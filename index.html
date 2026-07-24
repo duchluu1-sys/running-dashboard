@@ -1,7 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
+<link rel="manifest" href="manifest.json">
+
+<meta name="theme-color" content="#8B5CF6">
+
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+<meta name="mobile-web-app-capable" content="yes">
+  <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Đức Lưu — Running OS v2</title>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -1305,6 +1312,11 @@ document.addEventListener('DOMContentLoaded',()=>{
   renderFuture();
   // Charts are lazy-initialised on first tab visit — see initAdaptationCharts / initTrainingCharts
 });
+</script>
+  <script>
+if ("serviceWorker" in navigator) {
+    navigator.serviceWorker.register("sw.js");
+}
 </script>
 </body>
 </html>
