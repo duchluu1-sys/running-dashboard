@@ -289,13 +289,7 @@
       "vr": 9.1,
       "pctCeiling": null,
       "drift": 8.4,
-      "hrZones": [
-        44,
-        48,
-        8,
-        0,
-        0
-      ],
+      "hrZones": [44, 48, 8, 0, 0],
       "temp": 31,
       "flag": "✅",
       "note": "GCT baseline established · drift +8.4 bpm"
@@ -946,13 +940,7 @@
       "vr": 8.8,
       "pctCeiling": 0,
       "drift": null,
-      "hrZones": [
-        20,
-        26,
-        53,
-        1,
-        0
-      ],
+      "hrZones": [20, 26, 53, 1, 0],
       "temp": 28,
       "flag": "✅",
       "note": "20 min continuous @ 8.6 km/h ✅ · ceiling exactly met · ankle clean · plantar mild"
@@ -1086,10 +1074,7 @@
     "deloadWeek": 21,
     "weekVolOnBoard": 21.52,
     "lastWeekVol": 37.14,
-    "weekTarget": [
-      33,
-      37
-    ],
+    "weekTarget": [33, 37],
     "easyHRCeiling": 143,
     "walkTrigger": 143,
     "walkResume": 128,
@@ -1104,10 +1089,7 @@
     "stressLevel": "LOW",
     "formCue": "Eyes on the horizon — head up every session",
     "date": "July 23, 2026",
-    "hrvBaseline": [
-      53,
-      68
-    ],
+    "hrvBaseline": [53, 68],
     "weekSchedule": {
       "Mon": "easy",
       "Tue": "rest",
