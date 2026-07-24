@@ -261,6 +261,15 @@ body{background:var(--bg);color:var(--tx);font-family:var(--sans);font-size:14px
 </style>
 </head>
 <body>
+<div id="app-loading" style="position:fixed;inset:0;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:9999;gap:16px">
+  <div style="font-family:var(--mono);font-size:1.5rem;font-weight:700;background:linear-gradient(135deg,#e2e8f0,#a855f7);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">RUNNING OS V2</div>
+  <div style="font-family:var(--mono);font-size:.6rem;letter-spacing:3px;text-transform:uppercase;color:var(--vb)" class="blink">LOADING DATA…</div>
+</div>
+<div id="app-error" style="position:fixed;inset:0;background:var(--bg);display:none;flex-direction:column;align-items:center;justify-content:center;z-index:9999;gap:12px">
+  <div style="font-family:var(--mono);font-size:.72rem;letter-spacing:2px;text-transform:uppercase;color:var(--rd)">FAILED TO LOAD DATA</div>
+  <div id="app-error-msg" style="font-size:.7rem;color:var(--m2)"></div>
+  <button onclick="location.reload()" style="background:var(--v);color:#fff;border:none;padding:8px 18px;font-family:var(--mono);font-size:.58rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;cursor:pointer;border-radius:4px;margin-top:8px">RETRY</button>
+</div>
 <header class="hdr">
   <div><div class="hdr-name" id="hdr-name"></div><div class="hdr-tag">SUB-4 MARATHON · NORWEGIAN METHOD · RUNNING OS V2</div><div class="hdr-pill" id="hdr-pill"></div></div>
   <div class="hdr-r"><div class="hdr-date" id="hdr-date"></div><div class="hdr-meta" id="hdr-meta"></div></div>
@@ -430,78 +439,14 @@ body{background:var(--bg);color:var(--tx);font-family:var(--sans);font-size:14px
   <button class="pnb" id="pnb-future" onclick="switchTab('future')"><span class="pnb-icon">▷</span>FUTURE</button>
 </div></nav>
 <script>
-// ╔══════════════════════════════════════════════════╗
-// ║         STATIC BLOCK — APPEND RUNS HERE          ║
-// ║   Add one entry per run. Other arrays update     ║
-// ║   only when health/gates/meds/races change.      ║
-// ╚══════════════════════════════════════════════════╝
+// ════════════════════════════════════════════════════
+// DATA — populated at runtime by fetch('data.json')
+// ════════════════════════════════════════════════════
+let RUNS, GATES, RACES, ATHLETE, READINESS;
 
-// V2 RUNS schema: r,date,type,wk,dist,duration,pace,paceEasy,hrAvg,hrMax,
-//   te,gct,vr,pctCeiling,drift,hrZones,temp,flag,note
-// pace/paceEasy: decimal min/km (6.70 = 6:42/km)
-// pctCeiling: % time above 150bpm — quality only, null=unknown
-// drift: cardiac drift bpm (Q4-Q1 avg HR) — easy/long only, null=unknown
-// hrZones: [z1pct,z2pct,z3pct,z4pct,z5pct] summing ~100, null=estimate
-const RUNS=[
-{r:1, date:"May 9", type:"easy",wk:1, dist:10.12,duration:null,pace:null,paceEasy:null,hrAvg:131,hrMax:151,te:null, gct:null,vr:null, pctCeiling:null,drift:null, hrZones:null,temp:null,flag:"✅",  note:"Near-perfect opener"},
-{r:2, date:"May 11",type:"easy",wk:1, dist:4.94, duration:null,pace:null,paceEasy:null,hrAvg:132,hrMax:154,te:null, gct:null,vr:null, pctCeiling:null,drift:null, hrZones:null,temp:null,flag:"○",   note:"Acceptable"},
-{r:3, date:"May 13",type:"easy",wk:1, dist:3.59, duration:null,pace:null,paceEasy:null,hrAvg:115,hrMax:141,te:null, gct:null,vr:null, pctCeiling:null,drift:null, hrZones:null,temp:null,flag:"○",   note:"Too short"},
-{r:4, date:"May 14",type:"easy",wk:1, dist:5.19, duration:null,pace:null,paceEasy:null,hrAvg:140,hrMax:163,te:null, gct:null,vr:null, pctCeiling:null,drift:null, hrZones:null,temp:null,flag:"⚠️", note:"Heat spike — max 163"},
-{r:5, date:"May 15",type:"easy",wk:1, dist:6.93, duration:null,pace:null,paceEasy:null,hrAvg:122,hrMax:152,te:null, gct:null,vr:null, pctCeiling:null,drift:null, hrZones:null,temp:null,flag:"⚠️", note:"Very late — 23:25"},
-{r:6, date:"May 17",type:"easy",wk:2, dist:5.29, duration:null,pace:null,paceEasy:null,hrAvg:126,hrMax:163,te:null, gct:null,vr:null, pctCeiling:null,drift:null, hrZones:null,temp:null,flag:"⚠️", note:"Late + Z3 excursion"},
-{r:7, date:"May 19",type:"easy",wk:2, dist:6.68, duration:null,pace:null,paceEasy:null,hrAvg:132,hrMax:163,te:null, gct:null,vr:null, pctCeiling:null,drift:null, hrZones:null,temp:null,flag:"⚠️", note:"Afternoon — max 163"},
-{r:8, date:"May 21",type:"easy",wk:2, dist:5.14, duration:null,pace:null,paceEasy:null,hrAvg:123,hrMax:145,te:null, gct:null,vr:null, pctCeiling:null,drift:null, hrZones:null,temp:null,flag:"✅",  note:"Good"},
-{r:9, date:"May 26",type:"easy",wk:3, dist:5.00, duration:58,  pace:null,paceEasy:null,hrAvg:130,hrMax:142,te:null, gct:null,vr:null, pctCeiling:null,drift:null, hrZones:null,temp:null,flag:"✅✅",note:"Outstanding"},
-{r:10,date:"May 27",type:"easy",wk:3, dist:10.84,duration:92,  pace:null,paceEasy:null,hrAvg:127,hrMax:140,te:null, gct:null,vr:null, pctCeiling:null,drift:null, hrZones:null,temp:null,flag:"✅✅✅",note:"Exceptional — first 10km+"},
-{r:11,date:"May 29",type:"easy",wk:3, dist:5.03, duration:43,  pace:null,paceEasy:null,hrAvg:127,hrMax:144,te:null, gct:null,vr:null, pctCeiling:null,drift:null, hrZones:null,temp:null,flag:"✅",  note:"Good"},
-{r:12,date:"May 30",type:"easy",wk:3, dist:5.00, duration:null,pace:null,paceEasy:null,hrAvg:null,hrMax:null,te:null,gct:null,vr:null, pctCeiling:null,drift:null, hrZones:null,temp:null,flag:"✅",  note:"Statin Day 1"},
-{r:13,date:"Jun 1", type:"quality",wk:4,dist:5.66,duration:48, pace:6.80,paceEasy:6.50,hrAvg:127,hrMax:154,te:null, gct:null,vr:null, pctCeiling:0,   drift:null, hrZones:null,temp:26,  flag:"✅✅",note:"First quality session — 6×2:30min · excellent"},
-{r:14,date:"Jun 3", type:"easy",wk:4, dist:4.98, duration:44,  pace:8.79,paceEasy:7.32,hrAvg:123,hrMax:147,te:null, gct:361, vr:9.1, pctCeiling:null,drift:8.4,  hrZones:[44,48,8,0,0],temp:31,flag:"✅",  note:"GCT baseline established · drift +8.4 bpm"},
-{r:15,date:"Jun 4", type:"easy",wk:4, dist:6.17, duration:56,  pace:null,paceEasy:null,hrAvg:130,hrMax:149,te:null, gct:355, vr:null,pctCeiling:null,drift:3.5,  hrZones:null,temp:31,  flag:"✅",  note:"Drift +3.5"},
-{r:16,date:"Jun 5", type:"long",wk:4, dist:9.14, duration:97,  pace:null,paceEasy:null,hrAvg:129,hrMax:147,te:null, gct:366, vr:null,pctCeiling:null,drift:-1.5, hrZones:null,temp:31,  flag:"✅✅",note:"First negative drift 🏆 -1.5 bpm"},
-{r:17,date:"Jun 8", type:"easy",wk:5, dist:6.12, duration:58,  pace:null,paceEasy:null,hrAvg:132,hrMax:149,te:null, gct:null,vr:null, pctCeiling:null,drift:5.7,  hrZones:null,temp:30,  flag:"✅✅",note:"Post-illness return · drift +5.7"},
-{r:18,date:"Jun 9", type:"easy",wk:5, dist:5.33, duration:44,  pace:null,paceEasy:null,hrAvg:131,hrMax:145,te:null, gct:348, vr:null,pctCeiling:null,drift:6.1,  hrZones:null,temp:32,  flag:"✅✅",note:"GCT PB at time · drift +6.1"},
-{r:19,date:"Jun 11",type:"long",wk:5, dist:14.43,duration:138, pace:null,paceEasy:null,hrAvg:127,hrMax:142,te:null, gct:373, vr:null,pctCeiling:null,drift:1.8,  hrZones:null,temp:31,  flag:"⚠️", note:"58% distance jump ⚠️ rule violation · drift +1.8"},
-{r:20,date:"Jun 13",type:"quality",wk:6,dist:5.65,duration:null,pace:null,paceEasy:null,hrAvg:133,hrMax:159,te:2.4, gct:343, vr:null,pctCeiling:2,   drift:null, hrZones:null,temp:34,  flag:"✅✅",note:"GCT PB · ceiling touch (brief)"},
-{r:21,date:"Jun 15",type:"easy",wk:6, dist:5.10, duration:null,pace:null,paceEasy:null,hrAvg:null,hrMax:null,te:2.0,gct:null,vr:null, pctCeiling:null,drift:4.2,  hrZones:null,temp:30,  flag:"✅",  note:"Easy · drift +4.2"},
-{r:22,date:"Jun 17",type:"easy",wk:6, dist:4.89, duration:null,pace:null,paceEasy:null,hrAvg:119,hrMax:146,te:null, gct:335, vr:null,pctCeiling:null,drift:14.3, hrZones:null,temp:31,  flag:"⚠️", note:"Drift +14.3 ⚠️ — 95% humidity"},
-{r:23,date:"Jun 18",type:"long",wk:6, dist:10.41,duration:null,pace:null,paceEasy:null,hrAvg:127,hrMax:142,te:null, gct:347, vr:null,pctCeiling:null,drift:0.0,  hrZones:null,temp:31,  flag:"✅✅",note:"Drift +0.0 🏆 first flat long"},
-{r:24,date:"Jun 23",type:"easy",wk:7, dist:7.20, duration:null,pace:null,paceEasy:null,hrAvg:null,hrMax:null,te:2.2,gct:364, vr:null,pctCeiling:null,drift:null, hrZones:null,temp:null, flag:"✅",  note:"Post-illness treadmill return"},
-{r:25,date:"Jun 25",type:"easy",wk:7, dist:6.15, duration:null,pace:null,paceEasy:null,hrAvg:128,hrMax:147,te:null, gct:368, vr:null,pctCeiling:null,drift:5.6,  hrZones:null,temp:34,  flag:"✅",  note:"Intentional heat test · drift +5.6"},
-{r:26,date:"Jun 27",type:"long",wk:7, dist:10.43,duration:null,pace:null,paceEasy:null,hrAvg:null,hrMax:null,te:2.0,gct:329, vr:null,pctCeiling:null,drift:null, hrZones:null,temp:null, flag:"✅",  note:"Strides pulled GCT down"},
-{r:27,date:"Jun 29",type:"easy",wk:8, dist:5.60, duration:null,pace:null,paceEasy:null,hrAvg:132,hrMax:146,te:2.3, gct:331, vr:null,pctCeiling:null,drift:5.9,  hrZones:null,temp:30,  flag:"✅",  note:"Phase 2 gate CLEARED ✅ · drift +5.9"},
-{r:28,date:"Jul 1", type:"quality",wk:8,dist:6.24,duration:null,pace:null,paceEasy:null,hrAvg:127,hrMax:154,te:2.4, gct:317, vr:null,pctCeiling:1,   drift:null, hrZones:null,temp:34,  flag:"✅",  note:"GCT PB · 4s ceiling touch"},
-{r:29,date:"Jul 3", type:"easy",wk:8, dist:5.96, duration:null,pace:null,paceEasy:null,hrAvg:null,hrMax:null,te:null,gct:null,vr:null, pctCeiling:null,drift:null, hrZones:null,temp:null, flag:"⚠️", note:"Cut short — mental load"},
-{r:30,date:"Jul 4", type:"long",wk:8, dist:13.49,duration:null,pace:null,paceEasy:null,hrAvg:125,hrMax:150,te:2.5, gct:336, vr:null,pctCeiling:null,drift:-2.3, hrZones:null,temp:null, flag:"✅✅",note:"Drift -2.3 🏆 best ever · rain"},
-{r:31,date:"Jul 6", type:"easy",wk:9, dist:6.57, duration:72,  pace:null,paceEasy:null,hrAvg:123,hrMax:144,te:2.3, gct:346, vr:null,pctCeiling:null,drift:-1.6, hrZones:null,temp:31,  flag:"✅",  note:"Phase 2 W9 start · drift -1.6 🏆"},
-{r:32,date:"Jul 8", type:"quality",wk:9,dist:6.07,duration:50, pace:null,paceEasy:null,hrAvg:128,hrMax:159,te:3.1, gct:324, vr:null,pctCeiling:5,   drift:null, hrZones:null,temp:35,  flag:"⚠️", note:"Ceiling breach ⚠️ — cafe stop · outdoor heat"},
-{r:33,date:"Jul 9", type:"easy",wk:9, dist:4.87, duration:42,  pace:null,paceEasy:null,hrAvg:131,hrMax:146,te:2.9, gct:null,vr:null, pctCeiling:null,drift:0.1,  hrZones:null,temp:32,  flag:"✅",  note:"Drift +0.1 · foot cleared"},
-{r:34,date:"Jul 10",type:"quality",wk:9,dist:4.52,duration:null,pace:6.70,paceEasy:6.70,hrAvg:null,hrMax:149,te:2.9,gct:329, vr:null,pctCeiling:0,   drift:null, hrZones:null,temp:29,  flag:"✅",  note:"6:42/km LT1 CONFIRMED ✅ — outdoor dawn tempo"},
-{r:35,date:"Jul 11",type:"long",wk:9, dist:14.06,duration:null,pace:null,paceEasy:null,hrAvg:123,hrMax:150,te:3.1, gct:329, vr:null,pctCeiling:null,drift:3.9,  hrZones:null,temp:32,  flag:"✅",  note:"Drift +3.9 · ceiling held · 14km"},
-{r:36,date:"Jul 13",type:"easy",wk:10,dist:7.17, duration:null,pace:null,paceEasy:null,hrAvg:120,hrMax:139,te:3.2, gct:323, vr:null,pctCeiling:null,drift:null, hrZones:null,temp:29,  flag:"✅",  note:"6×20s strides @ 4:17/km"},
-{r:37,date:"Jul 14",type:"quality",wk:10,dist:5.03,duration:44,pace:null,paceEasy:null,hrAvg:120,hrMax:143,te:3.0, gct:312, vr:null,pctCeiling:0,   drift:null, hrZones:null,temp:29,  flag:"✅",  note:"7/7 reps · 0% ceiling 🏆 · treadmill"},
-{r:38,date:"Jul 16",type:"easy",wk:10,dist:4.77, duration:41,  pace:null,paceEasy:null,hrAvg:123,hrMax:145,te:2.5, gct:336, vr:null,pctCeiling:null,drift:10.0, hrZones:null,temp:27,  flag:"✅",  note:"Drift +10 ⚠️ — bad sleep carryover"},
-{r:39,date:"Jul 17",type:"quality",wk:10,dist:2.16,duration:19,pace:6.98,paceEasy:6.98,hrAvg:137,hrMax:153,te:3.2, gct:303, vr:8.5, pctCeiling:1,   drift:null, hrZones:null,temp:28,  flag:"✅✅",note:"GCT 303ms ALL-TIME BEST 🏆 · VR 8.5% 🏆 · 15 min tempo"},
-{r:40,date:"Jul 17",type:"easy",wk:10,dist:5.11, duration:40,  pace:null,paceEasy:null,hrAvg:126,hrMax:145,te:2.6, gct:326, vr:null,pctCeiling:null,drift:null, hrZones:null,temp:28,  flag:"✅",  note:"Flush after quality · walk 10.3%"},
-{r:41,date:"Jul 17",type:"long",wk:10,dist:12.90,duration:null,pace:null,paceEasy:null,hrAvg:null,hrMax:null,te:null,gct:328, vr:null,pctCeiling:null,drift:null, hrZones:null,temp:null, flag:"✅",  note:"Week 10 long run · Novablast 5"},
-{r:42,date:"Jul 20",type:"easy",wk:11,dist:6.50, duration:58,  pace:null,paceEasy:null,hrAvg:126,hrMax:145,te:3.5, gct:334, vr:9.1, pctCeiling:null,drift:null, hrZones:null,temp:30,  flag:"✅",  note:"Walk-free easy · VR 9.1% 🏆 best easy · strides"},
-{r:43,date:"Jul 21",type:"quality",wk:11,dist:5.02,duration:46,pace:null,paceEasy:null,hrAvg:116,hrMax:139,te:2.8, gct:311, vr:8.7, pctCeiling:0,   drift:null, hrZones:null,temp:27,  flag:"⚠️", note:"Too easy ⚠️ — speed too conservative · right ankle flag"},
-{r:44,date:"Jul 22",type:"easy",wk:11,dist:6.01, duration:53,  pace:null,paceEasy:null,hrAvg:136,hrMax:154,te:3.1, gct:339, vr:null,pctCeiling:null,drift:4.4,  hrZones:null,temp:34,  flag:"⚠️", note:"30.6% walk ratio · TE too high · 34°C · ankle first 2km"},
-{r:45,date:"Jul 23",type:"quality",wk:11,dist:3.99,duration:33,pace:6.98,paceEasy:6.98,hrAvg:128,hrMax:150,te:3.4, gct:315, vr:8.8, pctCeiling:0,   drift:null, hrZones:[20,26,53,1,0],temp:28,flag:"✅",note:"20 min continuous @ 8.6 km/h ✅ · ceiling exactly met · ankle clean · plantar mild"},
-];
-
-const GATES=[
-  {id:1,type:"hard",name:"Sustained Volume",short:"3 weeks ≥38km injury-free",progress:0,status:"pending",detail:"3 consecutive weeks at or above 38km without injury or unplanned rest. Current max: 37.14km (W10).",eta:"~Aug 2026"},
-  {id:2,type:"hard",name:"Quality Repeatability",short:"2×20 intervals + 2×20 tempo ceiling-clean",progress:0,status:"pending",detail:"Both 2×20 min Quality A AND 2×20 min Quality B completed with 0% time above 150 bpm, in 2 separate weeks.",eta:"~Sep 2026"},
-  {id:3,type:"hard",name:"Long Run In-Load",short:"20km during a full-load week",progress:0,status:"pending",detail:"20km long run in a week that also contained both Quality A and Quality B. Current max long run: 14.43km.",eta:"~Aug–Sep 2026"},
-  {id:4,type:"hard",name:"Injury-Free Continuity",short:"8 consecutive rising-load weeks",progress:37.5,status:"active",detail:"Week 11 = week 3 of 8. Started Week 9 (Jul 6). Clears Week 16 (Aug 31). Right ankle cleared R45. Right plantar mild fatigue at R45 — monitor.",eta:"Aug 31, 2026"},
-  {id:5,type:"hard",name:"Race 0",short:"VPBank Hanoi 10K completed",progress:0,status:"pending",detail:"VPBank Hanoi 10K — October 2026. Running with partner. Low stakes. Sub-55 min is Gate 1 fitness check.",eta:"Oct 2026"},
-  {id:6,type:"hard",name:"Test Data",short:"VO₂max + VT1/VT2 in hand",progress:0,status:"pending",detail:"VO₂max + VT1/VT2 tests (Regenetics HCMC preferred — 1.5M VND). BV 108 appointment Jul 30 to book. Target Sep 2026.",eta:"Sep 2026"},
-  {id:7,type:"soft",name:"Form Consolidation",short:"Head position improved vs Jul 17 baseline",progress:0,status:"pending",detail:"Re-assessment Oct 2026. Primary fix: eyes on horizon. Head down confirmed in video.",eta:"Oct 2026"},
-  {id:8,type:"soft",name:"GCT Outdoor Easy",short:"≤320ms on 2 consecutive outdoor easy runs",progress:40,status:"pending",detail:"Current outdoor easy average ~336ms. Program best (treadmill quality) = 303ms. Need two consecutive outdoor easy ≤320ms.",eta:"Aug–Sep 2026"},
-  {id:9,type:"soft",name:"Peak-Load Rhythm",short:"2×20+20km LR feels controlled, not hard",progress:0,status:"pending",detail:"Subjective check only. Peak load week must feel managed.",eta:"Sep 2026"}
-];
-
+// ════════════════════════════════════════════════════
+// STATIC — HEALTH_FLAGS & MEDICATIONS (kept in HTML, not in data.json)
+// ════════════════════════════════════════════════════
 const HEALTH_FLAGS=[
   {status:"urgent",title:"HBV Vaccination",short:"Shot 1 of 3. OVERDUE.",detail:"HBsAg negative, HBsAb 7.77 (need ≥10 — not immune). 3-shot course over 6 months. High priority: Vietnam prevalence + both parents Hep B positive. Any clinic.",action:"Book Shot 1 this week. No further deferral."},
   {status:"urgent",title:"BV 108 — July 30, 2026",short:"08:00 appt. Do not leave without test bookings.",detail:"Agenda: Atoyze 2-month review · blood retest (TG, Vit D, Potassium, Ferritin, CBC) · endocrinologist referral (TI-RADS 4) · lactate step test booking · VO₂max graded exercise test booking. Fallback: Regenetics HCMC (1.5M VND).",action:"Prepare agenda. Do not leave without confirmed dates for lactate + VO₂max tests."},
@@ -518,48 +463,11 @@ const MEDICATIONS=[
   {name:"CoQ10 (Sithion Q10)",dose:"Per label · with meal + fat",statinStart:"2026-05-30",status:"clean",purpose:"Counter statin-induced CoQ10 depletion",note:"Standard companion to statin therapy. No side effects."}
 ];
 
-const RACES=[
-  {name:"VPBank Hanoi 10K",label:"Race 0",date:new Date("2026-10-19"),goal:"Sub-55 min (Gate 1 fitness check)",note:"Running with partner. Low pressure. Primary purpose: race-day execution data point.",color:"#06b6d4"},
-  {name:"BIM Tây Hồ Half Marathon",label:"Race 1",date:new Date("2027-04-05"),goal:"Sub-1:55 = sub-4 confirmed · Sub-1:45 = 3:30 viable",note:"Gate 2. Competitive effort. Primary fitness checkpoint for marathon build.",color:"#7c3aed"},
-  {name:"VPBank Hanoi Marathon",label:"Race 2",date:new Date("2027-10-19"),goal:"Sub-4:00 · Stretch goal: 3:30",note:"Primary objective. Pace: 5:41/km (sub-4) or 4:58/km (3:30 stretch).",color:"#a855f7"}
-];
 
-// ════════════════════════════════════════════════════
 // END STATIC BLOCK
 // ════════════════════════════════════════════════════
 
 
-// ╔══════════════════════════════════════════════════╗
-// ║     CURRENT STATE — REPLACE AFTER EACH RUN      ║
-// ║    ~30 lines. Only this block changes weekly.    ║
-// ╚══════════════════════════════════════════════════╝
-
-const ATHLETE={
-  name:"Đức Lưu",age:30,phase:"Phase 2",phaseName:"Quality Development",
-  week:11,totalWeeks:24,deloadWeek:21,
-  weekVolOnBoard:21.52,lastWeekVol:37.14,weekTarget:[33,37],
-  easyHRCeiling:143,walkTrigger:143,walkResume:128,qualityCeiling:150,
-  ltPace:6.70,ltConfirmed:true,ltRun:"R34",ltDate:"Jul 10",
-  gctBest:303,vrBest:8.5,
-  statinStart:"2026-05-30",
-  stressLevel:"LOW",
-  formCue:"Eyes on the horizon — head up every session",
-  date:"July 23, 2026",
-  hrvBaseline:[53,68],
-  weekSchedule:{Mon:"easy",Tue:"rest",Wed:"quality_a",Thu:"easy_flush",Fri:"quality_b",Sat:"long",Sun:"rest"},
-  goalPaceSub4:5.683,goalPace330:4.967,
-};
-
-const READINESS={
-  hrv:71,hrvAvg7:63,rhr:41,rhrAvg7:41,sleepScore:null,
-  status:"GREEN",statusNote:"Balanced — train as planned",
-  lastUpdated:"Jul 23 morning",
-};
-
-// ════════════════════════════════════════════════════
-// END CURRENT STATE — display logic below, do not edit
-// ════════════════════════════════════════════════════
-// ── UTILITIES ──────────────────────────────────────────────────────────
 function fmtPace(v){if(!v)return'—';const m=Math.floor(v),s=Math.round((v-m)*60);return`${m}:${String(s).padStart(2,'0')}`}
 function daysUntil(d){const n=new Date();n.setHours(0,0,0,0);const t=new Date(d);t.setHours(0,0,0,0);return Math.ceil((t-n)/86400000)}
 function fmtDate(d){return new Date(d).toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'})}
@@ -1303,14 +1211,34 @@ function initAllCharts(a){
 
 // ── INIT ────────────────────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded',()=>{
-  _A=computeAllAnalytics();
-  renderVitals(_A);
-  renderToday(_A);
-  renderAdaptation(_A);
-  renderTraining(_A);
-  renderHealth(_A.statinDay);
-  renderFuture();
-  // Charts are lazy-initialised on first tab visit — see initAdaptationCharts / initTrainingCharts
+  const loadingEl=document.getElementById('app-loading');
+  const errorEl=document.getElementById('app-error');
+  const errorMsgEl=document.getElementById('app-error-msg');
+  fetch('data.json')
+    .then(r=>{
+      if(!r.ok)throw new Error('HTTP '+r.status+' — could not load data.json');
+      return r.json();
+    })
+    .then(data=>{
+      RUNS=data.RUNS;
+      GATES=data.GATES;
+      RACES=data.RACES.map(r=>({...r,date:new Date(r.date)}));
+      ATHLETE=data.ATHLETE;
+      READINESS=data.READINESS;
+      loadingEl.style.display='none';
+      _A=computeAllAnalytics();
+      renderVitals(_A);
+      renderToday(_A);
+      renderAdaptation(_A);
+      renderTraining(_A);
+      renderHealth(_A.statinDay);
+      renderFuture();
+    })
+    .catch(err=>{
+      loadingEl.style.display='none';
+      errorMsgEl.textContent=err.message;
+      errorEl.style.display='flex';
+    });
 });
 </script>
   <script>
