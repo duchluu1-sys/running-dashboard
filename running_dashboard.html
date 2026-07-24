@@ -1,0 +1,1310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Đức Lưu — Running OS v2</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#06060f;--sf:#0f0f1e;--sf2:#161628;--sf3:#1a1a30;
+  --bd:rgba(139,92,246,.12);--bdb:rgba(139,92,246,.35);
+  --v:#7c3aed;--vb:#a855f7;--cn:#06b6d4;--gn:#10b981;
+  --am:#f59e0b;--rd:#ef4444;--tx:#e2e8f0;--mu:#64748b;--m2:#94a3b8;
+  --glow:0 0 20px rgba(124,58,237,.15),0 0 40px rgba(124,58,237,.05);
+  --mono:'JetBrains Mono',monospace;--sans:'Inter',sans-serif;
+}
+body{background:var(--bg);color:var(--tx);font-family:var(--sans);font-size:14px;min-height:100vh;overflow-x:hidden}
+/* ANIMATIONS */
+@keyframes pulse-glow{0%,100%{box-shadow:0 0 6px 2px currentColor;opacity:1}50%{box-shadow:0 0 18px 6px currentColor;opacity:.6}}
+.sdot{width:10px;height:10px;border-radius:50%;display:inline-block;flex-shrink:0;animation:pulse-glow 2s ease-in-out infinite}
+.sdot.green{background:var(--gn);color:var(--gn)}.sdot.amber{background:var(--am);color:var(--am)}.sdot.red{background:var(--rd);color:var(--rd)}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.4}}
+.blink{animation:blink 2s ease-in-out infinite}
+/* HEADER */
+.hdr{background:linear-gradient(135deg,#06060f,#0a0a1c 55%,#0c0820);border-bottom:1px solid var(--bdb);padding:18px 32px 14px;display:flex;align-items:flex-end;justify-content:space-between;position:relative;overflow:hidden}
+.hdr::before{content:'OS·V2';position:absolute;right:40px;top:-6px;font-family:var(--mono);font-size:5rem;font-weight:700;color:rgba(124,58,237,.04);pointer-events:none;letter-spacing:6px}
+.hdr-name{font-family:var(--mono);font-size:1.5rem;font-weight:700;background:linear-gradient(135deg,#e2e8f0,#a855f7);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hdr-tag{font-family:var(--mono);font-size:.56rem;letter-spacing:4px;text-transform:uppercase;color:var(--vb);font-weight:600;margin-top:4px}
+.hdr-pill{display:none;margin-top:5px;background:rgba(124,58,237,.18);border:1px solid var(--bdb);border-radius:12px;padding:3px 10px;font-family:var(--mono);font-size:.58rem;letter-spacing:2px;color:var(--vb);text-transform:uppercase;width:fit-content}
+.hdr-r{text-align:right}
+.hdr-date{font-family:var(--mono);font-size:.78rem;color:var(--m2)}
+.hdr-meta{font-size:.58rem;letter-spacing:2px;text-transform:uppercase;color:var(--mu);margin-top:3px}
+/* VITALS */
+.vitals{background:var(--sf);border-bottom:1px solid var(--bd);padding:0 32px;display:grid;grid-template-columns:repeat(7,1fr)}
+.vit{padding:12px 10px;border-right:1px solid var(--bd);text-align:center}
+.vit:last-child{border-right:none}
+.vit-val{font-family:var(--mono);font-size:1.4rem;font-weight:700;line-height:1;color:var(--tx)}
+.vit-val.gn{color:var(--gn)}.vit-val.am{color:var(--am)}.vit-val.rd{color:var(--rd)}.vit-val.vb{color:var(--vb)}.vit-val.cn{color:var(--cn)}
+.vit-lbl{font-size:.5rem;letter-spacing:2px;text-transform:uppercase;color:var(--mu);margin-top:4px;font-weight:600}
+.vit-sub{font-size:.58rem;color:var(--m2);margin-top:2px;font-family:var(--mono)}
+.vit-rd{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;padding:12px 10px;border-right:1px solid var(--bd)}
+.vit-rd-top{display:flex;align-items:center;gap:7px}
+.vit-rd-txt{font-family:var(--mono);font-size:.95rem;font-weight:700}
+/* TABS TOP */
+.tabs-top{background:var(--sf);border-bottom:1px solid var(--bd);padding:0 32px;display:flex}
+.tab-btn{padding:10px 22px;font-family:var(--mono);font-size:.58rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--mu);background:transparent;border:none;border-bottom:2px solid transparent;cursor:pointer;transition:color .2s,border-color .2s;min-height:44px}
+.tab-btn:hover{color:var(--m2)}.tab-btn.active{color:var(--vb);border-bottom-color:var(--v)}
+/* MAIN */
+.main{padding:18px 24px;max-width:1440px;margin:0 auto}
+.tc{display:none}.tc.active{display:block}
+.mb{margin-bottom:16px}
+/* CARD */
+.card{background:var(--sf);border:1px solid var(--bd);border-radius:4px;border-top:2px solid rgba(124,58,237,.4);overflow:hidden;box-shadow:var(--glow);margin-bottom:16px}
+.card.rd-border{border-top-color:rgba(239,68,68,.5)}
+.card.gn-border{border-top-color:rgba(16,185,129,.4)}
+.card.am-border{border-top-color:rgba(245,158,11,.4)}
+.ch{padding:14px 20px 10px;border-bottom:1px solid var(--bd);display:flex;flex-direction:column;gap:2px;border-left:2px solid var(--v);margin-left:0}
+.cl{font-family:var(--mono);font-size:.64rem;letter-spacing:3px;text-transform:uppercase;color:var(--vb);font-weight:700}
+.cs{font-size:.6rem;color:var(--mu);letter-spacing:.5px}
+.cb{padding:18px 20px}
+/* GRIDS */
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px}
+.tgrid{display:grid;grid-template-columns:30% 35% 35%;grid-template-areas:"radar signals log";gap:16px;margin-bottom:16px}
+#radar-card{grid-area:radar}#signals-card{grid-area:signals}#log-card{grid-area:log}
+/* STATS ROW */
+.stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--bd)}
+.stat-cell{background:var(--sf2);padding:14px 16px}
+.stat-val{font-family:var(--mono);font-size:1.5rem;font-weight:700;color:var(--tx);line-height:1}
+.stat-val.gn{color:var(--gn)}.stat-val.am{color:var(--am)}.stat-val.rd{color:var(--rd)}.stat-val.vb{color:var(--vb)}.stat-val.cn{color:var(--cn)}
+.stat-lbl{font-family:var(--mono);font-size:.48rem;letter-spacing:2px;text-transform:uppercase;color:var(--mu);margin-top:4px}
+.stat-sub{font-size:.6rem;color:var(--m2);margin-top:2px}
+/* TODAY */
+.rd-block{display:flex;align-items:flex-start;gap:20px;padding:18px 20px}
+.rd-status{display:flex;align-items:center;gap:12px;margin-bottom:8px}
+.rd-label{font-family:var(--mono);font-size:1.8rem;font-weight:700}
+.rd-note{font-size:.75rem;color:var(--m2);line-height:1.5}
+.rd-time{font-family:var(--mono);font-size:.58rem;color:var(--mu);margin-top:4px}
+.eval-section{border-top:1px solid var(--bd);padding:14px 20px}
+.eval-grid{display:grid;grid-template-columns:repeat(3,1fr) auto;gap:10px;align-items:end}
+.ev-lbl{font-family:var(--mono);font-size:.48rem;letter-spacing:2px;text-transform:uppercase;color:var(--mu);display:block;margin-bottom:5px}
+.ev-inp{width:100%;background:var(--sf2);border:1px solid var(--bd);color:var(--tx);padding:9px 12px;font-family:var(--mono);font-size:.88rem;border-radius:4px;outline:none;transition:border-color .2s;min-height:44px}
+.ev-inp:focus{border-color:var(--vb)}
+.ev-btn{background:var(--v);color:#fff;border:none;padding:9px 16px;font-family:var(--mono);font-size:.58rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;cursor:pointer;border-radius:4px;transition:background .2s;min-height:44px;white-space:nowrap}
+.ev-btn:hover{background:var(--vb)}
+.eval-res{margin-top:10px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.eval-reason{font-size:.7rem;color:var(--m2);margin-top:4px;line-height:1.5;width:100%}
+/* LAST RUN */
+.lr-wrap{padding:16px 20px}
+.lr-badge{display:inline-flex;align-items:center;gap:6px;padding:3px 10px;border-radius:12px;font-family:var(--mono);font-size:.55rem;letter-spacing:2px;text-transform:uppercase;font-weight:700;margin-bottom:10px}
+.lr-badge.quality{background:rgba(124,58,237,.18);color:var(--vb)}.lr-badge.long{background:rgba(6,182,212,.18);color:var(--cn)}.lr-badge.easy{background:rgba(16,185,129,.18);color:var(--gn)}
+.lr-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.lr-field .lf-lbl{font-family:var(--mono);font-size:.48rem;letter-spacing:2px;text-transform:uppercase;color:var(--mu);margin-bottom:2px}
+.lr-field .lf-val{font-family:var(--mono);font-size:.88rem;font-weight:700;color:var(--tx)}
+.lr-note{margin-top:10px;padding:9px 12px;background:var(--sf2);border-left:2px solid var(--v);border-radius:0 4px 4px 0;font-size:.72rem;color:var(--m2);line-height:1.5}
+/* TODAY SESSION */
+.ts-wrap{padding:16px 20px}
+.ts-type{font-family:var(--mono);font-size:.7rem;font-weight:700;color:var(--vb);letter-spacing:2px;text-transform:uppercase;margin-bottom:6px}
+.ts-detail{font-size:.75rem;color:var(--m2);line-height:1.6}
+.ts-proto{margin-top:8px;padding:8px 12px;background:var(--sf2);border-left:2px solid var(--am);font-family:var(--mono);font-size:.65rem;color:var(--am)}
+/* ALERTS */
+.alert-card{background:rgba(239,68,68,.06);border:1px solid rgba(239,68,68,.25);border-radius:4px;padding:14px 16px;margin:0 16px 12px;border-left:3px solid var(--rd);cursor:pointer}
+.alert-card:last-child{margin-bottom:16px}
+.alert-top{display:flex;align-items:center;gap:8px}
+.alert-dot{width:7px;height:7px;border-radius:50%;background:var(--rd);flex-shrink:0}
+.alert-title{font-weight:600;font-size:.8rem;flex:1}
+.alert-chev{color:var(--mu);transition:transform .2s;font-size:.7rem}
+.alert-card.open .alert-chev{transform:rotate(180deg)}
+.alert-detail{display:none;margin-top:10px;font-size:.7rem;color:var(--m2);line-height:1.6;border-top:1px solid rgba(239,68,68,.15);padding-top:8px}
+.alert-detail.open{display:block}
+.alert-action{margin-top:6px;font-family:var(--mono);font-size:.62rem;color:var(--rd)}
+/* ADAPTATION */
+.sparse-state{padding:20px;text-align:center}
+.sparse-title{font-family:var(--mono);font-size:.7rem;color:var(--mu);letter-spacing:2px;text-transform:uppercase;margin-bottom:8px}
+.sparse-msg{font-size:.72rem;color:var(--m2);line-height:1.6;max-width:480px;margin:0 auto}
+.sparse-formula{font-family:var(--mono);font-size:.78rem;color:var(--vb);background:var(--sf2);padding:8px 14px;border-radius:4px;margin:10px auto;width:fit-content}
+/* PACE GAP */
+.pace-track-wrap{padding:20px}
+.pace-track{position:relative;height:56px;background:var(--sf2);border-radius:4px;overflow:hidden;margin-bottom:14px}
+.pt-filled{position:absolute;left:0;top:0;bottom:0;background:rgba(124,58,237,.35);border-right:2px solid var(--vb)}
+.pt-dot{position:absolute;top:50%;transform:translate(-50%,-50%);width:14px;height:14px;border-radius:50%;background:var(--vb);color:var(--vb);animation:pulse-glow 2s ease-in-out infinite}
+.pt-marker{position:absolute;top:0;bottom:0;width:2px;display:flex;flex-direction:column;align-items:center}
+.pt-marker-line{width:2px;height:100%;background:currentColor;opacity:.6}
+.pt-label{position:absolute;top:-20px;font-family:var(--mono);font-size:.5rem;white-space:nowrap;transform:translateX(-50%);color:currentColor}
+.pt-pace{position:absolute;bottom:-18px;font-family:var(--mono);font-size:.5rem;white-space:nowrap;transform:translateX(-50%);color:var(--m2)}
+.pt-track-labels{display:flex;justify-content:space-between;font-family:var(--mono);font-size:.5rem;color:var(--mu);margin-top:20px}
+.conf-note{font-family:var(--mono);font-size:.58rem;color:var(--mu);margin-top:12px;line-height:1.5}
+/* VR BLOCK */
+.vr-readings{display:flex;flex-direction:column;gap:8px;margin-top:10px}
+.vr-row{display:flex;justify-content:space-between;align-items:center;padding:7px 0;border-bottom:1px solid var(--bd)}
+.vr-row:last-child{border-bottom:none}
+.vr-label{font-family:var(--mono);font-size:.65rem;color:var(--m2)}
+.vr-val{font-family:var(--mono);font-size:.88rem;font-weight:700;color:var(--cn)}
+/* LOG */
+.log-hdr,.log-row{display:grid;grid-template-columns:36px 48px 50px 56px 52px 42px 42px 40px 28px;gap:0;padding:6px 12px;align-items:center}
+.log-hdr{font-family:var(--mono);font-size:.46rem;letter-spacing:2px;text-transform:uppercase;color:var(--mu);border-bottom:1px solid var(--bd);font-weight:700}
+.log-row{border-bottom:1px solid rgba(139,92,246,.05);cursor:pointer;transition:background .15s;font-family:var(--mono);font-size:.65rem;min-height:44px;border-left:2px solid transparent}
+.log-row:hover{background:var(--sf2)}.log-row.quality{border-left-color:var(--v)}.log-row.long{border-left-color:var(--cn)}.log-row.easy{border-left-color:var(--gn)}
+.log-scroll{max-height:420px;overflow-y:auto}.log-scroll::-webkit-scrollbar{width:3px}.log-scroll::-webkit-scrollbar-thumb{background:var(--v);border-radius:2px}.log-scroll::-webkit-scrollbar-track{background:transparent}
+.log-detail{display:none;padding:10px 12px 14px;background:var(--sf2);border-bottom:1px solid var(--bd);border-left:2px solid rgba(124,58,237,.3)}
+.log-detail.open{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
+.ld-lbl{font-family:var(--mono);font-size:.46rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--mu);margin-bottom:2px}
+.ld-val{font-family:var(--mono);font-size:.75rem;font-weight:700;color:var(--tx)}
+.ld-note{grid-column:1/-1;color:var(--m2);font-style:italic;padding-top:7px;border-top:1px solid var(--bd);margin-top:3px;font-size:.66rem;font-family:var(--sans);line-height:1.5}
+/* RADAR */
+.rsvg-wrap{padding:12px;display:flex;flex-direction:column;align-items:center}
+.rsvg-el{width:100%;max-width:250px;height:auto}
+.gate-dc{margin:6px 12px 0;background:var(--sf2);border:1px solid var(--bdb);border-radius:4px;padding:10px 12px;display:none}
+.gate-dc.open{display:block}
+.gdc-name{font-family:var(--mono);font-size:.62rem;color:var(--vb);font-weight:700;margin-bottom:4px}
+.gdc-text{font-size:.66rem;color:var(--m2);line-height:1.55}
+.gdc-eta{font-family:var(--mono);font-size:.56rem;color:var(--am);margin-top:4px}
+.gdc-bar{height:3px;background:var(--sf);border-radius:2px;margin-top:6px}.gdc-fill{height:100%;background:var(--v);border-radius:2px}
+.soft-gates{padding:8px 12px 12px}
+.sg-row{padding:6px 0;border-bottom:1px solid var(--bd)}.sg-row:last-child{border-bottom:none}
+.sg-top{display:flex;justify-content:space-between;margin-bottom:3px}
+.sg-name{font-size:.6rem;color:var(--m2);font-family:var(--mono)}.sg-pct{font-size:.6rem;color:var(--am);font-family:var(--mono)}
+.sg-bar{height:2px;background:var(--sf2);border-radius:1px}.sg-fill{height:100%;background:var(--am);border-radius:1px}
+/* HEALTH FLAGS */
+.flag-list{display:flex;flex-direction:column;gap:8px;padding:14px}
+.fc{background:var(--sf2);border-radius:4px;border:1px solid var(--bd);overflow:hidden;cursor:pointer;transition:border-color .2s}
+.fc:hover{border-color:var(--bdb)}
+.fc.urgent{border-left:3px solid var(--rd)}.fc.watch{border-left:3px solid var(--am)}.fc.clear{border-left:3px solid var(--gn)}
+.fh{display:flex;align-items:center;gap:8px;padding:11px 13px;min-height:44px}
+.fdot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.fdot.urgent{background:var(--rd)}.fdot.watch{background:var(--am)}.fdot.clear{background:var(--gn)}
+.ftitle{font-size:.78rem;font-weight:600;flex:1}.fshort{font-size:.6rem;color:var(--mu);max-width:48%;text-align:right;line-height:1.3}
+.fchev{color:var(--mu);margin-left:8px;transition:transform .2s;font-size:.7rem}
+.fc.open .fchev{transform:rotate(180deg)}
+.fd{display:none;padding:0 13px 13px;border-top:1px solid var(--bd)}
+.fd.open{display:block}
+.fd-text{font-size:.68rem;color:var(--m2);line-height:1.6;margin-top:9px}
+.fd-action{margin-top:8px;padding:7px 11px;background:rgba(124,58,237,.1);border-left:2px solid var(--v);font-size:.66rem;color:var(--m2);border-radius:0 4px 4px 0;line-height:1.4}
+/* MEDS */
+.med-list{display:flex;flex-direction:column;gap:10px;padding:14px}
+.med-row{background:var(--sf2);border-radius:4px;padding:13px;border-left:3px solid var(--gn);display:grid;grid-template-columns:1fr 70px;gap:8px;align-items:start}
+.med-name{font-family:var(--mono);font-size:.8rem;font-weight:700;color:var(--tx);margin-bottom:3px}
+.med-dose{font-size:.66rem;color:var(--m2);margin-bottom:3px;line-height:1.4}
+.med-note{font-size:.6rem;color:var(--mu);font-style:italic;line-height:1.35}
+.med-day{font-family:var(--mono);font-size:1.5rem;font-weight:700;color:var(--gn);text-align:right}
+.med-day-lbl{font-family:var(--mono);font-size:.46rem;letter-spacing:2px;text-transform:uppercase;color:var(--mu);display:block;text-align:right;margin-top:1px}
+/* RACE */
+.race-pipe{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;padding:16px}
+.race-card{border-radius:4px;padding:20px 18px;border-top:3px solid;background:var(--sf2);position:relative;overflow:hidden}
+.race-card::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:radial-gradient(circle at top left,rgba(124,58,237,.07) 0%,transparent 65%);pointer-events:none}
+.race-lbl{font-family:var(--mono);font-size:.5rem;letter-spacing:3px;text-transform:uppercase;color:var(--mu);margin-bottom:4px}
+.race-name{font-size:.95rem;font-weight:700;margin-bottom:2px}
+.race-dt{font-family:var(--mono);font-size:.65rem;color:var(--m2);margin-bottom:12px}
+.race-cd{font-family:var(--mono);font-size:2.5rem;font-weight:700;line-height:1}
+.race-cd-unit{font-family:var(--mono);font-size:.5rem;letter-spacing:2px;text-transform:uppercase;color:var(--mu);display:block;margin-top:2px}
+.race-goal{font-size:.7rem;color:var(--m2);margin-top:10px;line-height:1.55}
+.race-note{font-size:.62rem;color:var(--mu);font-style:italic;margin-top:4px;line-height:1.4}
+/* PHASE TIMELINE */
+.phase-tl-wrap{padding:30px 20px 20px;overflow-x:auto}
+.phase-track{display:flex;height:40px;border-radius:4px;overflow:visible;position:relative;min-width:600px}
+.pt-seg{height:100%;display:flex;align-items:center;justify-content:center;position:relative;border-right:1px solid var(--bg)}
+.pts-done{background:rgba(124,58,237,.45)}
+.pts-curr{background:rgba(124,58,237,.25);border:1px dashed var(--v)}
+.pts-future{background:rgba(100,116,139,.1);border:1px dashed rgba(100,116,139,.3)}
+.pts-race{width:28px!important;flex-shrink:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.pts-race-inner{background:var(--vb);border-radius:50%;width:12px;height:12px}
+.pt-seg-lbl{position:absolute;top:-20px;left:50%;transform:translateX(-50%);font-family:var(--mono);font-size:.5rem;color:var(--mu);white-space:nowrap;text-transform:uppercase;letter-spacing:1px}
+.pt-curr-dot{position:absolute;right:-6px;top:50%;transform:translateY(-50%);width:12px;height:12px;border-radius:50%;background:var(--vb);color:var(--vb);animation:pulse-glow 2s ease-in-out infinite;z-index:2}
+.pt-race-lbl{position:absolute;bottom:-20px;left:50%;transform:translateX(-50%);font-family:var(--mono);font-size:.48rem;color:var(--vb);white-space:nowrap}
+.pt-race-cd{font-family:var(--mono);font-size:.46rem;color:var(--cn);white-space:nowrap;position:absolute;bottom:-30px;left:50%;transform:translateX(-50%)}
+/* CHART WRAP */
+.cw{position:relative;height:220px}
+.cw canvas{position:absolute!important;inset:0;width:100%!important;height:100%!important}
+.cleg{display:flex;flex-wrap:wrap;gap:12px;padding:4px 16px 8px;justify-content:center}
+.li{display:flex;align-items:center;gap:5px;font-family:var(--mono);font-size:.52rem;letter-spacing:1px;text-transform:uppercase;color:var(--m2)}
+.ld{width:9px;height:9px;border-radius:50%;flex-shrink:0}.ld-line{width:14px;height:2px;border-radius:1px;flex-shrink:0}
+/* GATE LIST PHONE */
+.gate-list-card{display:none}
+.gate-list{display:flex;flex-direction:column;gap:8px;padding:14px}
+.gl-row{padding:10px 13px;background:var(--sf2);border-radius:4px;border-left:3px solid var(--bd)}
+.gl-row.active{border-left-color:var(--v)}.gl-row.cleared{border-left-color:var(--gn)}
+.gl-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:4px}
+.gl-name{font-size:.7rem;font-weight:600;color:var(--tx)}.gl-pct{font-family:var(--mono);font-size:.7rem;color:var(--vb)}
+.gl-bar{height:3px;background:var(--sf);border-radius:2px}.gl-fill{height:100%;background:var(--v);border-radius:2px}
+.gl-eta{font-size:.56rem;color:var(--mu);margin-top:4px}
+/* PHONE NAV */
+.pnav{display:none;position:fixed;bottom:0;left:0;right:0;height:56px;background:var(--sf);border-top:1px solid var(--bdb);z-index:100}
+.pnav-inner{display:flex;height:100%}
+.pnb{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;border:none;background:transparent;color:var(--mu);cursor:pointer;transition:color .15s;font-family:var(--mono);font-size:.44rem;letter-spacing:2px;text-transform:uppercase;font-weight:700;min-height:44px}
+.pnb.active{color:var(--vb)}.pnb-icon{font-size:1rem;line-height:1}
+/* UTILS */
+.mono{font-family:var(--mono)}.c-mu{color:var(--mu)}.c-m2{color:var(--m2)}.c-gn{color:var(--gn)}.c-am{color:var(--am)}.c-rd{color:var(--rd)}.c-vb{color:var(--vb)}.c-cn{color:var(--cn)}
+/* RESPONSIVE TABLET */
+@media(max-width:1024px){
+  .vitals{grid-template-columns:repeat(4,1fr)}.vit:nth-child(4){border-right:none}.vit:nth-child(5){border-top:1px solid var(--bd)}
+  .tgrid{grid-template-columns:1fr 1fr;grid-template-areas:"radar log" "signals signals"}
+  .g3{grid-template-columns:1fr 1fr}.g2{grid-template-columns:1fr}.race-pipe{grid-template-columns:1fr}
+  .main{padding:14px 16px}.tabs-top{padding:0 16px}.vitals{padding:0 16px}.hdr{padding:14px 18px}
+  .log-hdr,.log-row{grid-template-columns:34px 46px 50px 54px 48px 38px 28px}
+  .lc-gct-h,.lc-gct,.lc-vr-h,.lc-vr{display:none}
+  .eval-grid{grid-template-columns:1fr 1fr auto}
+}
+@media(max-width:600px){
+  .hdr{padding:10px 13px}.hdr-r{display:none}.hdr-name{font-size:1.15rem}.hdr-pill{display:block}
+  .vitals{grid-template-columns:repeat(2,1fr);padding:0 10px}.vit{padding:9px 6px}.vit-val{font-size:1.15rem}
+  .vit:nth-child(2){border-right:none}.vit:nth-child(4){border-right:none}.vit:nth-child(5){display:none}.vit:nth-child(6){border-right:none}
+  .tabs-top{display:none}.pnav{display:flex}.main{padding:12px 10px 70px}
+  .tgrid{grid-template-columns:1fr;grid-template-areas:"log" "signals"}#radar-card{display:none}
+  .gate-list-card{display:block}.g2,.g3,.race-pipe{grid-template-columns:1fr}
+  .log-hdr,.log-row{grid-template-columns:50px 55px 28px;padding:6px 10px}
+  .lc-r-h,.lc-r,.lc-type-h,.lc-type,.lc-pace-h,.lc-pace,.lc-avhr-h,.lc-avhr,.lc-mxhr-h,.lc-mxhr,.lc-gct-h,.lc-gct,.lc-vr-h,.lc-vr{display:none}
+  .eval-grid{grid-template-columns:1fr;gap:8px}.ev-btn{width:100%;margin-top:4px}
+  .med-row{grid-template-columns:1fr}.fshort{display:none}
+  .rd-block{flex-direction:column;gap:12px}
+  .lr-grid{grid-template-columns:repeat(2,1fr)}
+}
+</style>
+</head>
+<body>
+<header class="hdr">
+  <div><div class="hdr-name" id="hdr-name"></div><div class="hdr-tag">SUB-4 MARATHON · NORWEGIAN METHOD · RUNNING OS V2</div><div class="hdr-pill" id="hdr-pill"></div></div>
+  <div class="hdr-r"><div class="hdr-date" id="hdr-date"></div><div class="hdr-meta" id="hdr-meta"></div></div>
+</header>
+<div class="vitals" id="vitals"></div>
+<nav class="tabs-top">
+  <button class="tab-btn active" id="tb-today" onclick="switchTab('today')">◈ TODAY</button>
+  <button class="tab-btn" id="tb-adaptation" onclick="switchTab('adaptation')">↗ ADAPTATION</button>
+  <button class="tab-btn" id="tb-training" onclick="switchTab('training')">◇ TRAINING</button>
+  <button class="tab-btn" id="tb-health" onclick="switchTab('health')">♥ HEALTH</button>
+  <button class="tab-btn" id="tb-future" onclick="switchTab('future')">▷ FUTURE</button>
+</nav>
+<main class="main">
+<!-- ── TODAY ── -->
+<div id="tab-today" class="tc active">
+  <div class="card" id="rd-card">
+    <div class="ch"><div class="cl">READINESS</div><div class="cs" id="rd-sub"></div></div>
+    <div class="rd-block">
+      <div>
+        <div class="rd-status"><span class="sdot" id="rd-dot"></span><span class="rd-label" id="rd-label"></span></div>
+        <div class="rd-note" id="rd-note"></div>
+        <div class="rd-time" id="rd-time"></div>
+      </div>
+      <div style="flex:1">
+        <div class="eval-section">
+          <div style="font-family:var(--mono);font-size:.52rem;letter-spacing:2px;text-transform:uppercase;color:var(--mu);margin-bottom:10px">UPDATE READINESS</div>
+          <div class="eval-grid">
+            <div><label class="ev-lbl">HRV LAST NIGHT (MS)</label><input type="number" id="input-hrv" placeholder="e.g. 71" class="ev-inp"></div>
+            <div><label class="ev-lbl">RHR THIS MORNING (BPM)</label><input type="number" id="input-rhr" placeholder="e.g. 41" class="ev-inp"></div>
+            <div><label class="ev-lbl">SLEEP SCORE (0-100)</label><input type="number" id="input-sleep" placeholder="e.g. 74" class="ev-inp"></div>
+            <button onclick="evaluateReadiness()" class="ev-btn">EVALUATE</button>
+          </div>
+          <div class="eval-res" id="eval-res"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card" id="lr-card">
+    <div class="ch"><div class="cl">LAST RUN</div><div class="cs" id="lr-sub"></div></div>
+    <div class="lr-wrap" id="lr-body"></div>
+  </div>
+  <div id="alerts-wrap"></div>
+  <div class="card">
+    <div class="ch"><div class="cl">TODAY'S SESSION</div><div class="cs">week schedule · protocol reminder</div></div>
+    <div class="ts-wrap" id="ts-body"></div>
+  </div>
+</div>
+<!-- ── ADAPTATION ── -->
+<div id="tab-adaptation" class="tc">
+  <div class="g2">
+    <div class="card">
+      <div class="ch"><div class="cl">PACE · HR PERFORMANCE ENVELOPE</div><div class="cs">every run as a point · up-left = adaptation · sparse — builds with pace data</div></div>
+      <div id="pace-hr-sparse" class="sparse-state" style="display:none"></div>
+      <div class="cw"><canvas id="paceHRChart"></canvas></div>
+    </div>
+    <div class="card">
+      <div class="ch"><div class="cl">THRESHOLD PACE DEVELOPMENT</div><div class="cs">quality sessions · pace at sub-150 bpm ceiling</div></div>
+      <div id="threshold-sparse" class="sparse-state" style="display:none"></div>
+      <div class="cw"><canvas id="thresholdChart"></canvas></div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="ch"><div class="cl">PACE GAP ANALYSIS</div><div class="cs">current threshold → marathon goal · evidence-based</div></div>
+    <div id="pace-gap-body"></div>
+  </div>
+  <div class="g2">
+    <div class="card">
+      <div class="ch"><div class="cl">AEROBIC EFFICIENCY INDEX</div><div class="cs">easy runs only · lower = more efficient · AEI = avg HR ÷ speed (km/h)</div></div>
+      <div id="aei-sparse" class="sparse-state"></div>
+      <div class="cw" id="aei-chart-wrap" style="display:none"><canvas id="aeiChart"></canvas></div>
+    </div>
+    <div class="card">
+      <div class="ch"><div class="cl">QUALITY SESSION ZONE BREAKDOWN</div><div class="cs">last 8 quality sessions · Z3 dominance = ideal · est. = estimated</div></div>
+      <div class="cw"><canvas id="zoneChart"></canvas></div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="ch"><div class="cl">INTENSITY DISTRIBUTION</div><div class="cs">80/20 Norwegian Method compliance · by week · bars below 80% easy = amber</div></div>
+    <div class="cw"><canvas id="intensityChart"></canvas></div>
+  </div>
+  <div class="g2">
+    <div class="card">
+      <div class="ch"><div class="cl">QUALITY CEILING COMPLIANCE</div><div class="cs">% time above 150 bpm per quality session · target 0%</div></div>
+      <div id="compliance-header" style="padding:10px 20px 0;font-family:var(--mono);font-size:.72rem;color:var(--gn)"></div>
+      <div class="cw"><canvas id="complianceChart"></canvas></div>
+    </div>
+    <div class="card">
+      <div class="ch"><div class="cl">CARDIAC DRIFT</div><div class="cs">outdoor easy + long runs · negative = HR dropped = good</div></div>
+      <div class="cw"><canvas id="driftChart"></canvas></div>
+    </div>
+  </div>
+  <div class="g2">
+    <div class="card">
+      <div class="ch"><div class="cl">GROUND CONTACT TIME</div><div class="cs">all runs with data · inverted Y · lower is better ↑</div></div>
+      <div class="cleg" id="gct-leg"></div>
+      <div class="cw"><canvas id="gctChart"></canvas></div>
+    </div>
+    <div class="card gn-border">
+      <div class="ch"><div class="cl">VERTICAL RATIO</div><div class="cs">lower = less vertical oscillation = better economy</div></div>
+      <div id="vr-body" class="cb"></div>
+    </div>
+  </div>
+</div>
+<!-- ── TRAINING ── -->
+<div id="tab-training" class="tc">
+  <div class="g2">
+    <div class="card">
+      <div class="ch"><div class="cl">WEEKLY VOLUME</div><div class="cs">target corridor 33-37km · phase 1 slate · phase 2 violet · * partial</div></div>
+      <div class="cw"><canvas id="volChart"></canvas></div>
+    </div>
+    <div class="card">
+      <div class="ch"><div class="cl">LONG RUN PROGRESSION</div><div class="cs">building toward 20km gate</div></div>
+      <div class="cw"><canvas id="longRunChart"></canvas></div>
+    </div>
+  </div>
+  <div class="tgrid">
+    <div class="card" id="radar-card">
+      <div class="ch"><div class="cl">PHASE 2 → 3 GATES</div><div class="cs">6 hard gates · 0 of 6 cleared</div></div>
+      <div class="rsvg-wrap"><svg id="rsvg" class="rsvg-el" viewBox="0 0 400 400"></svg><div id="gate-dc" class="gate-dc"></div></div>
+      <div id="sgt-list"></div>
+    </div>
+    <div class="card" id="signals-card">
+      <div class="ch"><div class="cl">ADAPTATION SIGNALS</div><div class="cs">GCT · VR · drift summary</div></div>
+      <div id="sig-body" class="cb"></div>
+    </div>
+    <div class="card" id="log-card">
+      <div class="ch"><div class="cl">SESSION LOG</div><div class="cs">click row to expand · newest first</div></div>
+      <div id="log-wrap"></div>
+    </div>
+  </div>
+  <div class="card gate-list-card" id="gate-list-card">
+    <div class="ch"><div class="cl">PHASE 2 → 3 GATES</div><div class="cs">6 hard gates · 0 of 6 cleared</div></div>
+    <div id="glist-body"></div>
+  </div>
+</div>
+<!-- ── HEALTH ── -->
+<div id="tab-health" class="tc">
+  <div class="g2">
+    <div class="card">
+      <div class="ch"><div class="cl">HEALTH MONITORING</div><div class="cs" id="health-sub"></div></div>
+      <div id="flag-l"></div>
+    </div>
+    <div class="card">
+      <div class="ch"><div class="cl">MEDICATIONS & SUPPLEMENTS</div><div class="cs" id="med-sub"></div></div>
+      <div id="med-l"></div>
+    </div>
+  </div>
+</div>
+<!-- ── FUTURE ── -->
+<div id="tab-future" class="tc">
+  <div class="card">
+    <div class="ch"><div class="cl">RACE PIPELINE</div><div class="cs">primary objective: VPBank Hanoi Marathon · October 2027</div></div>
+    <div id="race-p"></div>
+  </div>
+  <div class="card">
+    <div class="ch"><div class="cl">PHASE TIMELINE</div><div class="cs">tap segment for detail</div></div>
+    <div id="phase-tl" class="phase-tl-wrap"></div>
+    <div id="phase-detail" style="display:none;margin:0 20px 16px;padding:12px;background:var(--sf2);border-radius:4px;font-size:.72rem;color:var(--m2);line-height:1.6;border-left:2px solid var(--v)"></div>
+  </div>
+</div>
+</main>
+<nav class="pnav"><div class="pnav-inner">
+  <button class="pnb active" id="pnb-today" onclick="switchTab('today')"><span class="pnb-icon">◈</span>TODAY</button>
+  <button class="pnb" id="pnb-adaptation" onclick="switchTab('adaptation')"><span class="pnb-icon">↗</span>ADAPT</button>
+  <button class="pnb" id="pnb-training" onclick="switchTab('training')"><span class="pnb-icon">◇</span>TRAIN</button>
+  <button class="pnb" id="pnb-health" onclick="switchTab('health')"><span class="pnb-icon">♥</span>HEALTH</button>
+  <button class="pnb" id="pnb-future" onclick="switchTab('future')"><span class="pnb-icon">▷</span>FUTURE</button>
+</div></nav>
+<script>
+// ╔══════════════════════════════════════════════════╗
+// ║         STATIC BLOCK — APPEND RUNS HERE          ║
+// ║   Add one entry per run. Other arrays update     ║
+// ║   only when health/gates/meds/races change.      ║
+// ╚══════════════════════════════════════════════════╝
+
+// V2 RUNS schema: r,date,type,wk,dist,duration,pace,paceEasy,hrAvg,hrMax,
+//   te,gct,vr,pctCeiling,drift,hrZones,temp,flag,note
+// pace/paceEasy: decimal min/km (6.70 = 6:42/km)
+// pctCeiling: % time above 150bpm — quality only, null=unknown
+// drift: cardiac drift bpm (Q4-Q1 avg HR) — easy/long only, null=unknown
+// hrZones: [z1pct,z2pct,z3pct,z4pct,z5pct] summing ~100, null=estimate
+const RUNS=[
+{r:1, date:"May 9", type:"easy",wk:1, dist:10.12,duration:null,pace:null,paceEasy:null,hrAvg:131,hrMax:151,te:null, gct:null,vr:null, pctCeiling:null,drift:null, hrZones:null,temp:null,flag:"✅",  note:"Near-perfect opener"},
+{r:2, date:"May 11",type:"easy",wk:1, dist:4.94, duration:null,pace:null,paceEasy:null,hrAvg:132,hrMax:154,te:null, gct:null,vr:null, pctCeiling:null,drift:null, hrZones:null,temp:null,flag:"○",   note:"Acceptable"},
+{r:3, date:"May 13",type:"easy",wk:1, dist:3.59, duration:null,pace:null,paceEasy:null,hrAvg:115,hrMax:141,te:null, gct:null,vr:null, pctCeiling:null,drift:null, hrZones:null,temp:null,flag:"○",   note:"Too short"},
+{r:4, date:"May 14",type:"easy",wk:1, dist:5.19, duration:null,pace:null,paceEasy:null,hrAvg:140,hrMax:163,te:null, gct:null,vr:null, pctCeiling:null,drift:null, hrZones:null,temp:null,flag:"⚠️", note:"Heat spike — max 163"},
+{r:5, date:"May 15",type:"easy",wk:1, dist:6.93, duration:null,pace:null,paceEasy:null,hrAvg:122,hrMax:152,te:null, gct:null,vr:null, pctCeiling:null,drift:null, hrZones:null,temp:null,flag:"⚠️", note:"Very late — 23:25"},
+{r:6, date:"May 17",type:"easy",wk:2, dist:5.29, duration:null,pace:null,paceEasy:null,hrAvg:126,hrMax:163,te:null, gct:null,vr:null, pctCeiling:null,drift:null, hrZones:null,temp:null,flag:"⚠️", note:"Late + Z3 excursion"},
+{r:7, date:"May 19",type:"easy",wk:2, dist:6.68, duration:null,pace:null,paceEasy:null,hrAvg:132,hrMax:163,te:null, gct:null,vr:null, pctCeiling:null,drift:null, hrZones:null,temp:null,flag:"⚠️", note:"Afternoon — max 163"},
+{r:8, date:"May 21",type:"easy",wk:2, dist:5.14, duration:null,pace:null,paceEasy:null,hrAvg:123,hrMax:145,te:null, gct:null,vr:null, pctCeiling:null,drift:null, hrZones:null,temp:null,flag:"✅",  note:"Good"},
+{r:9, date:"May 26",type:"easy",wk:3, dist:5.00, duration:58,  pace:null,paceEasy:null,hrAvg:130,hrMax:142,te:null, gct:null,vr:null, pctCeiling:null,drift:null, hrZones:null,temp:null,flag:"✅✅",note:"Outstanding"},
+{r:10,date:"May 27",type:"easy",wk:3, dist:10.84,duration:92,  pace:null,paceEasy:null,hrAvg:127,hrMax:140,te:null, gct:null,vr:null, pctCeiling:null,drift:null, hrZones:null,temp:null,flag:"✅✅✅",note:"Exceptional — first 10km+"},
+{r:11,date:"May 29",type:"easy",wk:3, dist:5.03, duration:43,  pace:null,paceEasy:null,hrAvg:127,hrMax:144,te:null, gct:null,vr:null, pctCeiling:null,drift:null, hrZones:null,temp:null,flag:"✅",  note:"Good"},
+{r:12,date:"May 30",type:"easy",wk:3, dist:5.00, duration:null,pace:null,paceEasy:null,hrAvg:null,hrMax:null,te:null,gct:null,vr:null, pctCeiling:null,drift:null, hrZones:null,temp:null,flag:"✅",  note:"Statin Day 1"},
+{r:13,date:"Jun 1", type:"quality",wk:4,dist:5.66,duration:48, pace:6.80,paceEasy:6.50,hrAvg:127,hrMax:154,te:null, gct:null,vr:null, pctCeiling:0,   drift:null, hrZones:null,temp:26,  flag:"✅✅",note:"First quality session — 6×2:30min · excellent"},
+{r:14,date:"Jun 3", type:"easy",wk:4, dist:4.98, duration:44,  pace:8.79,paceEasy:7.32,hrAvg:123,hrMax:147,te:null, gct:361, vr:9.1, pctCeiling:null,drift:8.4,  hrZones:[44,48,8,0,0],temp:31,flag:"✅",  note:"GCT baseline established · drift +8.4 bpm"},
+{r:15,date:"Jun 4", type:"easy",wk:4, dist:6.17, duration:56,  pace:null,paceEasy:null,hrAvg:130,hrMax:149,te:null, gct:355, vr:null,pctCeiling:null,drift:3.5,  hrZones:null,temp:31,  flag:"✅",  note:"Drift +3.5"},
+{r:16,date:"Jun 5", type:"long",wk:4, dist:9.14, duration:97,  pace:null,paceEasy:null,hrAvg:129,hrMax:147,te:null, gct:366, vr:null,pctCeiling:null,drift:-1.5, hrZones:null,temp:31,  flag:"✅✅",note:"First negative drift 🏆 -1.5 bpm"},
+{r:17,date:"Jun 8", type:"easy",wk:5, dist:6.12, duration:58,  pace:null,paceEasy:null,hrAvg:132,hrMax:149,te:null, gct:null,vr:null, pctCeiling:null,drift:5.7,  hrZones:null,temp:30,  flag:"✅✅",note:"Post-illness return · drift +5.7"},
+{r:18,date:"Jun 9", type:"easy",wk:5, dist:5.33, duration:44,  pace:null,paceEasy:null,hrAvg:131,hrMax:145,te:null, gct:348, vr:null,pctCeiling:null,drift:6.1,  hrZones:null,temp:32,  flag:"✅✅",note:"GCT PB at time · drift +6.1"},
+{r:19,date:"Jun 11",type:"long",wk:5, dist:14.43,duration:138, pace:null,paceEasy:null,hrAvg:127,hrMax:142,te:null, gct:373, vr:null,pctCeiling:null,drift:1.8,  hrZones:null,temp:31,  flag:"⚠️", note:"58% distance jump ⚠️ rule violation · drift +1.8"},
+{r:20,date:"Jun 13",type:"quality",wk:6,dist:5.65,duration:null,pace:null,paceEasy:null,hrAvg:133,hrMax:159,te:2.4, gct:343, vr:null,pctCeiling:2,   drift:null, hrZones:null,temp:34,  flag:"✅✅",note:"GCT PB · ceiling touch (brief)"},
+{r:21,date:"Jun 15",type:"easy",wk:6, dist:5.10, duration:null,pace:null,paceEasy:null,hrAvg:null,hrMax:null,te:2.0,gct:null,vr:null, pctCeiling:null,drift:4.2,  hrZones:null,temp:30,  flag:"✅",  note:"Easy · drift +4.2"},
+{r:22,date:"Jun 17",type:"easy",wk:6, dist:4.89, duration:null,pace:null,paceEasy:null,hrAvg:119,hrMax:146,te:null, gct:335, vr:null,pctCeiling:null,drift:14.3, hrZones:null,temp:31,  flag:"⚠️", note:"Drift +14.3 ⚠️ — 95% humidity"},
+{r:23,date:"Jun 18",type:"long",wk:6, dist:10.41,duration:null,pace:null,paceEasy:null,hrAvg:127,hrMax:142,te:null, gct:347, vr:null,pctCeiling:null,drift:0.0,  hrZones:null,temp:31,  flag:"✅✅",note:"Drift +0.0 🏆 first flat long"},
+{r:24,date:"Jun 23",type:"easy",wk:7, dist:7.20, duration:null,pace:null,paceEasy:null,hrAvg:null,hrMax:null,te:2.2,gct:364, vr:null,pctCeiling:null,drift:null, hrZones:null,temp:null, flag:"✅",  note:"Post-illness treadmill return"},
+{r:25,date:"Jun 25",type:"easy",wk:7, dist:6.15, duration:null,pace:null,paceEasy:null,hrAvg:128,hrMax:147,te:null, gct:368, vr:null,pctCeiling:null,drift:5.6,  hrZones:null,temp:34,  flag:"✅",  note:"Intentional heat test · drift +5.6"},
+{r:26,date:"Jun 27",type:"long",wk:7, dist:10.43,duration:null,pace:null,paceEasy:null,hrAvg:null,hrMax:null,te:2.0,gct:329, vr:null,pctCeiling:null,drift:null, hrZones:null,temp:null, flag:"✅",  note:"Strides pulled GCT down"},
+{r:27,date:"Jun 29",type:"easy",wk:8, dist:5.60, duration:null,pace:null,paceEasy:null,hrAvg:132,hrMax:146,te:2.3, gct:331, vr:null,pctCeiling:null,drift:5.9,  hrZones:null,temp:30,  flag:"✅",  note:"Phase 2 gate CLEARED ✅ · drift +5.9"},
+{r:28,date:"Jul 1", type:"quality",wk:8,dist:6.24,duration:null,pace:null,paceEasy:null,hrAvg:127,hrMax:154,te:2.4, gct:317, vr:null,pctCeiling:1,   drift:null, hrZones:null,temp:34,  flag:"✅",  note:"GCT PB · 4s ceiling touch"},
+{r:29,date:"Jul 3", type:"easy",wk:8, dist:5.96, duration:null,pace:null,paceEasy:null,hrAvg:null,hrMax:null,te:null,gct:null,vr:null, pctCeiling:null,drift:null, hrZones:null,temp:null, flag:"⚠️", note:"Cut short — mental load"},
+{r:30,date:"Jul 4", type:"long",wk:8, dist:13.49,duration:null,pace:null,paceEasy:null,hrAvg:125,hrMax:150,te:2.5, gct:336, vr:null,pctCeiling:null,drift:-2.3, hrZones:null,temp:null, flag:"✅✅",note:"Drift -2.3 🏆 best ever · rain"},
+{r:31,date:"Jul 6", type:"easy",wk:9, dist:6.57, duration:72,  pace:null,paceEasy:null,hrAvg:123,hrMax:144,te:2.3, gct:346, vr:null,pctCeiling:null,drift:-1.6, hrZones:null,temp:31,  flag:"✅",  note:"Phase 2 W9 start · drift -1.6 🏆"},
+{r:32,date:"Jul 8", type:"quality",wk:9,dist:6.07,duration:50, pace:null,paceEasy:null,hrAvg:128,hrMax:159,te:3.1, gct:324, vr:null,pctCeiling:5,   drift:null, hrZones:null,temp:35,  flag:"⚠️", note:"Ceiling breach ⚠️ — cafe stop · outdoor heat"},
+{r:33,date:"Jul 9", type:"easy",wk:9, dist:4.87, duration:42,  pace:null,paceEasy:null,hrAvg:131,hrMax:146,te:2.9, gct:null,vr:null, pctCeiling:null,drift:0.1,  hrZones:null,temp:32,  flag:"✅",  note:"Drift +0.1 · foot cleared"},
+{r:34,date:"Jul 10",type:"quality",wk:9,dist:4.52,duration:null,pace:6.70,paceEasy:6.70,hrAvg:null,hrMax:149,te:2.9,gct:329, vr:null,pctCeiling:0,   drift:null, hrZones:null,temp:29,  flag:"✅",  note:"6:42/km LT1 CONFIRMED ✅ — outdoor dawn tempo"},
+{r:35,date:"Jul 11",type:"long",wk:9, dist:14.06,duration:null,pace:null,paceEasy:null,hrAvg:123,hrMax:150,te:3.1, gct:329, vr:null,pctCeiling:null,drift:3.9,  hrZones:null,temp:32,  flag:"✅",  note:"Drift +3.9 · ceiling held · 14km"},
+{r:36,date:"Jul 13",type:"easy",wk:10,dist:7.17, duration:null,pace:null,paceEasy:null,hrAvg:120,hrMax:139,te:3.2, gct:323, vr:null,pctCeiling:null,drift:null, hrZones:null,temp:29,  flag:"✅",  note:"6×20s strides @ 4:17/km"},
+{r:37,date:"Jul 14",type:"quality",wk:10,dist:5.03,duration:44,pace:null,paceEasy:null,hrAvg:120,hrMax:143,te:3.0, gct:312, vr:null,pctCeiling:0,   drift:null, hrZones:null,temp:29,  flag:"✅",  note:"7/7 reps · 0% ceiling 🏆 · treadmill"},
+{r:38,date:"Jul 16",type:"easy",wk:10,dist:4.77, duration:41,  pace:null,paceEasy:null,hrAvg:123,hrMax:145,te:2.5, gct:336, vr:null,pctCeiling:null,drift:10.0, hrZones:null,temp:27,  flag:"✅",  note:"Drift +10 ⚠️ — bad sleep carryover"},
+{r:39,date:"Jul 17",type:"quality",wk:10,dist:2.16,duration:19,pace:6.98,paceEasy:6.98,hrAvg:137,hrMax:153,te:3.2, gct:303, vr:8.5, pctCeiling:1,   drift:null, hrZones:null,temp:28,  flag:"✅✅",note:"GCT 303ms ALL-TIME BEST 🏆 · VR 8.5% 🏆 · 15 min tempo"},
+{r:40,date:"Jul 17",type:"easy",wk:10,dist:5.11, duration:40,  pace:null,paceEasy:null,hrAvg:126,hrMax:145,te:2.6, gct:326, vr:null,pctCeiling:null,drift:null, hrZones:null,temp:28,  flag:"✅",  note:"Flush after quality · walk 10.3%"},
+{r:41,date:"Jul 17",type:"long",wk:10,dist:12.90,duration:null,pace:null,paceEasy:null,hrAvg:null,hrMax:null,te:null,gct:328, vr:null,pctCeiling:null,drift:null, hrZones:null,temp:null, flag:"✅",  note:"Week 10 long run · Novablast 5"},
+{r:42,date:"Jul 20",type:"easy",wk:11,dist:6.50, duration:58,  pace:null,paceEasy:null,hrAvg:126,hrMax:145,te:3.5, gct:334, vr:9.1, pctCeiling:null,drift:null, hrZones:null,temp:30,  flag:"✅",  note:"Walk-free easy · VR 9.1% 🏆 best easy · strides"},
+{r:43,date:"Jul 21",type:"quality",wk:11,dist:5.02,duration:46,pace:null,paceEasy:null,hrAvg:116,hrMax:139,te:2.8, gct:311, vr:8.7, pctCeiling:0,   drift:null, hrZones:null,temp:27,  flag:"⚠️", note:"Too easy ⚠️ — speed too conservative · right ankle flag"},
+{r:44,date:"Jul 22",type:"easy",wk:11,dist:6.01, duration:53,  pace:null,paceEasy:null,hrAvg:136,hrMax:154,te:3.1, gct:339, vr:null,pctCeiling:null,drift:4.4,  hrZones:null,temp:34,  flag:"⚠️", note:"30.6% walk ratio · TE too high · 34°C · ankle first 2km"},
+{r:45,date:"Jul 23",type:"quality",wk:11,dist:3.99,duration:33,pace:6.98,paceEasy:6.98,hrAvg:128,hrMax:150,te:3.4, gct:315, vr:8.8, pctCeiling:0,   drift:null, hrZones:[20,26,53,1,0],temp:28,flag:"✅",note:"20 min continuous @ 8.6 km/h ✅ · ceiling exactly met · ankle clean · plantar mild"},
+];
+
+const GATES=[
+  {id:1,type:"hard",name:"Sustained Volume",short:"3 weeks ≥38km injury-free",progress:0,status:"pending",detail:"3 consecutive weeks at or above 38km without injury or unplanned rest. Current max: 37.14km (W10).",eta:"~Aug 2026"},
+  {id:2,type:"hard",name:"Quality Repeatability",short:"2×20 intervals + 2×20 tempo ceiling-clean",progress:0,status:"pending",detail:"Both 2×20 min Quality A AND 2×20 min Quality B completed with 0% time above 150 bpm, in 2 separate weeks.",eta:"~Sep 2026"},
+  {id:3,type:"hard",name:"Long Run In-Load",short:"20km during a full-load week",progress:0,status:"pending",detail:"20km long run in a week that also contained both Quality A and Quality B. Current max long run: 14.43km.",eta:"~Aug–Sep 2026"},
+  {id:4,type:"hard",name:"Injury-Free Continuity",short:"8 consecutive rising-load weeks",progress:37.5,status:"active",detail:"Week 11 = week 3 of 8. Started Week 9 (Jul 6). Clears Week 16 (Aug 31). Right ankle cleared R45. Right plantar mild fatigue at R45 — monitor.",eta:"Aug 31, 2026"},
+  {id:5,type:"hard",name:"Race 0",short:"VPBank Hanoi 10K completed",progress:0,status:"pending",detail:"VPBank Hanoi 10K — October 2026. Running with partner. Low stakes. Sub-55 min is Gate 1 fitness check.",eta:"Oct 2026"},
+  {id:6,type:"hard",name:"Test Data",short:"VO₂max + VT1/VT2 in hand",progress:0,status:"pending",detail:"VO₂max + VT1/VT2 tests (Regenetics HCMC preferred — 1.5M VND). BV 108 appointment Jul 30 to book. Target Sep 2026.",eta:"Sep 2026"},
+  {id:7,type:"soft",name:"Form Consolidation",short:"Head position improved vs Jul 17 baseline",progress:0,status:"pending",detail:"Re-assessment Oct 2026. Primary fix: eyes on horizon. Head down confirmed in video.",eta:"Oct 2026"},
+  {id:8,type:"soft",name:"GCT Outdoor Easy",short:"≤320ms on 2 consecutive outdoor easy runs",progress:40,status:"pending",detail:"Current outdoor easy average ~336ms. Program best (treadmill quality) = 303ms. Need two consecutive outdoor easy ≤320ms.",eta:"Aug–Sep 2026"},
+  {id:9,type:"soft",name:"Peak-Load Rhythm",short:"2×20+20km LR feels controlled, not hard",progress:0,status:"pending",detail:"Subjective check only. Peak load week must feel managed.",eta:"Sep 2026"}
+];
+
+const HEALTH_FLAGS=[
+  {status:"urgent",title:"HBV Vaccination",short:"Shot 1 of 3. OVERDUE.",detail:"HBsAg negative, HBsAb 7.77 (need ≥10 — not immune). 3-shot course over 6 months. High priority: Vietnam prevalence + both parents Hep B positive. Any clinic.",action:"Book Shot 1 this week. No further deferral."},
+  {status:"urgent",title:"BV 108 — July 30, 2026",short:"08:00 appt. Do not leave without test bookings.",detail:"Agenda: Atoyze 2-month review · blood retest (TG, Vit D, Potassium, Ferritin, CBC) · endocrinologist referral (TI-RADS 4) · lactate step test booking · VO₂max graded exercise test booking. Fallback: Regenetics HCMC (1.5M VND).",action:"Prepare agenda. Do not leave without confirmed dates for lactate + VO₂max tests."},
+  {status:"watch",title:"TI-RADS 4 Thyroid Nodule",short:"5×4mm left lobe. Endocrinologist referral pending.",detail:"TI-RADS 4 = intermediate suspicion — majority benign but specialist required. TSH and thyroid function completely normal. Referral via Jul 30 appointment.",action:"Jul 30: get endocrinologist referral confirmed."},
+  {status:"watch",title:"Triglyceride Disorder",short:"TG 8.52 mmol/L (5× upper limit). Atoyze Day 53.",detail:"Genetic/metabolic driver confirmed. No fatty liver. Atoyze 20/10 from May 30. Zero statin muscle side effects across all 45 runs. Alcohol zero — non-negotiable. Retest Jul 30.",action:"Monitor for unusual leg heaviness every run. Retest Jul 30."},
+  {status:"watch",title:"Right Ankle + Right Plantar",short:"Ankle cleared R45. Plantar mild fatigue — monitor.",detail:"Right lateral ankle (peroneal) irritated R43, present first 2km R44 only, clean through 20 min continuous tempo R45. New mild right plantar fatigue at R45 end — not pain, fatigue. Monitor Week 12.",action:"Flag any ankle or plantar pain during Week 12 Quality A."},
+  {status:"clear",title:"Vitamin D Deficiency",short:"15.40 ng/mL baseline. D3 2,000 IU — Day 53.",detail:"Deficient at baseline (May 29). D3 supplementation running. Jul 30 retest will show response. Dose increase likely needed.",action:"Retest Jul 30."},
+  {status:"clear",title:"Gallbladder Polyps",short:"Largest 3mm. No action needed now.",detail:"Multiple small polyps found May 30 imaging. Largest 3mm — below surgical threshold. Routine monitoring only.",action:"Book gallbladder ultrasound November 2026."}
+];
+
+const MEDICATIONS=[
+  {name:"Atoyze 20/10",dose:"Atorvastatin 20mg + Ezetimibe 10mg · 1 tablet · evening with dinner",statinStart:"2026-05-30",status:"clean",purpose:"Triglyceride + cholesterol control",note:"Monitor for unusual muscle heaviness every run. Next review: Jul 30 blood retest."},
+  {name:"Vitamin D3 2,000 IU",dose:"1 capsule · with fattiest meal (fat-soluble)",statinStart:"2026-05-30",status:"clean",purpose:"Correct vitamin D deficiency (15.40 ng/mL baseline)",note:"Jul 30 retest. Dose increase likely."},
+  {name:"CoQ10 (Sithion Q10)",dose:"Per label · with meal + fat",statinStart:"2026-05-30",status:"clean",purpose:"Counter statin-induced CoQ10 depletion",note:"Standard companion to statin therapy. No side effects."}
+];
+
+const RACES=[
+  {name:"VPBank Hanoi 10K",label:"Race 0",date:new Date("2026-10-19"),goal:"Sub-55 min (Gate 1 fitness check)",note:"Running with partner. Low pressure. Primary purpose: race-day execution data point.",color:"#06b6d4"},
+  {name:"BIM Tây Hồ Half Marathon",label:"Race 1",date:new Date("2027-04-05"),goal:"Sub-1:55 = sub-4 confirmed · Sub-1:45 = 3:30 viable",note:"Gate 2. Competitive effort. Primary fitness checkpoint for marathon build.",color:"#7c3aed"},
+  {name:"VPBank Hanoi Marathon",label:"Race 2",date:new Date("2027-10-19"),goal:"Sub-4:00 · Stretch goal: 3:30",note:"Primary objective. Pace: 5:41/km (sub-4) or 4:58/km (3:30 stretch).",color:"#a855f7"}
+];
+
+// ════════════════════════════════════════════════════
+// END STATIC BLOCK
+// ════════════════════════════════════════════════════
+
+
+// ╔══════════════════════════════════════════════════╗
+// ║     CURRENT STATE — REPLACE AFTER EACH RUN      ║
+// ║    ~30 lines. Only this block changes weekly.    ║
+// ╚══════════════════════════════════════════════════╝
+
+const ATHLETE={
+  name:"Đức Lưu",age:30,phase:"Phase 2",phaseName:"Quality Development",
+  week:11,totalWeeks:24,deloadWeek:21,
+  weekVolOnBoard:21.52,lastWeekVol:37.14,weekTarget:[33,37],
+  easyHRCeiling:143,walkTrigger:143,walkResume:128,qualityCeiling:150,
+  ltPace:6.70,ltConfirmed:true,ltRun:"R34",ltDate:"Jul 10",
+  gctBest:303,vrBest:8.5,
+  statinStart:"2026-05-30",
+  stressLevel:"LOW",
+  formCue:"Eyes on the horizon — head up every session",
+  date:"July 23, 2026",
+  hrvBaseline:[53,68],
+  weekSchedule:{Mon:"easy",Tue:"rest",Wed:"quality_a",Thu:"easy_flush",Fri:"quality_b",Sat:"long",Sun:"rest"},
+  goalPaceSub4:5.683,goalPace330:4.967,
+};
+
+const READINESS={
+  hrv:71,hrvAvg7:63,rhr:41,rhrAvg7:41,sleepScore:null,
+  status:"GREEN",statusNote:"Balanced — train as planned",
+  lastUpdated:"Jul 23 morning",
+};
+
+// ════════════════════════════════════════════════════
+// END CURRENT STATE — display logic below, do not edit
+// ════════════════════════════════════════════════════
+// ── UTILITIES ──────────────────────────────────────────────────────────
+function fmtPace(v){if(!v)return'—';const m=Math.floor(v),s=Math.round((v-m)*60);return`${m}:${String(s).padStart(2,'0')}`}
+function daysUntil(d){const n=new Date();n.setHours(0,0,0,0);const t=new Date(d);t.setHours(0,0,0,0);return Math.ceil((t-n)/86400000)}
+function fmtDate(d){return new Date(d).toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'})}
+function daysSince(s){return Math.floor((new Date()-new Date(s))/86400000)}
+function movAvg(arr,n){return arr.map((_,i,a)=>{const w=a.slice(Math.max(0,i-n+1),i+1);return+(w.reduce((s,v)=>s+v,0)/w.length).toFixed(2)})}
+
+// ── ANALYTICS ENGINE (pure — no DOM access) ────────────────────────────
+function computeReadiness(r,a){
+  const {hrv,hrvAvg7,rhr,rhrAvg7,sleepScore}=r;
+  const rhrDelta=rhr-rhrAvg7,hrvOk=hrv>=a.hrvBaseline[0];
+  let status='GREEN',reason='All signals nominal — train as planned.';
+  if((sleepScore!==null&&sleepScore<45)||rhrDelta>=8){
+    status='RED';reason=rhrDelta>=8?'RHR elevated ≥8 bpm above rolling average — rest.':'Sleep score below 45 — mandatory rest.';
+  } else if((sleepScore!==null&&sleepScore<60)||!hrvOk||rhrDelta>=5){
+    status='AMBER';
+    reason=!hrvOk?'HRV below baseline — reduce intensity 20%, no quality sessions.':rhrDelta>=5?'RHR elevated +5–7 bpm — easy only, monitor closely.':'Sleep 45–59 — easy only, no quality sessions.';
+  } else if(sleepScore!==null&&sleepScore<75){reason='Sleep 60–74 but HRV balanced — proceed, monitor during session.';}
+  return{status,reason,rhrDelta,hrvOk};
+}
+
+function computeWeeklyVol(runs){
+  const map={};
+  runs.forEach(r=>{
+    const w=r.wk;
+    if(!map[w])map[w]={wk:w,label:`W${w}`,easy:0,quality:0,long:0,phase:w<=8?1:2};
+    if(r.type==='easy')map[w].easy+=r.dist;
+    else if(r.type==='quality')map[w].quality+=r.dist;
+    else if(r.type==='long')map[w].long+=r.dist;
+  });
+  return Object.values(map).sort((a,b)=>a.wk-b.wk).map(w=>{
+    const t=+(w.easy+w.quality+w.long).toFixed(2);
+    const ep=t>0?(w.easy/t*100):0;
+    const partial=w.wk===ATHLETE.week;
+    return{...w,total:t,easyPct:+ep.toFixed(1),compliant:ep>=80,partial};
+  });
+}
+
+function computeIntensityDist(wvol){return wvol}
+
+function computeGCTTrend(runs){
+  const pts=runs.filter(r=>r.gct).map(r=>({r:r.r,date:r.date,gct:r.gct,type:r.type}));
+  const vals=pts.map(p=>p.gct),ma=movAvg(vals,5);
+  return{pts,movingAvg:pts.map((p,i)=>({r:p.r,ma:ma[i]}))};
+}
+
+function computeVRTrend(runs){
+  const pts=runs.filter(r=>r.vr).map(r=>({r:r.r,date:r.date,vr:r.vr,type:r.type}));
+  return{pts,best:pts.length?Math.min(...pts.map(p=>p.vr)):null,baseline:9.1};
+}
+
+function computeCardiacDrift(runs){
+  const pts=runs.filter(r=>r.drift!==null&&r.drift!==undefined).map(r=>({r:r.r,date:r.date,drift:r.drift,type:r.type}));
+  return{pts};
+}
+
+function computeQualityCompliance(runs){
+  const q=runs.filter(r=>r.type==='quality').map(r=>{
+    let p=r.pctCeiling;
+    if(p===null||p===undefined)p=r.flag.includes('⚠')?5:0;
+    return{r:r.r,date:r.date,pct:p,status:p===0?'clean':p<=5?'minor':'breach'};
+  });
+  const last=q.slice(-10),clean=last.filter(s=>s.status==='clean').length;
+  return{sessions:q,cleanCount:clean,total:last.length,rate:last.length?Math.round(clean/last.length*100):0};
+}
+
+function computeAEI(runs){
+  const pts=runs.filter(r=>r.type==='easy'&&r.hrAvg&&(r.pace||r.paceEasy)).map(r=>{
+    const p=r.paceEasy||r.pace,spd=60/p,aei=+(r.hrAvg/spd).toFixed(2);
+    return{r:r.r,date:r.date,aei,hrAvg:r.hrAvg,pace:p};
+  });
+  const ma=movAvg(pts.map(p=>p.aei),5);
+  return{pts,movingAvg:pts.map((p,i)=>({r:p.r,ma:ma[i]}))};
+}
+
+function computeThresholdProg(runs){
+  const pts=runs.filter(r=>r.type==='quality'&&r.pace).map(r=>({r:r.r,date:r.date,pace:r.pace,hrAvg:r.hrAvg,pct:r.pctCeiling||0}));
+  if(pts.length<2)return{pts,slope:null,conf:'INSUFFICIENT'};
+  const n=pts.length,xs=pts.map((_,i)=>i),ys=pts.map(p=>p.pace);
+  const xm=xs.reduce((s,x)=>s+x)/n,ym=ys.reduce((s,y)=>s+y)/n;
+  const num=xs.reduce((s,x,i)=>s+(x-xm)*(ys[i]-ym),0);
+  const den=xs.reduce((s,x)=>s+(x-xm)**2,0);
+  const slope=den?+(num/den).toFixed(4):0;
+  return{pts,slope,conf:n>=5?'MEDIUM':'LOW'};
+}
+
+function computePaceHRScatter(runs){
+  const pts=runs.filter(r=>r.hrAvg&&(r.pace||r.paceEasy));
+  return pts.map((r,i)=>({x:r.hrAvg,y:r.paceEasy||r.pace,r:r.r,date:r.date,type:r.type,opacity:0.3+(i/pts.length)*0.7}));
+}
+
+function computeHRZoneEst(hrAvg,hrMax,known){
+  if(known)return{zones:known,est:false};
+  if(!hrAvg||!hrMax)return null;
+  const sd=(hrMax-hrAvg)*0.6;
+  function ncdf(x,m,s){
+    const z=(x-m)/(s*Math.SQRT2);
+    const t=1/(1+0.3275911*Math.abs(z));
+    const y=1-t*(0.254829592+t*(-0.284496736+t*(1.421413741+t*(-1.453152027+t*1.061405429))))*Math.exp(-z*z);
+    return 0.5*(1+(z>=0?y:-y));
+  }
+  const z=[122,138,146,154].reduce((acc,b,i,arr)=>{
+    const a=i===0?0:ncdf(arr[i-1],hrAvg,sd);
+    acc.push(+((ncdf(b,hrAvg,sd)-a)*100).toFixed(1));
+    return acc;
+  },[]);
+  z.push(+((1-ncdf(154,hrAvg,sd))*100).toFixed(1));
+  const sum=z.reduce((s,v)=>s+v);
+  return{zones:z.map(v=>+(v/sum*100).toFixed(1)),est:true};
+}
+
+function computeHRZoneDist(runs){
+  const q=runs.filter(r=>r.type==='quality').slice(-8);
+  return q.map(r=>{
+    const z=computeHRZoneEst(r.hrAvg,r.hrMax,r.hrZones);
+    return{r:r.r,date:r.date,zones:z?z.zones:[0,0,0,0,0],est:z?z.est:true};
+  });
+}
+
+function computePaceGap(runs,athlete){
+  const qp=runs.filter(r=>r.type==='quality'&&r.pace).sort((a,b)=>b.r-a.r);
+  const current=qp.length?qp[0]:null;
+  const currentPace=current?current.pace:athlete.ltPace;
+  const gap=+(currentPace-athlete.goalPaceSub4).toFixed(2);
+  const gap330=+(currentPace-athlete.goalPace330).toFixed(2);
+  return{currentPace,currentRun:current?current.r:34,gap,gap330,conf:athlete.ltConfirmed?'HIGH':'LOW'};
+}
+
+function computeLongRunProg(runs){
+  return runs.filter(r=>r.type==='long').map(r=>({r:r.r,date:r.date,dist:r.dist}));
+}
+
+function computeTodaySession(athlete){
+  const days=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+  const today=days[new Date().getDay()];
+  const map={Mon:'Easy + strides',Tue:'Rest',Wed:'Quality A (5×4 min intervals)',Thu:'Easy flush',Fri:'Quality B (20 min continuous tempo)',Sat:'Long run (14–15 km)',Sun:'Rest / Legs Day gym'};
+  const type=athlete.weekSchedule[today]||'rest';
+  const alreadyDone=RUNS.filter(r=>r.wk===athlete.week&&r.date.includes('Jul 23')).length>0;
+  return{day:today,label:map[today]||'Rest',type,hrCeiling:type.includes('quality')?athlete.qualityCeiling:athlete.easyHRCeiling,alreadyDone};
+}
+
+function computeAllAnalytics(){
+  const rdns=computeReadiness(READINESS,ATHLETE);
+  const wvol=computeWeeklyVol(RUNS);
+  const intensity=computeIntensityDist(wvol);
+  const gct=computeGCTTrend(RUNS);
+  const vr=computeVRTrend(RUNS);
+  const drift=computeCardiacDrift(RUNS);
+  const compliance=computeQualityCompliance(RUNS);
+  const aei=computeAEI(RUNS);
+  const threshold=computeThresholdProg(RUNS);
+  const scatter=computePaceHRScatter(RUNS);
+  const zones=computeHRZoneDist(RUNS);
+  const paceGap=computePaceGap(RUNS,ATHLETE);
+  const longRun=computeLongRunProg(RUNS);
+  const todaySession=computeTodaySession(ATHLETE);
+  const statinDay=daysSince(ATHLETE.statinStart);
+  return{rdns,wvol,intensity,gct,vr,drift,compliance,aei,threshold,scatter,zones,paceGap,longRun,todaySession,statinDay};
+}
+
+// ── TAB SWITCHING ───────────────────────────────────────────────────────
+const TABS=['today','adaptation','training','health','future'];
+// ── LAZY CHART INIT ─────────────────────────────────────────────────────
+// Charts are created only when their tab is first visited.
+// This prevents the init-in-hidden-tab blur + resize-shake problem.
+let _A; // analytics cache set on DOMContentLoaded
+const TAB_INITED={today:true,adaptation:false,training:false,health:true,future:true};
+
+function initAdaptationCharts(){
+  initPaceHRChart(_A);
+  if(_A.threshold.pts.length>=2)initThresholdChart(_A);
+  if(_A.aei.pts.length>=2)initAEIChart(_A);
+  initZoneChart(_A);
+  initIntensityChart(_A);
+  initComplianceChart(_A);
+  initDriftChart(_A);
+  initGCTChart(_A);
+}
+function initTrainingCharts(){
+  initVolumeChart(_A);
+  initLongRunChart(_A);
+}
+
+function switchTab(tab){
+  TABS.forEach(t=>{
+    document.getElementById('tab-'+t).classList.toggle('active',t===tab);
+    const b=document.getElementById('tb-'+t);if(b)b.classList.toggle('active',t===tab);
+    const p=document.getElementById('pnb-'+t);if(p)p.classList.toggle('active',t===tab);
+  });
+  if(!TAB_INITED[tab]){
+    TAB_INITED[tab]=true;
+    if(tab==='adaptation')initAdaptationCharts();
+    if(tab==='training')initTrainingCharts();
+  }
+}
+
+// ── READINESS EVALUATOR ─────────────────────────────────────────────────
+function evaluateReadiness(){
+  const hrv=parseFloat(document.getElementById('input-hrv').value)||READINESS.hrv;
+  const rhr=parseFloat(document.getElementById('input-rhr').value)||READINESS.rhr;
+  const sleep=parseFloat(document.getElementById('input-sleep').value)||null;
+  const fakeR={...READINESS,hrv,rhr,sleepScore:sleep};
+  const r=computeReadiness(fakeR,ATHLETE);
+  const cc=r.status==='GREEN'?'green':r.status==='AMBER'?'amber':'red';
+  const cv=r.status==='GREEN'?'gn':r.status==='AMBER'?'am':'rd';
+  document.getElementById('eval-res').innerHTML=`<span class="sdot ${cc}"></span><span class="vit-val ${cv}" style="font-size:1rem;margin-left:6px">${r.status}</span><div class="eval-reason">${r.reason}</div>`;
+  const dot=document.getElementById('rd-dot');const lbl=document.getElementById('rd-label');
+  if(dot){dot.className='sdot '+cc}if(lbl){lbl.className='rd-label c-'+r.status.toLowerCase().replace('green','gn').replace('amber','am').replace('red','rd');lbl.textContent=r.status}
+  const vdot=document.getElementById('s-vdot');const vtxt=document.getElementById('s-vtxt');
+  if(vdot){vdot.className='sdot '+cc}if(vtxt){vtxt.className='vit-rd-txt c-'+cv;vtxt.textContent=r.status}
+}
+
+// ── RENDER VITALS ───────────────────────────────────────────────────────
+function renderVitals(a){
+  const days=daysUntil(RACES[0].date);
+  const rdClass=a.rdns.status==='GREEN'?'green':a.rdns.status==='AMBER'?'amber':'red';
+  const rdVal=a.rdns.status==='GREEN'?'gn':a.rdns.status==='AMBER'?'am':'rd';
+  const hrvCls=READINESS.hrv>=ATHLETE.hrvBaseline[0]?'gn':'am';
+  document.getElementById('vitals').innerHTML=`
+    <div class="vit-rd">
+      <div class="vit-rd-top"><span class="sdot ${rdClass}" id="s-vdot"></span><span class="vit-rd-txt ${rdVal}" id="s-vtxt">${a.rdns.status}</span></div>
+      <div class="vit-lbl">DAILY READINESS</div>
+    </div>
+    <div class="vit"><div class="vit-val ${hrvCls}">${READINESS.hrv}<span style="font-size:.72rem">ms</span></div><div class="vit-lbl">HRV LAST NIGHT</div><div class="vit-sub">7d avg ${READINESS.hrvAvg7}ms</div></div>
+    <div class="vit"><div class="vit-val gn">${READINESS.rhr}<span style="font-size:.72rem">bpm</span></div><div class="vit-lbl">RHR</div><div class="vit-sub">avg ${READINESS.rhrAvg7} · Δ${a.rdns.rhrDelta>=0?'+':''}${a.rdns.rhrDelta}</div></div>
+    <div class="vit"><div class="vit-val vb">${ATHLETE.weekVolOnBoard}<span style="font-size:.72rem">km</span></div><div class="vit-lbl">WEEK ${ATHLETE.week} ON BOARD</div><div class="vit-sub">tgt ${ATHLETE.weekTarget[0]}–${ATHLETE.weekTarget[1]}km</div></div>
+    <div class="vit"><div class="vit-val" style="font-size:.95rem;line-height:1.2">${ATHLETE.phase}<br><span style="font-size:.58rem;color:var(--m2)">${ATHLETE.phaseName}</span></div><div class="vit-lbl">PHASE 2 · WEEK ${ATHLETE.week}</div><div class="vit-sub">W${ATHLETE.week}/${ATHLETE.totalWeeks}</div></div>
+    <div class="vit"><div class="vit-val cn" style="font-size:1.8rem">${days}</div><div class="vit-lbl">DAYS TO RACE 0</div><div class="vit-sub">VPBank 10K</div></div>
+    <div class="vit"><div class="vit-val vb">${ATHLETE.gctBest}<span style="font-size:.72rem">ms</span></div><div class="vit-lbl">GCT PROGRAM BEST</div><div class="vit-sub">R39 · ${ATHLETE.vrBest}% VR</div></div>`;
+  document.getElementById('hdr-name').textContent=ATHLETE.name;
+  document.getElementById('hdr-date').textContent=ATHLETE.date;
+  document.getElementById('hdr-meta').textContent=`${ATHLETE.phase} · Week ${ATHLETE.week} · ${ATHLETE.phaseName}`;
+  document.getElementById('hdr-pill').textContent=`P2 · W${ATHLETE.week}`;
+}
+
+// ── RENDER TODAY ────────────────────────────────────────────────────────
+function renderToday(a){
+  const rdCls=a.rdns.status==='GREEN'?'green':a.rdns.status==='AMBER'?'amber':'red';
+  const rdVal=a.rdns.status==='GREEN'?'gn':a.rdns.status==='AMBER'?'am':'rd';
+  document.getElementById('rd-dot').className=`sdot ${rdCls}`;
+  document.getElementById('rd-label').className=`rd-label c-${rdVal}`;
+  document.getElementById('rd-label').textContent=a.rdns.status;
+  document.getElementById('rd-note').textContent=READINESS.statusNote;
+  document.getElementById('rd-time').textContent=`Last updated: ${READINESS.lastUpdated}`;
+  document.getElementById('rd-sub').textContent=`HRV ${READINESS.hrv}ms · RHR ${READINESS.rhr}bpm · ${a.rdns.reason.slice(0,60)}`;
+
+  // Last run
+  const lr=RUNS[RUNS.length-1];
+  const typeColor={quality:'#7c3aed',long:'#06b6d4',easy:'#10b981'}[lr.type];
+  document.getElementById('lr-sub').textContent=`R${lr.r} · ${lr.date} · ${lr.type}`;
+  document.getElementById('lr-card').style.borderLeftColor=typeColor;
+  document.getElementById('lr-body').innerHTML=`
+    <span class="lr-badge ${lr.type}">R${lr.r} · ${lr.type.toUpperCase()}</span>
+    <div class="lr-grid">
+      <div class="lr-field"><div class="lf-lbl">DISTANCE</div><div class="lf-val">${lr.dist} km</div></div>
+      <div class="lr-field"><div class="lf-lbl">AVG HR</div><div class="lf-val">${lr.hrAvg||'—'} bpm</div></div>
+      <div class="lr-field"><div class="lf-lbl">MAX HR</div><div class="lf-val">${lr.hrMax||'—'} bpm</div></div>
+      <div class="lr-field"><div class="lf-lbl">GCT</div><div class="lf-val c-vb">${lr.gct||'—'} ms</div></div>
+      <div class="lr-field"><div class="lf-lbl">VR</div><div class="lf-val c-cn">${lr.vr?lr.vr+'%':'—'}</div></div>
+      <div class="lr-field"><div class="lf-lbl">TRAIN. EFFECT</div><div class="lf-val">${lr.te||'—'}</div></div>
+      ${lr.pctCeiling!==null&&lr.pctCeiling!==undefined?`<div class="lr-field"><div class="lf-lbl">CEILING</div><div class="lf-val ${lr.pctCeiling===0?'c-gn':'c-am'}">${lr.pctCeiling}%</div></div>`:''}
+      ${lr.drift!==null&&lr.drift!==undefined?`<div class="lr-field"><div class="lf-lbl">DRIFT</div><div class="lf-val ${lr.drift<=0?'c-cn':lr.drift<=5?'c-gn':lr.drift<=10?'c-am':'c-rd'}">${lr.drift>0?'+':''}${lr.drift} bpm</div></div>`:''}
+      <div class="lr-field"><div class="lf-lbl">TEMP</div><div class="lf-val">${lr.temp||'—'}${lr.temp?'°C':''}</div></div>
+      <div class="lr-field"><div class="lf-lbl">FLAG</div><div class="lf-val">${lr.flag}</div></div>
+    </div>
+    <div class="lr-note">${lr.note}</div>`;
+
+  // Alerts
+  const urgent=HEALTH_FLAGS.filter(f=>f.status==='urgent');
+  document.getElementById('alerts-wrap').innerHTML=urgent.length?`
+    <div class="card rd-border">
+      <div class="ch"><div class="cl">ACTIVE ALERTS</div><div class="cs">${urgent.length} urgent — action required</div></div>
+      ${urgent.map((f,i)=>`
+        <div class="alert-card" id="alc-${i}" onclick="toggleAlert(${i})">
+          <div class="alert-top"><span class="alert-dot"></span><span class="alert-title">${f.title}</span><span class="alert-chev">▾</span></div>
+          <div class="alert-detail" id="ald-${i}"><div>${f.detail}</div><div class="alert-action">→ ${f.action}</div></div>
+        </div>`).join('')}
+    </div>`:'';
+
+  // Today session
+  const ts=a.todaySession;
+  document.getElementById('ts-body').innerHTML=`
+    <div class="ts-type">${ts.day.toUpperCase()} — ${ts.label}</div>
+    <div class="ts-detail">HR ceiling: <span class="mono c-vb">${ts.hrCeiling} bpm</span>${ts.type==='quality_a'?` · Quality A · 5×4 min intervals · ceiling clean = 0% above ${ts.hrCeiling}`:ts.type==='quality_b'?` · Quality B · 20 min continuous @ 8.6 km/h`:ts.type==='long'?` · Long run · Novablast 5 · gel at 40 min + electrolytes`:''}</div>
+    <div class="ts-proto">Form cue: ${ATHLETE.formCue}</div>`;
+}
+function toggleAlert(i){const c=document.getElementById(`alc-${i}`),d=document.getElementById(`ald-${i}`);c.classList.toggle('open');d.classList.toggle('open')}
+
+// ── RENDER ADAPTATION ────────────────────────────────────────────────────
+function renderAdaptation(a){
+  // Pace gap
+  renderPaceGap(a.paceGap);
+  // VR block
+  const vr=a.vr;
+  const lastThree=vr.pts.slice(-3).reverse();
+  document.getElementById('vr-body').innerHTML=`
+    <div class="stats-row" style="margin:-18px -20px 14px">
+      <div class="stat-cell"><div class="stat-val cn">${vr.best||'—'}%</div><div class="stat-lbl">BEST</div><div class="stat-sub">R39 · Jul 17</div></div>
+      <div class="stat-cell"><div class="stat-val">${vr.baseline}%</div><div class="stat-lbl">BASELINE</div><div class="stat-sub">R14 · Jun 3</div></div>
+      <div class="stat-cell"><div class="stat-val cn">↓${vr.best?(vr.baseline-vr.best).toFixed(1):'—'}%</div><div class="stat-lbl">IMPROVEMENT</div><div class="stat-sub">vs baseline</div></div>
+    </div>
+    <div class="vr-readings">
+      ${lastThree.map(p=>`<div class="vr-row"><span class="vr-label">R${p.r} · ${p.date} · ${p.type}</span><span class="vr-val">${p.vr}%</span></div>`).join('')}
+    </div>`;
+  // Compliance header
+  document.getElementById('compliance-header').textContent=`${a.compliance.cleanCount} of last ${a.compliance.total} quality sessions ceiling-clean (${a.compliance.rate}%)`;
+  // AEI sparse state
+  if(a.aei.pts.length<2){
+    document.getElementById('aei-sparse').innerHTML=`
+      <div class="sparse-title">AEROBIC EFFICIENCY INDEX</div>
+      <div class="sparse-formula">AEI = avg HR ÷ speed (km/h)</div>
+      <div class="sparse-msg">AEI requires easy run pace data — currently ${a.aei.pts.length} point${a.aei.pts.length!==1?'s':''} available.<br>Log pace for every easy run during the post-run update. This becomes the primary base-building signal as data accumulates.</div>`;
+    document.getElementById('aei-chart-wrap').style.display='none';
+  } else {
+    document.getElementById('aei-sparse').style.display='none';
+    document.getElementById('aei-chart-wrap').style.display='block';
+  }
+  // Pace-HR sparse
+  if(a.scatter.length<3){
+    document.getElementById('pace-hr-sparse').style.display='block';
+    document.getElementById('pace-hr-sparse').innerHTML=`<div class="sparse-title">PACE · HR ENVELOPE</div><div class="sparse-msg">${a.scatter.length} point${a.scatter.length!==1?'s':''} available. Chart fills as pace is logged for each run. Adaptation appears as points moving upper-left (faster pace, same HR) over time.</div>`;
+  }
+  // Threshold sparse
+  if(a.threshold.pts.length<2){
+    document.getElementById('threshold-sparse').style.display='block';
+    document.getElementById('threshold-sparse').innerHTML=`<div class="sparse-title">THRESHOLD PACE TIMELINE</div><div class="sparse-formula">Confirmed: ${fmtPace(ATHLETE.ltPace)}/km (R34, ${ATHLETE.ltDate})</div><div class="sparse-msg">${a.threshold.pts.length} quality session${a.threshold.pts.length!==1?'s':''} with pace data. Timeline builds as quality sessions are logged with pace.</div>`;
+  }
+}
+
+function renderPaceGap(pg){
+  // Track: from 7:00/km (easy pace) to 4:58/km (3:30)
+  // Map: 7.0 → 4.967 on a track of width 100%
+  const lo=7.0,hi=4.967;
+  const range=lo-hi;
+  const curr=Math.min(pg.currentPace,lo);
+  const filledPct=((lo-curr)/range)*100;
+  const sub4Pct=((lo-ATHLETE.goalPaceSub4)/range)*100;
+  const lp1Pct=((lo-6.17)/range)*100; // Phase 3 entry ~6:10
+  const gapStr=fmtPace(Math.abs(pg.gap));
+  document.getElementById('pace-gap-body').innerHTML=`
+    <div class="pace-track-wrap">
+      <div class="pace-track">
+        <div class="pt-filled" style="width:${filledPct.toFixed(1)}%"></div>
+        <div class="pt-dot" style="left:${filledPct.toFixed(1)}%"></div>
+        <div class="pt-marker" style="left:${lp1Pct.toFixed(1)}%;color:var(--am)">
+          <div class="pt-marker-line"></div>
+          <div class="pt-label">Phase 3</div>
+          <div class="pt-pace">6:10/km</div>
+        </div>
+        <div class="pt-marker" style="left:${sub4Pct.toFixed(1)}%;color:var(--vb)">
+          <div class="pt-marker-line"></div>
+          <div class="pt-label">Sub-4</div>
+          <div class="pt-pace">5:41/km</div>
+        </div>
+        <div class="pt-marker" style="left:99%;color:var(--mu)">
+          <div class="pt-marker-line"></div>
+          <div class="pt-label">3:30</div>
+          <div class="pt-pace">4:58/km</div>
+        </div>
+      </div>
+      <div class="pt-track-labels"><span>NOW · ${fmtPace(pg.currentPace)}/km</span><span>RACE →</span></div>
+      <div class="stats-row" style="margin-top:14px">
+        <div class="stat-cell"><div class="stat-val vb">${fmtPace(pg.currentPace)}</div><div class="stat-lbl">CURRENT LT1</div><div class="stat-sub">R${pg.currentRun} · ${ATHLETE.ltDate}</div></div>
+        <div class="stat-cell"><div class="stat-val am">${gapStr}<span style="font-size:.9rem">/km</span></div><div class="stat-lbl">GAP TO SUB-4</div><div class="stat-sub">to 5:41/km</div></div>
+        <div class="stat-cell"><div class="stat-val cn">${fmtPace(6.17)}</div><div class="stat-lbl">PHASE 3 TARGET</div><div class="stat-sub">~entry Oct 2026</div></div>
+      </div>
+      <div class="conf-note">LT1 pace: <span style="color:var(--gn)">HIGH confidence</span> (R34 confirmed outdoor dawn) · Progression rate: <span style="color:var(--am)">INSUFFICIENT DATA</span> (1 confirmed quality pace point)</div>
+    </div>`;
+}
+
+// ── RENDER TRAINING ────────────────────────────────────────────────────
+function renderTraining(a){
+  renderSignals(a);
+  renderSessionLog();
+  drawRadar();
+  renderGateList();
+}
+
+function renderSignals(a){
+  const {gct,vr,drift,compliance}=a;
+  const gctBest=Math.min(...gct.pts.map(p=>p.gct));
+  const recentGCT=gct.pts.slice(-5);
+  const avgRecentGCT=recentGCT.length?Math.round(recentGCT.reduce((s,p)=>s+p.gct,0)/recentGCT.length):null;
+  document.getElementById('sig-body').innerHTML=`
+    <div class="stats-row" style="margin:-18px -20px 14px">
+      <div class="stat-cell"><div class="stat-val vb">${gctBest}ms</div><div class="stat-lbl">GCT BEST</div><div class="stat-sub">R39 · Jul 17</div></div>
+      <div class="stat-cell"><div class="stat-val">${avgRecentGCT||'—'}ms</div><div class="stat-lbl">5-RUN AVG</div><div class="stat-sub">recent trend</div></div>
+      <div class="stat-cell"><div class="stat-val cn">${vr.best||'—'}%</div><div class="stat-lbl">VR BEST</div><div class="stat-sub">R39 · 8.5%</div></div>
+    </div>
+    <div style="padding:0 0 10px">
+      <div style="font-family:var(--mono);font-size:.5rem;letter-spacing:2px;text-transform:uppercase;color:var(--mu);margin-bottom:6px">CEILING COMPLIANCE (LAST 10)</div>
+      <div style="font-family:var(--mono);font-size:1.1rem;font-weight:700;color:${compliance.rate===100?'var(--gn)':compliance.rate>=80?'var(--am)':'var(--rd)'}">${compliance.rate}%</div>
+      <div style="font-size:.65rem;color:var(--m2)">${compliance.cleanCount} of ${compliance.total} sessions ceiling-clean</div>
+    </div>
+    <div>
+      <div style="font-family:var(--mono);font-size:.5rem;letter-spacing:2px;text-transform:uppercase;color:var(--mu);margin-bottom:6px">BEST DRIFT (OUTDOOR)</div>
+      <div style="font-family:var(--mono);font-size:1.1rem;font-weight:700;color:var(--cn)">−2.3 bpm</div>
+      <div style="font-size:.65rem;color:var(--m2)">R30 · Jul 4 · rain</div>
+    </div>`;
+}
+
+let openRow=null;
+function toggleRow(r){
+  const d=document.getElementById('ld-'+r);if(!d)return;
+  if(openRow!==null&&openRow!==r){const p=document.getElementById('ld-'+openRow);if(p)p.classList.remove('open')}
+  d.classList.toggle('open');openRow=d.classList.contains('open')?r:null;
+}
+
+function renderSessionLog(){
+  const hdr=`<div class="log-hdr"><span class="lc-r-h c-mu">R</span><span class="lc-date-h">DATE</span><span class="lc-type-h">TYPE</span><span>DIST</span><span class="lc-pace-h">PACE</span><span class="lc-avhr-h">AVHR</span><span class="lc-mxhr-h">MXHR</span><span class="lc-gct-h">GCT</span><span>★</span></div>`;
+  const rows=[...RUNS].reverse().map(r=>`
+    <div class="log-row ${r.type}" onclick="toggleRow(${r.r})">
+      <span class="lc-r c-mu">${r.r}</span>
+      <span class="lc-date">${r.date}</span>
+      <span class="lc-type" style="font-size:.55rem;text-transform:uppercase;color:var(--mu)">${r.type.slice(0,4)}</span>
+      <span class="mono">${r.dist}km</span>
+      <span class="lc-pace mono c-vb">${fmtPace(r.pace||r.paceEasy)}</span>
+      <span class="lc-avhr c-m2">${r.hrAvg||'—'}</span>
+      <span class="lc-mxhr c-m2">${r.hrMax||'—'}</span>
+      <span class="lc-gct c-vb">${r.gct||'—'}</span>
+      <span>${r.flag}</span>
+    </div>
+    <div class="log-detail" id="ld-${r.r}">
+      <div><div class="ld-lbl">DIST</div><div class="ld-val">${r.dist}km</div></div>
+      <div><div class="ld-lbl">PACE</div><div class="ld-val">${fmtPace(r.pace||r.paceEasy)}</div></div>
+      <div><div class="ld-lbl">AVG HR</div><div class="ld-val">${r.hrAvg?r.hrAvg+' bpm':'—'}</div></div>
+      <div><div class="ld-lbl">MAX HR</div><div class="ld-val">${r.hrMax?r.hrMax+' bpm':'—'}</div></div>
+      <div><div class="ld-lbl">GCT</div><div class="ld-val c-vb">${r.gct?r.gct+' ms':'—'}</div></div>
+      <div><div class="ld-lbl">VR</div><div class="ld-val c-cn">${r.vr?r.vr+'%':'—'}</div></div>
+      ${r.pctCeiling!==null&&r.pctCeiling!==undefined?`<div><div class="ld-lbl">CEILING</div><div class="ld-val ${r.pctCeiling===0?'c-gn':'c-am'}">${r.pctCeiling}%</div></div>`:'<div></div>'}
+      ${r.drift!==null&&r.drift!==undefined?`<div><div class="ld-lbl">DRIFT</div><div class="ld-val ${r.drift<=0?'c-cn':r.drift<=5?'c-gn':'c-am'}">${r.drift>0?'+':''}${r.drift} bpm</div></div>`:'<div></div>'}
+      <div><div class="ld-lbl">TE</div><div class="ld-val">${r.te||'—'}</div></div>
+      <div><div class="ld-lbl">TEMP</div><div class="ld-val">${r.temp?r.temp+'°C':'—'}</div></div>
+      <div class="ld-note">${r.note}</div>
+    </div>`).join('');
+  document.getElementById('log-wrap').innerHTML=`${hdr}<div class="log-scroll">${rows}</div>`;
+}
+
+let openGate=null;
+function showGateDetail(id){
+  const g=GATES.find(x=>x.id===id),c=document.getElementById('gate-dc');if(!g)return;
+  if(openGate===id){c.classList.remove('open');openGate=null;return;}
+  c.innerHTML=`<div class="gdc-name">GATE ${id}: ${g.name.toUpperCase()}</div><div class="gdc-text">${g.detail}</div><div class="gdc-eta">ETA: ${g.eta}</div><div class="gdc-bar"><div class="gdc-fill" style="width:${g.progress}%"></div></div>`;
+  c.classList.add('open');openGate=id;
+}
+
+function drawRadar(){
+  const hg=GATES.filter(g=>g.type==='hard'),n=hg.length,cx=200,cy=200,R=145;
+  const pt=(i,p)=>{const a=(i*2*Math.PI/n)-Math.PI/2;return{x:cx+R*p*Math.cos(a),y:cy+R*p*Math.sin(a)}};
+  let s='';
+  [.2,.4,.6,.8,1].forEach(l=>{
+    const pts=hg.map((_,i)=>pt(i,l));
+    s+=`<path d="${pts.map((p,i)=>`${i===0?'M':'L'}${p.x.toFixed(1)},${p.y.toFixed(1)}`).join('')}Z" fill="none" stroke="rgba(139,92,246,${(l*.12+.04).toFixed(2)})" stroke-width="1"/>`;
+  });
+  hg.forEach((_,i)=>{const p=pt(i,1);s+=`<line x1="${cx}" y1="${cy}" x2="${p.x.toFixed(1)}" y2="${p.y.toFixed(1)}" stroke="rgba(139,92,246,.18)" stroke-width="1"/>`});
+  const dp=hg.map((g,i)=>pt(i,Math.max(g.progress/100,.01)));
+  s+=`<path d="${dp.map((p,i)=>`${i===0?'M':'L'}${p.x.toFixed(1)},${p.y.toFixed(1)}`).join('')}Z" fill="rgba(124,58,237,.22)" stroke="#7c3aed" stroke-width="2"/>`;
+  hg.forEach((g,i)=>{
+    const lp=pt(i,1.32),anchor=lp.x<cx-12?'end':lp.x>cx+12?'start':'middle';
+    const short=g.name.length>12?g.name.slice(0,11)+'…':g.name;
+    s+=`<text x="${lp.x.toFixed(1)}" y="${lp.y.toFixed(1)}" text-anchor="${anchor}" dominant-baseline="middle" fill="#64748b" font-size="10.5" font-family="Inter,sans-serif" style="cursor:pointer" onmouseover="this.setAttribute('fill','#a855f7')" onmouseout="this.setAttribute('fill','#64748b')" onclick="showGateDetail(${g.id})">${short}</text>`;
+    if(g.progress>0){const d=pt(i,g.progress/100);s+=`<circle cx="${d.x.toFixed(1)}" cy="${d.y.toFixed(1)}" r="5" fill="#a855f7" opacity=".9"/>`}
+  });
+  s+=`<circle cx="${cx}" cy="${cy}" r="4" fill="#7c3aed" opacity=".7"/>`;
+  document.getElementById('rsvg').innerHTML=s;
+  const soft=GATES.filter(g=>g.type==='soft');
+  document.getElementById('sgt-list').innerHTML=`<div class="soft-gates">${soft.map(g=>`<div class="sg-row"><div class="sg-top"><span class="sg-name">G${g.id} · ${g.name}</span><span class="sg-pct">${g.progress}%</span></div><div class="sg-bar"><div class="sg-fill" style="width:${g.progress}%"></div></div></div>`).join('')}</div>`;
+}
+
+function renderGateList(){
+  document.getElementById('glist-body').innerHTML=`<div class="gate-list">${GATES.map(g=>`<div class="gl-row ${g.status}"><div class="gl-top"><span class="gl-name">G${g.id} · ${g.name} <span class="c-mu" style="font-size:.56rem">[${g.type}]</span></span><span class="gl-pct">${g.progress}%</span></div><div class="gl-bar"><div class="gl-fill" style="width:${g.progress}%"></div></div><div class="gl-eta">${g.short} · ${g.eta}</div></div>`).join('')}</div>`;
+}
+
+// ── RENDER HEALTH ───────────────────────────────────────────────────────
+function renderHealth(statinDay){
+  const ord={urgent:0,watch:1,clear:2};
+  const sorted=[...HEALTH_FLAGS].sort((a,b)=>ord[a.status]-ord[b.status]);
+  const u=sorted.filter(f=>f.status==='urgent').length,w=sorted.filter(f=>f.status==='watch').length,cl=sorted.filter(f=>f.status==='clear').length;
+  document.getElementById('health-sub').textContent=`${u} urgent · ${w} watching · ${cl} clear`;
+  document.getElementById('flag-l').innerHTML=`<div class="flag-list">${sorted.map((f,i)=>`<div class="fc ${f.status}" id="fc-${i}" onclick="toggleFlag(${i})"><div class="fh"><span class="fdot ${f.status}"></span><span class="ftitle">${f.title}</span><span class="fshort">${f.short}</span><span class="fchev">▾</span></div><div class="fd" id="fd-${i}"><div class="fd-text">${f.detail}</div><div class="fd-action">→ ${f.action}</div></div></div>`).join('')}</div>`;
+  document.getElementById('med-sub').textContent=`day ${statinDay} · ${MEDICATIONS.length} active`;
+  document.getElementById('med-l').innerHTML=`<div class="med-list">${MEDICATIONS.map(m=>`<div class="med-row"><div><div class="med-name">${m.name}</div><div class="med-dose">${m.dose}</div><div class="med-note">${m.note}</div></div><div><div class="med-day">${statinDay}</div><span class="med-day-lbl">DAY</span></div></div>`).join('')}</div>`;
+}
+function toggleFlag(i){document.getElementById('fc-'+i).classList.toggle('open');document.getElementById('fd-'+i).classList.toggle('open')}
+
+// ── RENDER FUTURE ───────────────────────────────────────────────────────
+function renderFuture(){
+  document.getElementById('race-p').innerHTML=`<div class="race-pipe">${RACES.map(r=>{
+    const d=daysUntil(r.date);
+    return`<div class="race-card" style="border-top-color:${r.color}"><div class="race-lbl">${r.label}</div><div class="race-name" style="color:${r.color}">${r.name}</div><div class="race-dt">${fmtDate(r.date)}</div><div class="race-cd" style="color:${r.color}">${d>0?d:'RACE DAY'}</div><span class="race-cd-unit">DAYS REMAINING</span><div class="race-goal">${r.goal}</div><div class="race-note">${r.note}</div></div>`;
+  }).join('')}</div>`;
+  renderPhaseTimeline();
+}
+
+let openPhase=null;
+function showPhaseDetail(id,text){
+  const d=document.getElementById('phase-detail');
+  if(openPhase===id){d.style.display='none';openPhase=null;return;}
+  d.textContent=text;d.style.display='block';openPhase=id;
+}
+
+function renderPhaseTimeline(){
+  const totalW=40; // rough total weeks to race 2
+  const segs=[
+    {id:'p1',pct:8/totalW*100,label:'Phase 1',detail:'May–Jul 5, 2026 · 8 weeks · Base building · R1–R30 · 196km · Phase 2 gate cleared R27',cls:'pts-done'},
+    {id:'p2a',pct:11/totalW*100,label:'Phase 2 W1–11',detail:'Jul 6–Sep 7, 2026 · Week 11 current · Quality Development · 2 quality sessions/week · GCT 361→303ms',cls:'pts-curr'},
+    {id:'p2b',pct:5/totalW*100,label:'P2 W12–16',detail:'Sep 8–Oct 5, 2026 · Consolidation + deload · Gate clearance window · Peak 2×20 + 20km LR',cls:'pts-future'},
+  ];
+  const races=[
+    {id:'r0',pct:0,label:'Race 0',color:'#06b6d4'},
+    {id:'p3',pct:8/totalW*100,label:'Phase 3',color:'var(--vb)'},
+    {id:'r1',pct:0,label:'Race 1',color:'#7c3aed'},
+    {id:'p4',pct:6/totalW*100,label:'Phase 4',color:'var(--vb)'},
+    {id:'r2',pct:0,label:'Race 2',color:'#a855f7'},
+  ];
+  const seg2pct=segs.reduce((s,g)=>s+g.pct,0);
+  // Estimated weeks for race markers and p3/p4
+  const racePcts=[0,14,21,22,34,38]; // rough week positions
+  const raceItems=[
+    {id:'r0',pos:13/totalW*100,label:'Race 0',color:'#06b6d4',days:daysUntil(RACES[0].date)},
+    {id:'p3',pos:15/totalW*100,label:'Phase 3',color:null},
+    {id:'r1',pos:22/totalW*100,label:'Race 1',color:'#7c3aed',days:daysUntil(RACES[1].date)},
+    {id:'p4',pos:24/totalW*100,label:'Phase 4',color:null},
+    {id:'r2',pos:37/totalW*100,label:'Race 2',color:'#a855f7',days:daysUntil(RACES[2].date)},
+  ];
+  document.getElementById('phase-tl').innerHTML=`
+    <div class="phase-track">
+      ${segs.map(s=>`<div class="pt-seg ${s.cls}" style="width:${s.pct.toFixed(1)}%" onclick="showPhaseDetail('${s.id}','${s.detail}')"><div class="pt-seg-lbl">${s.label}</div>${s.cls==='pts-curr'?'<div class="pt-curr-dot blink"></div>':''}</div>`).join('')}
+      ${raceItems.filter(r=>!r.color||r.color).map(r=>`<div class="pt-seg pts-race" style="position:relative;width:3%" title="${r.label}"><div class="pt-seg-lbl" style="color:${r.color||'var(--mu)'}">${r.label}</div><div class="pts-race-inner" style="background:${r.color||'var(--mu)'}"></div>${r.days?`<div class="pt-race-cd">${r.days}d</div>`:''}</div>`).join('')}
+    </div>`;
+}
+// ── CHART REGISTRY ──────────────────────────────────────────────────────
+const CHARTS={};
+
+// ── CHART DEFAULTS ──────────────────────────────────────────────────────
+const CHART_DEFAULTS={
+  backgroundColor:'rgba(9,9,18,.96)',
+  borderColor:'rgba(139,92,246,.4)',borderWidth:1,
+  titleColor:'#a855f7',bodyColor:'#94a3b8',padding:10
+};
+function xTick(){return{color:'#64748b',font:{family:'JetBrains Mono',size:10}}}
+function yTick(){return{color:'#64748b',font:{family:'JetBrains Mono',size:10}}}
+function gridLine(){return{color:'rgba(139,92,246,.06)'}}
+function borderLine(){return{color:'rgba(139,92,246,.12)'}}
+
+// ── GCT CHART ──────────────────────────────────────────────────────────
+function initGCTChart(a){
+  const isMob=window.innerWidth<=600;
+  const d=isMob?a.gct.pts.slice(-15):a.gct.pts;
+  const tc={'quality':'#7c3aed','long':'#06b6d4','easy':'#10b981'};
+  const minR=d[0].r,maxR=d[d.length-1].r;
+  const mavgD=isMob?a.gct.movingAvg.slice(-15):a.gct.movingAvg;
+  CHARTS.gct=new Chart(document.getElementById('gctChart').getContext('2d'),{
+    type:'scatter',
+    data:{datasets:[
+      {type:'line',label:'_trend',data:d.map(p=>({x:p.r,y:p.gct})),borderColor:'rgba(148,163,184,.15)',borderWidth:1,pointRadius:0,fill:false,tension:.3,order:3},
+      {type:'line',label:'5-Run Avg',data:mavgD.map(p=>({x:p.r,y:p.ma})),borderColor:'#a855f7',borderWidth:2,pointRadius:0,fill:false,tension:.3,order:2},
+      {type:'scatter',label:'GCT',data:d.map(p=>({x:p.r,y:p.gct,lbl:p.label||`R${p.r}`,t:p.type})),backgroundColor:d.map(p=>tc[p.type]),borderColor:d.map(p=>tc[p.type]),pointRadius:5,pointHoverRadius:8,pointBorderWidth:0,order:1},
+      {type:'line',label:'Baseline 361ms',data:[{x:minR,y:361},{x:maxR,y:361}],borderColor:'#ef4444',borderDash:[5,5],borderWidth:1.5,pointRadius:0,fill:false,backgroundColor:'transparent',order:4},
+      {type:'line',label:'Target 320ms',data:[{x:minR,y:320},{x:maxR,y:320}],borderColor:'#f59e0b',borderDash:[5,5],borderWidth:1.5,pointRadius:0,fill:false,backgroundColor:'transparent',order:4},
+      {type:'line',label:'Best 303ms',data:[{x:minR,y:303},{x:maxR,y:303}],borderColor:'#10b981',borderDash:[5,5],borderWidth:1.5,pointRadius:0,fill:false,backgroundColor:'transparent',order:4},
+    ]},
+    options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'nearest',intersect:false},plugins:{legend:{display:false},tooltip:{...CHART_DEFAULTS,callbacks:{title:i=>i[0].raw.lbl||i[0].dataset.label,label:c=>c.raw.t?`GCT: ${c.raw.y}ms (${c.raw.t})`:`${c.dataset.label}: ${c.raw.y}ms`}}},scales:{x:{type:'linear',ticks:{...xTick(),callback:v=>`R${v}`,stepSize:2},grid:gridLine(),border:borderLine()},y:{reverse:true,min:290,max:380,title:{display:true,text:'GCT ms — lower is better ↑',color:'#64748b',font:{family:'Inter',size:10}},ticks:{...yTick(),callback:v=>`${v}ms`},grid:gridLine(),border:borderLine()}}}
+  });
+  document.getElementById('gct-leg').innerHTML=`
+    <div class="li"><span class="ld" style="background:#7c3aed"></span>Quality</div>
+    <div class="li"><span class="ld" style="background:#06b6d4"></span>Long</div>
+    <div class="li"><span class="ld" style="background:#10b981"></span>Easy</div>
+    <div class="li"><span class="ld" style="background:#a855f7;width:20px;height:2px;border-radius:1px"></span>5-Run Avg</div>
+    <div class="li"><span class="ld-line" style="background:#ef4444"></span>Baseline</div>
+    <div class="li"><span class="ld-line" style="background:#f59e0b"></span>Target 320</div>
+    <div class="li"><span class="ld-line" style="background:#10b981"></span>Best 303</div>`;
+}
+
+// ── VOLUME CHART ────────────────────────────────────────────────────────
+function initVolumeChart(a){
+  const w=a.wvol;
+  const bg=w.map(x=>x.partial?'rgba(168,85,247,.4)':x.phase===2?'#7c3aed':'rgba(71,85,105,.6)');
+  const bd=w.map(x=>x.partial?'#a855f7':x.phase===2?'#9333ea':'rgba(100,116,139,.8)');
+  CHARTS.vol=new Chart(document.getElementById('volChart').getContext('2d'),{
+    type:'bar',
+    data:{labels:w.map(x=>x.label+(x.partial?'*':'')),datasets:[
+      {label:'Volume (km)',data:w.map(x=>x.total),backgroundColor:bg,borderColor:bd,borderWidth:1,borderRadius:2,order:2},
+      {type:'line',label:'Min target 33km',data:w.map(()=>33),borderColor:'#f59e0b',borderDash:[5,5],borderWidth:1.5,pointRadius:0,fill:false,backgroundColor:'transparent',order:1},
+      {type:'line',label:'Max target 37km',data:w.map(()=>37),borderColor:'rgba(245,158,11,.4)',borderDash:[3,3],borderWidth:1,pointRadius:0,fill:false,backgroundColor:'transparent',order:1},
+    ]},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{...CHART_DEFAULTS,callbacks:{label:c=>`${c.dataset.label==='Volume (km)'?w[c.dataIndex].total+' km':c.dataset.label+': '+c.parsed.y+'km'}${w[c.dataIndex]?.partial?' (partial)':''}`}}},scales:{x:{ticks:xTick(),grid:gridLine(),border:borderLine()},y:{ticks:{...yTick(),callback:v=>`${v}km`},title:{display:true,text:'km / week',color:'#64748b',font:{family:'Inter',size:10}},grid:gridLine(),border:borderLine()}}}
+  });
+}
+
+// ── INTENSITY DISTRIBUTION CHART ────────────────────────────────────────
+function initIntensityChart(a){
+  const w=a.intensity;
+  CHARTS.intensity=new Chart(document.getElementById('intensityChart').getContext('2d'),{
+    type:'bar',
+    data:{labels:w.map(x=>x.label),datasets:[
+      {label:'Easy',data:w.map(x=>x.easyPct),backgroundColor:w.map(x=>x.compliant?'rgba(139,92,246,.32)':'rgba(245,158,11,.4)'),borderColor:w.map(x=>x.compliant?'rgba(168,85,247,.6)':'#f59e0b'),borderWidth:1,stack:'s'},
+      {label:'Quality',data:w.map(x=>+(x.quality/x.total*100).toFixed(1)),backgroundColor:'rgba(6,182,212,.65)',borderColor:'#06b6d4',borderWidth:1,stack:'s'},
+      {label:'Long',data:w.map(x=>+(x.long/x.total*100).toFixed(1)),backgroundColor:'rgba(168,85,247,.45)',borderColor:'#a855f7',borderWidth:1,stack:'s'},
+    ]},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:'#64748b',font:{family:'Inter',size:10}}},tooltip:{...CHART_DEFAULTS,callbacks:{label:c=>`${c.dataset.label}: ${c.parsed.y.toFixed(1)}%`}},annotation:{annotations:{line80:{type:'line',xMin:-0.5,xMax:w.length-0.5,yMin:80,yMax:80,borderColor:'rgba(245,158,11,.8)',borderWidth:1.5,borderDash:[5,5]}}}},scales:{x:{ticks:xTick(),grid:gridLine(),border:borderLine()},y:{max:100,ticks:{...yTick(),callback:v=>`${v}%`},title:{display:true,text:'% of weekly km',color:'#64748b',font:{family:'Inter',size:10}},grid:gridLine(),border:borderLine()}}}
+  });
+  // Add 80% reference line manually since no annotation plugin loaded
+}
+
+// ── QUALITY COMPLIANCE CHART ─────────────────────────────────────────────
+function initComplianceChart(a){
+  const s=a.compliance.sessions;
+  CHARTS.compliance=new Chart(document.getElementById('complianceChart').getContext('2d'),{
+    type:'bar',
+    data:{labels:s.map(x=>`R${x.r}`),datasets:[{
+      label:'% above ceiling',
+      data:s.map(x=>x.pct),
+      backgroundColor:s.map(x=>x.pct===0?'rgba(124,58,237,.55)':x.pct<=5?'rgba(245,158,11,.5)':'rgba(239,68,68,.5)'),
+      borderColor:s.map(x=>x.pct===0?'#7c3aed':x.pct<=5?'#f59e0b':'#ef4444'),
+      borderWidth:1,borderRadius:2,
+    }]},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{...CHART_DEFAULTS,callbacks:{label:c=>`${c.raw}% above ceiling — ${c.raw===0?'clean':c.raw<=5?'minor breach':'BREACH'}`}}},scales:{x:{ticks:xTick(),grid:gridLine(),border:borderLine()},y:{max:20,min:0,ticks:{...yTick(),callback:v=>`${v}%`},title:{display:true,text:'% time above 150 bpm',color:'#64748b',font:{family:'Inter',size:10}},grid:gridLine(),border:borderLine()}}}
+  });
+}
+
+// ── CARDIAC DRIFT CHART ─────────────────────────────────────────────────
+function initDriftChart(a){
+  const d=a.drift.pts;
+  if(d.length<3){return}
+  CHARTS.drift=new Chart(document.getElementById('driftChart').getContext('2d'),{
+    type:'bar',
+    data:{labels:d.map(x=>`R${x.r}`),datasets:[{
+      label:'Cardiac drift (bpm)',
+      data:d.map(x=>x.drift),
+      backgroundColor:d.map(x=>x.drift<=0?'rgba(6,182,212,.5)':x.drift<=5?'rgba(16,185,129,.4)':x.drift<=10?'rgba(245,158,11,.5)':'rgba(239,68,68,.5)'),
+      borderColor:d.map(x=>x.drift<=0?'#06b6d4':x.drift<=5?'#10b981':x.drift<=10?'#f59e0b':'#ef4444'),
+      borderWidth:1,borderRadius:2,
+    }]},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{...CHART_DEFAULTS,callbacks:{label:c=>`Drift ${c.raw>=0?'+':''}${c.raw} bpm — ${c.raw<=0?'excellent (HR dropped)':c.raw<=5?'minimal':c.raw<=10?'elevated':'high'}`}}},scales:{x:{ticks:xTick(),grid:gridLine(),border:borderLine()},y:{ticks:{...yTick(),callback:v=>`${v>=0?'+':''}${v}`},title:{display:true,text:'Q4 − Q1 avg HR (bpm)',color:'#64748b',font:{family:'Inter',size:10}},grid:gridLine(),border:borderLine()}}}
+  });
+}
+
+// ── LONG RUN CHART ──────────────────────────────────────────────────────
+function initLongRunChart(a){
+  const d=a.longRun;
+  CHARTS.longRun=new Chart(document.getElementById('longRunChart').getContext('2d'),{
+    type:'line',
+    data:{labels:d.map(x=>`R${x.r}`),datasets:[
+      {label:'Long run dist',data:d.map(x=>x.dist),borderColor:'#06b6d4',backgroundColor:'rgba(6,182,212,.08)',fill:true,tension:.3,pointBackgroundColor:d.map(x=>x.dist>=20?'#10b981':'#06b6d4'),pointRadius:5,pointHoverRadius:8},
+      {type:'line',label:'Gate 3: 20km',data:d.map(()=>20),borderColor:'#7c3aed',borderDash:[5,5],borderWidth:1.5,pointRadius:0,fill:false,backgroundColor:'transparent'},
+    ]},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{...CHART_DEFAULTS,callbacks:{label:c=>`${c.dataset.label==='Gate 3: 20km'?'Gate 3 target: 20km':c.parsed.y+' km'}`}}},scales:{x:{ticks:xTick(),grid:gridLine(),border:borderLine()},y:{min:0,max:25,ticks:{...yTick(),callback:v=>`${v}km`},title:{display:true,text:'km',color:'#64748b',font:{family:'Inter',size:10}},grid:gridLine(),border:borderLine()}}}
+  });
+}
+
+// ── PACE-HR SCATTER ─────────────────────────────────────────────────────
+function initPaceHRChart(a){
+  const d=a.scatter;
+  if(!d.length){return}
+  const tc={'quality':'#7c3aed','long':'#06b6d4','easy':'#10b981'};
+  const minHR=100,maxHR=165;
+  CHARTS.paceHR=new Chart(document.getElementById('paceHRChart').getContext('2d'),{
+    type:'scatter',
+    data:{datasets:[
+      {label:'Runs',data:d.map(p=>({x:p.x,y:p.y,r:p.r,date:p.date,t:p.type})),backgroundColor:d.map(p=>tc[p.type].replace(')',`,${p.opacity})`).replace('#','rgba(').replace(/^rgba\(#/,'rgba(').replace(/([0-9a-f]{2})([0-9a-f]{2})([0-9a-f]{2})/i,(_,r,g,b)=>`${parseInt(r,16)},${parseInt(g,16)},${parseInt(b,16)}`)),pointRadius:6,pointHoverRadius:9},
+      {type:'line',label:'Sub-4 goal',data:[{x:minHR,y:ATHLETE.goalPaceSub4},{x:maxHR,y:ATHLETE.goalPaceSub4}],borderColor:'rgba(168,85,247,.7)',borderWidth:1.5,borderDash:[5,3],pointRadius:0,fill:false,backgroundColor:'transparent'},
+      {type:'line',label:'LT1 R34',data:[{x:minHR,y:ATHLETE.ltPace},{x:maxHR,y:ATHLETE.ltPace}],borderColor:'rgba(245,158,11,.7)',borderWidth:1.5,borderDash:[5,3],pointRadius:0,fill:false,backgroundColor:'transparent'},
+      {type:'line',label:'Easy ceiling',data:[{x:143,y:5},{x:143,y:10}],borderColor:'rgba(16,185,129,.5)',borderWidth:1,borderDash:[4,4],pointRadius:0,fill:false,backgroundColor:'transparent'},
+      {type:'line',label:'Quality ceiling',data:[{x:150,y:5},{x:150,y:10}],borderColor:'rgba(124,58,237,.5)',borderWidth:1,borderDash:[4,4],pointRadius:0,fill:false,backgroundColor:'transparent'},
+    ]},
+    options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'nearest',intersect:false},plugins:{legend:{display:false},tooltip:{...CHART_DEFAULTS,callbacks:{title:i=>i[0].raw.r?`R${i[0].raw.r} · ${i[0].raw.date}`:i[0].dataset.label,label:c=>c.raw.t?`${fmtPace(c.raw.y)}/km at ${c.raw.x}bpm (${c.raw.t})`:`${c.dataset.label}: ${fmtPace(c.raw.y)}/km`}}},scales:{x:{type:'linear',min:minHR,max:maxHR,title:{display:true,text:'Average HR (bpm)',color:'#64748b',font:{family:'Inter',size:10}},ticks:{...xTick(),callback:v=>`${v}bpm`},grid:gridLine(),border:borderLine()},y:{reverse:true,min:5,max:10,title:{display:true,text:'Pace (min/km) — faster ↑',color:'#64748b',font:{family:'Inter',size:10}},ticks:{...yTick(),callback:v=>fmtPace(v)},grid:gridLine(),border:borderLine()}}}
+  });
+}
+
+// ── THRESHOLD CHART ─────────────────────────────────────────────────────
+function initThresholdChart(a){
+  const d=a.threshold.pts;
+  if(d.length<2){return}
+  // Linear trend
+  const n=d.length,xs=d.map((_,i)=>i),ys=d.map(p=>p.pace);
+  const xm=xs.reduce((s,x)=>s+x)/n,ym=ys.reduce((s,y)=>s+y)/n;
+  const num=xs.reduce((s,x,i)=>s+(x-xm)*(ys[i]-ym),0);
+  const den=xs.reduce((s,x)=>s+(x-xm)**2,1);
+  const slope=num/den,intercept=ym-slope*xm;
+  const trendLine=xs.map((x,i)=>({x:d[i].r,y:+(slope*x+intercept).toFixed(3)}));
+  CHARTS.threshold=new Chart(document.getElementById('thresholdChart').getContext('2d'),{
+    type:'scatter',
+    data:{datasets:[
+      {type:'scatter',label:'Quality session pace',data:d.map((p,i)=>({x:p.r,y:p.pace,date:p.date})),backgroundColor:'#7c3aed',pointRadius:6,pointHoverRadius:9},
+      {type:'line',label:'Trend',data:trendLine.map(p=>({x:p.x,y:p.y})),borderColor:'rgba(168,85,247,.5)',borderWidth:1.5,borderDash:[4,4],pointRadius:0,fill:false,backgroundColor:'transparent'},
+      {type:'line',label:'Sub-4 goal',data:[{x:d[0].r,y:ATHLETE.goalPaceSub4},{x:d[d.length-1].r,y:ATHLETE.goalPaceSub4}],borderColor:'rgba(168,85,247,.7)',borderWidth:1.5,borderDash:[5,3],pointRadius:0,fill:false,backgroundColor:'transparent'},
+      {type:'line',label:'Current LT1',data:[{x:d[0].r,y:ATHLETE.ltPace},{x:d[d.length-1].r,y:ATHLETE.ltPace}],borderColor:'rgba(245,158,11,.7)',borderWidth:1.5,borderDash:[5,3],pointRadius:0,fill:false,backgroundColor:'transparent'},
+    ]},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{...CHART_DEFAULTS,callbacks:{label:c=>c.raw.date?`R${c.raw.x} · ${c.raw.date}: ${fmtPace(c.raw.y)}/km`:`${c.dataset.label}: ${fmtPace(c.raw.y)}/km`}}},scales:{x:{type:'linear',ticks:{...xTick(),callback:v=>`R${v}`},grid:gridLine(),border:borderLine()},y:{reverse:true,min:5,max:8,ticks:{...yTick(),callback:v=>fmtPace(v)},title:{display:true,text:'Pace (min/km) — faster ↑',color:'#64748b',font:{family:'Inter',size:10}},grid:gridLine(),border:borderLine()}}}
+  });
+}
+
+// ── AEI CHART ───────────────────────────────────────────────────────────
+function initAEIChart(a){
+  const d=a.aei;if(d.pts.length<2){return}
+  CHARTS.aei=new Chart(document.getElementById('aeiChart').getContext('2d'),{
+    type:'scatter',
+    data:{datasets:[
+      {type:'scatter',label:'AEI',data:d.pts.map(p=>({x:p.r,y:p.aei,date:p.date})),backgroundColor:'#10b981',pointRadius:5,pointHoverRadius:8},
+      {type:'line',label:'5-Run Avg',data:d.movingAvg.map(p=>({x:p.r,y:p.ma})),borderColor:'#a855f7',borderWidth:2,pointRadius:0,fill:false,tension:.3,backgroundColor:'transparent'},
+    ]},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{...CHART_DEFAULTS,callbacks:{label:c=>c.raw.date?`R${c.raw.x} · ${c.raw.date}: AEI ${c.raw.y}`:`5-Run Avg: ${c.raw.y}`}}},scales:{x:{type:'linear',ticks:{...xTick(),callback:v=>`R${v}`},grid:gridLine(),border:borderLine()},y:{title:{display:true,text:'AEI — lower is better ↓',color:'#64748b',font:{family:'Inter',size:10}},ticks:yTick(),grid:gridLine(),border:borderLine()}}}
+  });
+}
+
+// ── HR ZONE DISTRIBUTION ─────────────────────────────────────────────────
+function initZoneChart(a){
+  const d=a.zones;
+  const zoneColors=['rgba(30,41,59,.8)','rgba(124,58,237,.55)','rgba(6,182,212,.6)','rgba(245,158,11,.6)','rgba(239,68,68,.7)'];
+  const zoneBorders=['rgba(30,41,59,1)','rgba(124,58,237,1)','rgba(6,182,212,1)','rgba(245,158,11,1)','rgba(239,68,68,1)'];
+  const zoneLabels=['Z1 <122','Z2 122-138','Z3 139-146','Z4 147-154','Z5 155+'];
+  CHARTS.zone=new Chart(document.getElementById('zoneChart').getContext('2d'),{
+    type:'bar',
+    data:{
+      labels:d.map(x=>`R${x.r}${x.est?'(est)':''}`),
+      datasets:zoneColors.map((c,zi)=>({
+        label:zoneLabels[zi],
+        data:d.map(x=>x.zones[zi]),
+        backgroundColor:c,
+        borderColor:zoneBorders[zi],
+        borderWidth:1,stack:'zones',
+      }))
+    },
+    options:{responsive:true,maintainAspectRatio:false,indexAxis:'y',plugins:{legend:{labels:{color:'#64748b',font:{family:'Inter',size:9},boxWidth:10}},tooltip:{...CHART_DEFAULTS,callbacks:{label:c=>`${c.dataset.label}: ${c.parsed.x.toFixed(1)}%`}}},scales:{x:{max:100,ticks:{...xTick(),callback:v=>`${v}%`},grid:gridLine(),border:borderLine()},y:{ticks:xTick(),grid:gridLine(),border:borderLine()}}}
+  });
+}
+
+// ── MASTER CHART INIT ───────────────────────────────────────────────────
+function initAllCharts(a){
+  initGCTChart(a);
+  initVolumeChart(a);
+  initIntensityChart(a);
+  initComplianceChart(a);
+  initDriftChart(a);
+  initLongRunChart(a);
+  initPaceHRChart(a);
+  if(a.threshold.pts.length>=2)initThresholdChart(a);
+  if(a.aei.pts.length>=2)initAEIChart(a);
+  initZoneChart(a);
+}
+
+// ── INIT ────────────────────────────────────────────────────────────────
+document.addEventListener('DOMContentLoaded',()=>{
+  _A=computeAllAnalytics();
+  renderVitals(_A);
+  renderToday(_A);
+  renderAdaptation(_A);
+  renderTraining(_A);
+  renderHealth(_A.statinDay);
+  renderFuture();
+  // Charts are lazy-initialised on first tab visit — see initAdaptationCharts / initTrainingCharts
+});
+</script>
+</body>
+</html>
