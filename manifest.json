@@ -1,0 +1,23 @@
+{
+  "name": "Running OS",
+  "short_name": "Running OS",
+  "description": "Personal running dashboard",
+  "start_url": "/running-dashboard/",
+  "scope": "/running-dashboard/",
+  "display": "standalone",
+  "background_color": "#09080F",
+  "theme_color": "#8B5CF6",
+  "orientation": "landscape",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
