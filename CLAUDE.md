@@ -18,6 +18,31 @@ Read before executing any update.
 
 ---
 
+## Tool Loading Protocol
+
+Execute at the start of every automation session, before any analysis.
+
+**0A — Load GitHub tools first.**
+Search for and confirm `push_files`, `get_file_contents`, `create_or_update_file` are available before proceeding. If unavailable, stop and report.
+
+**0B — Pull all reads in one batch:**
+- `duchluu1-sys/running-dashboard/data.json` (last run number, current ATHLETE state)
+- `duchluu1-sys/running-kb/run_archive.md` (last entry for continuity)
+- `duchluu1-sys/running-kb/training_kb.md` (current week table, trend tables)
+
+**0C — Load Garmin tools. Pull activity data.**
+
+All reads must complete before any analysis or writing begins.
+
+**Write rule — two atomic commits, both after go-ahead only:**
+- Commit 1: `data.json` → `duchluu1-sys/running-dashboard` (one `push_files` call)
+- Commit 2: `run_archive.md` + `training_kb.md` → `duchluu1-sys/running-kb` (one `push_files` call, both files together)
+
+**Verify each commit:** Confirm the returned SHA after each `push_files`. If no SHA returned, state "Commit [1/2] failed — [repo] not updated." Do not report done.
+
+
+---
+
 ## Post-Run Workflow
 
 When instructed to "update my run":
@@ -85,6 +110,7 @@ Append one object to the RUNS array in `duchluu1-sys/running-dashboard/data.json
 - `temp` = integer °C only. Do NOT write strings like "27–30°C".
 - `hrZones` = [Z1,Z2,Z3,Z4,Z5] as percentages. Must sum to 100. Null if not available.
 - `flag` logic: ✅✅✅ program best + exceptional · ✅✅ new PB or near-perfect · ✅ clean · ○ suboptimal · ⚠️ ceiling breach/injury/major gap
+- **Source precedence:** Screenshots win over API for `hrZones`, `moving`, `walkRatio` (API inflates these with idle/transition time). API wins for `dist`, `hrAvg`, `hrMax`, `gct`, `vr`, `te`, `te_an`. When sources disagree, state the disagreement explicitly in the verdict before writing. Never silently pick one source.
 
 **After appending run, update ATHLETE block — these fields only:**
 
@@ -226,6 +252,34 @@ Update Status Snapshot: `| HR recovery best | **[X] bpm/30s** (R[N], [Mon Day]) 
 **10. Update version timestamp at top of file.**
 
 Commit message: `KB update R[N] — [date]`
+
+---
+
+## Verdict & Write Protocol
+
+After completing Steps 1–5 analysis, present this before writing anything:
+
+R[N] VERDICT — [date]
+Type: [type] · Dist: [X]km · HR: [avg]/[max] · TE: [X]/[Y] · GCT: [X]ms · VR: [X]%
+Flag: [emoji] · [one line summary]
+[Source disagreements, if any]
+
+Ready to write:
+Commit 1: data.json → running-dashboard
+Commit 2: run_archive.md + training_kb.md → running-kb
+Go ahead?
+
+
+On go-ahead:
+1. `push_files` → `duchluu1-sys/running-dashboard` — confirm SHA
+2. `push_files` → `duchluu1-sys/running-kb` — confirm SHA
+
+Done message format:
+
+✅ R[N] committed.
+Dashboard: [SHA] · data.json updated
+KB: [SHA] · run_archive + training_kb updated
+
 
 ---
 
