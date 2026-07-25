@@ -359,7 +359,8 @@ body{background:var(--bg);color:var(--tx);font-family:var(--sans);font-size:14px
     </div>
     <div class="card">
       <div class="ch"><div class="cl">CARDIAC DRIFT</div><div class="cs">outdoor easy + long runs · negative = HR dropped = good</div></div>
-      <div class="cw"><canvas id="driftChart"></canvas></div>
+      <div id="drift-sparse" class="sparse-state" style="display:none"></div>
+      <div class="cw" id="drift-chart-wrap"><canvas id="driftChart"></canvas></div>
     </div>
   </div>
   <div class="g2">
@@ -508,6 +509,15 @@ function computeWeeklyVol(runs){
 
 function computeIntensityDist(wvol){return wvol}
 
+const MIN_TREND=5,MIN_SCATTER=3;
+function hasSufficientData(pts,minN){return pts.length>=minN;}
+function renderSparseCard(id,title,n,target,note){
+  const el=document.getElementById(id);
+  if(!el)return;
+  el.style.display='block';
+  el.innerHTML=`<div class="sparse-title">${title}</div><div class="sparse-msg">Building data: ${n} of ${target} qualifying runs captured.${note?'<br>'+note:''}</div>`;
+}
+
 function computeGCTTrend(runs){
   const pts=runs.filter(r=>r.gct).map(r=>({r:r.r,date:r.date,gct:r.gct,type:r.type}));
   const vals=pts.map(p=>p.gct),ma=movAvg(vals,5);
@@ -638,8 +648,8 @@ const TAB_INITED={today:true,adaptation:false,training:false,health:true,future:
 
 function initAdaptationCharts(){
   initPaceHRChart(_A);
-  if(_A.threshold.pts.length>=2)initThresholdChart(_A);
-  if(_A.aei.pts.length>=2)initAEIChart(_A);
+  if(hasSufficientData(_A.threshold.pts,MIN_SCATTER))initThresholdChart(_A);
+  if(hasSufficientData(_A.aei.pts,MIN_TREND))initAEIChart(_A);
   initZoneChart(_A);
   initIntensityChart(_A);
   initComplianceChart(_A);
@@ -800,25 +810,20 @@ function renderAdaptation(a){
   // Compliance header
   document.getElementById('compliance-header').textContent=`${a.compliance.cleanCount} of last ${a.compliance.total} quality sessions ceiling-clean (${a.compliance.rate}%)`;
   // AEI sparse state
-  if(a.aei.pts.length<2){
-    document.getElementById('aei-sparse').innerHTML=`
-      <div class="sparse-title">AEROBIC EFFICIENCY INDEX</div>
-      <div class="sparse-formula">AEI = avg HR ÷ speed (km/h)</div>
-      <div class="sparse-msg">AEI requires easy run pace data — currently ${a.aei.pts.length} point${a.aei.pts.length!==1?'s':''} available.<br>Log pace for every easy run during the post-run update. This becomes the primary base-building signal as data accumulates.</div>`;
+  if(!hasSufficientData(a.aei.pts,MIN_TREND)){
+    renderSparseCard('aei-sparse','AEROBIC EFFICIENCY INDEX',a.aei.pts.length,MIN_TREND,'Needs outdoor easy runs with pace data. Chart appears at '+MIN_TREND+' qualifying sessions.');
     document.getElementById('aei-chart-wrap').style.display='none';
   } else {
     document.getElementById('aei-sparse').style.display='none';
     document.getElementById('aei-chart-wrap').style.display='block';
   }
   // Pace-HR sparse
-  if(a.scatter.length<3){
-    document.getElementById('pace-hr-sparse').style.display='block';
-    document.getElementById('pace-hr-sparse').innerHTML=`<div class="sparse-title">PACE · HR ENVELOPE</div><div class="sparse-msg">${a.scatter.length} point${a.scatter.length!==1?'s':''} available. Chart fills as pace is logged for each run. Adaptation appears as points moving upper-left (faster pace, same HR) over time.</div>`;
+  if(!hasSufficientData(a.scatter,MIN_SCATTER)){
+    renderSparseCard('pace-hr-sparse','PACE · HR ENVELOPE',a.scatter.length,MIN_SCATTER,'Chart fills as pace is logged for each run. Adaptation appears as points moving upper-left over time.');
   }
   // Threshold sparse
-  if(a.threshold.pts.length<2){
-    document.getElementById('threshold-sparse').style.display='block';
-    document.getElementById('threshold-sparse').innerHTML=`<div class="sparse-title">THRESHOLD PACE TIMELINE</div><div class="sparse-formula">Confirmed: ${fmtPace(ATHLETE.ltPace)}/km (R34, ${ATHLETE.ltDate})</div><div class="sparse-msg">${a.threshold.pts.length} quality session${a.threshold.pts.length!==1?'s':''} with pace data. Timeline builds as quality sessions are logged with pace.</div>`;
+  if(!hasSufficientData(a.threshold.pts,MIN_SCATTER)){
+    renderSparseCard('threshold-sparse','THRESHOLD PACE DEVELOPMENT',a.threshold.pts.length,MIN_SCATTER,'Confirmed LT1: '+fmtPace(ATHLETE.ltPace)+'/km (R34). Timeline builds as quality sessions log pace data.');
   }
 }
 
@@ -1117,7 +1122,12 @@ function initComplianceChart(a){
 // ── CARDIAC DRIFT CHART ─────────────────────────────────────────────────
 function initDriftChart(a){
   const d=a.drift.pts;
-  if(d.length<3){return}
+  if(!hasSufficientData(d,MIN_TREND)){
+    renderSparseCard('drift-sparse','CARDIAC DRIFT',d.length,MIN_TREND,'Outdoor easy and long runs only. Negative drift = HR dropped = good adaptation signal.');
+    document.getElementById('drift-chart-wrap').style.display='none';
+    return;
+  }
+  document.getElementById('drift-chart-wrap').style.display='block';
   CHARTS.drift=new Chart(document.getElementById('driftChart').getContext('2d'),{
     type:'bar',
     data:{labels:d.map(x=>`R${x.r}`),datasets:[{
@@ -1230,8 +1240,8 @@ function initAllCharts(a){
   initDriftChart(a);
   initLongRunChart(a);
   initPaceHRChart(a);
-  if(a.threshold.pts.length>=2)initThresholdChart(a);
-  if(a.aei.pts.length>=2)initAEIChart(a);
+  if(hasSufficientData(a.threshold.pts,MIN_SCATTER))initThresholdChart(a);
+  if(hasSufficientData(a.aei.pts,MIN_TREND))initAEIChart(a);
   initZoneChart(a);
 }
 
