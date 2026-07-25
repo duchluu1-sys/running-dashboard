@@ -1148,7 +1148,7 @@ function initLongRunChart(a){
 function initPaceHRChart(a){
   const d=a.scatter;
   if(!d.length){return}
-  const tc={'quality':'#7c3aed','long':'#06b6d4','easy':'#10b981'};
+  const tc={'quality_a':'#7c3aed','quality_b':'#a855f7','long':'#06b6d4','easy':'#10b981'};
   const minHR=100,maxHR=165;
   CHARTS.paceHR=new Chart(document.getElementById('paceHRChart').getContext('2d'),{
     type:'scatter',
