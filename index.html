@@ -444,7 +444,7 @@ body{background:var(--bg);color:var(--tx);font-family:var(--sans);font-size:14px
 // ════════════════════════════════════════════════════
 // DATA — populated at runtime by fetch('data.json')
 // ════════════════════════════════════════════════════
-let RUNS, GATES, RACES, ATHLETE, READINESS;
+let RUNS, GATES, RACES, ATHLETE, READINESS_LOG;
 
 // ════════════════════════════════════════════════════
 // STATIC — HEALTH_FLAGS & MEDICATIONS (kept in HTML, not in data.json)
@@ -477,17 +477,25 @@ function daysSince(s){return Math.floor((new Date()-new Date(s))/86400000)}
 function movAvg(arr,n){return arr.map((_,i,a)=>{const w=a.slice(Math.max(0,i-n+1),i+1);return+(w.reduce((s,v)=>s+v,0)/w.length).toFixed(2)})}
 
 // ── ANALYTICS ENGINE (pure — no DOM access) ────────────────────────────
-function computeReadiness(r,a){
-  const {hrv,hrvAvg7,rhr,rhrAvg7,sleepScore}=r;
-  const rhrDelta=rhr-rhrAvg7,hrvOk=hrv>=a.hrvBaseline[0];
+function computeReadiness(log,a){
+  if(!log||!log.length)return{status:'GREEN',reason:'No readiness data.',rhrDelta:0,hrvOk:true,hrv:null,rhr:null,hrvAvg7:null,rhrAvg7:null,note:'',lastDate:''};
+  const last=log[log.length-1];
+  const {hrv,rhr,sleepScore}=last;
+  const hrvVals=log.slice(-7).filter(e=>e.hrv!=null).map(e=>e.hrv);
+  const rhrVals=log.slice(-7).filter(e=>e.rhr!=null).map(e=>e.rhr);
+  const hrvAvg7=hrvVals.length?Math.round(hrvVals.reduce((s,v)=>s+v,0)/hrvVals.length):hrv;
+  const rhrAvg7=rhrVals.length?Math.round(rhrVals.reduce((s,v)=>s+v,0)/rhrVals.length):rhr;
+  const rhrDelta=rhr!=null&&rhrAvg7!=null?rhr-rhrAvg7:0;
+  const hrvOk=hrv!=null&&hrv>=a.hrvBaseline[0];
+  const consecutive2=log.length>=2&&log.slice(-2).every(e=>e.hrv!=null&&e.hrv<a.hrvBaseline[0]);
   let status='GREEN',reason='All signals nominal — train as planned.';
-  if((sleepScore!==null&&sleepScore<45)||rhrDelta>=8){
+  if((sleepScore!=null&&sleepScore<45)||rhrDelta>=8){
     status='RED';reason=rhrDelta>=8?'RHR elevated ≥8 bpm above rolling average — rest.':'Sleep score below 45 — mandatory rest.';
-  } else if((sleepScore!==null&&sleepScore<60)||!hrvOk||rhrDelta>=5){
+  } else if((sleepScore!=null&&sleepScore<60)||consecutive2||!hrvOk||rhrDelta>=5){
     status='AMBER';
-    reason=!hrvOk?'HRV below baseline — reduce intensity 20%, no quality sessions.':rhrDelta>=5?'RHR elevated +5–7 bpm — easy only, monitor closely.':'Sleep 45–59 — easy only, no quality sessions.';
-  } else if(sleepScore!==null&&sleepScore<75){reason='Sleep 60–74 but HRV balanced — proceed, monitor during session.';}
-  return{status,reason,rhrDelta,hrvOk};
+    reason=consecutive2?'HRV below baseline 2 consecutive days — no quality sessions.':!hrvOk?'HRV below baseline — reduce intensity 20%, no quality sessions.':rhrDelta>=5?'RHR elevated +5–7 bpm — easy only, monitor closely.':'Sleep 45–59 — easy only, no quality sessions.';
+  } else if(sleepScore!=null&&sleepScore<75){reason='Sleep 60–74 but HRV balanced — proceed, monitor during session.';}
+  return{status,reason,rhrDelta,hrvOk,hrv,rhr,hrvAvg7,rhrAvg7,note:last.note||'',lastDate:last.date||''};
 }
 
 function computeWeeklyVol(runs){
@@ -620,7 +628,7 @@ function computeTodaySession(athlete){
 }
 
 function computeAllAnalytics(){
-  const rdns=computeReadiness(READINESS,ATHLETE);
+  const rdns=computeReadiness(READINESS_LOG,ATHLETE);
   const wvol=computeWeeklyVol(RUNS);
   const intensity=computeIntensityDist(wvol);
   const gct=computeGCTTrend(RUNS);
@@ -676,11 +684,12 @@ function switchTab(tab){
 
 // ── READINESS EVALUATOR ─────────────────────────────────────────────────
 function evaluateReadiness(){
-  const hrv=parseFloat(document.getElementById('input-hrv').value)||READINESS.hrv;
-  const rhr=parseFloat(document.getElementById('input-rhr').value)||READINESS.rhr;
+  const last=READINESS_LOG[READINESS_LOG.length-1]||{};
+  const hrv=parseFloat(document.getElementById('input-hrv').value)||last.hrv;
+  const rhr=parseFloat(document.getElementById('input-rhr').value)||last.rhr;
   const sleep=parseFloat(document.getElementById('input-sleep').value)||null;
-  const fakeR={...READINESS,hrv,rhr,sleepScore:sleep};
-  const r=computeReadiness(fakeR,ATHLETE);
+  const tempLog=[...READINESS_LOG.slice(0,-1),{...last,hrv,rhr,sleepScore:sleep}];
+  const r=computeReadiness(tempLog,ATHLETE);
   const cc=r.status==='GREEN'?'green':r.status==='AMBER'?'amber':'red';
   const cv=r.status==='GREEN'?'gn':r.status==='AMBER'?'am':'rd';
   document.getElementById('eval-res').innerHTML=`<span class="sdot ${cc}"></span><span class="vit-val ${cv}" style="font-size:1rem;margin-left:6px">${r.status}</span><div class="eval-reason">${r.reason}</div>`;
@@ -695,14 +704,14 @@ function renderVitals(a){
   const days=daysUntil(RACES[0].date);
   const rdClass=a.rdns.status==='GREEN'?'green':a.rdns.status==='AMBER'?'amber':'red';
   const rdVal=a.rdns.status==='GREEN'?'gn':a.rdns.status==='AMBER'?'am':'rd';
-  const hrvCls=READINESS.hrv>=ATHLETE.hrvBaseline[0]?'gn':'am';
+  const hrvCls=a.rdns.hrvOk?'gn':'am';
   document.getElementById('vitals').innerHTML=`
     <div class="vit-rd">
       <div class="vit-rd-top"><span class="sdot ${rdClass}" id="s-vdot"></span><span class="vit-rd-txt ${rdVal}" id="s-vtxt">${a.rdns.status}</span></div>
       <div class="vit-lbl">DAILY READINESS</div>
     </div>
-    <div class="vit"><div class="vit-val ${hrvCls}">${READINESS.hrv}<span style="font-size:.72rem">ms</span></div><div class="vit-lbl">HRV LAST NIGHT</div><div class="vit-sub">7d avg ${READINESS.hrvAvg7}ms</div></div>
-    <div class="vit"><div class="vit-val gn">${READINESS.rhr}<span style="font-size:.72rem">bpm</span></div><div class="vit-lbl">RHR</div><div class="vit-sub">avg ${READINESS.rhrAvg7} · Δ${a.rdns.rhrDelta>=0?'+':''}${a.rdns.rhrDelta}</div></div>
+    <div class="vit"><div class="vit-val ${hrvCls}">${a.rdns.hrv}<span style="font-size:.72rem">ms</span></div><div class="vit-lbl">HRV LAST NIGHT</div><div class="vit-sub">7d avg ${a.rdns.hrvAvg7}ms</div></div>
+    <div class="vit"><div class="vit-val gn">${a.rdns.rhr}<span style="font-size:.72rem">bpm</span></div><div class="vit-lbl">RHR</div><div class="vit-sub">avg ${a.rdns.rhrAvg7} · Δ${a.rdns.rhrDelta>=0?'+':''}${a.rdns.rhrDelta}</div></div>
     <div class="vit"><div class="vit-val vb">${ATHLETE.weekVolOnBoard}<span style="font-size:.72rem">km</span></div><div class="vit-lbl">WEEK ${ATHLETE.week} ON BOARD</div><div class="vit-sub">tgt ${ATHLETE.weekTarget[0]}–${ATHLETE.weekTarget[1]}km</div></div>
     <div class="vit"><div class="vit-val" style="font-size:.95rem;line-height:1.2">${ATHLETE.phase}<br><span style="font-size:.58rem;color:var(--m2)">${ATHLETE.phaseName}</span></div><div class="vit-lbl">PHASE 2 · WEEK ${ATHLETE.week}</div><div class="vit-sub">W${ATHLETE.week}/${ATHLETE.totalWeeks}</div></div>
     <div class="vit"><div class="vit-val cn" style="font-size:1.8rem">${days}</div><div class="vit-lbl">DAYS TO RACE 0</div><div class="vit-sub">VPBank 10K</div></div>
@@ -745,9 +754,9 @@ function renderToday(a){
   document.getElementById('rd-dot').className=`sdot ${rdCls}`;
   document.getElementById('rd-label').className=`rd-label c-${rdVal}`;
   document.getElementById('rd-label').textContent=a.rdns.status;
-  document.getElementById('rd-note').textContent=READINESS.statusNote;
-  const _st=isStale(),_rt=document.getElementById('rd-time');_rt.textContent=(_st?'⚠ STALE — ':'')+`Last updated: ${READINESS.lastUpdated}`;_rt.style.color=_st?'var(--am)':'';
-  document.getElementById('rd-sub').textContent=`HRV ${READINESS.hrv}ms · RHR ${READINESS.rhr}bpm · ${a.rdns.reason.slice(0,60)}`;
+  document.getElementById('rd-note').textContent=a.rdns.note;
+  const _st=isStale(),_rt=document.getElementById('rd-time');_rt.textContent=(_st?'⚠ STALE — ':'')+`Last updated: ${a.rdns.lastDate}`;_rt.style.color=_st?'var(--am)':'';
+  document.getElementById('rd-sub').textContent=`HRV ${a.rdns.hrv}ms · RHR ${a.rdns.rhr}bpm · ${a.rdns.reason.slice(0,60)}`;
 
   // Last run
   const lr=RUNS[RUNS.length-1];
@@ -1260,7 +1269,7 @@ document.addEventListener('DOMContentLoaded',()=>{
       GATES=data.GATES;
       RACES=data.RACES.map(r=>({...r,date:new Date(r.date)}));
       ATHLETE=data.ATHLETE;
-      READINESS=data.READINESS;
+      READINESS_LOG=data.READINESS_LOG;
       loadingEl.style.display='none';
       renderValidation();
       _A=computeAllAnalytics();

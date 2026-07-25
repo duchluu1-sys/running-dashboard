@@ -1399,14 +1399,14 @@
     "goalPaceSub4": 5.683,
     "goalPace330": 4.967
   },
-  "READINESS": {
-    "hrv": 71,
-    "hrvAvg7": 63,
-    "rhr": 41,
-    "rhrAvg7": 41,
-    "sleepScore": null,
-    "status": "GREEN",
-    "statusNote": "Balanced — train as planned",
-    "lastUpdated": "Jul 23 morning"
-  }
+  "READINESS_LOG": [
+    {
+      "date": "2026-07-23",
+      "hrv": 71,
+      "rhr": 41,
+      "sleepScore": null,
+      "status": "GREEN",
+      "note": "Balanced — train as planned"
+    }
+  ]
 }
