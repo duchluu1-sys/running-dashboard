@@ -37,65 +37,63 @@ Use `get_activity_details` with the most recent activity. If athlete specifies a
 
 Append one object to the RUNS array in `duchluu1-sys/running-dashboard/data.json`.
 
-**Schema — every field required, use null if not available:**
+**Schema version: 2 — every field required, use null if not available:**
 
 ```json
 {
   "r": <run number — increment +1 from last entry>,
   "date": "<Mon Day>",
-  "type": "<Easy|Quality A|Quality B|Long Run|Easy Flush|Strides>",
+  "type": "<easy|quality_a|quality_b|long|flush|strides>",
+  "wk": <current week number — integer>,
+  "dist": <distance km — 2 decimal places>,
+  "duration": <whole-session elapsed minutes — integer, includes warm-up/cool-down/walks>,
+  "moving": <running-only minutes — integer, excludes walk breaks, null if unknown>,
+  "pace": <quality-block pace min/km — float, null on easy/long runs>,
+  "hrAvg": <session average HR — integer or null>,
+  "hrMax": <session max HR — integer or null>,
+  "te": <aerobic training effect — float e.g. 3.4 or null>,
+  "te_an": <anaerobic training effect — float e.g. 0.0 or null>,
+  "gct": <ground contact time ms — integer or null>,
+  "vr": <vertical ratio % — float e.g. 8.8 or null>,
+  "cadence": <running cadence spm — integer or null>,
+  "pctCeiling": <% session time above HR ceiling — float, quality sessions only, else null>,
+  "drift": <cardiac drift bpm — OUTDOOR EASY/LONG ONLY — else null>,
+  "walkRatio": <walk time as % of total — float or null>,
+  "hrZones": <[Z1,Z2,Z3,Z4,Z5] as percentages summing to 100 — array or null>,
+  "temp": <temperature °C — integer or null>,
   "surface": "<outdoor|treadmill>",
   "conditions": "<start time HH:MM or brief context>",
-  "time": null,
-  "dist": <distance km — 2 decimal places>,
-  "elapsed": "<H:MM:SS or MM:SS>",
-  "moving": "<H:MM:SS or null>",
-  "hrAvg": <integer or null>,
-  "hrMax": <integer or null>,
-  "te_a": <aerobic TE float e.g. 3.4 or null>,
-  "te_an": <anaerobic TE float e.g. 0.0 or null>,
-  "gct": <ground contact time integer ms or null>,
-  "vr": <vertical ratio float e.g. 8.8 or null>,
-  "vo": <vertical oscillation float cm e.g. 10.2 or null>,
-  "sl": <stride length integer cm e.g. 118 or null>,
-  "cadence": <running cadence integer spm or null>,
-  "drift": <cardiac drift float bpm — OUTDOOR EASY/LONG ONLY — else null>,
-  "walkRatio": <walk time as % of total float or null>,
-  "temp": "<range string e.g. '27–30°C' or null>",
-  "flags": "<✅|✅✅|✅✅✅|⚠️|○>",
-  "notes": "<5 words max>"
+  "flag": "<✅|✅✅|✅✅✅|⚠️|○>",
+  "note": "<brief session note>"
 }
 ```
 
-**Flag logic:**
+**Type enum — use exactly these values:**
+- `easy` — HR-governed aerobic run, Z2 target
+- `quality_a` — interval session (reps × duration with full walk recovery)
+- `quality_b` — continuous tempo block (single unbroken effort)
+- `long` — 14km+ easy effort
+- `flush` — short easy recovery run post-quality or post-double day
+- `strides` — easy run with 6×20s strides appended
 
-| Flag | When |
-|---|---|
-| ✅✅✅ | Program best + exceptional execution |
-| ✅✅ | New PB or near-perfect difficult session |
-| ✅ | Clean session, no significant issues |
-| ○ | Completed but suboptimal |
-| ⚠️ | HR ceiling breach, injury flag, major execution gap |
+**Field rules:**
+- `duration` = whole session elapsed in minutes (integer). Includes warm-up, cool-down, walk breaks.
+- `moving` = running-only minutes (integer). Excludes walk breaks. Required for AEI calculation.
+- `pace` = quality-block pace only (min/km). Null on easy and long runs.
+- `pctCeiling` = % of session above 150 bpm. Quality sessions only. 0 = ceiling-clean.
+- `drift` = Q4 avg HR minus Q1 avg HR (running segments only). Populate ONLY for outdoor easy and long runs ≥4km. Null for all treadmill, all quality, and outdoor <4km.
+- `temp` = integer °C only. Do NOT write strings like "27–30°C".
+- `hrZones` = [Z1,Z2,Z3,Z4,Z5] as percentages. Must sum to 100. Null if not available.
+- `flag` logic: ✅✅✅ program best + exceptional · ✅✅ new PB or near-perfect · ✅ clean · ○ suboptimal · ⚠️ ceiling breach/injury/major gap
 
-**Drift field rule:** populate ONLY for outdoor easy and long runs. Set to null for all treadmill sessions, all quality sessions, and outdoor runs under 4km. Drift = Q4 avg HR minus Q1 avg HR (running segments only).
-
-**After appending run, also update ATHLETE block:**
+**After appending run, update ATHLETE block — these fields only:**
 
 ```json
-"ATHLETE": {
-  "date": "<today's date>",
-  "phase": 2,
-  "week": <current week number>,
-  "weekVolOnBoard": <total km this week including new run>,
-  "lastRun": <new run number>,
-  "lastRunDate": "<Mon Day, Year>",
-  "lastRunType": "<type>",
-  "lastRunDist": <dist>,
-  "lastRunHRMax": <hrMax>,
-  "lastRunGCT": <gct or null>,
-  "lastRunVR": <vr or null>,
-  "lastRunFlag": "<flag emoji>"
-}
+"date": "<July DD, YYYY>",
+"week": <current week number>,
+"weekVolOnBoard": <total km this week including new run — 2 decimal places>,
+"gctBest": <update only if new run GCT beats current best>,
+"vrBest": <update only if new run VR beats current best>
 ```
 
 Commit message: `R[N] — [type] [date]`
