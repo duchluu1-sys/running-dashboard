@@ -255,7 +255,7 @@
     {
       "r": 13,
       "date": "Jun 1",
-      "type": "quality",
+      "type": "quality_a",
       "wk": 4,
       "dist": 5.66,
       "duration": 48,
@@ -402,7 +402,7 @@
     {
       "r": 20,
       "date": "Jun 13",
-      "type": "quality",
+      "type": "quality_a",
       "wk": 6,
       "dist": 5.65,
       "duration": null,
@@ -570,7 +570,7 @@
     {
       "r": 28,
       "date": "Jul 1",
-      "type": "quality",
+      "type": "quality_a",
       "wk": 8,
       "dist": 6.24,
       "duration": null,
@@ -654,7 +654,7 @@
     {
       "r": 32,
       "date": "Jul 8",
-      "type": "quality",
+      "type": "quality_a",
       "wk": 9,
       "dist": 6.07,
       "duration": 50,
@@ -696,7 +696,7 @@
     {
       "r": 34,
       "date": "Jul 10",
-      "type": "quality",
+      "type": "quality_b",
       "wk": 9,
       "dist": 4.52,
       "duration": null,
@@ -759,7 +759,7 @@
     {
       "r": 37,
       "date": "Jul 14",
-      "type": "quality",
+      "type": "quality_a",
       "wk": 10,
       "dist": 5.03,
       "duration": 44,
@@ -801,7 +801,7 @@
     {
       "r": 39,
       "date": "Jul 17",
-      "type": "quality",
+      "type": "quality_b",
       "wk": 10,
       "dist": 2.16,
       "duration": 19,
@@ -885,7 +885,7 @@
     {
       "r": 43,
       "date": "Jul 21",
-      "type": "quality",
+      "type": "quality_a",
       "wk": 11,
       "dist": 5.02,
       "duration": 46,
@@ -927,7 +927,7 @@
     {
       "r": 45,
       "date": "Jul 23",
-      "type": "quality",
+      "type": "quality_b",
       "wk": 11,
       "dist": 3.99,
       "duration": 33,
