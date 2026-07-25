@@ -942,7 +942,7 @@
       "drift": null,
       "hrZones": [20, 26, 53, 1, 0],
       "temp": 28,
-      "flag": "✅",
+      "flags": "✅",
       "note": "20 min continuous @ 8.6 km/h ✅ · ceiling exactly met · ankle clean · plantar mild"
     }
   ],
