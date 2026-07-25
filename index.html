@@ -605,7 +605,7 @@ function computeTodaySession(athlete){
   const map={Mon:'Easy + strides',Tue:'Rest',Wed:'Quality A (5×4 min intervals)',Thu:'Easy flush',Fri:'Quality B (20 min continuous tempo)',Sat:'Long run (14–15 km)',Sun:'Rest / Legs Day gym'};
   const type=athlete.weekSchedule[today]||'rest';
   const alreadyDone=RUNS.filter(r=>r.wk===athlete.week&&r.date.includes('Jul 23')).length>0;
-  return{day:today,label:map[today]||'Rest',type,hrCeiling:type.includes('quality')?athlete.qualityCeiling:athlete.easyHRCeiling,alreadyDone};
+  return{day:today,label:map[today]||'Rest',type,hrBand:type.includes('quality')?[null,athlete.qualityCeiling]:athlete.easyHRBand,walkAt:athlete.walkTrigger,resumeAt:athlete.walkResume,alreadyDone};
 }
 
 function computeAllAnalytics(){
@@ -750,7 +750,7 @@ function renderToday(a){
   const ts=a.todaySession;
   document.getElementById('ts-body').innerHTML=`
     <div class="ts-type">${ts.day.toUpperCase()} — ${ts.label}</div>
-    <div class="ts-detail">HR ceiling: <span class="mono c-vb">${ts.hrCeiling} bpm</span>${ts.type==='quality_a'?` · Quality A · 5×4 min intervals · ceiling clean = 0% above ${ts.hrCeiling}`:ts.type==='quality_b'?` · Quality B · 20 min continuous @ 8.6 km/h`:ts.type==='long'?` · Long run · Novablast 5 · gel at 40 min + electrolytes`:''}</div>
+    <div class="ts-detail">${ts.hrBand[0]?`HR ${ts.hrBand[0]}–${ts.hrBand[1]}`:`HR ceiling ${ts.hrBand[1]}`} bpm ·${ts.type==='quality_a'?` · Quality A · 5×4 min intervals · ceiling clean = 0% above ${ts.hrCeiling}`:ts.type==='quality_b'?` · Quality B · 20 min continuous @ 8.6 km/h`:ts.type==='long'?` · Long run · Novablast 5 · gel at 40 min + electrolytes`:''}</div>
     <div class="ts-proto">Form cue: ${ATHLETE.formCue}</div>`;
 }
 function toggleAlert(i){const c=document.getElementById(`alc-${i}`),d=document.getElementById(`ald-${i}`);c.classList.toggle('open');d.classList.toggle('open')}
