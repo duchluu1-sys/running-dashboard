@@ -316,17 +316,20 @@ Verdict: [1–2 sentences — specific recommendation]
 | Sleep 60–74 · HRV balanced · RHR within +4 | 🟢 GREEN — monitor during session |
 | Sleep 75+ · HRV balanced · RHR within +4 | 🟢 GREEN — train as planned |
 
-**After evaluation, update READINESS block in data.json:**
+**After evaluation, append one entry to READINESS_LOG array in data.json:**
 
 ```json
-"READINESS": {
-  "hrv": <value>,
-  "sleepScore": <value or null>,
-  "rhr": <value or null>,
+{
+  "date": "<YYYY-MM-DD>",
+  "hrv": <integer or null>,
+  "rhr": <integer or null>,
+  "sleepScore": <integer 0-100 or null>,
   "status": "GREEN|CAUTION|REST",
-  "note": "<brief note>"
+  "note": "<brief note ≤10 words>"
 }
 ```
+
+Do NOT overwrite the array. Append to end only. The dashboard computes rolling averages from the full history.
 
 Commit message: `Readiness [date]`
 
