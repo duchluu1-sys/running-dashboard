@@ -1042,7 +1042,7 @@ function borderLine(){return{color:'rgba(139,92,246,.12)'}}
 function initGCTChart(a){
   const isMob=window.innerWidth<=600;
   const d=isMob?a.gct.pts.slice(-15):a.gct.pts;
-  const tc={'quality':'#7c3aed','long':'#06b6d4','easy':'#10b981'};
+  const tc={'quality_a':'#7c3aed','quality_b':'#a855f7','long':'#06b6d4','easy':'#10b981'};
   const minR=d[0].r,maxR=d[d.length-1].r;
   const mavgD=isMob?a.gct.movingAvg.slice(-15):a.gct.movingAvg;
   CHARTS.gct=new Chart(document.getElementById('gctChart').getContext('2d'),{
