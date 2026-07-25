@@ -18,6 +18,7 @@
       "drift": null,
       "hrZones": null,
       "temp": null,
+      "surface": "outdoor",
       "flag": "✅",
       "note": "Near-perfect opener"
     },
@@ -39,6 +40,7 @@
       "drift": null,
       "hrZones": null,
       "temp": null,
+      "surface": "outdoor",
       "flag": "○",
       "note": "Acceptable"
     },
@@ -60,6 +62,7 @@
       "drift": null,
       "hrZones": null,
       "temp": null,
+      "surface": "outdoor",
       "flag": "○",
       "note": "Too short"
     },
@@ -81,6 +84,7 @@
       "drift": null,
       "hrZones": null,
       "temp": null,
+      "surface": "outdoor",
       "flag": "⚠️",
       "note": "Heat spike — max 163"
     },
@@ -102,6 +106,7 @@
       "drift": null,
       "hrZones": null,
       "temp": null,
+      "surface": "outdoor",
       "flag": "⚠️",
       "note": "Very late — 23:25"
     },
@@ -123,6 +128,7 @@
       "drift": null,
       "hrZones": null,
       "temp": null,
+      "surface": "outdoor",
       "flag": "⚠️",
       "note": "Late + Z3 excursion"
     },
@@ -144,6 +150,7 @@
       "drift": null,
       "hrZones": null,
       "temp": null,
+      "surface": "outdoor",
       "flag": "⚠️",
       "note": "Afternoon — max 163"
     },
@@ -165,6 +172,7 @@
       "drift": null,
       "hrZones": null,
       "temp": null,
+      "surface": "outdoor",
       "flag": "✅",
       "note": "Good"
     },
@@ -186,6 +194,7 @@
       "drift": null,
       "hrZones": null,
       "temp": null,
+      "surface": "treadmill",
       "flag": "✅✅",
       "note": "Outstanding"
     },
@@ -207,6 +216,7 @@
       "drift": null,
       "hrZones": null,
       "temp": null,
+      "surface": "outdoor",
       "flag": "✅✅✅",
       "note": "Exceptional — first 10km+"
     },
@@ -228,6 +238,7 @@
       "drift": null,
       "hrZones": null,
       "temp": null,
+      "surface": "treadmill",
       "flag": "✅",
       "note": "Good"
     },
@@ -249,6 +260,7 @@
       "drift": null,
       "hrZones": null,
       "temp": null,
+      "surface": "treadmill",
       "flag": "✅",
       "note": "Statin Day 1"
     },
@@ -270,6 +282,7 @@
       "drift": null,
       "hrZones": null,
       "temp": 26,
+      "surface": "outdoor",
       "flag": "✅✅",
       "note": "First quality session — 6×2:30min · excellent"
     },
@@ -291,6 +304,7 @@
       "drift": 8.4,
       "hrZones": [44, 48, 8, 0, 0],
       "temp": 31,
+      "surface": "outdoor",
       "flag": "✅",
       "note": "GCT baseline established · drift +8.4 bpm"
     },
@@ -312,6 +326,7 @@
       "drift": 3.5,
       "hrZones": null,
       "temp": 31,
+      "surface": "outdoor",
       "flag": "✅",
       "note": "Drift +3.5"
     },
@@ -333,6 +348,7 @@
       "drift": -1.5,
       "hrZones": null,
       "temp": 31,
+      "surface": "outdoor",
       "flag": "✅✅",
       "note": "First negative drift 🏆 -1.5 bpm"
     },
@@ -354,6 +370,7 @@
       "drift": 5.7,
       "hrZones": null,
       "temp": 30,
+      "surface": "outdoor",
       "flag": "✅✅",
       "note": "Post-illness return · drift +5.7"
     },
@@ -375,6 +392,7 @@
       "drift": 6.1,
       "hrZones": null,
       "temp": 32,
+      "surface": "outdoor",
       "flag": "✅✅",
       "note": "GCT PB at time · drift +6.1"
     },
@@ -396,6 +414,7 @@
       "drift": 1.8,
       "hrZones": null,
       "temp": 31,
+      "surface": "outdoor",
       "flag": "⚠️",
       "note": "58% distance jump ⚠️ rule violation · drift +1.8"
     },
@@ -417,6 +436,7 @@
       "drift": null,
       "hrZones": null,
       "temp": 34,
+      "surface": "outdoor",
       "flag": "✅✅",
       "note": "GCT PB · ceiling touch (brief)"
     },
@@ -438,6 +458,7 @@
       "drift": 4.2,
       "hrZones": null,
       "temp": 30,
+      "surface": "outdoor",
       "flag": "✅",
       "note": "Easy · drift +4.2"
     },
@@ -459,6 +480,7 @@
       "drift": 14.3,
       "hrZones": null,
       "temp": 31,
+      "surface": "outdoor",
       "flag": "⚠️",
       "note": "Drift +14.3 ⚠️ — 95% humidity"
     },
@@ -480,6 +502,7 @@
       "drift": 0,
       "hrZones": null,
       "temp": 31,
+      "surface": "outdoor",
       "flag": "✅✅",
       "note": "Drift +0.0 🏆 first flat long"
     },
@@ -501,6 +524,7 @@
       "drift": null,
       "hrZones": null,
       "temp": null,
+      "surface": "treadmill",
       "flag": "✅",
       "note": "Post-illness treadmill return"
     },
@@ -522,6 +546,7 @@
       "drift": 5.6,
       "hrZones": null,
       "temp": 34,
+      "surface": "outdoor",
       "flag": "✅",
       "note": "Intentional heat test · drift +5.6"
     },
@@ -543,6 +568,7 @@
       "drift": null,
       "hrZones": null,
       "temp": null,
+      "surface": "treadmill",
       "flag": "✅",
       "note": "Strides pulled GCT down"
     },
@@ -564,6 +590,7 @@
       "drift": 5.9,
       "hrZones": null,
       "temp": 30,
+      "surface": "outdoor",
       "flag": "✅",
       "note": "Phase 2 gate CLEARED ✅ · drift +5.9"
     },
@@ -585,6 +612,7 @@
       "drift": null,
       "hrZones": null,
       "temp": 34,
+      "surface": "outdoor",
       "flag": "✅",
       "note": "GCT PB · 4s ceiling touch"
     },
@@ -606,6 +634,7 @@
       "drift": null,
       "hrZones": null,
       "temp": null,
+      "surface": "outdoor",
       "flag": "⚠️",
       "note": "Cut short — mental load"
     },
@@ -627,6 +656,7 @@
       "drift": -2.3,
       "hrZones": null,
       "temp": null,
+      "surface": "outdoor",
       "flag": "✅✅",
       "note": "Drift -2.3 🏆 best ever · rain"
     },
@@ -648,6 +678,7 @@
       "drift": -1.6,
       "hrZones": null,
       "temp": 31,
+      "surface": "outdoor",
       "flag": "✅",
       "note": "Phase 2 W9 start · drift -1.6 🏆"
     },
@@ -669,6 +700,7 @@
       "drift": null,
       "hrZones": null,
       "temp": 35,
+      "surface": "outdoor",
       "flag": "⚠️",
       "note": "Ceiling breach ⚠️ — cafe stop · outdoor heat"
     },
@@ -690,6 +722,7 @@
       "drift": 0.1,
       "hrZones": null,
       "temp": 32,
+      "surface": "outdoor",
       "flag": "✅",
       "note": "Drift +0.1 · foot cleared"
     },
@@ -711,6 +744,7 @@
       "drift": null,
       "hrZones": null,
       "temp": 29,
+      "surface": "outdoor",
       "flag": "✅",
       "note": "6:42/km LT1 CONFIRMED ✅ — outdoor dawn tempo"
     },
@@ -732,6 +766,7 @@
       "drift": 3.9,
       "hrZones": null,
       "temp": 32,
+      "surface": "outdoor",
       "flag": "✅",
       "note": "Drift +3.9 · ceiling held · 14km"
     },
@@ -753,6 +788,7 @@
       "drift": null,
       "hrZones": null,
       "temp": 29,
+      "surface": "treadmill",
       "flag": "✅",
       "note": "6×20s strides @ 4:17/km"
     },
@@ -774,6 +810,7 @@
       "drift": null,
       "hrZones": null,
       "temp": 29,
+      "surface": "treadmill",
       "flag": "✅",
       "note": "7/7 reps · 0% ceiling 🏆 · treadmill"
     },
@@ -795,6 +832,7 @@
       "drift": 10,
       "hrZones": null,
       "temp": 27,
+      "surface": "outdoor",
       "flag": "✅",
       "note": "Drift +10 ⚠️ — bad sleep carryover"
     },
@@ -816,6 +854,7 @@
       "drift": null,
       "hrZones": null,
       "temp": 28,
+      "surface": "treadmill",
       "flag": "✅✅",
       "note": "GCT 303ms ALL-TIME BEST 🏆 · VR 8.5% 🏆 · 15 min tempo"
     },
@@ -837,6 +876,7 @@
       "drift": null,
       "hrZones": null,
       "temp": 28,
+      "surface": "outdoor",
       "flag": "✅",
       "note": "Flush after quality · walk 10.3%"
     },
@@ -858,6 +898,7 @@
       "drift": null,
       "hrZones": null,
       "temp": null,
+      "surface": "treadmill",
       "flag": "✅",
       "note": "Week 10 long run · Novablast 5"
     },
@@ -879,6 +920,7 @@
       "drift": null,
       "hrZones": null,
       "temp": 30,
+      "surface": "treadmill",
       "flag": "✅",
       "note": "Walk-free easy · VR 9.1% 🏆 best easy · strides"
     },
@@ -900,6 +942,7 @@
       "drift": null,
       "hrZones": null,
       "temp": 27,
+      "surface": "treadmill",
       "flag": "⚠️",
       "note": "Too easy ⚠️ — speed too conservative · right ankle flag"
     },
@@ -921,6 +964,7 @@
       "drift": 4.4,
       "hrZones": null,
       "temp": 34,
+      "surface": "outdoor",
       "flag": "⚠️",
       "note": "30.6% walk ratio · TE too high · 34°C · ankle first 2km"
     },
@@ -941,6 +985,7 @@
       "drift": null,
       "hrZones": [20, 26, 53, 1, 0],
       "temp": 28,
+      "surface": "treadmill",
       "flag": "✅",
       "note": "20 min continuous @ 8.6 km/h ✅ · ceiling exactly met · ankle clean · plantar mild"
     },
