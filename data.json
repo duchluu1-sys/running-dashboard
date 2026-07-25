@@ -1075,7 +1075,7 @@
     "weekVolOnBoard": 21.52,
     "lastWeekVol": 37.14,
     "weekTarget": [33, 37],
-    "easyHRCeiling": 143,
+    "easyHRBand": [122, 139],
     "walkTrigger": 143,
     "walkResume": 128,
     "qualityCeiling": 150,
