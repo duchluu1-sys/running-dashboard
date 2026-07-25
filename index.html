@@ -703,6 +703,7 @@ function renderVitals(a){
 }
 
 // ── RENDER TODAY ────────────────────────────────────────────────────────
+function isStale(){const d=new Date(ATHLETE.date),t=new Date();d.setHours(0,0,0,0);t.setHours(0,0,0,0);return (t-d)/86400000>=1;}
 function renderToday(a){
   const rdCls=a.rdns.status==='GREEN'?'green':a.rdns.status==='AMBER'?'amber':'red';
   const rdVal=a.rdns.status==='GREEN'?'gn':a.rdns.status==='AMBER'?'am':'rd';
@@ -710,7 +711,7 @@ function renderToday(a){
   document.getElementById('rd-label').className=`rd-label c-${rdVal}`;
   document.getElementById('rd-label').textContent=a.rdns.status;
   document.getElementById('rd-note').textContent=READINESS.statusNote;
-  document.getElementById('rd-time').textContent=`Last updated: ${READINESS.lastUpdated}`;
+  const _st=isStale(),_rt=document.getElementById('rd-time');_rt.textContent=(_st?'⚠ STALE — ':'')+`Last updated: ${READINESS.lastUpdated}`;_rt.style.color=_st?'var(--am)':'';
   document.getElementById('rd-sub').textContent=`HRV ${READINESS.hrv}ms · RHR ${READINESS.rhr}bpm · ${a.rdns.reason.slice(0,60)}`;
 
   // Last run
@@ -1242,6 +1243,7 @@ document.addEventListener('DOMContentLoaded',()=>{
 });
 </script>
   <script>
+document.addEventListener('visibilitychange',()=>{if(!document.hidden)location.reload();});
 if ("serviceWorker" in navigator) {
     navigator.serviceWorker.register("sw.js");
 }
