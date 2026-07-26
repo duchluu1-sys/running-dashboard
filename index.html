@@ -3,7 +3,7 @@
 <head>
 <link rel="manifest" href="manifest.json">
 
-<meta name="theme-color" content="#8B5CF6">
+<meta name="theme-color" content="#06060f">
 
 <meta name="apple-mobile-web-app-capable" content="yes">
 
@@ -16,16 +16,19 @@
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --bg:#06060f;--sf:#0f0f1e;--sf2:#161628;--sf3:#1a1a30;
-  --bd:rgba(139,92,246,.12);--bdb:rgba(139,92,246,.35);
-  --v:#7c3aed;--vb:#a855f7;--cn:#06b6d4;--gn:#10b981;
+  --bg:#06060f;--sf:#0b0f14;--sf2:#111720;--sf3:#151c26;
+  --bd:rgba(0,212,255,.10);--bdb:rgba(0,212,255,.22);
+  --v:#0a8bab;--vb:#00d4ff;--cn:#00d4ff;--gn:#10b981;
   --am:#f59e0b;--rd:#ef4444;--tx:#e2e8f0;--mu:#64748b;--m2:#94a3b8;
-  --glow:0 0 20px rgba(124,58,237,.15),0 0 40px rgba(124,58,237,.05);
+  --glow:0 0 16px rgba(0,212,255,.10),0 0 36px rgba(0,212,255,.04);
   --mono:'JetBrains Mono',monospace;--sans:'Inter',sans-serif;
   /* S17 JARVIS TOKEN LAYER */
   --cy:#00d4ff;--cy-dim:rgba(0,212,255,.06);--cy-bd:rgba(0,212,255,.28);
   --cy-glow:0 0 10px rgba(0,212,255,.28),0 0 28px rgba(0,212,255,.07);
   --hud:'Rajdhani',sans-serif;--stm:'Share Tech Mono',monospace;
+  /* S24 DATA PALETTE — cyan = data · green/amber/red = status ONLY */
+  --d1:#00d4ff;--d2:rgba(0,212,255,.45);--d3:rgba(0,212,255,.18);--d4:#37505e;
+  --ok:#10b981;--warn:#f59e0b;--bad:#ef4444;--ref:rgba(0,212,255,.30);
   --grid:repeating-linear-gradient(0deg,transparent,transparent 39px,rgba(0,212,255,.022) 39px,rgba(0,212,255,.022) 40px),repeating-linear-gradient(90deg,transparent,transparent 39px,rgba(0,212,255,.022) 39px,rgba(0,212,255,.022) 40px);
 }
 body{background:var(--bg);background-image:var(--grid);color:var(--tx);font-family:var(--sans);font-size:14px;min-height:100vh;overflow-x:hidden}
@@ -37,10 +40,10 @@ body{background:var(--bg);background-image:var(--grid);color:var(--tx);font-fami
 .blink{animation:blink 2s ease-in-out infinite}
 /* HEADER */
 .hdr{background:linear-gradient(135deg,#06060f,#0a0a1c 55%,#0c0820);border-bottom:1px solid var(--bdb);padding:18px 32px 14px;display:flex;align-items:flex-end;justify-content:space-between;position:relative;overflow:hidden}
-.hdr::before{content:'OS·V2';position:absolute;right:40px;top:-6px;font-family:var(--mono);font-size:5rem;font-weight:700;color:rgba(124,58,237,.04);pointer-events:none;letter-spacing:6px}
-.hdr-name{font-family:var(--mono);font-size:1.5rem;font-weight:700;background:linear-gradient(135deg,#e2e8f0,#a855f7);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hdr::before{content:'OS·V2';position:absolute;right:40px;top:-6px;font-family:var(--mono);font-size:5rem;font-weight:700;color:rgba(0,212,255,.04);pointer-events:none;letter-spacing:6px}
+.hdr-name{font-family:var(--mono);font-size:1.5rem;font-weight:700;background:linear-gradient(135deg,#ffffff,#00d4ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 .hdr-tag{font-family:var(--mono);font-size:.56rem;letter-spacing:4px;text-transform:uppercase;color:var(--vb);font-weight:600;margin-top:4px}
-.hdr-pill{display:none;margin-top:5px;background:rgba(124,58,237,.18);border:1px solid var(--bdb);border-radius:12px;padding:3px 10px;font-family:var(--mono);font-size:.58rem;letter-spacing:2px;color:var(--vb);text-transform:uppercase;width:fit-content}
+.hdr-pill{display:none;margin-top:5px;background:rgba(0,212,255,.10);border:1px solid var(--bdb);border-radius:12px;padding:3px 10px;font-family:var(--mono);font-size:.58rem;letter-spacing:2px;color:var(--vb);text-transform:uppercase;width:fit-content}
 .hdr-r{text-align:right}
 .hdr-date{font-family:var(--mono);font-size:.78rem;color:var(--m2)}
 .hdr-meta{font-size:.58rem;letter-spacing:2px;text-transform:uppercase;color:var(--mu);margin-top:3px}
@@ -64,7 +67,7 @@ body{background:var(--bg);background-image:var(--grid);color:var(--tx);font-fami
 .tc{display:none}.tc.active{display:block}
 .mb{margin-bottom:16px}
 /* CARD */
-.card{background:var(--sf);border:1px solid var(--bd);border-radius:4px;border-top:2px solid rgba(124,58,237,.4);overflow:hidden;box-shadow:var(--glow);margin-bottom:16px}
+.card{background:var(--sf);border:1px solid var(--bd);border-radius:4px;border-top:2px solid rgba(0,212,255,.30);overflow:hidden;box-shadow:var(--glow);margin-bottom:16px}
 .card.rd-border{border-top-color:rgba(239,68,68,.5)}
 .card.gn-border{border-top-color:rgba(16,185,129,.4)}
 .card.am-border{border-top-color:rgba(245,158,11,.4)}
@@ -102,7 +105,7 @@ body{background:var(--bg);background-image:var(--grid);color:var(--tx);font-fami
 /* LAST RUN */
 .lr-wrap{padding:16px 20px}
 .lr-badge{display:inline-flex;align-items:center;gap:6px;padding:3px 10px;border-radius:12px;font-family:var(--mono);font-size:.55rem;letter-spacing:2px;text-transform:uppercase;font-weight:700;margin-bottom:10px}
-.lr-badge.quality{background:rgba(124,58,237,.18);color:var(--vb)}.lr-badge.long{background:rgba(6,182,212,.18);color:var(--cn)}.lr-badge.easy{background:rgba(16,185,129,.18);color:var(--gn)}
+.lr-badge.quality{background:rgba(0,212,255,.10);color:var(--cy)}.lr-badge.long{background:rgba(0,212,255,.14);color:var(--cn)}.lr-badge.easy{background:rgba(16,185,129,.18);color:var(--gn)}
 .lr-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
 .lr-field .lf-lbl{font-family:var(--mono);font-size:.48rem;letter-spacing:2px;text-transform:uppercase;color:var(--mu);margin-bottom:2px}
 .lr-field .lf-val{font-family:var(--mono);font-size:.88rem;font-weight:700;color:var(--tx)}
@@ -131,7 +134,7 @@ body{background:var(--bg);background-image:var(--grid);color:var(--tx);font-fami
 /* PACE GAP */
 .pace-track-wrap{padding:20px}
 .pace-track{position:relative;height:56px;background:var(--sf2);border-radius:4px;overflow:hidden;margin-bottom:14px}
-.pt-filled{position:absolute;left:0;top:0;bottom:0;background:rgba(124,58,237,.35);border-right:2px solid var(--vb)}
+.pt-filled{position:absolute;left:0;top:0;bottom:0;background:rgba(0,212,255,.22);border-right:2px solid var(--vb)}
 .pt-dot{position:absolute;top:50%;transform:translate(-50%,-50%);width:14px;height:14px;border-radius:50%;background:var(--vb);color:var(--vb);animation:pulse-glow 2s ease-in-out infinite}
 .pt-marker{position:absolute;top:0;bottom:0;width:2px;display:flex;flex-direction:column;align-items:center}
 .pt-marker-line{width:2px;height:100%;background:currentColor;opacity:.6}
@@ -148,10 +151,10 @@ body{background:var(--bg);background-image:var(--grid);color:var(--tx);font-fami
 /* LOG */
 .log-hdr,.log-row{display:grid;grid-template-columns:36px 48px 50px 56px 52px 42px 42px 40px 28px;gap:0;padding:6px 12px;align-items:center}
 .log-hdr{font-family:var(--mono);font-size:.46rem;letter-spacing:2px;text-transform:uppercase;color:var(--mu);border-bottom:1px solid var(--bd);font-weight:700}
-.log-row{border-bottom:1px solid rgba(139,92,246,.05);cursor:pointer;transition:background .15s;font-family:var(--mono);font-size:.65rem;min-height:44px;border-left:2px solid transparent}
+.log-row{border-bottom:1px solid rgba(0,212,255,.05);cursor:pointer;transition:background .15s;font-family:var(--mono);font-size:.65rem;min-height:44px;border-left:2px solid transparent}
 .log-row:hover{background:var(--sf2)}.log-row.quality{border-left-color:var(--v)}.log-row.long{border-left-color:var(--cn)}.log-row.easy{border-left-color:var(--gn)}
 .log-scroll{max-height:420px;overflow-y:auto}.log-scroll::-webkit-scrollbar{width:3px}.log-scroll::-webkit-scrollbar-thumb{background:var(--v);border-radius:2px}.log-scroll::-webkit-scrollbar-track{background:transparent}
-.log-detail{display:none;padding:10px 12px 14px;background:var(--sf2);border-bottom:1px solid var(--bd);border-left:2px solid rgba(124,58,237,.3)}
+.log-detail{display:none;padding:10px 12px 14px;background:var(--sf2);border-bottom:1px solid var(--bd);border-left:2px solid rgba(0,212,255,.25)}
 .log-detail.open{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
 .ld-lbl{font-family:var(--mono);font-size:.46rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--mu);margin-bottom:2px}
 .ld-val{font-family:var(--mono);font-size:.75rem;font-weight:700;color:var(--tx)}
@@ -197,7 +200,7 @@ body{background:var(--bg);background-image:var(--grid);color:var(--tx);font-fami
 .fd{display:none;padding:0 13px 13px;border-top:1px solid var(--bd)}
 .fd.open{display:block}
 .fd-text{font-size:.68rem;color:var(--m2);line-height:1.6;margin-top:9px}
-.fd-action{margin-top:8px;padding:7px 11px;background:rgba(124,58,237,.1);border-left:2px solid var(--v);font-size:.66rem;color:var(--m2);border-radius:0 4px 4px 0;line-height:1.4}
+.fd-action{margin-top:8px;padding:7px 11px;background:rgba(0,212,255,.06);border-left:2px solid var(--cy);font-size:.66rem;color:var(--m2);border-radius:0 4px 4px 0;line-height:1.4}
 /* MEDS */
 .med-list{display:flex;flex-direction:column;gap:10px;padding:14px}
 .med-row{background:var(--sf2);border-radius:4px;padding:13px;border-left:3px solid var(--gn);display:grid;grid-template-columns:1fr 70px;gap:8px;align-items:start}
@@ -209,7 +212,7 @@ body{background:var(--bg);background-image:var(--grid);color:var(--tx);font-fami
 /* RACE */
 .race-pipe{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;padding:16px}
 .race-card{border-radius:4px;padding:20px 18px;border-top:3px solid;background:var(--sf2);position:relative;overflow:hidden}
-.race-card::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:radial-gradient(circle at top left,rgba(124,58,237,.07) 0%,transparent 65%);pointer-events:none}
+.race-card::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:radial-gradient(circle at top left,rgba(0,212,255,.06) 0%,transparent 65%);pointer-events:none}
 .race-lbl{font-family:var(--mono);font-size:.5rem;letter-spacing:3px;text-transform:uppercase;color:var(--mu);margin-bottom:4px}
 .race-name{font-size:.95rem;font-weight:700;margin-bottom:2px}
 .race-dt{font-family:var(--mono);font-size:.65rem;color:var(--m2);margin-bottom:12px}
@@ -221,8 +224,8 @@ body{background:var(--bg);background-image:var(--grid);color:var(--tx);font-fami
 .phase-tl-wrap{padding:30px 20px 20px;overflow-x:auto}
 .phase-track{display:flex;height:40px;border-radius:4px;overflow:visible;position:relative;min-width:600px}
 .pt-seg{height:100%;display:flex;align-items:center;justify-content:center;position:relative;border-right:1px solid var(--bg)}
-.pts-done{background:rgba(124,58,237,.45)}
-.pts-curr{background:rgba(124,58,237,.25);border:1px dashed var(--v)}
+.pts-done{background:rgba(0,212,255,.30)}
+.pts-curr{background:rgba(0,212,255,.14);border:1px dashed var(--cy-bd)}
 .pts-future{background:rgba(100,116,139,.1);border:1px dashed rgba(100,116,139,.3)}
 .pts-race{width:28px!important;flex-shrink:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
 .pts-race-inner{background:var(--vb);border-radius:50%;width:12px;height:12px}
@@ -545,7 +548,7 @@ body{background:var(--bg);background-image:var(--grid);color:var(--tx);font-fami
 </head>
 <body>
 <div id="app-loading" style="position:fixed;inset:0;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:9999;gap:16px">
-  <div style="font-family:var(--mono);font-size:1.5rem;font-weight:700;background:linear-gradient(135deg,#e2e8f0,#a855f7);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">RUNNING OS V2</div>
+  <div style="font-family:var(--mono);font-size:1.5rem;font-weight:700;background:linear-gradient(135deg,#ffffff,#00d4ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">RUNNING OS V2</div>
   <div style="font-family:var(--mono);font-size:.6rem;letter-spacing:3px;text-transform:uppercase;color:var(--vb)" class="blink">LOADING DATA…</div>
 </div>
 <div id="app-error" style="position:fixed;inset:0;background:var(--bg);display:none;flex-direction:column;align-items:center;justify-content:center;z-index:9999;gap:12px">
@@ -1125,7 +1128,7 @@ function renderToday(a){
 
   // Last run
   const lr=RUNS[RUNS.length-1];
-  const typeColor={quality:'#7c3aed',long:'#06b6d4',easy:'#10b981'}[lr.type];
+  const typeColor={quality:D3,long:D2,easy:D1}[lr.type];
   document.getElementById('lr-sub').textContent=`R${lr.r} · ${lr.date} · ${lr.type}`;
   document.getElementById('lr-card').style.borderLeftColor=typeColor;
   document.getElementById('lr-body').innerHTML=`
@@ -1176,7 +1179,7 @@ function renderLoadCard(a){
   const bars=last4.map(w=>{
     const pct=(w.total/maxVol*100).toFixed(1);
     const isCurrent=w.wk===ATHLETE.week;
-    const bc=isCurrent?'var(--vb)':'rgba(139,92,246,.35)';
+    const bc=isCurrent?'var(--cy)':'rgba(0,212,255,.30)';
     return`<div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px">
       <div style="font-family:var(--mono);font-size:.55rem;color:${isCurrent?"var(--vb)":"var(--mu)"};">${w.total.toFixed(1)}</div>
       <div style="width:100%;height:48px;background:var(--sf2);border-radius:2px;position:relative;overflow:hidden">
@@ -1412,8 +1415,10 @@ function toggleFlag(i){document.getElementById('fc-'+i).classList.toggle('open')
 
 // ── RENDER FUTURE ───────────────────────────────────────────────────────
 function renderFuture(){
-  document.getElementById('race-p').innerHTML=`<div class="race-pipe">${RACES.map(r=>{
+  const RC=['rgba(0,212,255,.55)','rgba(0,212,255,.75)','#00d4ff'];
+  document.getElementById('race-p').innerHTML=`<div class="race-pipe">${RACES.map((r,ri)=>{
     const d=daysUntil(r.date);
+    r={...r,color:RC[ri]||D1};
     return`<div class="race-card" style="border-top-color:${r.color}"><div class="race-lbl">${r.label}</div><div class="race-name" style="color:${r.color}">${r.name}</div><div class="race-dt">${fmtDate(r.date)}</div><div class="race-cd" style="color:${r.color}">${d>0?d:'RACE DAY'}</div><span class="race-cd-unit">DAYS REMAINING</span><div class="race-goal">${r.goal}</div><div class="race-note">${r.note}</div></div>`;
   }).join('')}</div>`;
   renderPhaseTimeline();
@@ -1434,21 +1439,21 @@ function renderPhaseTimeline(){
     {id:'p2b',pct:5/totalW*100,label:'P2 W12–16',detail:'Sep 8–Oct 5, 2026 · Consolidation + deload · Gate clearance window · Peak 2×20 + 20km LR',cls:'pts-future'},
   ];
   const races=[
-    {id:'r0',pct:0,label:'Race 0',color:'#06b6d4'},
+    {id:'r0',pct:0,label:'Race 0',color:'rgba(0,212,255,.55)'},
     {id:'p3',pct:8/totalW*100,label:'Phase 3',color:'var(--vb)'},
-    {id:'r1',pct:0,label:'Race 1',color:'#7c3aed'},
+    {id:'r1',pct:0,label:'Race 1',color:'rgba(0,212,255,.75)'},
     {id:'p4',pct:6/totalW*100,label:'Phase 4',color:'var(--vb)'},
-    {id:'r2',pct:0,label:'Race 2',color:'#a855f7'},
+    {id:'r2',pct:0,label:'Race 2',color:'#00d4ff'},
   ];
   const seg2pct=segs.reduce((s,g)=>s+g.pct,0);
   // Estimated weeks for race markers and p3/p4
   const racePcts=[0,14,21,22,34,38]; // rough week positions
   const raceItems=[
-    {id:'r0',pos:13/totalW*100,label:'Race 0',color:'#06b6d4',days:daysUntil(RACES[0].date)},
+    {id:'r0',pos:13/totalW*100,label:'Race 0',color:'rgba(0,212,255,.55)',days:daysUntil(RACES[0].date)},
     {id:'p3',pos:15/totalW*100,label:'Phase 3',color:null},
-    {id:'r1',pos:22/totalW*100,label:'Race 1',color:'#7c3aed',days:daysUntil(RACES[1].date)},
+    {id:'r1',pos:22/totalW*100,label:'Race 1',color:'rgba(0,212,255,.75)',days:daysUntil(RACES[1].date)},
     {id:'p4',pos:24/totalW*100,label:'Phase 4',color:null},
-    {id:'r2',pos:37/totalW*100,label:'Race 2',color:'#a855f7',days:daysUntil(RACES[2].date)},
+    {id:'r2',pos:37/totalW*100,label:'Race 2',color:'#00d4ff',days:daysUntil(RACES[2].date)},
   ];
   document.getElementById('phase-tl').innerHTML=`
     <div class="phase-track">
@@ -1461,10 +1466,15 @@ const CHARTS={};
 
 // ── CHART DEFAULTS ──────────────────────────────────────────────────────
 const CHART_DEFAULTS={
-  backgroundColor:'rgba(9,9,18,.96)',
-  borderColor:'rgba(139,92,246,.4)',borderWidth:1,
-  titleColor:'#a855f7',bodyColor:'#94a3b8',padding:10
+  backgroundColor:'rgba(4,8,12,.97)',
+  borderColor:'rgba(0,212,255,.35)',borderWidth:1,
+  titleColor:'#00d4ff',bodyColor:'#94a3b8',padding:10
 };
+// S24 data palette — mirrors CSS tokens for Chart.js
+const D1='#00d4ff', D2='rgba(0,212,255,.45)', D3='rgba(0,212,255,.18)', D4='#37505e';
+const OK='#10b981', WARN='#f59e0b', BAD='#ef4444', REF='rgba(0,212,255,.30)';
+function axTitle(t){return{display:true,text:t,color:'#64748b',font:{family:'Share Tech Mono',size:10}}}
+function legLbl(sz){return{color:'#64748b',font:{family:'Share Tech Mono',size:sz||9},boxWidth:10}}
 function xTick(){return{color:'#64748b',font:{family:'Share Tech Mono',size:10}}}
 function yTick(){return{color:'#64748b',font:{family:'Share Tech Mono',size:10}}}
 function gridLine(){return{color:'rgba(0,212,255,.05)'}}
@@ -1472,7 +1482,7 @@ function borderLine(){return{color:'rgba(0,212,255,.12)'}}
 
 // ── GCT CHART ──────────────────────────────────────────────────────────
 function initGCTChart(a){
-  const tc={quality:"#7c3aed",long:"#00d4ff",easy:"#10b981"};
+  const tc={quality:D3,long:D2,easy:D1};
   const allPts=a.gct.pts;
   if(!allPts.length)return;
   const outdoor=allPts.filter(p=>p.surface==='outdoor');
@@ -1502,7 +1512,7 @@ function initGCTChart(a){
   if(olC){const r0=olC.pts[0].r,r1=olC.pts[olC.pts.length-1].r;
     datasets.push({type:"line",label:`OL avg ${olC.mean}ms`,
      data:[{x:r0,y:olC.mean},{x:r1,y:olC.mean}],
-     borderColor:"rgba(6,182,212,.35)",borderDash:[5,5],borderWidth:1.5,pointRadius:0,fill:false,backgroundColor:"transparent",order:3});}
+     borderColor:REF,borderDash:[5,5],borderWidth:1.5,pointRadius:0,fill:false,backgroundColor:"transparent",order:3});}
   CHARTS.gct=new Chart(document.getElementById("gctChart").getContext("2d"),{
     type:"scatter",data:{datasets},
     options:{responsive:true,maintainAspectRatio:false,
@@ -1518,11 +1528,11 @@ function initGCTChart(a){
           ticks:{...yTick(),callback:v=>`${v}ms`},grid:gridLine(),border:borderLine()}}}
   });
   document.getElementById("gct-leg").innerHTML=`
-    <div class="li"><span class="ld" style="background:#7c3aed"></span>Quality</div>
-    <div class="li"><span class="ld" style="background:#06b6d4"></span>Long</div>
-    <div class="li"><span class="ld" style="background:#10b981"></span>Easy</div>
+    <div class="li"><span class="ld" style="background:rgba(0,212,255,.18)"></span>Quality</div>
+    <div class="li"><span class="ld" style="background:rgba(0,212,255,.45)"></span>Long</div>
+    <div class="li"><span class="ld" style="background:#00d4ff"></span>Easy</div>
     <div class="li" style="color:var(--mu);font-size:.5rem">● outdoor &nbsp;·&nbsp; ○ treadmill</div>
-    <div class="li"><span class="ld-line" style="background:#10b981"></span>Easy trend (outdoor, n≥5)</div>`;
+    <div class="li"><span class="ld-line" style="background:#00d4ff"></span>Easy trend (outdoor, n≥5)</div>`;
   renderGCTCohortTable(a.gct.cohorts);
 }
 
@@ -1531,7 +1541,7 @@ function renderGCTCohortTable(cohorts){
   if(!el)return;
   const ORDER=['outdoor-easy','outdoor-long','outdoor-quality','treadmill-easy','treadmill-long','treadmill-quality'];
   const NAMES={'outdoor-easy':'Outdoor Easy','outdoor-long':'Outdoor Long','outdoor-quality':'Outdoor Quality','treadmill-easy':'Treadmill Easy','treadmill-long':'Treadmill Long','treadmill-quality':'Treadmill Quality'};
-  const COL={'outdoor-easy':'#10b981','outdoor-long':'#06b6d4','outdoor-quality':'#7c3aed','treadmill-easy':'rgba(16,185,129,.6)','treadmill-long':'rgba(6,182,212,.6)','treadmill-quality':'rgba(124,58,237,.6)'};
+  const COL={'outdoor-easy':D1,'outdoor-long':D2,'outdoor-quality':D3,'treadmill-easy':'rgba(0,212,255,.55)','treadmill-long':'rgba(0,212,255,.32)','treadmill-quality':'rgba(0,212,255,.14)'};
   const rows=ORDER.map(k=>{
     const c=cohorts.find(x=>x.key===k);
     if(!c)return'';
@@ -1553,16 +1563,16 @@ function renderGCTCohortTable(cohorts){
 // ── VOLUME CHART ────────────────────────────────────────────────────────
 function initVolumeChart(a){
   const w=a.wvol;
-  const bg=w.map(x=>x.partial?'rgba(0,212,255,.45)':x.phase===2?'rgba(124,58,237,.6)':'rgba(71,85,105,.5)');
-  const bd=w.map(x=>x.partial?'#00d4ff':x.phase===2?'#7c3aed':'rgba(100,116,139,.8)');
+  const bg=w.map(x=>x.partial?D1:x.phase===2?D2:'rgba(55,80,94,.5)');
+  const bd=w.map(x=>x.partial?D1:x.phase===2?'rgba(0,212,255,.6)':D4);
   CHARTS.vol=new Chart(document.getElementById('volChart').getContext('2d'),{
     type:'bar',
     data:{labels:w.map(x=>x.label+(x.partial?'*':'')),datasets:[
-      {label:'Volume (km)',data:w.map(x=>x.total),backgroundColor:bg,borderColor:bd,borderWidth:1,borderRadius:2,order:2},
-      {type:'line',label:'Min target 33km',data:w.map(()=>33),borderColor:'#f59e0b',borderDash:[5,5],borderWidth:1.5,pointRadius:0,fill:false,backgroundColor:'transparent',order:1},
-      {type:'line',label:'Max target 37km',data:w.map(()=>37),borderColor:'rgba(245,158,11,.4)',borderDash:[3,3],borderWidth:1,pointRadius:0,fill:false,backgroundColor:'transparent',order:1},
+      {label:'Volume (km)',data:w.map(x=>x.total),backgroundColor:bg,borderColor:bd,borderWidth:1,borderRadius:2,order:2,categoryPercentage:.72,barPercentage:.82},
+      {type:'line',label:'Min target 33km',data:w.map(()=>33),borderColor:REF,borderDash:[5,5],borderWidth:1.5,pointRadius:0,fill:false,backgroundColor:'transparent',order:1},
+      {type:'line',label:'Max target 37km',data:w.map(()=>37),borderColor:'rgba(0,212,255,.18)',borderDash:[3,3],borderWidth:1,pointRadius:0,fill:false,backgroundColor:'transparent',order:1},
     ]},
-    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{...CHART_DEFAULTS,callbacks:{label:c=>`${c.dataset.label==='Volume (km)'?w[c.dataIndex].total+' km':c.dataset.label+': '+c.parsed.y+'km'}${w[c.dataIndex]?.partial?' (partial)':''}`}}},scales:{x:{ticks:xTick(),grid:gridLine(),border:borderLine()},y:{ticks:{...yTick(),callback:v=>`${v}km`},title:{display:true,text:'km / week',color:'#64748b',font:{family:'Inter',size:10}},grid:gridLine(),border:borderLine()}}}
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{...CHART_DEFAULTS,callbacks:{label:c=>`${c.dataset.label==='Volume (km)'?w[c.dataIndex].total+' km':c.dataset.label+': '+c.parsed.y+'km'}${w[c.dataIndex]?.partial?' (partial)':''}`}}},scales:{x:{ticks:xTick(),grid:gridLine(),border:borderLine()},y:{ticks:{...yTick(),callback:v=>`${v}km`},title:{display:true,text:'km / week',color:'#64748b',font:{family:'Share Tech Mono',size:10}},grid:gridLine(),border:borderLine()}}}
   });
 }
 
@@ -1572,13 +1582,15 @@ function initIntensityChart(a){
   CHARTS.intensity=new Chart(document.getElementById('intensityChart').getContext('2d'),{
     type:'bar',
     data:{labels:w.map(x=>x.label),datasets:[
-      {label:'Easy',data:w.map(x=>x.easyPct),backgroundColor:w.map(x=>x.compliant?'rgba(139,92,246,.32)':'rgba(245,158,11,.4)'),borderColor:w.map(x=>x.compliant?'rgba(168,85,247,.6)':'#f59e0b'),borderWidth:1,stack:'s'},
-      {label:'Quality',data:w.map(x=>+(x.quality/x.total*100).toFixed(1)),backgroundColor:'rgba(0,212,255,.6)',borderColor:'#00d4ff',borderWidth:1,stack:'s'},
-      {label:'Long',data:w.map(x=>+(x.long/x.total*100).toFixed(1)),backgroundColor:'rgba(168,85,247,.45)',borderColor:'#a855f7',borderWidth:1,stack:'s'},
+      {label:'Easy',data:w.map(x=>x.easyPct),backgroundColor:D3,
+       borderColor:w.map(x=>x.compliant?'rgba(0,212,255,.35)':WARN),
+       borderWidth:w.map(x=>x.compliant?1:2),stack:'s',categoryPercentage:.68,barPercentage:.8},
+      {label:'Quality',data:w.map(x=>+(x.quality/x.total*100).toFixed(1)),backgroundColor:D1,borderColor:D1,borderWidth:1,stack:'s',categoryPercentage:.68,barPercentage:.8},
+      {label:'Long',data:w.map(x=>+(x.long/x.total*100).toFixed(1)),backgroundColor:D2,borderColor:'rgba(0,212,255,.6)',borderWidth:1,stack:'s',categoryPercentage:.68,barPercentage:.8},
+      {type:'line',label:'80% easy floor',data:w.map(()=>80),borderColor:WARN,borderDash:[6,4],borderWidth:1.5,pointRadius:0,fill:false,backgroundColor:'transparent'},
     ]},
-    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:'#64748b',font:{family:'Inter',size:10}}},tooltip:{...CHART_DEFAULTS,callbacks:{label:c=>`${c.dataset.label}: ${c.parsed.y.toFixed(1)}%`}},annotation:{annotations:{line80:{type:'line',xMin:-0.5,xMax:w.length-0.5,yMin:80,yMax:80,borderColor:'rgba(245,158,11,.8)',borderWidth:1.5,borderDash:[5,5]}}}},scales:{x:{ticks:xTick(),grid:gridLine(),border:borderLine()},y:{max:100,ticks:{...yTick(),callback:v=>`${v}%`},title:{display:true,text:'% of weekly km',color:'#64748b',font:{family:'Inter',size:10}},grid:gridLine(),border:borderLine()}}}
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:'#64748b',font:{family:'Share Tech Mono',size:10}}},tooltip:{...CHART_DEFAULTS,callbacks:{label:c=>`${c.dataset.label}: ${c.parsed.y.toFixed(1)}%`}}},scales:{x:{ticks:xTick(),grid:gridLine(),border:borderLine()},y:{max:100,ticks:{...yTick(),callback:v=>`${v}%`},title:{display:true,text:'% of weekly km',color:'#64748b',font:{family:'Share Tech Mono',size:10}},grid:gridLine(),border:borderLine()}}}
   });
-  // Add 80% reference line manually since no annotation plugin loaded
 }
 
 // ── QUALITY COMPLIANCE CHART ─────────────────────────────────────────────
@@ -1589,11 +1601,11 @@ function initComplianceChart(a){
     data:{labels:s.map(x=>`R${x.r}`),datasets:[{
       label:'% above ceiling',
       data:s.map(x=>x.pct),
-      backgroundColor:s.map(x=>x.pct===0?'rgba(16,185,129,.55)':x.pct<=5?'rgba(245,158,11,.5)':'rgba(239,68,68,.5)'),
-      borderColor:s.map(x=>x.pct===0?'#10b981':x.pct<=5?'#f59e0b':'#ef4444'),
+      backgroundColor:s.map(x=>x.pct===0?'rgba(16,185,129,.5)':x.pct<=5?'rgba(245,158,11,.45)':'rgba(239,68,68,.45)'),
+      borderColor:s.map(x=>x.pct===0?OK:x.pct<=5?WARN:BAD),
       borderWidth:1,borderRadius:2,
     }]},
-    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{...CHART_DEFAULTS,callbacks:{label:c=>`${c.raw}% above ceiling — ${c.raw===0?'clean':c.raw<=5?'minor breach':'BREACH'}`}}},scales:{x:{ticks:xTick(),grid:gridLine(),border:borderLine()},y:{max:20,min:0,ticks:{...yTick(),callback:v=>`${v}%`},title:{display:true,text:'% time above 150 bpm',color:'#64748b',font:{family:'Inter',size:10}},grid:gridLine(),border:borderLine()}}}
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{...CHART_DEFAULTS,callbacks:{label:c=>`${c.raw}% above ceiling — ${c.raw===0?'clean':c.raw<=5?'minor breach':'BREACH'}`}}},scales:{x:{ticks:xTick(),grid:gridLine(),border:borderLine()},y:{max:20,min:0,ticks:{...yTick(),callback:v=>`${v}%`},title:{display:true,text:'% time above 150 bpm',color:'#64748b',font:{family:'Share Tech Mono',size:10}},grid:gridLine(),border:borderLine()}}}
   });
 }
 
@@ -1606,18 +1618,18 @@ function initDriftChart(a){
     return;
   }
   document.getElementById('drift-chart-wrap').style.display='block';
-  const tc={easy:'rgba(16,185,129,.45)',long:'rgba(6,182,212,.45)'};
-  const bc={easy:'#10b981',long:'#06b6d4'};
+  const tc={easy:D2,long:'rgba(0,212,255,.7)'};
+  const bc={easy:'rgba(0,212,255,.6)',long:D1};
   CHARTS.drift=new Chart(document.getElementById('driftChart').getContext('2d'),{
     type:'bar',
     data:{labels:d.map(x=>`R${x.r}`),datasets:[{
       label:'Cardiac drift',
       data:d.map(x=>x.drift),
-      backgroundColor:d.map(x=>tc[x.type]||'rgba(148,163,184,.3)'),
-      borderColor:d.map(x=>bc[x.type]||'#64748b'),
+      backgroundColor:d.map(x=>tc[x.type]||D3),
+      borderColor:d.map(x=>bc[x.type]||D4),
       borderWidth:1,borderRadius:2,
     }]},
-    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{...CHART_DEFAULTS,callbacks:{label:c=>`${c.parsed.y>=0?'+':''}${c.parsed.y} bpm (${d[c.dataIndex].type}) — ${c.parsed.y<=0?'excellent':c.parsed.y<=5?'minimal':c.parsed.y<=10?'elevated':'high'}`}}},scales:{x:{ticks:xTick(),grid:gridLine(),border:borderLine()},y:{ticks:{...yTick(),callback:v=>`${v>=0?'+':''}${v}`},title:{display:true,text:'Q4 − Q1 avg HR (bpm)',color:'#64748b',font:{family:'Inter',size:10}},grid:gridLine(),border:borderLine()}}}
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{...CHART_DEFAULTS,callbacks:{label:c=>`${c.parsed.y>=0?'+':''}${c.parsed.y} bpm (${d[c.dataIndex].type}) — ${c.parsed.y<=0?'excellent':c.parsed.y<=5?'minimal':c.parsed.y<=10?'elevated':'high'}`}}},scales:{x:{ticks:xTick(),grid:gridLine(),border:borderLine()},y:{ticks:{...yTick(),callback:v=>`${v>=0?'+':''}${v}`},title:{display:true,text:'Q4 − Q1 avg HR (bpm)',color:'#64748b',font:{family:'Share Tech Mono',size:10}},grid:gridLine(),border:borderLine()}}}
   });
   renderDriftStats(a.drift);
 }
@@ -1639,8 +1651,8 @@ function renderDriftStats(drift){
     <div style="display:grid;grid-template-columns:60px 22px 58px 70px 1fr;padding:4px 0 6px;border-bottom:1px solid var(--bdb)">
       ${['TYPE','N','MEAN','3-RUN MA','READ'].map(h=>`<div style="font-family:var(--mono);font-size:.46rem;letter-spacing:2px;text-transform:uppercase;color:var(--mu)">${h}</div>`).join('')}
     </div>
-    ${row('Easy','#10b981',drift.easy.length,drift.easyMean,drift.easyMa3)}
-    ${row('Long','#06b6d4',drift.long.length,drift.longMean,drift.longMa3)}
+    ${row('Easy','rgba(0,212,255,.6)',drift.easy.length,drift.easyMean,drift.easyMa3)}
+    ${row('Long',D1,drift.long.length,drift.longMean,drift.longMa3)}
     <div style="font-size:.57rem;color:var(--mu);margin-top:7px;line-height:1.65">Easy elevated (+5.55 avg) — heat confound (30–34°C outdoor sessions). Long near-zero (+0.38) — walk breaks reset HR, compressing drift. Compare within type only.</div>`;
 }
 
@@ -1651,11 +1663,11 @@ function initLongRunChart(a){
     type:'line',
     data:{labels:d.map(x=>`R${x.r}`),datasets:[
       {label:'Long run dist',data:d.map(x=>x.dist),borderColor:'#00d4ff',backgroundColor:'rgba(0,212,255,.07)',fill:true,tension:.3,
-        pointBackgroundColor:d.map((x,i)=>i===d.length-1?'#00d4ff':x.dist>=20?'#10b981':'rgba(6,182,212,.65)'),
+        pointBackgroundColor:d.map((x,i)=>i===d.length-1?D1:x.dist>=20?OK:D2),
         pointRadius:d.map((_,i)=>i===d.length-1?8:4),pointHoverRadius:10},
-      {type:'line',label:'Gate 3: 20km',data:d.map(()=>20),borderColor:'#7c3aed',borderDash:[5,5],borderWidth:1.5,pointRadius:0,fill:false,backgroundColor:'transparent'},
+      {type:'line',label:'Gate 3: 20km',data:d.map(()=>20),borderColor:OK,borderDash:[5,5],borderWidth:1.5,pointRadius:0,fill:false,backgroundColor:'transparent'},
     ]},
-    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{...CHART_DEFAULTS,callbacks:{label:c=>`${c.dataset.label==='Gate 3: 20km'?'Gate 3 target: 20km':c.parsed.y+' km'}`}}},scales:{x:{ticks:xTick(),grid:gridLine(),border:borderLine()},y:{min:0,max:25,ticks:{...yTick(),callback:v=>`${v}km`},title:{display:true,text:'km',color:'#64748b',font:{family:'Inter',size:10}},grid:gridLine(),border:borderLine()}}}
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{...CHART_DEFAULTS,callbacks:{label:c=>`${c.dataset.label==='Gate 3: 20km'?'Gate 3 target: 20km':c.parsed.y+' km'}`}}},scales:{x:{ticks:xTick(),grid:gridLine(),border:borderLine()},y:{min:0,max:25,ticks:{...yTick(),callback:v=>`${v}km`},title:{display:true,text:'km',color:'#64748b',font:{family:'Share Tech Mono',size:10}},grid:gridLine(),border:borderLine()}}}
   });
 }
 
@@ -1663,18 +1675,18 @@ function initLongRunChart(a){
 function initPaceHRChart(a){
   const d=a.scatter;
   if(!d.length){return}
-  const tc={'quality_a':'#7c3aed','quality_b':'#a855f7','long':'#06b6d4','easy':'#10b981'};
+  const tc={'quality_a':'#0a8bab','quality_b':'#1aa8c9','long':'#4dc4e8','easy':'#00d4ff'};
   const minHR=100,maxHR=165;
   CHARTS.paceHR=new Chart(document.getElementById('paceHRChart').getContext('2d'),{
     type:'scatter',
     data:{datasets:[
       {label:'Runs',data:d.map(p=>({x:p.x,y:p.y,r:p.r,date:p.date,t:p.type})),backgroundColor:d.map(p=>tc[p.type].replace(')',`,${p.opacity})`).replace('#','rgba(').replace(/^rgba\(#/,'rgba(').replace(/([0-9a-f]{2})([0-9a-f]{2})([0-9a-f]{2})/i,(_,r,g,b)=>`${parseInt(r,16)},${parseInt(g,16)},${parseInt(b,16)}`)),pointRadius:6,pointHoverRadius:9},
-      {type:'line',label:'Sub-4 goal',data:[{x:minHR,y:ATHLETE.goalPaceSub4},{x:maxHR,y:ATHLETE.goalPaceSub4}],borderColor:'rgba(168,85,247,.7)',borderWidth:1.5,borderDash:[5,3],pointRadius:0,fill:false,backgroundColor:'transparent'},
-      {type:'line',label:'LT1 R34',data:[{x:minHR,y:ATHLETE.ltPace},{x:maxHR,y:ATHLETE.ltPace}],borderColor:'rgba(245,158,11,.7)',borderWidth:1.5,borderDash:[5,3],pointRadius:0,fill:false,backgroundColor:'transparent'},
-      {type:'line',label:'Easy ceiling',data:[{x:143,y:5},{x:143,y:10}],borderColor:'rgba(16,185,129,.5)',borderWidth:1,borderDash:[4,4],pointRadius:0,fill:false,backgroundColor:'transparent'},
-      {type:'line',label:'Quality ceiling',data:[{x:150,y:5},{x:150,y:10}],borderColor:'rgba(124,58,237,.5)',borderWidth:1,borderDash:[4,4],pointRadius:0,fill:false,backgroundColor:'transparent'},
+      {type:'line',label:'Sub-4 goal',data:[{x:minHR,y:ATHLETE.goalPaceSub4},{x:maxHR,y:ATHLETE.goalPaceSub4}],borderColor:OK,borderWidth:1.5,borderDash:[5,3],pointRadius:0,fill:false,backgroundColor:'transparent'},
+      {type:'line',label:'LT1 R34',data:[{x:minHR,y:ATHLETE.ltPace},{x:maxHR,y:ATHLETE.ltPace}],borderColor:REF,borderWidth:1.5,borderDash:[5,3],pointRadius:0,fill:false,backgroundColor:'transparent'},
+      {type:'line',label:'Easy ceiling',data:[{x:143,y:5},{x:143,y:10}],borderColor:'rgba(245,158,11,.45)',borderWidth:1,borderDash:[4,4],pointRadius:0,fill:false,backgroundColor:'transparent'},
+      {type:'line',label:'Quality ceiling',data:[{x:150,y:5},{x:150,y:10}],borderColor:'rgba(239,68,68,.4)',borderWidth:1,borderDash:[4,4],pointRadius:0,fill:false,backgroundColor:'transparent'},
     ]},
-    options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'nearest',intersect:false},plugins:{legend:{display:false},tooltip:{...CHART_DEFAULTS,callbacks:{title:i=>i[0].raw.r?`R${i[0].raw.r} · ${i[0].raw.date}`:i[0].dataset.label,label:c=>c.raw.t?`${fmtPace(c.raw.y)}/km at ${c.raw.x}bpm (${c.raw.t})`:`${c.dataset.label}: ${fmtPace(c.raw.y)}/km`}}},scales:{x:{type:'linear',min:minHR,max:maxHR,title:{display:true,text:'Average HR (bpm)',color:'#64748b',font:{family:'Inter',size:10}},ticks:{...xTick(),callback:v=>`${v}bpm`},grid:gridLine(),border:borderLine()},y:{reverse:true,min:5,max:10,title:{display:true,text:'Pace (min/km) — faster ↑',color:'#64748b',font:{family:'Inter',size:10}},ticks:{...yTick(),callback:v=>fmtPace(v)},grid:gridLine(),border:borderLine()}}}
+    options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'nearest',intersect:false},plugins:{legend:{display:false},tooltip:{...CHART_DEFAULTS,callbacks:{title:i=>i[0].raw.r?`R${i[0].raw.r} · ${i[0].raw.date}`:i[0].dataset.label,label:c=>c.raw.t?`${fmtPace(c.raw.y)}/km at ${c.raw.x}bpm (${c.raw.t})`:`${c.dataset.label}: ${fmtPace(c.raw.y)}/km`}}},scales:{x:{type:'linear',min:minHR,max:maxHR,title:{display:true,text:'Average HR (bpm)',color:'#64748b',font:{family:'Share Tech Mono',size:10}},ticks:{...xTick(),callback:v=>`${v}bpm`},grid:gridLine(),border:borderLine()},y:{reverse:true,min:5,max:10,title:{display:true,text:'Pace (min/km) — faster ↑',color:'#64748b',font:{family:'Share Tech Mono',size:10}},ticks:{...yTick(),callback:v=>fmtPace(v)},grid:gridLine(),border:borderLine()}}}
   });
 }
 
@@ -1692,12 +1704,12 @@ function initThresholdChart(a){
   CHARTS.threshold=new Chart(document.getElementById('thresholdChart').getContext('2d'),{
     type:'scatter',
     data:{datasets:[
-      {type:'scatter',label:'Quality session pace',data:d.map((p,i)=>({x:p.r,y:p.pace,date:p.date})),backgroundColor:'#7c3aed',pointRadius:6,pointHoverRadius:9},
-      {type:'line',label:'Trend',data:trendLine.map(p=>({x:p.x,y:p.y})),borderColor:'rgba(168,85,247,.5)',borderWidth:1.5,borderDash:[4,4],pointRadius:0,fill:false,backgroundColor:'transparent'},
-      {type:'line',label:'Sub-4 goal',data:[{x:d[0].r,y:ATHLETE.goalPaceSub4},{x:d[d.length-1].r,y:ATHLETE.goalPaceSub4}],borderColor:'rgba(168,85,247,.7)',borderWidth:1.5,borderDash:[5,3],pointRadius:0,fill:false,backgroundColor:'transparent'},
-      {type:'line',label:'Current LT1',data:[{x:d[0].r,y:ATHLETE.ltPace},{x:d[d.length-1].r,y:ATHLETE.ltPace}],borderColor:'rgba(245,158,11,.7)',borderWidth:1.5,borderDash:[5,3],pointRadius:0,fill:false,backgroundColor:'transparent'},
+      {type:'scatter',label:'Quality session pace',data:d.map((p,i)=>({x:p.r,y:p.pace,date:p.date})),backgroundColor:d.map((_,i)=>i===d.length-1?D1:D2),pointRadius:d.map((_,i)=>i===d.length-1?8:5),pointHoverRadius:10},
+      {type:'line',label:'Trend',data:trendLine.map(p=>({x:p.x,y:p.y})),borderColor:REF,borderWidth:1.5,borderDash:[4,4],pointRadius:0,fill:false,backgroundColor:'transparent'},
+      {type:'line',label:'Sub-4 goal',data:[{x:d[0].r,y:ATHLETE.goalPaceSub4},{x:d[d.length-1].r,y:ATHLETE.goalPaceSub4}],borderColor:OK,borderWidth:1.5,borderDash:[5,3],pointRadius:0,fill:false,backgroundColor:'transparent'},
+      {type:'line',label:'Current LT1',data:[{x:d[0].r,y:ATHLETE.ltPace},{x:d[d.length-1].r,y:ATHLETE.ltPace}],borderColor:'rgba(0,212,255,.55)',borderWidth:1.5,borderDash:[5,3],pointRadius:0,fill:false,backgroundColor:'transparent'},
     ]},
-    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{...CHART_DEFAULTS,callbacks:{label:c=>c.raw.date?`R${c.raw.x} · ${c.raw.date}: ${fmtPace(c.raw.y)}/km`:`${c.dataset.label}: ${fmtPace(c.raw.y)}/km`}}},scales:{x:{type:'linear',ticks:{...xTick(),callback:v=>`R${v}`},grid:gridLine(),border:borderLine()},y:{reverse:true,min:5,max:8,ticks:{...yTick(),callback:v=>fmtPace(v)},title:{display:true,text:'Pace (min/km) — faster ↑',color:'#64748b',font:{family:'Inter',size:10}},grid:gridLine(),border:borderLine()}}}
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{...CHART_DEFAULTS,callbacks:{label:c=>c.raw.date?`R${c.raw.x} · ${c.raw.date}: ${fmtPace(c.raw.y)}/km`:`${c.dataset.label}: ${fmtPace(c.raw.y)}/km`}}},scales:{x:{type:'linear',ticks:{...xTick(),callback:v=>`R${v}`},grid:gridLine(),border:borderLine()},y:{reverse:true,min:5,max:8,ticks:{...yTick(),callback:v=>fmtPace(v)},title:{display:true,text:'Pace (min/km) — faster ↑',color:'#64748b',font:{family:'Share Tech Mono',size:10}},grid:gridLine(),border:borderLine()}}}
   });
 }
 
@@ -1708,19 +1720,19 @@ function initAEIChart(a){
     type:'scatter',
     data:{datasets:[
       {type:'scatter',label:'AEI',data:d.pts.map(p=>({x:p.r,y:p.aei,date:p.date})),
-        backgroundColor:d.pts.map((_,i)=>i===d.pts.length-1?'#00d4ff':'#10b981'),
+        backgroundColor:d.pts.map((_,i)=>i===d.pts.length-1?D1:D2),
         pointRadius:d.pts.map((_,i)=>i===d.pts.length-1?8:4),pointHoverRadius:10},
-      {type:'line',label:'5-Run Avg',data:d.movingAvg.map(p=>({x:p.r,y:p.ma})),borderColor:'#a855f7',borderWidth:2,pointRadius:0,fill:false,tension:.3,backgroundColor:'transparent'},
+      {type:'line',label:'5-Run Avg',data:d.movingAvg.map(p=>({x:p.r,y:p.ma})),borderColor:D1,borderWidth:2,pointRadius:0,fill:false,tension:.3,backgroundColor:'transparent'},
     ]},
-    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{...CHART_DEFAULTS,callbacks:{label:c=>c.raw.date?`R${c.raw.x} · ${c.raw.date}: AEI ${c.raw.y}`:`5-Run Avg: ${c.raw.y}`}}},scales:{x:{type:'linear',ticks:{...xTick(),callback:v=>`R${v}`},grid:gridLine(),border:borderLine()},y:{title:{display:true,text:'AEI — lower is better ↓',color:'#64748b',font:{family:'Inter',size:10}},ticks:yTick(),grid:gridLine(),border:borderLine()}}}
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{...CHART_DEFAULTS,callbacks:{label:c=>c.raw.date?`R${c.raw.x} · ${c.raw.date}: AEI ${c.raw.y}`:`5-Run Avg: ${c.raw.y}`}}},scales:{x:{type:'linear',ticks:{...xTick(),callback:v=>`R${v}`},grid:gridLine(),border:borderLine()},y:{title:{display:true,text:'AEI — lower is better ↓',color:'#64748b',font:{family:'Share Tech Mono',size:10}},ticks:yTick(),grid:gridLine(),border:borderLine()}}}
   });
 }
 
 // ── HR ZONE DISTRIBUTION ─────────────────────────────────────────────────
 function initZoneChart(a){
   const d=a.zones;
-  const zoneColors=['rgba(30,41,59,.8)','rgba(124,58,237,.55)','rgba(6,182,212,.6)','rgba(245,158,11,.6)','rgba(239,68,68,.7)'];
-  const zoneBorders=['rgba(30,41,59,1)','rgba(124,58,237,1)','rgba(6,182,212,1)','rgba(245,158,11,1)','rgba(239,68,68,1)'];
+  const zoneColors=['rgba(55,80,94,.7)',D3,D1,'rgba(245,158,11,.6)','rgba(239,68,68,.7)'];
+  const zoneBorders=[D4,'rgba(0,212,255,.35)',D1,WARN,BAD];
   const zoneLabels=['Z1 <122','Z2 122-138','Z3 139-146','Z4 147-154','Z5 155+'];
   CHARTS.zone=new Chart(document.getElementById('zoneChart').getContext('2d'),{
     type:'bar',
@@ -1734,7 +1746,7 @@ function initZoneChart(a){
         borderWidth:1,stack:'zones',
       }))
     },
-    options:{responsive:true,maintainAspectRatio:false,indexAxis:'y',plugins:{legend:{labels:{color:'#64748b',font:{family:'Inter',size:9},boxWidth:10}},tooltip:{...CHART_DEFAULTS,callbacks:{label:c=>`${c.dataset.label}: ${c.parsed.x.toFixed(1)}%`}}},scales:{x:{max:100,ticks:{...xTick(),callback:v=>`${v}%`},grid:gridLine(),border:borderLine()},y:{ticks:xTick(),grid:gridLine(),border:borderLine()}}}
+    options:{responsive:true,maintainAspectRatio:false,indexAxis:'y',plugins:{legend:{labels:{color:'#64748b',font:{family:'Share Tech Mono',size:9},boxWidth:10}},tooltip:{...CHART_DEFAULTS,callbacks:{label:c=>`${c.dataset.label}: ${c.parsed.x.toFixed(1)}%`}}},scales:{x:{max:100,ticks:{...xTick(),callback:v=>`${v}%`},grid:gridLine(),border:borderLine()},y:{ticks:xTick(),grid:gridLine(),border:borderLine()}}}
   });
 }
 
