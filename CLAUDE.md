@@ -1,6 +1,6 @@
 # CLAUDE.md — Running OS Automation Protocol
 # Đức Lưu | duchluu1-sys
-# Version: July 24, 2026
+# Version: July 26, 2026
 
 This file governs all Claude Desktop automation for the Running OS system.
 Read before executing any update.
@@ -285,24 +285,26 @@ KB: [SHA] · run_archive + training_kb updated
 
 ## Morning Readiness Protocol
 
-When asked to check morning readiness:
+**Trigger:** user types "morning", "readiness", or "good morning".
 
-1. Pull from Garmin: overnight HRV average, RHR, sleep score, Body Battery, HRV status
-2. Compare HRV to baseline: **53–68 ms**
-3. Compare RHR to rolling 7-day average (pull from recent health summaries)
-4. Return exactly this format:
+### Step 1 — Load data (one batch before any analysis)
 
-```
-[emoji] [STATUS]
+**1A — Load GitHub tools.** Confirm `get_file_contents` and `push_files` available.
 
-HRV: [X] ms ([above/within/below] 53–68 ms baseline)
-RHR: [X] bpm ([delta] vs 7-day avg [Y] bpm)
-Sleep: [score] ([Good/Fair/Poor])
-Body Battery: [X]
+**1B — Pull from GitHub:**
+- `duchluu1-sys/running-dashboard/data.json` → read `ATHLETE.weekSchedule`, `ATHLETE.formCue`, `ATHLETE.week`, last run entry from RUNS, full READINESS_LOG array
+- `duchluu1-sys/running-kb/training_kb.md` → read Current Week table for today's exact targets
 
-Today: [planned session from current week]
-Verdict: [1–2 sentences — specific recommendation]
-```
+**1C — Pull from Garmin:** overnight HRV average, RHR, sleep score, Body Battery, HRV status.
+
+All reads before any analysis.
+
+---
+
+### Step 2 — Compute readiness status
+
+Compare HRV to baseline: **53–68 ms**
+Compare RHR to 7-day rolling average (compute from last 7 READINESS_LOG entries).
 
 **Decision rules (most restrictive wins):**
 
@@ -316,7 +318,54 @@ Verdict: [1–2 sentences — specific recommendation]
 | Sleep 60–74 · HRV balanced · RHR within +4 | 🟢 GREEN — monitor during session |
 | Sleep 75+ · HRV balanced · RHR within +4 | 🟢 GREEN — train as planned |
 
-**After evaluation, append one entry to READINESS_LOG array in data.json:**
+---
+
+### Step 3 — Determine today's session
+
+1. Read `ATHLETE.weekSchedule` → find today's day of week → get session type.
+2. Cross-reference training_kb.md Current Week table → get exact prescription (speed, reps, duration, targets).
+3. Apply readiness modifier:
+   - GREEN → prescribed session stands unchanged
+   - CAUTION → downgrade any quality session to easy; non-quality sessions unchanged
+   - REST → no session prescribed; note if a quality day is being suppressed
+
+---
+
+### Step 4 — Build briefing string
+
+Assemble 4 parts into a single coherent string. Dense, no filler. Target ~3–5 sentences total.
+
+**Part 1 — Readiness line:**
+State HRV vs baseline, RHR vs 7-day avg, status verdict.
+Example: `HRV 68ms within baseline, RHR 42 Δ+1 vs 7d avg — GREEN.`
+
+**Part 2 — Session prescription:**
+State what to do today with exact targets. If readiness overrides the scheduled session, state both.
+
+| Session type | What to include |
+|---|---|
+| easy | Distance range · HR 122–139 · walk @143, resume @128 · surface |
+| quality_a | Ladder targets (e.g. 8.5→8.8→9.0→9.1→9.2 km/h) · rep count × duration · HR ceiling 150 · full walk recovery |
+| quality_b | Duration · speed · HR ceiling 150 |
+| long | Distance target · speed range · easy effort · fueling reminder if ≥90 min (2 gels + 2 Roctane caps) |
+| flush | Short easy · HR 122–139 |
+| rest | Rest day — no session. |
+| downgraded | `[Original session] → easy run (CAUTION: [reason])` |
+
+**Part 3 — Equipment + cue (one line):**
+`Shoes: [model] · [Location] · Cue: [ATHLETE.formCue]`
+
+Shoe rule: Quality A/B → Evo SL · Easy / Long / Flush / Strides → Novablast 5
+Location rule: quality sessions + long runs → Elite Fitness Xuân Diệu · easy outdoor → outdoor
+
+**Part 4 — Load context (1–2 sentences):**
+State last run (R[N], type, distance, date). Add ACWR note if >1.3 or <0.8. Add any active injury monitor flags.
+
+---
+
+### Step 5 — Write to data.json
+
+Append one entry to READINESS_LOG in `duchluu1-sys/running-dashboard/data.json`:
 
 ```json
 {
@@ -325,14 +374,23 @@ Verdict: [1–2 sentences — specific recommendation]
   "rhr": <integer or null>,
   "sleepScore": <integer 0-100 or null>,
   "status": "GREEN|CAUTION|REST",
-  "note": "<brief note ≤10 words>"
-  "briefing": "<2-4 sentences: line 1 = HRV/RHR verdict, line 2 = today's mission from weekSchedule, line 3 = one coaching note from recent data, line 4 optional = one strategic flag>"
+  "note": "<brief note ≤10 words>",
+  "briefing": "<Part 1. Part 2. Part 3. Part 4.>"
 }
 ```
 
-Do NOT overwrite the array. Append to end only. The dashboard computes rolling averages from the full history.
+**Do NOT overwrite the array. Append to end only.**
+**Do NOT write to training_kb.md or run_archive.md — morning readiness touches data.json only.**
 
-Commit message: `Readiness [date]`
+Commit message: `Readiness [Mon Day]`
+
+Verify SHA. Done message:
+```
+✅ Readiness logged — [date]
+Status: [GREEN/CAUTION/REST]
+Today: [one-line session summary]
+Dashboard: [SHA]
+```
 
 ---
 
