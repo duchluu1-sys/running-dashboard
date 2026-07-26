@@ -11,7 +11,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Đức Lưu — Running OS v2</title>
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Inter:wght@300;400;500;600;700&family=Rajdhani:wght@600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -22,8 +22,13 @@
   --am:#f59e0b;--rd:#ef4444;--tx:#e2e8f0;--mu:#64748b;--m2:#94a3b8;
   --glow:0 0 20px rgba(124,58,237,.15),0 0 40px rgba(124,58,237,.05);
   --mono:'JetBrains Mono',monospace;--sans:'Inter',sans-serif;
+  /* S17 JARVIS TOKEN LAYER */
+  --cy:#00d4ff;--cy-dim:rgba(0,212,255,.06);--cy-bd:rgba(0,212,255,.28);
+  --cy-glow:0 0 10px rgba(0,212,255,.28),0 0 28px rgba(0,212,255,.07);
+  --hud:'Rajdhani',sans-serif;--stm:'Share Tech Mono',monospace;
+  --grid:repeating-linear-gradient(0deg,transparent,transparent 39px,rgba(0,212,255,.022) 39px,rgba(0,212,255,.022) 40px),repeating-linear-gradient(90deg,transparent,transparent 39px,rgba(0,212,255,.022) 39px,rgba(0,212,255,.022) 40px);
 }
-body{background:var(--bg);color:var(--tx);font-family:var(--sans);font-size:14px;min-height:100vh;overflow-x:hidden}
+body{background:var(--bg);background-image:var(--grid);color:var(--tx);font-family:var(--sans);font-size:14px;min-height:100vh;overflow-x:hidden}
 /* ANIMATIONS */
 @keyframes pulse-glow{0%,100%{box-shadow:0 0 6px 2px currentColor;opacity:1}50%{box-shadow:0 0 18px 6px currentColor;opacity:.6}}
 .sdot{width:10px;height:10px;border-radius:50%;display:inline-block;flex-shrink:0;animation:pulse-glow 2s ease-in-out infinite}
@@ -270,6 +275,111 @@ body{background:var(--bg);color:var(--tx);font-family:var(--sans);font-size:14px
   .rd-block{flex-direction:column;gap:12px}
   .lr-grid{grid-template-columns:repeat(2,1fr)}
 }
+
+/* ════════════════════════════════════════
+   S17 — JARVIS VISUAL FOUNDATION
+   All downstream tab steps consume these.
+   DO NOT edit existing rules above.
+   ════════════════════════════════════════ */
+
+/* HUD CARD — L-bracket corners, cyan ambient border */
+.hud-card{
+  position:relative;
+  background:var(--sf);
+  border:1px solid var(--cy-dim);
+  border-radius:2px;
+  overflow:visible;
+  margin-bottom:16px;
+}
+/* top-left bracket */
+.hud-card::before{
+  content:'';
+  position:absolute;
+  top:-2px;left:-2px;
+  width:14px;height:14px;
+  border-top:2px solid var(--cy);
+  border-left:2px solid var(--cy);
+  pointer-events:none;
+  z-index:1;
+}
+/* bottom-right bracket */
+.hud-card::after{
+  content:'';
+  position:absolute;
+  bottom:-2px;right:-2px;
+  width:14px;height:14px;
+  border-bottom:2px solid var(--cy);
+  border-right:2px solid var(--cy);
+  pointer-events:none;
+  z-index:1;
+}
+/* Glowing variant — ONE glow maximum rule: apply only to the single most
+   important card visible on the current tab */
+.hud-card.hud-glow{
+  border-color:var(--cy-bd);
+  box-shadow:var(--cy-glow);
+}
+
+/* HUD TYPOGRAPHY */
+.hud-num{
+  font-family:var(--hud);
+  font-weight:700;
+  letter-spacing:.5px;
+  line-height:1;
+}
+.hud-num.xl{font-size:2.8rem}   /* race countdown, readiness status */
+.hud-num.lg{font-size:1.8rem}   /* mission header */
+.hud-num.md{font-size:1.2rem}   /* vitals */
+.hud-num.sm{font-size:.9rem}    /* secondary metrics */
+
+.hud-lbl{
+  font-family:var(--stm);
+  font-size:.48rem;
+  letter-spacing:3px;
+  text-transform:uppercase;
+  color:var(--mu);
+  font-weight:400;
+}
+.hud-title{
+  font-family:var(--stm);
+  font-size:.58rem;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  color:var(--cy);
+  font-weight:400;
+  margin-bottom:6px;
+}
+
+/* CYAN UTILITY */
+.c-cy{color:var(--cy)}
+.bg-cy{background:rgba(0,212,255,.1)}
+.bd-cy{border-color:var(--cy-bd)}
+
+/* SCAN LINE — header animation (used in S21) */
+@keyframes scan{
+  0%{transform:translateY(-100%);opacity:0}
+  10%{opacity:.6}
+  90%{opacity:.6}
+  100%{transform:translateY(100vh);opacity:0}
+}
+.scan-line{
+  position:absolute;
+  left:0;right:0;
+  height:1px;
+  background:linear-gradient(90deg,transparent,var(--cy),transparent);
+  animation:scan 6s ease-in-out infinite;
+  pointer-events:none;
+  z-index:0;
+}
+
+/* HUD READINESS DOT — overrides .sdot for today's status dot */
+.sdot.hud-green{background:var(--gn);color:var(--gn);
+  box-shadow:0 0 8px rgba(16,185,129,.5)}
+.sdot.hud-amber{background:var(--am);color:var(--am);
+  box-shadow:0 0 8px rgba(245,158,11,.5)}
+.sdot.hud-red{background:var(--rd);color:var(--rd);
+  box-shadow:0 0 8px rgba(239,68,68,.5)}
+
 </style>
 </head>
 <body>
