@@ -839,7 +839,10 @@ body{background:var(--bg);background-image:var(--grid);color:var(--tx);font-fami
 /* Safe area insets for notched devices */
 .hdr{padding-top:max(14px,env(safe-area-inset-top,0px))}
 .pnav{padding-bottom:max(0px,env(safe-area-inset-bottom,0px))}
-.main{padding-bottom:max(16px,env(safe-area-inset-bottom,0px))}
+/* S30 safe-area — desktop/tablet only; mobile gets nav-bar-aware padding from the ≤600px block */
+@media(min-width:601px){.main{padding-bottom:max(16px,env(safe-area-inset-bottom,0px))}}
+/* Mobile: push content above the 68px fixed nav + notch */
+@media(max-width:600px){.main{padding-bottom:calc(68px + max(14px,env(safe-area-inset-bottom,0px)))}}
 
 /* Hide FS button on mobile (handled by PWA fullscreen) */
 @media(max-width:600px){.fs-btn{display:none}}
