@@ -821,10 +821,7 @@ body{background:var(--bg);background-image:var(--grid);color:var(--tx);font-fami
 .ms-row.ms-race .ms-label{color:var(--cy)}
 .ms-row.ms-past{opacity:.35}
 .ms-flag{font-size:.7rem;text-align:center}
-.ms-row.ms-nonneg::before{
-  content:'';position:absolute;left:-16px;top:50%;transform:translateY(-50%);
-  width:4px;height:4px;border-radius:50%;background:var(--rd);
-}
+.ms-row.ms-nonneg{border-left:2px solid var(--rd);padding-left:10px}
 
 /* ════════════════════════════════════════
    S30 — FULLSCREEN + REBRAND
@@ -1359,6 +1356,7 @@ function switchTab(tab){
     TAB_INITED[tab]=true;
     if(tab==='adaptation')initAdaptationCharts();
     if(tab==='training')initTrainingCharts();
+    if(tab==='future')initVolTrajChart(); // chart now visible, safe to render
   }
 }
 
@@ -1802,9 +1800,9 @@ function renderFuture(){
     </div>`;
   }).join('')}</div>`;
   renderPhaseTimeline();
-  // S28 — vol trajectory
+  // S28 — vol trajectory (canvas injected; chart init deferred to tab activation)
   const vtb=document.getElementById('vol-traj-body');
-  if(vtb){vtb.innerHTML='<div class="vol-traj-wrap"><canvas id="volTrajChart"></canvas></div>';initVolTrajChart();}
+  if(vtb){vtb.innerHTML='<div class="vol-traj-wrap"><canvas id="volTrajChart"></canvas></div>';}
   // S28 — quality progression
   renderQualProg();
   // S29
