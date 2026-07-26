@@ -805,6 +805,28 @@ function renderToday(a){
 function toggleAlert(i){const c=document.getElementById(`alc-${i}`),d=document.getElementById(`ald-${i}`);c.classList.toggle('open');d.classList.toggle('open')}
 
 // ── RENDER ADAPTATION ────────────────────────────────────────────────────
+function renderBriefing(){
+  const body=document.getElementById('briefing-body');
+  const dateEl=document.getElementById('briefing-date');
+  if(!body)return;
+  const last=READINESS_LOG&&READINESS_LOG.length?READINESS_LOG[READINESS_LOG.length-1]:null;
+  const briefing=last&&last.briefing?last.briefing:null;
+  const entryDate=last&&last.date?last.date:'';
+  const today=new Date().toISOString().slice(0,10);
+  const isStale=entryDate&&entryDate!==today;
+  if(dateEl){
+    dateEl.textContent=isStale?`⚠ ${entryDate} — stale`:entryDate||'pending first update';
+    dateEl.style.color=isStale?'var(--am)':'';
+  }
+  if(!briefing){
+    body.textContent='Morning readiness update not yet logged today. Run morning readiness protocol in Claude Desktop to generate briefing.';
+    body.style.color='var(--m2)';
+  } else {
+    body.textContent=briefing;
+    body.style.color=isStale?'var(--mu)':'';
+  }
+}
+
 function renderAdaptation(a){
   // Pace gap
   renderPaceGap(a.paceGap);
@@ -1279,6 +1301,7 @@ document.addEventListener('DOMContentLoaded',()=>{
       _A=computeAllAnalytics();
       renderVitals(_A);
       renderToday(_A);
+      renderBriefing();
       renderAdaptation(_A);
       renderTraining(_A);
       renderHealth(_A.statinDay);
