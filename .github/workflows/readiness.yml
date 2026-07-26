@@ -2,7 +2,7 @@ name: Morning Readiness
 
 on:
   schedule:
-    - cron: '0 23 * * *'   # 06:00 Hanoi (UTC+7)
+    - cron: '15 0 * * *'   # 06:00 Hanoi (UTC+7)
   workflow_dispatch:         # Manual trigger button in GitHub UI
 
 permissions:
