@@ -1348,7 +1348,7 @@ function switchTab(tab){
     TAB_INITED[tab]=true;
     if(tab==='adaptation')initAdaptationCharts();
     if(tab==='training')initTrainingCharts();
-    if(tab==='future')requestAnimationFrame(()=>requestAnimationFrame(initVolTrajChart)); // double-rAF: browser finishes layout before Chart.js reads canvas size
+    if(tab==='future')initVolTrajChart(); // canvas + chart created here while tab is visible
   }
 }
 
@@ -1792,9 +1792,7 @@ function renderFuture(){
     </div>`;
   }).join('')}</div>`;
   renderPhaseTimeline();
-  // S28 — vol trajectory (canvas injected; chart init deferred to tab activation)
-  const vtb=document.getElementById('vol-traj-body');
-  if(vtb){vtb.innerHTML='<div class="vol-traj-wrap"><canvas id="volTrajChart"></canvas></div>';}
+  // S28 — vol trajectory canvas injected by initVolTrajChart on tab activation
   // S28 — quality progression
   renderQualProg();
   // S29
@@ -1913,8 +1911,12 @@ function renderMilestones(){
 
 // ── S28: VOLUME TRAJECTORY CHART ────────────────────────────────────────
 function initVolTrajChart(){
+  const body=document.getElementById('vol-traj-body');
+  if(!body||!PROGRESSION.length)return;
+  // Canvas injected here — tab is already visible, so dimensions are real
+  body.innerHTML='<div class="vol-traj-wrap"><canvas id="volTrajChart"></canvas></div>';
   const ctx=document.getElementById('volTrajChart');
-  if(!ctx||!PROGRESSION.length)return;
+  if(!ctx)return;
   // Actual volumes by week from RUNS
   const byWk={};
   RUNS.forEach(r=>{byWk[r.wk]=(byWk[r.wk]||0)+r.dist;});
