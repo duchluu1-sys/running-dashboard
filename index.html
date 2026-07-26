@@ -769,6 +769,61 @@ body{background:var(--bg);background-image:var(--grid);color:var(--tx);font-fami
 .qp-kind.qp-peak{background:rgba(0,212,255,.12);color:var(--cy)}
 .qp-kind.qp-consolidation{background:rgba(0,212,255,.06);color:var(--m2)}
 
+/* ════════════════════════════════════════
+   S29 — GATE FORECAST + MILESTONE CALENDAR
+   ════════════════════════════════════════ */
+
+/* Gate forecast */
+.gf-list{padding:12px 16px;display:flex;flex-direction:column;gap:6px}
+.gf-row{
+  display:grid;
+  grid-template-columns:28px 1fr auto;
+  align-items:center;gap:8px;
+  padding:7px 10px;
+  background:var(--sf);
+  border-radius:2px;
+  border-left:3px solid transparent;
+}
+.gf-row.gf-clear{border-left-color:var(--ok);opacity:.5}
+.gf-row.gf-active{border-left-color:var(--cy)}
+.gf-row.gf-pending{border-left-color:var(--bd)}
+.gf-row.gf-tight{border-left-color:var(--am)}
+.gf-num{font-family:var(--hud);font-weight:700;font-size:1rem;color:var(--mu);text-align:center}
+.gf-row.gf-active .gf-num{color:var(--cy)}
+.gf-row.gf-tight .gf-num{color:var(--am)}
+.gf-name{font-family:var(--stm);font-size:.62rem;color:var(--tx);letter-spacing:.5px}
+.gf-short{font-family:var(--stm);font-size:.52rem;color:var(--mu);margin-top:2px;letter-spacing:.3px}
+.gf-eta{font-family:var(--stm);font-size:.5rem;color:var(--mu);white-space:nowrap;text-align:right;letter-spacing:1px}
+.gf-row.gf-tight .gf-eta{color:var(--am)}
+
+/* Progress bar under active gate */
+.gf-prog-wrap{grid-column:1/-1;height:3px;background:rgba(0,212,255,.08);border-radius:2px;margin-top:-2px}
+.gf-prog-bar{height:100%;border-radius:2px;background:var(--cy);transition:width .4s}
+
+/* Milestone calendar */
+.ms-list{padding:12px 16px;display:flex;flex-direction:column;gap:0}
+.ms-row{
+  display:grid;
+  grid-template-columns:80px 1fr 20px;
+  align-items:center;gap:10px;
+  padding:8px 6px;
+  border-bottom:1px solid rgba(0,212,255,.04);
+  position:relative;
+}
+.ms-row:last-child{border-bottom:none}
+.ms-date{font-family:var(--stm);font-size:.52rem;color:var(--mu);letter-spacing:1px;white-space:nowrap}
+.ms-row.ms-urgent .ms-date{color:var(--am);font-weight:700}
+.ms-row.ms-past .ms-date{opacity:.4}
+.ms-label{font-family:var(--stm);font-size:.62rem;color:var(--tx);letter-spacing:.3px}
+.ms-row.ms-urgent .ms-label{color:var(--am)}
+.ms-row.ms-race .ms-label{color:var(--cy)}
+.ms-row.ms-past{opacity:.35}
+.ms-flag{font-size:.7rem;text-align:center}
+.ms-row.ms-nonneg::before{
+  content:'';position:absolute;left:-16px;top:50%;transform:translateY(-50%);
+  width:4px;height:4px;border-radius:50%;background:var(--rd);
+}
+
 </style>
 </head>
 <body>
@@ -1697,6 +1752,9 @@ function renderFuture(){
   if(vtb){vtb.innerHTML='<div class="vol-traj-wrap"><canvas id="volTrajChart"></canvas></div>';initVolTrajChart();}
   // S28 — quality progression
   renderQualProg();
+  // S29
+  renderGateForecast();
+  renderMilestones();
 }
 
 let openPhase=null;
@@ -1745,6 +1803,67 @@ function renderPhaseTimeline(){
   document.getElementById('phase-tl').innerHTML=`<div class="ftl-wrap"><div class="ftl-track">${phaseFills}${todayPin}${racePins}</div><div class="ftl-leg"><span class="ftl-li"><span class="ftl-ld" style="background:rgba(0,212,255,.30)"></span>Complete</span><span class="ftl-li"><span class="ftl-ld" style="background:rgba(0,212,255,.16);border:1px dashed rgba(0,212,255,.4)"></span>Active</span><span class="ftl-li"><span class="ftl-ld" style="background:rgba(100,116,139,.08);border:1px dashed rgba(100,116,139,.3)"></span>Planned</span></div></div>`;
   document.getElementById('phase-detail').style.display='none';
   document.getElementById('phase-detail').style.cssText='display:none;margin:8px 20px 16px;padding:12px;background:var(--sf2);border-radius:4px;font-size:.7rem;color:var(--m2);line-height:1.7;border-left:2px solid var(--cy-bd)';
+}
+
+
+// ── S29: GATE FORECAST ──────────────────────────────────────────────────
+function renderGateForecast(){
+  const el=document.getElementById('gate-forecast-body');
+  if(!el||!GATES)return;
+  // Only show the 6 hard gates — what blocks Phase 3
+  const hard=GATES.filter(g=>g.type==='hard');
+  const rows=hard.map(g=>{
+    const cleared=g.status==='cleared';
+    const active=g.status==='active';
+    const tight=g.eta&&g.eta.includes('Sep')&&!cleared;  // Sep gates are the crunch window
+    const cls=cleared?'gf-clear':active?'gf-active':tight?'gf-tight':'gf-pending';
+    const icon=cleared?'✅':active?'◉':'○';
+    const progRow=active&&g.progress>0?
+      `<div class="gf-prog-wrap"><div class="gf-prog-bar" style="width:${g.progress}%"></div></div>`:
+      '';
+    return`<div class="gf-row ${cls}">
+      <div class="gf-num">${icon}</div>
+      <div>
+        <div class="gf-name">Gate ${g.id} — ${g.name}</div>
+        <div class="gf-short">${g.short}</div>
+        ${progRow}
+      </div>
+      <div class="gf-eta">${g.eta||'—'}</div>
+    </div>`;
+  }).join('');
+  el.innerHTML=`<div class="gf-list">${rows}</div>`;
+}
+
+// ── S29: MILESTONE CALENDAR ──────────────────────────────────────────────
+function renderMilestones(){
+  const el=document.getElementById('milestone-body');
+  if(!el||!MILESTONES.length)return;
+  const today=new Date();today.setHours(0,0,0,0);
+  const fmt=iso=>{
+    const d=new Date(iso+'T00:00:00');
+    return d.toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'2-digit'});
+  };
+  const daysTo=iso=>{
+    const d=new Date(iso+'T00:00:00');
+    return Math.round((d-today)/86400000);
+  };
+  const typeIcon={medical:'⚕',gate:'◈',test:'⚗',review:'◉',training:'⬇',race:'▷',phase:'→'};
+  const rows=MILESTONES.map(m=>{
+    const d=daysTo(m.date);
+    const past=d<0;
+    const urgent=!past&&d<=7&&m.nonNegotiable;
+    const race=m.type==='race';
+    const cls=`ms-row${past?' ms-past':''}${urgent?' ms-urgent':''}${race?' ms-race':''}${m.nonNegotiable?' ms-nonneg':''}`;
+    const dStr=past?'done':d===0?'TODAY':d<=30?`${d}d`:fmt(m.date);
+    return`<div class="${cls}">
+      <div class="ms-date">${fmt(m.date)}</div>
+      <div>
+        <div class="ms-label">${m.label}</div>
+      </div>
+      <div class="ms-flag">${typeIcon[m.type]||'·'}${m.nonNegotiable?'<span style="color:var(--rd);font-size:.5rem;display:block">NNeg</span>':''}</div>
+    </div>`;
+  }).join('');
+  el.innerHTML=`<div class="ms-list">${rows}</div>`;
 }
 
 // ── S28: VOLUME TRAJECTORY CHART ────────────────────────────────────────
