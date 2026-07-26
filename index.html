@@ -736,6 +736,39 @@ body{background:var(--bg);background-image:var(--grid);color:var(--tx);font-fami
   vertical-align:middle;margin-left:6px;
 }
 
+/* ════════════════════════════════════════
+   S28 — VOLUME TRAJECTORY + QUALITY PROGRESSION
+   ════════════════════════════════════════ */
+
+/* Suppress placeholder once JS injects content */
+.s28-stub:not(:empty)::after{content:'';display:none}
+
+/* Volume trajectory chart container */
+.vol-traj-wrap{height:180px;padding:4px 16px 12px}
+
+/* Quality progression table */
+.qp-table{width:100%;border-collapse:collapse;font-family:var(--stm);font-size:.62rem}
+.qp-table th{
+  color:var(--mu);letter-spacing:2px;text-transform:uppercase;
+  font-size:.5rem;padding:8px 12px 6px;
+  border-bottom:1px solid var(--bd);text-align:left;
+}
+.qp-table td{padding:5px 12px;border-bottom:1px solid rgba(0,212,255,.04)}
+.qp-row{transition:background .15s}
+.qp-row.qp-past td{opacity:.3}
+.qp-row.qp-curr{background:rgba(0,212,255,.06)}
+.qp-row.qp-curr td{color:var(--cy)}
+.qp-wk{font-weight:700;white-space:nowrap;color:var(--m2);width:90px}
+.qp-qa,.qp-qb{color:var(--m2)}
+.qp-lr,.qp-vol{color:var(--mu)}
+.qp-kind{
+  display:inline-block;font-size:.42rem;padding:1px 4px;
+  border-radius:2px;margin-left:5px;letter-spacing:1px;vertical-align:middle;
+}
+.qp-kind.qp-deload{background:rgba(245,158,11,.12);color:var(--am)}
+.qp-kind.qp-peak{background:rgba(0,212,255,.12);color:var(--cy)}
+.qp-kind.qp-consolidation{background:rgba(0,212,255,.06);color:var(--m2)}
+
 </style>
 </head>
 <body>
@@ -1659,6 +1692,11 @@ function renderFuture(){
     </div>`;
   }).join('')}</div>`;
   renderPhaseTimeline();
+  // S28 — vol trajectory
+  const vtb=document.getElementById('vol-traj-body');
+  if(vtb){vtb.innerHTML='<div class="vol-traj-wrap"><canvas id="volTrajChart"></canvas></div>';initVolTrajChart();}
+  // S28 — quality progression
+  renderQualProg();
 }
 
 let openPhase=null;
@@ -1708,6 +1746,81 @@ function renderPhaseTimeline(){
   document.getElementById('phase-detail').style.display='none';
   document.getElementById('phase-detail').style.cssText='display:none;margin:8px 20px 16px;padding:12px;background:var(--sf2);border-radius:4px;font-size:.7rem;color:var(--m2);line-height:1.7;border-left:2px solid var(--cy-bd)';
 }
+
+// ── S28: VOLUME TRAJECTORY CHART ────────────────────────────────────────
+function initVolTrajChart(){
+  const ctx=document.getElementById('volTrajChart');
+  if(!ctx||!PROGRESSION.length)return;
+  // Actual volumes by week from RUNS
+  const byWk={};
+  RUNS.forEach(r=>{byWk[r.wk]=(byWk[r.wk]||0)+r.dist;});
+  const prog=PROGRESSION;
+  const labels=prog.map(p=>`W${p.wk}`);
+  const actual=prog.map(p=>byWk[p.wk]?+byWk[p.wk].toFixed(1):null);
+  const minT=prog.map(p=>p.volMin);
+  const maxT=prog.map(p=>p.volMax);
+  const curr=ATHLETE.week;
+  const barBg=prog.map(p=>
+    p.kind==='deload'?'rgba(245,158,11,.45)':
+    p.kind==='peak'?D1:
+    p.wk===curr?'rgba(0,212,255,.55)':D2
+  );
+  const barBd=prog.map(p=>
+    p.kind==='deload'?WARN:p.kind==='peak'?D1:'rgba(0,212,255,.6)'
+  );
+  if(CHARTS.volTraj){CHARTS.volTraj.destroy();}
+  CHARTS.volTraj=new Chart(ctx,{
+    type:'bar',
+    data:{labels,datasets:[
+      {label:'Actual',data:actual,backgroundColor:barBg,borderColor:barBd,
+       borderWidth:1,borderRadius:2,categoryPercentage:.72,barPercentage:.85,order:2},
+      {type:'line',label:'Min',data:minT,borderColor:REF,borderDash:[5,4],
+       borderWidth:1.5,pointRadius:0,fill:false,backgroundColor:'transparent',order:1},
+      {type:'line',label:'Max',data:maxT,borderColor:'rgba(0,212,255,.14)',borderDash:[3,3],
+       borderWidth:1,pointRadius:0,fill:false,backgroundColor:'transparent',order:1},
+    ]},
+    options:{responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{display:false},
+        tooltip:{...CHART_DEFAULTS,callbacks:{
+          label:c=>c.dataset.label==='Actual'?(c.parsed.y!=null?c.parsed.y+' km':'pending'):
+            `${c.dataset.label}: ${c.parsed.y} km`
+        }}},
+      scales:{
+        x:{ticks:xTick(),grid:gridLine(),border:borderLine()},
+        y:{min:0,ticks:{...yTick(),callback:v=>`${v}`},
+          title:axTitle('km / week'),grid:gridLine(),border:borderLine()}
+      }
+    }
+  });
+}
+
+// ── S28: QUALITY PROGRESSION TABLE ──────────────────────────────────────
+function renderQualProg(){
+  const el=document.getElementById('qual-prog-body');
+  if(!el||!PROGRESSION.length)return;
+  const curr=ATHLETE.week;
+  const kindTag={
+    deload:`<span class="qp-kind qp-deload">DELOAD</span>`,
+    peak:`<span class="qp-kind qp-peak">PEAK</span>`,
+    consolidation:`<span class="qp-kind qp-consolidation">HOLD</span>`
+  };
+  const rows=PROGRESSION.map(p=>{
+    const past=p.wk<curr, active=p.wk===curr;
+    const lr=p.lrMin===p.lrMax?`${p.lrMin} km`:`${p.lrMin}–${p.lrMax} km`;
+    return`<tr class="qp-row${past?' qp-past':''}${active?' qp-curr':''}">
+      <td class="qp-wk">W${p.wk}${kindTag[p.kind]||''}</td>
+      <td class="qp-qa">${p.qualityA}</td>
+      <td class="qp-qb">${p.qualityB}</td>
+      <td class="qp-lr">${lr}</td>
+      <td class="qp-vol">${p.volMin}–${p.volMax}</td>
+    </tr>`;
+  }).join('');
+  el.innerHTML=`<div style="overflow-x:auto"><table class="qp-table">
+    <thead><tr><th>WEEK</th><th>QUALITY A</th><th>QUALITY B</th><th>LONG RUN</th><th>VOL</th></tr></thead>
+    <tbody>${rows}</tbody>
+  </table></div>`;
+}
+
 // ── CHART REGISTRY ──────────────────────────────────────────────────────
 const CHARTS={};
 
