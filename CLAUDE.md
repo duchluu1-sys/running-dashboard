@@ -326,6 +326,7 @@ Verdict: [1–2 sentences — specific recommendation]
   "sleepScore": <integer 0-100 or null>,
   "status": "GREEN|CAUTION|REST",
   "note": "<brief note ≤10 words>"
+  "briefing": "<2-4 sentences: line 1 = HRV/RHR verdict, line 2 = today's mission from weekSchedule, line 3 = one coaching note from recent data, line 4 optional = one strategic flag>"
 }
 ```
 
