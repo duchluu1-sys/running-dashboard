@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 {
   "RUNS": [
     {
@@ -1342,6 +1343,7 @@
       "date": "2026-10-19",
       "goal": "Sub-55 min (Gate 1 fitness check)",
       "note": "Running with partner. Low pressure. Primary purpose: race-day execution data point.",
+      "confirmed": true,
       "color": "#06b6d4"
     },
     {
@@ -1349,7 +1351,8 @@
       "label": "Race 1",
       "date": "2027-04-05",
       "goal": "Sub-1:55 = sub-4 confirmed · Sub-1:45 = 3:30 viable",
-      "note": "Gate 2. Competitive effort. Primary fitness checkpoint for marathon build.",
+      "note": "Gate 2. Competitive effort. Primary fitness checkpoint for marathon build. UNCONFIRMED — retired Jul 8 2026 per decision_log (replaced by competitive half Feb/Mar 2027 TBC). Retained as live option.",
+      "confirmed": false,
       "color": "#7c3aed"
     },
     {
@@ -1358,6 +1361,7 @@
       "date": "2027-10-19",
       "goal": "Sub-4:00 · Stretch goal: 3:30",
       "note": "Primary objective. Pace: 5:41/km (sub-4) or 4:58/km (3:30 stretch).",
+      "confirmed": true,
       "color": "#a855f7"
     }
   ],
@@ -1409,5 +1413,335 @@
       "note": "Balanced — train as planned",
       "briefing": "HRV 71ms above baseline, RHR 41 nominal — GREEN. R45 Jul 23: 20-min continuous tempo 8.6km/h ceiling-clean, W11 at 36.6km on board. Long run next: 14–15km treadmill target. Ankle and plantar cleared R45."
     }
+  ],
+  "PHASES": [
+    {
+      "n": 1,
+      "name": "Foundation",
+      "status": "complete",
+      "wkStart": 1,
+      "wkEnd": 8,
+      "dateStart": "2026-05-09",
+      "dateEnd": "2026-07-05",
+      "openEnded": false,
+      "focus": "Aerobic base · run/walk protocol · HR governance established",
+      "note": "Runs 1-30 · ~196 km · volume 22-28 km/wk"
+    },
+    {
+      "n": 2,
+      "name": "Quality Development",
+      "status": "active",
+      "wkStart": 9,
+      "wkEnd": 24,
+      "dateStart": "2026-07-06",
+      "dateEnd": "2026-10-25",
+      "openEnded": false,
+      "focus": "Two quality sessions/week — Quality A intervals + Quality B tempo · volume to 44 km",
+      "note": "16 weeks · deload W21 + W24 · consolidation W22-23"
+    },
+    {
+      "n": 3,
+      "name": "Threshold Development",
+      "status": "planned",
+      "wkStart": 25,
+      "wkEnd": null,
+      "dateStart": "2026-10-26",
+      "dateEnd": null,
+      "openEnded": true,
+      "focus": "Pace targets calibrated from real lactate data",
+      "note": "End date undefined. Entry requires lactate/VT data in hand or documented fallback active."
+    }
+  ],
+  "PROGRESSION": [
+    {
+      "wk": 9,
+      "phase": 2,
+      "dateStart": "2026-07-06",
+      "dateEnd": "2026-07-12",
+      "qualityA": "7×2:30 (17:30)",
+      "qualityB": "15 min",
+      "lrMin": 13,
+      "lrMax": 14,
+      "volMin": 33,
+      "volMax": 36,
+      "kind": "normal"
+    },
+    {
+      "wk": 10,
+      "phase": 2,
+      "dateStart": "2026-07-13",
+      "dateEnd": "2026-07-19",
+      "qualityA": "7×2:30 (17:30)",
+      "qualityB": "15 min",
+      "lrMin": 14,
+      "lrMax": 15,
+      "volMin": 33,
+      "volMax": 36,
+      "kind": "normal"
+    },
+    {
+      "wk": 11,
+      "phase": 2,
+      "dateStart": "2026-07-20",
+      "dateEnd": "2026-07-26",
+      "qualityA": "5×4 min (20:00)",
+      "qualityB": "20 min",
+      "lrMin": 14,
+      "lrMax": 15,
+      "volMin": 33,
+      "volMax": 37,
+      "kind": "normal"
+    },
+    {
+      "wk": 12,
+      "phase": 2,
+      "dateStart": "2026-07-27",
+      "dateEnd": "2026-08-02",
+      "qualityA": "5×4 min (20:00)",
+      "qualityB": "20 min",
+      "lrMin": 14,
+      "lrMax": 15,
+      "volMin": 33,
+      "volMax": 37,
+      "kind": "normal"
+    },
+    {
+      "wk": 13,
+      "phase": 2,
+      "dateStart": "2026-08-03",
+      "dateEnd": "2026-08-09",
+      "qualityA": "4×6 min (24:00)",
+      "qualityB": "25 min",
+      "lrMin": 15,
+      "lrMax": 16,
+      "volMin": 35,
+      "volMax": 38,
+      "kind": "normal"
+    },
+    {
+      "wk": 14,
+      "phase": 2,
+      "dateStart": "2026-08-10",
+      "dateEnd": "2026-08-16",
+      "qualityA": "4×6 min (24:00)",
+      "qualityB": "25 min",
+      "lrMin": 15,
+      "lrMax": 16,
+      "volMin": 35,
+      "volMax": 38,
+      "kind": "normal"
+    },
+    {
+      "wk": 15,
+      "phase": 2,
+      "dateStart": "2026-08-17",
+      "dateEnd": "2026-08-23",
+      "qualityA": "4×8 min (32:00)",
+      "qualityB": "30 min",
+      "lrMin": 16,
+      "lrMax": 18,
+      "volMin": 36,
+      "volMax": 40,
+      "kind": "normal"
+    },
+    {
+      "wk": 16,
+      "phase": 2,
+      "dateStart": "2026-08-24",
+      "dateEnd": "2026-08-30",
+      "qualityA": "4×8 min (32:00)",
+      "qualityB": "30 min",
+      "lrMin": 16,
+      "lrMax": 18,
+      "volMin": 36,
+      "volMax": 40,
+      "kind": "normal"
+    },
+    {
+      "wk": 17,
+      "phase": 2,
+      "dateStart": "2026-08-31",
+      "dateEnd": "2026-09-06",
+      "qualityA": "3×12 min (36:00)",
+      "qualityB": "35 min",
+      "lrMin": 18,
+      "lrMax": 20,
+      "volMin": 37,
+      "volMax": 42,
+      "kind": "normal"
+    },
+    {
+      "wk": 18,
+      "phase": 2,
+      "dateStart": "2026-09-07",
+      "dateEnd": "2026-09-13",
+      "qualityA": "3×12 min (36:00)",
+      "qualityB": "35 min",
+      "lrMin": 18,
+      "lrMax": 20,
+      "volMin": 37,
+      "volMax": 42,
+      "kind": "normal"
+    },
+    {
+      "wk": 19,
+      "phase": 2,
+      "dateStart": "2026-09-14",
+      "dateEnd": "2026-09-20",
+      "qualityA": "2×20 min (40:00)",
+      "qualityB": "2×20 min",
+      "lrMin": 20,
+      "lrMax": 22,
+      "volMin": 38,
+      "volMax": 44,
+      "kind": "peak"
+    },
+    {
+      "wk": 20,
+      "phase": 2,
+      "dateStart": "2026-09-21",
+      "dateEnd": "2026-09-27",
+      "qualityA": "2×20 min (40:00)",
+      "qualityB": "2×20 min",
+      "lrMin": 20,
+      "lrMax": 22,
+      "volMin": 38,
+      "volMax": 44,
+      "kind": "peak"
+    },
+    {
+      "wk": 21,
+      "phase": 2,
+      "dateStart": "2026-09-28",
+      "dateEnd": "2026-10-04",
+      "qualityA": "4×4 min (16:00)",
+      "qualityB": "10 min",
+      "lrMin": 12,
+      "lrMax": 12,
+      "volMin": 26,
+      "volMax": 28,
+      "kind": "deload"
+    },
+    {
+      "wk": 22,
+      "phase": 2,
+      "dateStart": "2026-10-05",
+      "dateEnd": "2026-10-11",
+      "qualityA": "2×20 min (hold)",
+      "qualityB": "2×20 min (hold)",
+      "lrMin": 20,
+      "lrMax": 22,
+      "volMin": 38,
+      "volMax": 42,
+      "kind": "consolidation"
+    },
+    {
+      "wk": 23,
+      "phase": 2,
+      "dateStart": "2026-10-12",
+      "dateEnd": "2026-10-18",
+      "qualityA": "2×20 min (hold)",
+      "qualityB": "2×20 min (hold)",
+      "lrMin": 20,
+      "lrMax": 22,
+      "volMin": 38,
+      "volMax": 42,
+      "kind": "consolidation"
+    },
+    {
+      "wk": 24,
+      "phase": 2,
+      "dateStart": "2026-10-19",
+      "dateEnd": "2026-10-25",
+      "qualityA": "4×4 min",
+      "qualityB": "10 min",
+      "lrMin": 12,
+      "lrMax": 12,
+      "volMin": 26,
+      "volMax": 28,
+      "kind": "deload"
+    }
+  ],
+  "MILESTONES": [
+    {
+      "date": "2026-07-30",
+      "label": "BV 108 medical appointment",
+      "type": "medical",
+      "nonNegotiable": true,
+      "note": "Must produce bookings for BOTH lactate and VO₂max tests. Do not leave without answers."
+    },
+    {
+      "date": "2026-08-30",
+      "label": "InBody scan",
+      "type": "medical",
+      "nonNegotiable": false,
+      "note": "SMM ≥ 39.1 kg — statin safety floor. Late-Aug target."
+    },
+    {
+      "date": "2026-08-31",
+      "label": "Gate 4 clears — 8 weeks injury-free",
+      "type": "gate",
+      "nonNegotiable": false,
+      "note": "Tracking from W9 (Jul 6). Clears at end of W16."
+    },
+    {
+      "date": "2026-09-15",
+      "label": "Phase 2 retrospective + quarterly audit",
+      "type": "review",
+      "nonNegotiable": false,
+      "note": "Score resolved predictions, review departures against falsification conditions, count reversals."
+    },
+    {
+      "date": "2026-09-30",
+      "label": "Lactate + VO₂max test",
+      "type": "test",
+      "nonNegotiable": true,
+      "note": "Gate 6. Recalibrates every threshold zone in the system. Sep target, Oct hard deadline."
+    },
+    {
+      "date": "2026-10-04",
+      "label": "Week 21 DELOAD",
+      "type": "training",
+      "nonNegotiable": true,
+      "note": "30% reduction. Every 4th week. Non-negotiable."
+    },
+    {
+      "date": "2026-10-19",
+      "label": "Race 0 — VPBank Hanoi 10K",
+      "type": "race",
+      "nonNegotiable": true,
+      "note": "Gate 5. Falls inside W24 deload. Low stakes — race-day execution data point."
+    },
+    {
+      "date": "2026-10-26",
+      "label": "Phase 3 start",
+      "type": "phase",
+      "nonNegotiable": false,
+      "note": "Blocked until all 6 hard gates green."
+    },
+    {
+      "date": "2027-03-01",
+      "label": "Competitive half marathon (TBC)",
+      "type": "race",
+      "nonNegotiable": false,
+      "note": "Date unconfirmed. Replaced BIM Tây Hồ per Jul 8 2026 decision. Gate-check for sub-4 viability."
+    },
+    {
+      "date": "2027-06-15",
+      "label": "Race simulation",
+      "type": "race",
+      "nonNegotiable": false,
+      "note": "Full dress rehearsal — fueling, kit, pacing. Jun/Jul 2027 window."
+    },
+    {
+      "date": "2027-10-19",
+      "label": "VPBank Hanoi Marathon",
+      "type": "race",
+      "nonNegotiable": true,
+      "note": "Primary objective. Sub-4:00. Stretch 3:30."
+    }
   ]
 }
+=======
+see_below
+>>>>>>> 46a7e0903ee1e9c59e5f88edd1b71c5d5bd8d927
