@@ -6,11 +6,13 @@
 <meta name="theme-color" content="#06060f">
 
 <meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="mobile-web-app-capable" content="yes">
 
 <meta name="mobile-web-app-capable" content="yes">
   <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Đức Lưu — Running OS v2</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Racing</title>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Inter:wght@300;400;500;600;700&family=Rajdhani:wght@600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <style>
@@ -40,7 +42,7 @@ body{background:var(--bg);background-image:var(--grid);color:var(--tx);font-fami
 .blink{animation:blink 2s ease-in-out infinite}
 /* HEADER */
 .hdr{background:linear-gradient(135deg,#06060f,#0a0a1c 55%,#0c0820);border-bottom:1px solid var(--bdb);padding:18px 32px 14px;display:flex;align-items:flex-end;justify-content:space-between;position:relative;overflow:hidden}
-.hdr::before{content:'OS·V2';position:absolute;right:40px;top:-6px;font-family:var(--mono);font-size:5rem;font-weight:700;color:rgba(0,212,255,.04);pointer-events:none;letter-spacing:6px}
+.hdr::before{content:'RACING';position:absolute;right:40px;top:-6px;font-family:var(--mono);font-size:5rem;font-weight:700;color:rgba(0,212,255,.04);pointer-events:none;letter-spacing:6px}
 .hdr-name{font-family:var(--mono);font-size:1.5rem;font-weight:700;background:linear-gradient(135deg,#ffffff,#00d4ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 .hdr-tag{font-family:var(--mono);font-size:.56rem;letter-spacing:4px;text-transform:uppercase;color:var(--vb);font-weight:600;margin-top:4px}
 .hdr-pill{display:none;margin-top:5px;background:rgba(0,212,255,.10);border:1px solid var(--bdb);border-radius:12px;padding:3px 10px;font-family:var(--mono);font-size:.58rem;letter-spacing:2px;color:var(--vb);text-transform:uppercase;width:fit-content}
@@ -824,11 +826,40 @@ body{background:var(--bg);background-image:var(--grid);color:var(--tx);font-fami
   width:4px;height:4px;border-radius:50%;background:var(--rd);
 }
 
+/* ════════════════════════════════════════
+   S30 — FULLSCREEN + REBRAND
+   ════════════════════════════════════════ */
+
+/* Fullscreen toggle button */
+.fs-btn{
+  background:transparent;
+  border:1px solid var(--cy-dim);
+  color:var(--mu);font-size:.95rem;
+  cursor:pointer;padding:3px 8px;
+  border-radius:3px;line-height:1;
+  transition:color .2s,border-color .2s;
+  min-height:30px;min-width:30px;
+  margin-right:12px;flex-shrink:0;
+  font-family:var(--sans);
+}
+.fs-btn:hover{color:var(--cy);border-color:var(--cy-bd)}
+
+/* hdr-r flex for button + date/meta stack */
+.hdr-r{display:flex;align-items:center;gap:0}
+
+/* Safe area insets for notched devices */
+.hdr{padding-top:max(14px,env(safe-area-inset-top,0px))}
+.pnav{padding-bottom:max(0px,env(safe-area-inset-bottom,0px))}
+.main{padding-bottom:max(16px,env(safe-area-inset-bottom,0px))}
+
+/* Hide FS button on mobile (handled by PWA fullscreen) */
+@media(max-width:600px){.fs-btn{display:none}}
+
 </style>
 </head>
 <body>
 <div id="app-loading" style="position:fixed;inset:0;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:9999;gap:16px">
-  <div style="font-family:var(--mono);font-size:1.5rem;font-weight:700;background:linear-gradient(135deg,#ffffff,#00d4ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">RUNNING OS V2</div>
+  <div style="font-family:var(--mono);font-size:1.5rem;font-weight:700;background:linear-gradient(135deg,#ffffff,#00d4ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">RACING</div>
   <div style="font-family:var(--mono);font-size:.6rem;letter-spacing:3px;text-transform:uppercase;color:var(--vb)" class="blink">LOADING DATA…</div>
 </div>
 <div id="app-error" style="position:fixed;inset:0;background:var(--bg);display:none;flex-direction:column;align-items:center;justify-content:center;z-index:9999;gap:12px">
@@ -838,8 +869,8 @@ body{background:var(--bg);background-image:var(--grid);color:var(--tx);font-fami
 </div>
 <header class="hdr">
   <div class="scan-line"></div>
-  <div><div class="hdr-name" id="hdr-name"></div><div class="hdr-tag">SUB-4 MARATHON · NORWEGIAN METHOD · RUNNING OS V2</div><div class="hdr-pill" id="hdr-pill"></div></div>
-  <div class="hdr-r"><div class="hdr-date" id="hdr-date"></div><div class="hdr-meta" id="hdr-meta"></div></div>
+  <div><div class="hdr-name" id="hdr-name"></div><div class="hdr-tag">SUB-4 · NORWEGIAN METHOD · RACING</div><div class="hdr-pill" id="hdr-pill"></div></div>
+  <div class="hdr-r"><button class="fs-btn" id="fs-btn" onclick="toggleFS()" title="Fullscreen">⛶</button><div><div class="hdr-date" id="hdr-date"></div><div class="hdr-meta" id="hdr-meta"></div></div></div>
 </header>
 <div class="vitals" id="vitals"></div>
 <nav class="tabs-top">
@@ -1481,6 +1512,30 @@ function toggleEval(){
   const open=sec.classList.toggle('open');
   btn.classList.toggle('open',open);
 }
+
+// S30 — fullscreen toggle
+function toggleFS(){
+  if(!document.fullscreenElement){
+    document.documentElement.requestFullscreen({navigationUI:'hide'}).catch(()=>{});
+  } else {
+    document.exitFullscreen().catch(()=>{});
+  }
+}
+document.addEventListener('fullscreenchange',()=>{
+  const b=document.getElementById('fs-btn');
+  if(b) b.textContent=document.fullscreenElement?'⊡':'⛶';
+});
+// Hide button when already running in PWA fullscreen/standalone
+(function(){
+  const mq=w=>window.matchMedia('(display-mode: '+w+')').matches;
+  if(mq('fullscreen')||mq('standalone')||window.navigator.standalone){
+    window.addEventListener('load',()=>{
+      const b=document.getElementById('fs-btn');
+      if(b) b.style.display='none';
+    });
+  }
+})();
+
 function toggleAlert(i){const c=document.getElementById(`alc-${i}`),d=document.getElementById(`ald-${i}`);c.classList.toggle('open');d.classList.toggle('open')}
 
 // ── RENDER ADAPTATION ────────────────────────────────────────────────────

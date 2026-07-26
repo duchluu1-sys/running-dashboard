@@ -1,12 +1,17 @@
 {
-  "name": "Running OS",
-  "short_name": "Running OS",
-  "description": "Personal running dashboard — Norwegian Method",
+  "name": "Racing",
+  "short_name": "Racing",
+  "description": "Personal performance dashboard — sub-4 marathon training",
   "start_url": "/running-dashboard/",
   "scope": "/running-dashboard/",
-  "display": "standalone",
+  "display": "fullscreen",
+  "display_override": [
+    "fullscreen",
+    "standalone",
+    "minimal-ui"
+  ],
   "background_color": "#06060f",
-  "theme_color": "#00d4ff",
+  "theme_color": "#06060f",
   "orientation": "any",
   "icons": [
     {
