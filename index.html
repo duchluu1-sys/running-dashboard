@@ -459,6 +459,34 @@ body{background:var(--bg);background-image:var(--grid);color:var(--tx);font-fami
 /* Signal summary text — Share Tech Mono */
 #sig-body{font-family:var(--stm);font-size:.68rem;line-height:1.75;color:var(--m2)}
 
+/* ════════════════════════════════════════
+   S20 — ADAPTATION + FUTURE TAB VISUAL
+   ════════════════════════════════════════ */
+
+/* Tab card header tints */
+#tab-adaptation .ch{border-left-color:var(--cy-bd)}
+#tab-adaptation .cl{color:var(--cy)}
+#tab-future .ch{border-left-color:var(--cy-bd)}
+#tab-future .cl{color:var(--cy)}
+
+/* Race countdown — hero Rajdhani */
+.race-cd{font-family:var(--hud);font-size:3.5rem;font-weight:700;letter-spacing:1px}
+.race-name{font-family:var(--hud);font-size:1.1rem;font-weight:700;letter-spacing:.5px}
+.race-lbl{font-family:var(--stm);letter-spacing:3px}
+.race-cd-unit{font-family:var(--stm);letter-spacing:2px}
+.race-goal{font-family:var(--stm);font-size:.68rem}
+
+/* Race card — allow hud-card L-bracket corners to extend */
+.race-card{overflow:visible}
+.race-card::before{background:radial-gradient(circle at top left,rgba(0,212,255,.05) 0%,transparent 65%)}
+
+/* Phase timeline — current segment brighter */
+.pts-curr{background:rgba(0,212,255,.18);border-color:var(--cy-bd)}
+.pt-curr-dot{background:var(--cy);color:var(--cy)}
+
+/* Phase detail panel — cyan border */
+#phase-detail{border-left-color:var(--cy-bd)!important}
+
 </style>
 </head>
 <body>
@@ -530,43 +558,43 @@ body{background:var(--bg);background-image:var(--grid);color:var(--tx);font-fami
 <!-- ── ADAPTATION ── -->
 <div id="tab-adaptation" class="tc">
   <div class="g2">
-    <div class="card">
+    <div class="card hud-card">
       <div class="ch"><div class="cl">PACE · HR PERFORMANCE ENVELOPE</div><div class="cs">every run as a point · up-left = adaptation · sparse — builds with pace data</div></div>
       <div id="pace-hr-sparse" class="sparse-state" style="display:none"></div>
       <div class="cw"><canvas id="paceHRChart"></canvas></div>
     </div>
-    <div class="card">
+    <div class="card hud-card">
       <div class="ch"><div class="cl">THRESHOLD PACE DEVELOPMENT</div><div class="cs">quality sessions · pace at sub-150 bpm ceiling</div></div>
       <div id="threshold-sparse" class="sparse-state" style="display:none"></div>
       <div class="cw"><canvas id="thresholdChart"></canvas></div>
     </div>
   </div>
-  <div class="card">
+  <div class="card hud-card">
     <div class="ch"><div class="cl">PACE GAP ANALYSIS</div><div class="cs">current threshold → marathon goal · evidence-based</div></div>
     <div id="pace-gap-body"></div>
   </div>
   <div class="g2">
-    <div class="card">
+    <div class="card hud-card">
       <div class="ch"><div class="cl">AEROBIC EFFICIENCY INDEX</div><div class="cs">easy runs only · lower = more efficient · AEI = avg HR ÷ speed (km/h)</div></div>
       <div id="aei-sparse" class="sparse-state"></div>
       <div class="cw" id="aei-chart-wrap" style="display:none"><canvas id="aeiChart"></canvas></div>
     </div>
-    <div class="card">
+    <div class="card hud-card">
       <div class="ch"><div class="cl">QUALITY SESSION ZONE BREAKDOWN</div><div class="cs">last 8 quality sessions · Z3 dominance = ideal · est. = estimated</div></div>
       <div class="cw"><canvas id="zoneChart"></canvas></div>
     </div>
   </div>
-  <div class="card">
+  <div class="card hud-card">
     <div class="ch"><div class="cl">INTENSITY DISTRIBUTION</div><div class="cs">80/20 Norwegian Method compliance · by week · bars below 80% easy = amber</div></div>
     <div class="cw"><canvas id="intensityChart"></canvas></div>
   </div>
   <div class="g2">
-    <div class="card">
+    <div class="card hud-card">
       <div class="ch"><div class="cl">QUALITY CEILING COMPLIANCE</div><div class="cs">% time above 150 bpm per quality session · target 0%</div></div>
       <div id="compliance-header" style="padding:10px 20px 0;font-family:var(--mono);font-size:.72rem;color:var(--gn)"></div>
       <div class="cw"><canvas id="complianceChart"></canvas></div>
     </div>
-    <div class="card">
+    <div class="card hud-card">
       <div class="ch"><div class="cl">CARDIAC DRIFT</div><div class="cs">easy (green) vs long (cyan) · outdoor only · negative = HR dropped = good</div></div>
       <div id="drift-sparse" class="sparse-state" style="display:none"></div>
       <div class="cw" id="drift-chart-wrap"><canvas id="driftChart"></canvas></div>
@@ -574,13 +602,13 @@ body{background:var(--bg);background-image:var(--grid);color:var(--tx);font-fami
     </div>
   </div>
   <div class="g2">
-    <div class="card">
+    <div class="card hud-card">
       <div class="ch"><div class="cl">GROUND CONTACT TIME</div><div class="cs">cohort-segmented · outdoor-easy trend only · hollow = treadmill</div></div>
       <div class="cleg" id="gct-leg"></div>
       <div class="cw"><canvas id="gctChart"></canvas></div>
       <div id="gct-cohort-table" style="padding:8px 20px 14px"></div>
     </div>
-    <div class="card gn-border">
+    <div class="card gn-border hud-card">
       <div class="ch"><div class="cl">VERTICAL RATIO</div><div class="cs">lower = less vertical oscillation = better economy</div></div>
       <div id="vr-body" class="cb"></div>
     </div>
@@ -633,11 +661,11 @@ body{background:var(--bg);background-image:var(--grid);color:var(--tx);font-fami
 </div>
 <!-- ── FUTURE ── -->
 <div id="tab-future" class="tc">
-  <div class="card">
+  <div class="card hud-card">
     <div class="ch"><div class="cl">RACE PIPELINE</div><div class="cs">primary objective: VPBank Hanoi Marathon · October 2027</div></div>
     <div id="race-p"></div>
   </div>
-  <div class="card">
+  <div class="card hud-card">
     <div class="ch"><div class="cl">PHASE TIMELINE</div><div class="cs">tap segment for detail</div></div>
     <div id="phase-tl" class="phase-tl-wrap"></div>
     <div id="phase-detail" style="display:none;margin:0 20px 16px;padding:12px;background:var(--sf2);border-radius:4px;font-size:.72rem;color:var(--m2);line-height:1.6;border-left:2px solid var(--v)"></div>
@@ -1389,7 +1417,7 @@ function borderLine(){return{color:'rgba(0,212,255,.12)'}}
 
 // ── GCT CHART ──────────────────────────────────────────────────────────
 function initGCTChart(a){
-  const tc={quality:"#7c3aed",long:"#06b6d4",easy:"#10b981"};
+  const tc={quality:"#7c3aed",long:"#00d4ff",easy:"#10b981"};
   const allPts=a.gct.pts;
   if(!allPts.length)return;
   const outdoor=allPts.filter(p=>p.surface==='outdoor');
@@ -1567,7 +1595,9 @@ function initLongRunChart(a){
   CHARTS.longRun=new Chart(document.getElementById('longRunChart').getContext('2d'),{
     type:'line',
     data:{labels:d.map(x=>`R${x.r}`),datasets:[
-      {label:'Long run dist',data:d.map(x=>x.dist),borderColor:'#06b6d4',backgroundColor:'rgba(6,182,212,.08)',fill:true,tension:.3,pointBackgroundColor:d.map(x=>x.dist>=20?'#10b981':'#06b6d4'),pointRadius:5,pointHoverRadius:8},
+      {label:'Long run dist',data:d.map(x=>x.dist),borderColor:'#00d4ff',backgroundColor:'rgba(0,212,255,.07)',fill:true,tension:.3,
+        pointBackgroundColor:d.map((x,i)=>i===d.length-1?'#00d4ff':x.dist>=20?'#10b981':'rgba(6,182,212,.65)'),
+        pointRadius:d.map((_,i)=>i===d.length-1?8:4),pointHoverRadius:10},
       {type:'line',label:'Gate 3: 20km',data:d.map(()=>20),borderColor:'#7c3aed',borderDash:[5,5],borderWidth:1.5,pointRadius:0,fill:false,backgroundColor:'transparent'},
     ]},
     options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{...CHART_DEFAULTS,callbacks:{label:c=>`${c.dataset.label==='Gate 3: 20km'?'Gate 3 target: 20km':c.parsed.y+' km'}`}}},scales:{x:{ticks:xTick(),grid:gridLine(),border:borderLine()},y:{min:0,max:25,ticks:{...yTick(),callback:v=>`${v}km`},title:{display:true,text:'km',color:'#64748b',font:{family:'Inter',size:10}},grid:gridLine(),border:borderLine()}}}
@@ -1622,7 +1652,9 @@ function initAEIChart(a){
   CHARTS.aei=new Chart(document.getElementById('aeiChart').getContext('2d'),{
     type:'scatter',
     data:{datasets:[
-      {type:'scatter',label:'AEI',data:d.pts.map(p=>({x:p.r,y:p.aei,date:p.date})),backgroundColor:'#10b981',pointRadius:5,pointHoverRadius:8},
+      {type:'scatter',label:'AEI',data:d.pts.map(p=>({x:p.r,y:p.aei,date:p.date})),
+        backgroundColor:d.pts.map((_,i)=>i===d.pts.length-1?'#00d4ff':'#10b981'),
+        pointRadius:d.pts.map((_,i)=>i===d.pts.length-1?8:4),pointHoverRadius:10},
       {type:'line',label:'5-Run Avg',data:d.movingAvg.map(p=>({x:p.r,y:p.ma})),borderColor:'#a855f7',borderWidth:2,pointRadius:0,fill:false,tension:.3,backgroundColor:'transparent'},
     ]},
     options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{...CHART_DEFAULTS,callbacks:{label:c=>c.raw.date?`R${c.raw.x} · ${c.raw.date}: AEI ${c.raw.y}`:`5-Run Avg: ${c.raw.y}`}}},scales:{x:{type:'linear',ticks:{...xTick(),callback:v=>`R${v}`},grid:gridLine(),border:borderLine()},y:{title:{display:true,text:'AEI — lower is better ↓',color:'#64748b',font:{family:'Inter',size:10}},ticks:yTick(),grid:gridLine(),border:borderLine()}}}
