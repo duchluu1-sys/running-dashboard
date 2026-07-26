@@ -378,9 +378,10 @@ body{background:var(--bg);color:var(--tx);font-family:var(--sans);font-size:14px
       <div class="cw"><canvas id="complianceChart"></canvas></div>
     </div>
     <div class="card">
-      <div class="ch"><div class="cl">CARDIAC DRIFT</div><div class="cs">outdoor easy + long runs · negative = HR dropped = good</div></div>
+      <div class="ch"><div class="cl">CARDIAC DRIFT</div><div class="cs">easy (green) vs long (cyan) · outdoor only · negative = HR dropped = good</div></div>
       <div id="drift-sparse" class="sparse-state" style="display:none"></div>
       <div class="cw" id="drift-chart-wrap"><canvas id="driftChart"></canvas></div>
+      <div id="drift-stats" style="padding:0 20px 12px"></div>
     </div>
   </div>
   <div class="g2">
@@ -603,8 +604,13 @@ function computeACWR(wvol,athlete){
 }
 
 function computeCardiacDrift(runs){
-  const pts=runs.filter(r=>r.drift!==null&&r.drift!==undefined).map(r=>({r:r.r,date:r.date,drift:r.drift,type:r.type}));
-  return{pts};
+  const fam=t=>t.startsWith('quality')?'quality':t;
+  const pts=runs.filter(r=>r.drift!==null&&r.drift!==undefined).map(r=>({r:r.r,date:r.date,drift:r.drift,type:fam(r.type)}));
+  const easy=pts.filter(p=>p.type==='easy');
+  const long=pts.filter(p=>p.type==='long');
+  const mean=arr=>arr.length?+(arr.reduce((s,p)=>s+p.drift,0)/arr.length).toFixed(2):null;
+  const ma3=arr=>arr.length>=3?+(arr.slice(-3).reduce((s,p)=>s+p.drift,0)/3).toFixed(2):null;
+  return{pts,easy,long,easyMean:mean(easy),longMean:mean(long),easyMa3:ma3(easy),longMa3:ma3(long)};
 }
 
 function computeQualityCompliance(runs){
@@ -1307,17 +1313,42 @@ function initDriftChart(a){
     return;
   }
   document.getElementById('drift-chart-wrap').style.display='block';
+  const tc={easy:'rgba(16,185,129,.45)',long:'rgba(6,182,212,.45)'};
+  const bc={easy:'#10b981',long:'#06b6d4'};
   CHARTS.drift=new Chart(document.getElementById('driftChart').getContext('2d'),{
     type:'bar',
     data:{labels:d.map(x=>`R${x.r}`),datasets:[{
-      label:'Cardiac drift (bpm)',
+      label:'Cardiac drift',
       data:d.map(x=>x.drift),
-      backgroundColor:d.map(x=>x.drift<=0?'rgba(6,182,212,.5)':x.drift<=5?'rgba(16,185,129,.4)':x.drift<=10?'rgba(245,158,11,.5)':'rgba(239,68,68,.5)'),
-      borderColor:d.map(x=>x.drift<=0?'#06b6d4':x.drift<=5?'#10b981':x.drift<=10?'#f59e0b':'#ef4444'),
+      backgroundColor:d.map(x=>tc[x.type]||'rgba(148,163,184,.3)'),
+      borderColor:d.map(x=>bc[x.type]||'#64748b'),
       borderWidth:1,borderRadius:2,
     }]},
-    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{...CHART_DEFAULTS,callbacks:{label:c=>`Drift ${c.raw>=0?'+':''}${c.raw} bpm — ${c.raw<=0?'excellent (HR dropped)':c.raw<=5?'minimal':c.raw<=10?'elevated':'high'}`}}},scales:{x:{ticks:xTick(),grid:gridLine(),border:borderLine()},y:{ticks:{...yTick(),callback:v=>`${v>=0?'+':''}${v}`},title:{display:true,text:'Q4 − Q1 avg HR (bpm)',color:'#64748b',font:{family:'Inter',size:10}},grid:gridLine(),border:borderLine()}}}
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{...CHART_DEFAULTS,callbacks:{label:c=>`${c.parsed.y>=0?'+':''}${c.parsed.y} bpm (${d[c.dataIndex].type}) — ${c.parsed.y<=0?'excellent':c.parsed.y<=5?'minimal':c.parsed.y<=10?'elevated':'high'}`}}},scales:{x:{ticks:xTick(),grid:gridLine(),border:borderLine()},y:{ticks:{...yTick(),callback:v=>`${v>=0?'+':''}${v}`},title:{display:true,text:'Q4 − Q1 avg HR (bpm)',color:'#64748b',font:{family:'Inter',size:10}},grid:gridLine(),border:borderLine()}}}
   });
+  renderDriftStats(a.drift);
+}
+
+function renderDriftStats(drift){
+  const el=document.getElementById('drift-stats');
+  if(!el)return;
+  const fmt=v=>v!==null?(v>=0?'+':'')+v:'—';
+  const read=v=>v===null?'—':v<=0?'HR dropped':v<=3?'minimal':v<=6?'moderate':'high (heat?)' ;
+  const row=(label,color,n,mean,ma3)=>`
+    <div style="display:grid;grid-template-columns:60px 22px 58px 70px 1fr;align-items:center;padding:5px 0;border-bottom:1px solid var(--bd);font-family:var(--mono);font-size:.6rem">
+      <span style="color:${color}">${label}</span>
+      <span style="color:var(--mu);text-align:center">${n}</span>
+      <span style="color:var(--m2)">${fmt(mean)} bpm</span>
+      <span style="color:var(--mu);font-size:.55rem">${ma3!==null?'MA3: '+fmt(ma3):'n<3'}</span>
+      <span style="color:var(--m2);font-size:.55rem">${read(mean)}</span>
+    </div>`;
+  el.innerHTML=`
+    <div style="display:grid;grid-template-columns:60px 22px 58px 70px 1fr;padding:4px 0 6px;border-bottom:1px solid var(--bdb)">
+      ${['TYPE','N','MEAN','3-RUN MA','READ'].map(h=>`<div style="font-family:var(--mono);font-size:.46rem;letter-spacing:2px;text-transform:uppercase;color:var(--mu)">${h}</div>`).join('')}
+    </div>
+    ${row('Easy','#10b981',drift.easy.length,drift.easyMean,drift.easyMa3)}
+    ${row('Long','#06b6d4',drift.long.length,drift.longMean,drift.longMa3)}
+    <div style="font-size:.57rem;color:var(--mu);margin-top:7px;line-height:1.65">Easy elevated (+5.55 avg) — heat confound (30–34°C outdoor sessions). Long near-zero (+0.38) — walk breaks reset HR, compressing drift. Compare within type only.</div>`;
 }
 
 // ── LONG RUN CHART ──────────────────────────────────────────────────────
