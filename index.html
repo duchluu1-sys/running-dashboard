@@ -432,6 +432,33 @@ body{background:var(--bg);background-image:var(--grid);color:var(--tx);font-fami
 #tab-today .ch{border-left-color:var(--cy-bd)}
 #tab-today .cl{color:var(--cy)}
 
+/* ════════════════════════════════════════
+   S19 — TRAINING + HEALTH TAB VISUAL
+   ════════════════════════════════════════ */
+
+/* Tab card header tints */
+#tab-training .ch{border-left-color:var(--cy-bd)}
+#tab-training .cl{color:var(--cy)}
+#tab-health .ch{border-left-color:var(--cy-bd)}
+#tab-health .cl{color:var(--cy)}
+
+/* Session log — quality → cyan border, alternating row tint */
+.log-row.quality{border-left-color:var(--cy)}
+.log-row.long{border-left-color:var(--cy)}
+.log-row:nth-child(even){background:rgba(0,212,255,.012)}
+
+/* Quality badge → cyan */
+.lr-badge.quality{background:rgba(0,212,255,.1);color:var(--cy)}
+
+/* Health flag cards — allow hud-card corners to escape */
+.fc{overflow:visible}
+
+/* Medication day number — Rajdhani */
+.med-day{font-family:var(--hud);font-weight:700;letter-spacing:.5px}
+
+/* Signal summary text — Share Tech Mono */
+#sig-body{font-family:var(--stm);font-size:.68rem;line-height:1.75;color:var(--m2)}
+
 </style>
 </head>
 <body>
@@ -562,31 +589,31 @@ body{background:var(--bg);background-image:var(--grid);color:var(--tx);font-fami
 <!-- ── TRAINING ── -->
 <div id="tab-training" class="tc">
   <div class="g2">
-    <div class="card">
+    <div class="card hud-card">
       <div class="ch"><div class="cl">WEEKLY VOLUME</div><div class="cs">target corridor 33-37km · phase 1 slate · phase 2 violet · * partial</div></div>
       <div class="cw"><canvas id="volChart"></canvas></div>
     </div>
-    <div class="card">
+    <div class="card hud-card">
       <div class="ch"><div class="cl">LONG RUN PROGRESSION</div><div class="cs">building toward 20km gate</div></div>
       <div class="cw"><canvas id="longRunChart"></canvas></div>
     </div>
   </div>
   <div class="tgrid">
-    <div class="card" id="radar-card">
+    <div class="card hud-card" id="radar-card">
       <div class="ch"><div class="cl">PHASE 2 → 3 GATES</div><div class="cs">6 hard gates · 0 of 6 cleared</div></div>
       <div id="gate-checklist"></div>
       <div id="gate-dc" class="gate-dc"></div>
     </div>
-    <div class="card" id="signals-card">
+    <div class="card hud-card" id="signals-card">
       <div class="ch"><div class="cl">ADAPTATION SIGNALS</div><div class="cs">GCT · VR · drift summary</div></div>
       <div id="sig-body" class="cb"></div>
     </div>
-    <div class="card" id="log-card">
+    <div class="card hud-card" id="log-card">
       <div class="ch"><div class="cl">SESSION LOG</div><div class="cs">click row to expand · newest first</div></div>
       <div id="log-wrap"></div>
     </div>
   </div>
-  <div class="card gate-list-card" id="gate-list-card">
+  <div class="card gate-list-card hud-card" id="gate-list-card">
     <div class="ch"><div class="cl">PHASE 2 → 3 GATES</div><div class="cs">6 hard gates · 0 of 6 cleared</div></div>
     <div id="glist-body"></div>
   </div>
@@ -594,11 +621,11 @@ body{background:var(--bg);background-image:var(--grid);color:var(--tx);font-fami
 <!-- ── HEALTH ── -->
 <div id="tab-health" class="tc">
   <div class="g2">
-    <div class="card">
+    <div class="card hud-card">
       <div class="ch"><div class="cl">HEALTH MONITORING</div><div class="cs" id="health-sub"></div></div>
       <div id="flag-l"></div>
     </div>
-    <div class="card">
+    <div class="card hud-card">
       <div class="ch"><div class="cl">MEDICATIONS & SUPPLEMENTS</div><div class="cs" id="med-sub"></div></div>
       <div id="med-l"></div>
     </div>
@@ -1355,10 +1382,10 @@ const CHART_DEFAULTS={
   borderColor:'rgba(139,92,246,.4)',borderWidth:1,
   titleColor:'#a855f7',bodyColor:'#94a3b8',padding:10
 };
-function xTick(){return{color:'#64748b',font:{family:'JetBrains Mono',size:10}}}
-function yTick(){return{color:'#64748b',font:{family:'JetBrains Mono',size:10}}}
-function gridLine(){return{color:'rgba(139,92,246,.06)'}}
-function borderLine(){return{color:'rgba(139,92,246,.12)'}}
+function xTick(){return{color:'#64748b',font:{family:'Share Tech Mono',size:10}}}
+function yTick(){return{color:'#64748b',font:{family:'Share Tech Mono',size:10}}}
+function gridLine(){return{color:'rgba(0,212,255,.05)'}}
+function borderLine(){return{color:'rgba(0,212,255,.12)'}}
 
 // ── GCT CHART ──────────────────────────────────────────────────────────
 function initGCTChart(a){
@@ -1443,8 +1470,8 @@ function renderGCTCohortTable(cohorts){
 // ── VOLUME CHART ────────────────────────────────────────────────────────
 function initVolumeChart(a){
   const w=a.wvol;
-  const bg=w.map(x=>x.partial?'rgba(168,85,247,.4)':x.phase===2?'#7c3aed':'rgba(71,85,105,.6)');
-  const bd=w.map(x=>x.partial?'#a855f7':x.phase===2?'#9333ea':'rgba(100,116,139,.8)');
+  const bg=w.map(x=>x.partial?'rgba(0,212,255,.45)':x.phase===2?'rgba(124,58,237,.6)':'rgba(71,85,105,.5)');
+  const bd=w.map(x=>x.partial?'#00d4ff':x.phase===2?'#7c3aed':'rgba(100,116,139,.8)');
   CHARTS.vol=new Chart(document.getElementById('volChart').getContext('2d'),{
     type:'bar',
     data:{labels:w.map(x=>x.label+(x.partial?'*':'')),datasets:[
@@ -1463,7 +1490,7 @@ function initIntensityChart(a){
     type:'bar',
     data:{labels:w.map(x=>x.label),datasets:[
       {label:'Easy',data:w.map(x=>x.easyPct),backgroundColor:w.map(x=>x.compliant?'rgba(139,92,246,.32)':'rgba(245,158,11,.4)'),borderColor:w.map(x=>x.compliant?'rgba(168,85,247,.6)':'#f59e0b'),borderWidth:1,stack:'s'},
-      {label:'Quality',data:w.map(x=>+(x.quality/x.total*100).toFixed(1)),backgroundColor:'rgba(6,182,212,.65)',borderColor:'#06b6d4',borderWidth:1,stack:'s'},
+      {label:'Quality',data:w.map(x=>+(x.quality/x.total*100).toFixed(1)),backgroundColor:'rgba(0,212,255,.6)',borderColor:'#00d4ff',borderWidth:1,stack:'s'},
       {label:'Long',data:w.map(x=>+(x.long/x.total*100).toFixed(1)),backgroundColor:'rgba(168,85,247,.45)',borderColor:'#a855f7',borderWidth:1,stack:'s'},
     ]},
     options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:'#64748b',font:{family:'Inter',size:10}}},tooltip:{...CHART_DEFAULTS,callbacks:{label:c=>`${c.dataset.label}: ${c.parsed.y.toFixed(1)}%`}},annotation:{annotations:{line80:{type:'line',xMin:-0.5,xMax:w.length-0.5,yMin:80,yMax:80,borderColor:'rgba(245,158,11,.8)',borderWidth:1.5,borderDash:[5,5]}}}},scales:{x:{ticks:xTick(),grid:gridLine(),border:borderLine()},y:{max:100,ticks:{...yTick(),callback:v=>`${v}%`},title:{display:true,text:'% of weekly km',color:'#64748b',font:{family:'Inter',size:10}},grid:gridLine(),border:borderLine()}}}
@@ -1479,8 +1506,8 @@ function initComplianceChart(a){
     data:{labels:s.map(x=>`R${x.r}`),datasets:[{
       label:'% above ceiling',
       data:s.map(x=>x.pct),
-      backgroundColor:s.map(x=>x.pct===0?'rgba(124,58,237,.55)':x.pct<=5?'rgba(245,158,11,.5)':'rgba(239,68,68,.5)'),
-      borderColor:s.map(x=>x.pct===0?'#7c3aed':x.pct<=5?'#f59e0b':'#ef4444'),
+      backgroundColor:s.map(x=>x.pct===0?'rgba(16,185,129,.55)':x.pct<=5?'rgba(245,158,11,.5)':'rgba(239,68,68,.5)'),
+      borderColor:s.map(x=>x.pct===0?'#10b981':x.pct<=5?'#f59e0b':'#ef4444'),
       borderWidth:1,borderRadius:2,
     }]},
     options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{...CHART_DEFAULTS,callbacks:{label:c=>`${c.raw}% above ceiling — ${c.raw===0?'clean':c.raw<=5?'minor breach':'BREACH'}`}}},scales:{x:{ticks:xTick(),grid:gridLine(),border:borderLine()},y:{max:20,min:0,ticks:{...yTick(),callback:v=>`${v}%`},title:{display:true,text:'% time above 150 bpm',color:'#64748b',font:{family:'Inter',size:10}},grid:gridLine(),border:borderLine()}}}
