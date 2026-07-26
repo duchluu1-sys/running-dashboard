@@ -380,6 +380,58 @@ body{background:var(--bg);background-image:var(--grid);color:var(--tx);font-fami
 .sdot.hud-red{background:var(--rd);color:var(--rd);
   box-shadow:0 0 8px rgba(239,68,68,.5)}
 
+/* ════════════════════════════════════════
+   S18 — TODAY TAB VISUAL
+   ════════════════════════════════════════ */
+
+/* Briefing — Share Tech Mono, own the defaults */
+#briefing-body{
+  font-family:var(--stm);
+  font-size:.7rem;
+  line-height:1.9;
+  letter-spacing:.4px;
+  color:var(--m2);
+}
+
+/* Vitals bar numbers — Rajdhani */
+.vit-val{font-family:var(--hud);font-weight:700}
+.vit-rd-txt{font-family:var(--hud);font-weight:700;font-size:1rem;letter-spacing:1px}
+
+/* Readiness label — Rajdhani (hud-num xl applied in JS; belt + suspenders) */
+.rd-label{font-family:var(--hud);font-weight:700;letter-spacing:2px}
+
+/* TODAY'S MISSION — highest visual weight on tab */
+.ts-type{
+  font-family:var(--hud);
+  font-size:1.5rem;
+  font-weight:700;
+  color:var(--cy);
+  letter-spacing:1px;
+  text-transform:uppercase;
+  margin-bottom:8px;
+  line-height:1.2;
+}
+.ts-detail{
+  font-family:var(--stm);
+  font-size:.7rem;
+  color:var(--m2);
+  line-height:1.75;
+}
+.ts-proto{
+  margin-top:10px;
+  padding:8px 12px;
+  background:rgba(0,212,255,.04);
+  border-left:2px solid var(--cy-bd);
+  font-family:var(--stm);
+  font-size:.65rem;
+  color:var(--cy);
+  border-radius:0 2px 2px 0;
+}
+
+/* Card header label — slight cyan tint on today tab */
+#tab-today .ch{border-left-color:var(--cy-bd)}
+#tab-today .cl{color:var(--cy)}
+
 </style>
 </head>
 <body>
@@ -408,16 +460,16 @@ body{background:var(--bg);background-image:var(--grid);color:var(--tx);font-fami
 <!-- ── TODAY ── -->
 <div id="tab-today" class="tc active">
   <div id="validation-banner"></div>
-  <div class="card" id="briefing-card">
+  <div class="card hud-card" id="briefing-card">
     <div class="ch"><div class="cl">SYSTEM BRIEFING</div><div class="cs" id="briefing-date">pending first update</div></div>
-    <div class="cb" id="briefing-body" style="color:var(--m2);font-family:var(--mono);font-size:.72rem;line-height:1.8;letter-spacing:.3px">Morning readiness update not yet logged today. Run morning readiness protocol in Claude Desktop to generate briefing.</div>
+    <div class="cb" id="briefing-body">Morning readiness update not yet logged today. Run morning readiness protocol in Claude Desktop to generate briefing.</div>
   </div>
   <div id="alerts-wrap"></div>
-  <div class="card">
+  <div class="card hud-card hud-glow" id="mission-card">
     <div class="ch"><div class="cl">TODAY'S MISSION</div><div class="cs">week schedule · protocol reminder</div></div>
     <div class="ts-wrap" id="ts-body"></div>
   </div>
-  <div class="card" id="rd-card">
+  <div class="card hud-card" id="rd-card">
     <div class="ch"><div class="cl">SYSTEM STATUS</div><div class="cs" id="rd-sub"></div></div>
     <div class="rd-block">
       <div>
@@ -439,11 +491,11 @@ body{background:var(--bg);background-image:var(--grid);color:var(--tx);font-fami
       </div>
     </div>
   </div>
-  <div class="card" id="load-card">
+  <div class="card hud-card" id="load-card">
     <div class="ch"><div class="cl">TRAINING LOAD</div><div class="cs" id="load-sub">ACWR · 4-week rolling</div></div>
     <div id="load-body" class="cb"></div>
   </div>
-  <div class="card" id="lr-card">
+  <div class="card hud-card" id="lr-card">
     <div class="ch"><div class="cl">LAST OPERATION</div><div class="cs" id="lr-sub"></div></div>
     <div class="lr-wrap" id="lr-body"></div>
   </div>
@@ -890,7 +942,7 @@ function renderVitals(a){
   const hrvCls=a.rdns.hrvOk?'gn':'am';
   document.getElementById('vitals').innerHTML=`
     <div class="vit-rd">
-      <div class="vit-rd-top"><span class="sdot ${rdClass}" id="s-vdot"></span><span class="vit-rd-txt ${rdVal}" id="s-vtxt">${a.rdns.status}</span></div>
+      <div class="vit-rd-top"><span class="sdot ${rdClass} ${rdClass==='green'?'hud-green':rdClass==='amber'?'hud-amber':'hud-red'}" id="s-vdot"></span><span class="vit-rd-txt ${rdVal}" id="s-vtxt" style="font-family:var(--hud);font-weight:700;letter-spacing:1px">${a.rdns.status}</span></div>
       <div class="vit-lbl">DAILY READINESS</div>
     </div>
     <div class="vit"><div class="vit-val ${hrvCls}">${a.rdns.hrv}<span style="font-size:.72rem">ms</span></div><div class="vit-lbl">HRV LAST NIGHT</div><div class="vit-sub">7d avg ${a.rdns.hrvAvg7}ms</div></div>
@@ -951,8 +1003,9 @@ function freshness(){
 function renderToday(a){
   const rdCls=a.rdns.status==='GREEN'?'green':a.rdns.status==='AMBER'?'amber':'red';
   const rdVal=a.rdns.status==='GREEN'?'gn':a.rdns.status==='AMBER'?'am':'rd';
-  document.getElementById('rd-dot').className=`sdot ${rdCls}`;
-  document.getElementById('rd-label').className=`rd-label c-${rdVal}`;
+  const _hd=a.rdns.status==='GREEN'?'hud-green':a.rdns.status==='AMBER'?'hud-amber':'hud-red';
+  document.getElementById('rd-dot').className=`sdot ${rdCls} ${_hd}`;
+  document.getElementById('rd-label').className=`rd-label hud-num xl c-${rdVal}`;
   document.getElementById('rd-label').textContent=a.rdns.status;
   document.getElementById('rd-note').textContent=a.rdns.note;
   const _f=freshness(),_rt=document.getElementById('rd-time');
