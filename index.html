@@ -152,8 +152,21 @@ body{background:var(--bg);color:var(--tx);font-family:var(--sans);font-size:14px
 .ld-val{font-family:var(--mono);font-size:.75rem;font-weight:700;color:var(--tx)}
 .ld-note{grid-column:1/-1;color:var(--m2);font-style:italic;padding-top:7px;border-top:1px solid var(--bd);margin-top:3px;font-size:.66rem;font-family:var(--sans);line-height:1.5}
 /* RADAR */
-.rsvg-wrap{padding:12px;display:flex;flex-direction:column;align-items:center}
-.rsvg-el{width:100%;max-width:250px;height:auto}
+.gc-list{padding:14px 20px}
+.gc-label{font-family:var(--mono);font-size:.5rem;letter-spacing:2px;text-transform:uppercase;color:var(--mu);padding:4px 0 8px;border-bottom:1px solid var(--bdb);margin-bottom:8px}
+.gc-item{padding:8px 0;border-bottom:1px solid var(--bdb);cursor:pointer;transition:background .15s}
+.gc-item:hover{background:var(--sf2)}.gc-item:last-child{border-bottom:none}
+.gc-top{display:flex;align-items:baseline;gap:6px;margin-bottom:3px}
+.gc-icon{font-family:var(--mono);font-size:.72rem;width:16px;flex-shrink:0;font-weight:700}
+.gc-item.cleared .gc-icon{color:var(--gn)}.gc-item.active .gc-icon{color:var(--cn)}.gc-item.pending .gc-icon{color:var(--mu)}
+.gc-name{font-family:var(--mono);font-size:.64rem;font-weight:700;flex:1;color:var(--m2)}
+.gc-item.active .gc-name{color:var(--vb)}.gc-item.cleared .gc-name{color:var(--gn)}
+.gc-pct{font-family:var(--mono);font-size:.58rem;color:var(--mu);min-width:28px;text-align:right}
+.gc-short{font-size:.61rem;color:var(--m2);margin-bottom:4px;padding-left:22px;line-height:1.4}
+.gc-bar{height:2px;background:var(--bdb);border-radius:2px;margin:4px 0 3px 22px}
+.gc-fill{height:100%;border-radius:2px;background:var(--mu)}
+.gc-fill.ac{background:var(--v)}.gc-fill.cl{background:var(--gn)}
+.gc-eta{font-family:var(--mono);font-size:.5rem;color:var(--mu);padding-left:22px}
 .gate-dc{margin:6px 12px 0;background:var(--sf2);border:1px solid var(--bdb);border-radius:4px;padding:10px 12px;display:none}
 .gate-dc.open{display:block}
 .gdc-name{font-family:var(--mono);font-size:.62rem;color:var(--vb);font-weight:700;margin-bottom:4px}
@@ -219,7 +232,7 @@ body{background:var(--bg);color:var(--tx);font-family:var(--sans);font-size:14px
 .li{display:flex;align-items:center;gap:5px;font-family:var(--mono);font-size:.52rem;letter-spacing:1px;text-transform:uppercase;color:var(--m2)}
 .ld{width:9px;height:9px;border-radius:50%;flex-shrink:0}.ld-line{width:14px;height:2px;border-radius:1px;flex-shrink:0}
 /* GATE LIST PHONE */
-.gate-list-card{display:none}
+.gate-list-card{display:none}/* content now in radar-card checklist */
 .gate-list{display:flex;flex-direction:column;gap:8px;padding:14px}
 .gl-row{padding:10px 13px;background:var(--sf2);border-radius:4px;border-left:3px solid var(--bd)}
 .gl-row.active{border-left-color:var(--v)}.gl-row.cleared{border-left-color:var(--gn)}
@@ -249,8 +262,7 @@ body{background:var(--bg);color:var(--tx);font-family:var(--sans);font-size:14px
   .vitals{grid-template-columns:repeat(2,1fr);padding:0 10px}.vit{padding:9px 6px}.vit-val{font-size:1.15rem}
   .vit:nth-child(2){border-right:none}.vit:nth-child(4){border-right:none}.vit:nth-child(5){display:none}.vit:nth-child(6){border-right:none}
   .tabs-top{display:none}.pnav{display:flex}.main{padding:12px 10px 82px}
-  .tgrid{grid-template-columns:1fr;grid-template-areas:"log" "signals"}#radar-card{display:none}
-  .gate-list-card{display:block}.g2,.g3,.race-pipe{grid-template-columns:1fr}
+  .tgrid{grid-template-columns:1fr;grid-template-areas:"radar" "log" "signals"}.g2,.g3,.race-pipe{grid-template-columns:1fr}
   .log-hdr,.log-row{grid-template-columns:50px 55px 28px;padding:6px 10px}
   .lc-r-h,.lc-r,.lc-type-h,.lc-type,.lc-pace-h,.lc-pace,.lc-avhr-h,.lc-avhr,.lc-mxhr-h,.lc-mxhr,.lc-gct-h,.lc-gct,.lc-vr-h,.lc-vr{display:none}
   .eval-grid{grid-template-columns:1fr;gap:8px}.ev-btn{width:100%;margin-top:4px}
@@ -394,8 +406,8 @@ body{background:var(--bg);color:var(--tx);font-family:var(--sans);font-size:14px
   <div class="tgrid">
     <div class="card" id="radar-card">
       <div class="ch"><div class="cl">PHASE 2 → 3 GATES</div><div class="cs">6 hard gates · 0 of 6 cleared</div></div>
-      <div class="rsvg-wrap"><svg id="rsvg" class="rsvg-el" viewBox="0 0 400 400"></svg><div id="gate-dc" class="gate-dc"></div></div>
-      <div id="sgt-list"></div>
+      <div id="gate-checklist"></div>
+      <div id="gate-dc" class="gate-dc"></div>
     </div>
     <div class="card" id="signals-card">
       <div class="ch"><div class="cl">ADAPTATION SIGNALS</div><div class="cs">GCT · VR · drift summary</div></div>
@@ -907,7 +919,7 @@ function renderPaceGap(pg){
 function renderTraining(a){
   renderSignals(a);
   renderSessionLog();
-  drawRadar();
+  renderGateChecklist();
   renderGateList();
 }
 
@@ -979,27 +991,26 @@ function showGateDetail(id){
   c.classList.add('open');openGate=id;
 }
 
-function drawRadar(){
-  const hg=GATES.filter(g=>g.type==='hard'),n=hg.length,cx=200,cy=200,R=145;
-  const pt=(i,p)=>{const a=(i*2*Math.PI/n)-Math.PI/2;return{x:cx+R*p*Math.cos(a),y:cy+R*p*Math.sin(a)}};
-  let s='';
-  [.2,.4,.6,.8,1].forEach(l=>{
-    const pts=hg.map((_,i)=>pt(i,l));
-    s+=`<path d="${pts.map((p,i)=>`${i===0?'M':'L'}${p.x.toFixed(1)},${p.y.toFixed(1)}`).join('')}Z" fill="none" stroke="rgba(139,92,246,${(l*.12+.04).toFixed(2)})" stroke-width="1"/>`;
-  });
-  hg.forEach((_,i)=>{const p=pt(i,1);s+=`<line x1="${cx}" y1="${cy}" x2="${p.x.toFixed(1)}" y2="${p.y.toFixed(1)}" stroke="rgba(139,92,246,.18)" stroke-width="1"/>`});
-  const dp=hg.map((g,i)=>pt(i,Math.max(g.progress/100,.01)));
-  s+=`<path d="${dp.map((p,i)=>`${i===0?'M':'L'}${p.x.toFixed(1)},${p.y.toFixed(1)}`).join('')}Z" fill="rgba(124,58,237,.22)" stroke="#7c3aed" stroke-width="2"/>`;
-  hg.forEach((g,i)=>{
-    const lp=pt(i,1.32),anchor=lp.x<cx-12?'end':lp.x>cx+12?'start':'middle';
-    const short=g.name.length>12?g.name.slice(0,11)+'…':g.name;
-    s+=`<text x="${lp.x.toFixed(1)}" y="${lp.y.toFixed(1)}" text-anchor="${anchor}" dominant-baseline="middle" fill="#64748b" font-size="10.5" font-family="Inter,sans-serif" style="cursor:pointer" onmouseover="this.setAttribute('fill','#a855f7')" onmouseout="this.setAttribute('fill','#64748b')" onclick="showGateDetail(${g.id})">${short}</text>`;
-    if(g.progress>0){const d=pt(i,g.progress/100);s+=`<circle cx="${d.x.toFixed(1)}" cy="${d.y.toFixed(1)}" r="5" fill="#a855f7" opacity=".9"/>`}
-  });
-  s+=`<circle cx="${cx}" cy="${cy}" r="4" fill="#7c3aed" opacity=".7"/>`;
-  document.getElementById('rsvg').innerHTML=s;
+function renderGateChecklist(){
+  const hard=GATES.filter(g=>g.type==='hard');
   const soft=GATES.filter(g=>g.type==='soft');
-  document.getElementById('sgt-list').innerHTML=`<div class="soft-gates">${soft.map(g=>`<div class="sg-row"><div class="sg-top"><span class="sg-name">G${g.id} · ${g.name}</span><span class="sg-pct">${g.progress}%</span></div><div class="sg-bar"><div class="sg-fill" style="width:${g.progress}%"></div></div></div>`).join('')}</div>`;
+  const cleared=hard.filter(g=>g.status==='cleared').length;
+  const icon=g=>g.status==='cleared'?'✓':g.status==='active'?'◐':'○';
+  const bar=g=>g.progress>0?`<div class="gc-bar"><div class="gc-fill ${g.status==='cleared'?'cl':g.status==='active'?'ac':''}" style="width:${g.progress}%"></div></div>`:'';
+  const row=g=>`<div class="gc-item ${g.status}" onclick="showGateDetail(${g.id})">
+    <div class="gc-top"><span class="gc-icon">${icon(g)}</span><span class="gc-name">G${g.id} · ${g.name}</span><span class="gc-pct">${g.progress?g.progress+'%':''}</span></div>
+    <div class="gc-short">${g.short}</div>
+    ${bar(g)}
+    <div class="gc-eta">${g.eta}</div>
+  </div>`;
+  const hd=cleared===hard.length?'ALL CLEARED ✓':`${cleared} of ${hard.length} cleared`;
+  document.getElementById('gate-checklist').innerHTML=`<div class="gc-list">
+    <div class="gc-label">HARD GATES · ${hd}</div>
+    ${hard.map(row).join('')}
+    <div class="gc-label" style="margin-top:10px">SOFT GATES</div>
+    ${soft.map(row).join('')}
+  </div>`;
+  document.getElementById('glist-body').innerHTML=document.getElementById('gate-checklist').innerHTML;
 }
 
 function renderGateList(){
