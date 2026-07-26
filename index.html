@@ -264,10 +264,12 @@ body{background:var(--bg);background-image:var(--grid);color:var(--tx);font-fami
   .log-hdr,.log-row{grid-template-columns:34px 46px 50px 54px 48px 38px 28px}
   .lc-gct-h,.lc-gct,.lc-vr-h,.lc-vr{display:none}
   .eval-grid{grid-template-columns:1fr 1fr}
-  /* S25 — TODAY: stack the decision cards, keep the review pair side by side */
+  /* S25 — TODAY */
   .today-grid{grid-template-columns:1fr 1fr;grid-template-areas:"brief brief" "alerts alerts" "mission mission" "status status" "load lastop"}
   .today-grid:has(#alerts-wrap:empty){grid-template-areas:"brief brief" "mission mission" "status status" "load lastop"}
   #briefing-body{max-width:none}
+  /* S27 — FUTURE: collapse to single column on tablet */
+  .future-grid{grid-template-columns:1fr;grid-template-areas:"races" "timeline" "voltraj" "gates" "qual" "milestones"}
 }
 @media(max-width:600px){
   .hdr{padding:10px 13px}.hdr-r{display:none}.hdr-name{font-size:1.15rem}.hdr-pill{display:block}
@@ -281,10 +283,13 @@ body{background:var(--bg);background-image:var(--grid);color:var(--tx);font-fami
   .med-row{grid-template-columns:1fr}.fshort{display:none}
   .rd-block{flex-direction:column;gap:12px}
   .lr-grid{grid-template-columns:repeat(2,1fr)}
-  /* S25 — TODAY: full single column */
+  /* S25 — TODAY */
   .today-grid{grid-template-columns:1fr;grid-template-areas:"brief" "alerts" "mission" "status" "load" "lastop"}
   .today-grid:has(#alerts-wrap:empty){grid-template-areas:"brief" "mission" "status" "load" "lastop"}
   .eval-grid{grid-template-columns:1fr;gap:8px}
+  /* S27 — FUTURE */
+  .future-grid{grid-template-columns:1fr;grid-template-areas:"races" "timeline" "voltraj" "gates" "qual" "milestones"}
+  .race-pipe{grid-template-columns:1fr}
 }
 
 /* ════════════════════════════════════════
@@ -626,6 +631,111 @@ body{background:var(--bg);background-image:var(--grid);color:var(--tx);font-fami
 .eval-grid{grid-template-columns:1fr 1fr;gap:10px}
 .eval-grid > button{grid-column:1/-1}
 
+/* ════════════════════════════════════════
+   S27 — FUTURE TAB GRID + PHASE TIMELINE
+   ════════════════════════════════════════ */
+
+/* FUTURE tab grid */
+.future-grid{
+  display:grid;
+  gap:16px;
+  grid-template-columns:1fr 1fr;
+  grid-template-areas:
+    "races      races"
+    "timeline   timeline"
+    "voltraj    gates"
+    "qual       milestones";
+}
+.future-grid>.card{margin-bottom:0}
+.fg-races{grid-area:races}
+.fg-timeline{grid-area:timeline}
+.fg-voltraj{grid-area:voltraj}
+.fg-gates{grid-area:gates}
+.fg-qual{grid-area:qual}
+.fg-milestones{grid-area:milestones}
+#tab-future .ch{border-left-color:var(--cy-bd)}
+#tab-future .cl{color:var(--cy)}
+
+/* S28 placeholder */
+.s28-stub{
+  height:80px;
+  display:flex;
+  align-items:center;
+  padding:0 20px;
+  color:var(--mu);
+  font-family:var(--stm);
+  font-size:.6rem;
+  letter-spacing:2px;
+}
+.s28-stub::after{content:'COMING NEXT BUILD'}
+
+/* PHASE TIMELINE — absolute-positioned track */
+.ftl-wrap{padding:44px 20px 24px;overflow-x:auto}
+.ftl-track{
+  position:relative;
+  height:22px;
+  background:rgba(0,212,255,.03);
+  border-radius:2px;
+  min-width:480px;
+}
+.ftl-phase{
+  position:absolute;top:0;height:100%;
+  cursor:pointer;transition:filter .15s;
+  display:flex;align-items:center;overflow:hidden;
+}
+.ftl-phase:hover{filter:brightness(1.3)}
+.ftl-plbl{
+  font-family:var(--stm);font-size:.42rem;
+  letter-spacing:1px;color:rgba(0,212,255,.5);
+  text-transform:uppercase;padding:0 5px;
+  white-space:nowrap;overflow:hidden;
+}
+
+/* Today marker */
+.ftl-today{position:absolute;top:-8px;bottom:-8px;transform:translateX(-50%);z-index:4;pointer-events:none}
+.ftl-tline{position:absolute;left:50%;top:0;bottom:0;width:1px;background:var(--cy);transform:translateX(-50%)}
+.ftl-tdot{
+  position:absolute;left:50%;top:50%;
+  transform:translate(-50%,-50%);
+  width:9px;height:9px;border-radius:50%;
+  background:var(--cy);box-shadow:var(--cy-glow);
+  animation:pulse-glow 2s ease-in-out infinite;
+}
+.ftl-tlbl{
+  position:absolute;top:-22px;left:50%;transform:translateX(-50%);
+  font-family:var(--stm);font-size:.42rem;letter-spacing:2px;
+  color:var(--cy);white-space:nowrap;
+}
+
+/* Race pins */
+.ftl-race{position:absolute;top:-10px;bottom:-10px;transform:translateX(-50%);z-index:3}
+.ftl-rline{position:absolute;left:50%;top:0;bottom:0;width:1px;transform:translateX(-50%);opacity:.6}
+.ftl-rdot{position:absolute;left:50%;bottom:-5px;transform:translateX(-50%);width:8px;height:8px;border-radius:50%}
+.ftl-rlbl{
+  position:absolute;left:50%;transform:translateX(-50%);
+  font-family:var(--stm);font-size:.44rem;letter-spacing:1px;
+  white-space:nowrap;text-align:center;line-height:1.5;
+}
+.ftl-above{bottom:calc(100% + 14px)}
+.ftl-below{top:calc(100% + 14px)}
+.ftl-rdays{font-size:.38rem;opacity:.65;letter-spacing:1px}
+.ftl-unc{color:var(--am);font-size:.42rem}
+
+/* Legend */
+.ftl-leg{display:flex;gap:16px;margin-top:28px}
+.ftl-li{display:flex;align-items:center;gap:5px;font-family:var(--stm);font-size:.46rem;color:var(--mu);letter-spacing:1px}
+.ftl-ld{width:12px;height:12px;border-radius:2px;flex-shrink:0}
+
+/* Race card updates */
+.race-unconf{opacity:.72}
+.race-primary{background:rgba(0,212,255,.03)}
+.race-unconf-badge{
+  display:inline-block;background:rgba(245,158,11,.12);
+  color:var(--am);font-family:var(--stm);font-size:.44rem;
+  padding:1px 5px;border-radius:2px;letter-spacing:1px;
+  vertical-align:middle;margin-left:6px;
+}
+
 </style>
 </head>
 <body>
@@ -803,14 +913,32 @@ body{background:var(--bg);background-image:var(--grid);color:var(--tx);font-fami
 </div>
 <!-- ── FUTURE ── -->
 <div id="tab-future" class="tc">
-  <div class="card hud-card">
-    <div class="ch"><div class="cl">RACE PIPELINE</div><div class="cs">primary objective: VPBank Hanoi Marathon · October 2027</div></div>
-    <div id="race-p"></div>
-  </div>
-  <div class="card hud-card">
-    <div class="ch"><div class="cl">PHASE TIMELINE</div><div class="cs">tap segment for detail</div></div>
-    <div id="phase-tl" class="phase-tl-wrap"></div>
-    <div id="phase-detail" style="display:none;margin:0 20px 16px;padding:12px;background:var(--sf2);border-radius:4px;font-size:.72rem;color:var(--m2);line-height:1.6;border-left:2px solid var(--v)"></div>
+  <div class="future-grid">
+    <div class="card hud-card fg-races">
+      <div class="ch"><div class="cl">RACE PIPELINE</div><div class="cs">primary objective: VPBank Hanoi Marathon · October 2027</div></div>
+      <div id="race-p"></div>
+    </div>
+    <div class="card hud-card fg-timeline">
+      <div class="ch"><div class="cl">PHASE TIMELINE</div><div class="cs">tap segment for detail · Phase 1→2→3</div></div>
+      <div id="phase-tl"></div>
+      <div id="phase-detail"></div>
+    </div>
+    <div class="card hud-card fg-voltraj" id="vol-traj-card">
+      <div class="ch"><div class="cl">VOLUME TRAJECTORY</div><div class="cs">actual vs plan · W9–24</div></div>
+      <div id="vol-traj-body" class="cb s28-stub"></div>
+    </div>
+    <div class="card hud-card fg-gates" id="gate-forecast-card">
+      <div class="ch"><div class="cl">GATE FORECAST</div><div class="cs">6 hard gates · Phase 3 entry Oct 26</div></div>
+      <div id="gate-forecast-body" class="cb s28-stub"></div>
+    </div>
+    <div class="card hud-card fg-qual" id="qual-prog-card">
+      <div class="ch"><div class="cl">QUALITY PROGRESSION</div><div class="cs">W9–24 · session targets</div></div>
+      <div id="qual-prog-body" class="cb s28-stub"></div>
+    </div>
+    <div class="card hud-card fg-milestones" id="milestone-card">
+      <div class="ch"><div class="cl">MILESTONE CALENDAR</div><div class="cs">Jul 30 BV 108 · Oct 19 Race 0</div></div>
+      <div id="milestone-body" class="cb s28-stub"></div>
+    </div>
   </div>
 </div>
 </main>
@@ -826,6 +954,7 @@ body{background:var(--bg);background-image:var(--grid);color:var(--tx);font-fami
 // DATA — populated at runtime by fetch('data.json')
 // ════════════════════════════════════════════════════
 let RUNS, GATES, RACES, ATHLETE, READINESS_LOG;
+let PHASES=[], PROGRESSION=[], MILESTONES=[];
 let _BYTES=0;   // S16 — byte length of the data.json payload currently loaded
 
 // ════════════════════════════════════════════════════
@@ -1513,51 +1642,71 @@ function toggleFlag(i){document.getElementById('fc-'+i).classList.toggle('open')
 
 // ── RENDER FUTURE ───────────────────────────────────────────────────────
 function renderFuture(){
-  const RC=['rgba(0,212,255,.55)','rgba(0,212,255,.75)','#00d4ff'];
+  const RC=[D2,'rgba(0,212,255,.6)',D1];
   document.getElementById('race-p').innerHTML=`<div class="race-pipe">${RACES.map((r,ri)=>{
     const d=daysUntil(r.date);
-    r={...r,color:RC[ri]||D1};
-    return`<div class="race-card" style="border-top-color:${r.color}"><div class="race-lbl">${r.label}</div><div class="race-name" style="color:${r.color}">${r.name}</div><div class="race-dt">${fmtDate(r.date)}</div><div class="race-cd" style="color:${r.color}">${d>0?d:'RACE DAY'}</div><span class="race-cd-unit">DAYS REMAINING</span><div class="race-goal">${r.goal}</div><div class="race-note">${r.note}</div></div>`;
+    const col=RC[ri]||D1;
+    const unconf=r.confirmed===false;
+    const primary=ri===2;
+    return`<div class="race-card${unconf?' race-unconf':''}${primary?' race-primary':''}" style="border-top:${primary?4:3}px ${unconf?'dashed':'solid'} ${col}">
+      <div class="race-lbl" style="color:${col}">${r.label}${unconf?` <span class="race-unconf-badge">UNCONFIRMED</span>`:''}</div>
+      <div class="race-name" style="color:${col}">${r.name}</div>
+      <div class="race-dt">${fmtDate(r.date)}</div>
+      <div class="race-cd" style="color:${col}">${d>0?d:'RACE DAY'}</div>
+      <span class="race-cd-unit">DAYS REMAINING</span>
+      <div class="race-goal">${r.goal}</div>
+      <div class="race-note" style="opacity:${unconf?.6:1}">${r.note}</div>
+    </div>`;
   }).join('')}</div>`;
   renderPhaseTimeline();
 }
 
 let openPhase=null;
 function showPhaseDetail(id,text){
-  const d=document.getElementById('phase-detail');
-  if(openPhase===id){d.style.display='none';openPhase=null;return;}
-  d.textContent=text;d.style.display='block';openPhase=id;
+  const el=document.getElementById('phase-detail');
+  if(openPhase===id){el.style.display='none';openPhase=null;return;}
+  el.innerHTML=text;el.style.display='block';openPhase=id;
 }
 
+// S27 — rebuilt from real dates against PHASES + RACES arrays
 function renderPhaseTimeline(){
-  const totalW=40; // rough total weeks to race 2
-  const segs=[
-    {id:'p1',pct:8/totalW*100,label:'Phase 1',detail:'May–Jul 5, 2026 · 8 weeks · Base building · R1–R30 · 196km · Phase 2 gate cleared R27',cls:'pts-done'},
-    {id:'p2a',pct:11/totalW*100,label:'Phase 2 W1–11',detail:'Jul 6–Sep 7, 2026 · Week 11 current · Quality Development · 2 quality sessions/week · GCT 361→303ms',cls:'pts-curr'},
-    {id:'p2b',pct:5/totalW*100,label:'P2 W12–16',detail:'Sep 8–Oct 5, 2026 · Consolidation + deload · Gate clearance window · Peak 2×20 + 20km LR',cls:'pts-future'},
-  ];
-  const races=[
-    {id:'r0',pct:0,label:'Race 0',color:'rgba(0,212,255,.55)'},
-    {id:'p3',pct:8/totalW*100,label:'Phase 3',color:'var(--vb)'},
-    {id:'r1',pct:0,label:'Race 1',color:'rgba(0,212,255,.75)'},
-    {id:'p4',pct:6/totalW*100,label:'Phase 4',color:'var(--vb)'},
-    {id:'r2',pct:0,label:'Race 2',color:'#00d4ff'},
-  ];
-  const seg2pct=segs.reduce((s,g)=>s+g.pct,0);
-  // Estimated weeks for race markers and p3/p4
-  const racePcts=[0,14,21,22,34,38]; // rough week positions
-  const raceItems=[
-    {id:'r0',pos:13/totalW*100,label:'Race 0',color:'rgba(0,212,255,.55)',days:daysUntil(RACES[0].date)},
-    {id:'p3',pos:15/totalW*100,label:'Phase 3',color:null},
-    {id:'r1',pos:22/totalW*100,label:'Race 1',color:'rgba(0,212,255,.75)',days:daysUntil(RACES[1].date)},
-    {id:'p4',pos:24/totalW*100,label:'Phase 4',color:null},
-    {id:'r2',pos:37/totalW*100,label:'Race 2',color:'#00d4ff',days:daysUntil(RACES[2].date)},
-  ];
-  document.getElementById('phase-tl').innerHTML=`
-    <div class="phase-track">
-      ${segs.map(s=>`<div class="pt-seg ${s.cls}" style="width:${s.pct.toFixed(1)}%" onclick="showPhaseDetail('${s.id}','${s.detail}')"><div class="pt-seg-lbl">${s.label}</div>${s.cls==='pts-curr'?'<div class="pt-curr-dot blink"></div>':''}</div>`).join('')}
-      ${raceItems.filter(r=>!r.color||r.color).map(r=>`<div class="pt-seg pts-race" style="position:relative;width:3%" title="${r.label}"><div class="pt-seg-lbl" style="color:${r.color||'var(--mu)'}">${r.label}</div><div class="pts-race-inner" style="background:${r.color||'var(--mu)'}"></div>${r.days?`<div class="pt-race-cd">${r.days}d</div>`:''}</div>`).join('')}
-    </div>`;
+  if(!PHASES.length){document.getElementById('phase-tl').innerHTML='<div style="padding:20px;color:var(--mu);font-family:var(--stm);font-size:.68rem">Loading…</div>';return;}
+  const EPOCH=new Date('2026-05-09T00:00:00');
+  const FINISH=new Date('2027-10-19T00:00:00');
+  const SPAN=FINISH-EPOCH;
+  function pct(iso){
+    if(!iso)return 100;
+    return Math.max(0,Math.min(100,(new Date(iso+'T00:00:00')-EPOCH)/SPAN*100));
+  }
+  const todayPct=pct(new Date().toISOString().slice(0,10));
+
+  // Phase fills
+  const phaseColors={complete:'rgba(0,212,255,.30)',active:'rgba(0,212,255,.16)',planned:'rgba(100,116,139,.08)'};
+  const phaseFills=PHASES.map(ph=>{
+    const L=pct(ph.dateStart),R=ph.openEnded?100:pct(ph.dateEnd);
+    const col=phaseColors[ph.status]||'rgba(100,116,139,.08)';
+    const dashed=ph.openEnded?'border-right:2px dashed rgba(0,212,255,.25);':'border-right:1px solid var(--bg);';
+    const detail=`<strong>${ph.name}</strong><br>${ph.dateStart} – ${ph.dateEnd||'TBD (open-ended)'}<br><br>${ph.focus}<br><br><em>${ph.note}</em>`;
+    return`<div class="ftl-phase" style="left:${L.toFixed(2)}%;width:${(R-L).toFixed(2)}%;background:${col};${dashed}" onclick="showPhaseDetail('p${ph.n}',\`${detail.replace(/`/g,"'")}\`)"><div class="ftl-plbl">${ph.name.replace('Quality Development','Phase 2').replace('Foundation','Phase 1').replace('Threshold Development','Phase 3')}</div></div>`;
+  }).join('');
+
+  // Today marker
+  const todayPin=`<div class="ftl-today" style="left:${todayPct.toFixed(2)}%"><div class="ftl-tline"></div><div class="ftl-tdot"></div><div class="ftl-tlbl">TODAY</div></div>`;
+
+  // Race pins — alternating above/below
+  const raceColors=[D2,'rgba(0,212,255,.6)',D1];
+  const racePins=RACES.map((r,i)=>{
+    const pos=pct(r.date instanceof Date?r.date.toISOString().slice(0,10):r.date);
+    const above=i%2===0;
+    const col=raceColors[i]||D1;
+    const d=daysUntil(r.date);
+    const unconf=r.confirmed===false;
+    return`<div class="ftl-race" style="left:${pos.toFixed(2)}%"><div class="ftl-rline" style="background:${col}"></div><div class="ftl-rdot" style="background:${col};box-shadow:0 0 6px ${col}"></div><div class="ftl-rlbl ${above?'ftl-above':'ftl-below'}" style="color:${col}">${r.label}${unconf?' <span class="ftl-unc">⚠</span>':''}<br><span class="ftl-rdays">${d>0?d+'d':'RACE DAY'}</span></div></div>`;
+  }).join('');
+
+  document.getElementById('phase-tl').innerHTML=`<div class="ftl-wrap"><div class="ftl-track">${phaseFills}${todayPin}${racePins}</div><div class="ftl-leg"><span class="ftl-li"><span class="ftl-ld" style="background:rgba(0,212,255,.30)"></span>Complete</span><span class="ftl-li"><span class="ftl-ld" style="background:rgba(0,212,255,.16);border:1px dashed rgba(0,212,255,.4)"></span>Active</span><span class="ftl-li"><span class="ftl-ld" style="background:rgba(100,116,139,.08);border:1px dashed rgba(100,116,139,.3)"></span>Planned</span></div></div>`;
+  document.getElementById('phase-detail').style.display='none';
+  document.getElementById('phase-detail').style.cssText='display:none;margin:8px 20px 16px;padding:12px;background:var(--sf2);border-radius:4px;font-size:.7rem;color:var(--m2);line-height:1.7;border-left:2px solid var(--cy-bd)';
 }
 // ── CHART REGISTRY ──────────────────────────────────────────────────────
 const CHARTS={};
@@ -1880,6 +2029,9 @@ document.addEventListener('DOMContentLoaded',()=>{
       RACES=data.RACES.map(r=>({...r,date:new Date(r.date)}));
       ATHLETE=data.ATHLETE;
       READINESS_LOG=data.READINESS_LOG;
+      PHASES=data.PHASES||[];
+      PROGRESSION=data.PROGRESSION||[];
+      MILESTONES=data.MILESTONES||[];
       loadingEl.style.display='none';
       renderValidation();
       _A=computeAllAnalytics();
