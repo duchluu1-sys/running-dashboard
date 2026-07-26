@@ -381,9 +381,10 @@ body{background:var(--bg);color:var(--tx);font-family:var(--sans);font-size:14px
   </div>
   <div class="g2">
     <div class="card">
-      <div class="ch"><div class="cl">GROUND CONTACT TIME</div><div class="cs">all runs with data · inverted Y · lower is better ↑</div></div>
+      <div class="ch"><div class="cl">GROUND CONTACT TIME</div><div class="cs">cohort-segmented · outdoor-easy trend only · hollow = treadmill</div></div>
       <div class="cleg" id="gct-leg"></div>
       <div class="cw"><canvas id="gctChart"></canvas></div>
+      <div id="gct-cohort-table" style="padding:8px 20px 14px"></div>
     </div>
     <div class="card gn-border">
       <div class="ch"><div class="cl">VERTICAL RATIO</div><div class="cs">lower = less vertical oscillation = better economy</div></div>
@@ -543,9 +544,25 @@ function renderSparseCard(id,title,n,target,note){
 }
 
 function computeGCTTrend(runs){
-  const pts=runs.filter(r=>r.gct).map(r=>({r:r.r,date:r.date,gct:r.gct,type:r.type}));
+  const fam=t=>t.startsWith('quality')?'quality':t;
+  const pts=runs.filter(r=>r.gct).map(r=>({r:r.r,date:r.date,gct:r.gct,type:fam(r.type),surface:r.surface||'outdoor'}));
+  const cohMap={};
+  pts.forEach(p=>{
+    const k=`${p.surface}-${p.type}`;
+    if(!cohMap[k])cohMap[k]={key:k,surface:p.surface,type:p.type,pts:[]};
+    cohMap[k].pts.push(p);
+  });
+  const cohorts=Object.values(cohMap).map(c=>{
+    const n=c.pts.length;
+    const mean=Math.round(c.pts.reduce((s,p)=>s+p.gct,0)/n);
+    const best=Math.min(...c.pts.map(p=>p.gct));
+    const h=Math.floor(n/2);
+    const delta=h>=2?Math.round(c.pts.slice(-h).reduce((s,p)=>s+p.gct,0)/h - c.pts.slice(0,h).reduce((s,p)=>s+p.gct,0)/h):null;
+    const movingAvg=n>=5?(()=>{const v=c.pts.map(p=>p.gct),ma=movAvg(v,5);return c.pts.map((p,i)=>({r:p.r,ma:ma[i]}));})():null;
+    return{...c,n,mean,best,delta,movingAvg};
+  });
   const vals=pts.map(p=>p.gct),ma=movAvg(vals,5);
-  return{pts,movingAvg:pts.map((p,i)=>({r:p.r,ma:ma[i]}))};
+  return{pts,movingAvg:pts.map((p,i)=>({r:p.r,ma:ma[i]})),cohorts};
 }
 
 function computeVRTrend(runs){
@@ -1091,33 +1108,84 @@ function borderLine(){return{color:'rgba(139,92,246,.12)'}}
 
 // ── GCT CHART ──────────────────────────────────────────────────────────
 function initGCTChart(a){
-  const isMob=window.innerWidth<=600;
-  const d=isMob?a.gct.pts.slice(-15):a.gct.pts;
-  const tc={'quality_a':'#7c3aed','quality_b':'#a855f7','long':'#06b6d4','easy':'#10b981'};
-  const minR=d[0].r,maxR=d[d.length-1].r;
-  const mavgD=isMob?a.gct.movingAvg.slice(-15):a.gct.movingAvg;
-  CHARTS.gct=new Chart(document.getElementById('gctChart').getContext('2d'),{
-    type:'scatter',
-    data:{datasets:[
-      {type:'line',label:'_trend',data:d.map(p=>({x:p.r,y:p.gct})),borderColor:'rgba(148,163,184,.15)',borderWidth:1,pointRadius:0,fill:false,tension:.3,order:3},
-      {type:'line',label:'5-Run Avg',data:mavgD.map(p=>({x:p.r,y:p.ma})),borderColor:'#a855f7',borderWidth:2,pointRadius:0,fill:false,tension:.3,order:2},
-      {type:'scatter',label:'GCT',data:d.map(p=>({x:p.r,y:p.gct,lbl:p.label||`R${p.r}`,t:p.type})),backgroundColor:d.map(p=>tc[p.type]),borderColor:d.map(p=>tc[p.type]),pointRadius:5,pointHoverRadius:8,pointBorderWidth:0,order:1},
-      {type:'line',label:'Baseline 361ms',data:[{x:minR,y:361},{x:maxR,y:361}],borderColor:'#ef4444',borderDash:[5,5],borderWidth:1.5,pointRadius:0,fill:false,backgroundColor:'transparent',order:4},
-      {type:'line',label:'Target 320ms',data:[{x:minR,y:320},{x:maxR,y:320}],borderColor:'#f59e0b',borderDash:[5,5],borderWidth:1.5,pointRadius:0,fill:false,backgroundColor:'transparent',order:4},
-      {type:'line',label:'Best 303ms',data:[{x:minR,y:303},{x:maxR,y:303}],borderColor:'#10b981',borderDash:[5,5],borderWidth:1.5,pointRadius:0,fill:false,backgroundColor:'transparent',order:4},
-    ]},
-    options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'nearest',intersect:false},plugins:{legend:{display:false},tooltip:{...CHART_DEFAULTS,callbacks:{title:i=>i[0].raw.lbl||i[0].dataset.label,label:c=>c.raw.t?`GCT: ${c.raw.y}ms (${c.raw.t})`:`${c.dataset.label}: ${c.raw.y}ms`}}},scales:{x:{type:'linear',ticks:{...xTick(),callback:v=>`R${v}`,stepSize:2},grid:gridLine(),border:borderLine()},y:{reverse:true,min:290,max:380,title:{display:true,text:'GCT ms — lower is better ↑',color:'#64748b',font:{family:'Inter',size:10}},ticks:{...yTick(),callback:v=>`${v}ms`},grid:gridLine(),border:borderLine()}}}
+  const tc={quality:"#7c3aed",long:"#06b6d4",easy:"#10b981"};
+  const allPts=a.gct.pts;
+  if(!allPts.length)return;
+  const outdoor=allPts.filter(p=>p.surface==='outdoor');
+  const treadmill=allPts.filter(p=>p.surface==='treadmill');
+  const oeC=a.gct.cohorts.find(c=>c.key==='outdoor-easy');
+  const olC=a.gct.cohorts.find(c=>c.key==='outdoor-long');
+  const datasets=[
+    {type:"scatter",label:"Outdoor",
+     data:outdoor.map(p=>({x:p.r,y:p.gct,lbl:`R${p.r}`,t:p.type,s:"outdoor"})),
+     backgroundColor:outdoor.map(p=>tc[p.type]),
+     borderColor:outdoor.map(p=>tc[p.type]),
+     borderWidth:0,pointRadius:5,pointHoverRadius:8,order:1},
+    {type:"scatter",label:"Treadmill",
+     data:treadmill.map(p=>({x:p.r,y:p.gct,lbl:`R${p.r}`,t:p.type,s:"treadmill"})),
+     backgroundColor:treadmill.map(()=>"rgba(0,0,0,0)"),
+     borderColor:treadmill.map(p=>tc[p.type]),
+     borderWidth:2,pointRadius:5,pointHoverRadius:8,order:1},
+  ];
+  if(oeC&&oeC.movingAvg)datasets.push(
+    {type:"line",label:"Outdoor easy trend",
+     data:oeC.movingAvg.map(p=>({x:p.r,y:p.ma})),
+     borderColor:"#10b981",borderWidth:2,pointRadius:0,fill:false,tension:.3,backgroundColor:"transparent",order:2});
+  if(oeC){const r0=oeC.pts[0].r,r1=oeC.pts[oeC.pts.length-1].r;
+    datasets.push({type:"line",label:`OE avg ${oeC.mean}ms`,
+     data:[{x:r0,y:oeC.mean},{x:r1,y:oeC.mean}],
+     borderColor:"rgba(16,185,129,.35)",borderDash:[5,5],borderWidth:1.5,pointRadius:0,fill:false,backgroundColor:"transparent",order:3});}
+  if(olC){const r0=olC.pts[0].r,r1=olC.pts[olC.pts.length-1].r;
+    datasets.push({type:"line",label:`OL avg ${olC.mean}ms`,
+     data:[{x:r0,y:olC.mean},{x:r1,y:olC.mean}],
+     borderColor:"rgba(6,182,212,.35)",borderDash:[5,5],borderWidth:1.5,pointRadius:0,fill:false,backgroundColor:"transparent",order:3});}
+  CHARTS.gct=new Chart(document.getElementById("gctChart").getContext("2d"),{
+    type:"scatter",data:{datasets},
+    options:{responsive:true,maintainAspectRatio:false,
+      interaction:{mode:"nearest",intersect:false},
+      plugins:{legend:{display:false},
+        tooltip:{...CHART_DEFAULTS,callbacks:{
+          title:i=>i[0].raw.lbl||i[0].dataset.label,
+          label:c=>c.raw.t?`GCT: ${c.raw.y}ms (${c.raw.t} · ${c.raw.s})`:c.dataset.label+": "+c.raw.y+"ms"}}},
+      scales:{
+        x:{type:"linear",ticks:{...xTick(),callback:v=>`R${v}`,stepSize:2},grid:gridLine(),border:borderLine()},
+        y:{reverse:true,min:280,max:390,
+          title:{display:true,text:"GCT ms — lower is better ↑",color:"#64748b",font:{family:"Inter",size:10}},
+          ticks:{...yTick(),callback:v=>`${v}ms`},grid:gridLine(),border:borderLine()}}}
   });
-  document.getElementById('gct-leg').innerHTML=`
+  document.getElementById("gct-leg").innerHTML=`
     <div class="li"><span class="ld" style="background:#7c3aed"></span>Quality</div>
     <div class="li"><span class="ld" style="background:#06b6d4"></span>Long</div>
     <div class="li"><span class="ld" style="background:#10b981"></span>Easy</div>
-    <div class="li"><span class="ld" style="background:#a855f7;width:20px;height:2px;border-radius:1px"></span>5-Run Avg</div>
-    <div class="li"><span class="ld-line" style="background:#ef4444"></span>Baseline</div>
-    <div class="li"><span class="ld-line" style="background:#f59e0b"></span>Target 320</div>
-    <div class="li"><span class="ld-line" style="background:#10b981"></span>Best 303</div>`;
+    <div class="li" style="color:var(--mu);font-size:.5rem">● outdoor &nbsp;·&nbsp; ○ treadmill</div>
+    <div class="li"><span class="ld-line" style="background:#10b981"></span>Easy trend (outdoor, n≥5)</div>`;
+  renderGCTCohortTable(a.gct.cohorts);
 }
 
+function renderGCTCohortTable(cohorts){
+  const el=document.getElementById("gct-cohort-table");
+  if(!el)return;
+  const ORDER=['outdoor-easy','outdoor-long','outdoor-quality','treadmill-easy','treadmill-long','treadmill-quality'];
+  const NAMES={'outdoor-easy':'Outdoor Easy','outdoor-long':'Outdoor Long','outdoor-quality':'Outdoor Quality','treadmill-easy':'Treadmill Easy','treadmill-long':'Treadmill Long','treadmill-quality':'Treadmill Quality'};
+  const COL={'outdoor-easy':'#10b981','outdoor-long':'#06b6d4','outdoor-quality':'#7c3aed','treadmill-easy':'rgba(16,185,129,.6)','treadmill-long':'rgba(6,182,212,.6)','treadmill-quality':'rgba(124,58,237,.6)'};
+  const rows=ORDER.map(k=>{
+    const c=cohorts.find(x=>x.key===k);
+    if(!c)return'';
+    const d=c.delta!==null?(c.delta>0?`+${c.delta}ms`:`${c.delta}ms`):'—';
+    const dc=c.delta!==null?(c.delta<0?'var(--gn)':c.delta>5?'var(--am)':'var(--m2)'):'var(--mu)';
+    return`<div style="display:grid;grid-template-columns:130px 24px 52px 52px 1fr;gap:0;padding:5px 0;border-bottom:1px solid var(--bd);align-items:center;font-family:var(--mono);font-size:.6rem">
+      <span style="color:${COL[k]}">${NAMES[k]}</span>
+      <span style="color:var(--mu);text-align:center">${c.n}</span>
+      <span style="color:var(--m2)">${c.mean}ms</span>
+      <span style="color:var(--m2)">${c.best}ms</span>
+      <span style="color:${dc};font-size:.55rem">${c.n>=5?d:'n<5 — insufficient'}</span>
+    </div>`;
+  }).join("");
+  el.innerHTML=`<div style="display:grid;grid-template-columns:130px 24px 52px 52px 1fr;gap:0;padding:4px 0 6px;border-bottom:1px solid var(--bdb)">
+    ${["COHORT","N","MEAN","BEST","WITHIN-COHORT Δ"].map(h=>`<div style="font-family:var(--mono);font-size:.46rem;letter-spacing:2px;text-transform:uppercase;color:var(--mu)">${h}</div>`).join("")}
+  </div>${rows}
+  <div style="font-size:.58rem;color:var(--mu);margin-top:8px;line-height:1.7">Trend lines for n≥5 only. Cohort means replace global refs (361/320/303). <span style="color:var(--am)">59% of original 361→303ms gain is cohort composition, not adaptation.</span></div>`;
+}
 // ── VOLUME CHART ────────────────────────────────────────────────────────
 function initVolumeChart(a){
   const w=a.wvol;
