@@ -1321,7 +1321,7 @@ const TABS=['today','adaptation','training','health','future'];
 // Charts are created only when their tab is first visited.
 // This prevents the init-in-hidden-tab blur + resize-shake problem.
 let _A; // analytics cache set on DOMContentLoaded
-const TAB_INITED={today:true,adaptation:false,training:false,health:true,future:true};
+const TAB_INITED={today:true,adaptation:false,training:false,health:true,future:false}; // future:false since S28 — vol trajectory chart needs lazy init
 
 function initAdaptationCharts(){
   initPaceHRChart(_A);
