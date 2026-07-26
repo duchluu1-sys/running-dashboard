@@ -263,7 +263,11 @@ body{background:var(--bg);background-image:var(--grid);color:var(--tx);font-fami
   .main{padding:14px 16px}.tabs-top{padding:0 16px}.vitals{padding:0 16px}.hdr{padding:14px 18px}
   .log-hdr,.log-row{grid-template-columns:34px 46px 50px 54px 48px 38px 28px}
   .lc-gct-h,.lc-gct,.lc-vr-h,.lc-vr{display:none}
-  .eval-grid{grid-template-columns:1fr 1fr auto}
+  .eval-grid{grid-template-columns:1fr 1fr}
+  /* S25 — TODAY: stack the decision cards, keep the review pair side by side */
+  .today-grid{grid-template-columns:1fr 1fr;grid-template-areas:"brief brief" "alerts alerts" "mission mission" "status status" "load lastop"}
+  .today-grid:has(#alerts-wrap:empty){grid-template-areas:"brief brief" "mission mission" "status status" "load lastop"}
+  #briefing-body{max-width:none}
 }
 @media(max-width:600px){
   .hdr{padding:10px 13px}.hdr-r{display:none}.hdr-name{font-size:1.15rem}.hdr-pill{display:block}
@@ -277,6 +281,10 @@ body{background:var(--bg);background-image:var(--grid);color:var(--tx);font-fami
   .med-row{grid-template-columns:1fr}.fshort{display:none}
   .rd-block{flex-direction:column;gap:12px}
   .lr-grid{grid-template-columns:repeat(2,1fr)}
+  /* S25 — TODAY: full single column */
+  .today-grid{grid-template-columns:1fr;grid-template-areas:"brief" "alerts" "mission" "status" "load" "lastop"}
+  .today-grid:has(#alerts-wrap:empty){grid-template-areas:"brief" "mission" "status" "load" "lastop"}
+  .eval-grid{grid-template-columns:1fr;gap:8px}
 }
 
 /* ════════════════════════════════════════
@@ -544,6 +552,80 @@ body{background:var(--bg);background-image:var(--grid);color:var(--tx);font-fami
 /* Scrollbar → cyan */
 .log-scroll::-webkit-scrollbar-thumb{background:var(--cy)}
 
+/* ════════════════════════════════════════
+   S25 — TODAY TAB RESPONSIVE GRID
+   Laptop ≥1025 : 2-col paired layout
+   Tablet  ≤1024: single col, load|lastop paired
+   Phone   ≤600 : full single col
+   ════════════════════════════════════════ */
+
+.today-grid{
+  display:grid;
+  gap:16px;
+  grid-template-columns:1.5fr 1fr;
+  grid-template-areas:
+    "brief   brief"
+    "alerts  alerts"
+    "mission status"
+    "load    lastop";
+}
+/* Kill stacked-card margin inside the grid — gap owns spacing now */
+.today-grid > .card{margin-bottom:0}
+
+.tg-brief{grid-area:brief}
+.tg-alerts{grid-area:alerts}
+.tg-mission{grid-area:mission}
+.tg-status{grid-area:status}
+.tg-load{grid-area:load}
+.tg-lastop{grid-area:lastop}
+
+/* Drop the alerts row entirely when there are no alerts —
+   prevents a phantom 16px gap */
+.today-grid:has(#alerts-wrap:empty){
+  grid-template-areas:
+    "brief   brief"
+    "mission status"
+    "load    lastop";
+}
+
+/* Briefing prose capped for readability — a 1800px line is unreadable */
+#briefing-body{max-width:105ch}
+
+/* Readiness block stacks vertically now that the card is narrower */
+.rd-block{flex-direction:column;gap:10px;padding:18px 20px 12px}
+.rd-main{width:100%}
+
+/* Manual entry toggle */
+.eval-toggle{
+  width:100%;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:8px;
+  padding:10px 20px;
+  background:transparent;
+  border:none;
+  border-top:1px solid var(--bd);
+  color:var(--mu);
+  font-family:var(--stm);
+  font-size:.52rem;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  cursor:pointer;
+  transition:color .2s;
+  min-height:44px;
+}
+.eval-toggle:hover{color:var(--cy)}
+.eval-chev{transition:transform .2s;font-size:.7rem}
+.eval-toggle.open{color:var(--cy)}
+.eval-toggle.open .eval-chev{transform:rotate(180deg)}
+
+.eval-section{display:none;border-top:none;padding:0 20px 16px}
+.eval-section.open{display:block}
+/* Narrow card → inputs stack 2-up with the button full width */
+.eval-grid{grid-template-columns:1fr 1fr;gap:10px}
+.eval-grid > button{grid-column:1/-1}
+
 </style>
 </head>
 <body>
@@ -573,44 +655,46 @@ body{background:var(--bg);background-image:var(--grid);color:var(--tx);font-fami
 <!-- ── TODAY ── -->
 <div id="tab-today" class="tc active">
   <div id="validation-banner"></div>
-  <div class="card hud-card" id="briefing-card">
-    <div class="ch"><div class="cl">SYSTEM BRIEFING</div><div class="cs" id="briefing-date">pending first update</div></div>
-    <div class="cb" id="briefing-body">Morning readiness update not yet logged today. Run morning readiness protocol in Claude Desktop to generate briefing.</div>
-  </div>
-  <div id="alerts-wrap"></div>
-  <div class="card hud-card hud-glow" id="mission-card">
-    <div class="ch"><div class="cl">TODAY'S MISSION</div><div class="cs">week schedule · protocol reminder</div></div>
-    <div class="ts-wrap" id="ts-body"></div>
-  </div>
-  <div class="card hud-card" id="rd-card">
-    <div class="ch"><div class="cl">SYSTEM STATUS</div><div class="cs" id="rd-sub"></div></div>
-    <div class="rd-block">
-      <div>
-        <div class="rd-status"><span class="sdot" id="rd-dot"></span><span class="rd-label" id="rd-label"></span></div>
-        <div class="rd-note" id="rd-note"></div>
-        <div class="rd-time" id="rd-time"></div>
-      </div>
-      <div style="flex:1">
-        <div class="eval-section">
-          <div style="font-family:var(--mono);font-size:.52rem;letter-spacing:2px;text-transform:uppercase;color:var(--mu);margin-bottom:10px">UPDATE READINESS</div>
-          <div class="eval-grid">
-            <div><label class="ev-lbl">HRV LAST NIGHT (MS)</label><input type="number" id="input-hrv" placeholder="e.g. 71" class="ev-inp"></div>
-            <div><label class="ev-lbl">RHR THIS MORNING (BPM)</label><input type="number" id="input-rhr" placeholder="e.g. 41" class="ev-inp"></div>
-            <div><label class="ev-lbl">SLEEP SCORE (0-100)</label><input type="number" id="input-sleep" placeholder="e.g. 74" class="ev-inp"></div>
-            <button onclick="evaluateReadiness()" class="ev-btn">EVALUATE</button>
-          </div>
-          <div class="eval-res" id="eval-res"></div>
+  <div class="today-grid">
+    <div class="card hud-card tg-brief" id="briefing-card">
+      <div class="ch"><div class="cl">SYSTEM BRIEFING</div><div class="cs" id="briefing-date">pending first update</div></div>
+      <div class="cb" id="briefing-body">Morning readiness update not yet logged today. Run morning readiness protocol in Claude Desktop to generate briefing.</div>
+    </div>
+    <div id="alerts-wrap" class="tg-alerts"></div>
+    <div class="card hud-card hud-glow tg-mission" id="mission-card">
+      <div class="ch"><div class="cl">TODAY'S MISSION</div><div class="cs">week schedule · protocol reminder</div></div>
+      <div class="ts-wrap" id="ts-body"></div>
+    </div>
+    <div class="card hud-card tg-status" id="rd-card">
+      <div class="ch"><div class="cl">SYSTEM STATUS</div><div class="cs" id="rd-sub"></div></div>
+      <div class="rd-block">
+        <div class="rd-main">
+          <div class="rd-status"><span class="sdot" id="rd-dot"></span><span class="rd-label" id="rd-label"></span></div>
+          <div class="rd-note" id="rd-note"></div>
+          <div class="rd-time" id="rd-time"></div>
         </div>
       </div>
+      <button class="eval-toggle" id="eval-toggle" onclick="toggleEval()">
+        <span>MANUAL READINESS ENTRY</span><span class="eval-chev">&#9662;</span>
+      </button>
+      <div class="eval-section" id="eval-section">
+        <div class="eval-grid">
+          <div><label class="ev-lbl">HRV LAST NIGHT (MS)</label><input type="number" id="input-hrv" placeholder="e.g. 71" class="ev-inp"></div>
+          <div><label class="ev-lbl">RHR THIS MORNING (BPM)</label><input type="number" id="input-rhr" placeholder="e.g. 41" class="ev-inp"></div>
+          <div><label class="ev-lbl">SLEEP SCORE (0-100)</label><input type="number" id="input-sleep" placeholder="e.g. 74" class="ev-inp"></div>
+          <button onclick="evaluateReadiness()" class="ev-btn">EVALUATE</button>
+        </div>
+        <div class="eval-res" id="eval-res"></div>
+      </div>
     </div>
-  </div>
-  <div class="card hud-card" id="load-card">
-    <div class="ch"><div class="cl">TRAINING LOAD</div><div class="cs" id="load-sub">ACWR · 4-week rolling</div></div>
-    <div id="load-body" class="cb"></div>
-  </div>
-  <div class="card hud-card" id="lr-card">
-    <div class="ch"><div class="cl">LAST OPERATION</div><div class="cs" id="lr-sub"></div></div>
-    <div class="lr-wrap" id="lr-body"></div>
+    <div class="card hud-card tg-load" id="load-card">
+      <div class="ch"><div class="cl">TRAINING LOAD</div><div class="cs" id="load-sub">ACWR · 4-week rolling</div></div>
+      <div id="load-body" class="cb"></div>
+    </div>
+    <div class="card hud-card tg-lastop" id="lr-card">
+      <div class="ch"><div class="cl">LAST OPERATION</div><div class="cs" id="lr-sub"></div></div>
+      <div class="lr-wrap" id="lr-body"></div>
+    </div>
   </div>
 </div>
 <!-- ── ADAPTATION ── -->
@@ -1125,6 +1209,11 @@ function renderToday(a){
   _rt.textContent=(_f.level==='fresh'?'':'⚠ ')+`Readiness: ${a.rdns.lastDate||'—'} · ${_f.label}`+(_f.level==='fresh'?'':' — rerun morning protocol');
   _rt.style.color=_f.color;
   document.getElementById('rd-sub').textContent=`HRV ${a.rdns.hrv}ms · RHR ${a.rdns.rhr}bpm · ${a.rdns.reason.slice(0,60)}`;
+  // S25 — if today's readiness is missing, surface the manual form unprompted
+  if(_f.level!=='fresh'){
+    const _es=document.getElementById('eval-section'),_eb=document.getElementById('eval-toggle');
+    if(_es&&_eb){_es.classList.add('open');_eb.classList.add('open');}
+  }
 
   // Last run
   const lr=RUNS[RUNS.length-1];
@@ -1165,6 +1254,15 @@ function renderToday(a){
     <div class="ts-type">${ts.day.toUpperCase()} — ${ts.label}</div>
     <div class="ts-detail">${ts.hrBand[0]?`HR ${ts.hrBand[0]}–${ts.hrBand[1]}`:`HR ceiling ${ts.hrBand[1]}`} bpm ·${ts.type==='quality_a'?` · Quality A · 5×4 min intervals · ceiling clean = 0% above ${ts.hrCeiling}`:ts.type==='quality_b'?` · Quality B · 20 min continuous @ 8.6 km/h`:ts.type==='long'?` · Long run · Novablast 5 · gel at 40 min + electrolytes`:''}</div>
     <div class="ts-proto">Form cue: ${ATHLETE.formCue}</div>`;
+}
+// S25 — manual readiness entry is a fallback, collapsed by default.
+// Auto-expands when no readiness has been logged today.
+function toggleEval(){
+  const sec=document.getElementById('eval-section');
+  const btn=document.getElementById('eval-toggle');
+  if(!sec||!btn)return;
+  const open=sec.classList.toggle('open');
+  btn.classList.toggle('open',open);
 }
 function toggleAlert(i){const c=document.getElementById(`alc-${i}`),d=document.getElementById(`ald-${i}`);c.classList.toggle('open');d.classList.toggle('open')}
 
