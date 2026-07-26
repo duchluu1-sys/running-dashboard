@@ -286,8 +286,17 @@ body{background:var(--bg);color:var(--tx);font-family:var(--sans);font-size:14px
 <!-- ── TODAY ── -->
 <div id="tab-today" class="tc active">
   <div id="validation-banner"></div>
+  <div class="card" id="briefing-card">
+    <div class="ch"><div class="cl">SYSTEM BRIEFING</div><div class="cs" id="briefing-date">pending first update</div></div>
+    <div class="cb" id="briefing-body" style="color:var(--m2);font-family:var(--mono);font-size:.72rem;line-height:1.8;letter-spacing:.3px">Morning readiness update not yet logged today. Run morning readiness protocol in Claude Desktop to generate briefing.</div>
+  </div>
+  <div id="alerts-wrap"></div>
+  <div class="card">
+    <div class="ch"><div class="cl">TODAY'S MISSION</div><div class="cs">week schedule · protocol reminder</div></div>
+    <div class="ts-wrap" id="ts-body"></div>
+  </div>
   <div class="card" id="rd-card">
-    <div class="ch"><div class="cl">READINESS</div><div class="cs" id="rd-sub"></div></div>
+    <div class="ch"><div class="cl">SYSTEM STATUS</div><div class="cs" id="rd-sub"></div></div>
     <div class="rd-block">
       <div>
         <div class="rd-status"><span class="sdot" id="rd-dot"></span><span class="rd-label" id="rd-label"></span></div>
@@ -309,13 +318,8 @@ body{background:var(--bg);color:var(--tx);font-family:var(--sans);font-size:14px
     </div>
   </div>
   <div class="card" id="lr-card">
-    <div class="ch"><div class="cl">LAST RUN</div><div class="cs" id="lr-sub"></div></div>
+    <div class="ch"><div class="cl">LAST OPERATION</div><div class="cs" id="lr-sub"></div></div>
     <div class="lr-wrap" id="lr-body"></div>
-  </div>
-  <div id="alerts-wrap"></div>
-  <div class="card">
-    <div class="ch"><div class="cl">TODAY'S SESSION</div><div class="cs">week schedule · protocol reminder</div></div>
-    <div class="ts-wrap" id="ts-body"></div>
   </div>
 </div>
 <!-- ── ADAPTATION ── -->
