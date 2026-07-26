@@ -649,6 +649,12 @@ body{background:var(--bg);background-image:var(--grid);color:var(--tx);font-fami
     "qual       milestones";
 }
 .future-grid>.card{margin-bottom:0}
+/* Inner components carry their own padding — kill the .cb default */
+#vol-traj-body,#gate-forecast-body,#qual-prog-body,#milestone-body{padding:0}
+/* Overflow guard: a card must never paint outside its own grid area */
+.future-grid>.card{overflow:hidden;min-width:0}
+.future-grid>.hud-card::before{top:0;left:0}
+.future-grid>.hud-card::after{bottom:0;right:0}
 .fg-races{grid-area:races}
 .fg-timeline{grid-area:timeline}
 .fg-voltraj{grid-area:voltraj}
@@ -658,18 +664,6 @@ body{background:var(--bg);background-image:var(--grid);color:var(--tx);font-fami
 #tab-future .ch{border-left-color:var(--cy-bd)}
 #tab-future .cl{color:var(--cy)}
 
-/* S28 placeholder */
-.s28-stub{
-  height:80px;
-  display:flex;
-  align-items:center;
-  padding:0 20px;
-  color:var(--mu);
-  font-family:var(--stm);
-  font-size:.6rem;
-  letter-spacing:2px;
-}
-.s28-stub::after{content:'COMING NEXT BUILD'}
 
 /* PHASE TIMELINE — absolute-positioned track */
 .ftl-wrap{padding:44px 20px 24px;overflow-x:auto}
@@ -742,8 +736,6 @@ body{background:var(--bg);background-image:var(--grid);color:var(--tx);font-fami
    S28 — VOLUME TRAJECTORY + QUALITY PROGRESSION
    ════════════════════════════════════════ */
 
-/* Suppress placeholder once JS injects content */
-.s28-stub:not(:empty)::after{content:'';display:none}
 
 /* Volume trajectory chart container */
 .vol-traj-wrap{height:180px;padding:4px 16px 12px}
@@ -1041,19 +1033,19 @@ body{background:var(--bg);background-image:var(--grid);color:var(--tx);font-fami
     </div>
     <div class="card hud-card fg-voltraj" id="vol-traj-card">
       <div class="ch"><div class="cl">VOLUME TRAJECTORY</div><div class="cs">actual vs plan · W9–24</div></div>
-      <div id="vol-traj-body" class="cb s28-stub"></div>
+      <div id="vol-traj-body" class="cb"></div>
     </div>
     <div class="card hud-card fg-gates" id="gate-forecast-card">
       <div class="ch"><div class="cl">GATE FORECAST</div><div class="cs">6 hard gates · Phase 3 entry Oct 26</div></div>
-      <div id="gate-forecast-body" class="cb s28-stub"></div>
+      <div id="gate-forecast-body" class="cb"></div>
     </div>
     <div class="card hud-card fg-qual" id="qual-prog-card">
       <div class="ch"><div class="cl">QUALITY PROGRESSION</div><div class="cs">W9–24 · session targets</div></div>
-      <div id="qual-prog-body" class="cb s28-stub"></div>
+      <div id="qual-prog-body" class="cb"></div>
     </div>
     <div class="card hud-card fg-milestones" id="milestone-card">
       <div class="ch"><div class="cl">MILESTONE CALENDAR</div><div class="cs">Jul 30 BV 108 · Oct 19 Race 0</div></div>
-      <div id="milestone-body" class="cb s28-stub"></div>
+      <div id="milestone-body" class="cb"></div>
     </div>
   </div>
 </div>
@@ -1987,7 +1979,7 @@ function renderQualProg(){
       <td class="qp-vol">${p.volMin}–${p.volMax}</td>
     </tr>`;
   }).join('');
-  el.innerHTML=`<div style="overflow-x:auto"><table class="qp-table">
+  el.innerHTML=`<div style="overflow-x:auto;padding-bottom:12px"><table class="qp-table">
     <thead><tr><th>WEEK</th><th>QUALITY A</th><th>QUALITY B</th><th>LONG RUN</th><th>VOL</th></tr></thead>
     <tbody>${rows}</tbody>
   </table></div>`;
