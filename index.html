@@ -467,6 +467,7 @@ body{background:var(--bg);color:var(--tx);font-family:var(--sans);font-size:14px
 // DATA — populated at runtime by fetch('data.json')
 // ════════════════════════════════════════════════════
 let RUNS, GATES, RACES, ATHLETE, READINESS_LOG;
+let _BYTES=0;   // S16 — byte length of the data.json payload currently loaded
 
 // ════════════════════════════════════════════════════
 // STATIC — HEALTH_FLAGS & MEDICATIONS (kept in HTML, not in data.json)
@@ -819,7 +820,24 @@ function renderValidation(){
   if(!el)return;
   el.innerHTML=errs.length?'<div class="card" style="border:1px solid rgba(239,68,68,.5)"><div class="cl" style="color:var(--rd)">\u26a0 DATA VALIDATION \u2014 '+errs.length+' issue(s)</div>'+errs.map(e=>'<div class="mono" style="font-size:.7rem;color:var(--m2);margin-top:4px">'+e+'</div>').join('')+'</div>':'';
 }
-function isStale(){const d=new Date(ATHLETE.date),t=new Date();d.setHours(0,0,0,0);t.setHours(0,0,0,0);return (t-d)/86400000>=1;}
+// S16 — single source of truth for data freshness.
+// Anchor = last READINESS_LOG entry (written every morning, run day or not).
+// ATHLETE.date is the last RUN date and is NOT a freshness signal — rest days false-positive.
+function dataAgeDays(){
+  const last=READINESS_LOG&&READINESS_LOG.length?READINESS_LOG[READINESS_LOG.length-1]:null;
+  if(!last||!last.date)return null;
+  const d=new Date(last.date+'T00:00:00'),t=new Date();
+  if(isNaN(d.getTime()))return null;
+  t.setHours(0,0,0,0);
+  return Math.round((t-d)/86400000);
+}
+function freshness(){
+  const n=dataAgeDays();
+  if(n===null)return{age:null,level:'none',label:'no readiness data',color:'var(--am)'};
+  if(n<=0)return{age:0,level:'fresh',label:'today',color:''};
+  if(n===1)return{age:1,level:'stale',label:'1 day old',color:'var(--am)'};
+  return{age:n,level:'expired',label:n+' days old',color:'var(--rd)'};
+}
 function renderToday(a){
   const rdCls=a.rdns.status==='GREEN'?'green':a.rdns.status==='AMBER'?'amber':'red';
   const rdVal=a.rdns.status==='GREEN'?'gn':a.rdns.status==='AMBER'?'am':'rd';
@@ -827,7 +845,9 @@ function renderToday(a){
   document.getElementById('rd-label').className=`rd-label c-${rdVal}`;
   document.getElementById('rd-label').textContent=a.rdns.status;
   document.getElementById('rd-note').textContent=a.rdns.note;
-  const _st=isStale(),_rt=document.getElementById('rd-time');_rt.textContent=(_st?'⚠ STALE — ':'')+`Last updated: ${a.rdns.lastDate}`;_rt.style.color=_st?'var(--am)':'';
+  const _f=freshness(),_rt=document.getElementById('rd-time');
+  _rt.textContent=(_f.level==='fresh'?'':'⚠ ')+`Readiness: ${a.rdns.lastDate||'—'} · ${_f.label}`+(_f.level==='fresh'?'':' — rerun morning protocol');
+  _rt.style.color=_f.color;
   document.getElementById('rd-sub').textContent=`HRV ${a.rdns.hrv}ms · RHR ${a.rdns.rhr}bpm · ${a.rdns.reason.slice(0,60)}`;
 
   // Last run
@@ -912,18 +932,18 @@ function renderBriefing(){
   const last=READINESS_LOG&&READINESS_LOG.length?READINESS_LOG[READINESS_LOG.length-1]:null;
   const briefing=last&&last.briefing?last.briefing:null;
   const entryDate=last&&last.date?last.date:'';
-  const today=new Date().toISOString().slice(0,10);
-  const isStale=entryDate&&entryDate!==today;
+  const _f=freshness();
+  const stale=_f.level!=='fresh';
   if(dateEl){
-    dateEl.textContent=isStale?`⚠ ${entryDate} — stale`:entryDate||'pending first update';
-    dateEl.style.color=isStale?'var(--am)':'';
+    dateEl.textContent=stale?`⚠ ${entryDate||'—'} · ${_f.label}`:entryDate||'pending first update';
+    dateEl.style.color=_f.color;
   }
   if(!briefing){
     body.textContent='Morning readiness update not yet logged today. Run morning readiness protocol in Claude Desktop to generate briefing.';
     body.style.color='var(--m2)';
   } else {
     body.textContent=briefing;
-    body.style.color=isStale?'var(--mu)':'';
+    body.style.color=stale?'var(--mu)':'';
   }
 }
 
@@ -1460,12 +1480,14 @@ document.addEventListener('DOMContentLoaded',()=>{
   const loadingEl=document.getElementById('app-loading');
   const errorEl=document.getElementById('app-error');
   const errorMsgEl=document.getElementById('app-error-msg');
-  fetch('data.json')
+  fetch('data.json',{cache:'no-store'})
     .then(r=>{
       if(!r.ok)throw new Error('HTTP '+r.status+' — could not load data.json');
-      return r.json();
+      return r.text();
     })
-    .then(data=>{
+    .then(txt=>{
+      _BYTES=txt.length;
+      const data=JSON.parse(txt);
       RUNS=data.RUNS;
       GATES=data.GATES;
       RACES=data.RACES.map(r=>({...r,date:new Date(r.date)}));
@@ -1491,7 +1513,32 @@ document.addEventListener('DOMContentLoaded',()=>{
 });
 </script>
   <script>
-document.addEventListener('visibilitychange',()=>{if(!document.hidden)location.reload();});
+// S16 — gated auto-refetch. Unconditional reload on every app-switch reset scroll
+// position and tab state for zero gain. Now: away <60s = do nothing at all;
+// otherwise fingerprint data.json and reload only if it actually changed.
+let _hiddenAt=null;
+function _fingerprint(d){
+  try{
+    return [d.RUNS.length,d.RUNS[d.RUNS.length-1].r,
+            d.READINESS_LOG.length,d.READINESS_LOG[d.READINESS_LOG.length-1].date,
+            d.ATHLETE.date].join('|');
+  }catch(e){return null;}
+}
+document.addEventListener('visibilitychange',()=>{
+  if(document.hidden){_hiddenAt=Date.now();return;}
+  if(_hiddenAt===null||Date.now()-_hiddenAt<60000)return;
+  _hiddenAt=null;
+  fetch('data.json',{cache:'no-store'})
+    .then(r=>r.ok?r.text():null)
+    .then(txt=>{
+      if(!txt)return;
+      let d;try{d=JSON.parse(txt);}catch(e){return;}
+      const remote=_fingerprint(d)+'|'+txt.length;
+      const local=_fingerprint({RUNS,READINESS_LOG,ATHLETE})+'|'+_BYTES;
+      if(remote!==local)location.reload();
+    })
+    .catch(()=>{});
+});
 if ("serviceWorker" in navigator) {
     navigator.serviceWorker.register("sw.js");
 }
