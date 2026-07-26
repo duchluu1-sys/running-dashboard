@@ -487,6 +487,60 @@ body{background:var(--bg);background-image:var(--grid);color:var(--tx);font-fami
 /* Phase detail panel — cyan border */
 #phase-detail{border-left-color:var(--cy-bd)!important}
 
+/* ════════════════════════════════════════
+   S21 — HEADER JARVIS TREATMENT
+   ════════════════════════════════════════ */
+
+/* Header border → cyan ambient */
+.hdr{border-bottom-color:var(--cy-bd)}
+
+/* Ghost text → cyan instead of violet */
+.hdr::before{color:rgba(0,212,255,.04)}
+
+/* Name: Rajdhani, white → cyan gradient */
+.hdr-name{
+  font-family:var(--hud);
+  font-size:1.6rem;
+  font-weight:700;
+  letter-spacing:1px;
+  background:linear-gradient(135deg,#ffffff 0%,var(--cy) 100%);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  background-clip:text;
+}
+
+/* Tag line → Share Tech Mono, cyan tint */
+.hdr-tag{
+  font-family:var(--stm);
+  font-size:.48rem;
+  letter-spacing:3px;
+  color:var(--cy);
+  opacity:.65;
+  margin-top:5px;
+}
+
+/* Header right: Share Tech Mono */
+.hdr-date{font-family:var(--stm);font-size:.72rem;color:var(--m2)}
+.hdr-meta{font-family:var(--stm);font-size:.5rem;letter-spacing:2px;color:var(--mu);margin-top:3px}
+
+/* Mobile pill → cyan */
+.hdr-pill{
+  background:rgba(0,212,255,.08);
+  border-color:var(--cy-bd);
+  color:var(--cy);
+  font-family:var(--stm);
+}
+
+/* Tab bar active state → cyan */
+.tab-btn.active{color:var(--cy);border-bottom-color:var(--cy)}
+.tab-btn:hover{color:var(--m2)}
+
+/* Mobile bottom nav active → cyan */
+.pnb.active{color:var(--cy)}
+
+/* Scrollbar → cyan */
+.log-scroll::-webkit-scrollbar-thumb{background:var(--cy)}
+
 </style>
 </head>
 <body>
@@ -500,6 +554,7 @@ body{background:var(--bg);background-image:var(--grid);color:var(--tx);font-fami
   <button onclick="location.reload()" style="background:var(--v);color:#fff;border:none;padding:8px 18px;font-family:var(--mono);font-size:.58rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;cursor:pointer;border-radius:4px;margin-top:8px">RETRY</button>
 </div>
 <header class="hdr">
+  <div class="scan-line"></div>
   <div><div class="hdr-name" id="hdr-name"></div><div class="hdr-tag">SUB-4 MARATHON · NORWEGIAN METHOD · RUNNING OS V2</div><div class="hdr-pill" id="hdr-pill"></div></div>
   <div class="hdr-r"><div class="hdr-date" id="hdr-date"></div><div class="hdr-meta" id="hdr-meta"></div></div>
 </header>
