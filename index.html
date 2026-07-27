@@ -266,12 +266,8 @@ body{background:var(--bg);background-image:var(--grid);color:var(--tx);font-fami
   .log-hdr,.log-row{grid-template-columns:34px 46px 50px 54px 48px 38px 28px}
   .lc-gct-h,.lc-gct,.lc-vr-h,.lc-vr{display:none}
   .eval-grid{grid-template-columns:1fr 1fr}
-  /* S25 — TODAY */
-  .today-grid{grid-template-columns:1fr 1fr;grid-template-areas:"brief brief" "alerts alerts" "mission mission" "status status" "load lastop"}
-  .today-grid:has(#alerts-wrap:empty){grid-template-areas:"brief brief" "mission mission" "status status" "load lastop"}
+  /* S25/S27 — Today/Future grids are now mobile-first (single-col default, 768px 2-col) */
   #briefing-body{max-width:none}
-  /* S27 — FUTURE: collapse to single column on tablet */
-  .future-grid{grid-template-columns:1fr;grid-template-areas:"races" "timeline" "voltraj" "gates" "qual" "milestones"}
 }
 @media(max-width:600px){
   .hdr{padding:10px 13px}.hdr-r{display:none}.hdr-name{font-size:1.15rem}.hdr-pill{display:block}
@@ -285,12 +281,8 @@ body{background:var(--bg);background-image:var(--grid);color:var(--tx);font-fami
   .med-row{grid-template-columns:1fr}.fshort{display:none}
   .rd-block{flex-direction:column;gap:12px}
   .lr-grid{grid-template-columns:repeat(2,1fr)}
-  /* S25 — TODAY */
-  .today-grid{grid-template-columns:1fr;grid-template-areas:"brief" "alerts" "mission" "status" "load" "lastop"}
-  .today-grid:has(#alerts-wrap:empty){grid-template-areas:"brief" "mission" "status" "load" "lastop"}
+  /* S25/S27 — grids handled by mobile-first defaults above */
   .eval-grid{grid-template-columns:1fr;gap:8px}
-  /* S27 — FUTURE */
-  .future-grid{grid-template-columns:1fr;grid-template-areas:"races" "timeline" "voltraj" "gates" "qual" "milestones"}
   .race-pipe{grid-template-columns:1fr}
 }
 
@@ -569,15 +561,24 @@ body{background:var(--bg);background-image:var(--grid);color:var(--tx);font-fami
 .today-grid{
   display:grid;
   gap:16px;
-  grid-template-columns:1.5fr 1fr;
-  grid-template-areas:
-    "brief   brief"
-    "alerts  alerts"
-    "mission status"
-    "load    lastop";
+  grid-template-columns:1fr;
+  grid-template-areas:"brief" "alerts" "status" "mission" "load" "lastop";
+}
+.today-grid:has(#alerts-wrap:empty){
+  grid-template-areas:"brief" "status" "mission" "load" "lastop";
 }
 /* Kill stacked-card margin inside the grid — gap owns spacing now */
-.today-grid > .card{margin-bottom:0}
+.today-grid>.card{margin-bottom:0}
+/* Desktop: restore 2-col */
+@media(min-width:768px){
+  .today-grid{
+    grid-template-columns:1.5fr 1fr;
+    grid-template-areas:"brief brief" "alerts alerts" "mission status" "load lastop";
+  }
+  .today-grid:has(#alerts-wrap:empty){
+    grid-template-areas:"brief brief" "mission status" "load lastop";
+  }
+}
 
 .tg-brief{grid-area:brief}
 .tg-alerts{grid-area:alerts}
@@ -588,12 +589,6 @@ body{background:var(--bg);background-image:var(--grid);color:var(--tx);font-fami
 
 /* Drop the alerts row entirely when there are no alerts —
    prevents a phantom 16px gap */
-.today-grid:has(#alerts-wrap:empty){
-  grid-template-areas:
-    "brief   brief"
-    "mission status"
-    "load    lastop";
-}
 
 /* Briefing prose capped for readability — a 1800px line is unreadable */
 #briefing-body{max-width:105ch}
@@ -637,16 +632,19 @@ body{background:var(--bg);background-image:var(--grid);color:var(--tx);font-fami
    S27 — FUTURE TAB GRID + PHASE TIMELINE
    ════════════════════════════════════════ */
 
-/* FUTURE tab grid */
+/* FUTURE tab grid — mobile first, single col */
 .future-grid{
   display:grid;
   gap:16px;
-  grid-template-columns:1fr 1fr;
-  grid-template-areas:
-    "races      races"
-    "timeline   timeline"
-    "voltraj    gates"
-    "qual       milestones";
+  grid-template-columns:1fr;
+  grid-template-areas:"races" "timeline" "voltraj" "gates" "qual" "milestones";
+}
+/* Desktop: restore 2-col */
+@media(min-width:768px){
+  .future-grid{
+    grid-template-columns:1fr 1fr;
+    grid-template-areas:"races races" "timeline timeline" "voltraj gates" "qual milestones";
+  }
 }
 .future-grid>.card{margin-bottom:0}
 /* Inner components carry their own padding — kill the .cb default */
@@ -797,9 +795,7 @@ body{background:var(--bg);background-image:var(--grid);color:var(--tx);font-fami
 /* Milestone calendar */
 .ms-list{padding:12px 16px;display:flex;flex-direction:column;gap:0}
 .ms-row{
-  display:grid;
-  grid-template-columns:80px 1fr 20px;
-  align-items:center;gap:10px;
+  display:block;
   padding:8px 6px;
   border-bottom:1px solid rgba(0,212,255,.04);
   position:relative;
@@ -836,6 +832,17 @@ body{background:var(--bg);background-image:var(--grid);color:var(--tx);font-fami
 /* hdr-r flex for button + date/meta stack */
 .hdr-r{display:flex;align-items:center;gap:0}
 
+/* No-orphan: value+unit stays on one line */
+.lf-val,.stat-val,.vit-val{white-space:nowrap}
+/* Body prose: strip letter-spacing so content fits at mobile widths */
+.ts-detail,.gc-short,.gf-short,.ms-label,.gf-name,.rd-note{letter-spacing:0}
+/* Milestone: stack date above label on mobile */
+@media(max-width:767px){
+  .ms-row{grid-template-columns:1fr;gap:2px;padding:8px 6px 6px}
+  .ms-date{font-size:.56rem}
+  .gf-row{grid-template-columns:20px 1fr;gap:6px}
+  .gf-eta{grid-column:2;font-size:.48rem;margin-top:-2px;text-align:left}
+}
 /* Safe area insets for notched devices */
 .hdr{padding-top:max(14px,env(safe-area-inset-top,0px))}
 .pnav{padding-bottom:max(0px,env(safe-area-inset-bottom,0px))}
@@ -878,16 +885,16 @@ body{background:var(--bg);background-image:var(--grid);color:var(--tx);font-fami
   <div id="validation-banner"></div>
   <div class="today-grid">
     <div class="card hud-card tg-brief" id="briefing-card">
-      <div class="ch"><div class="cl">SYSTEM BRIEFING</div><div class="cs" id="briefing-date">pending first update</div></div>
+      <div class="ch"><div class="cl">BRIEFING</div><div class="cs" id="briefing-date">pending first update</div></div>
       <div class="cb" id="briefing-body">Morning readiness update not yet logged today. Run morning readiness protocol in Claude Desktop to generate briefing.</div>
     </div>
     <div id="alerts-wrap" class="tg-alerts"></div>
     <div class="card hud-card hud-glow tg-mission" id="mission-card">
-      <div class="ch"><div class="cl">TODAY'S MISSION</div><div class="cs">week schedule · protocol reminder</div></div>
+      <div class="ch"><div class="cl">MISSION</div><div class="cs">week schedule · protocol reminder</div></div>
       <div class="ts-wrap" id="ts-body"></div>
     </div>
     <div class="card hud-card tg-status" id="rd-card">
-      <div class="ch"><div class="cl">SYSTEM STATUS</div><div class="cs" id="rd-sub"></div></div>
+      <div class="ch"><div class="cl">STATUS</div><div class="cs" id="rd-sub"></div></div>
       <div class="rd-block">
         <div class="rd-main">
           <div class="rd-status"><span class="sdot" id="rd-dot"></span><span class="rd-label" id="rd-label"></span></div>
@@ -909,11 +916,11 @@ body{background:var(--bg);background-image:var(--grid);color:var(--tx);font-fami
       </div>
     </div>
     <div class="card hud-card tg-load" id="load-card">
-      <div class="ch"><div class="cl">TRAINING LOAD</div><div class="cs" id="load-sub">ACWR · 4-week rolling</div></div>
+      <div class="ch"><div class="cl">LOAD</div><div class="cs" id="load-sub">ACWR</div></div>
       <div id="load-body" class="cb"></div>
     </div>
     <div class="card hud-card tg-lastop" id="lr-card">
-      <div class="ch"><div class="cl">LAST OPERATION</div><div class="cs" id="lr-sub"></div></div>
+      <div class="ch"><div class="cl">LAST RUN</div><div class="cs" id="lr-sub"></div></div>
       <div class="lr-wrap" id="lr-body"></div>
     </div>
   </div>
@@ -1026,28 +1033,28 @@ body{background:var(--bg);background-image:var(--grid);color:var(--tx);font-fami
 <div id="tab-future" class="tc">
   <div class="future-grid">
     <div class="card hud-card fg-races">
-      <div class="ch"><div class="cl">RACE PIPELINE</div><div class="cs">primary objective: VPBank Hanoi Marathon · October 2027</div></div>
+      <div class="ch"><div class="cl">RACES</div><div class="cs">primary objective: VPBank Hanoi Marathon · October 2027</div></div>
       <div id="race-p"></div>
     </div>
     <div class="card hud-card fg-timeline">
-      <div class="ch"><div class="cl">PHASE TIMELINE</div><div class="cs">tap segment for detail · Phase 1→2→3</div></div>
+      <div class="ch"><div class="cl">TIMELINE</div><div class="cs">tap segment for detail · Phase 1→2→3</div></div>
       <div id="phase-tl"></div>
       <div id="phase-detail"></div>
     </div>
     <div class="card hud-card fg-voltraj" id="vol-traj-card">
-      <div class="ch"><div class="cl">VOLUME TRAJECTORY</div><div class="cs">actual vs plan · W9–24</div></div>
+      <div class="ch"><div class="cl">VOLUME</div><div class="cs">actual vs plan · W9–24</div></div>
       <div id="vol-traj-body" class="cb"></div>
     </div>
     <div class="card hud-card fg-gates" id="gate-forecast-card">
-      <div class="ch"><div class="cl">GATE FORECAST</div><div class="cs">6 hard gates · Phase 3 entry Oct 26</div></div>
+      <div class="ch"><div class="cl">GATES</div><div class="cs">6 hard gates · Phase 3 entry Oct 26</div></div>
       <div id="gate-forecast-body" class="cb"></div>
     </div>
     <div class="card hud-card fg-qual" id="qual-prog-card">
-      <div class="ch"><div class="cl">QUALITY PROGRESSION</div><div class="cs">W9–24 · session targets</div></div>
+      <div class="ch"><div class="cl">QUALITY</div><div class="cs">W9–24 · session targets</div></div>
       <div id="qual-prog-body" class="cb"></div>
     </div>
     <div class="card hud-card fg-milestones" id="milestone-card">
-      <div class="ch"><div class="cl">MILESTONE CALENDAR</div><div class="cs">Jul 30 BV 108 · Oct 19 Race 0</div></div>
+      <div class="ch"><div class="cl">MILESTONES</div><div class="cs">Jul 30 BV 108 · Oct 19 Race 0</div></div>
       <div id="milestone-body" class="cb"></div>
     </div>
   </div>
@@ -1489,12 +1496,21 @@ function renderToday(a){
         </div>`).join('')}
     </div>`:'';
 
-  // Today session
+  // Today session — state-aware: REST/AMBER suppress or downgrade session
   const ts=a.todaySession;
-  document.getElementById('ts-body').innerHTML=`
-    <div class="ts-type">${ts.day.toUpperCase()} — ${ts.label}</div>
-    <div class="ts-detail">${ts.hrBand[0]?`HR ${ts.hrBand[0]}–${ts.hrBand[1]}`:`HR ceiling ${ts.hrBand[1]}`} bpm ·${ts.type==='quality_a'?` · Quality A · 5×4 min intervals · ceiling clean = 0% above ${ts.hrCeiling}`:ts.type==='quality_b'?` · Quality B · 20 min continuous @ 8.6 km/h`:ts.type==='long'?` · Long run · Novablast 5 · gel at 40 min + electrolytes`:''}</div>
-    <div class="ts-proto">Form cue: ${ATHLETE.formCue}</div>`;
+  const _rdStatus=a.rdns.status;
+  const _sessionLabel=`${ts.day.toUpperCase()} — ${ts.label}`;
+  const _hrLine=ts.hrBand[0]?`HR ${ts.hrBand[0]}–${ts.hrBand[1]} bpm`:`HR ceiling ${ts.hrBand[1]} bpm`;
+  const _sessionDetail=_hrLine+(ts.type==='quality_a'?' · Quality A · 5×4 min intervals':ts.type==='quality_b'?' · Quality B · 20 min continuous @ 8.6 km/h':ts.type==='long'?' · Long run · Novablast 5 · gel at 40 min + electrolytes':'');
+  let _missionHTML;
+  if(_rdStatus==='RED'){
+    _missionHTML=`<div class="ts-type" style="color:var(--rd)">REST</div><div style="font-size:.65rem;color:var(--mu);margin-bottom:10px;text-decoration:line-through;opacity:.45">${_sessionLabel}</div><div class="ts-detail">${a.rdns.reason}</div><div class="ts-proto">Form cue: ${ATHLETE.formCue}</div>`;
+  } else if(_rdStatus==='AMBER'&&ts.type&&ts.type.startsWith('quality')){
+    _missionHTML=`<div class="ts-type" style="color:var(--am)">EASY ONLY</div><div style="font-size:.65rem;color:var(--mu);margin-bottom:10px;opacity:.5">${_sessionLabel} — downgraded</div><div class="ts-detail">${a.rdns.reason}</div><div class="ts-proto">Form cue: ${ATHLETE.formCue}</div>`;
+  } else {
+    _missionHTML=`<div class="ts-type">${_sessionLabel}</div><div class="ts-detail">${_sessionDetail}</div><div class="ts-proto">Form cue: ${ATHLETE.formCue}</div>`;
+  }
+  document.getElementById('ts-body').innerHTML=_missionHTML;
 }
 // S25 — manual readiness entry is a fallback, collapsed by default.
 // Auto-expands when no readiness has been logged today.
@@ -1536,32 +1552,27 @@ function renderLoadCard(a){
   const el=document.getElementById("load-body");
   const sub=document.getElementById("load-sub");
   if(!el||!a.acwr)return;
-  const {acute,chronic,acwr,status,color,last4,monotony,strain}=a.acwr;
-  if(sub)sub.textContent=`ACWR ${acwr||"—"} · ${status} · ${last4.length}-week window`;
-  const maxVol=Math.max(...last4.map(w=>w.total),38);
-  const bars=last4.map(w=>{
-    const pct=(w.total/maxVol*100).toFixed(1);
-    const isCurrent=w.wk===ATHLETE.week;
-    const bc=isCurrent?'var(--cy)':'rgba(0,212,255,.30)';
-    return`<div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px">
-      <div style="font-family:var(--mono);font-size:.55rem;color:${isCurrent?"var(--vb)":"var(--mu)"};">${w.total.toFixed(1)}</div>
-      <div style="width:100%;height:48px;background:var(--sf2);border-radius:2px;position:relative;overflow:hidden">
-        <div style="position:absolute;bottom:0;left:0;right:0;height:${pct}%;background:${bc};border-radius:2px 2px 0 0;transition:height .3s"></div>
-      </div>
-      <div style="font-family:var(--mono);font-size:.48rem;color:var(--mu)">W${w.wk}${isCurrent?"*":""}</div>
-    </div>`;
-  }).join("");
+  const {acute,chronic,acwr,status,color,last4}=a.acwr;
+  if(sub)sub.textContent=`ACWR · ${last4.length}-week window`;
   el.innerHTML=`
-    <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px">
-      <div style="font-family:var(--mono);font-size:2rem;font-weight:700;color:var(--${color})">${acwr||"—"}</div>
-      <div>
-        <div style="font-family:var(--mono);font-size:.7rem;font-weight:700;color:var(--${color})">${status}</div>
-        <div style="font-size:.62rem;color:var(--m2);margin-top:2px">acute ${acute}km · chronic avg ${chronic}km</div>
-        ${monotony?`<div style="font-size:.58rem;color:var(--mu);margin-top:2px">monotony ${monotony} · strain ${strain}</div>`:""}
+    <div class="stats-row" style="margin:-18px -20px 0">
+      <div class="stat-cell">
+        <div class="stat-val ${color}">${acwr||'—'}</div>
+        <div class="stat-lbl">ACWR</div>
+        <div class="stat-sub">${status}</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-val">${acute}<span style="font-size:.75rem">km</span></div>
+        <div class="stat-lbl">ACUTE</div>
+        <div class="stat-sub">this week</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-val">${chronic}<span style="font-size:.75rem">km</span></div>
+        <div class="stat-lbl">CHRONIC</div>
+        <div class="stat-sub">4-wk avg</div>
       </div>
     </div>
-    <div style="display:flex;gap:6px;align-items:flex-end">${bars}</div>
-    <div style="font-family:var(--mono);font-size:.5rem;color:var(--mu);margin-top:8px">safe zone 0.8–1.3 · &gt;1.5 = spike risk · * current week (partial)</div>`;
+    <div style="padding:10px 20px 12px;font-family:var(--mono);font-size:.48rem;color:var(--mu)">safe 0.8–1.3 · &gt;1.5 = spike risk</div>`;
 }
 
 function renderBriefing(){
@@ -1853,28 +1864,36 @@ function renderPhaseTimeline(){
 
 
 // ── S29: GATE FORECAST ──────────────────────────────────────────────────
+// Short criteria map — kept to one line at mobile widths
+const GF_SHORT={
+  1:'3 wks · ≥38km · injury-free',
+  2:'2×20 intervals + 2×20 tempo ceiling-clean',
+  3:'20km in a full-load week',
+  4:'8 consecutive rising-load weeks',
+  5:'VPBank Hanoi 10K',
+  6:'Lactate + VO₂max cleared'
+};
 function renderGateForecast(){
   const el=document.getElementById('gate-forecast-body');
   if(!el||!GATES)return;
-  // Only show the 6 hard gates — what blocks Phase 3
   const hard=GATES.filter(g=>g.type==='hard');
   const rows=hard.map(g=>{
     const cleared=g.status==='cleared';
     const active=g.status==='active';
-    const tight=g.eta&&g.eta.includes('Sep')&&!cleared;  // Sep gates are the crunch window
+    const tight=g.eta&&g.eta.includes('Sep')&&!cleared;
     const cls=cleared?'gf-clear':active?'gf-active':tight?'gf-tight':'gf-pending';
-    const icon=cleared?'✅':active?'◉':'○';
-    const progRow=active&&g.progress>0?
-      `<div class="gf-prog-wrap"><div class="gf-prog-bar" style="width:${g.progress}%"></div></div>`:
-      '';
+    const icon=cleared?'✓':active?'◉':'○';
+    // Compact ETA: drop year (all 2026), shorten month names
+    const eta=(g.eta||'—').replace(/\s*2026/,'').replace('August','Aug').replace('September','Sep').replace('October','Oct');
+    const progBar=active&&g.progress>0?`<div class="gf-prog-wrap"><div class="gf-prog-bar" style="width:${g.progress}%"></div></div>`:'';
     return`<div class="gf-row ${cls}">
       <div class="gf-num">${icon}</div>
       <div>
         <div class="gf-name">Gate ${g.id} — ${g.name}</div>
-        <div class="gf-short">${g.short}</div>
-        ${progRow}
+        <div class="gf-short">${GF_SHORT[g.id]||g.short}</div>
+        ${progBar}
       </div>
-      <div class="gf-eta">${g.eta||'—'}</div>
+      <div class="gf-eta">${eta}</div>
     </div>`;
   }).join('');
   el.innerHTML=`<div class="gf-list">${rows}</div>`;
@@ -1887,26 +1906,28 @@ function renderMilestones(){
   const today=new Date();today.setHours(0,0,0,0);
   const fmt=iso=>{
     const d=new Date(iso+'T00:00:00');
-    return d.toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'2-digit'});
+    // Short: "30 Jul" or "30 Jul 27" for next year
+    const yr=d.getFullYear();
+    const base=d.toLocaleDateString('en-GB',{day:'numeric',month:'short'});
+    return yr>2026?base+" '"+String(yr).slice(-2):base;
   };
-  const daysTo=iso=>{
-    const d=new Date(iso+'T00:00:00');
-    return Math.round((d-today)/86400000);
-  };
-  const typeIcon={medical:'⚕',gate:'◈',test:'⚗',review:'◉',training:'⬇',race:'▷',phase:'→'};
+  const daysTo=iso=>Math.round((new Date(iso+'T00:00:00')-today)/86400000);
+  const typeIcon={medical:'⚕',gate:'◈',test:'⚗',review:'◉',training:'⬇',race:'▷',phase:'→',race_sim:'▷'};
   const rows=MILESTONES.map(m=>{
     const d=daysTo(m.date);
     const past=d<0;
     const urgent=!past&&d<=7&&m.nonNegotiable;
-    const race=m.type==='race';
+    const race=m.type==='race'||m.type==='race_sim';
     const cls=`ms-row${past?' ms-past':''}${urgent?' ms-urgent':''}${race?' ms-race':''}${m.nonNegotiable?' ms-nonneg':''}`;
-    const dStr=past?'done':d===0?'TODAY':d<=30?`${d}d`:fmt(m.date);
+    const dLabel=past?'past':d===0?'TODAY':d===1?'tomorrow':d<=14?d+'d away':'';
+    const icon=typeIcon[m.type]||'·';
+    const nnBadge=m.nonNegotiable?'<span style="color:var(--rd);font-size:.44rem;letter-spacing:1px;font-family:var(--stm)"> · NNeg</span>':'';
     return`<div class="${cls}">
-      <div class="ms-date">${fmt(m.date)}</div>
-      <div>
-        <div class="ms-label">${m.label}</div>
+      <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:1px">
+        <div class="ms-date">${fmt(m.date)}${dLabel?' <span style="font-size:.44rem;opacity:.55">('+dLabel+')</span>':''}</div>
+        <div style="font-size:.7rem;opacity:.7;flex-shrink:0">${icon}</div>
       </div>
-      <div class="ms-flag">${typeIcon[m.type]||'·'}${m.nonNegotiable?'<span style="color:var(--rd);font-size:.5rem;display:block">NNeg</span>':''}</div>
+      <div class="ms-label">${m.label}${nnBadge}</div>
     </div>`;
   }).join('');
   el.innerHTML=`<div class="ms-list">${rows}</div>`;
@@ -1963,17 +1984,18 @@ function initVolTrajChart(){
   });
 }
 
-// ── S28: QUALITY PROGRESSION TABLE ──────────────────────────────────────
+// ── S28: QUALITY PROGRESSION TABLE — ±3 weeks visible, expander for rest
 function renderQualProg(){
   const el=document.getElementById('qual-prog-body');
   if(!el||!PROGRESSION.length)return;
   const curr=ATHLETE.week;
+  const WINDOW=3; // weeks either side of current
   const kindTag={
     deload:`<span class="qp-kind qp-deload">DELOAD</span>`,
     peak:`<span class="qp-kind qp-peak">PEAK</span>`,
     consolidation:`<span class="qp-kind qp-consolidation">HOLD</span>`
   };
-  const rows=PROGRESSION.map(p=>{
+  const buildRow=p=>{
     const past=p.wk<curr, active=p.wk===curr;
     const lr=p.lrMin===p.lrMax?`${p.lrMin} km`:`${p.lrMin}–${p.lrMax} km`;
     return`<tr class="qp-row${past?' qp-past':''}${active?' qp-curr':''}">
@@ -1983,11 +2005,22 @@ function renderQualProg(){
       <td class="qp-lr">${lr}</td>
       <td class="qp-vol">${p.volMin}–${p.volMax}</td>
     </tr>`;
-  }).join('');
-  el.innerHTML=`<div style="overflow-x:auto;padding-bottom:12px"><table class="qp-table">
-    <thead><tr><th>WEEK</th><th>QUALITY A</th><th>QUALITY B</th><th>LONG RUN</th><th>VOL</th></tr></thead>
-    <tbody>${rows}</tbody>
-  </table></div>`;
+  };
+  const visible=PROGRESSION.filter(p=>Math.abs(p.wk-curr)<=WINDOW);
+  const hidden=PROGRESSION.filter(p=>Math.abs(p.wk-curr)>WINDOW);
+  const thead=`<thead><tr><th>WEEK</th><th>QUALITY A</th><th>QUALITY B</th><th>LONG RUN</th><th>VOL</th></tr></thead>`;
+  el.innerHTML=`
+    <div style="overflow-x:auto;padding-bottom:4px">
+      <table class="qp-table">${thead}<tbody>${visible.map(buildRow).join('')}</tbody></table>
+    </div>
+    ${hidden.length?`
+    <details style="padding:0 12px 10px">
+      <summary style="font-family:var(--stm);font-size:.52rem;letter-spacing:2px;color:var(--mu);cursor:pointer;list-style:none;padding:8px 0;text-transform:uppercase">Show all ${PROGRESSION.length} weeks ▾</summary>
+      <div style="overflow-x:auto;margin-top:6px">
+        <table class="qp-table">${thead}<tbody>${PROGRESSION.map(buildRow).join('')}</tbody></table>
+      </div>
+    </details>`:''}
+  `;
 }
 
 // ── CHART REGISTRY ──────────────────────────────────────────────────────
