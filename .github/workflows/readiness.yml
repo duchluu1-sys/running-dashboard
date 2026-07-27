@@ -13,7 +13,7 @@ permissions:
   contents: write            # Allows committing data.json
 
 concurrency:
-  group: readiness           # Prevents the two crons from racing each other
+  group: data-json          # Prevents the two crons from racing each other
   cancel-in-progress: false
 
 jobs:
