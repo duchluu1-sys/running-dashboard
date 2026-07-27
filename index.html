@@ -562,10 +562,10 @@ body{background:var(--bg);background-image:var(--grid);color:var(--tx);font-fami
   display:grid;
   gap:16px;
   grid-template-columns:1fr;
-  grid-template-areas:"brief" "alerts" "status" "mission" "load" "lastop";
+  grid-template-areas:"brief" "alerts" "status" "mission" "load" "lastop" "dated";
 }
 .today-grid:has(#alerts-wrap:empty){
-  grid-template-areas:"brief" "status" "mission" "load" "lastop";
+  grid-template-areas:"brief" "status" "mission" "load" "lastop" "dated";
 }
 /* Kill stacked-card margin inside the grid — gap owns spacing now */
 .today-grid>.card{margin-bottom:0}
@@ -573,10 +573,10 @@ body{background:var(--bg);background-image:var(--grid);color:var(--tx);font-fami
 @media(min-width:768px){
   .today-grid{
     grid-template-columns:1.5fr 1fr;
-    grid-template-areas:"brief brief" "alerts alerts" "mission status" "load lastop";
+    grid-template-areas:"brief brief" "alerts alerts" "mission status" "load lastop" "dated dated";
   }
   .today-grid:has(#alerts-wrap:empty){
-    grid-template-areas:"brief brief" "mission status" "load lastop";
+    grid-template-areas:"brief brief" "mission status" "load lastop" "dated dated";
   }
 }
 
@@ -586,6 +586,18 @@ body{background:var(--bg);background-image:var(--grid);color:var(--tx);font-fami
 .tg-status{grid-area:status}
 .tg-load{grid-area:load}
 .tg-lastop{grid-area:lastop}
+.tg-dated{grid-area:dated}
+
+/* S36 — dated alert countdown strip (amber, below LAST RUN) */
+#dated-alerts{display:none}
+.dated-alert-row{
+  display:flex;align-items:center;gap:8px;
+  padding:6px 12px;
+  border-left:2px solid var(--am);border-radius:2px;
+  font-family:var(--stm);font-size:.6rem;
+  margin-bottom:4px;
+}
+.dated-alert-row:last-child{margin-bottom:0}
 
 /* Drop the alerts row entirely when there are no alerts —
    prevents a phantom 16px gap */
@@ -923,6 +935,7 @@ body{background:var(--bg);background-image:var(--grid);color:var(--tx);font-fami
       <div class="ch"><div class="cl">LAST RUN</div><div class="cs" id="lr-sub"></div></div>
       <div class="lr-wrap" id="lr-body"></div>
     </div>
+    <div id="dated-alerts" class="tg-dated"></div>
   </div>
 </div>
 <!-- ── ADAPTATION ── -->
@@ -1079,13 +1092,17 @@ let _BYTES=0;   // S16 — byte length of the data.json payload currently loaded
 // STATIC — HEALTH_FLAGS & MEDICATIONS (kept in HTML, not in data.json)
 // ════════════════════════════════════════════════════
 const HEALTH_FLAGS=[
-  {status:"urgent",title:"HBV Vaccination",short:"Shot 1 of 3. OVERDUE.",detail:"HBsAg negative, HBsAb 7.77 (need ≥10 — not immune). 3-shot course over 6 months. High priority: Vietnam prevalence + both parents Hep B positive. Any clinic.",action:"Book Shot 1 this week. No further deferral."},
-  {status:"urgent",title:"BV 108 — July 30, 2026",short:"08:00 appt. Do not leave without test bookings.",detail:"Agenda: Atoyze 2-month review · blood retest (TG, Vit D, Potassium, Ferritin, CBC) · endocrinologist referral (TI-RADS 4) · lactate step test booking · VO₂max graded exercise test booking. Fallback: Regenetics HCMC (1.5M VND).",action:"Prepare agenda. Do not leave without confirmed dates for lactate + VO₂max tests."},
-  {status:"watch",title:"TI-RADS 4 Thyroid Nodule",short:"5×4mm left lobe. Endocrinologist referral pending.",detail:"TI-RADS 4 = intermediate suspicion — majority benign but specialist required. TSH and thyroid function completely normal. Referral via Jul 30 appointment.",action:"Jul 30: get endocrinologist referral confirmed."},
-  {status:"watch",title:"Triglyceride Disorder",short:"TG 8.52 mmol/L (5× upper limit). Atoyze Day 53.",detail:"Genetic/metabolic driver confirmed. No fatty liver. Atoyze 20/10 from May 30. Zero statin muscle side effects across all 45 runs. Alcohol zero — non-negotiable. Retest Jul 30.",action:"Monitor for unusual leg heaviness every run. Retest Jul 30."},
-  {status:"watch",title:"Right Ankle + Right Plantar",short:"Ankle cleared R45. Plantar mild fatigue — monitor.",detail:"Right lateral ankle (peroneal) irritated R43, present first 2km R44 only, clean through 20 min continuous tempo R45. New mild right plantar fatigue at R45 end — not pain, fatigue. Monitor Week 12.",action:"Flag any ankle or plantar pain during Week 12 Quality A."},
-  {status:"clear",title:"Vitamin D Deficiency",short:"15.40 ng/mL baseline. D3 2,000 IU — Day 53.",detail:"Deficient at baseline (May 29). D3 supplementation running. Jul 30 retest will show response. Dose increase likely needed.",action:"Retest Jul 30."},
-  {status:"clear",title:"Gallbladder Polyps",short:"Largest 3mm. No action needed now.",detail:"Multiple small polyps found May 30 imaging. Largest 3mm — below surgical threshold. Routine monitoring only.",action:"Book gallbladder ultrasound November 2026."}
+  // class: blocking = red card above MISSION (injury pain, statin red flag)
+  //        dated    = amber countdown below LAST RUN (auto-promotes at T-0)
+  //        standing = Health tab only (chronic, doesn't change today's plan)
+  // dueDate (ISO): required for class:"dated"; auto-promotes standing→dated at T-7, blocking at T-0
+  {class:"standing",status:"urgent",title:"HBV Vaccination",short:"Shot 1 of 3. OVERDUE.",detail:"HBsAg negative, HBsAb 7.77 (need ≥10 — not immune). 3-shot course over 6 months. High priority: Vietnam prevalence + both parents Hep B positive. Any clinic.",action:"Book Shot 1 this week. No further deferral."},
+  {class:"dated",dueDate:"2026-07-30",status:"urgent",title:"BV 108 — July 30, 2026",short:"08:00 appt. Do not leave without test bookings.",detail:"Agenda: Atoyze 2-month review · blood retest (TG, Vit D, Potassium, Ferritin, CBC) · endocrinologist referral (TI-RADS 4) · lactate step test booking · VO₂max graded exercise test booking. Fallback: Regenetics HCMC (1.5M VND).",action:"Prepare agenda. Do not leave without confirmed dates for lactate + VO₂max tests."},
+  {class:"standing",status:"watch",title:"TI-RADS 4 Thyroid Nodule",short:"5×4mm left lobe. Endocrinologist referral pending.",detail:"TI-RADS 4 = intermediate suspicion — majority benign but specialist required. TSH and thyroid function completely normal. Referral via Jul 30 appointment.",action:"Jul 30: get endocrinologist referral confirmed."},
+  {class:"standing",status:"watch",title:"Triglyceride Disorder",short:"TG 8.52 mmol/L (5× upper limit). Atoyze Day 53.",detail:"Genetic/metabolic driver confirmed. No fatty liver. Atoyze 20/10 from May 30. Zero statin muscle side effects across all 45 runs. Alcohol zero — non-negotiable. Retest Jul 30.",action:"Monitor for unusual leg heaviness every run. Retest Jul 30."},
+  {class:"standing",status:"watch",title:"Right Ankle + Right Plantar",short:"Ankle cleared R45. Plantar mild fatigue — monitor.",detail:"Right lateral ankle (peroneal) irritated R43, present first 2km R44 only, clean through 20 min continuous tempo R45. New mild right plantar fatigue at R45 end — not pain, fatigue. Monitor Week 12.",action:"Flag any ankle or plantar pain during Week 12 Quality A."},
+  {class:"standing",status:"clear",title:"Vitamin D Deficiency",short:"15.40 ng/mL baseline. D3 2,000 IU — Day 53.",detail:"Deficient at baseline (May 29). D3 supplementation running. Jul 30 retest will show response. Dose increase likely needed.",action:"Retest Jul 30."},
+  {class:"standing",status:"clear",title:"Gallbladder Polyps",short:"Largest 3mm. No action needed now.",detail:"Multiple small polyps found May 30 imaging. Largest 3mm — below surgical threshold. Routine monitoring only.",action:"Book gallbladder ultrasound November 2026."}
 ];
 
 const MEDICATIONS=[
@@ -1425,6 +1442,28 @@ function renderVitals(a){
 }
 
 // ── RENDER TODAY ────────────────────────────────────────────────────────
+// S36 — Alert severity model
+// blocking : red card above MISSION (changes what you do in next 24h)
+// dated    : amber countdown below LAST RUN (auto-promotes to blocking at T-0)
+// standing : Health tab only — doesn't change today's behaviour
+function classifyAlerts(flags){
+  const today=new Date();today.setHours(0,0,0,0);
+  const blocking=[];const dated=[];
+  flags.forEach(f=>{
+    const cls=f.class||'standing';
+    if(cls==='blocking'){blocking.push(f);return;}
+    if(cls==='standing')return;
+    if(cls==='dated'&&f.dueDate){
+      const due=new Date(f.dueDate+'T00:00:00');
+      const d=Math.round((due-today)/86400000);
+      if(d>7)return;          // too far out — skip Today tab
+      if(d<=0){blocking.push({...f,_days:d});return;} // overdue or due today → blocking
+      dated.push({...f,_days:d});
+    }
+  });
+  return{blocking,dated};
+}
+
 function validateRuns(runs){
   const ENUM=['easy','quality_a','quality_b','long','flush','strides','race'];
   const KNOWN=new Set(['r','date','type','wk','dist','duration','moving','pace','paceEasy','hrAvg','hrMax','te','te_an','gct','vr','vo','sl','cadence','pctCeiling','drift','walkRatio','hrZones','temp','surface','conditions','flag','note']);
@@ -1506,17 +1545,31 @@ function renderToday(a){
     </div>
     <div class="lr-note">${lr.note}</div>`;
 
-  // Alerts
-  const urgent=HEALTH_FLAGS.filter(f=>f.status==='urgent');
-  document.getElementById('alerts-wrap').innerHTML=urgent.length?`
+  // S36 — Alert severity model: blocking / dated / standing
+  const {blocking:_blk,dated:_dtd}=classifyAlerts(HEALTH_FLAGS);
+  document.getElementById('alerts-wrap').innerHTML=_blk.length?`
     <div class="card rd-border">
-      <div class="ch"><div class="cl">ACTIVE ALERTS</div><div class="cs">${urgent.length} urgent — action required</div></div>
-      ${urgent.map((f,i)=>`
+      <div class="ch"><div class="cl">ACTIVE ALERTS</div><div class="cs">${_blk.length} blocking — action required</div></div>
+      ${_blk.map((f,i)=>`
         <div class="alert-card" id="alc-${i}" onclick="toggleAlert(${i})">
           <div class="alert-top"><span class="alert-dot"></span><span class="alert-title">${f.title}</span><span class="alert-chev">▾</span></div>
           <div class="alert-detail" id="ald-${i}"><div>${f.detail}</div><div class="alert-action">→ ${f.action}</div></div>
         </div>`).join('')}
     </div>`:'';
+  // Dated items → amber countdown strip below LAST RUN
+  const _dEl=document.getElementById('dated-alerts');
+  if(_dEl){
+    if(_dtd.length){
+      _dEl.style.display='block';
+      _dEl.innerHTML=_dtd.map(f=>{
+        const _c=f._days<=1?'var(--rd)':f._days<=3?'var(--am)':'rgba(245,158,11,.45)';
+        const _lbl=f._days===0?'TODAY':f._days===1?'TOMORROW':`in ${f._days}d`;
+        return`<div class="dated-alert-row" style="border-left-color:${_c};color:${_c}"><span>⚑</span><span>${f.title} — ${_lbl}</span></div>`;
+      }).join('');
+    } else {
+      _dEl.style.display='none';_dEl.innerHTML='';
+    }
+  }
 
   // Today session — state-aware: REST/CAUTION suppress or downgrade session
   const ts=a.todaySession;
