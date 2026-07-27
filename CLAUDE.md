@@ -54,8 +54,9 @@ Use `get_activity_details` with the most recent activity. If athlete specifies a
 - **Quality A**: Interval session (reps of 2:30 / 3 / 4 / 6 / 8 / 10 / 12 min with full walk recovery)
 - **Quality B**: Continuous tempo block (15 / 20 / 25 / 30 / 35 min unbroken)
 - **Long Run**: 14km+ easy effort, capped at 22km
-- **Easy Flush**: Short easy recovery run, typically post-quality or post-double day
+- **Flush**: Short easy recovery run, typically post-quality or post-double day
 - **Strides**: Easy run with 6×20s strides appended
+- **Race**: Competitive race event
 
 ### Step 3 — Build data.json RUNS entry
 
@@ -67,7 +68,7 @@ Append one object to the RUNS array in `duchluu1-sys/running-dashboard/data.json
 {
   "r": <run number — increment +1 from last entry>,
   "date": "<Mon Day>",
-  "type": "<easy|quality_a|quality_b|long|flush|strides>",
+  "type": "<easy|quality_a|quality_b|long|flush|strides|race>",
   "wk": <current week number — integer>,
   "dist": <distance km — 2 decimal places>,
   "duration": <whole-session elapsed minutes — integer, includes warm-up/cool-down/walks>,
