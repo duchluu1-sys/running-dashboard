@@ -1106,25 +1106,19 @@ function daysSince(s){return Math.floor((new Date()-new Date(s))/86400000)}
 function movAvg(arr,n){return arr.map((_,i,a)=>{const w=a.slice(Math.max(0,i-n+1),i+1);return+(w.reduce((s,v)=>s+v,0)/w.length).toFixed(2)})}
 
 // ── ANALYTICS ENGINE (pure — no DOM access) ────────────────────────────
-function computeReadiness(log,a){
-  if(!log||!log.length)return{status:'GREEN',reason:'No readiness data.',rhrDelta:0,hrvOk:true,hrv:null,rhr:null,hrvAvg7:null,rhrAvg7:null,note:'',lastDate:''};
+function getReadiness(log,a){
+  // S32 — reads pre-computed verdict from READINESS_LOG. No decision engine here.
+  // Decisions are made by morning_readiness.py and stored as GREEN/CAUTION/REST.
+  if(!log||!log.length)return{status:'GREEN',note:'No readiness data.',reason:'No readiness data.',lastDate:'',hrv:null,rhr:null,hrvAvg7:null,rhrAvg7:null,rhrDelta:0,hrvOk:true};
   const last=log[log.length-1];
-  const {hrv,rhr,sleepScore}=last;
+  // Rolling averages — display only, not decision inputs
   const hrvVals=log.slice(-7).filter(e=>e.hrv!=null).map(e=>e.hrv);
   const rhrVals=log.slice(-7).filter(e=>e.rhr!=null).map(e=>e.rhr);
-  const hrvAvg7=hrvVals.length?Math.round(hrvVals.reduce((s,v)=>s+v,0)/hrvVals.length):hrv;
-  const rhrAvg7=rhrVals.length?Math.round(rhrVals.reduce((s,v)=>s+v,0)/rhrVals.length):rhr;
-  const rhrDelta=rhr!=null&&rhrAvg7!=null?rhr-rhrAvg7:0;
-  const hrvOk=hrv!=null&&hrv>=a.hrvBaseline[0];
-  const consecutive2=log.length>=2&&log.slice(-2).every(e=>e.hrv!=null&&e.hrv<a.hrvBaseline[0]);
-  let status='GREEN',reason='All signals nominal — train as planned.';
-  if((sleepScore!=null&&sleepScore<45)||rhrDelta>=8){
-    status='RED';reason=rhrDelta>=8?'RHR elevated ≥8 bpm above rolling average — rest.':'Sleep score below 45 — mandatory rest.';
-  } else if((sleepScore!=null&&sleepScore<60)||consecutive2||!hrvOk||rhrDelta>=5){
-    status='AMBER';
-    reason=consecutive2?'HRV below baseline 2 consecutive days — no quality sessions.':!hrvOk?'HRV below baseline — reduce intensity 20%, no quality sessions.':rhrDelta>=5?'RHR elevated +5–7 bpm — easy only, monitor closely.':'Sleep 45–59 — easy only, no quality sessions.';
-  } else if(sleepScore!=null&&sleepScore<75){reason='Sleep 60–74 but HRV balanced — proceed, monitor during session.';}
-  return{status,reason,rhrDelta,hrvOk,hrv,rhr,hrvAvg7,rhrAvg7,note:last.note||'',lastDate:last.date||''};
+  const hrvAvg7=hrvVals.length?Math.round(hrvVals.reduce((s,v)=>s+v,0)/hrvVals.length):last.hrv;
+  const rhrAvg7=rhrVals.length?Math.round(rhrVals.reduce((s,v)=>s+v,0)/rhrVals.length):last.rhr;
+  const rhrDelta=last.rhr!=null&&rhrAvg7!=null?last.rhr-rhrAvg7:0;
+  const hrvOk=last.hrv!=null&&a&&a.hrvBaseline?last.hrv>=a.hrvBaseline[0]:true;
+  return{status:last.status||'GREEN',note:last.note||'',reason:last.note||'',lastDate:last.date||'',hrv:last.hrv,rhr:last.rhr,hrvAvg7,rhrAvg7,rhrDelta,hrvOk};
 }
 
 function computeWeeklyVol(runs){
@@ -1307,7 +1301,7 @@ function computeTodaySession(athlete){
 }
 
 function computeAllAnalytics(){
-  const rdns=computeReadiness(READINESS_LOG,ATHLETE);
+  const rdns=getReadiness(READINESS_LOG,ATHLETE);
   const wvol=computeWeeklyVol(RUNS);
   const intensity=computeIntensityDist(wvol);
   const gct=computeGCTTrend(RUNS);
@@ -1365,26 +1359,38 @@ function switchTab(tab){
 
 // ── READINESS EVALUATOR ─────────────────────────────────────────────────
 function evaluateReadiness(){
+  // S32 — inline evaluator for manual fallback form. Mirrors morning_readiness.py rules.
+  // Uses CAUTION/REST/GREEN vocabulary to match READINESS_LOG.
   const last=READINESS_LOG[READINESS_LOG.length-1]||{};
   const hrv=parseFloat(document.getElementById('input-hrv').value)||last.hrv;
   const rhr=parseFloat(document.getElementById('input-rhr').value)||last.rhr;
   const sleep=parseFloat(document.getElementById('input-sleep').value)||null;
-  const tempLog=[...READINESS_LOG.slice(0,-1),{...last,hrv,rhr,sleepScore:sleep}];
-  const r=computeReadiness(tempLog,ATHLETE);
-  const cc=r.status==='GREEN'?'green':r.status==='AMBER'?'amber':'red';
-  const cv=r.status==='GREEN'?'gn':r.status==='AMBER'?'am':'rd';
-  document.getElementById('eval-res').innerHTML=`<span class="sdot ${cc}"></span><span class="vit-val ${cv}" style="font-size:1rem;margin-left:6px">${r.status}</span><div class="eval-reason">${r.reason}</div>`;
+  const rhrVals=READINESS_LOG.slice(-7).filter(e=>e.rhr!=null).map(e=>e.rhr);
+  const rhrAvg7=rhrVals.length?Math.round(rhrVals.reduce((s,v)=>s+v,0)/rhrVals.length):rhr;
+  const rhrDelta=rhr!=null&&rhrAvg7!=null?rhr-rhrAvg7:0;
+  const hrvOk=hrv!=null&&hrv>=ATHLETE.hrvBaseline[0];
+  const consecutive2=READINESS_LOG.length>=2&&READINESS_LOG.slice(-2).every(e=>e.hrv!=null&&e.hrv<ATHLETE.hrvBaseline[0]);
+  let status='GREEN',note='All signals nominal — train as planned.';
+  if((sleep!=null&&sleep<45)||rhrDelta>=8){
+    status='REST';note=rhrDelta>=8?'RHR elevated ≥8 bpm above rolling average — rest.':'Sleep score below 45 — mandatory rest.';
+  } else if((sleep!=null&&sleep<60)||consecutive2||!hrvOk||rhrDelta>=5){
+    status='CAUTION';
+    note=consecutive2?'HRV below baseline 2 consecutive days — no quality sessions.':!hrvOk?'HRV below baseline — reduce intensity 20%, no quality sessions.':rhrDelta>=5?'RHR elevated +5–7 bpm — easy only, monitor closely.':'Sleep 45–59 — easy only, no quality sessions.';
+  } else if(sleep!=null&&sleep<75){note='Sleep 60–74 but HRV balanced — proceed, monitor during session.';}
+  const cc=status==='GREEN'?'green':status==='CAUTION'?'amber':'red';
+  const cv=status==='GREEN'?'gn':status==='CAUTION'?'am':'rd';
+  document.getElementById('eval-res').innerHTML=`<span class="sdot ${cc}"></span><span class="vit-val ${cv}" style="font-size:1rem;margin-left:6px">${status}</span><div class="eval-reason">${note}</div>`;
   const dot=document.getElementById('rd-dot');const lbl=document.getElementById('rd-label');
-  if(dot){dot.className='sdot '+cc}if(lbl){lbl.className='rd-label c-'+r.status.toLowerCase().replace('green','gn').replace('amber','am').replace('red','rd');lbl.textContent=r.status}
+  if(dot){dot.className='sdot '+cc}if(lbl){lbl.className='rd-label c-'+(status==='GREEN'?'gn':status==='CAUTION'?'am':'rd');lbl.textContent=status}
   const vdot=document.getElementById('s-vdot');const vtxt=document.getElementById('s-vtxt');
-  if(vdot){vdot.className='sdot '+cc}if(vtxt){vtxt.className='vit-rd-txt c-'+cv;vtxt.textContent=r.status}
+  if(vdot){vdot.className='sdot '+cc}if(vtxt){vtxt.className='vit-rd-txt c-'+cv;vtxt.textContent=status}
 }
 
 // ── RENDER VITALS ───────────────────────────────────────────────────────
 function renderVitals(a){
   const days=daysUntil(RACES[0].date);
-  const rdClass=a.rdns.status==='GREEN'?'green':a.rdns.status==='AMBER'?'amber':'red';
-  const rdVal=a.rdns.status==='GREEN'?'gn':a.rdns.status==='AMBER'?'am':'rd';
+  const rdClass=a.rdns.status==='GREEN'?'green':a.rdns.status==='CAUTION'?'amber':'red';
+  const rdVal=a.rdns.status==='GREEN'?'gn':a.rdns.status==='CAUTION'?'am':'rd';
   const hrvCls=a.rdns.hrvOk?'gn':'am';
   document.getElementById('vitals').innerHTML=`
     <div class="vit-rd">
@@ -1447,9 +1453,9 @@ function freshness(){
   return{age:n,level:'expired',label:n+' days old',color:'var(--rd)'};
 }
 function renderToday(a){
-  const rdCls=a.rdns.status==='GREEN'?'green':a.rdns.status==='AMBER'?'amber':'red';
-  const rdVal=a.rdns.status==='GREEN'?'gn':a.rdns.status==='AMBER'?'am':'rd';
-  const _hd=a.rdns.status==='GREEN'?'hud-green':a.rdns.status==='AMBER'?'hud-amber':'hud-red';
+  const rdCls=a.rdns.status==='GREEN'?'green':a.rdns.status==='CAUTION'?'amber':'red';
+  const rdVal=a.rdns.status==='GREEN'?'gn':a.rdns.status==='CAUTION'?'am':'rd';
+  const _hd=a.rdns.status==='GREEN'?'hud-green':a.rdns.status==='CAUTION'?'hud-amber':'hud-red';
   document.getElementById('rd-dot').className=`sdot ${rdCls} ${_hd}`;
   document.getElementById('rd-label').className=`rd-label hud-num xl c-${rdVal}`;
   document.getElementById('rd-label').textContent=a.rdns.status;
@@ -1497,16 +1503,16 @@ function renderToday(a){
         </div>`).join('')}
     </div>`:'';
 
-  // Today session — state-aware: REST/AMBER suppress or downgrade session
+  // Today session — state-aware: REST/CAUTION suppress or downgrade session
   const ts=a.todaySession;
   const _rdStatus=a.rdns.status;
   const _sessionLabel=`${ts.day.toUpperCase()} — ${ts.label}`;
   const _hrLine=ts.hrBand[0]?`HR ${ts.hrBand[0]}–${ts.hrBand[1]} bpm`:`HR ceiling ${ts.hrBand[1]} bpm`;
   const _sessionDetail=_hrLine+(ts.type==='quality_a'?' · Quality A · 5×4 min intervals':ts.type==='quality_b'?' · Quality B · 20 min continuous @ 8.6 km/h':ts.type==='long'?' · Long run · Novablast 5 · gel at 40 min + electrolytes':'');
   let _missionHTML;
-  if(_rdStatus==='RED'){
+  if(_rdStatus==='REST'){
     _missionHTML=`<div class="ts-type" style="color:var(--rd)">REST</div><div style="font-size:.65rem;color:var(--mu);margin-bottom:10px;text-decoration:line-through;opacity:.45">${_sessionLabel}</div><div class="ts-detail">${a.rdns.reason}</div><div class="ts-proto">Form cue: ${ATHLETE.formCue}</div>`;
-  } else if(_rdStatus==='AMBER'&&ts.type&&ts.type.startsWith('quality')){
+  } else if(_rdStatus==='CAUTION'&&ts.type&&ts.type.startsWith('quality')){
     _missionHTML=`<div class="ts-type" style="color:var(--am)">EASY ONLY</div><div style="font-size:.65rem;color:var(--mu);margin-bottom:10px;opacity:.5">${_sessionLabel} — downgraded</div><div class="ts-detail">${a.rdns.reason}</div><div class="ts-proto">Form cue: ${ATHLETE.formCue}</div>`;
   } else {
     _missionHTML=`<div class="ts-type">${_sessionLabel}</div><div class="ts-detail">${_sessionDetail}</div><div class="ts-proto">Form cue: ${ATHLETE.formCue}</div>`;
