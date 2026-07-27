@@ -1,0 +1,56 @@
+name: Post Run
+
+# No cron. A run entry needs judgement fields that only the coaching layer
+# supplies, so this is dispatch-only by design.
+on:
+  workflow_dispatch:
+    inputs:
+      judgement:
+        description: 'Judgement JSON from Claude (paste one line)'
+        required: true
+        type: string
+      run_date:
+        description: 'Activity date YYYY-MM-DD (blank = today, Hanoi)'
+        required: false
+        type: string
+        default: ''
+      dry_run:
+        description: 'Preview only — assemble, validate, print, do not commit'
+        required: false
+        type: boolean
+        default: true
+
+permissions:
+  contents: write
+
+# MUST match readiness.yml. Both workflows write data.json; different groups
+# would let them race and produce a 409 SHA conflict.
+concurrency:
+  group: data-json
+  cancel-in-progress: false
+
+jobs:
+  post_run:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install garminconnect requests
+
+      - name: Log run
+        env:
+          GITHUB_TOKEN:    ${{ secrets.GITHUB_TOKEN }}
+          GARMIN_EMAIL:    ${{ secrets.GARMIN_EMAIL }}
+          GARMIN_PASSWORD: ${{ secrets.GARMIN_PASSWORD }}
+          JUDGEMENT:       ${{ inputs.judgement }}
+          RUN_DATE:        ${{ inputs.run_date }}
+          DRY_RUN:         ${{ inputs.dry_run }}
+        run: python scripts/post_run.py
