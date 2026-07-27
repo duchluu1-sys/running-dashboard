@@ -395,12 +395,13 @@ body{background:var(--bg);background-image:var(--grid);color:var(--tx);font-fami
    ════════════════════════════════════════ */
 
 /* Briefing — Share Tech Mono, own the defaults */
+/* S37 — supporting narrative: smaller, dimmer than MISSION */
 #briefing-body{
   font-family:var(--stm);
-  font-size:.7rem;
-  line-height:1.9;
+  font-size:.65rem;
+  line-height:1.85;
   letter-spacing:.4px;
-  color:var(--m2);
+  color:var(--mu);
 }
 
 /* Vitals bar numbers — Rajdhani */
@@ -413,7 +414,7 @@ body{background:var(--bg);background-image:var(--grid);color:var(--tx);font-fami
 /* TODAY'S MISSION — highest visual weight on tab */
 .ts-type{
   font-family:var(--hud);
-  font-size:1.5rem;
+  font-size:2rem;   /* S37 — MISSION is the largest element on Today */
   font-weight:700;
   color:var(--cy);
   letter-spacing:1px;
@@ -598,6 +599,10 @@ body{background:var(--bg);background-image:var(--grid);color:var(--tx);font-fami
   margin-bottom:4px;
 }
 .dated-alert-row:last-child{margin-bottom:0}
+
+/* S37 — LOAD + LAST RUN: reference cards, half weight */
+#load-card .cl,#lr-card .cl{opacity:.55;font-size:.54rem;letter-spacing:2px}
+#load-card .stat-val{font-size:1.2rem}
 
 /* Drop the alerts row entirely when there are no alerts —
    prevents a phantom 16px gap */
@@ -898,7 +903,7 @@ body{background:var(--bg);background-image:var(--grid);color:var(--tx);font-fami
   <div class="today-grid">
     <div class="card hud-card tg-brief" id="briefing-card">
       <div class="ch"><div class="cl">BRIEFING</div><div class="cs" id="briefing-date">pending first update</div></div>
-      <div class="cb" id="briefing-body">Morning readiness update not yet logged today. Run morning readiness protocol in Claude Desktop to generate briefing.</div>
+      <div class="cb" id="briefing-body">Morning readiness update not yet received. GitHub Action runs at 06:23 and 07:47 Hanoi time.</div>
     </div>
     <div id="alerts-wrap" class="tg-alerts"></div>
     <div class="card hud-card hud-glow tg-mission" id="mission-card">
@@ -1672,7 +1677,7 @@ function renderBriefing(){
     dateEl.style.color=_f.color;
   }
   if(!briefing){
-    body.textContent='Morning readiness update not yet logged today. Run morning readiness protocol in Claude Desktop to generate briefing.';
+    body.textContent='Morning readiness update not yet received. GitHub Action runs at 06:23 and 07:47 Hanoi time.';
     body.style.color='var(--m2)';
   } else {
     body.textContent=briefing;
