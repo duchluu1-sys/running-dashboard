@@ -1132,9 +1132,10 @@ function computeWeeklyVol(runs){
   runs.forEach(r=>{
     const w=r.wk;
     if(!map[w])map[w]={wk:w,label:`W${w}`,easy:0,quality:0,long:0,phase:w<=8?1:2};
-    if(r.type==='easy')map[w].easy+=r.dist;
+    if(r.type==='easy'||r.type==='flush'||r.type==='strides')map[w].easy+=r.dist;
     else if(r.type.startsWith('quality'))map[w].quality+=r.dist;
     else if(r.type==='long')map[w].long+=r.dist;
+    else if(r.type==='race')map[w].long+=r.dist;
   });
   return Object.values(map).sort((a,b)=>a.wk-b.wk).map(w=>{
     const t=+(w.easy+w.quality+w.long).toFixed(2);
@@ -1404,7 +1405,7 @@ function renderVitals(a){
 
 // ── RENDER TODAY ────────────────────────────────────────────────────────
 function validateRuns(runs){
-  const ENUM=['easy','quality_a','quality_b','long'];
+  const ENUM=['easy','quality_a','quality_b','long','flush','strides','race'];
   const KNOWN=new Set(['r','date','type','wk','dist','duration','moving','pace','paceEasy','hrAvg','hrMax','te','te_an','gct','vr','vo','sl','cadence','pctCeiling','drift','walkRatio','hrZones','temp','surface','conditions','flag','note']);
   const REQ=['r','date','type','wk','dist','flag','note'];
   const f=[];
