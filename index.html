@@ -1292,12 +1292,22 @@ function computeLongRunProg(runs){
 }
 
 function computeTodaySession(athlete){
+  // S33 — labels driven by PROGRESSION lookup, not hardcoded W12 strings
   const days=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
   const today=days[new Date().getDay()];
-  const map={Mon:'Easy + strides',Tue:'Rest',Wed:'Quality A (5×4 min intervals)',Thu:'Easy flush',Fri:'Quality B (20 min continuous tempo)',Sat:'Long run (14–15 km)',Sun:'Rest / Legs Day gym'};
+  const prog=PROGRESSION.find(p=>p.wk===athlete.week)||{};
+  const lrRange=prog.lrMin!=null?(prog.lrMin===prog.lrMax?`${prog.lrMin} km`:`${prog.lrMin}–${prog.lrMax} km`):'—';
+  const map={
+    Mon:'Easy + strides',
+    Tue:'Rest',
+    Wed:prog.qualityA?`Quality A (${prog.qualityA})`:'Quality A',
+    Thu:'Flush run',
+    Fri:prog.qualityB?`Quality B (${prog.qualityB})`:'Quality B',
+    Sat:`Long run (${lrRange})`,
+    Sun:'Rest / Legs Day gym'
+  };
   const type=athlete.weekSchedule[today]||'rest';
-  const alreadyDone=RUNS.filter(r=>r.wk===athlete.week&&r.date.includes('Jul 23')).length>0;
-  return{day:today,label:map[today]||'Rest',type,hrBand:type.includes('quality')?[null,athlete.qualityCeiling]:athlete.easyHRBand,walkAt:athlete.walkTrigger,resumeAt:athlete.walkResume,alreadyDone};
+  return{day:today,label:map[today]||'Rest',type,hrBand:type.includes('quality')?[null,athlete.qualityCeiling]:athlete.easyHRBand,walkAt:athlete.walkTrigger,resumeAt:athlete.walkResume,prog};
 }
 
 function computeAllAnalytics(){
@@ -1508,7 +1518,15 @@ function renderToday(a){
   const _rdStatus=a.rdns.status;
   const _sessionLabel=`${ts.day.toUpperCase()} — ${ts.label}`;
   const _hrLine=ts.hrBand[0]?`HR ${ts.hrBand[0]}–${ts.hrBand[1]} bpm`:`HR ceiling ${ts.hrBand[1]} bpm`;
-  const _sessionDetail=_hrLine+(ts.type==='quality_a'?' · Quality A · 5×4 min intervals':ts.type==='quality_b'?' · Quality B · 20 min continuous @ 8.6 km/h':ts.type==='long'?' · Long run · Novablast 5 · gel at 40 min + electrolytes':'');
+  // S33 — detail text reads from PROGRESSION via ts.prog
+  const _prog=ts.prog||{};
+  const _lrRange=_prog.lrMin!=null?(_prog.lrMin===_prog.lrMax?`${_prog.lrMin} km`:`${_prog.lrMin}–${_prog.lrMax} km`):'—';
+  const _sessionDetail=_hrLine+(
+    ts.type==='quality_a'?` · Quality A · ${_prog.qualityA||'interval session'}`:
+    ts.type==='quality_b'?` · Quality B · ${_prog.qualityB||'tempo'} continuous`:
+    ts.type==='long'?` · Long run (${_lrRange}) · Novablast 5 · gel at 40 min + electrolytes`:
+    ''
+  );
   let _missionHTML;
   if(_rdStatus==='REST'){
     _missionHTML=`<div class="ts-type" style="color:var(--rd)">REST</div><div style="font-size:.65rem;color:var(--mu);margin-bottom:10px;text-decoration:line-through;opacity:.45">${_sessionLabel}</div><div class="ts-detail">${a.rdns.reason}</div><div class="ts-proto">Form cue: ${ATHLETE.formCue}</div>`;
