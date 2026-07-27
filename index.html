@@ -1177,32 +1177,37 @@ function computeVRTrend(runs){
   return{pts,best:pts.length?Math.min(...pts.map(p=>p.vr)):null,baseline:9.1};
 }
 
-function computeACWR(wvol,athlete){
-  const currentWk=athlete.week;
-  const last4=wvol.slice(-4);
-  const acute=+athlete.weekVolOnBoard;
-  const chronic=last4.length?+(last4.reduce((s,w)=>s+w.total,0)/4).toFixed(2):acute;
-  const acwr=chronic>0?+(acute/chronic).toFixed(2):null;
+function computeACWR(runs){
+  // S34 — 7-day acute / 28-day chronic rolling windows, date-based.
+  // Eliminates Mon–Fri UNDERTRAINING artifact from partial-week calculation.
+  // Date parser: anchors year via PROGRESSION.dateStart for the run's week.
+  const MON={Jan:0,Feb:1,Mar:2,Apr:3,May:4,Jun:5,Jul:6,Aug:7,Sep:8,Oct:9,Nov:10,Dec:11};
+  function runDate(r){
+    const prog=PROGRESSION.find(p=>p.wk===r.wk);
+    if(!prog||!prog.dateStart)return null;
+    const yr=parseInt(prog.dateStart.slice(0,4));
+    const p=r.date.split(' ');
+    const m=MON[p[p.length-2]];const d=parseInt(p[p.length-1]);
+    return(m!==undefined&&!isNaN(d))?new Date(yr,m,d):null;
+  }
+  function cutoff(days){const c=new Date();c.setDate(c.getDate()-days);c.setHours(0,0,0,0);return c;}
+  function sumKm(days){return+runs.reduce((s,r)=>{const d=runDate(r);return(d&&d>=cutoff(days))?s+r.dist:s;},0).toFixed(1);}
+  const acute=sumKm(7);
+  const chronic=+(sumKm(28)/4).toFixed(1);
+  const acwr=chronic>=1?+(acute/chronic).toFixed(2):null;
   let status,color;
-  if(!acwr){status='NO DATA';color='mu';}
+  if(acwr===null){status='NO DATA';color='mu';}
   else if(acwr<0.8){status='UNDERTRAINING';color='cn';}
   else if(acwr<=1.3){status='OPTIMAL';color='gn';}
   else if(acwr<=1.5){status='ELEVATED';color='am';}
   else{status='HIGH RISK';color='rd';}
-  // Training monotony: session-to-session load variance (last 7 runs)
-  const recent=wvol.slice(-2).flatMap(w=>{
-    const runs=[];
-    if(w.easy)runs.push(w.easy/Math.max(1,Math.round(w.easy/5)));
-    if(w.quality)runs.push(w.quality/Math.max(1,Math.round(w.quality/5)));
-    if(w.long)runs.push(w.long);
-    return runs;
-  }).slice(-7);
-  const loads=[...Array(7-recent.length).fill(0),...recent];
-  const mean7=loads.reduce((s,v)=>s+v,0)/7;
-  const sd=Math.sqrt(loads.reduce((s,v)=>s+Math.pow(v-mean7,2),0)/7);
-  const monotony=sd>0.1?+(mean7/sd).toFixed(2):null;
-  const strain=monotony?+(mean7*7*monotony).toFixed(1):null;
-  return{acute,chronic,acwr,status,color,last4,monotony,strain};
+  // Monotony — individual session distances, last 7 days
+  const last7=runs.filter(r=>{const d=runDate(r);return d&&d>=cutoff(7);}).map(r=>r.dist);
+  const mu=last7.length?+(last7.reduce((s,v)=>s+v,0)/last7.length).toFixed(2):0;
+  const sd=last7.length>1?Math.sqrt(last7.reduce((s,v)=>s+Math.pow(v-mu,2),0)/last7.length):null;
+  const monotony=sd&&sd>0.1?+(mu/sd).toFixed(2):null;
+  const strain=monotony&&last7.length?+(mu*last7.length*monotony).toFixed(1):null;
+  return{acute,chronic,acwr,status,color,monotony,strain};
 }
 
 function computeCardiacDrift(runs){
@@ -1326,7 +1331,7 @@ function computeAllAnalytics(){
   const longRun=computeLongRunProg(RUNS);
   const todaySession=computeTodaySession(ATHLETE);
   const statinDay=daysSince(ATHLETE.statinStart);
-  const acwr=computeACWR(wvol,ATHLETE);
+  const acwr=computeACWR(RUNS); // S34 — date-based, not week-bucket
   return{rdns,wvol,intensity,gct,vr,drift,compliance,aei,threshold,scatter,zones,paceGap,longRun,todaySession,statinDay,acwr};
 }
 
@@ -1577,8 +1582,8 @@ function renderLoadCard(a){
   const el=document.getElementById("load-body");
   const sub=document.getElementById("load-sub");
   if(!el||!a.acwr)return;
-  const {acute,chronic,acwr,status,color,last4}=a.acwr;
-  if(sub)sub.textContent=`ACWR · ${last4.length}-week window`;
+  const {acute,chronic,acwr,status,color}=a.acwr; // S34 — last4 removed
+  if(sub)sub.textContent=`ACWR · 7-day / 28-day rolling`;
   el.innerHTML=`
     <div class="stats-row" style="margin:-18px -20px 0">
       <div class="stat-cell">
@@ -1589,12 +1594,12 @@ function renderLoadCard(a){
       <div class="stat-cell">
         <div class="stat-val">${acute}<span style="font-size:.75rem">km</span></div>
         <div class="stat-lbl">ACUTE</div>
-        <div class="stat-sub">this week</div>
+        <div class="stat-sub">last 7 days</div>
       </div>
       <div class="stat-cell">
         <div class="stat-val">${chronic}<span style="font-size:.75rem">km</span></div>
         <div class="stat-lbl">CHRONIC</div>
-        <div class="stat-sub">4-wk avg</div>
+        <div class="stat-sub">28-day avg</div>
       </div>
     </div>
     <div style="padding:10px 20px 12px;font-family:var(--mono);font-size:.48rem;color:var(--mu)">safe 0.8–1.3 · &gt;1.5 = spike risk</div>`;
