@@ -2,7 +2,17 @@
 """
 Running OS — Morning Readiness
 Pulls Garmin sleep/HRV/RHR, computes readiness, appends to READINESS_LOG in data.json.
-Runs daily at 06:00 Hanoi time via GitHub Actions.
+
+Runs twice daily via GitHub Actions (06:23 + 07:47 Hanoi). The second run is a
+backup: it exits without writing if a usable entry for today already exists.
+
+Design rules:
+  - NEVER write a fabricated verdict. If Garmin gives us nothing, exit non-zero
+    and leave the log alone. A missing entry is honest; a false CAUTION is not.
+  - NEVER write two entries for the same date. Duplicates corrupt the 7-day
+    rolling RHR average, which corrupts every subsequent day's delta.
+  - Readiness is derived from numeric HRV against the baseline, not from
+    Garmin's hrvStatus string, which is not reliably present in the sleep payload.
 """
 
 import json
@@ -14,92 +24,118 @@ import requests
 
 # ── Config ────────────────────────────────────────────────────────────────────
 
-REPO          = "duchluu1-sys/running-dashboard"
-FILE          = "data.json"
-GITHUB_TOKEN  = os.environ["GITHUB_TOKEN"]
-GARMIN_EMAIL  = os.environ["GARMIN_EMAIL"]
+REPO            = "duchluu1-sys/running-dashboard"
+FILE            = "data.json"
+GITHUB_TOKEN    = os.environ["GITHUB_TOKEN"]
+GARMIN_EMAIL    = os.environ["GARMIN_EMAIL"]
 GARMIN_PASSWORD = os.environ["GARMIN_PASSWORD"]
+
+# Manual dispatch overwrites today's entry instead of skipping
+FORCE_WRITE = os.environ.get("FORCE_WRITE", "false").lower() == "true"
 
 HRV_LOW  = 53   # baseline lower bound
 HRV_HIGH = 68   # baseline upper bound
 
+HANOI = datetime.timezone(datetime.timedelta(hours=7))
+
+
 # ── Garmin ────────────────────────────────────────────────────────────────────
 
 def pull_garmin(date_str):
-    """Returns (hrv, hrv_status, rhr, sleep_score) — any may be None on failure."""
+    """
+    Returns dict with hrv / rhr / sleep_score / hrv_status.
+    Values are None where unavailable. hrv_status is best-effort only and is
+    NOT used for the verdict.
+    """
+    out = {"hrv": None, "rhr": None, "sleep_score": None, "hrv_status": None}
     try:
         from garminconnect import Garmin
         api = Garmin(GARMIN_EMAIL, GARMIN_PASSWORD)
         api.login()
 
-        sleep_raw = api.get_sleep_data(date_str)
-        dto = sleep_raw.get("dailySleepDTO", {})
+        sleep_raw = api.get_sleep_data(date_str) or {}
+        dto = sleep_raw.get("dailySleepDTO", {}) or {}
 
         hrv         = sleep_raw.get("avgOvernightHrv")
-        hrv_status  = sleep_raw.get("hrvStatus", "UNKNOWN")
         rhr         = sleep_raw.get("restingHeartRate")
-        sleep_score = dto.get("sleepScores", {}).get("overall", {}).get("value")
+        sleep_score = (dto.get("sleepScores", {}) or {}).get("overall", {}).get("value")
 
-        # Cast to int where expected
-        hrv         = int(hrv)         if hrv         is not None else None
-        rhr         = int(rhr)         if rhr         is not None else None
-        sleep_score = int(sleep_score) if sleep_score is not None else None
+        out["hrv"]         = int(hrv)         if hrv         is not None else None
+        out["rhr"]         = int(rhr)         if rhr         is not None else None
+        out["sleep_score"] = int(sleep_score) if sleep_score is not None else None
 
-        return hrv, hrv_status, rhr, sleep_score
+        # hrvStatus is not reliably in the sleep payload. Try the dedicated
+        # endpoint, but treat total absence as non-fatal — the verdict does
+        # not depend on it.
+        try:
+            hrv_data = api.get_hrv_data(date_str) or {}
+            summary  = hrv_data.get("hrvSummary", {}) or {}
+            out["hrv_status"] = summary.get("status")
+            if out["hrv"] is None and summary.get("lastNightAvg") is not None:
+                out["hrv"] = int(summary["lastNightAvg"])
+        except Exception as e:
+            print(f"   note: hrv endpoint unavailable ({e})", file=sys.stderr)
 
     except Exception as e:
         print(f"⚠️  Garmin pull failed: {e}", file=sys.stderr)
-        return None, None, None, None
+
+    return out
 
 
 # ── Readiness logic ───────────────────────────────────────────────────────────
 
-def compute_status(hrv, hrv_status, rhr, sleep_score, rhr_7d_avg, prev_hrv_below):
+def compute_status(hrv, rhr, sleep_score, rhr_7d_avg, prev_hrv_below):
     """
-    Exact table from CLAUDE.md / training_kb.md.
-    Returns "GREEN", "CAUTION", or "REST".
+    Decision table from CLAUDE.md / training_kb.md.
+    Returns (status, reasons[]).
+
+    Derived from numeric values only. Most restrictive condition wins.
+    Caller must guarantee at least one of hrv / rhr / sleep_score is present.
     """
+    reasons = []
     caution = 0
 
-    # HRV: 2+ consecutive days below baseline → REST
     hrv_below = hrv is not None and hrv < HRV_LOW
-    if hrv_below and prev_hrv_below:
-        return "REST"
 
-    # RHR delta
+    # ── REST conditions ──
+    if hrv_below and prev_hrv_below:
+        return "REST", [f"HRV {hrv} below baseline 2+ consecutive days"]
+
     if rhr is not None and rhr_7d_avg is not None:
         delta = rhr - rhr_7d_avg
         if delta >= 8:
-            return "REST"
-        if delta >= 5:
-            caution += 1
+            return "REST", [f"RHR +{delta:.0f} above 7d avg"]
 
-    # Sleep score
-    if sleep_score is not None:
-        if sleep_score < 45:
-            return "REST"
-        if sleep_score < 60:
-            caution += 1
+    if sleep_score is not None and sleep_score < 45:
+        return "REST", [f"Sleep score {sleep_score}"]
 
-    # HRV single day below
+    # ── CAUTION signals ──
     if hrv_below:
         caution += 1
+        reasons.append(f"HRV {hrv} below baseline ({HRV_LOW})")
 
-    # Two caution signals → CAUTION regardless
-    if caution >= 2:
-        return "CAUTION"
-    if caution == 1:
-        return "CAUTION"
+    if rhr is not None and rhr_7d_avg is not None:
+        delta = rhr - rhr_7d_avg
+        if 5 <= delta < 8:
+            caution += 1
+            reasons.append(f"RHR +{delta:.0f} above 7d avg")
 
-    # GREEN bands
-    rhr_ok = (rhr is None or rhr_7d_avg is None or (rhr - rhr_7d_avg) <= 4)
-    balanced = (hrv_status == "BALANCED")
+    if sleep_score is not None and 45 <= sleep_score < 60:
+        caution += 1
+        reasons.append(f"Sleep score {sleep_score}")
 
-    if sleep_score is not None and sleep_score >= 60 and balanced and rhr_ok:
-        return "GREEN"
+    if caution >= 1:
+        return "CAUTION", reasons
 
-    # Fallback
-    return "CAUTION"
+    # ── GREEN ──
+    # No caution signals fired. Note whether this is a full-confidence green
+    # or a green computed from partial data.
+    have = [n for n, v in (("HRV", hrv), ("RHR", rhr), ("sleep", sleep_score)) if v is not None]
+    if len(have) == 3:
+        reasons.append("All signals nominal")
+    else:
+        reasons.append(f"Nominal on {'/'.join(have)} — partial data")
+    return "GREEN", reasons
 
 
 # ── GitHub read/write ─────────────────────────────────────────────────────────
@@ -111,7 +147,7 @@ HEADERS = {
 
 def gh_read():
     url = f"https://api.github.com/repos/{REPO}/contents/{FILE}"
-    r = requests.get(url, headers=HEADERS)
+    r = requests.get(url, headers=HEADERS, timeout=30)
     r.raise_for_status()
     meta = r.json()
     content = json.loads(base64.b64decode(meta["content"]).decode())
@@ -124,7 +160,7 @@ def gh_write(content, sha, message):
         json.dumps(content, indent=2, ensure_ascii=False).encode()
     ).decode()
     payload = {"message": message, "content": encoded, "sha": sha}
-    r = requests.put(url, headers=HEADERS, json=payload)
+    r = requests.put(url, headers=HEADERS, json=payload, timeout=30)
     r.raise_for_status()
     return r.json()["content"]["sha"]
 
@@ -132,68 +168,94 @@ def gh_write(content, sha, message):
 # ── Main ──────────────────────────────────────────────────────────────────────
 
 def main():
-    # Use Hanoi time (UTC+7) — cron fires at 23:00 UTC = 06:00 Hanoi next day
-    hanoi_offset = datetime.timezone(datetime.timedelta(hours=7))
-    today = datetime.datetime.now(hanoi_offset).date()
-    today_str = today.isoformat()
-    today_label = today.strftime("%b %-d")
+    today       = datetime.datetime.now(HANOI).date()
+    today_str   = today.isoformat()
+    today_label = today.strftime("%b ") + str(today.day)   # portable; avoids %-d
 
-    print(f"Running readiness check for {today_str} (Hanoi)")
+    print(f"Readiness check — {today_str} (Hanoi)")
 
-    # Pull Garmin
-    hrv, hrv_status, rhr, sleep_score = pull_garmin(today_str)
-    print(f"  HRV: {hrv} ms ({hrv_status}) | RHR: {rhr} | Sleep: {sleep_score}")
-
-    # Pull data.json
+    # ── Read current state first, so we can bail before hitting Garmin ──
     data, sha = gh_read()
     log = data.setdefault("READINESS_LOG", [])
 
-    # 7-day rolling RHR average from log
-    rhr_values = [e["rhr"] for e in log[-7:] if e.get("rhr") is not None]
+    existing_idx = next(
+        (i for i, e in enumerate(log) if e.get("date") == today_str), None
+    )
+    if existing_idx is not None and not FORCE_WRITE:
+        print(f"✓ Entry for {today_str} already exists (status "
+              f"{log[existing_idx].get('status')}). Backup run — nothing to do.")
+        return 0
+
+    # ── Pull Garmin ──
+    g = pull_garmin(today_str)
+    hrv, rhr, sleep_score = g["hrv"], g["rhr"], g["sleep_score"]
+    print(f"  HRV: {hrv} ms | RHR: {rhr} | Sleep: {sleep_score} "
+          f"| hrvStatus: {g['hrv_status']}")
+
+    # ── HARD STOP: never fabricate a verdict from nothing ──
+    if hrv is None and rhr is None and sleep_score is None:
+        print("\n✗ Garmin returned no usable metrics. NOT writing an entry.",
+              file=sys.stderr)
+        print("  A missing entry is honest. A fabricated CAUTION is not.",
+              file=sys.stderr)
+        print("  The dashboard staleness badge will flag this correctly.",
+              file=sys.stderr)
+        return 1
+
+    # ── 7-day rolling RHR, excluding today ──
+    prior = [e for e in log if e.get("date") != today_str]
+    rhr_values = [e["rhr"] for e in prior[-7:] if e.get("rhr") is not None]
     rhr_7d_avg = round(sum(rhr_values) / len(rhr_values), 1) if rhr_values else None
 
-    # Was yesterday HRV below baseline?
-    prev_hrv_below = (
-        len(log) > 0
-        and log[-1].get("hrv") is not None
-        and log[-1]["hrv"] < HRV_LOW
+    # ── Was the most recent prior entry below baseline? ──
+    prev_hrv_below = bool(
+        prior
+        and prior[-1].get("hrv") is not None
+        and prior[-1]["hrv"] < HRV_LOW
     )
 
-    # Compute status
-    status = compute_status(hrv, hrv_status, rhr, sleep_score, rhr_7d_avg, prev_hrv_below)
-    print(f"  Status: {status}")
+    status, reasons = compute_status(hrv, rhr, sleep_score, rhr_7d_avg, prev_hrv_below)
+    print(f"  Status: {status} — {'; '.join(reasons)}")
 
-    # Build note (≤10 words)
-    flags = []
-    if hrv is not None and hrv < HRV_LOW:
-        flags.append(f"HRV {hrv} below baseline")
-    if rhr is not None and rhr_7d_avg is not None and (rhr - rhr_7d_avg) >= 5:
-        flags.append(f"RHR +{int(rhr - rhr_7d_avg)} above 7d avg")
-    if sleep_score is not None and sleep_score < 60:
-        flags.append(f"Sleep {sleep_score}")
-    note = "; ".join(flags) if flags else "All signals clear"
+    note = "; ".join(reasons)[:80]
 
-    # Build briefing (dashboard Today tab first element)
-    hrv_str    = f"HRV {hrv} ms" if hrv else "HRV unavailable"
-    rhr_str    = f"RHR {rhr} (7d avg {rhr_7d_avg})" if rhr and rhr_7d_avg else f"RHR {rhr or '–'}"
-    sleep_str  = f"Sleep {sleep_score}" if sleep_score else "Sleep unavailable"
+    # ── Briefing ──
+    parts = []
+    if hrv is not None:
+        parts.append(f"HRV {hrv}ms")
+    if rhr is not None:
+        parts.append(f"RHR {rhr}" + (f" (7d {rhr_7d_avg})" if rhr_7d_avg else ""))
+    if sleep_score is not None:
+        parts.append(f"Sleep {sleep_score}")
+    vitals = " · ".join(parts) if parts else "vitals unavailable"
 
-    # Last run from RUNS array
+    missing = [n for n, v in (("HRV", hrv), ("RHR", rhr), ("sleep", sleep_score)) if v is None]
+    gap = f" [{'/'.join(missing)} unavailable]" if missing else ""
+
     runs = data.get("RUNS", [])
     last_run = runs[-1] if runs else None
     last_run_str = (
-        f"Last: R{last_run['r']} — {last_run['type']} {last_run['dist']}km ({last_run['date']})."
-        if last_run else "No runs logged yet."
+        f"Last: R{last_run['r']} {last_run['type']} {last_run['dist']}km ({last_run['date']})."
+        if last_run else "No runs logged."
     )
+
+    # Today's scheduled session from weekSchedule
+    sched = (data.get("ATHLETE", {}) or {}).get("weekSchedule", {}) or {}
+    dow = today.strftime("%a")
+    session = sched.get(dow, "unknown")
+    if status == "REST":
+        session_str = f"Scheduled: {session} — SUPPRESSED, rest."
+    elif status == "CAUTION" and session.startswith("quality"):
+        session_str = f"Scheduled: {session} — DOWNGRADE to easy."
+    else:
+        session_str = f"Scheduled: {session}."
 
     briefing = (
-        f"{hrv_str} · {rhr_str} · {sleep_str}. "
-        f"Status: {status}. "
-        f"{last_run_str} "
-        f"Check coaching layer for today's session prescription."
+        f"{vitals}{gap} — {status}. "
+        f"{'; '.join(reasons)}. "
+        f"{session_str} {last_run_str}"
     )
 
-    # Build entry
     entry = {
         "date":       today_str,
         "hrv":        hrv,
@@ -204,16 +266,20 @@ def main():
         "briefing":   briefing,
     }
 
-    # Append (never overwrite)
-    log.append(entry)
+    # ── Append, or replace on forced manual re-run. Never duplicate a date. ──
+    if existing_idx is not None:
+        print(f"  FORCE_WRITE — replacing existing {today_str} entry")
+        log[existing_idx] = entry
+        msg = f"Readiness {today_label} (re-run)"
+    else:
+        log.append(entry)
+        msg = f"Readiness {today_label}"
 
-    # Commit
-    commit_msg = f"Readiness {today_label}"
-    new_sha = gh_write(data, sha, commit_msg)
-
-    print(f"\n✅ Committed. Status: {status} | SHA: {new_sha}")
-    print(json.dumps(entry, indent=2))
+    new_sha = gh_write(data, sha, msg)
+    print(f"\n✅ Committed. Status: {status} | SHA: {new_sha[:12]}")
+    print(json.dumps(entry, indent=2, ensure_ascii=False))
+    return 0
 
 
 if __name__ == "__main__":
-    main()
+    sys.exit(main())

@@ -2,11 +2,19 @@ name: Morning Readiness
 
 on:
   schedule:
-    - cron: '0 0 * * *'   # 07:00 Hanoi (UTC+7)
+    # Times are UTC. Hanoi = UTC+7.
+    # NEVER use minute 0 — top-of-hour is the most contested slot on GitHub
+    # Actions and scheduled runs there get delayed hours or dropped silently.
+    - cron: '23 23 * * *'   # 06:23 Hanoi — primary
+    - cron: '47 0 * * *'    # 07:47 Hanoi — backup, only writes if primary produced nothing
   workflow_dispatch:         # Manual trigger button in GitHub UI
 
 permissions:
   contents: write            # Allows committing data.json
+
+concurrency:
+  group: readiness           # Prevents the two crons from racing each other
+  cancel-in-progress: false
 
 jobs:
   readiness:
@@ -29,4 +37,5 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GARMIN_EMAIL: ${{ secrets.GARMIN_EMAIL }}
           GARMIN_PASSWORD: ${{ secrets.GARMIN_PASSWORD }}
+          FORCE_WRITE: ${{ github.event_name == 'workflow_dispatch' && 'true' || 'false' }}
         run: python scripts/morning_readiness.py
