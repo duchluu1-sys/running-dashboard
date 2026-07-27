@@ -569,11 +569,13 @@ body{background:var(--bg);background-image:var(--grid);color:var(--tx);font-fami
   grid-template-areas:"brief" "status" "mission" "load" "lastop" "dated";
 }
 /* Kill stacked-card margin inside the grid — gap owns spacing now */
-.today-grid>.card{margin-bottom:0}
+.today-grid>.card{margin-bottom:0;min-width:0}
+/* Hide empty slots completely — prevents phantom grid rows / auto-placement artifacts */
+#alerts-wrap:empty{display:none}
 /* Desktop: restore 2-col */
 @media(min-width:768px){
   .today-grid{
-    grid-template-columns:1.5fr 1fr;
+    grid-template-columns:1fr 1fr; /* S37 symmetry — matches .g2 on other tabs */
     grid-template-areas:"brief brief" "alerts alerts" "mission status" "load lastop" "dated dated";
   }
   .today-grid:has(#alerts-wrap:empty){
