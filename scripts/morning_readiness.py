@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Running OS — Morning Readiness
+Running OS — Morning Readiness  (S35)
 Pulls Garmin sleep/HRV/RHR, computes readiness, appends to READINESS_LOG in data.json.
 
 Runs twice daily via GitHub Actions (06:23 + 07:47 Hanoi). The second run is a
@@ -21,6 +21,16 @@ Design rules:
     delta is undefined and cannot contribute to the verdict.
   - prev_hrv_below uses calendar consecutiveness: the prior entry must be
     dated yesterday. A gap in the log breaks the chain.
+
+S35 changes:
+  - HRV_LOW / HRV_HIGH lifted from module constants → read from
+    ATHLETE.hrvBaseline after data load. When the lactate test recalibrates
+    thresholds in Sep 2026, one field update cascades to both Python and JS.
+  - Briefing now names the exact session prescription from PROGRESSION
+    (not just the session type string). Includes week context, race countdown,
+    volume on board, and rolling ACWR.
+  - Days since last quality session surfaced when today is a quality day and
+    the gap is >3 days (missed session visible on Friday).
 """
 
 import json
@@ -41,14 +51,22 @@ GARMIN_PASSWORD = os.environ["GARMIN_PASSWORD"]
 # Manual dispatch overwrites today's entry instead of skipping
 FORCE_WRITE = os.environ.get("FORCE_WRITE", "false").lower() == "true"
 
-HRV_LOW  = 53   # baseline lower bound
-HRV_HIGH = 68   # baseline upper bound
+# S35: HRV thresholds are now read from ATHLETE.hrvBaseline after data load.
+# These defaults only apply if the key is absent from data.json.
+HRV_LOW_DEFAULT  = 53
+HRV_HIGH_DEFAULT = 68
 
 # Minimum RHR readings within the 7-day calendar window before computing a
 # delta. Fewer readings produce false precision and misleading CAUTION flags.
 RHR_MIN_DAYS = 3
 
 HANOI = datetime.timezone(datetime.timedelta(hours=7))
+
+# Shared month lookup for run date parsing
+_MONTH_NUM = {
+    "Jan": 1, "Feb": 2, "Mar": 3, "Apr": 4, "May": 5, "Jun": 6,
+    "Jul": 7, "Aug": 8, "Sep": 9, "Oct": 10, "Nov": 11, "Dec": 12,
+}
 
 
 # ── Garmin ────────────────────────────────────────────────────────────────────
@@ -96,39 +114,39 @@ def pull_garmin(date_str):
 
 # ── Readiness logic ───────────────────────────────────────────────────────────
 
-def compute_status(hrv, rhr, sleep_score, rhr_7d_avg, prev_hrv_below):
+def compute_status(hrv, rhr, sleep_score, rhr_7d_avg, prev_hrv_below, hrv_low):
     """
     Decision table from CLAUDE.md / training_kb.md.
     Returns (status, reasons[]).
+
+    S35: hrv_low is now passed in from ATHLETE.hrvBaseline[0] rather than
+    being a module-level constant. Eliminates the lactate-test update problem.
 
     All signals are evaluated before the verdict is issued. REST-level and
     CAUTION-level signals are collected independently; the final reasons list
     contains all of them so note and briefing reflect the full picture.
     Most restrictive condition wins.
-    Caller must guarantee at least one of hrv / rhr / sleep_score is present.
     """
-    hrv_below  = hrv is not None and hrv < HRV_LOW
+    hrv_below  = hrv is not None and hrv < hrv_low
     rhr_delta  = (rhr - rhr_7d_avg) if (rhr is not None and rhr_7d_avg is not None) else None
 
     rest_flags   = []
     caution_flags = []
 
-    # ── Classify every signal independently ──
-
-    # HRV
+    # ── HRV ──
     if hrv_below and prev_hrv_below:
         rest_flags.append(f"HRV {hrv} below baseline 2+ consecutive days")
     elif hrv_below:
-        caution_flags.append(f"HRV {hrv} below baseline ({HRV_LOW})")
+        caution_flags.append(f"HRV {hrv} below baseline ({hrv_low})")
 
-    # RHR delta (only available once RHR_MIN_DAYS readings exist)
+    # ── RHR delta (only when RHR_MIN_DAYS readings exist) ──
     if rhr_delta is not None:
         if rhr_delta >= 8:
             rest_flags.append(f"RHR +{rhr_delta:.0f} above 7d avg ({rhr_7d_avg})")
         elif rhr_delta >= 5:
             caution_flags.append(f"RHR +{rhr_delta:.0f} above 7d avg ({rhr_7d_avg})")
 
-    # Sleep score
+    # ── Sleep ──
     if sleep_score is not None:
         if sleep_score < 45:
             rest_flags.append(f"Sleep score {sleep_score}")
@@ -149,6 +167,145 @@ def compute_status(hrv, rhr, sleep_score, rhr_7d_avg, prev_hrv_below):
         return "GREEN", ["All signals nominal"]
     else:
         return "GREEN", [f"Nominal on {'/'.join(have)} — partial data"]
+
+
+# ── ACWR (rolling windows) ────────────────────────────────────────────────────
+
+def _run_date(r, wk_year):
+    """Parse a run's date string ('Mon Jul 27') into datetime.date using
+    PROGRESSION-anchored year. Returns None on failure."""
+    yr = wk_year.get(r.get("wk"))
+    if yr is None:
+        return None
+    parts = (r.get("date") or "").split()
+    if len(parts) < 2:
+        return None
+    m = _MONTH_NUM.get(parts[-2])
+    if m is None:
+        return None
+    try:
+        return datetime.date(yr, m, int(parts[-1]))
+    except (ValueError, TypeError):
+        return None
+
+
+def _build_wk_year(progression):
+    """Build wk → year dict from PROGRESSION.dateStart values.
+    Back-fills weeks before PROGRESSION with the first program year
+    so Phase 1 runs (wk 1–8) don't silently drop from ACWR windows.
+    Without this, ~31km of Phase 1 runs vanish from the 28-day chronic
+    window, underestimating chronic load and producing false ELEVATED
+    or HIGH RISK readings during peak weeks."""
+    wk_year = {}
+    first_prog_year = None
+
+    for p in sorted(progression, key=lambda x: x.get("wk", 0)):
+        ds = p.get("dateStart")
+        if ds:
+            try:
+                yr = int(ds[:4])
+                wk_year[p["wk"]] = yr
+                if first_prog_year is None:
+                    first_prog_year = yr
+            except (KeyError, ValueError, TypeError):
+                pass
+
+    # Back-fill Phase 1 weeks (before first PROGRESSION entry)
+    if wk_year and first_prog_year:
+        first_prog_wk = min(wk_year.keys())
+        for wk in range(1, first_prog_wk):
+            wk_year[wk] = first_prog_year
+
+    return wk_year
+
+
+def compute_acwr(runs, progression, today):
+    """
+    7-day acute / 28-day chronic rolling ACWR.
+    Mirrors computeACWR() in index.html (S34).
+    Returns float or None if insufficient chronic data.
+    """
+    wk_year = _build_wk_year(progression)
+
+    def sum_km(days):
+        cutoff = today - datetime.timedelta(days=days)
+        # >= matches S34 JS: c.setDate(c.getDate()-days) + d >= cutoff
+        return round(
+            sum(r.get("dist", 0) for r in runs
+                if (d := _run_date(r, wk_year)) and d >= cutoff),
+            1
+        )
+
+    acute   = sum_km(7)
+    chronic = round(sum_km(28) / 4, 1)
+    return round(acute / chronic, 2) if chronic >= 1 else None
+
+
+# ── Days since last quality session ───────────────────────────────────────────
+
+def days_since_quality(runs, progression, today):
+    """
+    Returns int days since last quality_a or quality_b session, or None.
+    Used to surface a missed Wednesday session when Friday's briefing runs.
+    """
+    wk_year = _build_wk_year(progression)
+    quality_runs = [r for r in runs if (r.get("type") or "").startswith("quality")]
+    if not quality_runs:
+        return None
+    last_q = quality_runs[-1]
+    q_date = _run_date(last_q, wk_year)
+    if q_date is None:
+        return None
+    return (today - q_date).days
+
+
+# ── Session description ────────────────────────────────────────────────────────
+
+def session_description(session_type, prog, athlete):
+    """
+    Full session description from PROGRESSION and ATHLETE fields.
+    Optional ATHLETE fields: qualityShoe, longShoe, qualityVenue.
+    These can be added to data.json to override defaults.
+    """
+    ceiling   = athlete.get("qualityCeiling", 150)
+    easy_band = athlete.get("easyHRBand", [122, 139])
+    q_shoe    = athlete.get("qualityShoe", "Evo SL")
+    l_shoe    = athlete.get("longShoe", "Novablast 5")
+    q_venue   = athlete.get("qualityVenue", "Elite Fitness")
+
+    if session_type == "quality_a":
+        qa = (prog.get("qualityA") or "interval session") if prog else "interval session"
+        return f"Quality A — {qa}, ceiling {ceiling} bpm. {q_shoe}, {q_venue}."
+
+    elif session_type == "quality_b":
+        qb = (prog.get("qualityB") or "tempo") if prog else "tempo"
+        return f"Quality B — {qb} continuous, ceiling {ceiling} bpm. {q_shoe}, {q_venue}."
+
+    elif session_type == "long":
+        if prog:
+            lr_min, lr_max = prog.get("lrMin"), prog.get("lrMax")
+            if lr_min is not None and lr_max is not None:
+                lr = f"{lr_min}km" if lr_min == lr_max else f"{lr_min}–{lr_max}km"
+            else:
+                lr = "—"
+        else:
+            lr = "—"
+        return (
+            f"Long run — {lr}, HR {easy_band[0]}–{easy_band[1]} bpm. "
+            f"{l_shoe}. Gel 40 min + electrolytes."
+        )
+
+    elif session_type == "easy":
+        return f"Easy run — HR {easy_band[0]}–{easy_band[1]} bpm. {l_shoe}."
+
+    elif session_type == "flush":
+        return f"Flush run — HR {easy_band[0]}–{easy_band[1]} bpm. {l_shoe}."
+
+    elif session_type in ("rest", "unknown"):
+        return "Rest day."
+
+    else:
+        return f"{session_type}."
 
 
 # ── GitHub read/write ─────────────────────────────────────────────────────────
@@ -201,6 +358,13 @@ def main():
               f"{log[existing_idx].get('status')}). Backup run — nothing to do.")
         return 0
 
+    # ── S35: Read HRV baseline from ATHLETE (replaces module constants) ──
+    athlete     = data.get("ATHLETE", {}) or {}
+    hrv_base    = athlete.get("hrvBaseline", [HRV_LOW_DEFAULT, HRV_HIGH_DEFAULT])
+    hrv_low     = hrv_base[0]
+    hrv_high    = hrv_base[1]
+    print(f"  HRV baseline: {hrv_low}–{hrv_high} ms (from ATHLETE.hrvBaseline)")
+
     # ── Pull Garmin ──
     g = pull_garmin(today_str)
     hrv, rhr, sleep_score = g["hrv"], g["rhr"], g["sleep_score"]
@@ -221,9 +385,6 @@ def main():
     prior = [e for e in log if e.get("date") != today_str]
 
     # ── 7-day RHR average: calendar window, minimum RHR_MIN_DAYS readings ──
-    # Filter to entries within the last 7 calendar days (ISO string comparison
-    # is safe because dates are zero-padded). Require RHR_MIN_DAYS readings;
-    # fewer produce false precision.
     recent_prior = [e for e in prior if e.get("date", "") > cutoff_str]
     rhr_values   = [e["rhr"] for e in recent_prior if e.get("rhr") is not None]
     rhr_7d_avg   = (
@@ -236,58 +397,103 @@ def main():
               f"({len(rhr_values)}/{RHR_MIN_DAYS} readings in window) — delta undefined")
 
     # ── prev_hrv_below: calendar-consecutive only ──
-    # The prior entry must be dated *yesterday*. A gap in the log — from a
-    # missed Garmin pull, a travel day, anything — breaks the chain. An entry
-    # from 3 days ago with low HRV does not constitute a consecutive streak.
     prev_entry = prior[-1] if prior else None
     prev_hrv_below = bool(
         prev_entry is not None
         and prev_entry.get("date") == yesterday_str
         and prev_entry.get("hrv") is not None
-        and prev_entry["hrv"] < HRV_LOW
+        and prev_entry["hrv"] < hrv_low  # S35: dynamic hrv_low
     )
 
-    status, reasons = compute_status(hrv, rhr, sleep_score, rhr_7d_avg, prev_hrv_below)
+    status, reasons = compute_status(
+        hrv, rhr, sleep_score, rhr_7d_avg, prev_hrv_below, hrv_low
+    )
     print(f"  Status: {status} — {'; '.join(reasons)}")
 
     note = "; ".join(reasons)[:80]
 
-    # ── Briefing ──
-    parts = []
-    if hrv is not None:
-        parts.append(f"HRV {hrv}ms")
-    if rhr is not None:
-        parts.append(f"RHR {rhr}" + (f" (7d {rhr_7d_avg})" if rhr_7d_avg else ""))
-    if sleep_score is not None:
-        parts.append(f"Sleep {sleep_score}")
-    vitals = " · ".join(parts) if parts else "vitals unavailable"
+    # ── S35: Rich briefing ───────────────────────────────────────────────────
+    runs        = data.get("RUNS", [])
+    progression = data.get("PROGRESSION", [])
+    races       = data.get("RACES", [])
 
-    missing = [n for n, v in (("HRV", hrv), ("RHR", rhr), ("sleep", sleep_score)) if v is None]
-    gap = f" [{'/'.join(missing)} unavailable]" if missing else ""
+    # Session from weekly schedule
+    sched   = athlete.get("weekSchedule", {})
+    dow     = today.strftime("%a")
+    session = sched.get(dow, "rest")
 
-    runs = data.get("RUNS", [])
+    # PROGRESSION entry for current week
+    week = athlete.get("week")
+    prog = next((p for p in progression if p.get("wk") == week), None)
+
+    # Volume context
+    total_weeks  = athlete.get("totalWeeks", 24)
+    vol_on_board = athlete.get("weekVolOnBoard", 0)
+    vol_min      = prog.get("volMin", "?") if prog else "?"
+    vol_max      = prog.get("volMax", "?") if prog else "?"
+
+    # Race 0 countdown (RACES[0])
+    days_to_race_0 = None
+    if races:
+        raw_date = races[0].get("date")
+        if raw_date:
+            try:
+                race_date      = datetime.date.fromisoformat(str(raw_date)[:10])
+                days_to_race_0 = (race_date - today).days
+            except (ValueError, TypeError):
+                pass
+
+    # ACWR (rolling 7/28 day, date-based — mirrors S34 JS)
+    acwr     = compute_acwr(runs, progression, today)
+    acwr_str = f"ACWR {acwr}" if acwr is not None else "ACWR —"
+
+    # Days since last quality session (surfaces missed sessions)
+    q_days     = days_since_quality(runs, progression, today)
+    q_gap_note = ""
+    if session.startswith("quality") and q_days is not None and q_days > 3:
+        q_gap_note = f" [{q_days}d since last quality]"
+
+    # Context line: W12/24 · 84d to Race 0 · 6.0km of 33–37km on board · ACWR 0.94
+    ctx_parts = [f"W{week}/{total_weeks}"] if week else []
+    if days_to_race_0 is not None:
+        ctx_parts.append(f"{days_to_race_0}d to Race 0")
+    ctx_parts.append(f"{vol_on_board}km of {vol_min}–{vol_max}km on board")
+    ctx_parts.append(acwr_str)
+    context_line = " · ".join(ctx_parts)
+
+    # Full session description from PROGRESSION
+    session_desc = session_description(session, prog, athlete)
+
+    # Last run
     last_run = runs[-1] if runs else None
     last_run_str = (
-        f"Last: R{last_run['r']} {last_run['type']} {last_run['dist']}km ({last_run['date']})."
+        f"Last: R{last_run['r']} {last_run['type']} {last_run['dist']}km "
+        f"({last_run['date']})."
         if last_run else "No runs logged."
     )
 
-    # Today's scheduled session from weekSchedule
-    sched   = (data.get("ATHLETE", {}) or {}).get("weekSchedule", {}) or {}
-    dow     = today.strftime("%a")
-    session = sched.get(dow, "unknown")
+    # Assemble briefing
     if status == "REST":
-        session_str = f"Scheduled: {session} — SUPPRESSED, rest."
+        # Lead with suppression, then context
+        suppressed_type = session_desc.split(" —")[0]  # e.g. "Quality A"
+        briefing = (
+            f"REST. {'; '.join(reasons)}. "
+            f"{suppressed_type} suppressed.{q_gap_note} "
+            f"{context_line}. {last_run_str}"
+        )
     elif status == "CAUTION" and session.startswith("quality"):
-        session_str = f"Scheduled: {session} — DOWNGRADE to easy."
+        # Downgrade quality → easy
+        briefing = (
+            f"CAUTION. {'; '.join(reasons)}. "
+            f"EASY ONLY — {session.replace('_', ' ').upper()} downgraded.{q_gap_note} "
+            f"{context_line}. {last_run_str}"
+        )
     else:
-        session_str = f"Scheduled: {session}."
-
-    briefing = (
-        f"{vitals}{gap} — {status}. "
-        f"{'; '.join(reasons)}. "
-        f"{session_str} {last_run_str}"
-    )
+        # GREEN (or CAUTION on a non-quality day) — lead with session
+        briefing = (
+            f"{session_desc}{q_gap_note} "
+            f"{context_line}. {last_run_str}"
+        )
 
     entry = {
         "date":       today_str,
