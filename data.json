@@ -1447,6 +1447,15 @@
       "status": "CAUTION",
       "note": "HRV 37 below baseline; RHR +7 above 7d avg; Sleep 48",
       "briefing": "HRV 37 ms · RHR 48 (7d avg 41.0) · Sleep 48. Status: CAUTION. Last: R46 — long 15.08km (Jul 25). Check coaching layer for today's session prescription."
+    },
+    {
+      "date": "2026-07-27",
+      "hrv": 55,
+      "rhr": 50,
+      "sleepScore": 36,
+      "status": "REST",
+      "note": "Sleep score 36",
+      "briefing": "HRV 55ms · RHR 50 (7d 44.5) · Sleep 36 — REST. Sleep score 36. Scheduled: easy — SUPPRESSED, rest. Last: R46 long 15.08km (Jul 25)."
     }
   ],
   "PHASES": [
