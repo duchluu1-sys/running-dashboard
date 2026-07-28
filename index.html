@@ -150,13 +150,18 @@ body{background:var(--bg);background-image:var(--grid);color:var(--tx);font-fami
 .vr-row:last-child{border-bottom:none}
 .vr-label{font-family:var(--mono);font-size:.65rem;color:var(--m2)}
 .vr-val{font-family:var(--mono);font-size:.88rem;font-weight:700;color:var(--cn)}
-/* RUNNING ECONOMY CARD — S39b */
-.re-callout{padding:8px 20px 10px;font-family:var(--mono);font-size:.68rem;color:var(--cn);border-bottom:1px solid var(--bd)}
-.re-panels{display:grid;grid-template-columns:1.4fr 1fr;gap:0}
-.re-panel{padding:14px 20px 16px}
-.re-panel-sep{border-left:1px solid var(--bd)}
-.re-phdr{font-family:var(--mono);font-size:.58rem;letter-spacing:2.5px;color:var(--mu);text-transform:uppercase;margin-bottom:10px}
-.re-phdr-sub{letter-spacing:1px;font-size:.5rem;color:var(--m2)}
+/* S39b RUNNING ECONOMY — GCT + VR consolidated card */
+.re-grid{display:grid;grid-template-columns:1.35fr 1fr;gap:0}
+.re-panel{padding:14px 20px 16px;min-width:0}
+.re-panel-div{border-left:1px solid var(--bd)}
+.re-hd{display:flex;flex-direction:column;gap:3px;margin-bottom:10px}
+.re-hd-t{font-family:var(--mono);font-size:.55rem;letter-spacing:2px;text-transform:uppercase;color:var(--m2);font-weight:700}
+.re-hd-s{font-family:var(--sans);font-size:.55rem;color:var(--mu);line-height:1.5}
+.re-crow{display:grid;grid-template-columns:1fr 22px 48px 48px;gap:0;padding:5px 0;border-bottom:1px solid var(--bd);align-items:center;font-family:var(--mono);font-size:.6rem}
+.re-crow:last-child{border-bottom:none}
+.re-chdr{display:grid;grid-template-columns:1fr 22px 48px 48px;gap:0;padding:4px 0 6px;border-bottom:1px solid var(--bdb)}
+.re-chdr div{font-family:var(--mono);font-size:.46rem;letter-spacing:2px;text-transform:uppercase;color:var(--mu)}
+.re-note{font-size:.58rem;color:var(--mu);margin-top:8px;line-height:1.7}
 /* LOG */
 .log-hdr,.log-row{display:grid;grid-template-columns:36px 48px 50px 56px 52px 42px 42px 40px 28px;gap:0;padding:6px 12px;align-items:center}
 .log-hdr{font-family:var(--mono);font-size:.46rem;letter-spacing:2px;text-transform:uppercase;color:var(--mu);border-bottom:1px solid var(--bd);font-weight:700}
@@ -270,6 +275,8 @@ body{background:var(--bg);background-image:var(--grid);color:var(--tx);font-fami
   .vitals{grid-template-columns:repeat(4,1fr)}.vit:nth-child(4){border-right:none}.vit:nth-child(5){border-top:1px solid var(--bd)}
   .tgrid{grid-template-columns:1fr 1fr;grid-template-areas:"radar log" "signals signals"}
   .g3{grid-template-columns:1fr 1fr}.g2{grid-template-columns:1fr}.race-pipe{grid-template-columns:1fr}
+  .re-grid{grid-template-columns:1fr}
+  .re-panel-div{border-left:none;border-top:1px solid var(--bd)}
   .main{padding:14px 16px}.tabs-top{padding:0 16px}.vitals{padding:0 16px}.hdr{padding:14px 18px}
   .log-hdr,.log-row{grid-template-columns:34px 46px 50px 54px 48px 38px 28px}
   .lc-gct-h,.lc-gct,.lc-vr-h,.lc-vr{display:none}
@@ -289,8 +296,6 @@ body{background:var(--bg);background-image:var(--grid);color:var(--tx);font-fami
   .med-row{grid-template-columns:1fr}.fshort{display:none}
   .rd-block{flex-direction:column;gap:12px}
   .lr-grid{grid-template-columns:repeat(2,1fr)}
-  .re-panels{grid-template-columns:1fr}
-  .re-panel-sep{border-left:none;border-top:1px solid var(--bd)}
   /* S25/S27 — grids handled by mobile-first defaults above */
   .eval-grid{grid-template-columns:1fr;gap:8px}
   .race-pipe{grid-template-columns:1fr}
@@ -1041,18 +1046,17 @@ body{background:var(--bg);background-image:var(--grid);color:var(--tx);font-fami
       <div id="drift-stats" style="padding:0 20px 12px"></div>
     </div>
   </div>
-  <div class="card hud-card">
-    <div class="ch"><div class="cl">RUNNING ECONOMY</div><div class="cs">GCT · VR · lower is better on both</div></div>
-    <div id="re-callout" class="re-callout"></div>
-    <div class="re-panels">
+  <div class="card hud-card" id="run-econ-card">
+    <div class="ch"><div class="cl">RUNNING ECONOMY</div><div class="cs">ground contact time · vertical ratio · cohort-segmented — cross-surface values are not comparable</div></div>
+    <div class="re-grid">
       <div class="re-panel">
-        <div class="re-phdr">GROUND CONTACT TIME &nbsp;<span class="re-phdr-sub">cohort-segmented · hollow = treadmill</span></div>
+        <div class="re-hd"><div class="re-hd-t">Ground Contact Time</div><div class="re-hd-s">outdoor-easy trend only · hollow = treadmill</div></div>
         <div class="cleg" id="gct-leg"></div>
-        <div class="cw" style="height:200px"><canvas id="gctChart"></canvas></div>
-        <div id="gct-cohort-table" style="padding:8px 0 4px"></div>
+        <div class="cw"><canvas id="gctChart"></canvas></div>
+        <div id="gct-cohort-table" style="padding:8px 0 0"></div>
       </div>
-      <div class="re-panel re-panel-sep">
-        <div class="re-phdr">VERTICAL RATIO &nbsp;<span class="re-phdr-sub">lower = less vertical oscillation</span></div>
+      <div class="re-panel re-panel-div">
+        <div class="re-hd"><div class="re-hd-t">Vertical Ratio</div><div class="re-hd-s">lower = less vertical oscillation = better economy</div></div>
         <div id="vr-body"></div>
       </div>
     </div>
@@ -1074,7 +1078,7 @@ body{background:var(--bg);background-image:var(--grid);color:var(--tx);font-fami
   </div>
   <div class="tgrid">
     <div class="card hud-card" id="radar-card">
-      <div class="ch"><div class="cl">PHASE 2 → 3 GATES</div><div class="cs">6 hard gates · 0 of 6 cleared</div></div>
+      <div class="ch"><div class="cl">PHASE 2 → 3 GATES</div><div class="cs" id="gate-sub">6 hard gates · 0 of 6 cleared</div></div>
       <div id="gate-checklist"></div>
       <div id="gate-dc" class="gate-dc"></div>
     </div>
@@ -1088,7 +1092,7 @@ body{background:var(--bg);background-image:var(--grid);color:var(--tx);font-fami
     </div>
   </div>
   <div class="card gate-list-card hud-card" id="gate-list-card">
-    <div class="ch"><div class="cl">PHASE 2 → 3 GATES</div><div class="cs">6 hard gates · 0 of 6 cleared</div></div>
+    <div class="ch"><div class="cl">PHASE 2 → 3 GATES</div><div class="cs" id="glist-sub">6 hard gates · 0 of 6 cleared</div></div>
     <div id="glist-body"></div>
   </div>
 </div>
@@ -1253,8 +1257,29 @@ function computeGCTTrend(runs){
 }
 
 function computeVRTrend(runs){
-  const pts=runs.filter(r=>r.vr).map(r=>({r:r.r,date:r.date,vr:r.vr,type:r.type}));
-  return{pts,best:pts.length?Math.min(...pts.map(p=>p.vr)):null,baseline:9.1};
+  // S39b — cohort-segmented by surface. Treadmill and outdoor VR are NOT
+  // comparable: belt mechanics alter vertical oscillation. Reporting a
+  // treadmill best against an outdoor baseline reproduces the exact
+  // cohort-composition error the GCT card exists to correct.
+  const fam=t=>t.startsWith('quality')?'quality':t;
+  const pts=runs.filter(r=>r.vr).map(r=>({r:r.r,date:r.date,vr:r.vr,type:fam(r.type),surface:r.surface||'outdoor'}));
+  const mk=(key,arr)=>{
+    if(!arr.length)return null;
+    const n=arr.length;
+    const mean=+(arr.reduce((s,p)=>s+p.vr,0)/n).toFixed(2);
+    const best=Math.min(...arr.map(p=>p.vr));
+    const bestPt=arr.find(p=>p.vr===best);
+    const first=arr[0],last=arr[arr.length-1];
+    const delta=n>=2?+(last.vr-first.vr).toFixed(1):null;
+    return{key,n,mean,best,bestPt,first,last,delta,pts:arr};
+  };
+  const cohorts={
+    outdoor:mk('outdoor',pts.filter(p=>p.surface==='outdoor')),
+    treadmill:mk('treadmill',pts.filter(p=>p.surface==='treadmill'))
+  };
+  const best=pts.length?Math.min(...pts.map(p=>p.vr)):null;
+  const bestPt=pts.find(p=>p.vr===best)||null;
+  return{pts,best,bestPt,cohorts,baseline:9.1};
 }
 
 function computeACWR(runs){
@@ -1795,7 +1820,7 @@ function renderAdaptation(a){
   renderAdaptationHeadline(a); // S37c
   // Pace gap
   renderPaceGap(a.paceGap);
-  // Running Economy (S39b — GCT callout + VR panel)
+  // Running Economy (S39b) — GCT cohort table + VR panel
   renderRunningEconomy(a);
   // Compliance header
   document.getElementById('compliance-header').textContent=`${a.compliance.cleanCount} of last ${a.compliance.total} quality sessions ceiling-clean (${a.compliance.rate}%)`;
@@ -1815,39 +1840,6 @@ function renderAdaptation(a){
   if(!hasSufficientData(a.threshold.pts,MIN_SCATTER)){
     renderSparseCard('threshold-sparse','THRESHOLD PACE DEVELOPMENT',a.threshold.pts.length,MIN_SCATTER,'Confirmed LT1: '+fmtPace(ATHLETE.ltPace)+'/km (R34). Timeline builds as quality sessions log pace data.');
   }
-}
-
-// ── RUNNING ECONOMY (S39b) ─────────────────────────────────────────────
-function renderRunningEconomy(a){
-  const {gct,vr}=a;
-  // Callout sentence: GCT outdoor-easy trend + VR best
-  const oe=gct.cohorts.find(c=>c.key==='outdoor-easy');
-  let callout='';
-  if(oe&&oe.n>=3){
-    const d=oe.delta;
-    const gctPart=d!==null?(d<0?`GCT outdoor easy ${d}ms trend over program`:`GCT outdoor easy +${d}ms trend (levelling)`):`GCT outdoor easy ${oe.mean}ms avg · n=${oe.n}`;
-    const vrPart=vr.best?`VR best ${vr.best}% (↓${(vr.baseline-vr.best).toFixed(1)}% from baseline ${vr.baseline}%)`:'VR data collecting';
-    callout=`${gctPart} · ${vrPart}`;
-  } else {
-    callout=`Outdoor easy runs with dynamics enabled build this signal · ${oe?oe.n+' qualifying runs so far':'no dynamics data yet'}`;
-  }
-  const reEl=document.getElementById('re-callout');
-  if(reEl)reEl.textContent=callout;
-  // VR panel
-  const vrEl=document.getElementById('vr-body');
-  if(!vrEl)return;
-  const lastThree=vr.pts.slice(-3).reverse();
-  const bestPt=vr.pts.length?vr.pts.reduce((a,b)=>b.vr<a.vr?b:a):null;
-  vrEl.innerHTML=`
-    <div class="stats-row" style="margin:0 0 14px">
-      <div class="stat-cell"><div class="stat-val cn">${vr.best||'—'}%</div><div class="stat-lbl">BEST</div><div class="stat-sub">${bestPt?`R${bestPt.r} · ${bestPt.date}`:'—'}</div></div>
-      <div class="stat-cell"><div class="stat-val">${vr.baseline}%</div><div class="stat-lbl">BASELINE</div><div class="stat-sub">R14 · Jun 3</div></div>
-      <div class="stat-cell"><div class="stat-val cn">↓${vr.best?(vr.baseline-vr.best).toFixed(1):'—'}%</div><div class="stat-lbl">IMPROVEMENT</div><div class="stat-sub">vs baseline</div></div>
-    </div>
-    <div class="vr-readings">
-      ${lastThree.length?lastThree.map(p=>`<div class="vr-row"><span class="vr-label">R${p.r} · ${p.date} · ${p.type}</span><span class="vr-val">${p.vr}%</span></div>`).join(''):'<div class="vr-row"><span class="vr-label" style="color:var(--mu)">No VR data yet</span></div>'}
-    </div>
-    <div style="font-size:.58rem;color:var(--mu);margin-top:12px;font-family:var(--mono);line-height:1.6">Target &lt;9.0% · Elite 6–8% · Lower = less vertical energy waste</div>`;
 }
 
 function renderPaceGap(pg){
@@ -1999,8 +1991,8 @@ function renderTraining(a){
   renderNextSession(); // S38a
   renderSignals(a);
   renderSessionLog();
-  renderGateChecklist();
-  renderGateList();
+  renderGates('checklist');
+  renderGates('list');
 }
 
 function renderSignals(a){
@@ -2087,31 +2079,8 @@ function showGateDetail(id){
   c.classList.add('open');openGate=id;
 }
 
-function renderGateChecklist(){
-  const hard=GATES.filter(g=>g.type==='hard');
-  const soft=GATES.filter(g=>g.type==='soft');
-  const cleared=hard.filter(g=>g.status==='cleared').length;
-  const icon=g=>g.status==='cleared'?'✓':g.status==='active'?'◐':'○';
-  const bar=g=>g.progress>0?`<div class="gc-bar"><div class="gc-fill ${g.status==='cleared'?'cl':g.status==='active'?'ac':''}" style="width:${g.progress}%"></div></div>`:'';
-  const row=g=>`<div class="gc-item ${g.status}" onclick="showGateDetail(${g.id})">
-    <div class="gc-top"><span class="gc-icon">${icon(g)}</span><span class="gc-name">G${g.id} · ${g.name}</span><span class="gc-pct">${g.progress?g.progress+'%':''}</span></div>
-    <div class="gc-short">${g.short}</div>
-    ${bar(g)}
-    <div class="gc-eta">${g.eta}</div>
-  </div>`;
-  const hd=cleared===hard.length?'ALL CLEARED ✓':`${cleared} of ${hard.length} cleared`;
-  document.getElementById('gate-checklist').innerHTML=`<div class="gc-list">
-    <div class="gc-label">HARD GATES · ${hd}</div>
-    ${hard.map(row).join('')}
-    <div class="gc-label" style="margin-top:10px">SOFT GATES</div>
-    ${soft.map(row).join('')}
-  </div>`;
-  document.getElementById('glist-body').innerHTML=document.getElementById('gate-checklist').innerHTML;
-}
-
-function renderGateList(){
-  document.getElementById('glist-body').innerHTML=`<div class="gate-list">${GATES.map(g=>`<div class="gl-row ${g.status}"><div class="gl-top"><span class="gl-name">G${g.id} · ${g.name} <span class="c-mu" style="font-size:.56rem">[${g.type}]</span></span><span class="gl-pct">${g.progress}%</span></div><div class="gl-bar"><div class="gl-fill" style="width:${g.progress}%"></div></div><div class="gl-eta">${g.short} · ${g.eta}</div></div>`).join('')}</div>`;
-}
+// renderGateChecklist / renderGateList / renderGateForecast removed — S40.
+// All three contexts now rendered by renderGates(mode). See S40 section.
 
 // ── RENDER HEALTH ───────────────────────────────────────────────────────
 function renderHealth(statinDay){
@@ -2148,7 +2117,7 @@ function renderFuture(){
   // S28 — quality progression
   renderQualProg();
   // S29
-  renderGateForecast();
+  renderGates('forecast');
   renderMilestones();
 }
 
@@ -2201,8 +2170,10 @@ function renderPhaseTimeline(){
 }
 
 
-// ── S29: GATE FORECAST ──────────────────────────────────────────────────
-// Short criteria map — kept to one line at mobile widths
+// ── S40: UNIFIED GATE RENDERER ──────────────────────────────────────────
+// mode: 'checklist' → #gate-checklist (Training tab, desktop)
+//       'list'      → #glist-body     (Training tab, mobile)
+//       'forecast'  → #gate-forecast-body (Future tab)
 const GF_SHORT={
   1:'3 wks · ≥38km · injury-free',
   2:'2×20 intervals + 2×20 tempo ceiling-clean',
@@ -2211,30 +2182,67 @@ const GF_SHORT={
   5:'VPBank Hanoi 10K',
   6:'Lactate + VO₂max cleared'
 };
-function renderGateForecast(){
-  const el=document.getElementById('gate-forecast-body');
+function renderGates(mode){
+  const TARGETS={checklist:'gate-checklist',list:'glist-body',forecast:'gate-forecast-body'};
+  const el=document.getElementById(TARGETS[mode]);
   if(!el||!GATES)return;
   const hard=GATES.filter(g=>g.type==='hard');
-  const rows=hard.map(g=>{
-    const cleared=g.status==='cleared';
-    const active=g.status==='active';
-    const tight=g.eta&&g.eta.includes('Sep')&&!cleared;
-    const cls=cleared?'gf-clear':active?'gf-active':tight?'gf-tight':'gf-pending';
-    const icon=cleared?'✓':active?'◉':'○';
-    // Compact ETA: drop year (all 2026), shorten month names
-    const eta=(g.eta||'—').replace(/\s*2026/,'').replace('August','Aug').replace('September','Sep').replace('October','Oct');
-    const progBar=active&&g.progress>0?`<div class="gf-prog-wrap"><div class="gf-prog-bar" style="width:${g.progress}%"></div></div>`:'';
-    return`<div class="gf-row ${cls}">
-      <div class="gf-num">${icon}</div>
-      <div>
-        <div class="gf-name">Gate ${g.id} — ${g.name}</div>
-        <div class="gf-short">${GF_SHORT[g.id]||g.short}</div>
-        ${progBar}
-      </div>
-      <div class="gf-eta">${eta}</div>
+  const soft=GATES.filter(g=>g.type==='soft');
+  const cleared=hard.filter(g=>g.status==='cleared').length;
+  // Shared helpers
+  const st=g=>g.status==='cleared'?'cleared':g.status==='active'?'active':'pending';
+  const icon=g=>g.status==='cleared'?'✓':g.status==='active'?'◐':'○';
+  const iconF=g=>g.status==='cleared'?'✓':g.status==='active'?'◉':'○';
+  const etaShort=s=>(s||'—').replace(/\s*2026/,'').replace('August','Aug').replace('September','Sep').replace('October','Oct');
+  const hdTxt=cleared===hard.length?'ALL CLEARED ✓':`${cleared} of ${hard.length} hard gates cleared`;
+
+  if(mode==='checklist'){
+    const sub=document.getElementById('gate-sub');
+    if(sub)sub.textContent=`${hard.length} hard gates · ${hdTxt}`;
+    const bar=g=>g.progress>0
+      ?`<div class="gc-bar"><div class="gc-fill ${g.status==='cleared'?'cl':g.status==='active'?'ac':''}" style="width:${g.progress}%"></div></div>`:'';
+    const row=g=>`<div class="gc-item ${st(g)}" onclick="showGateDetail(${g.id})">
+      <div class="gc-top"><span class="gc-icon">${icon(g)}</span><span class="gc-name">G${g.id} · ${g.name}</span><span class="gc-pct">${g.progress?g.progress+'%':''}</span></div>
+      <div class="gc-short">${g.short}</div>
+      ${bar(g)}
+      <div class="gc-eta">${g.eta}</div>
     </div>`;
-  }).join('');
-  el.innerHTML=`<div class="gf-list">${rows}</div>`;
+    el.innerHTML=`<div class="gc-list">
+      <div class="gc-label">HARD GATES · ${hdTxt}</div>
+      ${hard.map(row).join('')}
+      <div class="gc-label" style="margin-top:10px">SOFT GATES</div>
+      ${soft.map(row).join('')}
+    </div>`;
+  }
+
+  else if(mode==='list'){
+    const sub=document.getElementById('glist-sub');
+    if(sub)sub.textContent=`${hard.length} hard gates · ${hdTxt}`;
+    el.innerHTML=`<div class="gate-list">${GATES.map(g=>`<div class="gl-row ${st(g)}">
+      <div class="gl-top"><span class="gl-name">G${g.id} · ${g.name} <span class="c-mu" style="font-size:.56rem">[${g.type}]</span></span><span class="gl-pct">${g.progress}%</span></div>
+      <div class="gl-bar"><div class="gl-fill" style="width:${g.progress}%"></div></div>
+      <div class="gl-eta">${g.short} · ${g.eta}</div>
+    </div>`).join('')}</div>`;
+  }
+
+  else if(mode==='forecast'){
+    const rows=hard.map(g=>{
+      const tight=g.eta&&g.eta.includes('Sep')&&g.status!=='cleared';
+      const cls=g.status==='cleared'?'gf-clear':g.status==='active'?'gf-active':tight?'gf-tight':'gf-pending';
+      const progBar=g.status==='active'&&g.progress>0
+        ?`<div class="gf-prog-wrap"><div class="gf-prog-bar" style="width:${g.progress}%"></div></div>`:'';
+      return`<div class="gf-row ${cls}">
+        <div class="gf-num">${iconF(g)}</div>
+        <div>
+          <div class="gf-name">Gate ${g.id} — ${g.name}</div>
+          <div class="gf-short">${GF_SHORT[g.id]||g.short}</div>
+          ${progBar}
+        </div>
+        <div class="gf-eta">${etaShort(g.eta)}</div>
+      </div>`;
+    }).join('');
+    el.innerHTML=`<div class="gf-list">${rows}</div>`;
+  }
 }
 
 // ── S29: MILESTONE CALENDAR ──────────────────────────────────────────────
@@ -2434,6 +2442,68 @@ function initGCTChart(a){
     <div class="li" style="color:var(--mu);font-size:.5rem">● outdoor &nbsp;·&nbsp; ○ treadmill</div>
     <div class="li"><span class="ld-line" style="background:#00d4ff"></span>Easy trend (outdoor, n≥5)</div>`;
   renderGCTCohortTable(a.gct.cohorts);
+}
+
+// ── S39b RUNNING ECONOMY ───────────────────────────────────────────────
+// Renders the VR panel of the combined card. GCT panel is rendered by
+// initGCTChart() + renderGCTCohortTable() into the same card.
+function renderRunningEconomy(a){
+  const el=document.getElementById('vr-body');
+  if(!el)return;
+  const vr=a.vr;
+  if(!vr.pts.length){
+    el.innerHTML=`<div class="re-note">No vertical ratio data logged yet.</div>`;
+    return;
+  }
+  const NAMES={outdoor:'Outdoor',treadmill:'Treadmill'};
+  const COL={outdoor:'var(--d1)',treadmill:'var(--d2)'};
+  const co=vr.cohorts;
+
+  // Headline: best within each cohort, never across cohorts.
+  const cells=['outdoor','treadmill'].map(k=>{
+    const c=co[k];
+    if(!c)return`<div class="stat-cell"><div class="stat-val" style="color:var(--mu)">—</div><div class="stat-lbl">${NAMES[k]} BEST</div><div class="stat-sub">no data</div></div>`;
+    return`<div class="stat-cell"><div class="stat-val" style="color:${COL[k]}">${c.best}%</div><div class="stat-lbl">${NAMES[k]} BEST</div><div class="stat-sub">R${c.bestPt.r} · ${c.bestPt.date}</div></div>`;
+  }).join('');
+
+  // Within-cohort direction only. n<MIN_TREND = no adaptation claim.
+  const rows=['outdoor','treadmill'].map(k=>{
+    const c=co[k];
+    if(!c)return'';
+    let dTxt,dCol;
+    if(c.n<MIN_TREND){dTxt=`n<${MIN_TREND}`;dCol='var(--mu)';}
+    else if(c.delta===null){dTxt='—';dCol='var(--mu)';}
+    else{dTxt=c.delta<0?`${c.delta}%`:`+${c.delta}%`;dCol=c.delta<0?'var(--ok)':c.delta>0.3?'var(--warn)':'var(--m2)';}
+    return`<div class="re-crow">
+      <span style="color:${COL[k]}">${NAMES[k]}</span>
+      <span style="color:var(--mu);text-align:center">${c.n}</span>
+      <span style="color:var(--m2)">${c.mean}%</span>
+      <span style="color:${dCol};font-size:.55rem">${dTxt}</span>
+    </div>`;
+  }).join('');
+
+  const lastThree=vr.pts.slice(-3).reverse();
+
+  // Honest verdict. Outdoor is the cohort that matters for race economy.
+  const oc=co.outdoor;
+  let verdict;
+  if(!oc||oc.n<MIN_TREND){
+    verdict=`Outdoor cohort n=${oc?oc.n:0} — below the ${MIN_TREND}-run threshold. <span style="color:var(--warn)">No VR adaptation claim is supportable.</span> ${co.treadmill&&co.treadmill.n>=MIN_TREND?`Treadmill n=${co.treadmill.n} but belt mechanics alter oscillation; not transferable.`:''}`;
+  } else {
+    verdict=oc.delta<0
+      ?`Outdoor VR down ${Math.abs(oc.delta)}% across ${oc.n} runs — economy improving.`
+      :`Outdoor VR up ${oc.delta}% across ${oc.n} runs — not improving.`;
+  }
+
+  el.innerHTML=`
+    <div class="stats-row" style="margin:0 -20px 14px">${cells}</div>
+    <div class="re-chdr">${['COHORT','N','MEAN','Δ'].map(h=>`<div>${h}</div>`).join('')}</div>
+    ${rows}
+    <div class="re-note">${verdict}</div>
+    <div class="re-hd" style="margin:16px 0 4px"><div class="re-hd-t">Last 3 readings</div></div>
+    <div class="vr-readings">
+      ${lastThree.map(p=>`<div class="vr-row"><span class="vr-label">R${p.r} · ${p.date} · ${p.type} · ${p.surface}</span><span class="vr-val">${p.vr}%</span></div>`).join('')}
+    </div>`;
 }
 
 function renderGCTCohortTable(cohorts){
