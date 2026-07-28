@@ -874,6 +874,15 @@ body{background:var(--bg);background-image:var(--grid);color:var(--tx);font-fami
 /* Hide FS button on mobile (handled by PWA fullscreen) */
 @media(max-width:600px){.fs-btn{display:none}}
 
+/* S38a NEXT SESSION CARD */
+.ns-body{padding:14px 20px 18px}
+.ns-type{font-family:var(--hud);font-size:1.5rem;letter-spacing:2px;text-transform:uppercase;color:var(--cn);margin-bottom:6px}
+.ns-prescription{font-family:var(--mono);font-size:.82rem;color:var(--tx);margin-bottom:8px}
+.ns-meta{font-family:var(--mono);font-size:.53rem;letter-spacing:1px;color:var(--mu);margin-bottom:10px}
+.ns-sep{margin:0 8px;opacity:.35}
+.ns-purpose{font-size:.65rem;color:var(--m2);line-height:1.6}
+.ns-success{font-size:.62rem;color:var(--m2);margin-top:6px;padding-top:6px;border-top:1px solid rgba(0,212,255,.06);line-height:1.5}
+
 /* S37d SESSION LOG — verdict + zone bar + tags */
 .ld-verdict-block{font-size:.68rem;color:var(--tx);line-height:1.65;padding-bottom:8px;border-bottom:1px solid rgba(0,212,255,.06);margin-bottom:8px}
 .ld-zonewrap{padding-bottom:8px;border-bottom:1px solid rgba(0,212,255,.06);margin-bottom:8px}
@@ -1039,6 +1048,7 @@ body{background:var(--bg);background-image:var(--grid);color:var(--tx);font-fami
 <!-- ── TRAINING ── -->
 <div id="tab-training" class="tc">
   <div id="train-headline" class="card hud-card tab-headline"></div>
+  <div id="next-session-card" class="card hud-card"></div>
   <div class="g2">
     <div class="card hud-card">
       <div class="ch"><div class="cl">WEEKLY VOLUME</div><div class="cs">target corridor 33-37km · phase 1 slate · phase 2 violet · * partial</div></div>
@@ -1891,8 +1901,66 @@ function renderTrainingHeadline(a){
     </div>`;
 }
 
+function renderNextSession(){
+  const el=document.getElementById('next-session-card');
+  if(!el)return;
+  const DAYS=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+  const todayIdx=new Date().getDay();
+  // Find next non-rest session
+  let nextDay=null,daysAhead=0;
+  for(let i=1;i<=7;i++){
+    const d=DAYS[(todayIdx+i)%7];
+    const t=ATHLETE.weekSchedule[d];
+    if(t&&t!=='rest'){nextDay=d;daysAhead=i;break;}
+  }
+  if(!nextDay){el.style.display='none';return;}
+  const sType=ATHLETE.weekSchedule[nextDay];
+  const prog=PROGRESSION.find(p=>p.wk===ATHLETE.week);
+  // Prescription
+  const prescMap={
+    quality_a:prog?prog.qualityA+'  ·  ceiling 150 bpm':'—',
+    quality_b:prog?prog.qualityB+' continuous  ·  ceiling 150 bpm':'—',
+    long:prog?`${prog.lrMin}–${prog.lrMax} km  ·  HR 122–139`:'—',
+    easy:`${ATHLETE.weekTarget[0]}–${ATHLETE.weekTarget[1]} km  ·  HR 122–139`,
+    flush:'20–30 min  ·  HR 122–139  ·  easy effort'
+  };
+  const presc=prescMap[sType]||sType;
+  // Shoe + venue
+  const isQ=sType.startsWith('quality');
+  const shoe=isQ?'Evo SL':'Novablast 5';
+  const venue=(isQ||sType==='long')?'Elite Fitness Xuân Diệu':'Outdoor';
+  // Purpose + success criteria
+  const purposeMap={
+    quality_a:'Build interval capacity and raise speed ceiling. Full walk recovery between reps.',
+    quality_b:'Develop continuous tempo endurance. Single unbroken block at controlled effort.',
+    long:'Aerobic base and fat adaptation. HR governs — pace is irrelevant.',
+    easy:'Aerobic maintenance. Stay in Zone 2 throughout.',
+    flush:'Active recovery. Clear residual fatigue — effort should feel trivially easy.'
+  };
+  const successMap={
+    quality_a:'Complete all reps ceiling-clean (0% above 150 bpm). Full recovery between each.',
+    quality_b:'Complete full block unbroken without breaching 150 bpm.',
+    long:`Cover ${prog?.lrMin||'target'}–${prog?.lrMax||''}km. Walk at 143, resume at 128. HR 122–139 throughout.`,
+    easy:'HR 122–139 the whole session. Walk the moment you hit 143.',
+    flush:'Under 30 min is fine. No walk triggers needed — just stay easy.'
+  };
+  // Day label
+  const dayLabel=daysAhead===1?'TOMORROW':daysAhead===2?'IN 2 DAYS':nextDay.toUpperCase();
+  const typeLabel={quality_a:'QUALITY A',quality_b:'QUALITY B',long:'LONG RUN',easy:'EASY RUN',flush:'FLUSH'}[sType]||sType.toUpperCase();
+  el.innerHTML=`
+    <div class="ch"><div class="cl">NEXT SESSION</div><div class="cs">${dayLabel} · ${nextDay}</div></div>
+    <div class="ns-body">
+      <div class="ns-type">${typeLabel}</div>
+      <div class="ns-prescription">${presc}</div>
+      <div class="ns-meta">${shoe}<span class="ns-sep">·</span>${venue}</div>
+      <div class="ns-purpose">${purposeMap[sType]||''}</div>
+      <div class="ns-success">✓ ${successMap[sType]||''}</div>
+    </div>`;
+}
+
 function renderTraining(a){
   renderTrainingHeadline(a);
+  renderNextSession(); // S38a
   renderSignals(a);
   renderSessionLog();
   renderGateChecklist();
