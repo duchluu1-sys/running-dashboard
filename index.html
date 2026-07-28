@@ -1506,7 +1506,7 @@ function classifyAlerts(flags){
 
 function validateRuns(runs){
   const ENUM=['easy','quality_a','quality_b','long','flush','strides','race'];
-  const KNOWN=new Set(['r','date','type','wk','dist','duration','moving','pace','paceEasy','hrAvg','hrMax','te','te_an','gct','vr','vo','sl','cadence','pctCeiling','drift','walkRatio','hrZones','temp','surface','conditions','flag','note']);
+  const KNOWN=new Set(['r','date','type','wk','dist','duration','moving','pace','paceEasy','hrAvg','hrMax','te','te_an','gct','vr','vo','sl','cadence','pctCeiling','drift','walkRatio','hrZones','temp','surface','conditions','flag','note','verdict','tags']);
   const REQ=['r','date','type','wk','dist','flag','note'];
   const f=[];
   runs.forEach((r,i)=>{
