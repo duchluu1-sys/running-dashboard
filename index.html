@@ -157,7 +157,8 @@ body{background:var(--bg);background-image:var(--grid);color:var(--tx);font-fami
 .log-row:hover{background:var(--sf2)}.log-row.quality{border-left-color:var(--v)}.log-row.long{border-left-color:var(--cn)}.log-row.easy{border-left-color:var(--gn)}
 .log-scroll{max-height:420px;overflow-y:auto}.log-scroll::-webkit-scrollbar{width:3px}.log-scroll::-webkit-scrollbar-thumb{background:var(--v);border-radius:2px}.log-scroll::-webkit-scrollbar-track{background:transparent}
 .log-detail{display:none;padding:10px 12px 14px;background:var(--sf2);border-bottom:1px solid var(--bd);border-left:2px solid rgba(0,212,255,.25)}
-.log-detail.open{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
+.log-detail.open{display:flex;flex-direction:column;gap:0}
+.ld-metrics{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-bottom:4px}
 .ld-lbl{font-family:var(--mono);font-size:.46rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--mu);margin-bottom:2px}
 .ld-val{font-family:var(--mono);font-size:.75rem;font-weight:700;color:var(--tx)}
 .ld-note{grid-column:1/-1;color:var(--m2);font-style:italic;padding-top:7px;border-top:1px solid var(--bd);margin-top:3px;font-size:.66rem;font-family:var(--sans);line-height:1.5}
@@ -873,6 +874,25 @@ body{background:var(--bg);background-image:var(--grid);color:var(--tx);font-fami
 /* Hide FS button on mobile (handled by PWA fullscreen) */
 @media(max-width:600px){.fs-btn{display:none}}
 
+/* S37d SESSION LOG — verdict + zone bar + tags */
+.ld-verdict-block{font-size:.68rem;color:var(--tx);line-height:1.65;padding-bottom:8px;border-bottom:1px solid rgba(0,212,255,.06);margin-bottom:8px}
+.ld-zonewrap{padding-bottom:8px;border-bottom:1px solid rgba(0,212,255,.06);margin-bottom:8px}
+.ld-zonelbl{font-family:var(--mono);font-size:.42rem;letter-spacing:2px;color:var(--mu);margin-bottom:4px}
+.ld-zonebar{display:flex;height:4px;border-radius:2px;overflow:hidden;gap:1px;margin-bottom:3px}
+.ld-zone.z1{background:rgba(0,212,255,.22)}
+.ld-zone.z2{background:rgba(0,212,255,.55)}
+.ld-zone.z3{background:rgba(245,158,11,.65)}
+.ld-zone.z4{background:rgba(239,68,68,.55)}
+.ld-zone.z5{background:rgba(239,68,68,.9)}
+.ld-zonepcts{display:flex;gap:1px}
+.ld-zonepcts span{font-family:var(--mono);font-size:.42rem;color:var(--mu);text-align:center}
+.ld-tags{display:flex;gap:4px;flex-wrap:wrap;padding-top:8px;border-top:1px solid rgba(0,212,255,.06);margin-top:4px}
+.ld-tag{font-family:var(--mono);font-size:.42rem;letter-spacing:.5px;padding:2px 6px;border:1px solid rgba(0,212,255,.12);border-radius:2px;color:var(--mu);text-transform:uppercase}
+/* S37d LAST RUN — verdict + tags */
+.lr-verdict{font-size:.68rem;color:var(--tx);line-height:1.65;padding:0 0 4px}
+.lr-tags{display:flex;gap:4px;flex-wrap:wrap;padding-top:4px}
+.lr-tag{font-family:var(--mono);font-size:.42rem;letter-spacing:.5px;padding:2px 6px;border:1px solid rgba(0,212,255,.12);border-radius:2px;color:var(--mu);text-transform:uppercase}
+
 /* S37c TAB HEADLINE — interpretation layer */
 .tab-headline{margin-bottom:0}
 .thl-verdict{padding:10px 20px;font-size:.68rem;color:var(--m2);line-height:1.6;border-bottom:1px solid var(--bd)}
@@ -1563,7 +1583,9 @@ function renderToday(a){
       <div class="lr-field"><div class="lf-lbl">TEMP</div><div class="lf-val">${lr.temp||'—'}${lr.temp?'°C':''}</div></div>
       <div class="lr-field"><div class="lf-lbl">FLAG</div><div class="lf-val">${lr.flag}</div></div>
     </div>
-    <div class="lr-note">${lr.note}</div>`;
+    ${lr.verdict?`<div class="lr-verdict">${lr.verdict.split(/\.\s+/)[0].replace(/\.+$/,'')}.</div>`:``}
+    ${lr.verdict?``:`<div class="lr-note">${lr.note}</div>`}
+    ${lr.tags&&lr.tags.length?`<div class="lr-tags">${lr.tags.map(t=>`<span class="lr-tag">${t}</span>`).join('')}</div>`:``}`;
 
   // S36 — Alert severity model: blocking / dated / standing
   const {blocking:_blk,dated:_dtd}=classifyAlerts(HEALTH_FLAGS);
@@ -1909,7 +1931,16 @@ function toggleRow(r){
 
 function renderSessionLog(){
   const hdr=`<div class="log-hdr"><span class="lc-r-h c-mu">R</span><span class="lc-date-h">DATE</span><span class="lc-type-h">TYPE</span><span>DIST</span><span class="lc-pace-h">PACE</span><span class="lc-avhr-h">AVHR</span><span class="lc-mxhr-h">MXHR</span><span class="lc-gct-h">GCT</span><span>★</span></div>`;
-  const rows=[...RUNS].reverse().map(r=>`
+  const rows=[...RUNS].reverse().map(r=>{
+    // S37d — zone bar
+    const zoneBar=r.hrZones?`<div class="ld-zonewrap"><div class="ld-zonelbl">HR ZONES</div><div class="ld-zonebar">${r.hrZones.map((p,i)=>p>0?`<div class="ld-zone z${i+1}" style="flex:${p}"></div>`:'').join('')}</div><div class="ld-zonepcts">${r.hrZones.map((p,i)=>p>0?`<span style="flex:${p}">Z${i+1} ${p}%</span>`:'').join('')}</div></div>`:'';
+    // S37d — tags
+    const tagsHTML=r.tags&&r.tags.length?`<div class="ld-tags">${r.tags.map(t=>`<span class="ld-tag">${t}</span>`).join('')}</div>`:'';
+    // S37d — verdict block (full text) or note fallback
+    const bodyHTML=r.verdict
+      ?`<div class="ld-verdict-block">${r.verdict}</div>`
+      :`<div class="ld-note">${r.note}</div>`;
+    return `
     <div class="log-row ${r.type}" onclick="toggleRow(${r.r})">
       <span class="lc-r c-mu">${r.r}</span>
       <span class="lc-date">${r.date}</span>
@@ -1919,21 +1950,28 @@ function renderSessionLog(){
       <span class="lc-avhr c-m2">${r.hrAvg||'—'}</span>
       <span class="lc-mxhr c-m2">${r.hrMax||'—'}</span>
       <span class="lc-gct c-vb">${r.gct||'—'}</span>
-      <span>${r.flag}</span>
+      <span>${r.flag}${r.verdict?' 💬':''}</span>
     </div>
     <div class="log-detail" id="ld-${r.r}">
-      <div><div class="ld-lbl">DIST</div><div class="ld-val">${r.dist}km</div></div>
-      <div><div class="ld-lbl">PACE</div><div class="ld-val">${fmtPace(r.pace||r.paceEasy)}</div></div>
-      <div><div class="ld-lbl">AVG HR</div><div class="ld-val">${r.hrAvg?r.hrAvg+' bpm':'—'}</div></div>
-      <div><div class="ld-lbl">MAX HR</div><div class="ld-val">${r.hrMax?r.hrMax+' bpm':'—'}</div></div>
-      <div><div class="ld-lbl">GCT</div><div class="ld-val c-vb">${r.gct?r.gct+' ms':'—'}</div></div>
-      <div><div class="ld-lbl">VR</div><div class="ld-val c-cn">${r.vr?r.vr+'%':'—'}</div></div>
-      ${r.pctCeiling!==null&&r.pctCeiling!==undefined?`<div><div class="ld-lbl">CEILING</div><div class="ld-val ${r.pctCeiling===0?'c-gn':'c-am'}">${r.pctCeiling}%</div></div>`:'<div></div>'}
-      ${r.drift!==null&&r.drift!==undefined?`<div><div class="ld-lbl">DRIFT</div><div class="ld-val ${r.drift<=0?'c-cn':r.drift<=5?'c-gn':'c-am'}">${r.drift>0?'+':''}${r.drift} bpm</div></div>`:'<div></div>'}
-      <div><div class="ld-lbl">TE</div><div class="ld-val">${r.te||'—'}</div></div>
-      <div><div class="ld-lbl">TEMP</div><div class="ld-val">${r.temp?r.temp+'°C':'—'}</div></div>
-      <div class="ld-note">${r.note}</div>
-    </div>`).join('');
+      ${bodyHTML}
+      ${zoneBar}
+      <div class="ld-metrics">
+        <div><div class="ld-lbl">DIST</div><div class="ld-val">${r.dist}km</div></div>
+        <div><div class="ld-lbl">MOVING</div><div class="ld-val">${r.moving?r.moving+'min':'—'}</div></div>
+        <div><div class="ld-lbl">AVG HR</div><div class="ld-val">${r.hrAvg?r.hrAvg+' bpm':'—'}</div></div>
+        <div><div class="ld-lbl">MAX HR</div><div class="ld-val">${r.hrMax?r.hrMax+' bpm':'—'}</div></div>
+        <div><div class="ld-lbl">GCT</div><div class="ld-val c-vb">${r.gct?r.gct+' ms':'—'}</div></div>
+        <div><div class="ld-lbl">VR</div><div class="ld-val c-cn">${r.vr?r.vr+'%':'—'}</div></div>
+        ${r.pctCeiling!==null&&r.pctCeiling!==undefined?`<div><div class="ld-lbl">CEILING</div><div class="ld-val ${r.pctCeiling===0?'c-gn':'c-am'}">${r.pctCeiling}%</div></div>`:'<div></div>'}
+        ${r.drift!==null&&r.drift!==undefined?`<div><div class="ld-lbl">DRIFT</div><div class="ld-val ${r.drift<=0?'c-cn':r.drift<=5?'c-gn':'c-am'}">${r.drift>0?'+':''}${r.drift} bpm</div></div>`:'<div></div>'}
+        <div><div class="ld-lbl">WALK</div><div class="ld-val">${r.walkRatio?r.walkRatio+'%':'—'}</div></div>
+        <div><div class="ld-lbl">TE</div><div class="ld-val">${r.te||'—'}${r.te_an!==null&&r.te_an!==undefined?'/'+r.te_an:''}</div></div>
+        <div><div class="ld-lbl">TEMP</div><div class="ld-val">${r.temp?r.temp+'°C':'—'}</div></div>
+        <div><div class="ld-lbl">SURFACE</div><div class="ld-val">${r.surface||'—'}</div></div>
+      </div>
+      ${tagsHTML}
+    </div>`;
+  }).join('');
   document.getElementById('log-wrap').innerHTML=`${hdr}<div class="log-scroll">${rows}</div>`;
 }
 
