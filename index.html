@@ -150,6 +150,13 @@ body{background:var(--bg);background-image:var(--grid);color:var(--tx);font-fami
 .vr-row:last-child{border-bottom:none}
 .vr-label{font-family:var(--mono);font-size:.65rem;color:var(--m2)}
 .vr-val{font-family:var(--mono);font-size:.88rem;font-weight:700;color:var(--cn)}
+/* RUNNING ECONOMY CARD — S39b */
+.re-callout{padding:8px 20px 10px;font-family:var(--mono);font-size:.68rem;color:var(--cn);border-bottom:1px solid var(--bd)}
+.re-panels{display:grid;grid-template-columns:1.4fr 1fr;gap:0}
+.re-panel{padding:14px 20px 16px}
+.re-panel-sep{border-left:1px solid var(--bd)}
+.re-phdr{font-family:var(--mono);font-size:.58rem;letter-spacing:2.5px;color:var(--mu);text-transform:uppercase;margin-bottom:10px}
+.re-phdr-sub{letter-spacing:1px;font-size:.5rem;color:var(--m2)}
 /* LOG */
 .log-hdr,.log-row{display:grid;grid-template-columns:36px 48px 50px 56px 52px 42px 42px 40px 28px;gap:0;padding:6px 12px;align-items:center}
 .log-hdr{font-family:var(--mono);font-size:.46rem;letter-spacing:2px;text-transform:uppercase;color:var(--mu);border-bottom:1px solid var(--bd);font-weight:700}
@@ -282,6 +289,8 @@ body{background:var(--bg);background-image:var(--grid);color:var(--tx);font-fami
   .med-row{grid-template-columns:1fr}.fshort{display:none}
   .rd-block{flex-direction:column;gap:12px}
   .lr-grid{grid-template-columns:repeat(2,1fr)}
+  .re-panels{grid-template-columns:1fr}
+  .re-panel-sep{border-left:none;border-top:1px solid var(--bd)}
   /* S25/S27 — grids handled by mobile-first defaults above */
   .eval-grid{grid-template-columns:1fr;gap:8px}
   .race-pipe{grid-template-columns:1fr}
@@ -1032,16 +1041,20 @@ body{background:var(--bg);background-image:var(--grid);color:var(--tx);font-fami
       <div id="drift-stats" style="padding:0 20px 12px"></div>
     </div>
   </div>
-  <div class="g2">
-    <div class="card hud-card">
-      <div class="ch"><div class="cl">GROUND CONTACT TIME</div><div class="cs">cohort-segmented · outdoor-easy trend only · hollow = treadmill</div></div>
-      <div class="cleg" id="gct-leg"></div>
-      <div class="cw"><canvas id="gctChart"></canvas></div>
-      <div id="gct-cohort-table" style="padding:8px 20px 14px"></div>
-    </div>
-    <div class="card gn-border hud-card">
-      <div class="ch"><div class="cl">VERTICAL RATIO</div><div class="cs">lower = less vertical oscillation = better economy</div></div>
-      <div id="vr-body" class="cb"></div>
+  <div class="card hud-card">
+    <div class="ch"><div class="cl">RUNNING ECONOMY</div><div class="cs">GCT · VR · lower is better on both</div></div>
+    <div id="re-callout" class="re-callout"></div>
+    <div class="re-panels">
+      <div class="re-panel">
+        <div class="re-phdr">GROUND CONTACT TIME &nbsp;<span class="re-phdr-sub">cohort-segmented · hollow = treadmill</span></div>
+        <div class="cleg" id="gct-leg"></div>
+        <div class="cw" style="height:200px"><canvas id="gctChart"></canvas></div>
+        <div id="gct-cohort-table" style="padding:8px 0 4px"></div>
+      </div>
+      <div class="re-panel re-panel-sep">
+        <div class="re-phdr">VERTICAL RATIO &nbsp;<span class="re-phdr-sub">lower = less vertical oscillation</span></div>
+        <div id="vr-body"></div>
+      </div>
     </div>
   </div>
 </div>
@@ -1782,18 +1795,8 @@ function renderAdaptation(a){
   renderAdaptationHeadline(a); // S37c
   // Pace gap
   renderPaceGap(a.paceGap);
-  // VR block
-  const vr=a.vr;
-  const lastThree=vr.pts.slice(-3).reverse();
-  document.getElementById('vr-body').innerHTML=`
-    <div class="stats-row" style="margin:-18px -20px 14px">
-      <div class="stat-cell"><div class="stat-val cn">${vr.best||'—'}%</div><div class="stat-lbl">BEST</div><div class="stat-sub">R39 · Jul 17</div></div>
-      <div class="stat-cell"><div class="stat-val">${vr.baseline}%</div><div class="stat-lbl">BASELINE</div><div class="stat-sub">R14 · Jun 3</div></div>
-      <div class="stat-cell"><div class="stat-val cn">↓${vr.best?(vr.baseline-vr.best).toFixed(1):'—'}%</div><div class="stat-lbl">IMPROVEMENT</div><div class="stat-sub">vs baseline</div></div>
-    </div>
-    <div class="vr-readings">
-      ${lastThree.map(p=>`<div class="vr-row"><span class="vr-label">R${p.r} · ${p.date} · ${p.type}</span><span class="vr-val">${p.vr}%</span></div>`).join('')}
-    </div>`;
+  // Running Economy (S39b — GCT callout + VR panel)
+  renderRunningEconomy(a);
   // Compliance header
   document.getElementById('compliance-header').textContent=`${a.compliance.cleanCount} of last ${a.compliance.total} quality sessions ceiling-clean (${a.compliance.rate}%)`;
   // AEI sparse state
@@ -1812,6 +1815,39 @@ function renderAdaptation(a){
   if(!hasSufficientData(a.threshold.pts,MIN_SCATTER)){
     renderSparseCard('threshold-sparse','THRESHOLD PACE DEVELOPMENT',a.threshold.pts.length,MIN_SCATTER,'Confirmed LT1: '+fmtPace(ATHLETE.ltPace)+'/km (R34). Timeline builds as quality sessions log pace data.');
   }
+}
+
+// ── RUNNING ECONOMY (S39b) ─────────────────────────────────────────────
+function renderRunningEconomy(a){
+  const {gct,vr}=a;
+  // Callout sentence: GCT outdoor-easy trend + VR best
+  const oe=gct.cohorts.find(c=>c.key==='outdoor-easy');
+  let callout='';
+  if(oe&&oe.n>=3){
+    const d=oe.delta;
+    const gctPart=d!==null?(d<0?`GCT outdoor easy ${d}ms trend over program`:`GCT outdoor easy +${d}ms trend (levelling)`):`GCT outdoor easy ${oe.mean}ms avg · n=${oe.n}`;
+    const vrPart=vr.best?`VR best ${vr.best}% (↓${(vr.baseline-vr.best).toFixed(1)}% from baseline ${vr.baseline}%)`:'VR data collecting';
+    callout=`${gctPart} · ${vrPart}`;
+  } else {
+    callout=`Outdoor easy runs with dynamics enabled build this signal · ${oe?oe.n+' qualifying runs so far':'no dynamics data yet'}`;
+  }
+  const reEl=document.getElementById('re-callout');
+  if(reEl)reEl.textContent=callout;
+  // VR panel
+  const vrEl=document.getElementById('vr-body');
+  if(!vrEl)return;
+  const lastThree=vr.pts.slice(-3).reverse();
+  const bestPt=vr.pts.length?vr.pts.reduce((a,b)=>b.vr<a.vr?b:a):null;
+  vrEl.innerHTML=`
+    <div class="stats-row" style="margin:0 0 14px">
+      <div class="stat-cell"><div class="stat-val cn">${vr.best||'—'}%</div><div class="stat-lbl">BEST</div><div class="stat-sub">${bestPt?`R${bestPt.r} · ${bestPt.date}`:'—'}</div></div>
+      <div class="stat-cell"><div class="stat-val">${vr.baseline}%</div><div class="stat-lbl">BASELINE</div><div class="stat-sub">R14 · Jun 3</div></div>
+      <div class="stat-cell"><div class="stat-val cn">↓${vr.best?(vr.baseline-vr.best).toFixed(1):'—'}%</div><div class="stat-lbl">IMPROVEMENT</div><div class="stat-sub">vs baseline</div></div>
+    </div>
+    <div class="vr-readings">
+      ${lastThree.length?lastThree.map(p=>`<div class="vr-row"><span class="vr-label">R${p.r} · ${p.date} · ${p.type}</span><span class="vr-val">${p.vr}%</span></div>`).join(''):'<div class="vr-row"><span class="vr-label" style="color:var(--mu)">No VR data yet</span></div>'}
+    </div>
+    <div style="font-size:.58rem;color:var(--mu);margin-top:12px;font-family:var(--mono);line-height:1.6">Target &lt;9.0% · Elite 6–8% · Lower = less vertical energy waste</div>`;
 }
 
 function renderPaceGap(pg){
