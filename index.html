@@ -671,13 +671,13 @@ body{background:var(--bg);background-image:var(--grid);color:var(--tx);font-fami
   display:grid;
   gap:16px;
   grid-template-columns:1fr;
-  grid-template-areas:"races" "timeline" "voltraj" "gates" "qual" "milestones";
+  grid-template-areas:"races" "timeline" "decisions" "voltraj" "gates" "qual" "milestones";
 }
 /* Desktop: restore 2-col */
 @media(min-width:768px){
   .future-grid{
     grid-template-columns:1fr 1fr;
-    grid-template-areas:"races races" "timeline timeline" "voltraj gates" "qual milestones";
+    grid-template-areas:"races races" "timeline timeline" "decisions decisions" "voltraj gates" "qual milestones";
   }
 }
 .future-grid>.card{margin-bottom:0}
@@ -689,12 +689,34 @@ body{background:var(--bg);background-image:var(--grid);color:var(--tx);font-fami
 .future-grid>.hud-card::after{bottom:0;right:0}
 .fg-races{grid-area:races}
 .fg-timeline{grid-area:timeline}
+.fg-decisions{grid-area:decisions}
 .fg-voltraj{grid-area:voltraj}
 .fg-gates{grid-area:gates}
 .fg-qual{grid-area:qual}
 .fg-milestones{grid-area:milestones}
 #tab-future .ch{border-left-color:var(--cy-bd)}
 #tab-future .cl{color:var(--cy)}
+/* S40b — DECISION SEQUENCE */
+#dt-body{padding:0}
+.dt-flow{display:flex;align-items:flex-start;overflow-x:auto;padding:12px 20px 16px;scrollbar-width:thin;scrollbar-color:var(--bd) transparent;-webkit-overflow-scrolling:touch}
+.dt-flow::-webkit-scrollbar{height:2px}
+.dt-flow::-webkit-scrollbar-thumb{background:var(--bd);border-radius:2px}
+.dt-node{flex-shrink:0}
+.dt-box{min-width:86px;max-width:112px;padding:7px 10px;border:1px solid var(--bd);border-radius:3px}
+.dt-past .dt-box{opacity:.35}
+.dt-icon{font-size:.72rem;margin-bottom:4px;line-height:1}
+.dt-lbl{font-family:var(--stm);font-size:.57rem;color:var(--tx);line-height:1.35;margin-bottom:3px}
+.dt-meta{font-family:var(--stm);font-size:.46rem;color:var(--mu);letter-spacing:.3px}
+.dt-sep{display:flex;align-items:center;flex-shrink:0;padding:0 4px;padding-top:16px}
+.dt-sep-l{width:14px;height:1px;background:var(--bd)}
+.dt-sep-a{font-size:.6rem;color:var(--mu);margin-left:-3px;font-family:var(--stm)}
+@media(max-width:767px){
+  .dt-flow{flex-direction:column;overflow-x:visible}
+  .dt-box{min-width:unset;max-width:none;width:100%;box-sizing:border-box}
+  .dt-sep{flex-direction:column;padding:0;padding-left:14px;height:14px}
+  .dt-sep-l{width:1px;height:14px}
+  .dt-sep-a{display:none}
+}
 
 
 /* PHASE TIMELINE — absolute-positioned track */
@@ -1120,6 +1142,10 @@ body{background:var(--bg);background-image:var(--grid);color:var(--tx);font-fami
       <div class="ch"><div class="cl">TIMELINE</div><div class="cs">tap segment for detail · Phase 1→2→3</div></div>
       <div id="phase-tl"></div>
       <div id="phase-detail"></div>
+    </div>
+    <div class="card hud-card fg-decisions" id="decisions-card">
+      <div class="ch"><div class="cl">DECISION SEQUENCE</div><div class="cs">upcoming controllable events · scroll for 2027 →</div></div>
+      <div id="dt-body"></div>
     </div>
     <div class="card hud-card fg-voltraj" id="vol-traj-card">
       <div class="ch"><div class="cl">VOLUME</div><div class="cs">actual vs plan · W9–24</div></div>
@@ -2113,6 +2139,8 @@ function renderFuture(){
     </div>`;
   }).join('')}</div>`;
   renderPhaseTimeline();
+  // S40b — Decision Sequence
+  renderDecisionTimeline();
   // S28 — vol trajectory canvas injected by initVolTrajChart on tab activation
   // S28 — quality progression
   renderQualProg();
@@ -2243,6 +2271,75 @@ function renderGates(mode){
     }).join('');
     el.innerHTML=`<div class="gf-list">${rows}</div>`;
   }
+}
+
+// ── S40b: DECISION SEQUENCE ──────────────────────────────────────────────
+// Computed from PROGRESSION (vol step-ups, peak start) + MILESTONES.
+// Medical milestones excluded — Health tab owns those.
+// "Controllable" = events with a fixed date or a decision dependent on us.
+function renderDecisionTimeline(){
+  const el=document.getElementById('dt-body');
+  if(!el||!PROGRESSION||!MILESTONES)return;
+  const today=new Date();today.setHours(0,0,0,0);
+
+  const TYPE_HEX={vol:'#00d4ff',peak:'#00d4ff',deload:'#f59e0b',
+    gate:'#10b981',test:'#f59e0b',review:'#94a3b8',
+    phase:'#00d4ff',race:'#00d4ff',training:'#f59e0b'};
+  const TYPE_ICON={gate:'◈',test:'⚗',review:'◉',phase:'→',race:'▷',training:'⬇'};
+  const shortD=iso=>{const MON=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],d=new Date(iso+'T00:00:00');return MON[d.getMonth()]+' '+d.getDate();};
+
+  const nodes=[];
+  // Source 1: PROGRESSION — vol step-ups and first peak block
+  let prevMin=null,seenPeak=false;
+  for(const p of PROGRESSION){
+    if(p.wk<=ATHLETE.week){prevMin=p.volMin;continue;}
+    const date=new Date(p.dateStart+'T00:00:00');
+    if(prevMin!==null&&p.volMin>prevMin)
+      nodes.push({date,label:`↑ Vol ${p.volMin}–${p.volMax}km`,sub:`W${p.wk}`,type:'vol',icon:'⬆'});
+    if(p.kind==='peak'&&!seenPeak){
+      nodes.push({date,label:'Peak block',sub:`W${p.wk}–${p.wk+1}`,type:'peak',icon:'▲'});
+      seenPeak=true;
+    }
+    prevMin=p.volMin;
+  }
+  // Source 2: MILESTONES (medical + race_sim excluded; races capped at marathon)
+  const MARATHON='2027-10-20';
+  for(const m of MILESTONES){
+    if(m.type==='medical'||m.type==='race_sim')continue;
+    if(m.type==='race'&&m.date>MARATHON)continue;
+    nodes.push({date:new Date(m.date+'T00:00:00'),label:m.label,
+      sub:shortD(m.date),type:m.type,icon:TYPE_ICON[m.type]||'·',nonNeg:m.nonNegotiable});
+  }
+  // Dedup: drop vol/peak nodes within 2 days of any milestone (milestone wins)
+  const msDates=new Set(MILESTONES.filter(m=>m.type!=='medical').map(m=>new Date(m.date+'T00:00:00').getTime()));
+  const deduped=nodes
+    .filter(n=>(n.type==='vol'||n.type==='peak')
+      ?![...msDates].some(md=>Math.abs(n.date.getTime()-md)<=2*86400000)
+      :true)
+    .sort((a,b)=>a.date-b.date);
+
+  if(!deduped.length){el.innerHTML='<div style="padding:14px 20px;color:var(--mu);font-size:.6rem">No upcoming decisions logged.</div>';return;}
+
+  const html=deduped.map((n,i)=>{
+    const days=Math.round((n.date-today)/86400000);
+    const past=days<0,near=!past&&days<=14;
+    const hex=TYPE_HEX[n.type]||'#64748b';
+    const statusCls=past?'dt-past':near?'dt-near':'dt-future';
+    const dTxt=past?'done':days===0?'TODAY':days<=7?`${days}d`:'';
+    const boxStyle=near
+      ?`border-color:${hex};box-shadow:0 0 10px ${hex}28`
+      :`border-color:${hex}1a`;
+    const sep=i<deduped.length-1?`<div class="dt-sep"><div class="dt-sep-l"></div><div class="dt-sep-a">›</div></div>`:'';
+    return`<div class="dt-node ${statusCls}">
+      <div class="dt-box" style="${boxStyle}">
+        <div class="dt-icon" style="color:${hex}">${n.icon}</div>
+        <div class="dt-lbl">${n.label}</div>
+        <div class="dt-meta">${n.sub}${dTxt?` · <span style="color:#f59e0b">${dTxt}</span>`:''}</div>
+      </div>
+    </div>${sep}`;
+  }).join('');
+
+  el.innerHTML=`<div class="dt-flow">${html}</div>`;
 }
 
 // ── S29: MILESTONE CALENDAR ──────────────────────────────────────────────
