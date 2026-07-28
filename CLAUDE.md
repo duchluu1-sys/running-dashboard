@@ -89,7 +89,8 @@ Append one object to the RUNS array in `duchluu1-sys/running-dashboard/data.json
   "surface": "<outdoor|treadmill>",
   "conditions": "<start time HH:MM or brief context>",
   "flag": "<✅|✅✅|✅✅✅|⚠️|○>",
-  "note": "<brief session note>"
+  "note": "<brief session note>",
+  "verdict": null
 }
 ```
 
@@ -102,6 +103,7 @@ Append one object to the RUNS array in `duchluu1-sys/running-dashboard/data.json
 - `temp` = integer °C only. Do NOT write strings like "27–30°C".
 - `hrZones` = [Z1,Z2,Z3,Z4,Z5] as percentages. Must sum to 100. Null if not available.
 - `flag` logic: ✅✅✅ program best + exceptional · ✅✅ new PB or near-perfect · ✅ clean · ○ suboptimal · ⚠️ ceiling breach/injury/major gap
+- `verdict` = coaching interpretation, 2–4 sentences. Leave as null in the entry — athlete fills this in before committing. Dashboard falls back to `note` field in render if null.
 - **Source precedence:** Screenshots win over API for `hrZones`, `moving`, `walkRatio`. API wins for `dist`, `hrAvg`, `hrMax`, `gct`, `vr`, `te`, `te_an`. When sources disagree, state the disagreement explicitly in the verdict before writing.
 
 **After appending run, update ATHLETE block — these fields only:**
@@ -193,23 +195,12 @@ Commit message: `KB update R[N] — [date]`
 
 ## Verdict & Write Protocol
 
-After completing Steps 1–5 analysis, present this before writing anything:
+After completing Steps 1–5 analysis, produce all three outputs simultaneously — no go-ahead gate:
+1. data.json run entry (verdict: null — athlete fills in before committing)
+2. training_kb.md full replacement file
+3. run_archive.md full replacement file
 
-```
-R[N] VERDICT — [date]
-Type: [type] · Dist: [X]km · HR: [avg]/[max] · TE: [X]/[Y] · GCT: [X]ms · VR: [X]%
-Flag: [emoji] · [one line summary]
-[Source disagreements, if any]
-
-Ready to write:
-Commit 1: data.json → running-dashboard
-Commit 2: run_archive.md + training_kb.md → running-kb
-Go ahead?
-```
-
-On go-ahead:
-1. `push_files` → `duchluu1-sys/running-dashboard` — confirm SHA
-2. `push_files` → `duchluu1-sys/running-kb` — confirm SHA
+Athlete commits all three via GitHub Desktop.
 
 ---
 
