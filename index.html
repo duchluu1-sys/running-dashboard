@@ -181,15 +181,16 @@ body{background:var(--bg);background-image:var(--grid);color:var(--tx);font-fami
 .gc-item:hover{background:var(--sf2)}.gc-item:last-child{border-bottom:none}
 .gc-top{display:flex;align-items:baseline;gap:6px;margin-bottom:3px}
 .gc-icon{font-family:var(--mono);font-size:.72rem;width:16px;flex-shrink:0;font-weight:700}
-.gc-item.cleared .gc-icon{color:var(--gn)}.gc-item.active .gc-icon{color:var(--cn)}.gc-item.pending .gc-icon{color:var(--mu)}
+.gc-item.cleared .gc-icon{color:var(--gn)}.gc-item.active .gc-icon{color:var(--cn)}.gc-item.pending .gc-icon{color:var(--mu)}.gc-item.tight .gc-icon{color:var(--am)}
 .gc-name{font-family:var(--mono);font-size:.64rem;font-weight:700;flex:1;color:var(--m2)}
-.gc-item.active .gc-name{color:var(--vb)}.gc-item.cleared .gc-name{color:var(--gn)}
+.gc-item.active .gc-name{color:var(--vb)}.gc-item.cleared .gc-name{color:var(--gn)}.gc-item.tight .gc-name{color:var(--am)}
 .gc-pct{font-family:var(--mono);font-size:.58rem;color:var(--mu);min-width:28px;text-align:right}
 .gc-short{font-size:.61rem;color:var(--m2);margin-bottom:4px;padding-left:22px;line-height:1.4}
 .gc-bar{height:2px;background:var(--bdb);border-radius:2px;margin:4px 0 3px 22px}
 .gc-fill{height:100%;border-radius:2px;background:var(--mu)}
-.gc-fill.ac{background:var(--v)}.gc-fill.cl{background:var(--gn)}
+.gc-fill.ac{background:var(--v)}.gc-fill.cl{background:var(--gn)}.gc-fill.ti{background:var(--am)}
 .gc-eta{font-family:var(--mono);font-size:.5rem;color:var(--mu);padding-left:22px}
+.gc-item.tight .gc-eta{color:var(--am);opacity:.8}
 .gate-dc{margin:6px 12px 0;background:var(--sf2);border:1px solid var(--bdb);border-radius:4px;padding:10px 12px;display:none}
 .gate-dc.open{display:block}
 .gdc-name{font-family:var(--mono);font-size:.62rem;color:var(--vb);font-weight:700;margin-bottom:4px}
@@ -258,7 +259,7 @@ body{background:var(--bg);background-image:var(--grid);color:var(--tx);font-fami
 .gate-list-card{display:none}/* content now in radar-card checklist */
 .gate-list{display:flex;flex-direction:column;gap:8px;padding:14px}
 .gl-row{padding:10px 13px;background:var(--sf2);border-radius:4px;border-left:3px solid var(--bd)}
-.gl-row.active{border-left-color:var(--v)}.gl-row.cleared{border-left-color:var(--gn)}
+.gl-row.active{border-left-color:var(--v)}.gl-row.cleared{border-left-color:var(--gn)}.gl-row.tight{border-left-color:var(--am)}
 .gl-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:4px}
 .gl-name{font-size:.7rem;font-weight:600;color:var(--tx)}.gl-pct{font-family:var(--mono);font-size:.7rem;color:var(--vb)}
 .gl-bar{height:3px;background:var(--sf);border-radius:2px}.gl-fill{height:100%;background:var(--v);border-radius:2px}
@@ -498,9 +499,9 @@ body{background:var(--bg);background-image:var(--grid);color:var(--tx);font-fami
 /* Race countdown — hero Rajdhani */
 .race-cd{font-family:var(--hud);font-size:3.5rem;font-weight:700;letter-spacing:1px}
 .race-name{font-family:var(--hud);font-size:1.1rem;font-weight:700;letter-spacing:.5px}
-.race-lbl{font-family:var(--stm);letter-spacing:3px}
-.race-cd-unit{font-family:var(--stm);letter-spacing:2px}
-.race-goal{font-family:var(--stm);font-size:.68rem}
+.race-lbl{font-family:var(--mono);letter-spacing:2px}
+.race-cd-unit{font-family:var(--mono);letter-spacing:1px}
+.race-goal{font-family:var(--mono);font-size:.68rem}
 
 /* Race card — allow hud-card L-bracket corners to extend */
 .race-card{overflow:visible}
@@ -705,11 +706,11 @@ body{background:var(--bg);background-image:var(--grid);color:var(--tx);font-fami
 .dt-box{min-width:86px;max-width:112px;padding:7px 10px;border:1px solid var(--bd);border-radius:3px}
 .dt-past .dt-box{opacity:.35}
 .dt-icon{font-size:.72rem;margin-bottom:4px;line-height:1}
-.dt-lbl{font-family:var(--stm);font-size:.57rem;color:var(--tx);line-height:1.35;margin-bottom:3px}
-.dt-meta{font-family:var(--stm);font-size:.46rem;color:var(--mu);letter-spacing:.3px}
+.dt-lbl{font-family:var(--mono);font-size:.57rem;color:var(--tx);line-height:1.35;margin-bottom:3px}
+.dt-meta{font-family:var(--mono);font-size:.46rem;color:var(--mu);letter-spacing:.2px}
 .dt-sep{display:flex;align-items:center;flex-shrink:0;padding:0 4px;padding-top:16px}
 .dt-sep-l{width:14px;height:1px;background:var(--bd)}
-.dt-sep-a{font-size:.6rem;color:var(--mu);margin-left:-3px;font-family:var(--stm)}
+.dt-sep-a{font-size:.6rem;color:var(--mu);margin-left:-3px;font-family:var(--mono)}
 @media(max-width:767px){
   .dt-flow{flex-direction:column;overflow-x:visible}
   .dt-box{min-width:unset;max-width:none;width:100%;box-sizing:border-box}
@@ -735,8 +736,8 @@ body{background:var(--bg);background-image:var(--grid);color:var(--tx);font-fami
 }
 .ftl-phase:hover{filter:brightness(1.3)}
 .ftl-plbl{
-  font-family:var(--stm);font-size:.42rem;
-  letter-spacing:1px;color:rgba(0,212,255,.5);
+  font-family:var(--mono);font-size:.42rem;
+  letter-spacing:.5px;color:rgba(0,212,255,.5);
   text-transform:uppercase;padding:0 5px;
   white-space:nowrap;overflow:hidden;
 }
@@ -753,7 +754,7 @@ body{background:var(--bg);background-image:var(--grid);color:var(--tx);font-fami
 }
 .ftl-tlbl{
   position:absolute;top:-22px;left:50%;transform:translateX(-50%);
-  font-family:var(--stm);font-size:.42rem;letter-spacing:2px;
+  font-family:var(--mono);font-size:.42rem;letter-spacing:1px;
   color:var(--cy);white-space:nowrap;
 }
 
@@ -763,7 +764,7 @@ body{background:var(--bg);background-image:var(--grid);color:var(--tx);font-fami
 .ftl-rdot{position:absolute;left:50%;bottom:-5px;transform:translateX(-50%);width:8px;height:8px;border-radius:50%}
 .ftl-rlbl{
   position:absolute;left:50%;transform:translateX(-50%);
-  font-family:var(--stm);font-size:.44rem;letter-spacing:1px;
+  font-family:var(--mono);font-size:.44rem;letter-spacing:.5px;
   white-space:nowrap;text-align:center;line-height:1.5;
 }
 .ftl-above{bottom:calc(100% + 14px)}
@@ -773,7 +774,7 @@ body{background:var(--bg);background-image:var(--grid);color:var(--tx);font-fami
 
 /* Legend */
 .ftl-leg{display:flex;gap:16px;margin-top:28px}
-.ftl-li{display:flex;align-items:center;gap:5px;font-family:var(--stm);font-size:.46rem;color:var(--mu);letter-spacing:1px}
+.ftl-li{display:flex;align-items:center;gap:5px;font-family:var(--mono);font-size:.46rem;color:var(--mu);letter-spacing:.5px}
 .ftl-ld{width:12px;height:12px;border-radius:2px;flex-shrink:0}
 
 /* Race card updates */
@@ -781,8 +782,8 @@ body{background:var(--bg);background-image:var(--grid);color:var(--tx);font-fami
 .race-primary{background:rgba(0,212,255,.03)}
 .race-unconf-badge{
   display:inline-block;background:rgba(245,158,11,.12);
-  color:var(--am);font-family:var(--stm);font-size:.44rem;
-  padding:1px 5px;border-radius:2px;letter-spacing:1px;
+  color:var(--am);font-family:var(--mono);font-size:.44rem;
+  padding:1px 5px;border-radius:2px;letter-spacing:.5px;
   vertical-align:middle;margin-left:6px;
 }
 
@@ -795,7 +796,7 @@ body{background:var(--bg);background-image:var(--grid);color:var(--tx);font-fami
 .vol-traj-wrap{height:180px;padding:4px 16px 12px}
 
 /* Quality progression table */
-.qp-table{width:100%;border-collapse:collapse;font-family:var(--stm);font-size:.62rem}
+.qp-table{width:100%;border-collapse:collapse;font-family:var(--mono);font-size:.62rem}
 .qp-table th{
   color:var(--mu);letter-spacing:2px;text-transform:uppercase;
   font-size:.5rem;padding:8px 12px 6px;
@@ -822,7 +823,7 @@ body{background:var(--bg);background-image:var(--grid);color:var(--tx);font-fami
    ════════════════════════════════════════ */
 
 /* Gate forecast */
-.gf-list{padding:12px 16px;display:flex;flex-direction:column;gap:6px}
+.gf-list{padding:12px 20px;display:flex;flex-direction:column;gap:8px}
 .gf-row{
   display:grid;
   grid-template-columns:28px 1fr auto;
@@ -839,9 +840,9 @@ body{background:var(--bg);background-image:var(--grid);color:var(--tx);font-fami
 .gf-num{font-family:var(--hud);font-weight:700;font-size:1rem;color:var(--mu);text-align:center}
 .gf-row.gf-active .gf-num{color:var(--cy)}
 .gf-row.gf-tight .gf-num{color:var(--am)}
-.gf-name{font-family:var(--stm);font-size:.62rem;color:var(--tx);letter-spacing:.5px}
-.gf-short{font-family:var(--stm);font-size:.52rem;color:var(--mu);margin-top:2px;letter-spacing:.3px}
-.gf-eta{font-family:var(--stm);font-size:.5rem;color:var(--mu);white-space:nowrap;text-align:right;letter-spacing:1px}
+.gf-name{font-family:var(--mono);font-size:.62rem;color:var(--tx);letter-spacing:.3px}
+.gf-short{font-family:var(--mono);font-size:.52rem;color:var(--mu);margin-top:2px;letter-spacing:.2px}
+.gf-eta{font-family:var(--mono);font-size:.5rem;color:var(--mu);white-space:nowrap;text-align:right;letter-spacing:.5px}
 .gf-row.gf-tight .gf-eta{color:var(--am)}
 
 /* Progress bar under active gate */
@@ -849,7 +850,7 @@ body{background:var(--bg);background-image:var(--grid);color:var(--tx);font-fami
 .gf-prog-bar{height:100%;border-radius:2px;background:var(--cy);transition:width .4s}
 
 /* Milestone calendar */
-.ms-list{padding:12px 16px;display:flex;flex-direction:column;gap:0}
+.ms-list{padding:12px 20px;display:flex;flex-direction:column;gap:0}
 .ms-row{
   display:block;
   padding:8px 6px;
@@ -857,10 +858,10 @@ body{background:var(--bg);background-image:var(--grid);color:var(--tx);font-fami
   position:relative;
 }
 .ms-row:last-child{border-bottom:none}
-.ms-date{font-family:var(--stm);font-size:.52rem;color:var(--mu);letter-spacing:1px;white-space:nowrap}
+.ms-date{font-family:var(--mono);font-size:.52rem;color:var(--mu);letter-spacing:.5px;white-space:nowrap}
 .ms-row.ms-urgent .ms-date{color:var(--am);font-weight:700}
 .ms-row.ms-past .ms-date{opacity:.4}
-.ms-label{font-family:var(--stm);font-size:.62rem;color:var(--tx);letter-spacing:.3px}
+.ms-label{font-family:var(--mono);font-size:.62rem;color:var(--tx);letter-spacing:.2px}
 .ms-row.ms-urgent .ms-label{color:var(--am)}
 .ms-row.ms-race .ms-label{color:var(--cy)}
 .ms-row.ms-past{opacity:.35}
@@ -2158,7 +2159,7 @@ function showPhaseDetail(id,text){
 
 // S27 — rebuilt from real dates against PHASES + RACES arrays
 function renderPhaseTimeline(){
-  if(!PHASES.length){document.getElementById('phase-tl').innerHTML='<div style="padding:20px;color:var(--mu);font-family:var(--stm);font-size:.68rem">Loading…</div>';return;}
+  if(!PHASES.length){document.getElementById('phase-tl').innerHTML='<div style="padding:20px;color:var(--mu);font-family:var(--mono);font-size:.68rem">Loading…</div>';return;}
   const EPOCH=new Date('2026-05-09T00:00:00');
   const FINISH=new Date('2027-10-19T00:00:00');
   const SPAN=FINISH-EPOCH;
@@ -2218,7 +2219,10 @@ function renderGates(mode){
   const soft=GATES.filter(g=>g.type==='soft');
   const cleared=hard.filter(g=>g.status==='cleared').length;
   // Shared helpers
-  const st=g=>g.status==='cleared'?'cleared':g.status==='active'?'active':'pending';
+  const st=g=>g.status==='cleared'?'cleared'
+    :g.status==='active'?'active'
+    :(g.eta&&(g.eta.includes('Aug')||g.eta.includes('Sep')))?'tight'
+    :'pending';
   const icon=g=>g.status==='cleared'?'✓':g.status==='active'?'◐':'○';
   const iconF=g=>g.status==='cleared'?'✓':g.status==='active'?'◉':'○';
   const etaShort=s=>(s||'—').replace(/\s*2026/,'').replace('August','Aug').replace('September','Sep').replace('October','Oct');
@@ -2228,7 +2232,7 @@ function renderGates(mode){
     const sub=document.getElementById('gate-sub');
     if(sub)sub.textContent=`${hard.length} hard gates · ${hdTxt}`;
     const bar=g=>g.progress>0
-      ?`<div class="gc-bar"><div class="gc-fill ${g.status==='cleared'?'cl':g.status==='active'?'ac':''}" style="width:${g.progress}%"></div></div>`:'';
+      ?`<div class="gc-bar"><div class="gc-fill ${g.status==='cleared'?'cl':g.status==='active'?'ac':st(g)==='tight'?'ti':''}" style="width:${g.progress}%"></div></div>`:'';
     const row=g=>`<div class="gc-item ${st(g)}" onclick="showGateDetail(${g.id})">
       <div class="gc-top"><span class="gc-icon">${icon(g)}</span><span class="gc-name">G${g.id} · ${g.name}</span><span class="gc-pct">${g.progress?g.progress+'%':''}</span></div>
       <div class="gc-short">${g.short}</div>
@@ -2364,7 +2368,7 @@ function renderMilestones(){
     const cls=`ms-row${past?' ms-past':''}${urgent?' ms-urgent':''}${race?' ms-race':''}${m.nonNegotiable?' ms-nonneg':''}`;
     const dLabel=past?'past':d===0?'TODAY':d===1?'tomorrow':d<=14?d+'d away':'';
     const icon=typeIcon[m.type]||'·';
-    const nnBadge=m.nonNegotiable?'<span style="color:var(--rd);font-size:.44rem;letter-spacing:1px;font-family:var(--stm)"> · NNeg</span>':'';
+    const nnBadge=m.nonNegotiable?'<span style="color:var(--rd);font-size:.44rem;letter-spacing:.5px;font-family:var(--mono)"> · NNeg</span>':'';
     return`<div class="${cls}">
       <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:1px">
         <div class="ms-date">${fmt(m.date)}${dLabel?' <span style="font-size:.44rem;opacity:.55">('+dLabel+')</span>':''}</div>
@@ -2458,7 +2462,7 @@ function renderQualProg(){
     </div>
     ${hidden.length?`
     <details style="padding:0 12px 10px">
-      <summary style="font-family:var(--stm);font-size:.52rem;letter-spacing:2px;color:var(--mu);cursor:pointer;list-style:none;padding:8px 0;text-transform:uppercase">Show all ${PROGRESSION.length} weeks ▾</summary>
+      <summary style="font-family:var(--mono);font-size:.52rem;letter-spacing:1px;color:var(--mu);cursor:pointer;list-style:none;padding:8px 0;text-transform:uppercase">Show all ${PROGRESSION.length} weeks ▾</summary>
       <div style="overflow-x:auto;margin-top:6px">
         <table class="qp-table">${thead}<tbody>${PROGRESSION.map(buildRow).join('')}</tbody></table>
       </div>
