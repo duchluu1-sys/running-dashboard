@@ -1387,6 +1387,46 @@
       "verdict": "REST day run under R46 load carryover — Z3 at 36% and TE 2.8 Tempo are heat-driven (32°C, 14:48 start, 89% humidity) rather than fitness signals. Ankle and plantar both clean. This added unnecessary load on a scheduled rest day; the data is informational only. Quality A Wednesday proceeds as planned: speed ladder 8.5→9.2 km/h, ceiling 150.",
       "tags": ["rest-day-run", "heat", "z3-excursion"]
     }
+{
+  "r": 48,
+  "date": "Jul 28",
+  "type": "economy",
+  "wk": 12,
+  "dist": 2.28,
+  "duration": 20,
+  "moving": 20,
+  "pace": null,
+  "paceEasy": null,
+  "hrAvg": 117,
+  "hrMax": 155,
+  "te": null,
+  "te_an": null,
+  "gct": null,
+  "vr": null,
+  "cadence": null,
+  "pctCeiling": null,
+  "drift": null,
+  "walkRatio": null,
+  "hrZones": [
+    60,
+    20,
+    10,
+    5,
+    5
+  ],
+  "temp": null,
+  "surface": "treadmill",
+  "conditions": "10:53",
+  "flag": "⚠️",
+  "note": "Economy Work — strides + hill sprints makeup (Push Day addon). Max speed 14.9 km/h · max grade 10.0% confirm sprint efforts. HR 155 = transient sprint spike, not threshold breach. DEPARTURE: combined strides + hill sprints same day (Achilles stacking rule). Falsification: Achilles/posterior tibial 48h. No pain/fatigue post-session.",
+  "verdict": "[ECONOMY WORK] Strides + hill sprints makeup session completed. Neuromuscular stimulus delivered. Departure noted — monitor Achilles 48h. Quality A tomorrow unaffected.",
+  "tags": [
+    "economy",
+    "strides",
+    "hill-sprints",
+    "departure-logged"
+  ]
+}
   ],
   "GATES": [
     {
