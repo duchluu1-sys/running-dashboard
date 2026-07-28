@@ -1314,8 +1314,8 @@
       "conditions": null,
       "flag": "✅",
       "note": "20 min continuous @ 8.6 km/h ✅ · ceiling exactly met · ankle clean · plantar mild",
-      "verdict": null,
-      "tags": []
+      "verdict": "Quality B ceiling-clean at the new 20-min benchmark — max HR exactly 150, zero seconds over ceiling. GCT 315ms and VR 8.8% are both strong for a continuous tempo block. Right plantar remained mild and did not limit execution. W12 Quality B target: repeat 20 min at 8.6 km/h, aim to keep GCT under 320.",
+      "tags": ["ceiling-clean", "plantar-flag"]
     },
     {
       "r": 46,
@@ -1349,8 +1349,8 @@
       "conditions": "13:16",
       "flag": "✅✅",
       "note": "New compliant LR PB 🏆 15.08km · avg HR 125 · TE 4.1 · 29% walk",
-      "verdict": null,
-      "tags": []
+      "verdict": "New compliant long run PB at 15.08km — distance gate advancing. Z3 at 19% and TE 4.1 Tempo are explained by afternoon timing (13:16) and 29% walk ratio inflating the HR distribution; avg HR 125 confirms aerobic control throughout. GCT 329ms and VR 9.4% are appropriate for this duration. W12 long run target: 14–15km treadmill, morning slot preferred.",
+      "tags": ["pb-distance", "walk-heavy"]
     },
     {
       "r": 47,
@@ -1384,8 +1384,8 @@
       "conditions": "14:48",
       "flag": "⚠️",
       "note": "REST day run ⚠️ · Z3 36% · TE 2.8 Tempo · avg 135 · max 146 · 31–33°C · 89% humidity",
-      "verdict": null,
-      "tags": []
+      "verdict": "REST day run under R46 load carryover — Z3 at 36% and TE 2.8 Tempo are heat-driven (32°C, 14:48 start, 89% humidity) rather than fitness signals. Ankle and plantar both clean. This added unnecessary load on a scheduled rest day; the data is informational only. Quality A Wednesday proceeds as planned: speed ladder 8.5→9.2 km/h, ceiling 150.",
+      "tags": ["rest-day-run", "heat", "z3-excursion"]
     }
   ],
   "GATES": [
