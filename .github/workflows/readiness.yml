@@ -1,12 +1,6 @@
 name: Morning Readiness
 
 on:
-  schedule:
-    # Times are UTC. Hanoi = UTC+7.
-    # NEVER use minute 0 — top-of-hour is the most contested slot on GitHub
-    # Actions and scheduled runs there get delayed hours or dropped silently.
-    - cron: '23 23 * * *'   # 06:23 Hanoi — primary
-    - cron: '47 0 * * *'    # 07:47 Hanoi — backup, only writes if primary produced nothing
   workflow_dispatch:         # Manual trigger button in GitHub UI
 
 permissions:
