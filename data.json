@@ -25,7 +25,9 @@
       "surface": "outdoor",
       "conditions": null,
       "flag": "✅",
-      "note": "Near-perfect opener"
+      "note": "Near-perfect opener",
+      "verdict": null,
+      "tags": []
     },
     {
       "r": 2,
@@ -52,7 +54,9 @@
       "surface": "outdoor",
       "conditions": null,
       "flag": "○",
-      "note": "Acceptable"
+      "note": "Acceptable",
+      "verdict": null,
+      "tags": []
     },
     {
       "r": 3,
@@ -79,7 +83,9 @@
       "surface": "outdoor",
       "conditions": null,
       "flag": "○",
-      "note": "Too short"
+      "note": "Too short",
+      "verdict": null,
+      "tags": []
     },
     {
       "r": 4,
@@ -106,7 +112,9 @@
       "surface": "outdoor",
       "conditions": null,
       "flag": "⚠️",
-      "note": "Heat spike — max 163"
+      "note": "Heat spike — max 163",
+      "verdict": null,
+      "tags": []
     },
     {
       "r": 5,
@@ -133,7 +141,9 @@
       "surface": "outdoor",
       "conditions": null,
       "flag": "⚠️",
-      "note": "Very late — 23:25"
+      "note": "Very late — 23:25",
+      "verdict": null,
+      "tags": []
     },
     {
       "r": 6,
@@ -160,7 +170,9 @@
       "surface": "outdoor",
       "conditions": null,
       "flag": "⚠️",
-      "note": "Late + Z3 excursion"
+      "note": "Late + Z3 excursion",
+      "verdict": null,
+      "tags": []
     },
     {
       "r": 7,
@@ -187,7 +199,9 @@
       "surface": "outdoor",
       "conditions": null,
       "flag": "⚠️",
-      "note": "Afternoon — max 163"
+      "note": "Afternoon — max 163",
+      "verdict": null,
+      "tags": []
     },
     {
       "r": 8,
@@ -214,7 +228,9 @@
       "surface": "outdoor",
       "conditions": null,
       "flag": "✅",
-      "note": "Good"
+      "note": "Good",
+      "verdict": null,
+      "tags": []
     },
     {
       "r": 9,
@@ -241,7 +257,9 @@
       "surface": "treadmill",
       "conditions": null,
       "flag": "✅✅",
-      "note": "Outstanding"
+      "note": "Outstanding",
+      "verdict": null,
+      "tags": []
     },
     {
       "r": 10,
@@ -268,7 +286,9 @@
       "surface": "outdoor",
       "conditions": null,
       "flag": "✅✅✅",
-      "note": "Exceptional — first 10km+"
+      "note": "Exceptional — first 10km+",
+      "verdict": null,
+      "tags": []
     },
     {
       "r": 11,
@@ -295,7 +315,9 @@
       "surface": "treadmill",
       "conditions": null,
       "flag": "✅",
-      "note": "Good"
+      "note": "Good",
+      "verdict": null,
+      "tags": []
     },
     {
       "r": 12,
@@ -322,7 +344,9 @@
       "surface": "treadmill",
       "conditions": null,
       "flag": "✅",
-      "note": "Statin Day 1"
+      "note": "Statin Day 1",
+      "verdict": null,
+      "tags": []
     },
     {
       "r": 13,
@@ -349,7 +373,9 @@
       "surface": "outdoor",
       "conditions": null,
       "flag": "✅✅",
-      "note": "First quality session — 6×2:30min · excellent"
+      "note": "First quality session — 6×2:30min · excellent",
+      "verdict": null,
+      "tags": []
     },
     {
       "r": 14,
@@ -382,7 +408,9 @@
       "surface": "outdoor",
       "conditions": null,
       "flag": "✅",
-      "note": "GCT baseline established · drift +8.4 bpm"
+      "note": "GCT baseline established · drift +8.4 bpm",
+      "verdict": null,
+      "tags": []
     },
     {
       "r": 15,
@@ -409,7 +437,9 @@
       "surface": "outdoor",
       "conditions": null,
       "flag": "✅",
-      "note": "Drift +3.5"
+      "note": "Drift +3.5",
+      "verdict": null,
+      "tags": []
     },
     {
       "r": 16,
@@ -436,7 +466,9 @@
       "surface": "outdoor",
       "conditions": null,
       "flag": "✅✅",
-      "note": "First negative drift 🏆 -1.5 bpm"
+      "note": "First negative drift 🏆 -1.5 bpm",
+      "verdict": null,
+      "tags": []
     },
     {
       "r": 17,
@@ -463,7 +495,9 @@
       "surface": "outdoor",
       "conditions": null,
       "flag": "✅✅",
-      "note": "Post-illness return · drift +5.7"
+      "note": "Post-illness return · drift +5.7",
+      "verdict": null,
+      "tags": []
     },
     {
       "r": 18,
@@ -490,7 +524,9 @@
       "surface": "outdoor",
       "conditions": null,
       "flag": "✅✅",
-      "note": "GCT PB at time · drift +6.1"
+      "note": "GCT PB at time · drift +6.1",
+      "verdict": null,
+      "tags": []
     },
     {
       "r": 19,
@@ -517,7 +553,9 @@
       "surface": "outdoor",
       "conditions": null,
       "flag": "⚠️",
-      "note": "58% distance jump ⚠️ rule violation · drift +1.8"
+      "note": "58% distance jump ⚠️ rule violation · drift +1.8",
+      "verdict": null,
+      "tags": []
     },
     {
       "r": 20,
@@ -544,7 +582,9 @@
       "surface": "outdoor",
       "conditions": null,
       "flag": "✅✅",
-      "note": "GCT PB · ceiling touch (brief)"
+      "note": "GCT PB · ceiling touch (brief)",
+      "verdict": null,
+      "tags": []
     },
     {
       "r": 21,
@@ -571,7 +611,9 @@
       "surface": "outdoor",
       "conditions": null,
       "flag": "✅",
-      "note": "Easy · drift +4.2"
+      "note": "Easy · drift +4.2",
+      "verdict": null,
+      "tags": []
     },
     {
       "r": 22,
@@ -598,7 +640,9 @@
       "surface": "outdoor",
       "conditions": null,
       "flag": "⚠️",
-      "note": "Drift +14.3 ⚠️ — 95% humidity"
+      "note": "Drift +14.3 ⚠️ — 95% humidity",
+      "verdict": null,
+      "tags": []
     },
     {
       "r": 23,
@@ -625,7 +669,9 @@
       "surface": "outdoor",
       "conditions": null,
       "flag": "✅✅",
-      "note": "Drift +0.0 🏆 first flat long"
+      "note": "Drift +0.0 🏆 first flat long",
+      "verdict": null,
+      "tags": []
     },
     {
       "r": 24,
@@ -652,7 +698,9 @@
       "surface": "treadmill",
       "conditions": null,
       "flag": "✅",
-      "note": "Post-illness treadmill return"
+      "note": "Post-illness treadmill return",
+      "verdict": null,
+      "tags": []
     },
     {
       "r": 25,
@@ -679,7 +727,9 @@
       "surface": "outdoor",
       "conditions": null,
       "flag": "✅",
-      "note": "Intentional heat test · drift +5.6"
+      "note": "Intentional heat test · drift +5.6",
+      "verdict": null,
+      "tags": []
     },
     {
       "r": 26,
@@ -706,7 +756,9 @@
       "surface": "treadmill",
       "conditions": null,
       "flag": "✅",
-      "note": "Strides pulled GCT down"
+      "note": "Strides pulled GCT down",
+      "verdict": null,
+      "tags": []
     },
     {
       "r": 27,
@@ -733,7 +785,9 @@
       "surface": "outdoor",
       "conditions": null,
       "flag": "✅",
-      "note": "Phase 2 gate CLEARED ✅ · drift +5.9"
+      "note": "Phase 2 gate CLEARED ✅ · drift +5.9",
+      "verdict": null,
+      "tags": []
     },
     {
       "r": 28,
@@ -760,7 +814,9 @@
       "surface": "outdoor",
       "conditions": null,
       "flag": "✅",
-      "note": "GCT PB · 4s ceiling touch"
+      "note": "GCT PB · 4s ceiling touch",
+      "verdict": null,
+      "tags": []
     },
     {
       "r": 29,
@@ -787,7 +843,9 @@
       "surface": "outdoor",
       "conditions": null,
       "flag": "⚠️",
-      "note": "Cut short — mental load"
+      "note": "Cut short — mental load",
+      "verdict": null,
+      "tags": []
     },
     {
       "r": 30,
@@ -814,7 +872,9 @@
       "surface": "outdoor",
       "conditions": null,
       "flag": "✅✅",
-      "note": "Drift -2.3 🏆 best ever · rain"
+      "note": "Drift -2.3 🏆 best ever · rain",
+      "verdict": null,
+      "tags": []
     },
     {
       "r": 31,
@@ -841,7 +901,9 @@
       "surface": "outdoor",
       "conditions": null,
       "flag": "✅",
-      "note": "Phase 2 W9 start · drift -1.6 🏆"
+      "note": "Phase 2 W9 start · drift -1.6 🏆",
+      "verdict": null,
+      "tags": []
     },
     {
       "r": 32,
@@ -868,7 +930,9 @@
       "surface": "outdoor",
       "conditions": null,
       "flag": "⚠️",
-      "note": "Ceiling breach ⚠️ — cafe stop · outdoor heat"
+      "note": "Ceiling breach ⚠️ — cafe stop · outdoor heat",
+      "verdict": null,
+      "tags": []
     },
     {
       "r": 33,
@@ -895,7 +959,9 @@
       "surface": "outdoor",
       "conditions": null,
       "flag": "✅",
-      "note": "Drift +0.1 · foot cleared"
+      "note": "Drift +0.1 · foot cleared",
+      "verdict": null,
+      "tags": []
     },
     {
       "r": 34,
@@ -922,7 +988,9 @@
       "surface": "outdoor",
       "conditions": null,
       "flag": "✅",
-      "note": "6:42/km LT1 CONFIRMED ✅ — outdoor dawn tempo"
+      "note": "6:42/km LT1 CONFIRMED ✅ — outdoor dawn tempo",
+      "verdict": null,
+      "tags": []
     },
     {
       "r": 35,
@@ -949,7 +1017,9 @@
       "surface": "outdoor",
       "conditions": null,
       "flag": "✅",
-      "note": "Drift +3.9 · ceiling held · 14km"
+      "note": "Drift +3.9 · ceiling held · 14km",
+      "verdict": null,
+      "tags": []
     },
     {
       "r": 36,
@@ -976,7 +1046,9 @@
       "surface": "treadmill",
       "conditions": null,
       "flag": "✅",
-      "note": "6×20s strides @ 4:17/km"
+      "note": "6×20s strides @ 4:17/km",
+      "verdict": null,
+      "tags": []
     },
     {
       "r": 37,
@@ -1003,7 +1075,9 @@
       "surface": "treadmill",
       "conditions": null,
       "flag": "✅",
-      "note": "7/7 reps · 0% ceiling 🏆 · treadmill"
+      "note": "7/7 reps · 0% ceiling 🏆 · treadmill",
+      "verdict": null,
+      "tags": []
     },
     {
       "r": 38,
@@ -1030,7 +1104,9 @@
       "surface": "outdoor",
       "conditions": null,
       "flag": "✅",
-      "note": "Drift +10 ⚠️ — bad sleep carryover"
+      "note": "Drift +10 ⚠️ — bad sleep carryover",
+      "verdict": null,
+      "tags": []
     },
     {
       "r": 39,
@@ -1057,7 +1133,9 @@
       "surface": "treadmill",
       "conditions": null,
       "flag": "✅✅",
-      "note": "GCT 303ms ALL-TIME BEST 🏆 · VR 8.5% 🏆 · 15 min tempo"
+      "note": "GCT 303ms ALL-TIME BEST 🏆 · VR 8.5% 🏆 · 15 min tempo",
+      "verdict": null,
+      "tags": []
     },
     {
       "r": 40,
@@ -1084,7 +1162,9 @@
       "surface": "outdoor",
       "conditions": null,
       "flag": "✅",
-      "note": "Flush after quality · walk 10.3%"
+      "note": "Flush after quality · walk 10.3%",
+      "verdict": null,
+      "tags": []
     },
     {
       "r": 41,
@@ -1111,7 +1191,9 @@
       "surface": "treadmill",
       "conditions": null,
       "flag": "✅",
-      "note": "Week 10 long run · Novablast 5"
+      "note": "Week 10 long run · Novablast 5",
+      "verdict": null,
+      "tags": []
     },
     {
       "r": 42,
@@ -1138,7 +1220,9 @@
       "surface": "treadmill",
       "conditions": null,
       "flag": "✅",
-      "note": "Walk-free easy · VR 9.1% 🏆 best easy · strides"
+      "note": "Walk-free easy · VR 9.1% 🏆 best easy · strides",
+      "verdict": null,
+      "tags": []
     },
     {
       "r": 43,
@@ -1165,7 +1249,9 @@
       "surface": "treadmill",
       "conditions": null,
       "flag": "⚠️",
-      "note": "Too easy ⚠️ — speed too conservative · right ankle flag"
+      "note": "Too easy ⚠️ — speed too conservative · right ankle flag",
+      "verdict": null,
+      "tags": []
     },
     {
       "r": 44,
@@ -1192,7 +1278,9 @@
       "surface": "outdoor",
       "conditions": null,
       "flag": "⚠️",
-      "note": "30.6% walk ratio · TE too high · 34°C · ankle first 2km"
+      "note": "30.6% walk ratio · TE too high · 34°C · ankle first 2km",
+      "verdict": null,
+      "tags": []
     },
     {
       "r": 45,
@@ -1225,7 +1313,9 @@
       "surface": "treadmill",
       "conditions": null,
       "flag": "✅",
-      "note": "20 min continuous @ 8.6 km/h ✅ · ceiling exactly met · ankle clean · plantar mild"
+      "note": "20 min continuous @ 8.6 km/h ✅ · ceiling exactly met · ankle clean · plantar mild",
+      "verdict": null,
+      "tags": []
     },
     {
       "r": 46,
@@ -1240,13 +1330,13 @@
       "hrAvg": 125,
       "hrMax": 146,
       "te": 4.1,
-      "te_an": 1.0,
+      "te_an": 1,
       "gct": 329,
       "vr": 9.4,
       "cadence": null,
       "pctCeiling": null,
       "drift": null,
-      "walkRatio": 29.0,
+      "walkRatio": 29,
       "hrZones": [
         30,
         51,
@@ -1258,7 +1348,9 @@
       "surface": "treadmill",
       "conditions": "13:16",
       "flag": "✅✅",
-      "note": "New compliant LR PB 🏆 15.08km · avg HR 125 · TE 4.1 · 29% walk"
+      "note": "New compliant LR PB 🏆 15.08km · avg HR 125 · TE 4.1 · 29% walk",
+      "verdict": null,
+      "tags": []
     },
     {
       "r": 47,
@@ -1273,12 +1365,12 @@
       "hrAvg": 135,
       "hrMax": 146,
       "te": 2.8,
-      "te_an": 0.0,
+      "te_an": 0,
       "gct": 327,
       "vr": 9.6,
       "cadence": null,
       "pctCeiling": null,
-      "drift": 6.0,
+      "drift": 6,
       "walkRatio": 12.8,
       "hrZones": [
         4,
@@ -1291,7 +1383,9 @@
       "surface": "outdoor",
       "conditions": "14:48",
       "flag": "⚠️",
-      "note": "REST day run ⚠️ · Z3 36% · TE 2.8 Tempo · avg 135 · max 146 · 31–33°C · 89% humidity"
+      "note": "REST day run ⚠️ · Z3 36% · TE 2.8 Tempo · avg 135 · max 146 · 31–33°C · 89% humidity",
+      "verdict": null,
+      "tags": []
     }
   ],
   "GATES": [
@@ -1330,7 +1424,7 @@
       "type": "hard",
       "name": "Injury-Free Continuity",
       "short": "8 consecutive rising-load weeks",
-      "progress": 50.0,
+      "progress": 50,
       "status": "active",
       "detail": "Week 12 = week 4 of 8. Started Week 9 (Jul 6). Clears Week 16 (Aug 31). Right ankle cleared R45. Right plantar mild fatigue at R45 — monitor.",
       "eta": "Aug 31, 2026"
