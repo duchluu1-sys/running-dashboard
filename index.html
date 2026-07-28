@@ -793,7 +793,7 @@ body{background:var(--bg);background-image:var(--grid);color:var(--tx);font-fami
 
 
 /* Volume trajectory chart container */
-.vol-traj-wrap{height:180px;padding:4px 16px 12px}
+.vol-traj-wrap{height:220px;padding:4px 20px 0}
 
 /* Quality progression table */
 .qp-table{width:100%;border-collapse:collapse;font-family:var(--mono);font-size:.62rem}
@@ -826,9 +826,9 @@ body{background:var(--bg);background-image:var(--grid);color:var(--tx);font-fami
 .gf-list{padding:12px 20px;display:flex;flex-direction:column;gap:8px}
 .gf-row{
   display:grid;
-  grid-template-columns:28px 1fr auto;
-  align-items:center;gap:8px;
-  padding:7px 10px;
+  grid-template-columns:22px 1fr auto;
+  align-items:flex-start;gap:8px;
+  padding:9px 12px;
   background:var(--sf);
   border-radius:2px;
   border-left:3px solid transparent;
@@ -837,16 +837,16 @@ body{background:var(--bg);background-image:var(--grid);color:var(--tx);font-fami
 .gf-row.gf-active{border-left-color:var(--cy)}
 .gf-row.gf-pending{border-left-color:var(--bd)}
 .gf-row.gf-tight{border-left-color:var(--am)}
-.gf-num{font-family:var(--hud);font-weight:700;font-size:1rem;color:var(--mu);text-align:center}
+.gf-num{font-family:var(--mono);font-weight:700;font-size:.72rem;color:var(--mu);text-align:center;padding-top:1px}
 .gf-row.gf-active .gf-num{color:var(--cy)}
 .gf-row.gf-tight .gf-num{color:var(--am)}
 .gf-name{font-family:var(--mono);font-size:.62rem;color:var(--tx);letter-spacing:.3px}
-.gf-short{font-family:var(--mono);font-size:.52rem;color:var(--mu);margin-top:2px;letter-spacing:.2px}
-.gf-eta{font-family:var(--mono);font-size:.5rem;color:var(--mu);white-space:nowrap;text-align:right;letter-spacing:.5px}
+.gf-short{font-family:var(--mono);font-size:.52rem;color:var(--mu);margin-top:3px;letter-spacing:.2px}
+.gf-eta{font-family:var(--mono);font-size:.5rem;color:var(--mu);white-space:nowrap;text-align:right;letter-spacing:.5px;padding-top:1px}
 .gf-row.gf-tight .gf-eta{color:var(--am)}
 
 /* Progress bar under active gate */
-.gf-prog-wrap{grid-column:1/-1;height:3px;background:rgba(0,212,255,.08);border-radius:2px;margin-top:-2px}
+.gf-prog-wrap{grid-column:1/-1;height:3px;background:rgba(0,212,255,.08);border-radius:2px;margin-top:6px;margin-bottom:2px}
 .gf-prog-bar{height:100%;border-radius:2px;background:var(--cy);transition:width .4s}
 
 /* Milestone calendar */
@@ -2384,48 +2384,84 @@ function renderMilestones(){
 function initVolTrajChart(){
   const body=document.getElementById('vol-traj-body');
   if(!body||!PROGRESSION.length)return;
-  // Canvas injected here — tab is already visible, so dimensions are real
-  body.innerHTML='<div class="vol-traj-wrap"><canvas id="volTrajChart"></canvas></div>';
-  const ctx=document.getElementById('volTrajChart');
-  if(!ctx)return;
-  // Actual volumes by week from RUNS
+  // Actual volumes by week
   const byWk={};
   RUNS.forEach(r=>{byWk[r.wk]=(byWk[r.wk]||0)+r.dist;});
   const prog=PROGRESSION;
-  const labels=prog.map(p=>`W${p.wk}`);
+  const curr=ATHLETE.week;
   const actual=prog.map(p=>byWk[p.wk]?+byWk[p.wk].toFixed(1):null);
   const minT=prog.map(p=>p.volMin);
   const maxT=prog.map(p=>p.volMax);
-  const curr=ATHLETE.week;
+  // Target-ceiling bars for future weeks — shows the plan visually
+  const planCeil=prog.map((p,i)=>actual[i]===null?p.volMax:null);
+  const labels=prog.map(p=>`W${p.wk}`);
+  // Color actual bars by week kind
   const barBg=prog.map(p=>
-    p.kind==='deload'?'rgba(245,158,11,.45)':
+    p.kind==='deload'?'rgba(245,158,11,.55)':
     p.kind==='peak'?D1:
-    p.wk===curr?'rgba(0,212,255,.55)':D2
+    p.wk===curr?'rgba(0,212,255,.65)':D2
   );
   const barBd=prog.map(p=>
-    p.kind==='deload'?WARN:p.kind==='peak'?D1:'rgba(0,212,255,.6)'
+    p.kind==='deload'?WARN:p.kind==='peak'?D1:'rgba(0,212,255,.7)'
   );
+  // Stats
+  const doneWks=prog.filter((_,i)=>actual[i]!==null).length;
+  const remaining=prog.length-doneWks;
+  const onTarget=prog.filter((_,i)=>actual[i]!=null&&actual[i]>=prog[i].volMin&&actual[i]<=prog[i].volMax).length;
+  const subEl=document.querySelector('#vol-traj-card .cs');
+  if(subEl)subEl.textContent=`W9–24 · ${doneWks} of ${prog.length} weeks · ${onTarget} on target`;
+  // Inject layout
+  body.innerHTML=`
+    <div style="display:flex;gap:20px;padding:10px 20px 4px">
+      <div>
+        <div style="font-family:var(--mono);font-size:.9rem;font-weight:700;color:var(--cy);line-height:1">${doneWks}</div>
+        <div style="font-family:var(--mono);font-size:.44rem;letter-spacing:1px;text-transform:uppercase;color:var(--mu);margin-top:2px">DONE</div>
+      </div>
+      <div>
+        <div style="font-family:var(--mono);font-size:.9rem;font-weight:700;color:var(--m2);line-height:1">${remaining}</div>
+        <div style="font-family:var(--mono);font-size:.44rem;letter-spacing:1px;text-transform:uppercase;color:var(--mu);margin-top:2px">REMAINING</div>
+      </div>
+      <div>
+        <div style="font-family:var(--mono);font-size:.9rem;font-weight:700;color:var(--ok);line-height:1">${onTarget}/${doneWks}</div>
+        <div style="font-family:var(--mono);font-size:.44rem;letter-spacing:1px;text-transform:uppercase;color:var(--mu);margin-top:2px">ON TARGET</div>
+      </div>
+    </div>
+    <div class="vol-traj-wrap"><canvas id="volTrajChart"></canvas></div>
+    <div class="cleg" id="vt-leg" style="padding:6px 20px 14px;justify-content:flex-start">
+      <div class="li"><span class="ld" style="background:rgba(0,212,255,.55);border-radius:2px"></span>Actual</div>
+      <div class="li"><span class="ld" style="background:rgba(245,158,11,.55);border-radius:2px"></span>Deload</div>
+      <div class="li"><span class="ld" style="background:#00d4ff;border-radius:2px"></span>Peak</div>
+      <div class="li"><span class="ld" style="background:rgba(0,212,255,.10);border-radius:2px;border:1px solid rgba(0,212,255,.25)"></span>Plan</div>
+      <div class="li"><span class="ld-line" style="background:rgba(0,212,255,.35);border-top:1px dashed rgba(0,212,255,.35)"></span>Min</div>
+    </div>`;
+  const ctx=document.getElementById('volTrajChart');
+  if(!ctx)return;
   if(CHARTS.volTraj){CHARTS.volTraj.destroy();}
   CHARTS.volTraj=new Chart(ctx,{
     type:'bar',
     data:{labels,datasets:[
+      {label:'Plan',data:planCeil,backgroundColor:'rgba(0,212,255,.08)',borderColor:'rgba(0,212,255,.20)',
+       borderWidth:1,borderRadius:2,categoryPercentage:.72,barPercentage:.85,order:3},
       {label:'Actual',data:actual,backgroundColor:barBg,borderColor:barBd,
        borderWidth:1,borderRadius:2,categoryPercentage:.72,barPercentage:.85,order:2},
       {type:'line',label:'Min',data:minT,borderColor:REF,borderDash:[5,4],
        borderWidth:1.5,pointRadius:0,fill:false,backgroundColor:'transparent',order:1},
-      {type:'line',label:'Max',data:maxT,borderColor:'rgba(0,212,255,.14)',borderDash:[3,3],
+      {type:'line',label:'Max',data:maxT,borderColor:'rgba(0,212,255,.12)',borderDash:[3,3],
        borderWidth:1,pointRadius:0,fill:false,backgroundColor:'transparent',order:1},
     ]},
     options:{responsive:true,maintainAspectRatio:false,
       plugins:{legend:{display:false},
         tooltip:{...CHART_DEFAULTS,callbacks:{
-          label:c=>c.dataset.label==='Actual'?(c.parsed.y!=null?c.parsed.y+' km':'pending'):
-            `${c.dataset.label}: ${c.parsed.y} km`
+          label:c=>{
+            if(c.dataset.label==='Plan')return c.parsed.y!=null?`Plan ceiling: ${prog[c.dataIndex].volMin}–${prog[c.dataIndex].volMax} km`:'';
+            if(c.dataset.label==='Actual')return c.parsed.y!=null?`Actual: ${c.parsed.y} km`:'No data yet';
+            return`${c.dataset.label}: ${c.parsed.y} km`;
+          }
         }}},
       scales:{
-        x:{ticks:xTick(),grid:gridLine(),border:borderLine()},
-        y:{min:0,ticks:{...yTick(),callback:v=>`${v}`},
-          title:axTitle('km / week'),grid:gridLine(),border:borderLine()}
+        x:{ticks:{...xTick(),maxRotation:0,minRotation:0},grid:gridLine(),border:borderLine()},
+        y:{min:0,max:50,ticks:{...yTick(),callback:v=>`${v}`},
+          title:axTitle('km'),grid:gridLine(),border:borderLine()}
       }
     }
   });
