@@ -1436,6 +1436,45 @@
         "hill-sprints",
         "departure-logged"
       ]
+    },
+    {
+      "r": 49,
+      "date": "Jul 29",
+      "type": "quality_a",
+      "wk": 12,
+      "dist": 5.06,
+      "duration": 46,
+      "moving": 34,
+      "pace": 8.99,
+      "paceEasy": null,
+      "hrAvg": 118,
+      "hrMax": 145,
+      "te": 2.9,
+      "te_an": 0.1,
+      "gct": 302,
+      "vr": 8.5,
+      "cadence": null,
+      "pctCeiling": 0,
+      "drift": null,
+      "walkRatio": null,
+      "hrZones": [
+        23,
+        33,
+        13,
+        0,
+        0
+      ],
+      "temp": 29,
+      "surface": "treadmill",
+      "conditions": "13:43",
+      "flag": "✅✅",
+      "note": "GCT 302ms NEW ALL-TIME BEST 🏆 · VR 8.5% ✅ · ceiling clean · max HR 145 · 5 bpm headroom · ladder 8.5→9.2 km/h · TE artefact (walk recovery suppresses avg HR)",
+      "verdict": "Quality A W12 executed cleanly. Max HR 145 — 5 bpm under ceiling. Z3 5:58 (13%) confirms quality stimulus delivered. GCT 302ms is new program best (beats R39 303ms). VR 8.5% on target. TE 2.9 'Base (Low Aerobic)' is a classifier artefact — walk recovery suppresses session-average HR (118 bpm), landing the classifier in Base regardless of interval quality. Rep 5 set to 9.2 km/h (Technogym); Garmin recorded 9.1 — accelerometer lag on speed change. RPE 3/10 at 9.2 km/h is a Phase 3 adaptation signal. Hold current speed ceiling; lactate test September makes the formal call.",
+      "tags": [
+        "gct-pb",
+        "ceiling-clean",
+        "te-artefact"
+      ]
     }
   ],
   "GATES": [
@@ -1567,7 +1606,7 @@
     "week": 12,
     "totalWeeks": 24,
     "deloadWeek": 21,
-    "weekVolOnBoard": 8.29,
+    "weekVolOnBoard": 13.35,
     "lastWeekVol": 36.6,
     "weekTarget": [
       33,
@@ -1584,7 +1623,7 @@
     "ltConfirmed": true,
     "ltRun": "R34",
     "ltDate": "Jul 10",
-    "gctBest": 303,
+    "gctBest": 302,
     "vrBest": 8.5,
     "statinStart": "2026-05-30",
     "stressLevel": "LOW",
