@@ -102,7 +102,8 @@ body{background:var(--bg);background-image:var(--grid);color:var(--tx);font-fami
 .hb-metric{font-family:var(--mono);font-size:.52rem;text-transform:uppercase;letter-spacing:1px;color:var(--mu)}
 .hb-val{font-family:var(--mono);font-size:1rem;font-weight:700;color:var(--cy);white-space:nowrap}
 .hb-badge{font-family:var(--mono);font-size:.44rem;text-transform:uppercase;letter-spacing:1px;padding:2px 7px;border-radius:2px;border:1px solid currentColor;white-space:nowrap}
-.hb-ref{font-family:var(--mono);font-size:.46rem;color:var(--mu);text-align:right;line-height:1.6}
+.hb-ref{font-family:var(--mono);font-size:.52rem;color:var(--mu);text-align:right;line-height:1.5}
+.hb-footer{padding:8px 20px 12px;font-family:var(--mono);font-size:.46rem;color:var(--mu);border-top:1px solid var(--bd);line-height:1.7}
 @media(max-width:480px){.hb-row{grid-template-columns:70px 65px auto 1fr;gap:0 8px;padding:10px 14px}.hb-ref{display:none}}
 /* TODAY */
 .rd-block{display:flex;align-items:flex-start;gap:20px;padding:18px 20px}
@@ -687,13 +688,13 @@ body{background:var(--bg);background-image:var(--grid);color:var(--tx);font-fami
   display:grid;
   gap:16px;
   grid-template-columns:1fr;
-  grid-template-areas:"races" "timeline" "decisions" "voltraj" "gates" "qual" "milestones";
+  grid-template-areas:"races" "timeline" "decisions" "voltraj" "gates" "qual" "milestones" "trivia";
 }
 /* Desktop: restore 2-col */
 @media(min-width:768px){
   .future-grid{
     grid-template-columns:1fr 1fr;
-    grid-template-areas:"races races" "timeline timeline" "decisions decisions" "voltraj gates" "qual milestones";
+    grid-template-areas:"races races" "timeline timeline" "decisions decisions" "voltraj gates" "qual milestones" "trivia trivia";
   }
 }
 .future-grid>.card{margin-bottom:0}
@@ -710,8 +711,24 @@ body{background:var(--bg);background-image:var(--grid);color:var(--tx);font-fami
 .fg-gates{grid-area:gates}
 .fg-qual{grid-area:qual}
 .fg-milestones{grid-area:milestones}
+.fg-trivia{grid-area:trivia}
 #tab-future .ch{border-left-color:var(--cy-bd)}
 #tab-future .cl{color:var(--cy)}
+/* S45 — TRIVIA + WHAT-IF */
+.tw-section{padding:12px 20px 14px}
+.tw-section+.tw-section{border-top:1px solid var(--bd)}
+.tw-heading{font-family:var(--mono);font-size:.48rem;letter-spacing:2px;text-transform:uppercase;color:var(--mu);margin-bottom:10px}
+.tw-tiles{display:flex;gap:10px;overflow-x:auto;padding-bottom:2px;scrollbar-width:none}
+.tw-tiles::-webkit-scrollbar{display:none}
+.tw-tile{flex-shrink:0;min-width:150px;max-width:190px;padding:9px 12px;border:1px solid var(--bd);border-radius:3px;border-left:3px solid var(--cy)}
+.tw-tile-val{font-family:var(--mono);font-size:.78rem;font-weight:700;color:var(--cy);line-height:1.2;margin-bottom:3px}
+.tw-tile-lbl{font-family:var(--mono);font-size:.46rem;color:var(--mu);line-height:1.5}
+.wi-row{display:grid;grid-template-columns:1fr 64px 48px 88px;gap:0 10px;padding:7px 0;border-bottom:1px solid var(--bd);align-items:center}
+.wi-row:last-child{border-bottom:none}
+.wi-hdr div{font-family:var(--mono);font-size:.44rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--mu)}
+.wi-label{font-family:var(--mono);font-size:.58rem;color:var(--tx)}
+.wi-sub{font-family:var(--mono);font-size:.46rem;color:var(--mu)}
+.wi-val{font-family:var(--mono);font-size:.78rem;font-weight:700;color:var(--m2)}
 /* S40b — DECISION SEQUENCE */
 #dt-body{padding:0}
 .dt-flow{display:flex;align-items:flex-start;overflow-x:auto;padding:12px 20px 16px;scrollbar-width:thin;scrollbar-color:var(--bd) transparent;-webkit-overflow-scrolling:touch}
@@ -1051,7 +1068,7 @@ body{background:var(--bg);background-image:var(--grid);color:var(--tx);font-fami
     </div>
   </div>
   <div class="card hud-card" id="hb-card">
-    <div class="ch"><div class="cl">HUMAN BENCHMARK</div><div class="cs">your metrics vs trained runner population · VO₂max + threshold pace after lactate test Oct 2026</div></div>
+    <div class="ch"><div class="cl">HUMAN BENCHMARK</div><div class="cs">your metrics vs trained runner population · ref: Garmin HRM literature (GCT/VR) · AHA data (RHR) · VO₂max + threshold after lactate test Oct 2026</div></div>
     <div id="hb-body"></div>
   </div>
   <div class="g2">
@@ -1090,6 +1107,12 @@ body{background:var(--bg);background-image:var(--grid);color:var(--tx);font-fami
       <div class="ch"><div class="cl">QUALITY CEILING COMPLIANCE</div><div class="cs">% time above 150 bpm per quality session · target 0%</div></div>
       <div id="compliance-header" style="padding:10px 20px 0;font-family:var(--mono);font-size:.72rem;color:var(--gn)"></div>
       <div class="cw"><canvas id="complianceChart"></canvas></div>
+      <div class="cleg" id="compliance-leg" style="padding:6px 20px 14px;justify-content:flex-start">
+        <div class="li"><span class="ld" style="background:rgba(16,185,129,.5);border-radius:2px"></span>Clean (0%)</div>
+        <div class="li"><span class="ld" style="background:rgba(245,158,11,.45);border-radius:2px"></span>Minor breach (1–5%)</div>
+        <div class="li"><span class="ld" style="background:rgba(239,68,68,.45);border-radius:2px"></span>Breach (&gt;5%)</div>
+        <div class="li" style="color:var(--mu);font-size:.48rem">every bar at zero = ceiling mastery · amber/red = HR exceeded 150 bpm during that quality session</div>
+      </div>
     </div>
     <div class="card hud-card">
       <div class="ch"><div class="cl">CARDIAC DRIFT</div><div class="cs">easy (green) vs long (cyan) · outdoor only · negative = HR dropped = good</div></div>
@@ -1192,6 +1215,10 @@ body{background:var(--bg);background-image:var(--grid);color:var(--tx);font-fami
     <div class="card hud-card fg-milestones" id="milestone-card">
       <div class="ch"><div class="cl">MILESTONES</div><div class="cs">Jul 30 BV 108 · Oct 19 Race 0</div></div>
       <div id="milestone-body" class="cb"></div>
+    </div>
+    <div class="card hud-card fg-trivia" id="trivia-card">
+      <div class="ch"><div class="cl">TRIVIA · WHAT-IF</div><div class="cs">auto-generated from RUNS + PROGRESSION · no hardcoding</div></div>
+      <div id="trivia-body"></div>
     </div>
   </div>
 </div>
@@ -1941,7 +1968,14 @@ function renderHumanBenchmark(){
       `R39 · TM · elite &lt;7% · trained 7–9% · rec 10%+`)
    +row('BODY COMP',
       bcVal, bcTier,
-      bcFat!=null?`elite &lt;10% · athletic 10–15% · fit 15–20%`:inBodyRef+' · elite &lt;10% · fit 15–20%');
+      bcFat!=null?`elite &lt;10% · athletic 10–15% · fit 15–20%`:inBodyRef+' · elite &lt;10% · fit 15–20%')
+   +`<div class="hb-footer">
+      Sources: Garmin running dynamics research (GCT/VR population norms) ·
+      American Heart Association resting HR reference ranges (RHR) ·
+      ACSM body composition standards (body comp) ·
+      Tiers are population cohort benchmarks, not personalized thresholds —
+      lactate test Oct 2026 will establish your individual training zones.
+    </div>`;
 }
 
 // ── S43: PB WALL + ODOMETER ─────────────────────────────────────────────
@@ -2135,10 +2169,18 @@ function renderNextSession(){
   const el=document.getElementById('next-session-card');
   if(!el)return;
   const DAYS=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
-  const todayIdx=new Date().getDay();
+  const MON=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  const now=new Date();
+  const todayIdx=now.getDay();
+  // Check if today has a scheduled session that hasn't been logged yet
+  const todayStr=MON[now.getMonth()]+' '+now.getDate();
+  const loggedToday=RUNS.some(r=>r.date===todayStr);
+  const todaySched=ATHLETE.weekSchedule[DAYS[todayIdx]];
+  // If today has a non-rest session that hasn't been done → show TODAY
+  const startAt=(todaySched&&todaySched!=='rest'&&!loggedToday)?0:1;
   // Find next non-rest session
   let nextDay=null,daysAhead=0;
-  for(let i=1;i<=7;i++){
+  for(let i=startAt;i<=7;i++){
     const d=DAYS[(todayIdx+i)%7];
     const t=ATHLETE.weekSchedule[d];
     if(t&&t!=='rest'){nextDay=d;daysAhead=i;break;}
@@ -2175,7 +2217,7 @@ function renderNextSession(){
     flush:'Under 30 min is fine. No walk triggers needed — just stay easy.'
   };
   // Day label
-  const dayLabel=daysAhead===1?'TOMORROW':daysAhead===2?'IN 2 DAYS':nextDay.toUpperCase();
+  const dayLabel=daysAhead===0?'TODAY':daysAhead===1?'TOMORROW':daysAhead===2?'IN 2 DAYS':nextDay.toUpperCase();
   const typeLabel={quality_a:'QUALITY A',quality_b:'QUALITY B',long:'LONG RUN',easy:'EASY RUN',flush:'FLUSH'}[sType]||sType.toUpperCase();
   el.innerHTML=`
     <div class="ch"><div class="cl">NEXT SESSION</div><div class="cs">${dayLabel} · ${nextDay}</div></div>
@@ -2317,6 +2359,8 @@ function renderFuture(){
   renderPhaseTimeline();
   // S40b — Decision Sequence
   renderDecisionTimeline();
+  // S45 — Trivia + What-if
+  renderTriviaWhatIf();
   // S28 — vol trajectory canvas injected by initVolTrajChart on tab activation
   // S28 — quality progression
   renderQualProg();
@@ -2450,6 +2494,91 @@ function renderGates(mode){
     }).join('');
     el.innerHTML=`<div class="gf-list">${rows}</div>`;
   }
+}
+
+// ── S45: TRIVIA ENGINE + WHAT-IF PROJECTOR ──────────────────────────────
+// Trivia: auto-generated contextual facts from RUNS + PROGRESSION + GATES.
+// What-if: 3 volume scenarios (min/mid/max) through W24 with projections.
+// Nothing hardcoded — all values computed live on render.
+function renderTriviaWhatIf(){
+  const el=document.getElementById('trivia-body');
+  if(!el||!RUNS.length)return;
+  const today=new Date();today.setHours(0,0,0,0);
+  const MON=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  const shortDate=iso=>MON[new Date(iso+'T00:00:00').getMonth()]+' '+new Date(iso+'T00:00:00').getDate();
+
+  // — TRIVIA FACTS —
+  const totalKm=+RUNS.reduce((s,r)=>s+r.dist,0).toFixed(1);
+  const daysElapsed=Math.round((today-new Date('2026-05-09T00:00:00'))/86400000);
+  const gctPts=RUNS.filter(r=>r.gct).sort((a,b)=>a.r-b.r);
+  const gctFirst=gctPts[0],gctLast=gctPts[gctPts.length-1];
+  const gctDrop=gctPts.length>=2?gctFirst.gct-gctLast.gct:null;
+  const race0ms=MILESTONES.find(m=>m.label&&m.label.includes('Race 0'));
+  const race0Days=race0ms?daysUntil(race0ms.date):null;
+  const openG=GATES.filter(g=>g.type==='hard'&&g.status!=='cleared').length;
+  const gate4=GATES.find(g=>g.id===4);
+  const gate4Days=gate4?daysUntil('2026-08-31'):null;
+  const byWk={};RUNS.forEach(r=>{byWk[r.wk]=(byWk[r.wk]||0)+r.dist;});
+  const bestWkE=Object.entries(byWk).reduce((b,[w,v])=>+v>+b[1]?[w,+v]:b,['0',0]);
+
+  const facts=[
+    {val:`${totalKm} km`,lbl:`in ${daysElapsed} days · ${(totalKm/daysElapsed).toFixed(1)} km/day average`},
+    gctDrop>0?{val:`↓ ${gctDrop}ms GCT`,lbl:`R${gctFirst.r} ${gctFirst.gct}ms → R${gctLast.r} ${gctLast.gct}ms · ${Math.round(gctDrop/gctFirst.gct*100)}% form change`}:null,
+    race0ms?{val:`${race0Days}d away`,lbl:`Race 0 · VPBank 10K · ${shortDate(race0ms.date)}`}:null,
+    gate4?{val:`${openG}/6 gates open`,lbl:`Gate 4 (injury-free) clears in ${gate4Days} days · Aug 31`}:null,
+    {val:`W${bestWkE[0]} best wk`,lbl:`${bestWkE[1].toFixed(1)}km · program high so far · plan peaks 44km at W19`},
+    {val:`${RUNS.length} sessions`,lbl:`${ATHLETE.week} weeks complete · ${(RUNS.length/ATHLETE.week).toFixed(1)} runs/week avg`},
+  ].filter(Boolean);
+
+  const tilesHTML=facts.map(f=>`
+    <div class="tw-tile">
+      <div class="tw-tile-val">${f.val}</div>
+      <div class="tw-tile-lbl">${f.lbl}</div>
+    </div>`).join('');
+
+  // — WHAT-IF PROJECTOR — 3 volume scenarios from current week onward
+  const futProg=PROGRESSION.filter(p=>p.wk>ATHLETE.week);
+  const pastKm=+Object.values(byWk).reduce((s,v)=>s+v,0).toFixed(0);
+  const scenarios=[
+    {id:'min',lbl:'Conservative',sub:'stay at vol floor each week'},
+    {id:'mid',lbl:'On plan',    sub:'mid-range each week'},
+    {id:'max',lbl:'Aggressive', sub:'push vol ceiling each week'},
+  ];
+  const results=scenarios.map(sc=>{
+    let futKm=0,peak=0,peakWk=null;
+    for(const p of futProg){
+      const vol=sc.id==='min'?p.volMin:sc.id==='max'?p.volMax:Math.round((p.volMin+p.volMax)/2);
+      futKm+=vol;
+      if(vol>peak){peak=vol;peakWk=p.wk;}
+    }
+    return{...sc,peak,peakWk,totalAtR0:pastKm+futKm};
+  });
+
+  const wiHdr=`<div class="wi-row wi-hdr">
+    <div><div>SCENARIO</div></div>
+    <div><div>PEAK WK</div></div>
+    <div><div>W#</div></div>
+    <div><div>KM BY RACE 0</div></div>
+  </div>`;
+  const wiRows=results.map(sc=>{
+    const hi=sc.id==='mid';
+    return`<div class="wi-row">
+      <div><div class="wi-label" style="${hi?'color:var(--cy)':''}">${sc.lbl}</div><div class="wi-sub">${sc.sub}</div></div>
+      <div class="wi-val" style="${hi?'color:var(--cy)':''}">${sc.peak}km</div>
+      <div class="wi-sub" style="color:var(--m2)">W${sc.peakWk}</div>
+      <div class="wi-sub" style="color:var(--m2)">~${sc.totalAtR0}km</div>
+    </div>`;
+  }).join('');
+
+  el.innerHTML=`
+    <div class="tw-section">
+      <div class="tw-heading">PROGRAM STATS · scroll for more →</div>
+      <div class="tw-tiles">${tilesHTML}</div>
+    </div>
+    <div class="tw-section">
+      <div class="tw-heading">WHAT-IF · W${ATHLETE.week+1}–24 volume scenarios</div>
+      ${wiHdr}${wiRows}
+    </div>`;
 }
 
 // ── S40b: DECISION SEQUENCE ──────────────────────────────────────────────
@@ -2808,7 +2937,7 @@ function renderRunningEconomy(a){
   }
 
   el.innerHTML=`
-    <div class="stats-row" style="margin:0 -20px 14px">${cells}</div>
+    <div class="stats-row" style="grid-template-columns:1fr 1fr;margin:0 -20px 14px">${cells}</div>
     <div class="re-chdr">${['COHORT','N','MEAN','Δ'].map(h=>`<div>${h}</div>`).join('')}</div>
     ${rows}
     <div class="re-note">${verdict}</div>
