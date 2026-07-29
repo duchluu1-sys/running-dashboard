@@ -241,6 +241,104 @@ def compute_acwr(runs, progression, today):
     return round(acute / chronic, 2) if chronic >= 1 else None
 
 
+# ── Directive engine (Layer 3: variance → imperative) ─────────────────────────
+
+def ceiling_recent(runs, n=5):
+    """
+    Recency- and magnitude-weighted ceiling read over the last n quality
+    sessions. Deliberately NOT a binary all-time rate: a 1% breach on a
+    19-min tempo is ~11s at 153bpm, inside strap lag. Returns
+    (clean_count, total, mean_magnitude_of_breaches) or None.
+    """
+    q = [r for r in runs
+         if (r.get("type") or "").startswith("quality")
+         and r.get("pctCeiling") is not None]
+    if not q:
+        return None
+    recent = q[-n:]
+    breaches = [r["pctCeiling"] for r in recent if r["pctCeiling"] > 0]
+    clean = len(recent) - len(breaches)
+    mean_mag = round(sum(breaches) / len(breaches), 1) if breaches else 0
+    return clean, len(recent), mean_mag
+
+
+def sleep_trend(log, n=4):
+    """Mean sleepScore over last n logged entries that have one, or None."""
+    vals = [e.get("sleepScore") for e in log[-n:] if e.get("sleepScore")]
+    if not vals:
+        return None
+    return round(sum(vals) / len(vals))
+
+
+def build_directives(runs, log, athlete, prog, acwr, q_days, session, today):
+    """
+    Turns computed variance into imperative statements. Each directive is
+    a gap between actual and planned, phrased as an action.
+
+    Rules:
+      - Silence is information. No directive fires when a metric is in range.
+      - Maximum 3 directives. Alert fatigue is a patient safety issue.
+      - Ordered by leverage: today's session first, then week, then trend.
+    """
+    out = []
+
+    # 1. Today's quality prescription — undercooked vs overcooked
+    if session.startswith("quality"):
+        under = (acwr is not None and acwr < 0.95) or (q_days is not None and q_days >= 5)
+        cr = ceiling_recent(runs)
+        if under:
+            bits = []
+            if q_days is not None and q_days >= 5:
+                bits.append(f"{q_days}d without quality")
+            if acwr is not None and acwr < 0.95:
+                bits.append(f"ACWR {acwr}")
+            out.append(
+                f"Undercooked, not overcooked ({', '.join(bits)}) — "
+                f"don't be conservative on the ladder."
+            )
+        if cr:
+            clean, total, mag = cr
+            if clean < total and mag >= 3:
+                out.append(
+                    f"Ceiling: {clean}/{total} recent clean, mean breach {mag}% — "
+                    f"start at the bottom of the ladder."
+                )
+
+    # 2. Weekly volume pace
+    vol_on = athlete.get("weekVolOnBoard") or 0
+    if prog:
+        v_min = prog.get("volMin")
+        sched = athlete.get("weekSchedule", {})
+        order = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
+        dow = today.strftime("%a")
+        try:
+            idx = order.index(dow)
+        except ValueError:
+            idx = 0
+        left = [d for d in order[idx:] if (sched.get(d, "rest") != "rest")]
+        if v_min and left:
+            need = round(v_min - vol_on, 1)
+            if need > 0:
+                per = round(need / len(left), 1)
+                if per > 12:
+                    out.append(
+                        f"Volume: {need}km over {len(left)} sessions = {per}km each. "
+                        f"Above sustainable — expect to land under {v_min}km."
+                    )
+                elif need > 0:
+                    out.append(
+                        f"Volume: {need}km left over {len(left)} sessions "
+                        f"(~{per}km each) to clear {v_min}km."
+                    )
+
+    # 3. Sleep trend — only if genuinely low
+    st = sleep_trend(log)
+    if st is not None and st < 65:
+        out.append(f"Sleep 4-night mean {st} — below 65. Earlier bedtime is the lever.")
+
+    return out[:3]
+
+
 # ── Days since last quality session ───────────────────────────────────────────
 
 def days_since_quality(runs, progression, today):
@@ -472,6 +570,12 @@ def main():
         if last_run else "No runs logged."
     )
 
+    # ── Directives (Layer 3) — variance turned imperative ────────────────────
+    directives = build_directives(
+        runs, log, athlete, prog, acwr, q_days, session, today
+    )
+    directive_str = (" " + " ".join(directives)) if directives else ""
+
     # Assemble briefing
     if status == "REST":
         # Lead with suppression, then context
@@ -489,9 +593,9 @@ def main():
             f"{context_line}. {last_run_str}"
         )
     else:
-        # GREEN (or CAUTION on a non-quality day) — lead with session
+        # GREEN (or CAUTION on a non-quality day) — session, directives, context
         briefing = (
-            f"{session_desc}{q_gap_note} "
+            f"{session_desc}{q_gap_note}{directive_str} "
             f"{context_line}. {last_run_str}"
         )
 
