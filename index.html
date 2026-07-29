@@ -89,6 +89,13 @@ body{background:var(--bg);background-image:var(--grid);color:var(--tx);font-fami
 .stat-val.gn{color:var(--gn)}.stat-val.am{color:var(--am)}.stat-val.rd{color:var(--rd)}.stat-val.vb{color:var(--vb)}.stat-val.cn{color:var(--cn)}
 .stat-lbl{font-family:var(--mono);font-size:.48rem;letter-spacing:2px;text-transform:uppercase;color:var(--mu);margin-top:4px}
 .stat-sub{font-size:.6rem;color:var(--m2);margin-top:2px}
+/* S43 — PB WALL */
+.pb-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--bd)}
+.pb-cell{background:var(--sf2);padding:12px 16px;min-width:0}
+.pb-val{font-family:var(--mono);font-size:1.2rem;font-weight:700;color:var(--cy);line-height:1}
+.pb-lbl{font-family:var(--mono);font-size:.44rem;letter-spacing:2px;text-transform:uppercase;color:var(--mu);margin-top:4px}
+.pb-ref{font-family:var(--mono);font-size:.5rem;color:var(--m2);margin-top:3px}
+@media(max-width:767px){.pb-grid{grid-template-columns:repeat(2,1fr)}}
 /* TODAY */
 .rd-block{display:flex;align-items:flex-start;gap:20px;padding:18px 20px}
 .rd-status{display:flex;align-items:center;gap:12px;margin-bottom:8px}
@@ -1025,6 +1032,16 @@ body{background:var(--bg);background-image:var(--grid);color:var(--tx);font-fami
 <!-- ── ADAPTATION ── -->
 <div id="tab-adaptation" class="tc">
   <div id="adapt-headline" class="card hud-card tab-headline"></div>
+  <div class="g2" id="pb-row">
+    <div class="card hud-card" id="odo-card">
+      <div class="ch"><div class="cl">ODOMETER</div><div class="cs">program totals since May 9, 2026</div></div>
+      <div id="odo-body"></div>
+    </div>
+    <div class="card hud-card" id="pb-card">
+      <div class="ch"><div class="cl">PROGRAM BESTS</div><div class="cs">personal records across all sessions</div></div>
+      <div id="pb-body"></div>
+    </div>
+  </div>
   <div class="g2">
     <div class="card hud-card">
       <div class="ch"><div class="cl">PACE · HR PERFORMANCE ENVELOPE</div><div class="cs">every run as a point · up-left = adaptation · sparse — builds with pace data</div></div>
@@ -1843,8 +1860,81 @@ function renderAdaptationHeadline(a){
     </div>`;
 }
 
+// ── S43: PB WALL + ODOMETER ─────────────────────────────────────────────
+function renderPBWall(){
+  const oEl=document.getElementById('odo-body');
+  const pbEl=document.getElementById('pb-body');
+  if(!oEl||!pbEl||!RUNS.length)return;
+
+  // — ODOMETER —
+  const totalKm=+RUNS.reduce((s,r)=>s+r.dist,0).toFixed(1);
+  const totalRuns=RUNS.length;
+  const start=new Date('2026-05-09T00:00:00');
+  const today=new Date();today.setHours(0,0,0,0);
+  const days=Math.round((today-start)/86400000);
+  oEl.innerHTML=`
+    <div class="stats-row" style="margin:0">
+      <div class="stat-cell">
+        <div class="stat-val cn">${totalKm}</div>
+        <div class="stat-lbl">KM LOGGED</div>
+        <div class="stat-sub">since May 9</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-val">${totalRuns}</div>
+        <div class="stat-lbl">SESSIONS</div>
+        <div class="stat-sub">W1 – W${ATHLETE.week}</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-val">${days}</div>
+        <div class="stat-lbl">DAYS</div>
+        <div class="stat-sub">program age</div>
+      </div>
+    </div>`;
+
+  // — PB WALL —
+  const fam=t=>t.startsWith('quality')?'quality':t;
+  const tLbl=t=>({easy:'easy',long:'long',quality:'quality',strides:'strides'}[fam(t)]||fam(t));
+  const sLbl=s=>s==='treadmill'?'TM':'OD';
+
+  // Best GCT (lower = better)
+  const gctPts=RUNS.filter(r=>r.gct);
+  const bGCT=gctPts.length?gctPts.reduce((b,r)=>r.gct<b.gct?r:b):null;
+  // Best VR (lower = better)
+  const vrPts=RUNS.filter(r=>r.vr);
+  const bVR=vrPts.length?vrPts.reduce((b,r)=>r.vr<b.vr?r:b):null;
+  // Best drift (most negative = best cardiac economy)
+  const dPts=RUNS.filter(r=>r.drift!==null&&r.drift!==undefined);
+  const bDrift=dPts.length?dPts.reduce((b,r)=>r.drift<b.drift?r:b):null;
+  // Longest run
+  const bDist=RUNS.reduce((b,r)=>r.dist>b.dist?r:b);
+  // Best TE (higher = more impactful training stimulus)
+  const tePts=RUNS.filter(r=>r.te);
+  const bTE=tePts.length?tePts.reduce((b,r)=>r.te>b.te?r:b):null;
+  // Fastest overall pace (lower = faster)
+  const pPts=RUNS.filter(r=>r.pace);
+  const bPace=pPts.length?pPts.reduce((b,r)=>r.pace<b.pace?r:b):null;
+
+  const cell=(val,lbl,ref,sub)=>
+    `<div class="pb-cell">
+      <div class="pb-val">${val||'—'}</div>
+      <div class="pb-lbl">${lbl}</div>
+      <div class="pb-ref">${val?ref:'no data'}</div>
+      ${val&&sub?`<div class="pb-ref" style="color:var(--mu);font-size:.44rem">${sub}</div>`:''}
+    </div>`;
+
+  pbEl.innerHTML=`<div class="pb-grid">
+    ${cell(bGCT?bGCT.gct+'ms':null,'GCT',`R${bGCT?.r} · ${bGCT?.date}`,bGCT?sLbl(bGCT.surface)+' · ↓ lower better':'')}
+    ${cell(bVR?bVR.vr+'%':null,'VR',`R${bVR?.r} · ${bVR?.date}`,bVR?sLbl(bVR.surface)+' · ↓ lower better':'')}
+    ${cell(bDrift?(bDrift.drift>0?'+':'')+bDrift.drift+' bpm':null,'DRIFT',`R${bDrift?.r} · ${bDrift?.date}`,'↓ negative = HR dropped')}
+    ${cell(bDist?bDist.dist+' km':null,'LONG RUN',`R${bDist?.r} · ${bDist?.date}`,tLbl(bDist?.type))}
+    ${cell(bTE?bTE.te:null,'BEST TE',`R${bTE?.r} · ${bTE?.date}`,bTE?tLbl(bTE.type)+' · ↑ higher better':'')}
+    ${cell(bPace?fmtPace(bPace.pace)+'/km':null,'FASTEST PACE',`R${bPace?.r} · ${bPace?.date}`,bPace?tLbl(bPace.type)+' · ↓ lower better':'')}
+  </div>`;
+}
+
 function renderAdaptation(a){
   renderAdaptationHeadline(a); // S37c
+  renderPBWall();              // S43
   // Pace gap
   renderPaceGap(a.paceGap);
   // Running Economy (S39b) — GCT cohort table + VR panel
