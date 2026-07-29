@@ -1093,7 +1093,7 @@ body{background:var(--bg);background-image:var(--grid);color:var(--tx);font-fami
       <div class="cw"><canvas id="paceHRChart"></canvas></div>
     </div>
     <div class="card hud-card">
-      <div class="ch"><div class="cl">THRESHOLD PACE DEVELOPMENT</div><div class="cs">quality sessions · pace at sub-150 bpm ceiling</div></div>
+      <div class="ch"><div class="cl">THRESHOLD PACE DEVELOPMENT</div><div class="cs">Q-A: top interval pace · Q-B: tempo block pace · ● interval · ○ tempo</div></div>
       <div id="threshold-sparse" class="sparse-state" style="display:none"></div>
       <div class="cw"><canvas id="thresholdChart"></canvas></div>
     </div>
@@ -1447,14 +1447,19 @@ function computeAEI(runs){
 }
 
 function computeThresholdProg(runs){
-  const pts=runs.filter(r=>r.type.startsWith('quality')&&r.pace).map(r=>({r:r.r,date:r.date,pace:r.pace,hrAvg:r.hrAvg,pct:r.pctCeiling||0}));
-  if(pts.length<2)return{pts,slope:null,conf:'INSUFFICIENT'};
+  const qa=runs.filter(r=>r.type==='quality_a'&&r.qualityPace!=null)
+    .map(r=>({r:r.r,date:r.date,pace:r.qualityPace,sub:'A'}));
+  const qb=runs.filter(r=>r.type==='quality_b'&&r.qualityPace!=null)
+    .map(r=>({r:r.r,date:r.date,pace:r.qualityPace,sub:'B'}));
+  const pts=[...qa,...qb].sort((a,b)=>a.r-b.r);
+  if(pts.length<2)return{pts,qa,qb,slope:null,conf:'INSUFFICIENT'};
   const n=pts.length,xs=pts.map((_,i)=>i),ys=pts.map(p=>p.pace);
   const xm=xs.reduce((s,x)=>s+x)/n,ym=ys.reduce((s,y)=>s+y)/n;
   const num=xs.reduce((s,x,i)=>s+(x-xm)*(ys[i]-ym),0);
-  const den=xs.reduce((s,x)=>s+(x-xm)**2,0);
-  const slope=den?+(num/den).toFixed(4):0;
-  return{pts,slope,conf:n>=5?'MEDIUM':'LOW'};
+  const den=xs.reduce((s,x)=>s+(x-xm)**2,0)||1;
+  const slope=+(num/den).toFixed(4);
+  return{pts,qa,qb,slope,conf:pts.length>=5?'MEDIUM':'LOW'};
+}
 }
 
 function computePaceHRScatter(runs){
@@ -1656,7 +1661,7 @@ function classifyAlerts(flags){
 
 function validateRuns(runs){
   const ENUM=['easy','quality_a','quality_b','long','flush','strides','race'];
-  const KNOWN=new Set(['r','date','type','wk','dist','duration','moving','pace','paceEasy','hrAvg','hrMax','te','te_an','gct','vr','vo','sl','cadence','pctCeiling','drift','walkRatio','hrZones','temp','surface','conditions','flag','note','verdict','tags']);
+  const KNOWN=new Set(['r','date','type','wk','dist','duration','moving','pace','paceEasy','hrAvg','hrMax','te','te_an','gct','vr','vo','sl','cadence','pctCeiling','drift','walkRatio','hrZones','temp','surface','conditions','flag','note','verdict','tags','qualityPace']);
   const REQ=['r','date','type','wk','dist','flag','note'];
   const f=[];
   runs.forEach((r,i)=>{
@@ -3204,25 +3209,52 @@ function initPaceHRChart(a){
 
 // ── THRESHOLD CHART ─────────────────────────────────────────────────────
 function initThresholdChart(a){
-  const d=a.threshold.pts;
-  if(d.length<2){return}
-  // Linear trend
+  const{qa,qb,pts:d}=a.threshold;
+  if(!d||d.length<2){return}
   const n=d.length,xs=d.map((_,i)=>i),ys=d.map(p=>p.pace);
   const xm=xs.reduce((s,x)=>s+x)/n,ym=ys.reduce((s,y)=>s+y)/n;
   const num=xs.reduce((s,x,i)=>s+(x-xm)*(ys[i]-ym),0);
-  const den=xs.reduce((s,x)=>s+(x-xm)**2,1);
-  const slope=num/den,intercept=ym-slope*xm;
-  const trendLine=xs.map((x,i)=>({x:d[i].r,y:+(slope*x+intercept).toFixed(3)}));
+  const den=xs.reduce((s,x)=>s+(x-xm)**2,0)||1;
+  const sl=num/den,ic=ym-sl*xm;
+  const rs=d.map(p=>p.r);
+  const rMin=Math.min(...rs),rMax=Math.max(...rs);
+  const tL=[{x:rMin,y:+(ic).toFixed(3)},{x:rMax,y:+(sl*(n-1)+ic).toFixed(3)}];
   CHARTS.threshold=new Chart(document.getElementById('thresholdChart').getContext('2d'),{
     type:'scatter',
     data:{datasets:[
-      {type:'scatter',label:'Quality session pace',data:d.map((p,i)=>({x:p.r,y:p.pace,date:p.date})),backgroundColor:d.map((_,i)=>i===d.length-1?D1:D2),pointRadius:d.map((_,i)=>i===d.length-1?8:5),pointHoverRadius:10},
-      {type:'line',label:'Trend',data:trendLine.map(p=>({x:p.x,y:p.y})),borderColor:REF,borderWidth:1.5,borderDash:[4,4],pointRadius:0,fill:false,backgroundColor:'transparent'},
-      {type:'line',label:'Sub-4 goal',data:[{x:d[0].r,y:ATHLETE.goalPaceSub4},{x:d[d.length-1].r,y:ATHLETE.goalPaceSub4}],borderColor:OK,borderWidth:1.5,borderDash:[5,3],pointRadius:0,fill:false,backgroundColor:'transparent'},
-      {type:'line',label:'Current LT1',data:[{x:d[0].r,y:ATHLETE.ltPace},{x:d[d.length-1].r,y:ATHLETE.ltPace}],borderColor:'rgba(0,212,255,.55)',borderWidth:1.5,borderDash:[5,3],pointRadius:0,fill:false,backgroundColor:'transparent'},
+      {type:'scatter',label:'Q-A — top interval pace',
+       data:qa.map(p=>({x:p.r,y:p.pace,date:p.date,sub:'A'})),
+       backgroundColor:D1,borderColor:D1,
+       pointRadius:qa.map((_,i)=>i===qa.length-1?8:5),pointHoverRadius:10},
+      {type:'scatter',label:'Q-B — tempo block pace',
+       data:qb.map(p=>({x:p.r,y:p.pace,date:p.date,sub:'B'})),
+       backgroundColor:'transparent',borderColor:D1,borderWidth:2,
+       pointRadius:qb.map((_,i)=>i===qb.length-1?8:5),pointHoverRadius:10},
+      {type:'line',label:'Trend',data:tL,
+       borderColor:REF,borderWidth:1.5,borderDash:[4,4],pointRadius:0,fill:false,backgroundColor:'transparent'},
+      {type:'line',label:'Sub-4 goal',
+       data:[{x:rMin,y:ATHLETE.goalPaceSub4},{x:rMax,y:ATHLETE.goalPaceSub4}],
+       borderColor:OK,borderWidth:1.5,borderDash:[5,3],pointRadius:0,fill:false,backgroundColor:'transparent'},
+      {type:'line',label:'Current LT1',
+       data:[{x:rMin,y:ATHLETE.ltPace},{x:rMax,y:ATHLETE.ltPace}],
+       borderColor:'rgba(0,212,255,.55)',borderWidth:1.5,borderDash:[5,3],pointRadius:0,fill:false,backgroundColor:'transparent'},
     ]},
-    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{...CHART_DEFAULTS,callbacks:{label:c=>c.raw.date?`R${c.raw.x} · ${c.raw.date}: ${fmtPace(c.raw.y)}/km`:`${c.dataset.label}: ${fmtPace(c.raw.y)}/km`}}},scales:{x:{type:'linear',ticks:{...xTick(),callback:v=>`R${v}`},grid:gridLine(),border:borderLine()},y:{reverse:true,min:5,max:8,ticks:{...yTick(),callback:v=>fmtPace(v)},title:{display:true,text:'Pace (min/km) — faster ↑',color:'#64748b',font:{family:'Share Tech Mono',size:10}},grid:gridLine(),border:borderLine()}}}
+    options:{responsive:true,maintainAspectRatio:false,
+      plugins:{
+        legend:{display:true,position:'bottom',
+          labels:{color:'#64748b',font:{family:'Share Tech Mono',size:9},boxWidth:10}},
+        tooltip:{...CHART_DEFAULTS,callbacks:{
+          label:c=>c.raw.date
+            ?`R${c.raw.x} · ${c.raw.date}: ${fmtPace(c.raw.y)}/km (Q-${c.raw.sub||'?'})`
+            :`${c.dataset.label}: ${fmtPace(c.raw.y)}/km`}}},
+      scales:{
+        x:{type:'linear',ticks:{...xTick(),callback:v=>`R${v}`},grid:gridLine(),border:borderLine()},
+        y:{reverse:true,min:5,max:8,
+          ticks:{...yTick(),callback:v=>fmtPace(v)},
+          title:{display:true,text:'Pace (min/km) — faster ↑',color:'#64748b',font:{family:'Share Tech Mono',size:10}},
+          grid:gridLine(),border:borderLine()}}}
   });
+}
 }
 
 // ── AEI CHART ───────────────────────────────────────────────────────────

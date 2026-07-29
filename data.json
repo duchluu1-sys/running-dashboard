@@ -356,7 +356,7 @@
       "dist": 5.66,
       "duration": 48,
       "moving": null,
-      "pace": 6.8,
+      "pace": null,
       "paceEasy": 6.5,
       "hrAvg": 127,
       "hrMax": 154,
@@ -375,7 +375,8 @@
       "flag": "✅✅",
       "note": "First quality session — 6×2:30min · excellent",
       "verdict": null,
-      "tags": []
+      "tags": [],
+      "qualityPace": 6.8
     },
     {
       "r": 14,
@@ -584,7 +585,8 @@
       "flag": "✅✅",
       "note": "GCT PB · ceiling touch (brief)",
       "verdict": null,
-      "tags": []
+      "tags": [],
+      "qualityPace": null
     },
     {
       "r": 21,
@@ -816,7 +818,8 @@
       "flag": "✅",
       "note": "GCT PB · 4s ceiling touch",
       "verdict": null,
-      "tags": []
+      "tags": [],
+      "qualityPace": 6.43
     },
     {
       "r": 29,
@@ -932,7 +935,8 @@
       "flag": "⚠️",
       "note": "Ceiling breach ⚠️ — cafe stop · outdoor heat",
       "verdict": null,
-      "tags": []
+      "tags": [],
+      "qualityPace": 6.1
     },
     {
       "r": 33,
@@ -990,7 +994,8 @@
       "flag": "✅",
       "note": "6:42/km LT1 CONFIRMED ✅ — outdoor dawn tempo",
       "verdict": null,
-      "tags": []
+      "tags": [],
+      "qualityPace": 6.7
     },
     {
       "r": 35,
@@ -1077,7 +1082,8 @@
       "flag": "✅",
       "note": "7/7 reps · 0% ceiling 🏆 · treadmill",
       "verdict": null,
-      "tags": []
+      "tags": [],
+      "qualityPace": 6.74
     },
     {
       "r": 38,
@@ -1135,7 +1141,8 @@
       "flag": "✅✅",
       "note": "GCT 303ms ALL-TIME BEST 🏆 · VR 8.5% 🏆 · 15 min tempo",
       "verdict": null,
-      "tags": []
+      "tags": [],
+      "qualityPace": 6.98
     },
     {
       "r": 40,
@@ -1251,7 +1258,8 @@
       "flag": "⚠️",
       "note": "Too easy ⚠️ — speed too conservative · right ankle flag",
       "verdict": null,
-      "tags": []
+      "tags": [],
+      "qualityPace": 6.74
     },
     {
       "r": 44,
@@ -1318,7 +1326,8 @@
       "tags": [
         "ceiling-clean",
         "plantar-flag"
-      ]
+      ],
+      "qualityPace": 6.98
     },
     {
       "r": 46,
@@ -1445,7 +1454,7 @@
       "dist": 5.06,
       "duration": 46,
       "moving": 34,
-      "pace": 8.99,
+      "pace": null,
       "paceEasy": null,
       "hrAvg": 118,
       "hrMax": 145,
@@ -1474,7 +1483,8 @@
         "gct-pb",
         "ceiling-clean",
         "te-artefact"
-      ]
+      ],
+      "qualityPace": 6.52
     }
   ],
   "GATES": [
