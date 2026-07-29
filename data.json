@@ -1604,7 +1604,16 @@
       "Sun": "rest"
     },
     "goalPaceSub4": 5.683,
-    "goalPace330": 4.967
+    "goalPace330": 4.967,
+    "bodyComp": {
+      "date": "2026-07-05",
+      "weight": 76.2,
+      "smm": 39.1,
+      "fatPct": 10.8,
+      "vfa": 28.5,
+      "phaseAngle": 7.1,
+      "score": 90
+    }
   },
   "READINESS_LOG": [
     {
@@ -1642,15 +1651,6 @@
       "status": "GREEN",
       "note": "All signals nominal",
       "briefing": "Rest day. W12/24 · 83d to Race 0 · 6.01km of 33–37km on board · ACWR 1.02. Last: R47 easy 6.01km (Jul 27)."
-    },
-    {
-      "date": "2026-07-29",
-      "hrv": 66,
-      "rhr": 44,
-      "sleepScore": 64,
-      "status": "GREEN",
-      "note": "All signals nominal",
-      "briefing": "Quality A — 5×4 min (20:00), ceiling 150 bpm. Evo SL, Elite Fitness. [6d since last quality] W12/24 · 82d to Race 0 · 8.29km of 33–37km on board · ACWR 0.93. Last: R48 strides 2.28km (Jul 28)."
     }
   ],
   "PHASES": [
