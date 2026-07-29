@@ -96,6 +96,14 @@ body{background:var(--bg);background-image:var(--grid);color:var(--tx);font-fami
 .pb-lbl{font-family:var(--mono);font-size:.44rem;letter-spacing:2px;text-transform:uppercase;color:var(--mu);margin-top:4px}
 .pb-ref{font-family:var(--mono);font-size:.5rem;color:var(--m2);margin-top:3px}
 @media(max-width:767px){.pb-grid{grid-template-columns:repeat(2,1fr)}}
+/* S44 — HUMAN BENCHMARK */
+.hb-row{display:grid;grid-template-columns:90px 80px auto 1fr;gap:0 12px;padding:10px 20px;border-bottom:1px solid var(--bd);align-items:center;min-width:0}
+.hb-row:last-child{border-bottom:none}
+.hb-metric{font-family:var(--mono);font-size:.52rem;text-transform:uppercase;letter-spacing:1px;color:var(--mu)}
+.hb-val{font-family:var(--mono);font-size:1rem;font-weight:700;color:var(--cy);white-space:nowrap}
+.hb-badge{font-family:var(--mono);font-size:.44rem;text-transform:uppercase;letter-spacing:1px;padding:2px 7px;border-radius:2px;border:1px solid currentColor;white-space:nowrap}
+.hb-ref{font-family:var(--mono);font-size:.46rem;color:var(--mu);text-align:right;line-height:1.6}
+@media(max-width:480px){.hb-row{grid-template-columns:70px 65px auto 1fr;gap:0 8px;padding:10px 14px}.hb-ref{display:none}}
 /* TODAY */
 .rd-block{display:flex;align-items:flex-start;gap:20px;padding:18px 20px}
 .rd-status{display:flex;align-items:center;gap:12px;margin-bottom:8px}
@@ -1042,6 +1050,10 @@ body{background:var(--bg);background-image:var(--grid);color:var(--tx);font-fami
       <div id="pb-body"></div>
     </div>
   </div>
+  <div class="card hud-card" id="hb-card">
+    <div class="ch"><div class="cl">HUMAN BENCHMARK</div><div class="cs">your metrics vs trained runner population · VO₂max + threshold pace after lactate test Oct 2026</div></div>
+    <div id="hb-body"></div>
+  </div>
   <div class="g2">
     <div class="card hud-card">
       <div class="ch"><div class="cl">PACE · HR PERFORMANCE ENVELOPE</div><div class="cs">every run as a point · up-left = adaptation · sparse — builds with pace data</div></div>
@@ -1860,6 +1872,78 @@ function renderAdaptationHeadline(a){
     </div>`;
 }
 
+// ── S44: HUMAN BENCHMARK ────────────────────────────────────────────────
+// Static tier thresholds are population benchmarks, not computed from RUNS.
+// GCT + VR are treadmill bests (R39) — flagged in ref column.
+// Body comp populates from ATHLETE.bodyComp after InBody Aug 30.
+// VO₂max + threshold pace rows ship after lactate test Oct 2026.
+function renderHumanBenchmark(){
+  const el=document.getElementById('hb-body');
+  if(!el)return;
+
+  // — RHR — computed live from READINESS_LOG
+  const rhrVals=READINESS_LOG.filter(r=>r.rhr).map(r=>r.rhr);
+  const rhr7d=rhrVals.slice(-7);
+  const rhrAvg=rhr7d.length?Math.round(rhr7d.reduce((s,v)=>s+v,0)/rhr7d.length):null;
+  const rhrLow=rhrVals.length?Math.min(...rhrVals):null;
+  const rhrTier=!rhrAvg?{l:'NO DATA',c:'var(--mu)'}
+    :rhrAvg<40?{l:'ELITE',c:'var(--gn)'}
+    :rhrAvg<50?{l:'TRAINED RUNNER',c:'var(--cy)'}
+    :rhrAvg<65?{l:'ACTIVE',c:'var(--am)'}
+    :{l:'AVERAGE',c:'var(--mu)'};
+
+  // — GCT — from ATHLETE.gctBest (treadmill R39)
+  const gct=ATHLETE.gctBest;
+  const gctTier=!gct?{l:'NO DATA',c:'var(--mu)'}
+    :gct<220?{l:'ELITE',c:'var(--gn)'}
+    :gct<260?{l:'SUB-ELITE',c:'var(--gn)'}
+    :gct<300?{l:'TRAINED',c:'var(--cy)'}
+    :gct<360?{l:'TRAINED REC',c:'var(--cy)'}
+    :{l:'RECREATIONAL',c:'var(--mu)'};
+
+  // — VR — from ATHLETE.vrBest (treadmill R39)
+  const vr=ATHLETE.vrBest;
+  const vrTier=!vr?{l:'NO DATA',c:'var(--mu)'}
+    :vr<7?{l:'ELITE',c:'var(--gn)'}
+    :vr<9?{l:'WELL-TRAINED',c:'var(--cy)'}
+    :vr<11?{l:'TRAINED REC',c:'var(--am)'}
+    :{l:'RECREATIONAL',c:'var(--mu)'};
+
+  // — BODY COMP — ATHLETE.bodyComp populated by Claude Desktop post InBody
+  const bc=ATHLETE.bodyComp||null;
+  const bcFat=bc?.fatPct??null;
+  const bcVal=bcFat!=null?bcFat+'% fat':null;
+  const inBodyMs=MILESTONES?.find(m=>m.label&&m.label.toLowerCase().includes('inbody'));
+  const inBodyRef=inBodyMs?'InBody '+inBodyMs.date.slice(5).replace('-',' '):'InBody Aug 30';
+  const bcTier=bcFat==null?{l:'PENDING',c:'var(--mu)'}
+    :bcFat<10?{l:'ELITE',c:'var(--gn)'}
+    :bcFat<15?{l:'ATHLETIC',c:'var(--gn)'}
+    :bcFat<20?{l:'FIT',c:'var(--cy)'}
+    :{l:'AVERAGE',c:'var(--mu)'};
+
+  const row=(metric,val,tier,ref)=>`
+    <div class="hb-row">
+      <div class="hb-metric">${metric}</div>
+      <div class="hb-val" style="${!val?'color:var(--mu)':''}">${val||'—'}</div>
+      <div class="hb-badge" style="color:${tier.c}">${tier.l}</div>
+      <div class="hb-ref">${ref}</div>
+    </div>`;
+
+  el.innerHTML=
+    row('RHR',
+      rhrAvg?rhrAvg+' bpm':null, rhrTier,
+      `7d avg · low ${rhrLow||'—'} bpm · elite &lt;40 · avg 65–80`)
+   +row('GCT',
+      gct?gct+'ms':null, gctTier,
+      `R39 · TM · elite &lt;220ms · trained 260–300 · rec 300–360`)
+   +row('VR',
+      vr?vr+'%':null, vrTier,
+      `R39 · TM · elite &lt;7% · trained 7–9% · rec 10%+`)
+   +row('BODY COMP',
+      bcVal, bcTier,
+      bcFat!=null?`elite &lt;10% · athletic 10–15% · fit 15–20%`:inBodyRef+' · elite &lt;10% · fit 15–20%');
+}
+
 // ── S43: PB WALL + ODOMETER ─────────────────────────────────────────────
 function renderPBWall(){
   const oEl=document.getElementById('odo-body');
@@ -1935,6 +2019,7 @@ function renderPBWall(){
 function renderAdaptation(a){
   renderAdaptationHeadline(a); // S37c
   renderPBWall();              // S43
+  renderHumanBenchmark();      // S44
   // Pace gap
   renderPaceGap(a.paceGap);
   // Running Economy (S39b) — GCT cohort table + VR panel
