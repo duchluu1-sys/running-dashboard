@@ -1460,7 +1460,6 @@ function computeThresholdProg(runs){
   const slope=+(num/den).toFixed(4);
   return{pts,qa,qb,slope,conf:pts.length>=5?'MEDIUM':'LOW'};
 }
-}
 
 function computePaceHRScatter(runs){
   const pts=runs.filter(r=>r.hrAvg&&(r.pace||r.paceEasy));
@@ -2861,7 +2860,7 @@ function initVolTrajChart(){
     ]},
     options:{responsive:true,maintainAspectRatio:false,
       plugins:{legend:{display:false},
-        tooltip:{.....CHART_DEFAULTS,callbacks:{
+        tooltip:{...CHART_DEFAULTS,callbacks:{
           label:c=>{
             if(c.dataset.label==='Plan')return c.parsed.y!=null?`Plan ceiling: ${prog[c.dataIndex].volMin}–${prog[c.dataIndex].volMax} km`:'';
             if(c.dataset.label==='Actual')return c.parsed.y!=null?`Actual: ${c.parsed.y} km`:'No data yet';
@@ -2869,8 +2868,8 @@ function initVolTrajChart(){
           }
         }}},
       scales:{
-        x:{ticks:{.....xTick(),maxRotation:0,minRotation:0},grid:gridLine(),border:borderLine()},
-        y:{min:0,max:50,ticks:{.....yTick(),callback:v=>`${v}`},
+        x:{ticks:{...xTick(),maxRotation:0,minRotation:0},grid:gridLine(),border:borderLine()},
+        y:{min:0,max:50,ticks:{...yTick(),callback:v=>`${v}`},
           title:axTitle('km'),grid:gridLine(),border:borderLine()}
       }
     }
@@ -2973,14 +2972,14 @@ function initGCTChart(a){
     options:{responsive:true,maintainAspectRatio:false,
       interaction:{mode:"nearest",intersect:false},
       plugins:{legend:{display:false},
-        tooltip:{.....CHART_DEFAULTS,callbacks:{
+        tooltip:{...CHART_DEFAULTS,callbacks:{
           title:i=>i[0].raw.lbl||i[0].dataset.label,
           label:c=>c.raw.t?`GCT: ${c.raw.y}ms (${c.raw.t} · ${c.raw.s})`:c.dataset.label+": "+c.raw.y+"ms"}}},
       scales:{
-        x:{type:"linear",ticks:{.....xTick(),callback:v=>`R${v}`,stepSize:2},grid:gridLine(),border:borderLine()},
+        x:{type:"linear",ticks:{...xTick(),callback:v=>`R${v}`,stepSize:2},grid:gridLine(),border:borderLine()},
         y:{reverse:true,min:280,max:390,
           title:{display:true,text:"GCT ms — lower is better ↑",color:"#64748b",font:{family:"Inter",size:10}},
-          ticks:{.....yTick(),callback:v=>`${v}ms`},grid:gridLine(),border:borderLine()}}}
+          ticks:{...yTick(),callback:v=>`${v}ms`},grid:gridLine(),border:borderLine()}}}
   });
   document.getElementById("gct-leg").innerHTML=`
     <div class="li"><span class="ld" style="background:rgba(0,212,255,.18)"></span>Quality</div>
@@ -3089,7 +3088,7 @@ function initVolumeChart(a){
       {type:'line',label:'Min target 33km',data:w.map(()=>33),borderColor:REF,borderDash:[5,5],borderWidth:1.5,pointRadius:0,fill:false,backgroundColor:'transparent',order:1},
       {type:'line',label:'Max target 37km',data:w.map(()=>37),borderColor:'rgba(0,212,255,.18)',borderDash:[3,3],borderWidth:1,pointRadius:0,fill:false,backgroundColor:'transparent',order:1},
     ]},
-    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{.....CHART_DEFAULTS,callbacks:{label:c=>`${c.dataset.label==='Volume (km)'?w[c.dataIndex].total+' km':c.dataset.label+': '+c.parsed.y+'km'}${w[c.dataIndex]?.partial?' (partial)':''}`}}},scales:{x:{ticks:xTick(),grid:gridLine(),border:borderLine()},y:{ticks:{.....yTick(),callback:v=>`${v}km`},title:{display:true,text:'km / week',color:'#64748b',font:{family:'Share Tech Mono',size:10}},grid:gridLine(),border:borderLine()}}}
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{...CHART_DEFAULTS,callbacks:{label:c=>`${c.dataset.label==='Volume (km)'?w[c.dataIndex].total+' km':c.dataset.label+': '+c.parsed.y+'km'}${w[c.dataIndex]?.partial?' (partial)':''}`}}},scales:{x:{ticks:xTick(),grid:gridLine(),border:borderLine()},y:{ticks:{...yTick(),callback:v=>`${v}km`},title:{display:true,text:'km / week',color:'#64748b',font:{family:'Share Tech Mono',size:10}},grid:gridLine(),border:borderLine()}}}
   });
 }
 
@@ -3106,7 +3105,7 @@ function initIntensityChart(a){
       {label:'Long',data:w.map(x=>+(x.long/x.total*100).toFixed(1)),backgroundColor:D2,borderColor:'rgba(0,212,255,.6)',borderWidth:1,stack:'s',categoryPercentage:.68,barPercentage:.8},
       {type:'line',label:'80% easy floor',data:w.map(()=>80),borderColor:WARN,borderDash:[6,4],borderWidth:1.5,pointRadius:0,fill:false,backgroundColor:'transparent'},
     ]},
-    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:'#64748b',font:{family:'Share Tech Mono',size:10}}},tooltip:{.....CHART_DEFAULTS,callbacks:{label:c=>`${c.dataset.label}: ${c.parsed.y.toFixed(1)}%`}}},scales:{x:{ticks:xTick(),grid:gridLine(),border:borderLine()},y:{max:100,ticks:{.....yTick(),callback:v=>`${v}%`},title:{display:true,text:'% of weekly km',color:'#64748b',font:{family:'Share Tech Mono',size:10}},grid:gridLine(),border:borderLine()}}}
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:'#64748b',font:{family:'Share Tech Mono',size:10}}},tooltip:{...CHART_DEFAULTS,callbacks:{label:c=>`${c.dataset.label}: ${c.parsed.y.toFixed(1)}%`}}},scales:{x:{ticks:xTick(),grid:gridLine(),border:borderLine()},y:{max:100,ticks:{...yTick(),callback:v=>`${v}%`},title:{display:true,text:'% of weekly km',color:'#64748b',font:{family:'Share Tech Mono',size:10}},grid:gridLine(),border:borderLine()}}}
   });
 }
 
@@ -3122,7 +3121,7 @@ function initComplianceChart(a){
       borderColor:s.map(x=>x.pct===0?OK:x.pct<=5?WARN:BAD),
       borderWidth:1,borderRadius:2,
     }]},
-    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{.....CHART_DEFAULTS,callbacks:{label:c=>`${c.raw}% above ceiling — ${c.raw===0?'clean':c.raw<=5?'minor breach':'BREACH'}`}}},scales:{x:{ticks:xTick(),grid:gridLine(),border:borderLine()},y:{max:20,min:0,ticks:{.....yTick(),callback:v=>`${v}%`},title:{display:true,text:'% time above 150 bpm',color:'#64748b',font:{family:'Share Tech Mono',size:10}},grid:gridLine(),border:borderLine()}}}
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{...CHART_DEFAULTS,callbacks:{label:c=>`${c.raw}% above ceiling — ${c.raw===0?'clean':c.raw<=5?'minor breach':'BREACH'}`}}},scales:{x:{ticks:xTick(),grid:gridLine(),border:borderLine()},y:{max:20,min:0,ticks:{...yTick(),callback:v=>`${v}%`},title:{display:true,text:'% time above 150 bpm',color:'#64748b',font:{family:'Share Tech Mono',size:10}},grid:gridLine(),border:borderLine()}}}
   });
 }
 
@@ -3146,7 +3145,7 @@ function initDriftChart(a){
       borderColor:d.map(x=>bc[x.type]||D4),
       borderWidth:1,borderRadius:2,
     }]},
-    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{.....CHART_DEFAULTS,callbacks:{label:c=>`${c.parsed.y>=0?'+':''}${c.parsed.y} bpm (${d[c.dataIndex].type}) — ${c.parsed.y<=0?'excellent':c.parsed.y<=5?'minimal':c.parsed.y<=10?'elevated':'high'}`}}},scales:{x:{ticks:xTick(),grid:gridLine(),border:borderLine()},y:{ticks:{.....yTick(),callback:v=>`${v>=0?'+':''}${v}`},title:{display:true,text:'Q4 − Q1 avg HR (bpm)',color:'#64748b',font:{family:'Share Tech Mono',size:10}},grid:gridLine(),border:borderLine()}}}
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{...CHART_DEFAULTS,callbacks:{label:c=>`${c.parsed.y>=0?'+':''}${c.parsed.y} bpm (${d[c.dataIndex].type}) — ${c.parsed.y<=0?'excellent':c.parsed.y<=5?'minimal':c.parsed.y<=10?'elevated':'high'}`}}},scales:{x:{ticks:xTick(),grid:gridLine(),border:borderLine()},y:{ticks:{...yTick(),callback:v=>`${v>=0?'+':''}${v}`},title:{display:true,text:'Q4 − Q1 avg HR (bpm)',color:'#64748b',font:{family:'Share Tech Mono',size:10}},grid:gridLine(),border:borderLine()}}}
   });
   renderDriftStats(a.drift);
 }
@@ -3184,7 +3183,7 @@ function initLongRunChart(a){
         pointRadius:d.map((_,i)=>i===d.length-1?8:4),pointHoverRadius:10},
       {type:'line',label:'Gate 3: 20km',data:d.map(()=>20),borderColor:OK,borderDash:[5,5],borderWidth:1.5,pointRadius:0,fill:false,backgroundColor:'transparent'},
     ]},
-    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{.....CHART_DEFAULTS,callbacks:{label:c=>`${c.dataset.label==='Gate 3: 20km'?'Gate 3 target: 20km':c.parsed.y+' km'}`}}},scales:{x:{ticks:xTick(),grid:gridLine(),border:borderLine()},y:{min:0,max:25,ticks:{.....yTick(),callback:v=>`${v}km`},title:{display:true,text:'km',color:'#64748b',font:{family:'Share Tech Mono',size:10}},grid:gridLine(),border:borderLine()}}}
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{...CHART_DEFAULTS,callbacks:{label:c=>`${c.dataset.label==='Gate 3: 20km'?'Gate 3 target: 20km':c.parsed.y+' km'}`}}},scales:{x:{ticks:xTick(),grid:gridLine(),border:borderLine()},y:{min:0,max:25,ticks:{...yTick(),callback:v=>`${v}km`},title:{display:true,text:'km',color:'#64748b',font:{family:'Share Tech Mono',size:10}},grid:gridLine(),border:borderLine()}}}
   });
 }
 
@@ -3203,7 +3202,7 @@ function initPaceHRChart(a){
       {type:'line',label:'Easy ceiling',data:[{x:143,y:5},{x:143,y:10}],borderColor:'rgba(245,158,11,.45)',borderWidth:1,borderDash:[4,4],pointRadius:0,fill:false,backgroundColor:'transparent'},
       {type:'line',label:'Quality ceiling',data:[{x:150,y:5},{x:150,y:10}],borderColor:'rgba(239,68,68,.4)',borderWidth:1,borderDash:[4,4],pointRadius:0,fill:false,backgroundColor:'transparent'},
     ]},
-    options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'nearest',intersect:false},plugins:{legend:{display:false},tooltip:{.....CHART_DEFAULTS,callbacks:{title:i=>i[0].raw.r?`R${i[0].raw.r} · ${i[0].raw.date}`:i[0].dataset.label,label:c=>c.raw.t?`${fmtPace(c.raw.y)}/km at ${c.raw.x}bpm (${c.raw.t})`:`${c.dataset.label}: ${fmtPace(c.raw.y)}/km`}}},scales:{x:{type:'linear',min:minHR,max:maxHR,title:{display:true,text:'Average HR (bpm)',color:'#64748b',font:{family:'Share Tech Mono',size:10}},ticks:{.....xTick(),callback:v=>`${v}bpm`},grid:gridLine(),border:borderLine()},y:{reverse:true,min:5,max:10,title:{display:true,text:'Pace (min/km) — faster ↑',color:'#64748b',font:{family:'Share Tech Mono',size:10}},ticks:{.....yTick(),callback:v=>fmtPace(v)},grid:gridLine(),border:borderLine()}}}
+    options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'nearest',intersect:false},plugins:{legend:{display:false},tooltip:{...CHART_DEFAULTS,callbacks:{title:i=>i[0].raw.r?`R${i[0].raw.r} · ${i[0].raw.date}`:i[0].dataset.label,label:c=>c.raw.t?`${fmtPace(c.raw.y)}/km at ${c.raw.x}bpm (${c.raw.t})`:`${c.dataset.label}: ${fmtPace(c.raw.y)}/km`}}},scales:{x:{type:'linear',min:minHR,max:maxHR,title:{display:true,text:'Average HR (bpm)',color:'#64748b',font:{family:'Share Tech Mono',size:10}},ticks:{...xTick(),callback:v=>`${v}bpm`},grid:gridLine(),border:borderLine()},y:{reverse:true,min:5,max:10,title:{display:true,text:'Pace (min/km) — faster ↑',color:'#64748b',font:{family:'Share Tech Mono',size:10}},ticks:{...yTick(),callback:v=>fmtPace(v)},grid:gridLine(),border:borderLine()}}}
   });
 }
 
@@ -3243,18 +3242,17 @@ function initThresholdChart(a){
       plugins:{
         legend:{display:true,position:'bottom',
           labels:{color:'#64748b',font:{family:'Share Tech Mono',size:9},boxWidth:10}},
-        tooltip:{.....CHART_DEFAULTS,callbacks:{
+        tooltip:{...CHART_DEFAULTS,callbacks:{
           label:c=>c.raw.date
             ?`R${c.raw.x} · ${c.raw.date}: ${fmtPace(c.raw.y)}/km (Q-${c.raw.sub||'?'})`
             :`${c.dataset.label}: ${fmtPace(c.raw.y)}/km`}}},
       scales:{
-        x:{type:'linear',ticks:{.....xTick(),callback:v=>`R${v}`},grid:gridLine(),border:borderLine()},
+        x:{type:'linear',ticks:{...xTick(),callback:v=>`R${v}`},grid:gridLine(),border:borderLine()},
         y:{reverse:true,min:5,max:8,
-          ticks:{.....yTick(),callback:v=>fmtPace(v)},
+          ticks:{...yTick(),callback:v=>fmtPace(v)},
           title:{display:true,text:'Pace (min/km) — faster ↑',color:'#64748b',font:{family:'Share Tech Mono',size:10}},
           grid:gridLine(),border:borderLine()}}}
   });
-}
 }
 
 // ── AEI CHART ───────────────────────────────────────────────────────────
@@ -3268,7 +3266,7 @@ function initAEIChart(a){
         pointRadius:d.pts.map((_,i)=>i===d.pts.length-1?8:4),pointHoverRadius:10},
       {type:'line',label:'5-Run Avg',data:d.movingAvg.map(p=>({x:p.r,y:p.ma})),borderColor:D1,borderWidth:2,pointRadius:0,fill:false,tension:.3,backgroundColor:'transparent'},
     ]},
-    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{.....CHART_DEFAULTS,callbacks:{label:c=>c.raw.date?`R${c.raw.x} · ${c.raw.date}: AEI ${c.raw.y}`:`5-Run Avg: ${c.raw.y}`}}},scales:{x:{type:'linear',ticks:{.....xTick(),callback:v=>`R${v}`},grid:gridLine(),border:borderLine()},y:{title:{display:true,text:'AEI — lower is better ↓',color:'#64748b',font:{family:'Share Tech Mono',size:10}},ticks:yTick(),grid:gridLine(),border:borderLine()}}}
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{...CHART_DEFAULTS,callbacks:{label:c=>c.raw.date?`R${c.raw.x} · ${c.raw.date}: AEI ${c.raw.y}`:`5-Run Avg: ${c.raw.y}`}}},scales:{x:{type:'linear',ticks:{...xTick(),callback:v=>`R${v}`},grid:gridLine(),border:borderLine()},y:{title:{display:true,text:'AEI — lower is better ↓',color:'#64748b',font:{family:'Share Tech Mono',size:10}},ticks:yTick(),grid:gridLine(),border:borderLine()}}}
   });
 }
 
@@ -3290,7 +3288,7 @@ function initZoneChart(a){
         borderWidth:1,stack:'zones',
       }))
     },
-    options:{responsive:true,maintainAspectRatio:false,indexAxis:'y',plugins:{legend:{labels:{color:'#64748b',font:{family:'Share Tech Mono',size:9},boxWidth:10}},tooltip:{.....CHART_DEFAULTS,callbacks:{label:c=>`${c.dataset.label}: ${c.parsed.x.toFixed(1)}%`}}},scales:{x:{max:100,ticks:{.....xTick(),callback:v=>`${v}%`},grid:gridLine(),border:borderLine()},y:{ticks:xTick(),grid:gridLine(),border:borderLine()}}}
+    options:{responsive:true,maintainAspectRatio:false,indexAxis:'y',plugins:{legend:{labels:{color:'#64748b',font:{family:'Share Tech Mono',size:9},boxWidth:10}},tooltip:{...CHART_DEFAULTS,callbacks:{label:c=>`${c.dataset.label}: ${c.parsed.x.toFixed(1)}%`}}},scales:{x:{max:100,ticks:{...xTick(),callback:v=>`${v}%`},grid:gridLine(),border:borderLine()},y:{ticks:xTick(),grid:gridLine(),border:borderLine()}}}
   });
 }
 
