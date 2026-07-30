@@ -1088,7 +1088,7 @@ body{background:var(--bg);background-image:var(--grid);color:var(--tx);font-fami
   </div>
   <div class="g2">
     <div class="card hud-card">
-      <div class="ch"><div class="cl">PACE · HR PERFORMANCE ENVELOPE</div><div class="cs">every run as a point · up-left = adaptation · sparse — builds with pace data</div></div>
+      <div class="ch"><div class="cl">PACE · HR PERFORMANCE ENVELOPE</div><div class="cs">easy + long runs · upper-left = faster at same HR = adaptation · dim = older · bright = recent</div></div>
       <div id="pace-hr-sparse" class="sparse-state" style="display:none"></div>
       <div class="cw"><canvas id="paceHRChart"></canvas></div>
     </div>
@@ -1462,8 +1462,9 @@ function computeThresholdProg(runs){
 }
 
 function computePaceHRScatter(runs){
-  const pts=runs.filter(r=>r.hrAvg&&(r.pace||r.paceEasy));
-  return pts.map((r,i)=>({x:r.hrAvg,y:r.paceEasy||r.pace,r:r.r,date:r.date,type:r.type,opacity:0.3+(i/pts.length)*0.7}));
+  const pts=runs.filter(r=>(r.type==='easy'||r.type==='long')&&r.hrAvg&&r.paceEasy);
+  return pts.map((r,i)=>({x:r.hrAvg,y:r.paceEasy,r:r.r,date:r.date,type:r.type,
+    opacity:0.2+(i/Math.max(pts.length-1,1))*0.8}));
 }
 
 function computeHRZoneEst(hrAvg,hrMax,known){
@@ -1781,13 +1782,30 @@ function renderToday(a){
     ts.type==='long'?` · Long run (${_lrRange}) · Novablast 5 · gel at 40 min + electrolytes`:
     ''
   );
+  // Mission card data — matches Next Session template
+  const _missionShoe=ts.type.startsWith('quality')?'Evo SL':'Novablast 5';
+  const _missionVenue=(ts.type.startsWith('quality')||ts.type==='long')?'Elite Fitness Xuân Diệu':'Outdoor';
+  const _purposeM={
+    quality_a:'Build interval capacity and raise speed ceiling. Full walk recovery between reps.',
+    quality_b:'Develop continuous tempo endurance. Single unbroken block at controlled effort.',
+    long:'Aerobic base and fat adaptation. HR governs — pace is irrelevant.',
+    easy:'Aerobic maintenance. Stay in Zone 2 throughout.',
+    flush:'Active recovery. Clear residual fatigue — effort should feel trivially easy.'
+  };
+  const _successM={
+    quality_a:'Complete all reps ceiling-clean (0% above 150 bpm). Full recovery between each.',
+    quality_b:'Complete full block unbroken without breaching 150 bpm.',
+    long:`Cover ${_prog.lrMin||'target'}–${_prog.lrMax||''}km. Walk at 143, resume at 128.`,
+    easy:'HR 122–139 the whole session. Walk the moment you hit 143.',
+    flush:'Under 30 min is fine. No walk triggers needed — just stay easy.'
+  };
   let _missionHTML;
   if(_rdStatus==='REST'){
-    _missionHTML=`<div class="ts-type" style="color:var(--rd)">REST</div><div style="font-size:.65rem;color:var(--mu);margin-bottom:10px;text-decoration:line-through;opacity:.45">${_sessionLabel}</div><div class="ts-detail">${a.rdns.reason}</div><div class="ts-proto">Form cue: ${ATHLETE.formCue}</div>`;
+    _missionHTML=`<div class="ns-body"><div class="ns-type" style="color:var(--rd)">REST</div><div class="ns-prescription" style="text-decoration:line-through;opacity:.4">${_sessionLabel}</div><div class="ns-purpose">${a.rdns.reason}</div><div class="ns-success">✓ Form cue: ${ATHLETE.formCue}</div></div>`;
   } else if(_rdStatus==='CAUTION'&&ts.type&&ts.type.startsWith('quality')){
-    _missionHTML=`<div class="ts-type" style="color:var(--am)">EASY ONLY</div><div style="font-size:.65rem;color:var(--mu);margin-bottom:10px;opacity:.5">${_sessionLabel} — downgraded</div><div class="ts-detail">${a.rdns.reason}</div><div class="ts-proto">Form cue: ${ATHLETE.formCue}</div>`;
+    _missionHTML=`<div class="ns-body"><div class="ns-type" style="color:var(--am)">EASY ONLY</div><div class="ns-prescription" style="opacity:.5">${_sessionLabel} — downgraded</div><div class="ns-purpose">${a.rdns.reason}</div><div class="ns-success">✓ HR 122–139. Walk at 143. Form cue: ${ATHLETE.formCue}</div></div>`;
   } else {
-    _missionHTML=`<div class="ts-type">${_sessionLabel}</div><div class="ts-detail">${_sessionDetail}</div><div class="ts-proto">Form cue: ${ATHLETE.formCue}</div>`;
+    _missionHTML=`<div class="ns-body"><div class="ns-type">${_sessionLabel}</div><div class="ns-prescription">${_sessionDetail}</div><div class="ns-meta">${_missionShoe}<span class="ns-sep">·</span>${_missionVenue}</div><div class="ns-purpose">${_purposeM[ts.type]||''}</div><div class="ns-success">✓ ${_successM[ts.type]||''}</div><div class="ns-success" style="border-top:none;padding-top:0;margin-top:2px;opacity:.7">Form cue: ${ATHLETE.formCue}</div></div>`;
   }
   document.getElementById('ts-body').innerHTML=_missionHTML;
 }
@@ -2102,34 +2120,33 @@ function renderAdaptation(a){
 }
 
 function renderPaceGap(pg){
-  // Track: from 7:00/km (easy pace) to 4:58/km (3:30)
-  // Map: 7.0 → 4.967 on a track of width 100%
   const lo=7.0,hi=4.967;
   const range=lo-hi;
   const curr=Math.min(pg.currentPace,lo);
   const filledPct=((lo-curr)/range)*100;
   const sub4Pct=((lo-ATHLETE.goalPaceSub4)/range)*100;
-  const lp1Pct=((lo-6.17)/range)*100; // Phase 3 entry ~6:10
+  const p3Pct=((lo-6.17)/range)*100;
   const gapStr=fmtPace(Math.abs(pg.gap));
+  // LT1 history: confirmed quality pace points (qualityPace field)
+  const ltHist=RUNS.filter(r=>r.qualityPace!=null)
+    .sort((a,b)=>a.r-b.r)
+    .slice(-4)
+    .map(r=>`<span style="color:var(--mu);margin-right:14px">R${r.r}&nbsp;${fmtPace(r.qualityPace)}</span>`).join('');
+  // Gap to Phase 3 target
+  const gapToP3=+(pg.currentPace-6.17).toFixed(2);
   document.getElementById('pace-gap-body').innerHTML=`
     <div class="pace-track-wrap">
       <div class="pace-track">
         <div class="pt-filled" style="width:${filledPct.toFixed(1)}%"></div>
         <div class="pt-dot" style="left:${filledPct.toFixed(1)}%"></div>
-        <div class="pt-marker" style="left:${lp1Pct.toFixed(1)}%;color:var(--am)">
-          <div class="pt-marker-line"></div>
-          <div class="pt-label">Phase 3</div>
-          <div class="pt-pace">6:10/km</div>
+        <div class="pt-marker" style="left:${p3Pct.toFixed(1)}%;color:var(--am)">
+          <div class="pt-marker-line"></div><div class="pt-label">Phase 3</div><div class="pt-pace">6:10</div>
         </div>
         <div class="pt-marker" style="left:${sub4Pct.toFixed(1)}%;color:var(--vb)">
-          <div class="pt-marker-line"></div>
-          <div class="pt-label">Sub-4</div>
-          <div class="pt-pace">5:41/km</div>
+          <div class="pt-marker-line"></div><div class="pt-label">Sub-4</div><div class="pt-pace">5:41</div>
         </div>
         <div class="pt-marker" style="left:99%;color:var(--mu)">
-          <div class="pt-marker-line"></div>
-          <div class="pt-label">3:30</div>
-          <div class="pt-pace">4:58/km</div>
+          <div class="pt-marker-line"></div><div class="pt-label">3:30</div><div class="pt-pace">4:58</div>
         </div>
       </div>
       <div class="pt-track-labels"><span>NOW · ${fmtPace(pg.currentPace)}/km</span><span>RACE →</span></div>
@@ -2138,7 +2155,27 @@ function renderPaceGap(pg){
         <div class="stat-cell"><div class="stat-val am">${gapStr}<span style="font-size:.9rem">/km</span></div><div class="stat-lbl">GAP TO SUB-4</div><div class="stat-sub">to 5:41/km</div></div>
         <div class="stat-cell"><div class="stat-val cn">${fmtPace(6.17)}</div><div class="stat-lbl">PHASE 3 TARGET</div><div class="stat-sub">~entry Oct 2026</div></div>
       </div>
-      <div class="conf-note">LT1 pace: <span style="color:var(--gn)">HIGH confidence</span> (R34 confirmed outdoor dawn) · Progression rate: <span style="color:var(--am)">INSUFFICIENT DATA</span> (1 confirmed quality pace point)</div>
+      <div class="conf-note" style="margin-top:10px;margin-bottom:12px">LT1 pace: <span style="color:var(--gn)">HIGH confidence</span> (R34 confirmed outdoor dawn) · Recent quality pace: ${ltHist||'—'}</div>
+      <div style="border-top:1px solid rgba(0,212,255,.08);padding-top:12px">
+        <div style="font-family:var(--mono);font-size:.48rem;letter-spacing:2px;color:var(--mu);margin-bottom:10px">HOW THE GAP CLOSES</div>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px">
+          <div style="background:rgba(0,212,255,.04);border:1px solid rgba(0,212,255,.1);border-radius:4px;padding:10px">
+            <div style="font-family:var(--mono);font-size:.44rem;letter-spacing:1.5px;color:var(--mu);margin-bottom:4px">PHASE 2 — NOW → OCT 2026</div>
+            <div style="font-family:var(--hud);font-size:.9rem;color:var(--cn);margin-bottom:5px">VOLUME &amp; REPS</div>
+            <div style="font-size:.6rem;color:var(--m2);line-height:1.55">LT1 expected to hold roughly flat. This phase builds the aerobic engine — longer intervals, more reps. Ceiling compliance rate is the metric that matters, not pace.</div>
+          </div>
+          <div style="background:rgba(245,158,11,.04);border:1px solid rgba(245,158,11,.15);border-radius:4px;padding:10px">
+            <div style="font-family:var(--mono);font-size:.44rem;letter-spacing:1.5px;color:var(--mu);margin-bottom:4px">LACTATE TEST — SEP 2026</div>
+            <div style="font-family:var(--hud);font-size:.9rem;color:var(--am);margin-bottom:5px">CALIBRATION</div>
+            <div style="font-size:.6rem;color:var(--m2);line-height:1.55">Regenetics HCMC. Recalibrates all zones from real data. This is when LT1 gets a proper number — not inference. Everything Phase 3+ is built on this.</div>
+          </div>
+          <div style="background:rgba(99,102,241,.04);border:1px solid rgba(99,102,241,.15);border-radius:4px;padding:10px">
+            <div style="font-family:var(--mono);font-size:.44rem;letter-spacing:1.5px;color:var(--mu);margin-bottom:4px">PHASE 3 → RACE — OCT 2026+</div>
+            <div style="font-family:var(--hud);font-size:.9rem;color:var(--vb);margin-bottom:5px">THRESHOLD WORK</div>
+            <div style="font-size:.6rem;color:var(--m2);line-height:1.55">Threshold intervals + VO₂max sessions shift LT1 from ~6:42 toward 6:10 then 5:41. This is where the 1:18/km gap actually closes — not Phase 2.</div>
+          </div>
+        </div>
+      </div>
     </div>`;
 }
 
@@ -3191,18 +3228,35 @@ function initLongRunChart(a){
 function initPaceHRChart(a){
   const d=a.scatter;
   if(!d.length){return}
-  const tc={'quality_a':'#0a8bab','quality_b':'#1aa8c9','long':'#4dc4e8','easy':'#00d4ff'};
   const minHR=100,maxHR=165;
   CHARTS.paceHR=new Chart(document.getElementById('paceHRChart').getContext('2d'),{
     type:'scatter',
     data:{datasets:[
-      {label:'Runs',data:d.map(p=>({x:p.x,y:p.y,r:p.r,date:p.date,t:p.type})),backgroundColor:d.map(p=>tc[p.type].replace(')',`,${p.opacity})`).replace('#','rgba(').replace(/^rgba\(#/,'rgba(').replace(/([0-9a-f]{2})([0-9a-f]{2})([0-9a-f]{2})/i,(_,r,g,b)=>`${parseInt(r,16)},${parseInt(g,16)},${parseInt(b,16)}`)),pointRadius:6,pointHoverRadius:9},
-      {type:'line',label:'Sub-4 goal',data:[{x:minHR,y:ATHLETE.goalPaceSub4},{x:maxHR,y:ATHLETE.goalPaceSub4}],borderColor:OK,borderWidth:1.5,borderDash:[5,3],pointRadius:0,fill:false,backgroundColor:'transparent'},
-      {type:'line',label:'LT1 R34',data:[{x:minHR,y:ATHLETE.ltPace},{x:maxHR,y:ATHLETE.ltPace}],borderColor:REF,borderWidth:1.5,borderDash:[5,3],pointRadius:0,fill:false,backgroundColor:'transparent'},
-      {type:'line',label:'Easy ceiling',data:[{x:143,y:5},{x:143,y:10}],borderColor:'rgba(245,158,11,.45)',borderWidth:1,borderDash:[4,4],pointRadius:0,fill:false,backgroundColor:'transparent'},
-      {type:'line',label:'Quality ceiling',data:[{x:150,y:5},{x:150,y:10}],borderColor:'rgba(239,68,68,.4)',borderWidth:1,borderDash:[4,4],pointRadius:0,fill:false,backgroundColor:'transparent'},
+      {label:'Easy + Long',
+       data:d.map(p=>({x:p.x,y:p.y,r:p.r,date:p.date,t:p.type})),
+       backgroundColor:d.map(p=>`rgba(0,212,255,${p.opacity.toFixed(2)})`),
+       borderColor:d.map(p=>`rgba(0,212,255,${Math.min(1,p.opacity+0.15).toFixed(2)})`),
+       borderWidth:1,pointRadius:6,pointHoverRadius:9},
+      {type:'line',label:'LT1 (R34 confirmed)',
+       data:[{x:minHR,y:ATHLETE.ltPace},{x:maxHR,y:ATHLETE.ltPace}],
+       borderColor:REF,borderWidth:1.5,borderDash:[5,3],pointRadius:0,fill:false,backgroundColor:'transparent'},
+      {type:'line',label:'Walk trigger 143bpm',
+       data:[{x:143,y:5},{x:143,y:10}],
+       borderColor:'rgba(245,158,11,.4)',borderWidth:1,borderDash:[4,4],pointRadius:0,fill:false,backgroundColor:'transparent'},
     ]},
-    options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'nearest',intersect:false},plugins:{legend:{display:false},tooltip:{...CHART_DEFAULTS,callbacks:{title:i=>i[0].raw.r?`R${i[0].raw.r} · ${i[0].raw.date}`:i[0].dataset.label,label:c=>c.raw.t?`${fmtPace(c.raw.y)}/km at ${c.raw.x}bpm (${c.raw.t})`:`${c.dataset.label}: ${fmtPace(c.raw.y)}/km`}}},scales:{x:{type:'linear',min:minHR,max:maxHR,title:{display:true,text:'Average HR (bpm)',color:'#64748b',font:{family:'Share Tech Mono',size:10}},ticks:{...xTick(),callback:v=>`${v}bpm`},grid:gridLine(),border:borderLine()},y:{reverse:true,min:5,max:10,title:{display:true,text:'Pace (min/km) — faster ↑',color:'#64748b',font:{family:'Share Tech Mono',size:10}},ticks:{...yTick(),callback:v=>fmtPace(v)},grid:gridLine(),border:borderLine()}}}
+    options:{responsive:true,maintainAspectRatio:false,
+      plugins:{
+        legend:{display:false},
+        tooltip:{...CHART_DEFAULTS,callbacks:{
+          title:i=>i[0].raw.r?`R${i[0].raw.r} · ${i[0].raw.date}`:i[0].dataset.label,
+          label:c=>c.raw.t?`${fmtPace(c.raw.y)}/km at ${c.raw.x}bpm (${c.raw.t})`:`${c.dataset.label}: ${fmtPace(c.raw.y)}/km`}}},
+      scales:{
+        x:{type:'linear',min:minHR,max:maxHR,
+           title:{display:true,text:'Average HR (bpm)',color:'#64748b',font:{family:'Share Tech Mono',size:10}},
+           ticks:{...xTick(),callback:v=>`${v}bpm`},grid:gridLine(),border:borderLine()},
+        y:{reverse:true,min:5,max:10,
+           title:{display:true,text:'Pace (min/km) — faster ↑',color:'#64748b',font:{family:'Share Tech Mono',size:10}},
+           ticks:{...yTick(),callback:v=>fmtPace(v)},grid:gridLine(),border:borderLine()}}}
   });
 }
 
