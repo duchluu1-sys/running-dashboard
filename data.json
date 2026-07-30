@@ -1545,7 +1545,7 @@
       "short": "VO₂max + VT1/VT2 in hand",
       "progress": 0,
       "status": "pending",
-      "detail": "VO₂max + VT1/VT2 tests (Regenetics HCMC preferred — 1.5M VND). BV 108 appointment Jul 30 to book. Target Sep 2026.",
+      "detail": "VO₂max + VT1/VT2 tests CONFIRMED at Regenetics HCMC (1.5M VND · Sep 2026 target). Lactate step test: BV 108 (~Aug 13 appointment) — booking still needed. Confirm Regenetics reports VT1/VT2 as pace + HR outputs, not just VO₂ numbers.",
       "eta": "Sep 2026"
     },
     {
@@ -1961,11 +1961,11 @@
   ],
   "MILESTONES": [
     {
-      "date": "2026-07-30",
-      "label": "BV 108 medical appointment",
+      "date": "2026-08-13",
+      "label": "BV 108 medical appointment (rescheduled)",
       "type": "medical",
       "nonNegotiable": true,
-      "note": "Must produce bookings for BOTH lactate and VO₂max tests. Do not leave without answers."
+      "note": "Rescheduled ~Aug 13 — doctor instruction to finish meds first. Jul 30 not attended. Agenda: Atoyze review · blood retest (TG, Vit D, K, Ferritin, CBC) · endocrinologist referral (TI-RADS 4) · lactate step test booking. Do not leave without lactate date."
     },
     {
       "date": "2026-08-30",
@@ -1993,7 +1993,7 @@
       "label": "Lactate + VO₂max test",
       "type": "test",
       "nonNegotiable": true,
-      "note": "Gate 6. Recalibrates every threshold zone in the system. Sep target, Oct hard deadline."
+      "note": "Gate 6. Recalibrates every threshold zone in the system. VO₂max + VT1/VT2: CONFIRMED at Regenetics HCMC (1.5M VND). Lactate step test: booking pending via BV 108 (~Aug 13). Sep target, Oct hard deadline."
     },
     {
       "date": "2026-10-04",
