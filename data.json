@@ -1485,6 +1485,34 @@
         "te-artefact"
       ],
       "qualityPace": 6.52
+    },
+    {
+      "r": 50,
+      "date": "Jul 30",
+      "type": "flush",
+      "wk": 12,
+      "dist": 5.47,
+      "duration": 45,
+      "moving": 39,
+      "pace": null,
+      "hrAvg": 129,
+      "hrMax": 143,
+      "te": 3.3,
+      "te_an": 0.0,
+      "gct": 331,
+      "vr": 9.4,
+      "cadence": 128,
+      "pctCeiling": null,
+      "drift": null,
+      "walkRatio": 6.3,
+      "hrZones": null,
+      "temp": 28,
+      "surface": "treadmill",
+      "conditions": "15:59",
+      "flag": "✅",
+      "note": "Thu flush · avg HR 129 ✅ · max 143 (walk trigger, compliant) · GCT 331ms · VR 9.4% · 6.3% walk · Statin Day 62",
+      "verdict": null,
+      "tags": []
     }
   ],
   "GATES": [
@@ -1616,7 +1644,7 @@
     "week": 12,
     "totalWeeks": 24,
     "deloadWeek": 21,
-    "weekVolOnBoard": 13.35,
+    "weekVolOnBoard": 18.82,
     "lastWeekVol": 36.6,
     "weekTarget": [
       33,
@@ -1638,7 +1666,7 @@
     "statinStart": "2026-05-30",
     "stressLevel": "LOW",
     "formCue": "Eyes on the horizon — head up every session",
-    "date": "July 29, 2026",
+    "date": "July 30, 2026",
     "hrvBaseline": [
       53,
       68
