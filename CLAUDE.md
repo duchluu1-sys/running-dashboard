@@ -103,7 +103,7 @@ Append one object to the RUNS array in `duchluu1-sys/running-dashboard/data.json
 - `temp` = integer °C only. Do NOT write strings like "27–30°C".
 - `hrZones` = [Z1,Z2,Z3,Z4,Z5] as percentages. Must sum to 100. Null if not available.
 - `flag` logic: ✅✅✅ program best + exceptional · ✅✅ new PB or near-perfect · ✅ clean · ○ suboptimal · ⚠️ ceiling breach/injury/major gap
-- `verdict` = coaching interpretation, 2–4 sentences. Leave as null in the entry — athlete fills this in before committing. Dashboard falls back to `note` field in render if null.
+- `verdict` = coaching interpretation, 2–4 sentences. Required, never null. Claude writes this. Dashboard falls back to `note` field in render if null.
 - **Source precedence:** Screenshots win over API for `hrZones`, `moving`, `walkRatio`. API wins for `dist`, `hrAvg`, `hrMax`, `gct`, `vr`, `te`, `te_an`. When sources disagree, state the disagreement explicitly in the verdict before writing.
 
 **After appending run, update ATHLETE block — these fields only:**
