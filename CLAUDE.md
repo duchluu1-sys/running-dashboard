@@ -90,7 +90,7 @@ Append one object to the RUNS array in `duchluu1-sys/running-dashboard/data.json
   "conditions": "<start time HH:MM or brief context>",
   "flag": "<✅|✅✅|✅✅✅|⚠️|○>",
   "note": "<brief session note>",
-  "verdict": null
+  "verdict": "<coaching interpretation — required, never null. Minimum 2 sentences: what the session confirmed + what's next. 'Clean flush — HR governed. Quality B tomorrow unchanged.' is a valid verdict.>"
 }
 ```
 
@@ -193,14 +193,47 @@ Commit message: `KB update R[N] — [date]`
 
 ---
 
+## Option B — Phone / Screenshot Workflow (no Garmin MCP)
+
+Use when: Claude Desktop unavailable, Garmin MCP not accessible, running from phone.
+
+**Required screenshots (all mandatory before analysis begins):**
+1. Overview tab — distance, avg HR, avg pace, elapsed time, calories
+2. Stats tab (Pace/Speed/Timing/HR section) — avg pace, moving pace, total time, moving time, run time, walk time, avg HR, max HR
+3. Stats tab (Training Effect / Running Dynamics section) — TE aerobic/anaerobic, cadence, stride length, VR, VO, GCT
+4. Charts tab — HR zone distribution (time + %)
+5. Charts tab — GCT, VR, cadence charts (for visual scatter confirmation)
+6. Laps tab — full lap table
+7. Technogym screen photo (if available) — authoritative distance source
+
+**Source rules (Option B):**
+- Distance: Technogym screen photo if available → else Garmin overview
+- hrZones: Screenshot values. If sum ≠ 100% (sub-Z1 walk time excluded by Garmin display), set hrZones: null and note reason in archive
+- All dynamics (GCT, VR, cadence, VO): Stats tab screenshots
+- All other fields: same precedence as Desktop protocol
+
+**What changes vs Desktop:**
+- Step 0C (Garmin tool pull) is skipped — screenshots replace it
+- Steps 1–5 analysis is identical
+- Verdict rule applies identically — never null
+
+**Repo access from phone:**
+- running-dashboard (public): GitHub OAuth connector can push data.json directly
+- running-kb (private): requires Desktop commit or GitHub Mobile manual paste
+
 ## Verdict & Write Protocol
 
 After completing Steps 1–5 analysis, produce all three outputs simultaneously — no go-ahead gate:
-1. data.json run entry (verdict: null — athlete fills in before committing)
+1. data.json run entry — verdict is written by Claude, never null
 2. training_kb.md full replacement file
 3. run_archive.md full replacement file
 
-Athlete commits all three via GitHub Desktop.
+Athlete commits all three via GitHub Desktop or pushes via GitHub connector.
+
+**Verdict rule (non-negotiable):** Every committed run entry must have a non-null verdict.
+Minimum 2 sentences. Covers: (1) what the session confirmed or flagged, (2) what's next.
+A clean uneventful session still gets a verdict — "nothing to action" is a verdict.
+Null verdict = protocol failure.
 
 ---
 
