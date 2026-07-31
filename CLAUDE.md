@@ -1,6 +1,6 @@
 # CLAUDE.md — Running OS Automation Protocol
 # Luu Hoang Duc | duchluu1-sys
-# Version: July 26, 2026
+# Version: July 31, 2026
 
 This file governs all Claude Desktop automation for the Running OS system.
 Read before executing any update.
@@ -15,6 +15,17 @@ Read before executing any update.
 | duchluu1-sys/running-kb | Private | training_kb.md, run_archive.md, decision_log.md, personal_notes.md |
 
 **NEVER write health data, medications, diagnoses, or blood results to the public repo.**
+
+---
+
+## Scope of This File
+
+**CLAUDE.md governs:** data.json schema, READINESS_LOG format, automation workflow (post-run and morning readiness), commit conventions, and session type classification.
+
+**The system prompt (coaching layer) governs:** training prescription, session governance, HR thresholds for real-time coaching, and any conflict resolution between sources.
+
+- When this file and the system prompt conflict on a **coaching or prescription matter**: system prompt wins.
+- When this file and the system prompt conflict on a **data format or automation matter**: this file wins.
 
 ---
 
@@ -34,7 +45,7 @@ Search for and confirm `push_files`, `get_file_contents`, `create_or_update_file
 
 All reads must complete before any analysis or writing begins.
 
-**Write rule — two atomic commits, both after go-ahead only:**
+**Write rule — two atomic commits, no go-ahead gate:**
 - Commit 1: `data.json` → `duchluu1-sys/running-dashboard` (one `push_files` call)
 - Commit 2: `run_archive.md` + `training_kb.md` → `duchluu1-sys/running-kb` (one `push_files` call, both files together)
 
@@ -55,7 +66,7 @@ Use `get_activity_details` with the most recent activity. If athlete specifies a
 - **Quality B**: Continuous tempo block (15 / 20 / 25 / 30 / 35 min unbroken)
 - **Long Run**: 14km+ easy effort, capped at 22km
 - **Flush**: Short easy recovery run, typically post-quality or post-double day
-- **Strides**: Easy run with 6×20s strides appended
+- **Strides**: Easy run with 6x20s strides appended
 - **Race**: Competitive race event
 
 ### Step 3 — Build data.json RUNS entry
@@ -85,12 +96,12 @@ Append one object to the RUNS array in `duchluu1-sys/running-dashboard/data.json
   "drift": <cardiac drift bpm — OUTDOOR EASY/LONG ONLY — else null>,
   "walkRatio": <walk time as % of total — float or null>,
   "hrZones": <[Z1,Z2,Z3,Z4,Z5] as percentages summing to 100 — array or null>,
-  "temp": <temperature °C — integer or null>,
+  "temp": <temperature C — integer or null>,
   "surface": "<outdoor|treadmill>",
   "conditions": "<start time HH:MM or brief context>",
-  "flag": "<✅|✅✅|✅✅✅|⚠️|○>",
+  "flag": "<checkmark|checkmark-checkmark|checkmark-x3|warning|circle>",
   "note": "<brief session note>",
-  "verdict": "<coaching interpretation — required, never null. Minimum 2 sentences: what the session confirmed + what's next. 'Clean flush — HR governed. Quality B tomorrow unchanged.' is a valid verdict.>"
+  "verdict": "<coaching interpretation — required, never null>"
 }
 ```
 
@@ -99,11 +110,11 @@ Append one object to the RUNS array in `duchluu1-sys/running-dashboard/data.json
 - `moving` = running-only minutes (integer). Excludes walk breaks. Required for AEI calculation.
 - `pace` = quality-block pace only (min/km). Null on easy and long runs.
 - `pctCeiling` = % of session above 150 bpm. Quality sessions only. 0 = ceiling-clean.
-- `drift` = Q4 avg HR minus Q1 avg HR (running segments only). Populate ONLY for outdoor easy and long runs ≥4km. Null for all treadmill, all quality, and outdoor <4km.
-- `temp` = integer °C only. Do NOT write strings like "27–30°C".
+- `drift` = Q4 avg HR minus Q1 avg HR (running segments only). Populate ONLY for outdoor easy and long runs 4km+. Null for all treadmill, all quality, and outdoor under 4km.
+- `temp` = integer C only. Do NOT write strings like "27-30C".
 - `hrZones` = [Z1,Z2,Z3,Z4,Z5] as percentages. Must sum to 100. Null if not available.
-- `flag` logic: ✅✅✅ program best + exceptional · ✅✅ new PB or near-perfect · ✅ clean · ○ suboptimal · ⚠️ ceiling breach/injury/major gap
-- `verdict` = coaching interpretation, 2–4 sentences. Required, never null. Claude writes this. Dashboard falls back to `note` field in render if null.
+- `flag` logic: 3-check program best + exceptional; 2-check new PB or near-perfect; 1-check clean; circle suboptimal; warning ceiling breach/injury/major gap
+- `verdict` = coaching interpretation, 2-4 sentences. Required, never null. Claude writes this.
 - **Source precedence:** Screenshots win over API for `hrZones`, `moving`, `walkRatio`. API wins for `dist`, `hrAvg`, `hrMax`, `gct`, `vr`, `te`, `te_an`. When sources disagree, state the disagreement explicitly in the verdict before writing.
 
 **After appending run, update ATHLETE block — these fields only:**
@@ -139,13 +150,13 @@ Append to end of `duchluu1-sys/running-kb/run_archive.md`.
 | Elapsed | [time] | — |
 | Moving time | [time] | — |
 | Avg HR | [X] bpm | — |
-| Max HR | [X] bpm | [✅ if ≤150 quality / ≤143 easy, else ⚠️] |
-| TE | [X]/[Y] ([Garmin label]) | [✅ or ⚠️] |
-| GCT | [X] ms | [✅ or flag] |
-| VR | [X]% | [✅ if <9%, else flag] |
+| Max HR | [X] bpm | [check if <=150 quality / <=143 easy, else warning] |
+| TE | [X]/[Y] ([Garmin label]) | [check or warning] |
+| GCT | [X] ms | [check or flag] |
+| VR | [X]% | [check if <9%, else flag] |
 | Cadence | [X] spm | — |
-| Temp | [X]°C | — |
-| Statin Day | [N] | [✅ clean or issue] |
+| Temp | [X]C | — |
+| Statin Day | [N] | [check clean or issue] |
 
 **Key Findings:**
 
@@ -157,19 +168,19 @@ Append to end of `duchluu1-sys/running-kb/run_archive.md`.
 
 ---
 
-**📊 DATA VERDICT**
+**DATA VERDICT**
 [One dense summary line]
 **Objective rating: [Clean / Good / Execution incomplete / Outstanding]**
 
-**🧠 FELT EXPERIENCE**
+**FELT EXPERIENCE**
 [Athlete's own words if provided. If not: "Not recorded."]
 **Subjective rating: [descriptor]**
 
-**⚡ THE GAP**
+**THE GAP**
 **Type [A/B/C] — [aligned/misaligned/partial]**
 [One paragraph.]
 
-**✅ DECISIONS**
+**DECISIONS**
 1. **Run [N] logged: [X] km. Week [N] on board: [X] km.**
 2. [Any training adjustments]
 ```
@@ -207,14 +218,14 @@ Use when: Claude Desktop unavailable, Garmin MCP not accessible, running from ph
 7. Technogym screen photo (if available) — authoritative distance source
 
 **Source rules (Option B):**
-- Distance: Technogym screen photo if available → else Garmin overview
-- hrZones: Screenshot values. If sum ≠ 100% (sub-Z1 walk time excluded by Garmin display), set hrZones: null and note reason in archive
+- Distance: Technogym screen photo if available, else Garmin overview
+- hrZones: Screenshot values. If sum not 100% (sub-Z1 walk time excluded by Garmin display), set hrZones: null and note reason in archive
 - All dynamics (GCT, VR, cadence, VO): Stats tab screenshots
 - All other fields: same precedence as Desktop protocol
 
 **What changes vs Desktop:**
 - Step 0C (Garmin tool pull) is skipped — screenshots replace it
-- Steps 1–5 analysis is identical
+- Steps 1-5 analysis is identical
 - Verdict rule applies identically — never null
 
 **Repo access from phone:**
@@ -223,7 +234,7 @@ Use when: Claude Desktop unavailable, Garmin MCP not accessible, running from ph
 
 ## Verdict & Write Protocol
 
-After completing Steps 1–5 analysis, produce all three outputs simultaneously — no go-ahead gate:
+After completing Steps 1-5 analysis, produce all three outputs simultaneously — **no go-ahead gate:**
 1. data.json run entry — verdict is written by Claude, never null
 2. training_kb.md full replacement file
 3. run_archive.md full replacement file
@@ -231,7 +242,7 @@ After completing Steps 1–5 analysis, produce all three outputs simultaneously 
 Athlete commits all three via GitHub Desktop or pushes via GitHub connector.
 
 **Verdict rule (non-negotiable):** Every committed run entry must have a non-null verdict.
-Minimum 2 sentences. Covers: (1) what the session confirmed or flagged, (2) what's next.
+Minimum 2 sentences. Covers: (1) what the session confirmed or flagged, (2) what is next.
 A clean uneventful session still gets a verdict — "nothing to action" is a verdict.
 Null verdict = protocol failure.
 
@@ -246,8 +257,8 @@ Null verdict = protocol failure.
 **1A — Load GitHub tools.** Confirm `get_file_contents` and `push_files` available.
 
 **1B — Pull from GitHub:**
-- `duchluu1-sys/running-dashboard/data.json` → read `ATHLETE.weekSchedule`, `ATHLETE.formCue`, `ATHLETE.week`, last run entry from RUNS, full READINESS_LOG array
-- `duchluu1-sys/running-kb/training_kb.md` → read Current Week table for today's exact targets
+- `duchluu1-sys/running-dashboard/data.json` — read `ATHLETE.weekSchedule`, `ATHLETE.formCue`, `ATHLETE.week`, last run entry from RUNS, full READINESS_LOG array
+- `duchluu1-sys/running-kb/training_kb.md` — read Current Week table for today's exact targets
 
 **1C — Pull from Garmin:** overnight HRV average, RHR, sleep score, Body Battery, HRV status.
 
@@ -255,35 +266,35 @@ All reads before any analysis.
 
 ### Step 2 — Compute readiness status
 
-Compare HRV to baseline: **53–68 ms**
+Compare HRV to baseline: **53-68 ms**
 Compare RHR to 7-day rolling average (compute from last 7 READINESS_LOG entries).
 
 | Condition | Status |
 |---|---|
-| HRV below baseline 2+ consecutive days OR RHR ≥ +8 above 7-day avg | 🔴 REST |
-| HRV below baseline OR RHR +5 to +7 above 7-day avg | 🟡 CAUTION — easy only, no quality |
-| Sleep score <45 | 🔴 REST |
-| Sleep score 45–59 | 🟡 CAUTION — easy only |
-| Two caution signals simultaneously | 🟡 CAUTION regardless |
-| Sleep 60–74 · HRV balanced · RHR within +4 | 🟢 GREEN — monitor during session |
-| Sleep 75+ · HRV balanced · RHR within +4 | 🟢 GREEN — train as planned |
+| HRV below baseline 2+ consecutive days OR RHR +8 or more above 7-day avg | REST |
+| HRV below baseline OR RHR +5 to +7 above 7-day avg | CAUTION — easy only, no quality |
+| Sleep score under 45 | REST |
+| Sleep score 45-59 | CAUTION — easy only |
+| Two caution signals simultaneously | CAUTION regardless |
+| Sleep 60-74, HRV balanced, RHR within +4 | GREEN — monitor during session |
+| Sleep 75+, HRV balanced, RHR within +4 | GREEN — train as planned |
 
 ### Step 3 — Determine today's session
 
-1. Read `ATHLETE.weekSchedule` → find today's day → get session type
-2. Cross-reference training_kb.md Current Week table → get exact targets
-3. Apply readiness modifier: GREEN = prescribed session · CAUTION = downgrade quality to easy · REST = no session
+1. Read `ATHLETE.weekSchedule` — find today's day — get session type
+2. Cross-reference training_kb.md Current Week table — get exact targets
+3. Apply readiness modifier: GREEN = prescribed session; CAUTION = downgrade quality to easy; REST = no session
 
 ### Step 4 — Build briefing string
 
-4 parts, dense, no filler, ~3–5 sentences total.
+4 parts, dense, no filler, 3-5 sentences total.
 
 **Part 1:** HRV vs baseline, RHR vs 7d avg, status verdict.
-**Part 2:** Today's session with exact targets (speed, reps, HR ceiling, duration, surface). If downgraded: `[Original] → easy run (CAUTION: [reason])`
-**Part 3:** `Shoes: [model] · [Location] · Cue: [ATHLETE.formCue]`
-- Quality A/B → Evo SL · Easy/Long/Flush → Novablast 5
-- Quality + Long → Elite Fitness Xuân Diệu · Easy outdoor → outdoor
-**Part 4:** Last run (R[N], type, dist, date). ACWR note if >1.3 or <0.8. Active injury monitors.
+**Part 2:** Today's session with exact targets (speed, reps, HR ceiling, duration, surface). If downgraded: [Original] -> easy run (CAUTION: [reason])
+**Part 3:** Shoes: [model], [Location], Cue: [ATHLETE.formCue]
+- Quality A/B: Evo SL; Easy/Long/Flush: Novablast 5
+- Quality + Long: Elite Fitness Xuan Dieu; Easy outdoor: outdoor
+**Part 4:** Last run (R[N], type, dist, date). ACWR note if over 1.3 or under 0.8. Active injury monitors.
 
 ### Step 5 — Write to data.json
 
@@ -296,7 +307,7 @@ Append to READINESS_LOG in `duchluu1-sys/running-dashboard/data.json`:
   "rhr": <integer or null>,
   "sleepScore": <integer 0-100 or null>,
   "status": "GREEN|CAUTION|REST",
-  "note": "<brief note ≤10 words>",
+  "note": "<brief note 10 words max>",
   "briefing": "<Part 1. Part 2. Part 3. Part 4.>"
 }
 ```
@@ -308,7 +319,7 @@ Commit message: `Readiness [Mon Day]`
 
 Confirm SHA. Done message:
 ```
-✅ Readiness logged — [date]
+Readiness logged — [date]
 Status: [GREEN/CAUTION/REST]
 Today: [one-line session summary]
 Dashboard: [SHA]
@@ -320,12 +331,12 @@ Dashboard: [SHA]
 
 | Parameter | Value |
 |---|---|
-| Easy HR range | 122–139 bpm |
-| Walk trigger | **143 bpm** — walk immediately |
+| Easy HR range | 122-139 bpm |
+| Walk trigger (easy/long only) | **143 bpm** — walk immediately; not operative during quality sessions |
 | Resume after walk | **128 bpm** |
-| Quality HR ceiling | **150 bpm** — hard ceiling |
-| Quality entry HR | 115–120 bpm (8+ min warm-up) |
-| Recovery between reps | ≤128 bpm |
+| Quality HR ceiling | **150 bpm** — hard ceiling for Quality A + B |
+| Quality entry HR | 115-120 bpm (8+ min warm-up) |
+| Recovery between reps | 128 bpm or below |
 | Treadmill incline | 1% always |
 | Pace ceiling Phase 2 | sub-6:30/km (connective tissue rule) |
 | Weekly volume increase | max 10% |
@@ -339,21 +350,21 @@ Dashboard: [SHA]
 **Phase 2 — Quality Development**
 - Current week: Week 12 (Jul 27 – Aug 2, 2026)
 - Phase 2 ends: October 25, 2026 (Week 24)
-- Deload weeks: 21 (Sep 28 – Oct 4) · 24 (Oct 19–25)
-- Consolidation weeks: 22–23 (Oct 5–18)
+- Deload weeks: 21 (Sep 28 – Oct 4), 24 (Oct 19-25)
+- Consolidation weeks: 22-23 (Oct 5-18)
 - Next race: VPBank Hanoi 10K, October 19, 2026 (Race 0 — inside W24 deload)
 
 **Quality A — treadmill intervals (paired 2-week blocks):**
-W9–10: 7×2:30 min ✅ → W11–12: 5×4 min (current) → W13–14: 4×6 min → W15–16: 4×8 min → W17–18: 3×12 min → W19–20: 2×20 min → W21: 4×4 min DELOAD → W22–23: 2×20 min hold → W24: 4×4 min DELOAD
+W9-10: 7x2:30 min done; W11-12: 5x4 min (current); W13-14: 4x6 min; W15-16: 4x8 min; W17-18: 3x12 min; W19-20: 2x20 min; W21: 4x4 min DELOAD; W22-23: 2x20 min hold; W24: 4x4 min DELOAD
 
 **Quality B — continuous tempo (paired 2-week blocks):**
-W9–10: 15 min ✅ → W11–12: 20 min (current) → W13–14: 25 min → W15–16: 30 min → W17–18: 35 min → W19–20: 2×20 min → W21: 10 min DELOAD → W22–23: 2×20 min hold → W24: 10 min DELOAD
+W9-10: 15 min done; W11-12: 20 min (current); W13-14: 25 min; W15-16: 30 min; W17-18: 35 min; W19-20: 2x20 min; W21: 10 min DELOAD; W22-23: 2x20 min hold; W24: 10 min DELOAD
 
 **Long run targets (paired 2-week blocks):**
-W9–10: 13–15 km ✅ → W11–12: 14–15 km (current) → W13–14: 15–16 km → W15–16: 16–18 km → W17–18: 18–20 km → W19–20: 20–22 km → W21: 12 km DELOAD → W22–23: 20–22 km hold → W24: 12 km DELOAD
+W9-10: 13-15 km done; W11-12: 14-15 km (current); W13-14: 15-16 km; W15-16: 16-18 km; W17-18: 18-20 km; W19-20: 20-22 km; W21: 12 km DELOAD; W22-23: 20-22 km hold; W24: 12 km DELOAD
 
 **Weekly volume targets (paired 2-week blocks):**
-W9–10: 33–36 km ✅ → W11–12: 33–37 km (current) → W13–14: 35–38 km → W15–16: 36–40 km → W17–18: 37–42 km → W19–20: 38–44 km → W21: 26–28 km DELOAD → W22–23: 38–42 km hold → W24: 26–28 km DELOAD
+W9-10: 33-36 km done; W11-12: 33-37 km (current); W13-14: 35-38 km; W15-16: 36-40 km; W17-18: 37-42 km; W19-20: 38-44 km; W21: 26-28 km DELOAD; W22-23: 38-42 km hold; W24: 26-28 km DELOAD
 
 ---
 
@@ -364,7 +375,7 @@ Medication: **Atoyze 20/10 (Atorvastatin 20mg + Ezetimibe 10mg)** — started Ma
 Calculate statin day: Day 1 = May 30, 2026. Increment +1 per calendar day.
 
 After every run:
-- Clean: `Statin Day [N] — no unusual muscle heaviness ✅`
+- Clean: `Statin Day [N] — no unusual muscle heaviness`
 - Issue: `Statin Day [N] — [describe: unusual heaviness / deep ache / disproportionate fatigue]`
 
 **Red flags — stop training immediately:**
