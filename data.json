@@ -1769,6 +1769,15 @@
       "status": "GREEN",
       "note": "All signals nominal",
       "briefing": "Quality A — 5x4 min (20:00), ceiling 150 bpm. Evo SL, Elite Fitness. [6d since last quality] W12/24 · 82d to Race 0 · 8.29km of 33-37km on board · ACWR 0.93. Last: R48 strides 2.28km (Jul 28)."
+    },
+    {
+      "date": "2026-08-01",
+      "hrv": 63,
+      "rhr": 45,
+      "sleepScore": 77,
+      "status": "GREEN",
+      "note": "All signals nominal",
+      "briefing": "Long run — 14–15km, HR 122–139 bpm. Novablast 5. Gel 40 min + electrolytes. Volume: 9.3km left over 1 sessions (~9.3km each) to clear 33km. Sleep 4-night mean 54 — below 65. Earlier bedtime is the lever. W12/24 · 79d to Race 0 · 23.66km of 33–37km on board · ACWR 1.05. Last: R51 quality_b 4.84km (Jul 31)."
     }
   ],
   "PHASES": [
