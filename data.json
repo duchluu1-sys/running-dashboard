@@ -398,13 +398,7 @@
       "pctCeiling": null,
       "drift": 8.4,
       "walkRatio": null,
-      "hrZones": [
-        44,
-        48,
-        8,
-        0,
-        0
-      ],
+      "hrZones": [44, 48, 8, 0, 0],
       "temp": 31,
       "surface": "outdoor",
       "conditions": null,
@@ -1310,23 +1304,14 @@
       "pctCeiling": 0,
       "drift": null,
       "walkRatio": null,
-      "hrZones": [
-        20,
-        26,
-        53,
-        1,
-        0
-      ],
+      "hrZones": [20, 26, 53, 1, 0],
       "temp": 28,
       "surface": "treadmill",
       "conditions": null,
       "flag": "✅",
       "note": "20 min continuous @ 8.6 km/h ✅ · ceiling exactly met · ankle clean · plantar mild",
       "verdict": "Quality B ceiling-clean at the new 20-min benchmark — max HR exactly 150, zero seconds over ceiling. GCT 315ms and VR 8.8% are both strong for a continuous tempo block. Right plantar remained mild and did not limit execution. W12 Quality B target: repeat 20 min at 8.6 km/h, aim to keep GCT under 320.",
-      "tags": [
-        "ceiling-clean",
-        "plantar-flag"
-      ],
+      "tags": ["ceiling-clean", "plantar-flag"],
       "qualityPace": 6.98
     },
     {
@@ -1349,23 +1334,14 @@
       "pctCeiling": null,
       "drift": null,
       "walkRatio": 29,
-      "hrZones": [
-        30,
-        51,
-        19,
-        0,
-        0
-      ],
+      "hrZones": [30, 51, 19, 0, 0],
       "temp": 28,
       "surface": "treadmill",
       "conditions": "13:16",
       "flag": "✅✅",
       "note": "New compliant LR PB 15.08km · avg HR 125 · TE 4.1 · 29% walk",
       "verdict": "New compliant long run PB at 15.08km — distance gate advancing. Z3 at 19% and TE 4.1 Tempo are explained by afternoon timing (13:16) and 29% walk ratio inflating the HR distribution; avg HR 125 confirms aerobic control throughout. GCT 329ms and VR 9.4% are appropriate for this duration. W12 long run target: 14–15km treadmill, morning slot preferred.",
-      "tags": [
-        "pb-distance",
-        "walk-heavy"
-      ]
+      "tags": ["pb-distance", "walk-heavy"]
     },
     {
       "r": 47,
@@ -1387,24 +1363,14 @@
       "pctCeiling": null,
       "drift": 6,
       "walkRatio": 12.8,
-      "hrZones": [
-        4,
-        57,
-        36,
-        0,
-        0
-      ],
+      "hrZones": [4, 57, 36, 0, 0],
       "temp": 32,
       "surface": "outdoor",
       "conditions": "14:48",
       "flag": "⚠️",
       "note": "REST day run · Z3 36% · TE 2.8 Tempo · avg 135 · max 146 · 31-33C · 89% humidity",
       "verdict": "REST day run under R46 load carryover — Z3 at 36% and TE 2.8 Tempo are heat-driven (32C, 14:48 start, 89% humidity) rather than fitness signals. Ankle and plantar both clean. This added unnecessary load on a scheduled rest day; the data is informational only. Quality A Wednesday proceeds as planned: speed ladder 8.5 to 9.2 km/h, ceiling 150.",
-      "tags": [
-        "rest-day-run",
-        "heat",
-        "z3-excursion"
-      ]
+      "tags": ["rest-day-run", "heat", "z3-excursion"]
     },
     {
       "r": 48,
@@ -1426,25 +1392,14 @@
       "pctCeiling": null,
       "drift": null,
       "walkRatio": null,
-      "hrZones": [
-        60,
-        20,
-        10,
-        5,
-        5
-      ],
+      "hrZones": [60, 20, 10, 5, 5],
       "temp": null,
       "surface": "treadmill",
       "conditions": "10:53",
       "flag": "⚠️",
       "note": "Economy Work — strides + hill sprints makeup (Push Day addon). Max speed 14.9 km/h · max grade 10.0%. HR 155 = transient sprint spike. DEPARTURE: combined strides + hill sprints same day (Achilles stacking rule). Falsification: Achilles/posterior tibial 48h. No pain/fatigue post-session.",
       "verdict": "[ECONOMY WORK] Strides + hill sprints makeup session completed. Neuromuscular stimulus delivered. Departure noted — monitor Achilles 48h. Quality A tomorrow unaffected.",
-      "tags": [
-        "economy",
-        "strides",
-        "hill-sprints",
-        "departure-logged"
-      ]
+      "tags": ["economy", "strides", "hill-sprints", "departure-logged"]
     },
     {
       "r": 49,
@@ -1466,24 +1421,14 @@
       "pctCeiling": 0,
       "drift": null,
       "walkRatio": null,
-      "hrZones": [
-        23,
-        33,
-        13,
-        0,
-        0
-      ],
+      "hrZones": [23, 33, 13, 0, 0],
       "temp": 29,
       "surface": "treadmill",
       "conditions": "13:43",
       "flag": "✅✅",
       "note": "GCT 302ms NEW ALL-TIME BEST · VR 8.5% · ceiling clean · max HR 145 · 5 bpm headroom · ladder 8.5 to 9.2 km/h · TE artefact (walk recovery suppresses avg HR)",
       "verdict": "Quality A W12 executed cleanly. Max HR 145 — 5 bpm under ceiling. Z3 5:58 (13%) confirms quality stimulus delivered. GCT 302ms is new program best (beats R39 303ms). VR 8.5% on target. TE 2.9 Base (Low Aerobic) is a classifier artefact — walk recovery suppresses session-average HR (118 bpm). Rep 5 set to 9.2 km/h (Technogym); Garmin recorded 9.1 — accelerometer lag on speed change. RPE 3/10 at 9.2 km/h is a Phase 3 adaptation signal. Hold current speed ceiling; lactate test September makes the formal call.",
-      "tags": [
-        "gct-pb",
-        "ceiling-clean",
-        "te-artefact"
-      ],
+      "tags": ["gct-pb", "ceiling-clean", "te-artefact"],
       "qualityPace": 6.52
     },
     {
@@ -1541,10 +1486,65 @@
       "flag": "✅",
       "note": "22 min continuous @ 8.6 km/h · 2 min over prescription · brain stop signal overridden · HR clean max 145 · GCT 317ms · VR 9.3% · Statin Day 63",
       "verdict": "Quality B W12 executed and exceeded — 22 minutes continuous at 8.6 km/h, 2 minutes beyond the 20-min prescription. Max HR 145, ceiling clean (5 bpm headroom); zero Z4/Z5. Brain stop signal was present and overcome — RPE 2/10, body comfortable, ran through to completion and past the target. GCT 317ms within quality cohort (mean 310ms); TE 3.3 is walk-recovery artefact. Long run tomorrow (Aug 1): 13.0-13.5 km to land week within 33-37 km ceiling.",
-      "tags": [
-        "ceiling-clean",
-        "over-prescription"
-      ]
+      "tags": ["ceiling-clean", "over-prescription"]
+    },
+    {
+      "r": 52,
+      "date": "Aug 1",
+      "type": "long",
+      "wk": 12,
+      "dist": 4.64,
+      "duration": 53,
+      "moving": 32,
+      "pace": null,
+      "paceEasy": null,
+      "hrAvg": 111,
+      "hrMax": 139,
+      "te": 2.4,
+      "te_an": 0.0,
+      "gct": 319,
+      "vr": 9.2,
+      "cadence": null,
+      "pctCeiling": null,
+      "drift": null,
+      "walkRatio": null,
+      "hrZones": null,
+      "temp": 28,
+      "surface": "treadmill",
+      "conditions": "13:51",
+      "flag": "⚠️",
+      "note": "Truncated LR — mental DNF · body fine (max HR 139, RPE 2/10, feel Weak) · idle 12:56 · GCT 319ms · VR 9.2% · Statin Day 64",
+      "verdict": "Truncated long run — mental stop, not physical. Max HR 139 well inside ceiling. Garmin feel: Weak, RPE 2/10. Body was not the limiter. Week 12 closes at 28.30 km (short). Chill week follows.",
+      "tags": ["truncated", "mental-dnf"]
+    },
+    {
+      "r": 53,
+      "date": "Aug 3",
+      "type": "easy",
+      "wk": 13,
+      "dist": 6.29,
+      "duration": 53,
+      "moving": 52,
+      "pace": null,
+      "paceEasy": 8.35,
+      "hrAvg": 130,
+      "hrMax": 152,
+      "te": 2.9,
+      "te_an": 0.0,
+      "gct": 316,
+      "vr": 9.0,
+      "cadence": null,
+      "pctCeiling": null,
+      "drift": null,
+      "walkRatio": 32.0,
+      "hrZones": [15, 51, 24, 1, 0],
+      "temp": 33,
+      "surface": "outdoor",
+      "conditions": "15:31",
+      "flag": "✅",
+      "note": "W13 chill easy outdoor · 33°C · max HR 152 wrist artifact discarded · avg HR 130 trusted · VR 9.0% ✅ best outdoor VR · GCT 316ms · walk 16:53 · Statin Day 66",
+      "verdict": "Easy outdoor chill week. Wrist HR artifact — max 152 discarded, avg 130 trusted. VR 9.0% is best outdoor VR on record. Good energy, ran because wanted to. Right energy for the reset week.",
+      "tags": ["outdoor", "heat", "chill-week", "vr-outdoor-best"]
     }
   ],
   "GATES": [
@@ -1583,9 +1583,9 @@
       "type": "hard",
       "name": "Injury-Free Continuity",
       "short": "8 consecutive rising-load weeks",
-      "progress": 50,
+      "progress": 62,
       "status": "active",
-      "detail": "Week 12 = week 4 of 8. Started Week 9 (Jul 6). Clears Week 16 (Aug 31). Right ankle cleared R45. Right plantar mild fatigue at R45 — no recurrence R49 R51.",
+      "detail": "Week 13 = week 5 of 8. Started Week 9 (Jul 6). Clears Week 16 (Aug 31). Week 13 = chill week — injury-free streak maintained, volume rising paused intentionally. Right ankle cleared R45. Right plantar mild fatigue R45 — no recurrence R49–R53.",
       "eta": "Aug 31, 2026"
     },
     {
@@ -1673,19 +1673,13 @@
     "age": 30,
     "phase": "Phase 2",
     "phaseName": "Quality Development",
-    "week": 12,
+    "week": 13,
     "totalWeeks": 24,
     "deloadWeek": 21,
-    "weekVolOnBoard": 23.66,
-    "lastWeekVol": 36.6,
-    "weekTarget": [
-      33,
-      37
-    ],
-    "easyHRBand": [
-      122,
-      139
-    ],
+    "weekVolOnBoard": 6.29,
+    "lastWeekVol": 28.3,
+    "weekTarget": [35, 38],
+    "easyHRBand": [122, 139],
     "walkTrigger": 143,
     "walkResume": 128,
     "qualityCeiling": 150,
@@ -1696,13 +1690,10 @@
     "gctBest": 302,
     "vrBest": 8.5,
     "statinStart": "2026-05-30",
-    "stressLevel": "LOW",
+    "stressLevel": "MEDIUM",
     "formCue": "Eyes on the horizon — head up every session",
-    "date": "July 31, 2026",
-    "hrvBaseline": [
-      53,
-      68
-    ],
+    "date": "August 3, 2026",
+    "hrvBaseline": [53, 68],
     "weekSchedule": {
       "Mon": "easy",
       "Tue": "rest",
@@ -1794,8 +1785,8 @@
       "rhr": 50,
       "sleepScore": 42,
       "status": "REST",
-      "note": "Sleep score 42",
-      "briefing": "REST. Sleep score 42. Easy run suppressed. W12/24 · 77d to Race 0 · 23.66km of 33–37km on board · ACWR 0.71. Last: R51 quality_b 4.84km (Jul 31)."
+      "note": "Sleep score 42 — Garmin REST. Ran anyway (chill week, afternoon outdoor 6.29km). R53 logged.",
+      "briefing": "REST. Sleep score 42. Chill week active — R53 outdoor easy 6.29km completed despite REST flag. W13/24 · 77d to Race 0 · 6.29km on board. Last: R53 easy 6.29km (Aug 3)."
     }
   ],
   "PHASES": [
@@ -2052,7 +2043,7 @@
       "label": "BV 108 medical appointment (rescheduled)",
       "type": "medical",
       "nonNegotiable": true,
-      "note": "Rescheduled ~Aug 13 — doctor instruction to finish meds first. Jul 30 not attended. Agenda: Atoyze review · blood retest (TG, Vit D, K, Ferritin, CBC) · endocrinologist referral (TI-RADS 4) · lactate step test booking. Do not leave without lactate date."
+      "note": "Rescheduled ~Aug 13 — doctor instruction to finish meds first. Jul 30 appointment not attended. Agenda unchanged when rescheduled: Atoyze review · blood retest (TG, Vit D, K, Ferritin, CBC) · endocrinologist referral (TI-RADS 4) · lactate step test booking. Do not leave without lactate date."
     },
     {
       "date": "2026-08-30",
