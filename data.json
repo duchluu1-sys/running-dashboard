@@ -112,7 +112,7 @@
       "surface": "outdoor",
       "conditions": null,
       "flag": "⚠️",
-      "note": "Heat spike — max 163",
+      "note": "Heat spike -- max 163",
       "verdict": null,
       "tags": []
     },
@@ -141,7 +141,7 @@
       "surface": "outdoor",
       "conditions": null,
       "flag": "⚠️",
-      "note": "Very late — 23:25",
+      "note": "Very late -- 23:25",
       "verdict": null,
       "tags": []
     },
@@ -199,7 +199,7 @@
       "surface": "outdoor",
       "conditions": null,
       "flag": "⚠️",
-      "note": "Afternoon — max 163",
+      "note": "Afternoon -- max 163",
       "verdict": null,
       "tags": []
     },
@@ -286,7 +286,7 @@
       "surface": "outdoor",
       "conditions": null,
       "flag": "✅✅✅",
-      "note": "Exceptional — first 10km+",
+      "note": "Exceptional -- first 10km+",
       "verdict": null,
       "tags": []
     },
@@ -373,7 +373,7 @@
       "surface": "outdoor",
       "conditions": null,
       "flag": "✅✅",
-      "note": "First quality session — 6x2:30min · excellent",
+      "note": "First quality session -- 6x2:30min",
       "verdict": null,
       "tags": [],
       "qualityPace": 6.8
@@ -409,7 +409,7 @@
       "surface": "outdoor",
       "conditions": null,
       "flag": "✅",
-      "note": "GCT baseline established · drift +8.4 bpm",
+      "note": "GCT baseline established",
       "verdict": null,
       "tags": []
     },
@@ -467,7 +467,7 @@
       "surface": "outdoor",
       "conditions": null,
       "flag": "✅✅",
-      "note": "First negative drift 🏆 -1.5 bpm",
+      "note": "First negative drift -1.5 bpm",
       "verdict": null,
       "tags": []
     },
@@ -496,7 +496,7 @@
       "surface": "outdoor",
       "conditions": null,
       "flag": "✅✅",
-      "note": "Post-illness return · drift +5.7",
+      "note": "Post-illness return",
       "verdict": null,
       "tags": []
     },
@@ -525,7 +525,7 @@
       "surface": "outdoor",
       "conditions": null,
       "flag": "✅✅",
-      "note": "GCT PB at time · drift +6.1",
+      "note": "GCT PB at time",
       "verdict": null,
       "tags": []
     },
@@ -554,7 +554,7 @@
       "surface": "outdoor",
       "conditions": null,
       "flag": "⚠️",
-      "note": "58% distance jump ⚠️ rule violation · drift +1.8",
+      "note": "58% distance jump -- rule violation",
       "verdict": null,
       "tags": []
     },
@@ -583,10 +583,9 @@
       "surface": "outdoor",
       "conditions": null,
       "flag": "✅✅",
-      "note": "GCT PB · ceiling touch (brief)",
+      "note": "GCT PB",
       "verdict": null,
-      "tags": [],
-      "qualityPace": null
+      "tags": []
     },
     {
       "r": 21,
@@ -613,7 +612,7 @@
       "surface": "outdoor",
       "conditions": null,
       "flag": "✅",
-      "note": "Easy · drift +4.2",
+      "note": "Easy",
       "verdict": null,
       "tags": []
     },
@@ -642,7 +641,7 @@
       "surface": "outdoor",
       "conditions": null,
       "flag": "⚠️",
-      "note": "Drift +14.3 ⚠️ — 95% humidity",
+      "note": "Drift +14.3 -- 95% humidity",
       "verdict": null,
       "tags": []
     },
@@ -671,7 +670,7 @@
       "surface": "outdoor",
       "conditions": null,
       "flag": "✅✅",
-      "note": "Drift +0.0 🏆 first flat long",
+      "note": "Drift +0.0 first flat long",
       "verdict": null,
       "tags": []
     },
@@ -700,7 +699,7 @@
       "surface": "treadmill",
       "conditions": null,
       "flag": "✅",
-      "note": "Post-illness treadmill return",
+      "note": "Post-illness return",
       "verdict": null,
       "tags": []
     },
@@ -729,7 +728,7 @@
       "surface": "outdoor",
       "conditions": null,
       "flag": "✅",
-      "note": "Intentional heat test · drift +5.6",
+      "note": "Heat test",
       "verdict": null,
       "tags": []
     },
@@ -787,7 +786,7 @@
       "surface": "outdoor",
       "conditions": null,
       "flag": "✅",
-      "note": "Phase 2 gate CLEARED ✅ · drift +5.9",
+      "note": "Phase 2 gate CLEARED",
       "verdict": null,
       "tags": []
     },
@@ -816,7 +815,7 @@
       "surface": "outdoor",
       "conditions": null,
       "flag": "✅",
-      "note": "GCT PB · 4s ceiling touch",
+      "note": "GCT PB",
       "verdict": null,
       "tags": [],
       "qualityPace": 6.43
@@ -846,7 +845,7 @@
       "surface": "outdoor",
       "conditions": null,
       "flag": "⚠️",
-      "note": "Cut short — mental load",
+      "note": "Cut short -- mental load",
       "verdict": null,
       "tags": []
     },
@@ -875,7 +874,7 @@
       "surface": "outdoor",
       "conditions": null,
       "flag": "✅✅",
-      "note": "Drift -2.3 🏆 best ever · rain",
+      "note": "Drift -2.3 best ever",
       "verdict": null,
       "tags": []
     },
@@ -904,7 +903,7 @@
       "surface": "outdoor",
       "conditions": null,
       "flag": "✅",
-      "note": "Phase 2 W9 start · drift -1.6 🏆",
+      "note": "Phase 2 W9 start",
       "verdict": null,
       "tags": []
     },
@@ -933,7 +932,7 @@
       "surface": "outdoor",
       "conditions": null,
       "flag": "⚠️",
-      "note": "Ceiling breach — cafe stop · outdoor heat",
+      "note": "Ceiling breach",
       "verdict": null,
       "tags": [],
       "qualityPace": 6.1
@@ -963,7 +962,7 @@
       "surface": "outdoor",
       "conditions": null,
       "flag": "✅",
-      "note": "Drift +0.1 · foot cleared",
+      "note": "Foot cleared",
       "verdict": null,
       "tags": []
     },
@@ -992,7 +991,7 @@
       "surface": "outdoor",
       "conditions": null,
       "flag": "✅",
-      "note": "6:42/km LT1 CONFIRMED — outdoor dawn tempo",
+      "note": "6:42/km LT1 CONFIRMED",
       "verdict": null,
       "tags": [],
       "qualityPace": 6.7
@@ -1022,7 +1021,7 @@
       "surface": "outdoor",
       "conditions": null,
       "flag": "✅",
-      "note": "Drift +3.9 · ceiling held · 14km",
+      "note": "Drift +3.9",
       "verdict": null,
       "tags": []
     },
@@ -1051,7 +1050,7 @@
       "surface": "treadmill",
       "conditions": null,
       "flag": "✅",
-      "note": "6x20s strides @ 4:17/km",
+      "note": "6x20s strides",
       "verdict": null,
       "tags": []
     },
@@ -1080,7 +1079,7 @@
       "surface": "treadmill",
       "conditions": null,
       "flag": "✅",
-      "note": "7/7 reps · 0% ceiling · treadmill",
+      "note": "7/7 reps ceiling-clean",
       "verdict": null,
       "tags": [],
       "qualityPace": 6.74
@@ -1110,7 +1109,7 @@
       "surface": "outdoor",
       "conditions": null,
       "flag": "✅",
-      "note": "Drift +10 — bad sleep carryover",
+      "note": "Drift +10 bad sleep",
       "verdict": null,
       "tags": []
     },
@@ -1139,7 +1138,7 @@
       "surface": "treadmill",
       "conditions": null,
       "flag": "✅✅",
-      "note": "GCT 303ms ALL-TIME BEST · VR 8.5% · 15 min tempo",
+      "note": "GCT 303ms ALL-TIME BEST · VR 8.5%",
       "verdict": null,
       "tags": [],
       "qualityPace": 6.98
@@ -1169,7 +1168,7 @@
       "surface": "outdoor",
       "conditions": null,
       "flag": "✅",
-      "note": "Flush after quality · walk 10.3%",
+      "note": "Flush after quality",
       "verdict": null,
       "tags": []
     },
@@ -1198,7 +1197,7 @@
       "surface": "treadmill",
       "conditions": null,
       "flag": "✅",
-      "note": "Week 10 long run · Novablast 5",
+      "note": "Week 10 long run",
       "verdict": null,
       "tags": []
     },
@@ -1227,7 +1226,7 @@
       "surface": "treadmill",
       "conditions": null,
       "flag": "✅",
-      "note": "Walk-free easy · VR 9.1% best easy · strides",
+      "note": "Walk-free easy · VR 9.1% best easy",
       "verdict": null,
       "tags": []
     },
@@ -1256,7 +1255,7 @@
       "surface": "treadmill",
       "conditions": null,
       "flag": "⚠️",
-      "note": "Too easy — speed too conservative · right ankle flag",
+      "note": "Too conservative",
       "verdict": null,
       "tags": [],
       "qualityPace": 6.74
@@ -1286,7 +1285,7 @@
       "surface": "outdoor",
       "conditions": null,
       "flag": "⚠️",
-      "note": "30.6% walk ratio · TE too high · 34C · ankle first 2km",
+      "note": "30.6% walk · TE too high",
       "verdict": null,
       "tags": []
     },
@@ -1321,8 +1320,8 @@
       "surface": "treadmill",
       "conditions": null,
       "flag": "✅",
-      "note": "20 min continuous @ 8.6 km/h ✅ · ceiling exactly met · ankle clean · plantar mild",
-      "verdict": "Quality B ceiling-clean at the new 20-min benchmark — max HR exactly 150, zero seconds over ceiling. GCT 315ms and VR 8.8% are both strong for a continuous tempo block. Right plantar remained mild and did not limit execution. W12 Quality B target: repeat 20 min at 8.6 km/h, aim to keep GCT under 320.",
+      "note": "20 min continuous ceiling-clean",
+      "verdict": "Quality B ceiling-clean at the new 20-min benchmark -- max HR exactly 150, zero seconds over ceiling. GCT 315ms and VR 8.8% are both strong for a continuous tempo block. Right plantar remained mild and did not limit execution.",
       "tags": [
         "ceiling-clean",
         "plantar-flag"
@@ -1360,8 +1359,8 @@
       "surface": "treadmill",
       "conditions": "13:16",
       "flag": "✅✅",
-      "note": "New compliant LR PB 15.08km · avg HR 125 · TE 4.1 · 29% walk",
-      "verdict": "New compliant long run PB at 15.08km — distance gate advancing. Z3 at 19% and TE 4.1 Tempo are explained by afternoon timing (13:16) and 29% walk ratio inflating the HR distribution; avg HR 125 confirms aerobic control throughout. GCT 329ms and VR 9.4% are appropriate for this duration. W12 long run target: 14–15km treadmill, morning slot preferred.",
+      "note": "New compliant LR PB 15.08km",
+      "verdict": "New compliant long run PB at 15.08km -- distance gate advancing. avg HR 125 confirms aerobic control throughout.",
       "tags": [
         "pb-distance",
         "walk-heavy"
@@ -1398,8 +1397,8 @@
       "surface": "outdoor",
       "conditions": "14:48",
       "flag": "⚠️",
-      "note": "REST day run · Z3 36% · TE 2.8 Tempo · avg 135 · max 146 · 31-33C · 89% humidity",
-      "verdict": "REST day run under R46 load carryover — Z3 at 36% and TE 2.8 Tempo are heat-driven (32C, 14:48 start, 89% humidity) rather than fitness signals. Ankle and plantar both clean. This added unnecessary load on a scheduled rest day; the data is informational only. Quality A Wednesday proceeds as planned: speed ladder 8.5 to 9.2 km/h, ceiling 150.",
+      "note": "REST day run · Z3 36%",
+      "verdict": "REST day run under R46 load carryover -- Z3 at 36% heat-driven. Ankle and plantar both clean.",
       "tags": [
         "rest-day-run",
         "heat",
@@ -1437,8 +1436,8 @@
       "surface": "treadmill",
       "conditions": "10:53",
       "flag": "⚠️",
-      "note": "Economy Work — strides + hill sprints makeup (Push Day addon). Max speed 14.9 km/h · max grade 10.0%. HR 155 = transient sprint spike. DEPARTURE: combined strides + hill sprints same day (Achilles stacking rule). Falsification: Achilles/posterior tibial 48h. No pain/fatigue post-session.",
-      "verdict": "[ECONOMY WORK] Strides + hill sprints makeup session completed. Neuromuscular stimulus delivered. Departure noted — monitor Achilles 48h. Quality A tomorrow unaffected.",
+      "note": "Economy Work strides + hill sprints",
+      "verdict": "[ECONOMY WORK] Strides + hill sprints makeup session completed. Departure noted.",
       "tags": [
         "economy",
         "strides",
@@ -1477,8 +1476,8 @@
       "surface": "treadmill",
       "conditions": "13:43",
       "flag": "✅✅",
-      "note": "GCT 302ms NEW ALL-TIME BEST · VR 8.5% · ceiling clean · max HR 145 · 5 bpm headroom · ladder 8.5 to 9.2 km/h · TE artefact (walk recovery suppresses avg HR)",
-      "verdict": "Quality A W12 executed cleanly. Max HR 145 — 5 bpm under ceiling. Z3 5:58 (13%) confirms quality stimulus delivered. GCT 302ms is new program best (beats R39 303ms). VR 8.5% on target. TE 2.9 Base (Low Aerobic) is a classifier artefact — walk recovery suppresses session-average HR (118 bpm). Rep 5 set to 9.2 km/h (Technogym); Garmin recorded 9.1 — accelerometer lag on speed change. RPE 3/10 at 9.2 km/h is a Phase 3 adaptation signal. Hold current speed ceiling; lactate test September makes the formal call.",
+      "note": "GCT 302ms NEW ALL-TIME BEST · ceiling clean",
+      "verdict": "Quality A W12 executed cleanly. GCT 302ms is new program best. VR 8.5% on target. TE artefact -- walk recovery suppresses avg HR.",
       "tags": [
         "gct-pb",
         "ceiling-clean",
@@ -1510,8 +1509,8 @@
       "surface": "treadmill",
       "conditions": "15:59",
       "flag": "✅",
-      "note": "Thu flush · avg HR 129 · max 143 (walk trigger, compliant) · GCT 331ms · VR 9.4% · 6.3% walk · Statin Day 62",
-      "verdict": "Clean Thursday flush — HR governed throughout, walk trigger grazed at 143 bpm and respected per protocol. W12 on board 18.82km. Quality B Friday proceeds as planned: 20 min continuous @ 8.6 km/h, ceiling 150 bpm.",
+      "note": "Thu flush · max 143 compliant",
+      "verdict": "Clean Thursday flush -- HR governed throughout.",
       "tags": []
     },
     {
@@ -1539,8 +1538,8 @@
       "surface": "treadmill",
       "conditions": "15:09",
       "flag": "✅",
-      "note": "22 min continuous @ 8.6 km/h · 2 min over prescription · brain stop signal overridden · HR clean max 145 · GCT 317ms · VR 9.3% · Statin Day 63",
-      "verdict": "Quality B W12 executed and exceeded — 22 minutes continuous at 8.6 km/h, 2 minutes beyond the 20-min prescription. Max HR 145, ceiling clean (5 bpm headroom); zero Z4/Z5. Brain stop signal was present and overcome — RPE 2/10, body comfortable, ran through to completion and past the target. GCT 317ms within quality cohort (mean 310ms); TE 3.3 is walk-recovery artefact. Long run tomorrow (Aug 1): 13.0-13.5 km to land week within 33-37 km ceiling.",
+      "note": "22 min continuous · 2 min over · ceiling clean",
+      "verdict": "Quality B W12 executed and exceeded -- 22 minutes continuous at 8.6 km/h. Max HR 145, ceiling clean. Brain stop signal was present and overcome.",
       "tags": [
         "ceiling-clean",
         "over-prescription"
@@ -1571,8 +1570,8 @@
       "surface": "treadmill",
       "conditions": "13:51",
       "flag": "⚠️",
-      "note": "Truncated LR — mental DNF · body fine (max HR 139, RPE 2/10, feel Weak) · idle 12:56 · GCT 319ms · VR 9.2% · Statin Day 64",
-      "verdict": "Truncated long run — mental stop, not physical. Max HR 139 well inside ceiling. Garmin feel: Weak, RPE 2/10. Body was not the limiter. Week 12 closes at 28.30 km (short). Chill week follows.",
+      "note": "Truncated LR -- mental DNF · body fine",
+      "verdict": "Truncated long run -- mental stop, not physical. Max HR 139 well inside ceiling. Week 12 closes at 28.30 km (short). Chill week follows.",
       "tags": [
         "truncated",
         "mental-dnf"
@@ -1609,8 +1608,8 @@
       "surface": "outdoor",
       "conditions": "15:31",
       "flag": "✅",
-      "note": "W13 chill easy outdoor · 33°C · max HR 152 wrist artifact discarded · avg HR 130 trusted · VR 9.0% ✅ best outdoor VR · GCT 316ms · walk 16:53 · Statin Day 66",
-      "verdict": "Easy outdoor chill week. Wrist HR artifact — max 152 discarded, avg 130 trusted. VR 9.0% is best outdoor VR on record. Good energy, ran because wanted to. Right energy for the reset week.",
+      "note": "W13 chill easy outdoor · VR 9.0% outdoor best · GCT 316ms",
+      "verdict": "Easy outdoor chill week. Wrist HR artifact -- max 152 discarded, avg 130 trusted. VR 9.0% is best outdoor VR on record.",
       "tags": [
         "outdoor",
         "heat",
@@ -1642,13 +1641,53 @@
       "surface": "treadmill",
       "conditions": "14:02",
       "flag": "✅✅",
-      "note": "Quality A W13 chill · 5×4 min ladder 8.5→9.3 km/h · max HR 149 ✅ · GCT 308ms · VR 8.7% · pctCeiling 0% · Statin Day 67",
-      "verdict": "Clean Quality A on the new Tuesday slot. Max HR 149 — ceiling never touched even after pushing to 9.3 km/h on the final reps. GCT 308ms is the second-best quality session reading in the program (behind R49's 302ms); form is holding at pace. VR 8.7% consistent with quality cohort. The speed extension to 9.3 km/h produced no ceiling breach and no form collapse — data backs up how it felt. Speed ceiling stays at 9.2 km/h as the programme prescription for now; 9.3 is a data point, not a new cap. Thursday Quality B will be the first read on how the Tue/Thu split recovers.",
+      "note": "Quality A W13 · 5x4 min 8.5->9.3 km/h · GCT 308ms 2nd best",
+      "verdict": "Clean Quality A on the new Tuesday slot. GCT 308ms second-best. Speed ceiling stays at 9.2 km/h.",
       "tags": [
         "ceiling-clean",
         "new-tuesday-slot"
       ],
       "qualityPace": 6.45
+    },
+    {
+      "r": 55,
+      "date": "Aug 5",
+      "type": "easy",
+      "wk": 13,
+      "dist": 7.29,
+      "duration": 59,
+      "moving": 58,
+      "pace": 8.05,
+      "paceEasy": null,
+      "hrAvg": 125,
+      "hrMax": 144,
+      "te": 2.8,
+      "te_an": 0.1,
+      "gct": 318,
+      "vr": 9.4,
+      "cadence": 133,
+      "pctCeiling": 0,
+      "drift": null,
+      "walkRatio": 22.3,
+      "hrZones": [
+        21,
+        59,
+        8,
+        0,
+        0
+      ],
+      "temp": 31,
+      "surface": "outdoor",
+      "conditions": "17:25",
+      "flag": "✅",
+      "note": "W13 chill easy outdoor rain · avg HR 125 · max HR 144 · GCT 318ms · VR 9.4% · 22.3% walk · 26-min coconut break at ~30 min · Gate 8 cleared: R53+R55 = two consecutive outdoor easy ≤320ms ✅ · Statin Day 68",
+      "verdict": "Clean easy in rain. Near-perfect HR governance: only 19/3,520 GPX points above walk trigger (143 bpm), zero above 150. GCT 318ms near-outdoor-best (R53: 316ms). Gate 8 CLEARED -- two consecutive outdoor easy <=320ms achieved. Lap 1 at 6:55/km breached the easy pace alert and drove Seg 1 drift of +8.9 bpm (5:06 Z3 time). 26-min break was intentional -- coconut water and mental reset, not a DNF; second segment ran cleanly from 70 bpm (near-resting HR). Ran in a low-mood headspace; run helped. Chill week doing its job.",
+      "tags": [
+        "outdoor",
+        "rain",
+        "chill-week",
+        "gate-8-cleared"
+      ]
     }
   ],
   "GATES": [
@@ -1689,7 +1728,7 @@
       "short": "8 consecutive rising-load weeks",
       "progress": 62,
       "status": "active",
-      "detail": "Week 13 = week 5 of 8. Started Week 9 (Jul 6). Clears Week 16 (Aug 31). No injury signals through R54.",
+      "detail": "Week 13 = week 5 of 8. Started Week 9 (Jul 6). Clears Week 16 (Aug 31). No injury signals through R55.",
       "eta": "Aug 31, 2026"
     },
     {
@@ -1699,7 +1738,7 @@
       "short": "VPBank Hanoi 10K completed",
       "progress": 0,
       "status": "pending",
-      "detail": "VPBank Hanoi 10K — October 2026. Running with partner. Low stakes. Sub-55 min is Gate 1 fitness check.",
+      "detail": "VPBank Hanoi 10K -- October 2026. Running with partner. Low stakes. Sub-55 min is Gate 1 fitness check.",
       "eta": "Oct 2026"
     },
     {
@@ -1709,7 +1748,7 @@
       "short": "VO2max + VT1/VT2 in hand",
       "progress": 0,
       "status": "pending",
-      "detail": "VO2max + VT1/VT2 tests CONFIRMED at Regenetics HCMC (1.5M VND · Sep 2026 target). Lactate step test: BV 108 (~Aug 13 appointment) — booking still needed.",
+      "detail": "VO2max + VT1/VT2 tests CONFIRMED at Regenetics HCMC (1.5M VND, Sep 2026 target). Lactate step test: BV 108 (~Aug 13) -- booking still needed.",
       "eta": "Sep 2026"
     },
     {
@@ -1727,10 +1766,10 @@
       "type": "soft",
       "name": "GCT Outdoor Easy",
       "short": "<=320ms on 2 consecutive outdoor easy runs",
-      "progress": 40,
-      "status": "pending",
-      "detail": "Current outdoor easy average ~336ms. Program best (treadmill quality) = 302ms. Need two consecutive outdoor easy <=320ms.",
-      "eta": "Aug-Sep 2026"
+      "progress": 100,
+      "status": "cleared",
+      "detail": "CLEARED Aug 5, 2026 -- R53 (316ms, Aug 3) + R55 (318ms, Aug 5): two consecutive outdoor easy runs <=320ms. Form adaptation confirmed in open-air conditions.",
+      "eta": "CLEARED Aug 5, 2026"
     },
     {
       "id": 9,
@@ -1757,8 +1796,8 @@
       "name": "BIM Tay Ho Half Marathon",
       "label": "Race 1",
       "date": "2027-04-05",
-      "goal": "Sub-1:55 = sub-4 confirmed · Sub-1:45 = 3:30 viable",
-      "note": "Gate 2. Competitive effort. UNCONFIRMED — retired Jul 8 2026 per decision_log (replaced by competitive half Feb/Mar 2027 TBC). Retained as live option.",
+      "goal": "Sub-1:55 = sub-4 confirmed",
+      "note": "Gate 2. UNCONFIRMED -- retained as live option.",
       "confirmed": false,
       "color": "#7c3aed"
     },
@@ -1767,7 +1806,7 @@
       "label": "Race 2",
       "date": "2027-10-19",
       "goal": "Sub-4:00 · Stretch goal: 3:30",
-      "note": "Primary objective. Pace: 5:41/km (sub-4) or 4:58/km (3:30 stretch).",
+      "note": "Primary objective.",
       "confirmed": true,
       "color": "#a855f7"
     }
@@ -1780,7 +1819,7 @@
     "week": 13,
     "totalWeeks": 24,
     "deloadWeek": 21,
-    "weekVolOnBoard": 11.16,
+    "weekVolOnBoard": 18.45,
     "lastWeekVol": 28.3,
     "weekTarget": [
       35,
@@ -1801,8 +1840,8 @@
     "vrBest": 8.5,
     "statinStart": "2026-05-30",
     "stressLevel": "MODERATE",
-    "formCue": "Eyes on the horizon — head up every session",
-    "date": "August 4, 2026",
+    "formCue": "Eyes on the horizon -- head up every session",
+    "date": "August 5, 2026",
     "hrvBaseline": [
       53,
       68
@@ -1835,8 +1874,8 @@
       "rhr": 41,
       "sleepScore": null,
       "status": "GREEN",
-      "note": "Balanced — train as planned",
-      "briefing": "HRV 71ms above baseline, RHR 41 nominal — GREEN. R45 Jul 23: 20-min continuous tempo 8.6km/h ceiling-clean, W11 at 36.6km on board. Long run next: 14-15km treadmill target. Ankle and plantar cleared R45."
+      "note": "Balanced",
+      "briefing": "HRV 71ms above baseline, RHR 41 nominal -- GREEN."
     },
     {
       "date": "2026-07-26",
@@ -1844,8 +1883,8 @@
       "rhr": 48,
       "sleepScore": 48,
       "status": "CAUTION",
-      "note": "HRV 37 below baseline; RHR +7 above 7d avg; Sleep 48",
-      "briefing": "HRV 37 ms · RHR 48 (7d avg 41.0) · Sleep 48. Status: CAUTION. Last: R46 — long 15.08km (Jul 25). Check coaching layer for today session prescription."
+      "note": "HRV below baseline",
+      "briefing": "HRV 37ms below baseline. CAUTION."
     },
     {
       "date": "2026-07-27",
@@ -1853,8 +1892,8 @@
       "rhr": 50,
       "sleepScore": 36,
       "status": "REST",
-      "note": "Sleep score 36",
-      "briefing": "HRV 55ms · RHR 50 (7d 44.5) · Sleep 36 — REST. Sleep score 36. Scheduled: easy — SUPPRESSED, rest. Last: R46 long 15.08km (Jul 25)."
+      "note": "Sleep 36",
+      "briefing": "Sleep 36 -- REST."
     },
     {
       "date": "2026-07-28",
@@ -1862,8 +1901,8 @@
       "rhr": 48,
       "sleepScore": 70,
       "status": "GREEN",
-      "note": "All signals nominal",
-      "briefing": "Rest day. W12/24 · 83d to Race 0 · 6.01km of 33-37km on board · ACWR 1.02. Last: R47 easy 6.01km (Jul 27)."
+      "note": "All nominal",
+      "briefing": "Rest day. All nominal."
     },
     {
       "date": "2026-07-29",
@@ -1871,8 +1910,8 @@
       "rhr": 44,
       "sleepScore": 64,
       "status": "GREEN",
-      "note": "All signals nominal",
-      "briefing": "Quality A — 5x4 min (20:00), ceiling 150 bpm. Evo SL, Elite Fitness. [6d since last quality] W12/24 · 82d to Race 0 · 8.29km of 33-37km on board · ACWR 0.93. Last: R48 strides 2.28km (Jul 28)."
+      "note": "All nominal",
+      "briefing": "Quality A -- 5x4 min. All nominal."
     },
     {
       "date": "2026-08-01",
@@ -1880,8 +1919,8 @@
       "rhr": 45,
       "sleepScore": 77,
       "status": "GREEN",
-      "note": "All signals nominal",
-      "briefing": "Long run — 14–15km, HR 122–139 bpm. Novablast 5. Gel 40 min + electrolytes. Volume: 9.3km left over 1 sessions (~9.3km each) to clear 33km. Sleep 4-night mean 54 — below 65. Earlier bedtime is the lever. W12/24 · 79d to Race 0 · 23.66km of 33–37km on board · ACWR 1.05. Last: R51 quality_b 4.84km (Jul 31)."
+      "note": "All nominal",
+      "briefing": "Long run -- 14-15km. All nominal."
     },
     {
       "date": "2026-08-02",
@@ -1889,8 +1928,8 @@
       "rhr": 46,
       "sleepScore": 85,
       "status": "GREEN",
-      "note": "All signals nominal",
-      "briefing": "Rest day. Sleep 4-night mean 62 — below 65. Earlier bedtime is the lever. W12/24 · 78d to Race 0 · 23.66km of 33–37km on board · ACWR 0.71. Last: R51 quality_b 4.84km (Jul 31)."
+      "note": "All nominal",
+      "briefing": "Rest day. All nominal."
     },
     {
       "date": "2026-08-03",
@@ -1898,8 +1937,8 @@
       "rhr": 50,
       "sleepScore": 42,
       "status": "REST",
-      "note": "Sleep score 42 — Garmin REST. Ran anyway (chill week, afternoon outdoor 6.29km). R53 logged.",
-      "briefing": "REST. Sleep score 42. Chill week active — R53 outdoor easy 6.29km completed despite REST flag. W13/24 · 77d to Race 0 · 6.29km on board. Last: R53 easy 6.29km (Aug 3)."
+      "note": "Sleep 42 -- ran anyway (chill week)",
+      "briefing": "REST. Chill week -- R53 easy 6.29km completed."
     },
     {
       "date": "2026-08-05",
@@ -1907,8 +1946,8 @@
       "rhr": 46,
       "sleepScore": 68,
       "status": "GREEN",
-      "note": "All signals nominal",
-      "briefing": "Easy run — HR 122–139 bpm. Novablast 5. Volume: 23.8km left over 3 sessions (~7.9km each) to clear 35km. W13/24 · 75d to Race 0 · 11.16km of 35–38km on board · ACWR 0.87. Last: R54 quality_a 4.87km (Aug 4)."
+      "note": "All nominal",
+      "briefing": "Easy run -- HR 122-139 bpm. W13 on board 11.16km. ACWR 0.87. Last: R54 4.87km."
     }
   ],
   "PHASES": [
@@ -1922,7 +1961,7 @@
       "dateEnd": "2026-07-05",
       "openEnded": false,
       "focus": "Aerobic base · run/walk protocol · HR governance established",
-      "note": "Runs 1-30 · ~196 km · volume 22-28 km/wk"
+      "note": "Runs 1-30 · ~196 km"
     },
     {
       "n": 2,
@@ -1933,8 +1972,8 @@
       "dateStart": "2026-07-06",
       "dateEnd": "2026-10-25",
       "openEnded": false,
-      "focus": "Two quality sessions/week — Quality A intervals + Quality B tempo · volume to 44 km",
-      "note": "16 weeks · deload W21 + W24 · consolidation W22-23"
+      "focus": "Two quality sessions/week -- Quality A intervals + Quality B tempo · volume to 44 km",
+      "note": "16 weeks · deload W21 + W24"
     },
     {
       "n": 3,
@@ -1946,7 +1985,7 @@
       "dateEnd": null,
       "openEnded": true,
       "focus": "Pace targets calibrated from real lactate data",
-      "note": "End date undefined. Entry requires lactate/VT data in hand or documented fallback active."
+      "note": "End date undefined."
     }
   ],
   "PROGRESSION": [
@@ -2165,18 +2204,18 @@
       "label": "BV 108 medical appointment (rescheduled)",
       "type": "medical",
       "nonNegotiable": true,
-      "note": "Rescheduled ~Aug 13 — doctor instruction to finish meds first. Jul 30 appointment not attended. Agenda unchanged when rescheduled: Atoyze review · blood retest (TG, Vit D, K, Ferritin, CBC) · endocrinologist referral (TI-RADS 4) · lactate step test booking. Do not leave without lactate date."
+      "note": "Rescheduled ~Aug 13. Agenda: Atoyze review · blood retest · endocrinologist referral (TI-RADS 4) · lactate step test booking. Do not leave without lactate date."
     },
     {
       "date": "2026-08-30",
       "label": "InBody scan",
       "type": "medical",
       "nonNegotiable": false,
-      "note": "SMM >= 39.1 kg — statin safety floor. Late-Aug target."
+      "note": "SMM >= 39.1 kg -- statin safety floor. Late-Aug target."
     },
     {
       "date": "2026-08-31",
-      "label": "Gate 4 clears — 8 weeks injury-free",
+      "label": "Gate 4 clears -- 8 weeks injury-free",
       "type": "gate",
       "nonNegotiable": false,
       "note": "Tracking from W9 (Jul 6). Clears at end of W16."
@@ -2186,28 +2225,28 @@
       "label": "Phase 2 retrospective + quarterly audit",
       "type": "review",
       "nonNegotiable": false,
-      "note": "Score resolved predictions, review departures against falsification conditions, count reversals."
+      "note": "Score resolved predictions, review departures, count reversals."
     },
     {
       "date": "2026-09-30",
       "label": "Lactate + VO2max test",
       "type": "test",
       "nonNegotiable": true,
-      "note": "Gate 6. Recalibrates every threshold zone in the system. VO2max + VT1/VT2: CONFIRMED at Regenetics HCMC (1.5M VND). Lactate step test: booking pending via BV 108 (~Aug 13). Sep target, Oct hard deadline."
+      "note": "VO2max + VT1/VT2: CONFIRMED Regenetics HCMC (1.5M VND). Lactate: BV 108 (~Aug 13) booking pending."
     },
     {
       "date": "2026-10-04",
       "label": "Week 21 DELOAD",
       "type": "training",
       "nonNegotiable": true,
-      "note": "30% reduction. Every 4th week. Non-negotiable."
+      "note": "30% reduction. Non-negotiable."
     },
     {
       "date": "2026-10-19",
-      "label": "Race 0 — VPBank Hanoi 10K",
+      "label": "Race 0 -- VPBank Hanoi 10K",
       "type": "race",
       "nonNegotiable": true,
-      "note": "Gate 5. Falls inside W24 deload. Low stakes — race-day execution data point."
+      "note": "Gate 5. Low stakes. Race-day execution data point."
     },
     {
       "date": "2026-10-26",
@@ -2221,14 +2260,14 @@
       "label": "Competitive half marathon (TBC)",
       "type": "race",
       "nonNegotiable": false,
-      "note": "Date unconfirmed. Replaced BIM Tay Ho per Jul 8 2026 decision. Gate-check for sub-4 viability."
+      "note": "Date unconfirmed. Gate-check for sub-4 viability."
     },
     {
       "date": "2027-06-15",
       "label": "Race simulation",
       "type": "race",
       "nonNegotiable": false,
-      "note": "Full dress rehearsal — fueling, kit, pacing. Jun/Jul 2027 window."
+      "note": "Full dress rehearsal. Jun/Jul 2027 window."
     },
     {
       "date": "2027-10-19",
