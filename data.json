@@ -1900,6 +1900,15 @@
       "status": "REST",
       "note": "Sleep score 42 — Garmin REST. Ran anyway (chill week, afternoon outdoor 6.29km). R53 logged.",
       "briefing": "REST. Sleep score 42. Chill week active — R53 outdoor easy 6.29km completed despite REST flag. W13/24 · 77d to Race 0 · 6.29km on board. Last: R53 easy 6.29km (Aug 3)."
+    },
+    {
+      "date": "2026-08-05",
+      "hrv": 60,
+      "rhr": 46,
+      "sleepScore": 68,
+      "status": "GREEN",
+      "note": "All signals nominal",
+      "briefing": "Easy run — HR 122–139 bpm. Novablast 5. Volume: 23.8km left over 3 sessions (~7.9km each) to clear 35km. W13/24 · 75d to Race 0 · 11.16km of 35–38km on board · ACWR 0.87. Last: R54 quality_a 4.87km (Aug 4)."
     }
   ],
   "PHASES": [
