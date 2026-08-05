@@ -1268,15 +1268,15 @@ const HEALTH_FLAGS=[
   {class:"standing",status:"urgent",title:"HBV Vaccination",short:"Shot 1 of 3. OVERDUE.",detail:"HBsAg negative, HBsAb 7.77 (need ≥10 — not immune). 3-shot course over 6 months. High priority: Vietnam prevalence + both parents Hep B positive. Any clinic.",action:"Book Shot 1 this week. No further deferral."},
   {class:"dated",dueDate:"2026-08-13",status:"urgent",title:"BV 108 — ~Aug 13 (rescheduled)",short:"Meds finishing first. Agenda unchanged. Get lactate booking.",detail:"Rescheduled per doctor: finish meds course first. Jul 30 not attended. Agenda: Atoyze review · blood retest (TG, Vit D, Potassium, Ferritin, CBC) · endocrinologist referral (TI-RADS 4) · lactate step test booking. VO₂max already confirmed at Regenetics HCMC — not needed here.",action:"Do not leave without a lactate test date. VO₂max is settled (Regenetics HCMC)."},
   {class:"standing",status:"watch",title:"TI-RADS 4 Thyroid Nodule",short:"5×4mm left lobe. Endocrinologist referral pending.",detail:"TI-RADS 4 = intermediate suspicion — majority benign but specialist required. TSH and thyroid function completely normal. Referral via Jul 30 appointment.",action:"Jul 30: get endocrinologist referral confirmed."},
-  {class:"standing",status:"watch",title:"Triglyceride Disorder",short:"TG 8.52 mmol/L (5× upper limit). Atoyze Day 53.",detail:"Genetic/metabolic driver confirmed. No fatty liver. Atoyze 20/10 from May 30. Zero statin muscle side effects across all 49 runs. Alcohol zero — non-negotiable. Retest ~Aug 13 (BV 108 rescheduled).",action:"Monitor for unusual leg heaviness every run. Retest Jul 30."},
+  {class:"standing",status:"watch",title:"Triglyceride Disorder",short:"TG 8.52 mmol/L (5× upper limit). On Atoyze 20/10.",detail:"Genetic/metabolic driver confirmed. No fatty liver. Atoyze 20/10 from May 30. Zero statin muscle side effects across all runs to date. Alcohol zero — non-negotiable. Retest ~Aug 13 (BV 108 rescheduled).",action:"Monitor for unusual leg heaviness every run. Retest ~Aug 13 (BV 108)."},
   {class:"standing",status:"watch",title:"Right Ankle + Right Plantar",short:"Ankle cleared R45. Plantar mild fatigue — monitor.",detail:"Right lateral ankle (peroneal) irritated R43, present first 2km R44 only, clean through 20 min continuous tempo R45. New mild right plantar fatigue at R45 end — not pain, fatigue. Monitor Week 12.",action:"Flag any ankle or plantar pain during Week 12 Quality A."},
-  {class:"standing",status:"clear",title:"Vitamin D Deficiency",short:"15.40 ng/mL baseline. D3 2,000 IU — Day 53.",detail:"Deficient at baseline (May 29). D3 supplementation running. ~Aug 13 retest will show response (BV 108 rescheduled). Dose increase likely needed.",action:"Retest Jul 30."},
+  {class:"standing",status:"clear",title:"Vitamin D Deficiency",short:"15.40 ng/mL baseline. D3 2,000 IU ongoing.",detail:"Deficient at baseline (May 29). D3 supplementation running. ~Aug 13 retest will show response (BV 108 rescheduled). Dose increase likely needed.",action:"Retest ~Aug 13 (BV 108)."},
   {class:"standing",status:"clear",title:"Gallbladder Polyps",short:"Largest 3mm. No action needed now.",detail:"Multiple small polyps found May 30 imaging. Largest 3mm — below surgical threshold. Routine monitoring only.",action:"Book gallbladder ultrasound November 2026."}
 ];
 
 const MEDICATIONS=[
-  {name:"Atoyze 20/10",dose:"Atorvastatin 20mg + Ezetimibe 10mg · 1 tablet · evening with dinner",statinStart:"2026-05-30",status:"clean",purpose:"Triglyceride + cholesterol control",note:"Monitor for unusual muscle heaviness every run. Next review: Jul 30 blood retest."},
-  {name:"Vitamin D3 2,000 IU",dose:"1 capsule · with fattiest meal (fat-soluble)",statinStart:"2026-05-30",status:"clean",purpose:"Correct vitamin D deficiency (15.40 ng/mL baseline)",note:"Jul 30 retest. Dose increase likely."},
+  {name:"Atoyze 20/10",dose:"Atorvastatin 20mg + Ezetimibe 10mg · 1 tablet · evening with dinner",statinStart:"2026-05-30",status:"clean",purpose:"Triglyceride + cholesterol control",note:"Monitor for unusual muscle heaviness every run. Next review: ~Aug 13 blood retest (BV 108)."},
+  {name:"Vitamin D3 2,000 IU",dose:"1 capsule · with fattiest meal (fat-soluble)",statinStart:"2026-05-30",status:"clean",purpose:"Correct vitamin D deficiency (15.40 ng/mL baseline)",note:"Retest ~Aug 13 (BV 108). Dose increase likely."},
   {name:"CoQ10 (Sithion Q10)",dose:"Per label · with meal + fat",statinStart:"2026-05-30",status:"clean",purpose:"Counter statin-induced CoQ10 depletion",note:"Standard companion to statin therapy. No side effects."}
 ];
 
@@ -1629,7 +1629,7 @@ function renderVitals(a){
     <div class="vit"><div class="vit-val vb">${ATHLETE.weekVolOnBoard}<span style="font-size:.72rem">km</span></div><div class="vit-lbl">WEEK ${ATHLETE.week} ON BOARD</div><div class="vit-sub">tgt ${ATHLETE.weekTarget[0]}–${ATHLETE.weekTarget[1]}km</div></div>
     <div class="vit"><div class="vit-val" style="font-size:.95rem;line-height:1.2">${ATHLETE.phase}<br><span style="font-size:.58rem;color:var(--m2)">${ATHLETE.phaseName}</span></div><div class="vit-lbl">PHASE 2 · WEEK ${ATHLETE.week}</div><div class="vit-sub">W${ATHLETE.week}/${ATHLETE.totalWeeks}</div></div>
     <div class="vit"><div class="vit-val cn" style="font-size:1.8rem">${days}</div><div class="vit-lbl">DAYS TO RACE 0</div><div class="vit-sub">VPBank 10K</div></div>
-    <div class="vit"><div class="vit-val vb">${ATHLETE.gctBest}<span style="font-size:.72rem">ms</span></div><div class="vit-lbl">GCT PROGRAM BEST</div><div class="vit-sub">R39 · ${ATHLETE.vrBest}% VR</div></div>`;
+    <div class="vit"><div class="vit-val vb">${ATHLETE.gctBest}<span style="font-size:.72rem">ms</span></div><div class="vit-lbl">GCT PROGRAM BEST</div><div class="vit-sub">VR ${ATHLETE.vrBest}%</div></div>`;
   document.getElementById('hdr-name').textContent=ATHLETE.name;
   document.getElementById('hdr-date').textContent=ATHLETE.date;
   document.getElementById('hdr-meta').textContent=`${ATHLETE.phase} · Week ${ATHLETE.week} · ${ATHLETE.phaseName}`;
@@ -2384,13 +2384,23 @@ function renderTraining(a){
 function renderSignals(a){
   const {gct,vr,drift,compliance}=a;
   const gctBest=Math.min(...gct.pts.map(p=>p.gct));
+  const gctBestPt=gct.pts.find(p=>p.gct===gctBest);
   const recentGCT=gct.pts.slice(-5);
   const avgRecentGCT=recentGCT.length?Math.round(recentGCT.reduce((s,p)=>s+p.gct,0)/recentGCT.length):null;
+  // VR best — from computed data, not hardcoded
+  const vrBestVal=vr.best||'—';
+  const vrBestPt=vr.bestPt;
+  const vrBestSub=vrBestPt?`R${vrBestPt.r} · ${vrBestPt.date}`:'—';
+  // Best drift — computed from drift data
+  const allDrift=[...drift.easy,...drift.long];
+  const bestDriftPt=allDrift.length?allDrift.reduce((b,p)=>p.drift<b.drift?p:b):null;
+  const bestDriftStr=bestDriftPt?(bestDriftPt.drift>=0?'+':'')+bestDriftPt.drift+' bpm':'—';
+  const bestDriftSub=bestDriftPt?`R${bestDriftPt.r} · ${bestDriftPt.date}`:'—';
   document.getElementById('sig-body').innerHTML=`
     <div class="stats-row" style="margin:-18px -20px 14px">
-      <div class="stat-cell"><div class="stat-val vb">${gctBest}ms</div><div class="stat-lbl">GCT BEST</div><div class="stat-sub">R39 · Jul 17</div></div>
+      <div class="stat-cell"><div class="stat-val vb">${gctBest}ms</div><div class="stat-lbl">GCT BEST</div><div class="stat-sub">${gctBestPt?`R${gctBestPt.r} · ${gctBestPt.date}`:'—'}</div></div>
       <div class="stat-cell"><div class="stat-val">${avgRecentGCT||'—'}ms</div><div class="stat-lbl">5-RUN AVG</div><div class="stat-sub">recent trend</div></div>
-      <div class="stat-cell"><div class="stat-val cn">${vr.best||'—'}%</div><div class="stat-lbl">VR BEST</div><div class="stat-sub">R39 · 8.5%</div></div>
+      <div class="stat-cell"><div class="stat-val cn">${vrBestVal}%</div><div class="stat-lbl">VR BEST</div><div class="stat-sub">${vrBestSub}</div></div>
     </div>
     <div style="padding:0 0 10px">
       <div style="font-family:var(--mono);font-size:.5rem;letter-spacing:2px;text-transform:uppercase;color:var(--mu);margin-bottom:6px">CEILING COMPLIANCE (LAST 10)</div>
@@ -2399,8 +2409,8 @@ function renderSignals(a){
     </div>
     <div>
       <div style="font-family:var(--mono);font-size:.5rem;letter-spacing:2px;text-transform:uppercase;color:var(--mu);margin-bottom:6px">BEST DRIFT (OUTDOOR)</div>
-      <div style="font-family:var(--mono);font-size:1.1rem;font-weight:700;color:var(--cn)">−2.3 bpm</div>
-      <div style="font-size:.65rem;color:var(--m2)">R30 · Jul 4 · rain</div>
+      <div style="font-family:var(--mono);font-size:1.1rem;font-weight:700;color:var(--cn)">${bestDriftStr}</div>
+      <div style="font-size:.65rem;color:var(--m2)">${bestDriftSub}</div>
     </div>`;
 }
 
@@ -3206,7 +3216,7 @@ function renderDriftStats(drift){
     </div>
     ${row('Easy','rgba(0,212,255,.6)',drift.easy.length,drift.easyMean,drift.easyMa3)}
     ${row('Long',D1,drift.long.length,drift.longMean,drift.longMa3)}
-    <div style="font-size:.57rem;color:var(--mu);margin-top:7px;line-height:1.65">Easy elevated (+5.55 avg) — heat confound (30–34°C outdoor sessions). Long near-zero (+0.38) — walk breaks reset HR, compressing drift. Compare within type only.</div>`;
+    <div style="font-size:.57rem;color:var(--mu);margin-top:7px;line-height:1.65">${drift.easyMean!==null&&drift.easyMean>4?`Easy avg elevated (${(drift.easyMean>=0?'+':'')+drift.easyMean} bpm) — likely heat confound in outdoor sessions.`:drift.easyMean!==null?`Easy avg ${(drift.easyMean>=0?'+':'')+drift.easyMean} bpm — good aerobic control.`:''} Compare within type only.</div>`;
 }
 
 // ── LONG RUN CHART ──────────────────────────────────────────────────────
