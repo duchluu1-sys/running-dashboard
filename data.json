@@ -1809,10 +1809,10 @@
     ],
     "weekSchedule": {
       "Mon": "easy",
-      "Tue": "rest",
-      "Wed": "quality_a",
-      "Thu": "flush",
-      "Fri": "quality_b",
+      "Tue": "quality_a",
+      "Wed": "easy",
+      "Thu": "quality_b",
+      "Fri": "rest",
       "Sat": "long",
       "Sun": "rest"
     },
@@ -1900,24 +1900,6 @@
       "status": "REST",
       "note": "Sleep score 42 — Garmin REST. Ran anyway (chill week, afternoon outdoor 6.29km). R53 logged.",
       "briefing": "REST. Sleep score 42. Chill week active — R53 outdoor easy 6.29km completed despite REST flag. W13/24 · 77d to Race 0 · 6.29km on board. Last: R53 easy 6.29km (Aug 3)."
-    },
-    {
-      "date": "2026-08-04",
-      "hrv": 62,
-      "rhr": 49,
-      "sleepScore": 75,
-      "status": "GREEN",
-      "note": "All signals nominal",
-      "briefing": "Rest day. Volume: 23.8km left over 4 sessions (~6.0km each) to clear 35km. W13/24 · 76d to Race 0 · 11.16km of 35–38km on board · ACWR 0.94. Last: R54 quality_a 4.87km (Aug 4)."
-    },
-    {
-      "date": "2026-08-05",
-      "hrv": 60,
-      "rhr": 46,
-      "sleepScore": 68,
-      "status": "GREEN",
-      "note": "All signals nominal",
-      "briefing": "Quality A — 4x6 min (24:00), ceiling 150 bpm. Evo SL, Elite Fitness. Undercooked, not overcooked (ACWR 0.87) — don't be conservative on the ladder. Volume: 23.8km left over 4 sessions (~6.0km each) to clear 35km. W13/24 · 75d to Race 0 · 11.16km of 35–38km on board · ACWR 0.87. Last: R54 quality_a 4.87km (Aug 4)."
     }
   ],
   "PHASES": [
