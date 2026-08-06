@@ -864,6 +864,7 @@ body{background:var(--bg);background-image:var(--grid);color:var(--tx);font-fami
 .qp-kind.qp-deload{background:rgba(245,158,11,.12);color:var(--am)}
 .qp-kind.qp-peak{background:rgba(0,212,255,.12);color:var(--cy)}
 .qp-kind.qp-consolidation{background:rgba(0,212,255,.06);color:var(--m2)}
+.qp-kind.qp-chill{background:rgba(100,116,139,.12);color:var(--m2)}
 
 /* ════════════════════════════════════════
    S29 — GATE FORECAST + MILESTONE CALENDAR
@@ -1151,6 +1152,12 @@ body{background:var(--bg);background-image:var(--grid);color:var(--tx);font-fami
       </div>
     </div>
   </div>
+  <div class="card hud-card" id="cadence-card">
+    <div class="ch"><div class="cl">RUNNING CADENCE</div><div class="cs">avg run cadence per session · Garmin-reported (run segments only) · target 170 spm</div></div>
+    <div id="cadence-sparse" class="sparse-state" style="display:none"></div>
+    <div class="cw"><canvas id="cadenceChart"></canvas></div>
+    <div style="padding:4px 20px 12px;font-family:var(--mono);font-size:.56rem;color:var(--mu);line-height:1.6">Garmin avg run cadence excludes walk segments. Target 170 spm = standard threshold for reducing overstriding. Current range 128–133 spm — 37+ spm gap to close over Phase 2–3. Log cadence each session from Stats tab → Avg Run Cadence.</div>
+  </div>
 </div>
 <!-- ── TRAINING ── -->
 <div id="tab-training" class="tc">
@@ -1384,6 +1391,16 @@ function computeVRTrend(runs){
   return{pts,best,bestPt,cohorts,baseline:9.1};
 }
 
+function computeCadenceTrend(runs){
+  // Cadence trend — uses Garmin's 'Avg Run Cadence' (run segments only, walk excluded)
+  const fam=t=>t.startsWith('quality')?'quality':t;
+  const pts=runs.filter(r=>r.cadence!=null&&r.cadence>0)
+    .map(r=>({r:r.r,date:r.date,cadence:r.cadence,type:fam(r.type),surface:r.surface||'outdoor'}));
+  if(!pts.length)return{pts:[],movingAvg:[]};
+  const ma=movAvg(pts.map(p=>p.cadence),5);
+  return{pts,movingAvg:pts.map((p,i)=>({r:p.r,ma:+ma[i].toFixed(1)}))};
+}
+
 function computeACWR(runs){
   // S34 — 7-day acute / 28-day chronic rolling windows, date-based.
   // Eliminates Mon–Fri UNDERTRAINING artifact from partial-week calculation.
@@ -1512,8 +1529,8 @@ function computeTodaySession(athlete){
   // S33 — labels driven by PROGRESSION lookup, not hardcoded W12 strings
   const days=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
   const today=days[new Date().getDay()];
-  const prog=PROGRESSION.find(p=>p.wk===athlete.week)||{};
-  const lrRange=prog.lrMin!=null?(prog.lrMin===prog.lrMax?`${prog.lrMin} km`:`${prog.lrMin}–${prog.lrMax} km`):'—';
+  const prog=ATHLETE.weekOverride||PROGRESSION.find(p=>p.wk===athlete.week)||{};
+  const lrRange=prog.lrMin!=null?(prog.lrMin===prog.lrMax?`${prog.lrMin} km`:`${prog.lrMin}–${prog.lrMax} km`):'by feel';
   const map={
     Mon:'Easy run',
     Tue:prog.qualityA?`Quality A (${prog.qualityA})`:'Quality A',
@@ -1544,7 +1561,8 @@ function computeAllAnalytics(){
   const todaySession=computeTodaySession(ATHLETE);
   const statinDay=daysSince(ATHLETE.statinStart);
   const acwr=computeACWR(RUNS); // S34 — date-based, not week-bucket
-  return{rdns,wvol,intensity,gct,vr,drift,compliance,aei,threshold,scatter,zones,paceGap,longRun,todaySession,statinDay,acwr};
+  const cadence=computeCadenceTrend(RUNS);
+  return{rdns,wvol,intensity,gct,vr,drift,compliance,aei,threshold,scatter,zones,paceGap,longRun,todaySession,statinDay,acwr,cadence};
 }
 
 // ── TAB SWITCHING ───────────────────────────────────────────────────────
@@ -1564,6 +1582,7 @@ function initAdaptationCharts(){
   initComplianceChart(_A);
   initDriftChart(_A);
   initGCTChart(_A);
+  initCadenceChart(_A);
 }
 function initTrainingCharts(){
   initVolumeChart(_A);
@@ -2198,13 +2217,19 @@ function renderTrainingHeadline(a){
   // Signal 3: Long run trajectory
   const lrs=a.longRun;
   const lastLR=lrs[lrs.length-1];
-  const prog=PROGRESSION.find(p=>p.wk===ATHLETE.week);
-  let lrVal='—',lrSub=`W${ATHLETE.week} target: ${prog?prog.lrMin+'–'+prog.lrMax+'km':'—'}`,lrCol='var(--mu)';
+  const prog=ATHLETE.weekOverride||PROGRESSION.find(p=>p.wk===ATHLETE.week);
+  const isChillLR=prog&&(prog.lrMin==null||prog.kind==='chill');
+  let lrVal='—',lrSub=isChillLR?'CHILL WEEK — no LR target':`W${ATHLETE.week} target: ${prog?prog.lrMin+'–'+prog.lrMax+'km':'—'}`,lrCol='var(--mu)';
   if(lastLR){
     lrVal=`${lastLR.dist}km`;
-    const onTarget=prog&&lastLR.dist>=prog.lrMin;
-    lrCol=onTarget?'var(--gn)':'var(--am)';
-    lrSub=`Last: R${lastLR.r} · ${lastLR.date} · target ${prog?prog.lrMin+'–'+prog.lrMax+'km':'—'}`;
+    if(isChillLR){
+      lrCol='var(--mu)';
+      lrSub=`Last: R${lastLR.r} · ${lastLR.date} · CHILL WEEK — no target`;
+    } else {
+      const onTarget=prog&&lastLR.dist>=prog.lrMin;
+      lrCol=onTarget?'var(--gn)':'var(--am)';
+      lrSub=`Last: R${lastLR.r} · ${lastLR.date} · target ${prog?prog.lrMin+'–'+prog.lrMax+'km':'—'}`;
+    }
   }
   // Race 0 countdown
   const race0=RACES.find(r=>r.label==='Race 0');
@@ -2247,12 +2272,12 @@ function renderNextSession(){
   }
   if(!nextDay){el.style.display='none';return;}
   const sType=ATHLETE.weekSchedule[nextDay];
-  const prog=PROGRESSION.find(p=>p.wk===ATHLETE.week);
+  const prog=ATHLETE.weekOverride||PROGRESSION.find(p=>p.wk===ATHLETE.week);
   // Prescription
   const prescMap={
     quality_a:prog?prog.qualityA+'  ·  ceiling 150 bpm':'—',
     quality_b:prog?prog.qualityB+' continuous  ·  ceiling 150 bpm':'—',
-    long:prog?`${prog.lrMin}–${prog.lrMax} km  ·  HR 122–139`:'—',
+    long:prog&&prog.lrMin!=null?`${prog.lrMin}–${prog.lrMax} km  ·  HR 122–139`:`easy effort  ·  HR 122–139  ·  no km target`,
     easy:`HR 122–139  ·  walk at 143  ·  resume at 128`,
     flush:'20–30 min  ·  HR 122–139  ·  easy effort'
   };
@@ -2272,7 +2297,7 @@ function renderNextSession(){
   const successMap={
     quality_a:'Complete all reps ceiling-clean (0% above 150 bpm). Full recovery between each.',
     quality_b:'Complete full block unbroken without breaching 150 bpm.',
-    long:`Cover ${prog?.lrMin||'target'}–${prog?.lrMax||''}km. Walk at 143, resume at 128. HR 122–139 throughout.`,
+    long:prog&&prog.lrMin!=null?`Cover ${prog.lrMin}–${prog.lrMax}km. Walk at 143, resume at 128. HR 122–139 throughout.`:`By feel — no distance target. Walk at 143, resume at 128. HR 122–139.`,
     easy:'HR 122–139 the whole session. Walk the moment you hit 143.',
     flush:'Under 30 min is fine. No walk triggers needed — just stay easy.'
   };
@@ -2307,14 +2332,18 @@ function renderVariance(a){
   // 1. Week volume vs floor
   if(prog){
     const on=ATHLETE.weekVolOnBoard||0, vMin=prog.volMin, vMax=prog.volMax;
-    const ORD=['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
-    const di=ORD.indexOf(['Sun','Mon','Tue','Wed','Thu','Fri','Sat'][new Date().getDay()]);
-    const left=ORD.slice(di<0?0:di).filter(d=>(ATHLETE.weekSchedule[d]||'rest')!=='rest').length;
-    const pct=vMin?on/vMin*100:0;
-    const need=+(vMin-on).toFixed(1);
-    push('Week volume',`${on.toFixed(1)}km`,`${vMin}–${vMax}km`,pct,
-      pct>=100?OK:left>0?CY:AM,
-      pct>=100?'in range':left>0?`${need}km · ${left} left`:`${need}km short`);
+    if(vMin==null||prog.kind==='chill'){
+      push('Week volume',`${on.toFixed(1)}km`,'CHILL WEEK',100,MU,'no strict target');
+    } else {
+      const ORD=['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+      const di=ORD.indexOf(['Sun','Mon','Tue','Wed','Thu','Fri','Sat'][new Date().getDay()]);
+      const left=ORD.slice(di<0?0:di).filter(d=>(ATHLETE.weekSchedule[d]||'rest')!=='rest').length;
+      const pct=vMin?on/vMin*100:0;
+      const need=+(vMin-on).toFixed(1);
+      push('Week volume',`${on.toFixed(1)}km`,`${vMin}–${vMax}km`,pct,
+        pct>=100?OK:left>0?CY:AM,
+        pct>=100?'in range':left>0?`${need}km · ${left} left`:`${need}km short`);
+    }
   }
 
   // 2. ACWR vs 0.8–1.3
@@ -2348,9 +2377,13 @@ function renderVariance(a){
   if(prog){
     const lr=RUNS.filter(r=>r.type==='long').slice(-1)[0];
     if(lr){
-      const pct=prog.lrMin?lr.dist/prog.lrMin*100:0;
-      push('Last long run',`${lr.dist}km`,`${prog.lrMin}–${prog.lrMax}km`,pct,
-        pct>=100?OK:AM, pct>=100?'in range':`${(prog.lrMin-lr.dist).toFixed(1)}km short`);
+      if(prog.lrMin==null||prog.kind==='chill'){
+        push('Last long run',`${lr.dist}km`,'CHILL WEEK',100,MU,'no target this week');
+      } else {
+        const pct=prog.lrMin?lr.dist/prog.lrMin*100:0;
+        push('Last long run',`${lr.dist}km`,`${prog.lrMin}–${prog.lrMax}km`,pct,
+          pct>=100?OK:AM, pct>=100?'in range':`${(prog.lrMin-lr.dist).toFixed(1)}km short`);
+      }
     }
   }
 
@@ -2932,17 +2965,28 @@ function renderQualProg(){
   const kindTag={
     deload:`<span class="qp-kind qp-deload">DELOAD</span>`,
     peak:`<span class="qp-kind qp-peak">PEAK</span>`,
-    consolidation:`<span class="qp-kind qp-consolidation">HOLD</span>`
+    consolidation:`<span class="qp-kind qp-consolidation">HOLD</span>`,
+    chill:`<span class="qp-kind qp-chill">CHILL</span>`
   };
   const buildRow=p=>{
     const past=p.wk<curr, active=p.wk===curr;
-    const lr=p.lrMin===p.lrMax?`${p.lrMin} km`:`${p.lrMin}–${p.lrMax} km`;
+    // For the active week: use weekOverride if present
+    const ov=active&&ATHLETE.weekOverride?ATHLETE.weekOverride:null;
+    const qa=ov?ov.qualityA:p.qualityA;
+    const qb=ov?ov.qualityB:p.qualityB;
+    const kind=ov?ov.kind:p.kind;
+    const lrMin=ov?ov.lrMin:p.lrMin;
+    const lrMax=ov?ov.lrMax:p.lrMax;
+    const volMin=ov?ov.volMin:p.volMin;
+    const volMax=ov?ov.volMax:p.volMax;
+    const lr=lrMin==null?'by feel':(lrMin===lrMax?`${lrMin} km`:`${lrMin}–${lrMax} km`);
+    const vol=volMin==null?'—':`${volMin}–${volMax}`;
     return`<tr class="qp-row${past?' qp-past':''}${active?' qp-curr':''}">
-      <td class="qp-wk">W${p.wk}${kindTag[p.kind]||''}</td>
-      <td class="qp-qa">${p.qualityA}</td>
-      <td class="qp-qb">${p.qualityB}</td>
+      <td class="qp-wk">W${p.wk}${kindTag[kind]||''}</td>
+      <td class="qp-qa">${qa}</td>
+      <td class="qp-qb">${qb}</td>
       <td class="qp-lr">${lr}</td>
-      <td class="qp-vol">${p.volMin}–${p.volMax}</td>
+      <td class="qp-vol">${vol}</td>
     </tr>`;
   };
   const visible=PROGRESSION.filter(p=>Math.abs(p.wk-curr)<=WINDOW);
@@ -3124,6 +3168,50 @@ function renderGCTCohortTable(cohorts){
   <div style="font-size:.58rem;color:var(--mu);margin-top:8px;line-height:1.7">Trend lines for n≥5 only. Cohort means replace global refs (361/320/303). <span style="color:var(--am)">59% of original 361→303ms gain is cohort composition, not adaptation.</span></div>`;
 }
 // ── VOLUME CHART ────────────────────────────────────────────────────────
+function initCadenceChart(a){
+  const d=a.cadence;
+  const el=document.getElementById('cadenceChart');
+  const sparse=document.getElementById('cadence-sparse');
+  if(!d||d.pts.length<2){
+    if(el)el.parentElement.style.display='none';
+    if(sparse){sparse.style.display='block';sparse.textContent=`CADENCE — ${d&&d.pts.length===1?'1 run logged — need 2+ to chart':'NO DATA YET'} · log Avg Run Cadence from Garmin Stats tab each session`;}
+    return;
+  }
+  if(sparse)sparse.style.display='none';
+  const tc={quality:'rgba(0,212,255,.85)',long:'rgba(0,212,255,.5)',easy:'rgba(16,185,129,.8)',flush:'rgba(100,116,139,.55)'};
+  const datasets=[
+    {type:'scatter',label:'Cadence',
+     data:d.pts.map(p=>({x:p.r,y:p.cadence,lbl:`R${p.r} · ${p.date}`,t:p.type})),
+     backgroundColor:d.pts.map(p=>tc[p.type]||tc.easy),
+     borderColor:d.pts.map(p=>tc[p.type]||tc.easy),
+     borderWidth:0,pointRadius:6,pointHoverRadius:9,order:1},
+    {type:'line',label:'170 spm target',
+     data:[{x:d.pts[0].r,y:170},{x:d.pts[d.pts.length-1].r,y:170}],
+     borderColor:'rgba(245,158,11,.35)',borderDash:[4,4],borderWidth:1.5,
+     pointRadius:0,fill:false,backgroundColor:'transparent',order:3},
+  ];
+  if(d.pts.length>=5)datasets.push(
+    {type:'line',label:'5-Run Avg',
+     data:d.movingAvg.map(p=>({x:p.r,y:p.ma})),
+     borderColor:'rgba(0,212,255,.6)',borderWidth:2,pointRadius:0,
+     fill:false,tension:.3,backgroundColor:'transparent',order:2}
+  );
+  CHARTS.cadence=new Chart(el.getContext('2d'),{
+    type:'scatter',data:{datasets},
+    options:{responsive:true,maintainAspectRatio:false,
+      interaction:{mode:'nearest',intersect:false},
+      plugins:{legend:{display:false},
+        tooltip:{...CHART_DEFAULTS,callbacks:{
+          title:i=>i[0].raw.lbl||'',
+          label:c=>c.raw.t?`${c.raw.y} spm (${c.raw.t})`:c.dataset.label+': '+c.raw.y+' spm'}}},
+      scales:{
+        x:{type:'linear',ticks:{...xTick(),callback:v=>`R${v}`,stepSize:2},grid:gridLine(),border:borderLine()},
+        y:{min:110,max:180,title:axTitle('spm'),ticks:{...yTick(),callback:v=>`${v}`},grid:gridLine(),border:borderLine()}
+      }
+    }
+  });
+}
+
 function initVolumeChart(a){
   const w=a.wvol;
   const bg=w.map(x=>x.partial?D1:x.phase===2?D2:'rgba(55,80,94,.5)');
@@ -3368,6 +3456,7 @@ function initAllCharts(a){
   if(hasSufficientData(a.threshold.pts,MIN_SCATTER))initThresholdChart(a);
   if(hasSufficientData(a.aei.pts,MIN_TREND))initAEIChart(a);
   initZoneChart(a);
+  initCadenceChart(a);
 }
 
 // ── INIT ────────────────────────────────────────────────────────────────
