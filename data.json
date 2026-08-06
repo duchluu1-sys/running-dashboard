@@ -1958,6 +1958,15 @@
       "status": "GREEN",
       "note": "All nominal",
       "briefing": "Easy run -- HR 122-139 bpm. W13 on board 11.16km. ACWR 0.87. Last: R54 4.87km."
+    },
+    {
+      "date": "2026-08-06",
+      "hrv": 63,
+      "rhr": 46,
+      "sleepScore": 81,
+      "status": "GREEN",
+      "note": "All signals nominal",
+      "briefing": "Quality B — 25 min continuous, ceiling 150 bpm. Evo SL, Elite Fitness. Undercooked, not overcooked (ACWR 0.93) — don't be conservative on the ladder. Volume: 16.6km left over 2 sessions (~8.3km each) to clear 35km. W13/24 · 74d to Race 0 · 18.45km of 35–38km on board · ACWR 0.93. Last: R55 easy 7.29km (Aug 5)."
     }
   ],
   "PHASES": [
