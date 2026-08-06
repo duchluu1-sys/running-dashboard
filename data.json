@@ -1688,6 +1688,39 @@
         "chill-week",
         "gate-8-cleared"
       ]
+    },
+    {
+      "r": 56,
+      "date": "Aug 6",
+      "type": "quality_b",
+      "wk": 13,
+      "dist": 4.66,
+      "duration": 41,
+      "moving": 32,
+      "pace": 6.98,
+      "hrAvg": 129,
+      "hrMax": 151,
+      "te": 3.5,
+      "te_an": 0.0,
+      "gct": 314,
+      "vr": 9.2,
+      "cadence": null,
+      "pctCeiling": 0,
+      "drift": null,
+      "walkRatio": 13.5,
+      "hrZones": null,
+      "temp": 28,
+      "surface": "treadmill",
+      "conditions": "14:40",
+      "flag": "✅",
+      "note": "Quality B W13 chill · ~21 min continuous @ 8.6 km/h · max HR 151 (wrist noise, 1 bpm over) · GCT 314ms QB best · VR 9.2% · pctCeiling 0% · Statin Day 69",
+      "verdict": "Ceiling-clean Quality B on the new Thursday slot. Max HR 151 is wrist noise at 1 bpm over — not a breach. Three consecutive Technogym laps at 06:58/km confirm ~21 minutes continuous at 8.6 km/h, above the 20-min prescription and clean throughout. GCT 314ms is the best Quality B reading in the program (previous best R45: 315ms). TE 3.5 is also the highest QB TE yet. The form adaptation confirmed Tuesday at R54 carried over 48 hours to Thursday — that's the Tue/Thu structure doing its job. Long run Saturday is the final piece: first outdoor long run since R35, first under the new schedule. Go conservative the first 5km.",
+      "tags": [
+        "ceiling-clean",
+        "qb-gct-best",
+        "new-thu-slot"
+      ],
+      "qualityPace": 6.98
     }
   ],
   "GATES": [
@@ -1728,7 +1761,7 @@
       "short": "8 consecutive rising-load weeks",
       "progress": 62,
       "status": "active",
-      "detail": "Week 13 = week 5 of 8. Started Week 9 (Jul 6). Clears Week 16 (Aug 31). No injury signals through R55.",
+      "detail": "Week 13 = week 5 of 8. Started Week 9 (Jul 6). Clears Week 16 (Aug 31). No injury signals through R56.",
       "eta": "Aug 31, 2026"
     },
     {
@@ -1819,11 +1852,11 @@
     "week": 13,
     "totalWeeks": 24,
     "deloadWeek": 21,
-    "weekVolOnBoard": 18.45,
+    "weekVolOnBoard": 23.11,
     "lastWeekVol": 28.3,
     "weekTarget": [
-      0,
-      0
+      35,
+      38
     ],
     "easyHRBand": [
       122,
@@ -1841,7 +1874,7 @@
     "statinStart": "2026-05-30",
     "stressLevel": "MODERATE",
     "formCue": "Eyes on the horizon -- head up every session",
-    "date": "August 5, 2026",
+    "date": "August 6, 2026",
     "hrvBaseline": [
       53,
       68
