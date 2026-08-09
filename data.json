@@ -24,7 +24,7 @@
       "temp": null,
       "surface": "outdoor",
       "conditions": null,
-      "flag": "\u2705",
+      "flag": "✅",
       "note": "Near-perfect opener",
       "verdict": null,
       "tags": []
@@ -53,7 +53,7 @@
       "temp": null,
       "surface": "outdoor",
       "conditions": null,
-      "flag": "\u25cb",
+      "flag": "○",
       "note": "Acceptable",
       "verdict": null,
       "tags": []
@@ -82,7 +82,7 @@
       "temp": null,
       "surface": "outdoor",
       "conditions": null,
-      "flag": "\u25cb",
+      "flag": "○",
       "note": "Too short",
       "verdict": null,
       "tags": []
@@ -111,7 +111,7 @@
       "temp": null,
       "surface": "outdoor",
       "conditions": null,
-      "flag": "\u26a0\ufe0f",
+      "flag": "⚠️",
       "note": "Heat spike -- max 163",
       "verdict": null,
       "tags": []
@@ -140,7 +140,7 @@
       "temp": null,
       "surface": "outdoor",
       "conditions": null,
-      "flag": "\u26a0\ufe0f",
+      "flag": "⚠️",
       "note": "Very late -- 23:25",
       "verdict": null,
       "tags": []
@@ -169,7 +169,7 @@
       "temp": null,
       "surface": "outdoor",
       "conditions": null,
-      "flag": "\u26a0\ufe0f",
+      "flag": "⚠️",
       "note": "Late + Z3 excursion",
       "verdict": null,
       "tags": []
@@ -198,7 +198,7 @@
       "temp": null,
       "surface": "outdoor",
       "conditions": null,
-      "flag": "\u26a0\ufe0f",
+      "flag": "⚠️",
       "note": "Afternoon -- max 163",
       "verdict": null,
       "tags": []
@@ -227,7 +227,7 @@
       "temp": null,
       "surface": "outdoor",
       "conditions": null,
-      "flag": "\u2705",
+      "flag": "✅",
       "note": "Good",
       "verdict": null,
       "tags": []
@@ -256,7 +256,7 @@
       "temp": null,
       "surface": "treadmill",
       "conditions": null,
-      "flag": "\u2705\u2705",
+      "flag": "✅✅",
       "note": "Outstanding",
       "verdict": null,
       "tags": []
@@ -285,7 +285,7 @@
       "temp": null,
       "surface": "outdoor",
       "conditions": null,
-      "flag": "\u2705\u2705\u2705",
+      "flag": "✅✅✅",
       "note": "Exceptional -- first 10km+",
       "verdict": null,
       "tags": []
@@ -314,7 +314,7 @@
       "temp": null,
       "surface": "treadmill",
       "conditions": null,
-      "flag": "\u2705",
+      "flag": "✅",
       "note": "Good",
       "verdict": null,
       "tags": []
@@ -343,7 +343,7 @@
       "temp": null,
       "surface": "treadmill",
       "conditions": null,
-      "flag": "\u2705",
+      "flag": "✅",
       "note": "Statin Day 1",
       "verdict": null,
       "tags": []
@@ -372,7 +372,7 @@
       "temp": 26,
       "surface": "outdoor",
       "conditions": null,
-      "flag": "\u2705\u2705",
+      "flag": "✅✅",
       "note": "First quality session -- 6x2:30min",
       "verdict": null,
       "tags": [],
@@ -408,7 +408,7 @@
       "temp": 31,
       "surface": "outdoor",
       "conditions": null,
-      "flag": "\u2705",
+      "flag": "✅",
       "note": "GCT baseline established",
       "verdict": null,
       "tags": []
@@ -437,7 +437,7 @@
       "temp": 31,
       "surface": "outdoor",
       "conditions": null,
-      "flag": "\u2705",
+      "flag": "✅",
       "note": "Drift +3.5",
       "verdict": null,
       "tags": []
@@ -466,7 +466,7 @@
       "temp": 31,
       "surface": "outdoor",
       "conditions": null,
-      "flag": "\u2705\u2705",
+      "flag": "✅✅",
       "note": "First negative drift -1.5 bpm",
       "verdict": null,
       "tags": []
@@ -495,7 +495,7 @@
       "temp": 30,
       "surface": "outdoor",
       "conditions": null,
-      "flag": "\u2705\u2705",
+      "flag": "✅✅",
       "note": "Post-illness return",
       "verdict": null,
       "tags": []
@@ -524,7 +524,7 @@
       "temp": 32,
       "surface": "outdoor",
       "conditions": null,
-      "flag": "\u2705\u2705",
+      "flag": "✅✅",
       "note": "GCT PB at time",
       "verdict": null,
       "tags": []
@@ -553,7 +553,7 @@
       "temp": 31,
       "surface": "outdoor",
       "conditions": null,
-      "flag": "\u26a0\ufe0f",
+      "flag": "⚠️",
       "note": "58% distance jump -- rule violation",
       "verdict": null,
       "tags": []
@@ -582,7 +582,7 @@
       "temp": 34,
       "surface": "outdoor",
       "conditions": null,
-      "flag": "\u2705\u2705",
+      "flag": "✅✅",
       "note": "GCT PB",
       "verdict": null,
       "tags": []
@@ -611,7 +611,7 @@
       "temp": 30,
       "surface": "outdoor",
       "conditions": null,
-      "flag": "\u2705",
+      "flag": "✅",
       "note": "Easy",
       "verdict": null,
       "tags": []
@@ -640,7 +640,7 @@
       "temp": 31,
       "surface": "outdoor",
       "conditions": null,
-      "flag": "\u26a0\ufe0f",
+      "flag": "⚠️",
       "note": "Drift +14.3 -- 95% humidity",
       "verdict": null,
       "tags": []
@@ -669,7 +669,7 @@
       "temp": 31,
       "surface": "outdoor",
       "conditions": null,
-      "flag": "\u2705\u2705",
+      "flag": "✅✅",
       "note": "Drift +0.0 first flat long",
       "verdict": null,
       "tags": []
@@ -698,7 +698,7 @@
       "temp": null,
       "surface": "treadmill",
       "conditions": null,
-      "flag": "\u2705",
+      "flag": "✅",
       "note": "Post-illness return",
       "verdict": null,
       "tags": []
@@ -727,7 +727,7 @@
       "temp": 34,
       "surface": "outdoor",
       "conditions": null,
-      "flag": "\u2705",
+      "flag": "✅",
       "note": "Heat test",
       "verdict": null,
       "tags": []
@@ -756,7 +756,7 @@
       "temp": null,
       "surface": "treadmill",
       "conditions": null,
-      "flag": "\u2705",
+      "flag": "✅",
       "note": "Strides pulled GCT down",
       "verdict": null,
       "tags": []
@@ -785,7 +785,7 @@
       "temp": 30,
       "surface": "outdoor",
       "conditions": null,
-      "flag": "\u2705",
+      "flag": "✅",
       "note": "Phase 2 gate CLEARED",
       "verdict": null,
       "tags": []
@@ -814,7 +814,7 @@
       "temp": 34,
       "surface": "outdoor",
       "conditions": null,
-      "flag": "\u2705",
+      "flag": "✅",
       "note": "GCT PB",
       "verdict": null,
       "tags": [],
@@ -844,7 +844,7 @@
       "temp": null,
       "surface": "outdoor",
       "conditions": null,
-      "flag": "\u26a0\ufe0f",
+      "flag": "⚠️",
       "note": "Cut short -- mental load",
       "verdict": null,
       "tags": []
@@ -873,7 +873,7 @@
       "temp": null,
       "surface": "outdoor",
       "conditions": null,
-      "flag": "\u2705\u2705",
+      "flag": "✅✅",
       "note": "Drift -2.3 best ever",
       "verdict": null,
       "tags": []
@@ -902,7 +902,7 @@
       "temp": 31,
       "surface": "outdoor",
       "conditions": null,
-      "flag": "\u2705",
+      "flag": "✅",
       "note": "Phase 2 W9 start",
       "verdict": null,
       "tags": []
@@ -931,7 +931,7 @@
       "temp": 35,
       "surface": "outdoor",
       "conditions": null,
-      "flag": "\u26a0\ufe0f",
+      "flag": "⚠️",
       "note": "Ceiling breach",
       "verdict": null,
       "tags": [],
@@ -961,7 +961,7 @@
       "temp": 32,
       "surface": "outdoor",
       "conditions": null,
-      "flag": "\u2705",
+      "flag": "✅",
       "note": "Foot cleared",
       "verdict": null,
       "tags": []
@@ -990,7 +990,7 @@
       "temp": 29,
       "surface": "outdoor",
       "conditions": null,
-      "flag": "\u2705",
+      "flag": "✅",
       "note": "6:42/km LT1 CONFIRMED",
       "verdict": null,
       "tags": [],
@@ -1020,7 +1020,7 @@
       "temp": 32,
       "surface": "outdoor",
       "conditions": null,
-      "flag": "\u2705",
+      "flag": "✅",
       "note": "Drift +3.9",
       "verdict": null,
       "tags": []
@@ -1049,7 +1049,7 @@
       "temp": 29,
       "surface": "treadmill",
       "conditions": null,
-      "flag": "\u2705",
+      "flag": "✅",
       "note": "6x20s strides",
       "verdict": null,
       "tags": []
@@ -1078,7 +1078,7 @@
       "temp": 29,
       "surface": "treadmill",
       "conditions": null,
-      "flag": "\u2705",
+      "flag": "✅",
       "note": "7/7 reps ceiling-clean",
       "verdict": null,
       "tags": [],
@@ -1108,7 +1108,7 @@
       "temp": 27,
       "surface": "outdoor",
       "conditions": null,
-      "flag": "\u2705",
+      "flag": "✅",
       "note": "Drift +10 bad sleep",
       "verdict": null,
       "tags": []
@@ -1137,8 +1137,8 @@
       "temp": 28,
       "surface": "treadmill",
       "conditions": null,
-      "flag": "\u2705\u2705",
-      "note": "GCT 303ms ALL-TIME BEST \u00b7 VR 8.5%",
+      "flag": "✅✅",
+      "note": "GCT 303ms ALL-TIME BEST · VR 8.5%",
       "verdict": null,
       "tags": [],
       "qualityPace": 6.98
@@ -1167,7 +1167,7 @@
       "temp": 28,
       "surface": "outdoor",
       "conditions": null,
-      "flag": "\u2705",
+      "flag": "✅",
       "note": "Flush after quality",
       "verdict": null,
       "tags": []
@@ -1196,7 +1196,7 @@
       "temp": null,
       "surface": "treadmill",
       "conditions": null,
-      "flag": "\u2705",
+      "flag": "✅",
       "note": "Week 10 long run",
       "verdict": null,
       "tags": []
@@ -1225,8 +1225,8 @@
       "temp": 30,
       "surface": "treadmill",
       "conditions": null,
-      "flag": "\u2705",
-      "note": "Walk-free easy \u00b7 VR 9.1% best easy",
+      "flag": "✅",
+      "note": "Walk-free easy · VR 9.1% best easy",
       "verdict": null,
       "tags": []
     },
@@ -1254,7 +1254,7 @@
       "temp": 27,
       "surface": "treadmill",
       "conditions": null,
-      "flag": "\u26a0\ufe0f",
+      "flag": "⚠️",
       "note": "Too conservative",
       "verdict": null,
       "tags": [],
@@ -1284,8 +1284,8 @@
       "temp": 34,
       "surface": "outdoor",
       "conditions": null,
-      "flag": "\u26a0\ufe0f",
-      "note": "30.6% walk \u00b7 TE too high",
+      "flag": "⚠️",
+      "note": "30.6% walk · TE too high",
       "verdict": null,
       "tags": []
     },
@@ -1319,7 +1319,7 @@
       "temp": 28,
       "surface": "treadmill",
       "conditions": null,
-      "flag": "\u2705",
+      "flag": "✅",
       "note": "20 min continuous ceiling-clean",
       "verdict": "Quality B ceiling-clean at the new 20-min benchmark -- max HR exactly 150, zero seconds over ceiling. GCT 315ms and VR 8.8% are both strong for a continuous tempo block. Right plantar remained mild and did not limit execution.",
       "tags": [
@@ -1358,7 +1358,7 @@
       "temp": 28,
       "surface": "treadmill",
       "conditions": "13:16",
-      "flag": "\u2705\u2705",
+      "flag": "✅✅",
       "note": "New compliant LR PB 15.08km",
       "verdict": "New compliant long run PB at 15.08km -- distance gate advancing. avg HR 125 confirms aerobic control throughout.",
       "tags": [
@@ -1396,8 +1396,8 @@
       "temp": 32,
       "surface": "outdoor",
       "conditions": "14:48",
-      "flag": "\u26a0\ufe0f",
-      "note": "REST day run \u00b7 Z3 36%",
+      "flag": "⚠️",
+      "note": "REST day run · Z3 36%",
       "verdict": "REST day run under R46 load carryover -- Z3 at 36% heat-driven. Ankle and plantar both clean.",
       "tags": [
         "rest-day-run",
@@ -1435,7 +1435,7 @@
       "temp": null,
       "surface": "treadmill",
       "conditions": "10:53",
-      "flag": "\u26a0\ufe0f",
+      "flag": "⚠️",
       "note": "Economy Work strides + hill sprints",
       "verdict": "[ECONOMY WORK] Strides + hill sprints makeup session completed. Departure noted.",
       "tags": [
@@ -1475,8 +1475,8 @@
       "temp": 29,
       "surface": "treadmill",
       "conditions": "13:43",
-      "flag": "\u2705\u2705",
-      "note": "GCT 302ms NEW ALL-TIME BEST \u00b7 ceiling clean",
+      "flag": "✅✅",
+      "note": "GCT 302ms NEW ALL-TIME BEST · ceiling clean",
       "verdict": "Quality A W12 executed cleanly. GCT 302ms is new program best. VR 8.5% on target. TE artefact -- walk recovery suppresses avg HR.",
       "tags": [
         "gct-pb",
@@ -1508,8 +1508,8 @@
       "temp": 28,
       "surface": "treadmill",
       "conditions": "15:59",
-      "flag": "\u2705",
-      "note": "Thu flush \u00b7 max 143 compliant",
+      "flag": "✅",
+      "note": "Thu flush · max 143 compliant",
       "verdict": "Clean Thursday flush -- HR governed throughout.",
       "tags": []
     },
@@ -1537,8 +1537,8 @@
       "temp": 27,
       "surface": "treadmill",
       "conditions": "15:09",
-      "flag": "\u2705",
-      "note": "22 min continuous \u00b7 2 min over \u00b7 ceiling clean",
+      "flag": "✅",
+      "note": "22 min continuous · 2 min over · ceiling clean",
       "verdict": "Quality B W12 executed and exceeded -- 22 minutes continuous at 8.6 km/h. Max HR 145, ceiling clean. Brain stop signal was present and overcome.",
       "tags": [
         "ceiling-clean",
@@ -1569,8 +1569,8 @@
       "temp": 28,
       "surface": "treadmill",
       "conditions": "13:51",
-      "flag": "\u26a0\ufe0f",
-      "note": "Truncated LR -- mental DNF \u00b7 body fine",
+      "flag": "⚠️",
+      "note": "Truncated LR -- mental DNF · body fine",
       "verdict": "Truncated long run -- mental stop, not physical. Max HR 139 well inside ceiling. Week 12 closes at 28.30 km (short). Chill week follows.",
       "tags": [
         "truncated",
@@ -1607,8 +1607,8 @@
       "temp": 33,
       "surface": "outdoor",
       "conditions": "15:31",
-      "flag": "\u2705",
-      "note": "W13 chill easy outdoor \u00b7 VR 9.0% outdoor best \u00b7 GCT 316ms",
+      "flag": "✅",
+      "note": "W13 chill easy outdoor · VR 9.0% outdoor best · GCT 316ms",
       "verdict": "Easy outdoor chill week. Wrist HR artifact -- max 152 discarded, avg 130 trusted. VR 9.0% is best outdoor VR on record.",
       "tags": [
         "outdoor",
@@ -1640,8 +1640,8 @@
       "temp": 28,
       "surface": "treadmill",
       "conditions": "14:02",
-      "flag": "\u2705\u2705",
-      "note": "Quality A W13 \u00b7 5x4 min 8.5->9.3 km/h \u00b7 GCT 308ms 2nd best",
+      "flag": "✅✅",
+      "note": "Quality A W13 · 5x4 min 8.5->9.3 km/h · GCT 308ms 2nd best",
       "verdict": "Clean Quality A on the new Tuesday slot. GCT 308ms second-best. Speed ceiling stays at 9.2 km/h.",
       "tags": [
         "ceiling-clean",
@@ -1679,8 +1679,8 @@
       "temp": 31,
       "surface": "outdoor",
       "conditions": "17:25",
-      "flag": "\u2705",
-      "note": "W13 chill easy outdoor rain \u00b7 avg HR 125 \u00b7 max HR 144 \u00b7 GCT 318ms \u00b7 VR 9.4% \u00b7 22.3% walk \u00b7 26-min coconut break at ~30 min \u00b7 Gate 8 cleared: R53+R55 = two consecutive outdoor easy \u2264320ms \u2705 \u00b7 Statin Day 68",
+      "flag": "✅",
+      "note": "W13 chill easy outdoor rain · avg HR 125 · max HR 144 · GCT 318ms · VR 9.4% · 22.3% walk · 26-min coconut break at ~30 min · Gate 8 cleared: R53+R55 = two consecutive outdoor easy ≤320ms ✅ · Statin Day 68",
       "verdict": "Clean easy in rain. Near-perfect HR governance: only 19/3,520 GPX points above walk trigger (143 bpm), zero above 150. GCT 318ms near-outdoor-best (R53: 316ms). Gate 8 CLEARED -- two consecutive outdoor easy <=320ms achieved. Lap 1 at 6:55/km breached the easy pace alert and drove Seg 1 drift of +8.9 bpm (5:06 Z3 time). 26-min break was intentional -- coconut water and mental reset, not a DNF; second segment ran cleanly from 70 bpm (near-resting HR). Ran in a low-mood headspace; run helped. Chill week doing its job.",
       "tags": [
         "outdoor",
@@ -1712,9 +1712,9 @@
       "temp": 28,
       "surface": "treadmill",
       "conditions": "14:40",
-      "flag": "\u2705",
-      "note": "Quality B W13 chill \u00b7 ~21 min continuous @ 8.6 km/h \u00b7 max HR 151 (wrist noise, 1 bpm over) \u00b7 GCT 314ms QB best \u00b7 VR 9.2% \u00b7 pctCeiling 0% \u00b7 Statin Day 69",
-      "verdict": "Ceiling-clean Quality B on the new Thursday slot. Max HR 151 is wrist noise at 1 bpm over \u2014 not a breach. Three consecutive Technogym laps at 06:58/km confirm ~21 minutes continuous at 8.6 km/h, above the 20-min prescription and clean throughout. GCT 314ms is the best Quality B reading in the program (previous best R45: 315ms). TE 3.5 is also the highest QB TE yet. The form adaptation confirmed Tuesday at R54 carried over 48 hours to Thursday \u2014 that's the Tue/Thu structure doing its job. Long run Saturday is the final piece: first outdoor long run since R35, first under the new schedule. Go conservative the first 5km.",
+      "flag": "✅",
+      "note": "Quality B W13 chill · ~21 min continuous @ 8.6 km/h · max HR 151 (wrist noise, 1 bpm over) · GCT 314ms QB best · VR 9.2% · pctCeiling 0% · Statin Day 69",
+      "verdict": "Ceiling-clean Quality B on the new Thursday slot. Max HR 151 is wrist noise at 1 bpm over — not a breach. Three consecutive Technogym laps at 06:58/km confirm ~21 minutes continuous at 8.6 km/h, above the 20-min prescription and clean throughout. GCT 314ms is the best Quality B reading in the program (previous best R45: 315ms). TE 3.5 is also the highest QB TE yet. The form adaptation confirmed Tuesday at R54 carried over 48 hours to Thursday — that's the Tue/Thu structure doing its job. Long run Saturday is the final piece: first outdoor long run since R35, first under the new schedule. Go conservative the first 5km.",
       "tags": [
         "ceiling-clean",
         "qb-gct-best",
@@ -1752,8 +1752,8 @@
       "temp": 30,
       "surface": "outdoor",
       "conditions": "05:47",
-      "flag": "\u2705\u2705",
-      "note": "W13 chill LR outdoor \u00b7 West Lake loop \u00b7 05:47 dawn \u00b7 avg HR 130 \u00b7 max HR 162 (200m sprint ~km3) \u00b7 GCT 313ms new outdoor LR record \u00b7 VR 9.2% \u00b7 drift +8.6 \u00b7 24.1% walk \u00b7 3 gels + 3 caps + coke + 2 coconuts \u00b7 sweat 2,260ml \u00b7 ankle flare km1-5 resolved \u00b7 Statin Day 71",
+      "flag": "✅✅",
+      "note": "W13 chill LR outdoor · West Lake loop · 05:47 dawn · avg HR 130 · max HR 162 (200m sprint ~km3) · GCT 313ms new outdoor LR record · VR 9.2% · drift +8.6 · 24.1% walk · 3 gels + 3 caps + coke + 2 coconuts · sweat 2,260ml · ankle flare km1-5 resolved · Statin Day 71",
       "verdict": "New distance PB (17.15km outdoor, +2.07km over R46 treadmill). GCT 313ms new program long run record -- 16ms better than previous best (329ms, R41/R46 treadmill). Outdoor LR GCT trend: 366 to 313 over 6 runs. First outdoor LR since R35 (Jul 11). Dawn timing correct. Fueling excellent: 3 gels, 3 electrolyte caps, coke, 2 coconuts, 2 water breaks. Sprint at km3 (200m challenge, max HR 162 at GPX min 24.6) logged as departure -- Z3 30% run-only, driven by sprint + fast Lap 1 (7:06/km). Ankle flare km1-5 (longer than usual 2-3km), resolved clean post-run. Form improved markedly laps 6-17. W13 closes at 40.26km.",
       "tags": [
         "outdoor",
@@ -1880,7 +1880,7 @@
       "name": "VPBank Hanoi Marathon",
       "label": "Race 2",
       "date": "2027-10-19",
-      "goal": "Sub-4:00 \u00b7 Stretch goal: 3:30",
+      "goal": "Sub-4:00 · Stretch goal: 3:30",
       "note": "Primary objective.",
       "confirmed": true,
       "color": "#a855f7"
@@ -2031,7 +2031,7 @@
       "sleepScore": 81,
       "status": "GREEN",
       "note": "All signals nominal",
-      "briefing": "Quality B \u2014 25 min continuous, ceiling 150 bpm. Evo SL, Elite Fitness. Undercooked, not overcooked (ACWR 0.93) \u2014 don't be conservative on the ladder. Volume: 16.6km left over 2 sessions (~8.3km each) to clear 35km. W13/24 \u00b7 74d to Race 0 \u00b7 18.45km of 35\u201338km on board \u00b7 ACWR 0.93. Last: R55 easy 7.29km (Aug 5)."
+      "briefing": "Quality B — 25 min continuous, ceiling 150 bpm. Evo SL, Elite Fitness. Undercooked, not overcooked (ACWR 0.93) — don't be conservative on the ladder. Volume: 16.6km left over 2 sessions (~8.3km each) to clear 35km. W13/24 · 74d to Race 0 · 18.45km of 35–38km on board · ACWR 0.93. Last: R55 easy 7.29km (Aug 5)."
     },
     {
       "date": "2026-08-08",
@@ -2040,7 +2040,16 @@
       "sleepScore": 63,
       "status": "GREEN",
       "note": "All signals nominal",
-      "briefing": "Long run \u2014 15\u201316km, HR 122\u2013139 bpm. Novablast 5. Gel 40 min + electrolytes. Volume: 11.9km left over 1 sessions (~11.9km each) to clear 35km. Sleep 4-night mean 64 \u2014 below 65. Earlier bedtime is the lever. W13/24 \u00b7 72d to Race 0 \u00b7 23.11km of 35\u201338km on board \u00b7 ACWR 0.8. Last: R56 quality_b 4.66km (Aug 6)."
+      "briefing": "Long run — 15–16km, HR 122–139 bpm. Novablast 5. Gel 40 min + electrolytes. Volume: 11.9km left over 1 sessions (~11.9km each) to clear 35km. Sleep 4-night mean 64 — below 65. Earlier bedtime is the lever. W13/24 · 72d to Race 0 · 23.11km of 35–38km on board · ACWR 0.8. Last: R56 quality_b 4.66km (Aug 6)."
+    },
+    {
+      "date": "2026-08-09",
+      "hrv": 65,
+      "rhr": 47,
+      "sleepScore": 86,
+      "status": "GREEN",
+      "note": "All signals nominal",
+      "briefing": "Rest day. Sleep 4-night mean 64 — below 65. Earlier bedtime is the lever. W14/24 · 71d to Race 0 · 0km of 35–38km on board · ACWR 1.13. Last: R57 long 17.15km (Aug 8)."
     }
   ],
   "PHASES": [
@@ -2053,8 +2062,8 @@
       "dateStart": "2026-05-09",
       "dateEnd": "2026-07-05",
       "openEnded": false,
-      "focus": "Aerobic base \u00b7 run/walk protocol \u00b7 HR governance established",
-      "note": "Runs 1-30 \u00b7 ~196 km"
+      "focus": "Aerobic base · run/walk protocol · HR governance established",
+      "note": "Runs 1-30 · ~196 km"
     },
     {
       "n": 2,
@@ -2065,8 +2074,8 @@
       "dateStart": "2026-07-06",
       "dateEnd": "2026-10-25",
       "openEnded": false,
-      "focus": "Two quality sessions/week -- Quality A intervals + Quality B tempo \u00b7 volume to 44 km",
-      "note": "16 weeks \u00b7 deload W21 + W24"
+      "focus": "Two quality sessions/week -- Quality A intervals + Quality B tempo · volume to 44 km",
+      "note": "16 weeks · deload W21 + W24"
     },
     {
       "n": 3,
@@ -2297,7 +2306,7 @@
       "label": "BV 108 medical appointment (rescheduled)",
       "type": "medical",
       "nonNegotiable": true,
-      "note": "Rescheduled ~Aug 13. Agenda: Atoyze review \u00b7 blood retest \u00b7 endocrinologist referral (TI-RADS 4) \u00b7 lactate step test booking. Do not leave without lactate date."
+      "note": "Rescheduled ~Aug 13. Agenda: Atoyze review · blood retest · endocrinologist referral (TI-RADS 4) · lactate step test booking. Do not leave without lactate date."
     },
     {
       "date": "2026-08-30",
