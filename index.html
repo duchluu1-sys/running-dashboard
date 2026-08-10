@@ -703,13 +703,13 @@ body{background:var(--bg);background-image:var(--grid);color:var(--tx);font-fami
   display:grid;
   gap:16px;
   grid-template-columns:1fr;
-  grid-template-areas:"races" "timeline" "decisions" "voltraj" "gates" "qual" "milestones" "trivia";
+  grid-template-areas:"races" "timeline" "decisions" "perf" "voltraj" "gates" "qual" "milestones" "trivia";
 }
 /* Desktop: restore 2-col */
 @media(min-width:768px){
   .future-grid{
     grid-template-columns:1fr 1fr;
-    grid-template-areas:"races races" "timeline timeline" "decisions decisions" "voltraj gates" "qual milestones" "trivia trivia";
+    grid-template-areas:"races races" "timeline timeline" "decisions decisions" "perf perf" "voltraj gates" "qual milestones" "trivia trivia";
   }
 }
 .future-grid>.card{margin-bottom:0}
@@ -727,6 +727,7 @@ body{background:var(--bg);background-image:var(--grid);color:var(--tx);font-fami
 .fg-qual{grid-area:qual}
 .fg-milestones{grid-area:milestones}
 .fg-trivia{grid-area:trivia}
+.fg-perf{grid-area:perf}
 #tab-future .ch{border-left-color:var(--cy-bd)}
 #tab-future .cl{color:var(--cy)}
 /* S45 — TRIVIA + WHAT-IF */
@@ -1163,6 +1164,7 @@ body{background:var(--bg);background-image:var(--grid);color:var(--tx);font-fami
 <div id="tab-training" class="tc">
   <div id="train-headline" class="card hud-card tab-headline"></div>
   <div id="next-session-card" class="card hud-card"></div>
+  <div class="card hud-card" id="tt-plan-card"></div>
   <div class="card hud-card" id="variance-card">
     <div class="ch"><div class="cl">VARIANCE</div><div class="cs">actual vs planned · gaps only · interpretation belongs to the coaching layer, not this card</div></div>
     <div id="variance-body"></div>
@@ -1226,6 +1228,7 @@ body{background:var(--bg);background-image:var(--grid);color:var(--tx);font-fami
       <div class="ch"><div class="cl">DECISION SEQUENCE</div><div class="cs">upcoming controllable events · scroll for 2027 →</div></div>
       <div id="dt-body"></div>
     </div>
+    <div class="card hud-card fg-perf" id="perf-proj-card"></div>
     <div class="card hud-card fg-voltraj" id="vol-traj-card">
       <div class="ch"><div class="cl">VOLUME</div><div class="cs">actual vs plan · W9–24</div></div>
       <div id="vol-traj-body" class="cb"></div>
@@ -2199,6 +2202,130 @@ function renderPaceGap(pg){
 }
 
 // ── RENDER TRAINING ────────────────────────────────────────────────────
+
+// ── TIME TRIAL PLAN CARD ─────────────────────────────────────────────────
+function renderTimeTrial(){
+  const el=document.getElementById('tt-plan-card');
+  if(!el)return;
+  const tt=ATHLETE.timeTrial;
+  if(!tt||!tt.planned){el.style.display='none';return;}
+  const d=daysUntil(tt.planned);
+  const done=tt.result!=null;
+  const fmtP=v=>{const m=Math.floor(v),s=Math.round((v-m)*60);return`${m}:${String(s).padStart(2,'0')}`;};
+  const fmtR=v=>`${Math.round(v)} min`;
+  if(done&&tt.result){
+    const hm=+(tt.result*Math.pow(21.1/10,1.06)).toFixed(0);
+    const hmH=Math.floor(hm/60),hmM=hm%60;
+    el.innerHTML=`<div class="ch"><div class="cl">BENCHMARK RESULT · 10K TIME TRIAL</div><div class="cs" style="color:var(--gn)">✓ COMPLETE · ${tt.resultDate||''}</div></div>
+      <div class="thl-signals">
+        <div class="thl-sig"><div class="thl-label">10K TIME</div><div class="thl-value" style="color:var(--gn)">${Math.floor(tt.result)}:${String(Math.round((tt.result%1)*60)).padStart(2,'0')}</div><div class="thl-sub">actual result</div></div>
+        <div class="thl-sig"><div class="thl-label">PACE</div><div class="thl-value" style="color:var(--cy)">${tt.resultPace?fmtP(tt.resultPace)+'/km':'—'}</div><div class="thl-sub">avg pace</div></div>
+        <div class="thl-sig"><div class="thl-label">→ HM PROJ</div><div class="thl-value" style="color:var(--m2)">${hmH}:${String(hmM).padStart(2,'0')}</div><div class="thl-sub">Riegel · medium conf</div></div>
+      </div>`;
+  } else {
+    const dLabel=d>1?`${d} days away`:d===1?'TOMORROW':d===0?'TODAY':'upcoming';
+    el.innerHTML=`<div class="ch"><div class="cl">BENCHMARK SESSION · 10K TIME TRIAL</div><div class="cs">W15 · Aug 17 · West Lake · Dawn · <span style="color:var(--am);font-weight:700">${dLabel}</span></div></div>
+      <div class="thl-signals">
+        <div class="thl-sig"><div class="thl-label">PACE TARGET</div><div class="thl-value" style="color:var(--cy)">${fmtP(tt.paceTargetMin)}–${fmtP(tt.paceTargetMax)}</div><div class="thl-sub">min/km · conservative to mid</div></div>
+        <div class="thl-sig"><div class="thl-label">TIME TARGET</div><div class="thl-value" style="color:var(--cy)">${fmtR(tt.targetTimeMin)}–${fmtR(tt.targetTimeMax)}</div><div class="thl-sub">current baseline estimate</div></div>
+        <div class="thl-sig"><div class="thl-label">STATUS</div><div class="thl-value" style="color:var(--am)">PLANNED</div><div class="thl-sub">departure logged Aug 10</div></div>
+      </div>
+      <div style="padding:10px 20px 12px;border-top:1px solid var(--bd)">
+        <div style="font-family:var(--mono);font-size:.48rem;letter-spacing:2px;text-transform:uppercase;color:var(--mu);margin-bottom:8px">Pacing strategy</div>
+        <div style="display:grid;grid-template-columns:52px 1fr 1fr;gap:5px 10px;font-family:var(--mono);font-size:.62rem">
+          <span style="color:var(--cy)">km 1–2</span><span style="color:var(--m2)">6:10–6:20/km</span><span style="color:var(--mu)">settle · do not race yet</span>
+          <span style="color:var(--cy)">km 3–7</span><span style="color:var(--m2)">5:45–6:00/km</span><span style="color:var(--mu)">find ceiling · hold</span>
+          <span style="color:var(--cy)">km 8–10</span><span style="color:var(--m2)">max sustainable</span><span style="color:var(--mu)">whatever is left</span>
+        </div>
+      </div>
+      <div style="padding:8px 20px;border-top:1px solid var(--bd);font-family:var(--mono);font-size:.56rem;color:var(--mu);display:flex;flex-wrap:wrap;gap:16px">
+        <span>HR ceiling <span style="color:var(--m2)">165</span> · pace alerts <span style="color:var(--m2)">5:15–6:20</span> · auto-lap <span style="color:var(--m2)">1km</span> · pause <span style="color:var(--m2)">OFF</span></span>
+        <span>Shoe: <span style="color:var(--m2)">Evo SL</span> · gel km 5 · 700ml water</span>
+      </div>
+      <div style="padding:7px 20px;border-top:1px solid rgba(245,158,11,.15);background:rgba(245,158,11,.04);font-family:var(--mono);font-size:.5rem;color:var(--am)">⚑ Departure: replaces W15 Mon easy run · falsification → injury or fatigue bleed into Tue</div>`;
+  }
+}
+
+// ── PERFORMANCE PROJECTION MODEL (Future tab) ────────────────────────────
+function renderPerfProjections(){
+  const el=document.getElementById('perf-proj-card');
+  if(!el)return;
+  const tt=ATHLETE.timeTrial;
+  const ltPace=ATHLETE.ltPace||6.7;
+  const hasResult=tt&&tt.result!=null;
+  const conf=hasResult?'MEDIUM':'LOW';
+  const confCol=hasResult?'var(--am)':'#f87171';
+  const confNote=hasResult
+    ?`Based on ${tt.resultDate||'time trial'} result · Riegel formula`
+    :'No race data · LT1 inference · updates after Aug 17 time trial';
+  const fmtP=v=>{const m=Math.floor(v),s=Math.round((v-m)*60);return`${m}:${String(s).padStart(2,'0')}`;};
+  const fmtT=m=>{const h=Math.floor(m/60),mn=Math.round(m%60);return`${h}:${String(mn).padStart(2,'0')}`;};
+  const riegel=(t,d1,d2)=>t*Math.pow(d2/d1,1.06);
+  // 10K estimates
+  let t_con,t_mid,t_opt,p_con,p_mid,p_opt;
+  if(hasResult){
+    t_mid=tt.result; t_con=tt.result*1.04; t_opt=tt.result*0.97;
+    p_mid=tt.resultPace||t_mid/10; p_con=t_con/10; p_opt=t_opt/10;
+  } else {
+    t_con=ltPace*0.925*10; t_mid=ltPace*0.895*10; t_opt=ltPace*0.865*10;
+    p_con=ltPace*0.925; p_mid=ltPace*0.895; p_opt=ltPace*0.865;
+  }
+  const hm_mid=riegel(t_mid,10,21.1);
+  const hm_con=riegel(t_con,10,21.1);
+  const hm_opt=riegel(t_opt,10,21.1);
+  const m_mid=riegel(t_mid,10,42.195);
+  const m_con=riegel(t_con,10,42.195);
+  const m_opt=riegel(t_opt,10,42.195);
+  const hmGap=Math.round(hm_mid-115);
+  const mGap=Math.round(m_mid-240);
+  const hmPct=Math.min(100,Math.max(0,Math.round(115/hm_mid*100)));
+  el.innerHTML=`
+    <div class="ch"><div class="cl">PERFORMANCE MODEL</div><div class="cs">Riegel · LT1-based · ${hasResult?'time trial validated':'estimates only'}</div></div>
+    <div style="display:flex;align-items:center;gap:8px;padding:8px 20px;background:rgba(239,68,68,.06);border-bottom:1px solid rgba(239,68,68,.12)">
+      <span style="width:6px;height:6px;border-radius:50%;background:${confCol};display:inline-block;flex-shrink:0"></span>
+      <span style="font-family:var(--mono);font-size:.5rem;color:${confCol};letter-spacing:1px">${conf} CONFIDENCE</span>
+      <span style="font-family:var(--mono);font-size:.46rem;color:var(--mu);margin-left:auto;text-align:right;max-width:55%">${confNote}</span>
+    </div>
+    <div style="padding:12px 20px;border-bottom:1px solid var(--bd)">
+      <div style="font-family:var(--mono);font-size:.46rem;letter-spacing:2px;color:var(--mu);text-transform:uppercase;margin-bottom:8px">10K estimate · ${hasResult?'from actual result':'from LT1 inference'}</div>
+      <div style="display:grid;grid-template-columns:84px 68px 58px 1fr;gap:4px;font-family:var(--mono);font-size:.6rem;align-items:center;row-gap:6px">
+        <span style="color:var(--mu)">Conservative</span><span style="color:var(--m2)">${fmtP(p_con)}/km</span><span style="color:var(--m2)">~${Math.round(t_con)} min</span><span></span>
+        <span style="color:var(--cy);font-weight:700">Mid-range</span><span style="color:var(--cy)">${fmtP(p_mid)}/km</span><span style="color:var(--cy)">~${Math.round(t_mid)} min</span><span style="color:var(--mu);font-size:.44rem;text-align:right">← model uses this</span>
+        <span style="color:var(--mu)">Optimistic</span><span style="color:var(--m2)">${fmtP(p_opt)}/km</span><span style="color:var(--m2)">~${Math.round(t_opt)} min</span><span></span>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid var(--bd)">
+      <div style="padding:12px 20px;border-right:1px solid var(--bd)">
+        <div style="font-family:var(--mono);font-size:.46rem;letter-spacing:2px;color:var(--mu);text-transform:uppercase;margin-bottom:6px">Half marathon</div>
+        <div style="font-family:var(--hud,monospace);font-size:1.05rem;font-weight:700;color:var(--m2);letter-spacing:1px">${fmtT(hm_mid)}</div>
+        <div style="font-family:var(--mono);font-size:.5rem;color:var(--mu);margin-top:3px">range ${fmtT(hm_opt)}–${fmtT(hm_con)}</div>
+        <div style="font-family:var(--mono);font-size:.5rem;color:#f87171;margin-top:6px">Gate: sub-1:55 · gap ~${hmGap} min</div>
+      </div>
+      <div style="padding:12px 20px">
+        <div style="font-family:var(--mono);font-size:.46rem;letter-spacing:2px;color:var(--mu);text-transform:uppercase;margin-bottom:6px">Marathon</div>
+        <div style="font-family:var(--hud,monospace);font-size:1.05rem;font-weight:700;color:var(--m2);letter-spacing:1px">${fmtT(m_mid)}</div>
+        <div style="font-family:var(--mono);font-size:.5rem;color:var(--mu);margin-top:3px">range ${fmtT(m_opt)}–${fmtT(m_con)}</div>
+        <div style="font-family:var(--mono);font-size:.5rem;color:#f87171;margin-top:6px">Goal: sub-4:00 · gap ~${mGap} min</div>
+      </div>
+    </div>
+    <div style="padding:10px 20px;border-bottom:1px solid var(--bd)">
+      <div style="font-family:var(--mono);font-size:.46rem;letter-spacing:2px;color:var(--mu);text-transform:uppercase;margin-bottom:6px">HM gate progress · towards sub-1:55</div>
+      <div style="background:rgba(255,255,255,.06);height:3px;border-radius:2px;overflow:hidden;margin-bottom:4px"><div style="height:100%;background:var(--cy);border-radius:2px;width:${hmPct}%"></div></div>
+      <div style="display:flex;justify-content:space-between;font-family:var(--mono);font-size:.46rem;color:var(--mu)">
+        <span>current ~${fmtT(hm_mid)}</span><span style="color:var(--am)">${hmPct}% to gate</span><span>gate: 1:55</span>
+      </div>
+    </div>
+    <div style="padding:10px 20px 12px">
+      <div style="font-family:var(--mono);font-size:.46rem;letter-spacing:2px;color:var(--mu);text-transform:uppercase;margin-bottom:6px">What updates this model</div>
+      <div style="font-family:var(--stm,monospace);font-size:.6rem;color:var(--mu);line-height:1.85">
+        1 · Aug 17 time trial → Riegel recalculates from actual 10K<br>
+        2 · Sep 2026 lactate test → LT1/LT2 precision replaces inference<br>
+        3 · Feb 2027 HM race → replaces all estimates with real data<br>
+        <span style="color:var(--m2);font-style:italic">Note: current = today's baseline. Phase 3–5 training closes the gap.</span>
+      </div>
+    </div>`;
+}
+
 function renderTrainingHeadline(a){
   // Signal 1: Week volume execution
   const vol=+(ATHLETE.weekVolOnBoard||0);
@@ -2406,6 +2533,7 @@ function renderVariance(a){
 
 function renderTraining(a){
   renderTrainingHeadline(a);
+  renderTimeTrial();
   renderVariance(a);
   renderNextSession(); // S38a
   renderSignals(a);
@@ -2544,6 +2672,7 @@ function renderFuture(){
   renderPhaseTimeline();
   // S40b — Decision Sequence
   renderDecisionTimeline();
+  renderPerfProjections();
   // S45 — Trivia + What-if
   renderTriviaWhatIf();
   // S28 — vol trajectory canvas injected by initVolTrajChart on tab activation

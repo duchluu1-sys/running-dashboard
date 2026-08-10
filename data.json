@@ -1971,6 +1971,25 @@
       "vfa": 28.5,
       "phaseAngle": 7.1,
       "score": 90
+    },
+    "timeTrial": {
+      "planned": "2026-08-17",
+      "paceTargetMin": 5.75,
+      "paceTargetMax": 6.17,
+      "targetTimeMin": 57.5,
+      "targetTimeMax": 62.0,
+      "result": null,
+      "resultPace": null,
+      "resultDate": null,
+      "venue": "West Lake outdoor loop",
+      "shoe": "Evo SL",
+      "strategy": "km1-2 at 6:10-6:20 · km3-7 at 5:45-6:00 · km8-10 max sustainable",
+      "garminAlerts": {
+        "hrUpper": 165,
+        "paceFast": 5.25,
+        "paceSlow": 6.33
+      },
+      "departureLogged": true
     }
   },
   "READINESS_LOG": [
@@ -2347,6 +2366,13 @@
       "type": "medical",
       "nonNegotiable": true,
       "note": "Rescheduled ~Aug 13. Agenda: Atoyze review · blood retest · endocrinologist referral (TI-RADS 4) · lactate step test booking. Do not leave without lactate date."
+    },
+    {
+      "date": "2026-08-17",
+      "label": "10K Time Trial — W15 baseline benchmark",
+      "type": "test",
+      "nonNegotiable": false,
+      "note": "Planned departure from easy run. West Lake loop · dawn start · Evo SL · 5:45–6:10/km target · departure logged Aug 10."
     },
     {
       "date": "2026-08-30",
