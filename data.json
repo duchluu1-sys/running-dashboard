@@ -1763,6 +1763,37 @@
         "departure-sprint",
         "west-lake"
       ]
+    },
+    {
+      "r": 58,
+      "date": "Aug 10",
+      "type": "easy",
+      "wk": 14,
+      "dist": 5.52,
+      "duration": 45,
+      "moving": 37,
+      "pace": null,
+      "hrAvg": 126,
+      "hrMax": 145,
+      "te": 3.2,
+      "te_an": 0.0,
+      "gct": 327,
+      "vr": 9.6,
+      "cadence": 125,
+      "pctCeiling": null,
+      "drift": null,
+      "walkRatio": 7.4,
+      "hrZones": null,
+      "temp": 30,
+      "surface": "treadmill",
+      "conditions": "15:09",
+      "flag": "✅",
+      "note": "W14 Mon easy · 29–31°C gym · avg HR 126 · max HR 145 (heat lag, walk-compliant) · GCT 327ms · 7.4% walk · ⚠️ left plantar onset km1 resolved · Statin Day 73",
+      "verdict": "Clean Monday easy day -- 48h recovery from R57 17.15km LR PB confirmed. Avg HR 126 is 4 bpm lower than comparable R50 flush (129 bpm) in similar gym conditions -- strong cardiac recovery signal. Max HR 145 (2 bpm above walk trigger) is physiological HR lag on walk initiation, not a governance failure; walk time 3:18 confirms active protocol use throughout. Progressive afternoon pacing (TM L5: 7:38/km) in 29-31C gym drove 14% Z3 time -- suppress pace build in second half of future afternoon easy sessions. New symptom: left foot underside onset ~km 1, resolved by km 1 (first left plantar data point -- left foot was cleared). Mention to Dr. Thang at BV 108 Aug 13. Statin Day 73 clean.",
+      "tags": [
+        "heat",
+        "left-plantar-new"
+      ]
     }
   ],
   "GATES": [
@@ -1894,7 +1925,7 @@
     "week": 14,
     "totalWeeks": 24,
     "deloadWeek": 21,
-    "weekVolOnBoard": 0,
+    "weekVolOnBoard": 5.52,
     "lastWeekVol": 40.26,
     "weekTarget": [
       35,
@@ -1916,7 +1947,7 @@
     "statinStart": "2026-05-30",
     "stressLevel": "MODERATE",
     "formCue": "Eyes on the horizon -- head up every session",
-    "date": "August 8, 2026",
+    "date": "August 10, 2026",
     "hrvBaseline": [
       53,
       68
