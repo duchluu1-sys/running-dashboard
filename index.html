@@ -159,6 +159,13 @@ body{background:var(--bg);background-image:var(--grid);color:var(--tx);font-fami
 .alert-detail{display:none;margin-top:10px;font-size:.7rem;color:var(--m2);line-height:1.6;border-top:1px solid rgba(239,68,68,.15);padding-top:8px}
 .alert-detail.open{display:block}
 .alert-action{margin-top:6px;font-family:var(--mono);font-size:.62rem;color:var(--rd)}
+/* COACHING NOTE */
+.cn-headline{font-family:var(--hud);font-size:1.05rem;font-weight:700;color:var(--tx);line-height:1.35;padding:14px 20px 12px;border-bottom:1px solid var(--bd)}
+.cn-body{padding:12px 20px;font-size:.73rem;color:var(--m2);line-height:1.75;border-bottom:1px solid var(--bd)}
+.cn-next{padding:11px 20px 14px;display:flex;gap:12px;align-items:flex-start}
+.cn-next-lbl{font-family:var(--mono);font-size:.44rem;letter-spacing:2.5px;text-transform:uppercase;color:var(--gn);flex-shrink:0;padding-top:3px;white-space:nowrap}
+.cn-next-txt{font-size:.7rem;color:var(--gn);line-height:1.55}
+.cn-meta{padding:0 20px 10px;font-family:var(--mono);font-size:.48rem;color:var(--mu);letter-spacing:1px}
 /* ADAPTATION */
 .sparse-state{padding:20px;text-align:center}
 .sparse-title{font-family:var(--mono);font-size:.7rem;color:var(--mu);letter-spacing:2px;text-transform:uppercase;margin-bottom:8px}
@@ -1074,6 +1081,7 @@ body{background:var(--bg);background-image:var(--grid);color:var(--tx);font-fami
 <!-- ── ADAPTATION ── -->
 <div id="tab-adaptation" class="tc">
   <div id="adapt-headline" class="card hud-card tab-headline"></div>
+  <div id="coach-note-card" class="card hud-card"></div>
   <div class="g2" id="pb-row">
     <div class="card hud-card" id="odo-card">
       <div class="ch"><div class="cl">ODOMETER</div><div class="cs">program totals since May 9, 2026</div></div>
@@ -1962,6 +1970,26 @@ function renderAdaptationHeadline(a){
     </div>`;
 }
 
+// ── COACH NOTE ──────────────────────────────────────────────────────────
+function renderCoachNote(){
+  const el=document.getElementById('coach-note-card');
+  if(!el)return;
+  const arr=ATHLETE.phaseAssessment;
+  if(!arr||!arr.length){el.style.display='none';return;}
+  const n=arr[arr.length-1];
+  el.innerHTML=`
+    <div class="ch" style="border-left-color:var(--cy-bd)">
+      <div class="cl">PHASE COACHING NOTE</div>
+      <div class="cs">${n.phase} · updated ${n.date}</div>
+    </div>
+    <div class="cn-headline">${n.headline}</div>
+    <div class="cn-body">${n.body}</div>
+    <div class="cn-next">
+      <div class="cn-next-lbl">NEXT<br>OBJECTIVE</div>
+      <div class="cn-next-txt">${n.nextObjective}</div>
+    </div>`;
+}
+
 // ── S44: HUMAN BENCHMARK ────────────────────────────────────────────────
 // Static tier thresholds are population benchmarks, not computed from RUNS.
 // GCT + VR are treadmill bests (R39) — flagged in ref column.
@@ -2115,6 +2143,7 @@ function renderPBWall(){
 
 function renderAdaptation(a){
   renderAdaptationHeadline(a); // S37c
+  renderCoachNote();           // coaching narrative card
   renderPBWall();              // S43
   renderHumanBenchmark();      // S44
   // Pace gap
