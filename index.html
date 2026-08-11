@@ -1129,14 +1129,14 @@ body{background:var(--bg);background-image:var(--grid);color:var(--tx);font-fami
   </div>
   <div class="g2">
     <div class="card hud-card">
-      <div class="ch"><div class="cl">QUALITY CEILING COMPLIANCE</div><div class="cs">% time above 150 bpm per quality session · target 0%</div></div>
+      <div class="ch"><div class="cl">QUALITY CEILING COMPLIANCE</div><div class="cs" id="compliance-sub">% time above 155 bpm per quality session · target 0% · ceiling raised from 150 → 155 Aug 11</div></div>
       <div id="compliance-header" style="padding:10px 20px 0;font-family:var(--mono);font-size:.72rem;color:var(--gn)"></div>
       <div class="cw"><canvas id="complianceChart"></canvas></div>
       <div class="cleg" id="compliance-leg" style="padding:6px 20px 14px;justify-content:flex-start">
         <div class="li"><span class="ld" style="background:rgba(16,185,129,.5);border-radius:2px"></span>Clean (0%)</div>
         <div class="li"><span class="ld" style="background:rgba(245,158,11,.45);border-radius:2px"></span>Minor breach (1–5%)</div>
         <div class="li"><span class="ld" style="background:rgba(239,68,68,.45);border-radius:2px"></span>Breach (&gt;5%)</div>
-        <div class="li" style="color:var(--mu);font-size:.48rem">every bar at zero = ceiling mastery · amber/red = HR exceeded 150 bpm during that quality session</div>
+        <div class="li" style="color:var(--mu);font-size:.48rem">every bar at zero = ceiling mastery · amber/red = HR exceeded the quality ceiling during that quality session</div>
       </div>
     </div>
     <div class="card hud-card">
@@ -1823,8 +1823,8 @@ function renderToday(a){
     flush:'Active recovery. Clear residual fatigue — effort should feel trivially easy.'
   };
   const _successM={
-    quality_a:'Complete all reps ceiling-clean (0% above 150 bpm). Full recovery between each.',
-    quality_b:'Complete full block unbroken without breaching 150 bpm.',
+    quality_a:`Complete all reps ceiling-clean (0% above ${ATHLETE.qualityCeiling} bpm). Full recovery between each.`,
+    quality_b:`Complete full block unbroken without breaching ${ATHLETE.qualityCeiling} bpm.`,
     long:`Cover ${_prog.lrMin||'target'}–${_prog.lrMax||''}km. Walk at 143, resume at 128.`,
     easy:'HR 122–139 the whole session. Walk the moment you hit 143.',
     flush:'Under 30 min is fine. No walk triggers needed — just stay easy.'
@@ -2053,7 +2053,7 @@ function renderHumanBenchmark(){
       `7d avg · low ${rhrLow||'—'} bpm · elite &lt;40 · avg 65–80`)
    +row('GCT',
       gct?gct+'ms':null, gctTier,
-      `R39 · TM · elite &lt;220ms · trained 260–300 · rec 300–360`)
+      `R49 · TM · elite &lt;220ms · trained 260–300 · rec 300–360`)
    +row('VR',
       vr?vr+'%':null, vrTier,
       `R39 · TM · elite &lt;7% · trained 7–9% · rec 10%+`)
@@ -2144,6 +2144,9 @@ function renderPBWall(){
 function renderAdaptation(a){
   renderAdaptationHeadline(a); // S37c
   renderCoachNote();           // coaching narrative card
+  // Update ceiling-dependent labels
+  const cSub=document.getElementById('compliance-sub');
+  if(cSub)cSub.textContent=`% time above ${ATHLETE.qualityCeiling} bpm per quality session · target 0%`;
   renderPBWall();              // S43
   renderHumanBenchmark();      // S44
   // Pace gap
@@ -2262,13 +2265,14 @@ function renderTimeTrial(){
       <div style="padding:10px 20px 12px;border-top:1px solid var(--bd)">
         <div style="font-family:var(--mono);font-size:.48rem;letter-spacing:2px;text-transform:uppercase;color:var(--mu);margin-bottom:8px">Pacing strategy</div>
         <div style="display:grid;grid-template-columns:52px 1fr 1fr;gap:5px 10px;font-family:var(--mono);font-size:.62rem">
-          <span style="color:var(--cy)">km 1–2</span><span style="color:var(--m2)">6:10–6:20/km</span><span style="color:var(--mu)">settle · do not race yet</span>
-          <span style="color:var(--cy)">km 3–7</span><span style="color:var(--m2)">5:45–6:00/km</span><span style="color:var(--mu)">find ceiling · hold</span>
-          <span style="color:var(--cy)">km 8–10</span><span style="color:var(--m2)">max sustainable</span><span style="color:var(--mu)">whatever is left</span>
+          <span style="color:var(--cy)">km 1–2</span><span style="color:var(--m2)">5:30/km</span><span style="color:var(--mu)">controlled · don't chase the feeling</span>
+          <span style="color:var(--cy)">km 3–5</span><span style="color:var(--m2)">5:20–5:25/km</span><span style="color:var(--mu)">build into it · check HR</span>
+          <span style="color:var(--cy)">km 6–8</span><span style="color:var(--m2)">5:10–5:15/km</span><span style="color:var(--mu)">only if km 3–5 felt clean</span>
+          <span style="color:var(--cy)">km 9–10</span><span style="color:var(--m2)">RPE 9</span><span style="color:var(--mu)">everything left · no ceiling</span>
         </div>
       </div>
       <div style="padding:8px 20px;border-top:1px solid var(--bd);font-family:var(--mono);font-size:.56rem;color:var(--mu);display:flex;flex-wrap:wrap;gap:16px">
-        <span>HR ceiling <span style="color:var(--m2)">165</span> · pace alerts <span style="color:var(--m2)">5:15–6:20</span> · auto-lap <span style="color:var(--m2)">1km</span> · pause <span style="color:var(--m2)">OFF</span></span>
+        <span>HR ceiling <span style="color:var(--m2)">${tt.garminAlerts&&tt.garminAlerts.hrUpper||165}</span> · pace alerts <span style="color:var(--m2)">${tt.garminAlerts?fmtP(tt.garminAlerts.paceFast)+'–'+fmtP(tt.garminAlerts.paceSlow):'5:06–5:50'}</span> · auto-lap <span style="color:var(--m2)">1km</span> · pause <span style="color:var(--m2)">OFF</span></span>
         <span>Shoe: <span style="color:var(--m2)">Evo SL</span> · gel km 5 · 700ml water</span>
       </div>
       <div style="padding:7px 20px;border-top:1px solid rgba(245,158,11,.15);background:rgba(245,158,11,.04);font-family:var(--mono);font-size:.5rem;color:var(--am)">⚑ Departure: replaces W15 Mon easy run · falsification → injury or fatigue bleed into Tue</div>`;
@@ -2431,8 +2435,8 @@ function renderNextSession(){
   const prog=ATHLETE.weekOverride||PROGRESSION.find(p=>p.wk===ATHLETE.week);
   // Prescription
   const prescMap={
-    quality_a:prog?prog.qualityA+'  ·  ceiling 150 bpm':'—',
-    quality_b:prog?prog.qualityB+' continuous  ·  ceiling 150 bpm':'—',
+    quality_a:prog?prog.qualityA+`  ·  ceiling ${ATHLETE.qualityCeiling} bpm`:'—',
+    quality_b:prog?prog.qualityB+` continuous  ·  ceiling ${ATHLETE.qualityCeiling} bpm`:'—',
     long:prog&&prog.lrMin!=null?`${prog.lrMin}–${prog.lrMax} km  ·  HR 122–139`:`easy effort  ·  HR 122–139  ·  no km target`,
     easy:`HR 122–139  ·  walk at 143  ·  resume at 128`,
     flush:'20–30 min  ·  HR 122–139  ·  easy effort'
@@ -2451,8 +2455,8 @@ function renderNextSession(){
     flush:'Active recovery. Clear residual fatigue — effort should feel trivially easy.'
   };
   const successMap={
-    quality_a:'Complete all reps ceiling-clean (0% above 150 bpm). Full recovery between each.',
-    quality_b:'Complete full block unbroken without breaching 150 bpm.',
+    quality_a:`Complete all reps ceiling-clean (0% above ${ATHLETE.qualityCeiling} bpm). Full recovery between each.`,
+    quality_b:`Complete full block unbroken without breaching ${ATHLETE.qualityCeiling} bpm.`,
     long:prog&&prog.lrMin!=null?`Cover ${prog.lrMin}–${prog.lrMax}km. Walk at 143, resume at 128. HR 122–139 throughout.`:`By feel — no distance target. Walk at 143, resume at 128. HR 122–139.`,
     easy:'HR 122–139 the whole session. Walk the moment you hit 143.',
     flush:'Under 30 min is fine. No walk triggers needed — just stay easy.'
@@ -3414,7 +3418,7 @@ function initComplianceChart(a){
       borderColor:s.map(x=>x.pct===0?OK:x.pct<=5?WARN:BAD),
       borderWidth:1,borderRadius:2,
     }]},
-    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{...CHART_DEFAULTS,callbacks:{label:c=>`${c.raw}% above ceiling — ${c.raw===0?'clean':c.raw<=5?'minor breach':'BREACH'}`}}},scales:{x:{ticks:xTick(),grid:gridLine(),border:borderLine()},y:{max:20,min:0,ticks:{...yTick(),callback:v=>`${v}%`},title:{display:true,text:'% time above 150 bpm',color:'#64748b',font:{family:'Share Tech Mono',size:10}},grid:gridLine(),border:borderLine()}}}
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{...CHART_DEFAULTS,callbacks:{label:c=>`${c.raw}% above ceiling — ${c.raw===0?'clean':c.raw<=5?'minor breach':'BREACH'}`}}},scales:{x:{ticks:xTick(),grid:gridLine(),border:borderLine()},y:{max:20,min:0,ticks:{...yTick(),callback:v=>`${v}%`},title:{display:true,text:`% time above ${ATHLETE.qualityCeiling} bpm`,color:'#64748b',font:{family:'Share Tech Mono',size:10}},grid:gridLine(),border:borderLine()}}}
   });
 }
 
