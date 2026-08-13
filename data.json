@@ -1830,6 +1830,41 @@
         "program-high-te-an",
         "departure-resolved"
       ]
+    },
+    {
+      "r": 60,
+      "date": "Aug 13",
+      "type": "quality_b",
+      "wk": 14,
+      "dist": 4.36,
+      "duration": 36,
+      "moving": 29,
+      "pace": 5.77,
+      "hrAvg": 122,
+      "hrMax": 149,
+      "te": 2.9,
+      "te_an": 0.3,
+      "gct": 304,
+      "vr": 8.6,
+      "cadence": null,
+      "pctCeiling": 0,
+      "drift": null,
+      "walkRatio": 17.2,
+      "hrZones": null,
+      "temp": 29,
+      "surface": "treadmill",
+      "conditions": "15:10",
+      "flag": "✅✅",
+      "note": "W14 Quality B sharpening · 3×5 min @ 10.4 km/h (5:46/km) · max HR 149 · avg HR 122 · TE 2.9/0.3 · GCT 304ms · VR 8.6% · stride 1.11m · zero tissue complaint · RPE 3/10 · pctCeiling 0% ✅ · hrZones null (Garmin 71%) · Statin Day 76 · BV 108 done",
+      "verdict": "Race-week sharpening session executed correctly. 149 bpm max with RPE 3/10 at 10.4 km/h over 3×5 min confirms priming without fatigue accumulation. HR response nearly identical to R59 rep 3 despite heavier accumulated week load — quiet positive signal. GCT 304ms solid for mixed-speed session. TE_an 0.3 confirms stayed sub-threshold throughout. Zero tissue complaint with warm-up protocol fully established. Arriving at Saturday race preview and Sunday/Monday trial with legs primed, not cooked.",
+      "qualityPace": 5.77,
+      "tags": [
+        "race-week",
+        "sharpening",
+        "ceiling-clean",
+        "priming",
+        "bv108-done"
+      ]
     }
   ],
   "GATES": [
@@ -1961,7 +1996,7 @@
     "week": 14,
     "totalWeeks": 24,
     "deloadWeek": 21,
-    "weekVolOnBoard": 11.69,
+    "weekVolOnBoard": 16.05,
     "lastWeekVol": 40.26,
     "weekTarget": [
       35,
@@ -1987,7 +2022,7 @@
     "statinStart": "2026-05-30",
     "stressLevel": "MODERATE",
     "formCue": "Eyes on the horizon -- head up every session",
-    "date": "August 11, 2026",
+    "date": "August 13, 2026",
     "hrvBaseline": [
       53,
       68
@@ -2030,7 +2065,9 @@
         "paceFast": 5.1,
         "paceSlow": 5.83
       },
-      "departureLogged": true
+      "departureLogged": true,
+      "trialWindow": "Aug 16 (Sun) or Aug 17 (Mon)",
+      "trialNote": "Weather dependent — dawn after rain · heatwave week · confirm night before"
     },
     "phaseAssessment": [
       {
@@ -2425,14 +2462,14 @@
       "label": "BV 108 medical appointment",
       "type": "medical",
       "nonNegotiable": true,
-      "note": "Aug 13. Agenda: Atoyze review · blood retest (TG, Vit D, Potassium, Ferritin, CBC) · endocrinologist referral (TI-RADS 4) · lactate step test booking · ⚡ quality HR ceiling raise to 160 bpm (interim 155 active — explicit clearance needed given Atoyze + TI-RADS 4 context) · left plantar mention (R58 km1, resolved R59). Do not leave without lactate date."
+      "note": "✅ DONE Aug 13. Blood retest done at home — results pending Dr. Thắng review. Quality HR ceiling raise to 160 pending blood results. Lactate + VO₂max: ALL confirmed Regenetics HCMC. Left plantar mentioned (resolved)."
     },
     {
       "date": "2026-08-17",
-      "label": "10K Time Trial — W15 baseline benchmark",
+      "label": "10K Time Trial — W15 · Sun Aug 16 or Mon Aug 17",
       "type": "test",
       "nonNegotiable": false,
-      "note": "Calibrated from R59. Start 5:30/km km1-2 · build 5:20-5:25/km km3-5 · pick up if HR clean km6+ · RPE 9 km9-10. Realistic: 58-65 min. No HR ceiling. Saturday race preview: 3x5 min @ 5:20-5:25/km outdoor dawn Evo SL. Race-week departures logged Aug 11."
+      "note": "Weather dependent — dawn after rain. Start 5:30/km km1-2 · build 5:20-5:25/km km3-5 · pick up if HR clean km6+ · RPE 9 km9-10. No HR ceiling. Saturday race preview: 3×5 min @ 5:20-5:25/km outdoor dawn Evo SL. Realistic: 58-65 min."
     },
     {
       "date": "2026-08-30",

@@ -2256,7 +2256,7 @@ function renderTimeTrial(){
       </div>`;
   } else {
     const dLabel=d>1?`${d} days away`:d===1?'TOMORROW':d===0?'TODAY':'upcoming';
-    el.innerHTML=`<div class="ch"><div class="cl">BENCHMARK SESSION · 10K TIME TRIAL</div><div class="cs">W15 · Aug 17 · West Lake · Dawn · <span style="color:var(--am);font-weight:700">${dLabel}</span></div></div>
+    el.innerHTML=`<div class="ch"><div class="cl">BENCHMARK SESSION · 10K TIME TRIAL</div><div class="cs">W15 · ${tt.trialWindow||'Aug 17'} · West Lake · Dawn · <span style="color:var(--am);font-weight:700">${dLabel}</span></div></div>
       <div class="thl-signals">
         <div class="thl-sig"><div class="thl-label">PACE TARGET</div><div class="thl-value" style="color:var(--cy)">${fmtP(tt.paceTargetMin)}–${fmtP(tt.paceTargetMax)}</div><div class="thl-sub">min/km · conservative to mid</div></div>
         <div class="thl-sig"><div class="thl-label">TIME TARGET</div><div class="thl-value" style="color:var(--cy)">${fmtR(tt.targetTimeMin)}–${fmtR(tt.targetTimeMax)}</div><div class="thl-sub">current baseline estimate</div></div>
