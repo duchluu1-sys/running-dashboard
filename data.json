@@ -2206,6 +2206,15 @@
       "status": "GREEN",
       "note": "All signals nominal",
       "briefing": "Quality A — Pace Calibration Ladder (ceiling suspended). Evo SL, Elite Fitness. W14/24 · 69d to Race 0 · 5.52km on board. Last: R58 easy 5.52km (Aug 10)."
+    },
+    {
+      "date": "2026-08-13",
+      "hrv": 53,
+      "rhr": 50,
+      "sleepScore": 70,
+      "status": "GREEN",
+      "note": "All signals nominal",
+      "briefing": "Quality B — 3x5 min race-sharp @ 10.5 km/h continuous, ceiling 155 bpm. Evo SL, Elite Fitness. Volume: 18.9km left over 2 sessions (~9.4km each) to clear 35km. W14/24 · 67d to Race 0 · 16.05km of 35–38km on board · ACWR 1.04. Last: R60 quality_b 4.36km (Aug 13)."
     }
   ],
   "PHASES": [
