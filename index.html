@@ -3315,11 +3315,11 @@ function renderPaceZones(){
           const hPct=Math.round(80-(pt.hr-130)/50*70);
           const isLT1=pt.label==='LT1',isLT2=pt.label==='LT2+';
           const barCol=isLT1?'var(--gn)':isLT2?'var(--am)':'var(--cy)';
+          const topLabel=pt.label||String(pt.hr);
+          const topCol=pt.label?barCol:'var(--mu)';
           return`<div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:2px">
-            <div style="font-family:var(--mono);font-size:.42rem;color:var(--mu)">${pt.hr}</div>
-            <div style="width:100%;background:${barCol};border-radius:2px 2px 0 0;opacity:.8;height:${hPct}%;min-height:4px;position:relative">
-              ${pt.label?`<div style="position:absolute;top:-14px;left:50%;transform:translateX(-50%);font-family:var(--mono);font-size:.38rem;color:${barCol};white-space:nowrap">${pt.label}</div>`:''}
-            </div>
+            <div style="font-family:var(--mono);font-size:.42rem;color:${topCol};font-weight:${pt.label?'700':'400'}">${topLabel}</div>
+            <div style="width:100%;background:${barCol};border-radius:2px 2px 0 0;opacity:.8;height:${hPct}%;min-height:4px"></div>
             <div style="font-family:var(--mono);font-size:.42rem;color:var(--m2)">${Math.floor(paceMin)}:${String(Math.round((paceMin%1)*60)).padStart(2,'0')}</div>
           </div>`;
         }).join('')}
