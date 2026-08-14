@@ -2366,12 +2366,12 @@
     },
     {
       "date": "2026-08-14",
-      "hrv": null,
-      "rhr": null,
-      "sleepScore": 80,
+      "hrv": 67,
+      "rhr": 48,
+      "sleepScore": 87,
       "status": "GREEN",
-      "note": "Sleep 7:20 / score 80 · race day · 10K time trial 61:17 · statin Day 77",
-      "briefing": "W14 race day. Sleep 80. 10K time trial — post-thunderstorm afternoon. LCRS baseline set: 7.6 min. W15 starts Monday Aug 17."
+      "note": "All signals nominal",
+      "briefing": "Rest day. Volume: 36km over 1 sessions = 36.0km each. Above sustainable — expect to land under 36km. W15/24 · 66d to Race 0 · 0.0km of 36–40km on board · ACWR 1.14. Last: R61 race 10.01km (Aug 14)."
     }
   ],
   "PHASES": [
