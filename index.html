@@ -1179,11 +1179,11 @@ body{background:var(--bg);background-image:var(--grid);color:var(--tx);font-fami
   </div>
   <div class="g2">
     <div class="card hud-card">
-      <div class="ch"><div class="cl">WEEKLY VOLUME</div><div class="cs">target corridor 33-37km · phase 1 slate · phase 2 violet · * partial</div></div>
+      <div class="ch"><div class="cl">WEEKLY VOLUME</div><div class="cs">target corridor from PROGRESSION · phase 1 slate · phase 2 violet · * partial</div></div>
       <div class="cw"><canvas id="volChart"></canvas></div>
     </div>
     <div class="card hud-card">
-      <div class="ch"><div class="cl">LONG RUN PROGRESSION</div><div class="cs">building toward 20km gate</div></div>
+      <div class="ch"><div class="cl">LONG RUN PROGRESSION</div><div class="cs">building toward 20–22km peak · Phase 3 race specifics from Mar 2027</div></div>
       <div class="cw"><canvas id="longRunChart"></canvas></div>
     </div>
   </div>
@@ -1205,6 +1205,14 @@ body{background:var(--bg);background-image:var(--grid);color:var(--tx);font-fami
   <div class="card gate-list-card hud-card" id="gate-list-card">
     <div class="ch"><div class="cl">PHASE 2 → 3 GATES</div><div class="cs" id="glist-sub">6 hard gates · 0 of 6 cleared</div></div>
     <div id="glist-body"></div>
+  </div>
+  <div class="card hud-card" id="qual-prog-card-train">
+    <div class="ch"><div class="cl">QUALITY PROGRESSION</div><div class="cs">W9–24 · session targets · pace recalibrated Aug 11</div></div>
+    <div id="qual-prog-body-train" class="cb"></div>
+  </div>
+  <div class="card hud-card" id="pace-zones-card">
+    <div class="ch"><div class="cl">PACE SPECTRUM</div><div class="cs">current capability map · updates from data.json</div></div>
+    <div id="pace-zones-body"></div>
   </div>
 </div>
 <!-- ── HEALTH ── -->
@@ -1245,12 +1253,9 @@ body{background:var(--bg);background-image:var(--grid);color:var(--tx);font-fami
       <div class="ch"><div class="cl">GATES</div><div class="cs">6 hard gates · Phase 3 entry Oct 26</div></div>
       <div id="gate-forecast-body" class="cb"></div>
     </div>
-    <div class="card hud-card fg-qual" id="qual-prog-card">
-      <div class="ch"><div class="cl">QUALITY</div><div class="cs">W9–24 · session targets</div></div>
-      <div id="qual-prog-body" class="cb"></div>
-    </div>
+
     <div class="card hud-card fg-milestones" id="milestone-card">
-      <div class="ch"><div class="cl">MILESTONES</div><div class="cs">Jul 30 BV 108 · Oct 19 Race 0</div></div>
+      <div class="ch"><div class="cl">MILESTONES</div><div class="cs">Oct 19 Race 0 · Sep 2026 Regenetics · Oct 2027 VPBank Marathon</div></div>
       <div id="milestone-body" class="cb"></div>
     </div>
     <div class="card hud-card fg-trivia" id="trivia-card">
@@ -1284,7 +1289,7 @@ const HEALTH_FLAGS=[
   //        standing = Health tab only (chronic, doesn't change today's plan)
   // dueDate (ISO): required for class:"dated"; auto-promotes standing→dated at T-7, blocking at T-0
   {class:"standing",status:"urgent",title:"HBV Vaccination",short:"Shot 1 of 3. OVERDUE.",detail:"HBsAg negative, HBsAb 7.77 (need ≥10 — not immune). 3-shot course over 6 months. High priority: Vietnam prevalence + both parents Hep B positive. Any clinic.",action:"Book Shot 1 this week. No further deferral."},
-  {class:"dated",dueDate:"2026-08-13",status:"urgent",title:"BV 108 — ~Aug 13 (rescheduled)",short:"Meds finishing first. Agenda unchanged. Get lactate booking.",detail:"Rescheduled per doctor: finish meds course first. Jul 30 not attended. Agenda: Atoyze review · blood retest (TG, Vit D, Potassium, Ferritin, CBC) · endocrinologist referral (TI-RADS 4) · lactate step test booking. VO₂max already confirmed at Regenetics HCMC — not needed here.",action:"Do not leave without a lactate test date. VO₂max is settled (Regenetics HCMC)."},
+  {class:"standing",status:"clear",title:"BV 108 — Aug 13 ✅ DONE",short:"Blood retest done. Results pending Dr. Thắng.",detail:"Done Aug 13. Blood retest at home. Results pending Dr. Thắng review. HR ceiling raise to 160 pending blood results. Endocrinologist referral (TI-RADS 4) pending. Left plantar mentioned — resolved. Creatine clearance pending CK/creatinine results.",action:"Await Dr. Thắng blood result review. HR ceiling 160 clearance pending."},
   {class:"standing",status:"watch",title:"TI-RADS 4 Thyroid Nodule",short:"5×4mm left lobe. Endocrinologist referral pending.",detail:"TI-RADS 4 = intermediate suspicion — majority benign but specialist required. TSH and thyroid function completely normal. Referral via Jul 30 appointment.",action:"Jul 30: get endocrinologist referral confirmed."},
   {class:"standing",status:"watch",title:"Triglyceride Disorder",short:"TG 8.52 mmol/L (5× upper limit). On Atoyze 20/10.",detail:"Genetic/metabolic driver confirmed. No fatty liver. Atoyze 20/10 from May 30. Zero statin muscle side effects across all runs to date. Alcohol zero — non-negotiable. Retest ~Aug 13 (BV 108 rescheduled).",action:"Monitor for unusual leg heaviness every run. Retest ~Aug 13 (BV 108)."},
   {class:"standing",status:"watch",title:"Right Ankle + Right Plantar",short:"Ankle cleared R45. Plantar mild fatigue — monitor.",detail:"Right lateral ankle (peroneal) irritated R43, present first 2km R44 only, clean through 20 min continuous tempo R45. New mild right plantar fatigue at R45 end — not pain, fatigue. Monitor Week 12.",action:"Flag any ankle or plantar pain during Week 12 Quality A."},
@@ -2248,12 +2253,31 @@ function renderTimeTrial(){
   if(done&&tt.result){
     const hm=+(tt.result*Math.pow(21.1/10,1.06)).toFixed(0);
     const hmH=Math.floor(hm/60),hmM=hm%60;
-    el.innerHTML=`<div class="ch"><div class="cl">BENCHMARK RESULT · 10K TIME TRIAL</div><div class="cs" style="color:var(--gn)">✓ COMPLETE · ${tt.resultDate||''}</div></div>
+    const ma=+(tt.result*Math.pow(42.195/10,1.06)).toFixed(0);
+    const maH=Math.floor(ma/60),maM=ma%60;
+    const timeMin=Math.floor(tt.result),timeSec=Math.round((tt.result%1)*60);
+    const runPaceStr=tt.runPace?fmtP(tt.runPace)+'/km':'—';
+    el.innerHTML=`<div class="ch"><div class="cl">BENCHMARK RESULT · 10K TIME TRIAL</div><div class="cs" style="color:var(--gn)">✓ COMPLETE · ${tt.resultDate||''} · ${tt.trialNote||''}</div></div>
       <div class="thl-signals">
-        <div class="thl-sig"><div class="thl-label">10K TIME</div><div class="thl-value" style="color:var(--gn)">${Math.floor(tt.result)}:${String(Math.round((tt.result%1)*60)).padStart(2,'0')}</div><div class="thl-sub">actual result</div></div>
-        <div class="thl-sig"><div class="thl-label">PACE</div><div class="thl-value" style="color:var(--cy)">${tt.resultPace?fmtP(tt.resultPace)+'/km':'—'}</div><div class="thl-sub">avg pace</div></div>
-        <div class="thl-sig"><div class="thl-label">→ HM PROJ</div><div class="thl-value" style="color:var(--m2)">${hmH}:${String(hmM).padStart(2,'0')}</div><div class="thl-sub">Riegel · medium conf</div></div>
-      </div>`;
+        <div class="thl-sig"><div class="thl-label">10K TIME</div><div class="thl-value" style="color:var(--gn)">${timeMin}:${String(timeSec).padStart(2,'0')}</div><div class="thl-sub">total elapsed</div></div>
+        <div class="thl-sig"><div class="thl-label">AVG PACE</div><div class="thl-value" style="color:var(--cy)">${tt.resultPace?fmtP(tt.resultPace)+'/km':'—'}</div><div class="thl-sub">overall incl. walks</div></div>
+        <div class="thl-sig"><div class="thl-label">RUN PACE</div><div class="thl-value" style="color:var(--vb)">${runPaceStr}</div><div class="thl-sub">run segments only</div></div>
+        <div class="thl-sig"><div class="thl-label">LCRS</div><div class="thl-value" style="color:var(--vb)">${tt.lcrs||'—'} min</div><div class="thl-sub">longest cont. run</div></div>
+        <div class="thl-sig"><div class="thl-label">AVG HR</div><div class="thl-value" style="color:var(--m2)">${tt.avgHR||151} bpm</div><div class="thl-sub">max ${tt.maxHR||164} bpm</div></div>
+        <div class="thl-sig"><div class="thl-label">GCT</div><div class="thl-value" style="color:var(--vb)">${tt.gct||284} ms</div><div class="thl-sub">🏆 new program best</div></div>
+        <div class="thl-sig"><div class="thl-label">→ HM PROJ</div><div class="thl-value" style="color:var(--m2)">${hmH}:${String(hmM).padStart(2,'0')}</div><div class="thl-sub">Riegel</div></div>
+        <div class="thl-sig"><div class="thl-label">→ MAR PROJ</div><div class="thl-value" style="color:var(--m2)">${maH}:${String(maM).padStart(2,'0')}</div><div class="thl-sub">Riegel · low conf</div></div>
+      </div>
+      <div style="padding:10px 20px 12px;border-top:1px solid var(--bd)">
+        <div style="font-family:var(--mono);font-size:.46rem;letter-spacing:2px;text-transform:uppercase;color:var(--mu);margin-bottom:6px">Per-km lap splits</div>
+        <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:4px;font-family:var(--mono);font-size:.54rem">
+          ${(tt.laps||[]).map(l=>`<div style="background:rgba(0,212,255,.04);border-radius:3px;padding:4px 6px;border:1px solid rgba(0,212,255,.08)"><div style="color:var(--mu);font-size:.42rem">km ${l.km}</div><div style="color:var(--m2)">${fmtP(l.pace)}</div><div style="color:var(--mu);font-size:.42rem">${l.hr} bpm</div></div>`).join('')}
+        </div>
+      </div>
+      <div style="padding:8px 20px;border-top:1px solid var(--bd);font-family:var(--mono);font-size:.5rem;color:var(--mu)">
+        <span style="color:var(--am)">⚑ Key finding:</span> Pacing error km 1 (5:16 vs 5:30 plan). LCRS 7.6 min = primary constraint. W15–23 quality progression addresses this directly.
+      </div>
+      ${tt.verdict?`<div style="padding:6px 20px 10px;font-family:var(--mono);font-size:.5rem;color:var(--mu);border-top:1px solid rgba(0,212,255,.05)">${tt.verdict}</div>`:''}`;
   } else {
     const dLabel=d>1?`${d} days away`:d===1?'TOMORROW':d===0?'TODAY':'upcoming';
     el.innerHTML=`<div class="ch"><div class="cl">BENCHMARK SESSION · 10K TIME TRIAL</div><div class="cs">W15 · ${tt.trialWindow||'Aug 17'} · West Lake · Dawn · <span style="color:var(--am);font-weight:700">${dLabel}</span></div></div>
@@ -2289,8 +2313,8 @@ function renderPerfProjections(){
   const conf=hasResult?'MEDIUM':'LOW';
   const confCol=hasResult?'var(--am)':'#f87171';
   const confNote=hasResult
-    ?`Based on ${tt.resultDate||'time trial'} result · Riegel formula`
-    :'No race data · LT1 inference · updates after Aug 17 time trial';
+    ?`Based on ${tt.resultDate||'time trial'} result · Riegel formula · LT data: Regenetics Sep 2026`
+    :'No race data · LT1 inference · time trial result will auto-update';
   const fmtP=v=>{const m=Math.floor(v),s=Math.round((v-m)*60);return`${m}:${String(s).padStart(2,'0')}`;};
   const fmtT=m=>{const h=Math.floor(m/60),mn=Math.round(m%60);return`${h}:${String(mn).padStart(2,'0')}`;};
   const riegel=(t,d1,d2)=>t*Math.pow(d2/d1,1.06);
@@ -2351,9 +2375,9 @@ function renderPerfProjections(){
     <div style="padding:10px 20px 12px">
       <div style="font-family:var(--mono);font-size:.46rem;letter-spacing:2px;color:var(--mu);text-transform:uppercase;margin-bottom:6px">What updates this model</div>
       <div style="font-family:var(--stm,monospace);font-size:.6rem;color:var(--mu);line-height:1.85">
-        1 · Aug 17 time trial → Riegel recalculates from actual 10K<br>
+        1 · ✓ Aug 14 10K trial → Riegel calibrated to actual result<br>
         2 · Sep 2026 lactate test → LT1/LT2 precision replaces inference<br>
-        3 · Feb 2027 HM race → replaces all estimates with real data<br>
+        3 · Feb/Mar 2027 HM race → replaces all estimates with real data<br>
         <span style="color:var(--m2);font-style:italic">Note: current = today's baseline. Phase 3–5 training closes the gap.</span>
       </div>
     </div>`;
@@ -2573,6 +2597,8 @@ function renderTraining(a){
   renderSessionLog();
   renderGates('checklist');
   renderGates('list');
+  renderQualProgTrain();
+  renderPaceZones();
 }
 
 function renderSignals(a){
@@ -2605,6 +2631,11 @@ function renderSignals(a){
       <div style="font-family:var(--mono);font-size:.5rem;letter-spacing:2px;text-transform:uppercase;color:var(--mu);margin-bottom:6px">BEST DRIFT (OUTDOOR)</div>
       <div style="font-family:var(--mono);font-size:1.1rem;font-weight:700;color:var(--cn)">${bestDriftStr}</div>
       <div style="font-size:.65rem;color:var(--m2)">${bestDriftSub}</div>
+    </div>
+    <div style="border-top:1px solid var(--bd);padding-top:10px;margin-top:4px">
+      <div style="font-family:var(--mono);font-size:.5rem;letter-spacing:2px;text-transform:uppercase;color:var(--mu);margin-bottom:6px">LCRS — LONGEST CONTINUOUS RUN SEGMENT</div>
+      <div style="font-family:var(--mono);font-size:1.1rem;font-weight:700;color:var(--vb)">${ATHLETE.lcrs||'—'} min</div>
+      <div style="font-size:.65rem;color:var(--m2)">R${ATHLETE.lcrsRun||'61'} · ${ATHLETE.lcrsDate||'Aug 14'} · target ${ATHLETE.lcrsTarget||20} min W${ATHLETE.lcrsTargetWk||20}</div>
     </div>`;
 }
 
@@ -2709,8 +2740,8 @@ function renderFuture(){
   // S45 — Trivia + What-if
   renderTriviaWhatIf();
   // S28 — vol trajectory canvas injected by initVolTrajChart on tab activation
-  // S28 — quality progression
-  renderQualProg();
+  // S28 — quality progression: moved to TRAINING tab (renderQualProgTrain)
+  // renderQualProg(); // future tab qual-prog-body element removed
   // S29
   renderGates('forecast');
   renderMilestones();
@@ -3166,6 +3197,165 @@ function renderQualProg(){
       </div>
     </details>`:''}
   `;
+}
+
+
+
+// ── QUALITY PROGRESSION — TRAINING TAB COPY ────────────────────────────
+// Mirrors renderQualProg() but targets the training-tab element
+function renderQualProgTrain(){
+  const el=document.getElementById('qual-prog-body-train');
+  if(!el||!PROGRESSION.length)return;
+  const curr=ATHLETE.week;
+  const WINDOW=3;
+  const kindTag={
+    deload:`<span class="qp-kind qp-deload">DELOAD</span>`,
+    peak:`<span class="qp-kind qp-peak">PEAK</span>`,
+    consolidation:`<span class="qp-kind qp-consolidation">HOLD</span>`,
+    chill:`<span class="qp-kind qp-chill">CHILL</span>`
+  };
+  const buildRow=p=>{
+    const past=p.wk<curr,active=p.wk===curr;
+    const qa=p.qualityA,qb=p.qualityB,kind=p.kind;
+    const lrMin=p.lrMin,lrMax=p.lrMax,volMin=p.volMin,volMax=p.volMax;
+    const lr=lrMin==null?'by feel':(lrMin===lrMax?`${lrMin} km`:`${lrMin}–${lrMax} km`);
+    const vol=volMin==null?'—':`${volMin}–${volMax}`;
+    return`<tr class="qp-row${past?' qp-past':''}${active?' qp-curr':''}">
+      <td class="qp-wk">W${p.wk}${kindTag[kind]||''}</td>
+      <td class="qp-qa">${qa}</td>
+      <td class="qp-qb">${qb}</td>
+      <td class="qp-lr">${lr}</td>
+      <td class="qp-vol">${vol}</td>
+    </tr>`;
+  };
+  const visible=PROGRESSION.filter(p=>Math.abs(p.wk-curr)<=WINDOW);
+  const hidden=PROGRESSION.filter(p=>Math.abs(p.wk-curr)>WINDOW);
+  const thead=`<thead><tr><th>WEEK</th><th>QUALITY A</th><th>QUALITY B</th><th>LONG RUN</th><th>VOL</th></tr></thead>`;
+  el.innerHTML=`
+    <div style="overflow-x:auto;padding-bottom:4px">
+      <table class="qp-table">${thead}<tbody>${visible.map(buildRow).join('')}</tbody></table>
+    </div>
+    ${hidden.length?`
+    <details style="padding:0 12px 10px">
+      <summary style="font-family:var(--mono);font-size:.52rem;letter-spacing:1px;color:var(--mu);cursor:pointer;list-style:none;padding:8px 0;text-transform:uppercase">Show all ${PROGRESSION.length} weeks ▾</summary>
+      <div style="overflow-x:auto;margin-top:6px">
+        <table class="qp-table">${thead}<tbody>${PROGRESSION.map(buildRow).join('')}</tbody></table>
+      </div>
+    </details>`:''}
+  `;
+}
+
+// ── PACE SPECTRUM — current capability map ────────────────────────────────
+function renderPaceZones(){
+  const el=document.getElementById('pace-zones-body');
+  if(!el)return;
+  const a=ATHLETE;
+  const tt=a.timeTrial;
+  const fmtP=v=>{if(!v)return'—';const m=Math.floor(v),s=Math.round((v-m)*60);return`${m}:${String(s).padStart(2,'0')}`;};
+  const fmtKmh=v=>`${v} km/h`;
+  // Riegel
+  const riegel=(t,d1,d2)=>t*Math.pow(d2/d1,1.06);
+  const has10K=tt&&tt.result!=null;
+  const t10=has10K?tt.result:null;
+  const t5=t10?riegel(t10,10,5):null;
+  const tHM=t10?riegel(t10,10,21.1):null;
+  const p5=t5?t5/5:null;
+  const pHM=tHM?tHM/21.1:null;
+  // LT1 outdoor est: ltPace * 1.05 (treadmill to outdoor transfer ~5%)
+  const lt1tmPace=a.ltPace||6.32;
+  const lt1odPace=lt1tmPace*1.05;
+  // LT2 outdoor est: lt2 treadmill → outdoor
+  const lt2PaceMinOD=5.77,lt2PaceMaxOD=6.07;
+  // Quality targets
+  const qaMinKmh=9.8,qaMaxKmh=10.0;
+  const qaPaceMin=60/qaMaxKmh,qaPaceMax=60/qaMinKmh;
+  const qbKmh=9.0,qbPace=60/qbKmh;
+  // Marathon current projection (Riegel from 10K)
+  const tMar=t10?riegel(t10,10,42.195):null;
+  const pMar=tMar?tMar/42.195:null;
+
+  // Build rows: label | pace | hr | speed | conf | color
+  const rows=[
+    {section:'TRAINING ZONES'},
+    {label:'EASY',pace:`${fmtP(a.easyPaceMin||7.0)}–${fmtP(a.easyPaceMax||8.5)}`,hr:`${a.easyHRBand[0]}–${a.easyHRBand[1]}`,speed:'7.1–8.6',conf:'HIGH',col:'var(--cy)',src:'validated · cardiac drift',zone:'Z2'},
+    {label:'LT1 (TM)',pace:fmtP(lt1tmPace),hr:'~140',speed:'9.5',conf:'MED',col:'var(--gn)',src:'R59 calibration',zone:'Z3'},
+    {label:'LT1 (OD est)',pace:fmtP(lt1odPace),hr:'~140',speed:'~9.0',conf:'MED-LOW',col:'rgba(16,185,129,.6)',src:'outdoor transfer ~5%',zone:'Z3'},
+    {label:'QUALITY A',pace:`${fmtP(qaPaceMin)}–${fmtP(qaPaceMax)}`,hr:'145–150',speed:'9.8–10.0',conf:'PRESC',col:'var(--gn)',src:'W15–16 target',zone:'Z3'},
+    {label:'QUALITY B',pace:fmtP(qbPace),hr:'140–145',speed:'9.0',conf:'PRESC',col:'var(--gn)',src:'W15–16 target',zone:'Z3'},
+    {label:'LT2 (TM est)',pace:`${fmtP(a.lt2PaceMin||5.56)}–${fmtP(a.lt2PaceMax||5.88)}`,hr:'155–163',speed:'10.2–10.8',conf:'MED-LOW',col:'var(--am)',src:'R59 triangulation',zone:'Z4'},
+    {label:'LT2 (OD est)',pace:`${fmtP(lt2PaceMinOD)}–${fmtP(lt2PaceMaxOD)}`,hr:'155–163',speed:'9.9–10.4',conf:'MED-LOW',col:'var(--am)',src:'outdoor transfer',zone:'Z4'},
+    {section:'RACE BENCHMARKS'},
+    ...(has10K?[
+      {label:'10K ACTUAL',pace:fmtP(tt.resultPace),hr:tt.avgHR?`${tt.avgHR} avg`:'151 avg',speed:`${(60/tt.resultPace).toFixed(1)}`,conf:'★ MEASURED',col:'var(--vb)',src:`Aug 14 · R61 overall`,zone:'Z4'},
+      {label:'10K RUN SEGS',pace:fmtP(tt.runPace||5.33),hr:`${tt.maxHR||164} max`,speed:`${(60/(tt.runPace||5.33)).toFixed(1)}`,conf:'★ MEASURED',col:'var(--vb)',src:'running segments only',zone:'Z4'},
+    ]:[]),
+    ...(p5?[{label:'5K (Riegel est)',pace:fmtP(p5),hr:'—',speed:`${(60/p5).toFixed(1)}`,conf:'LOW',col:'var(--mu)',src:'from 10K result',zone:'Z4+'}]:[]),
+    ...(pHM?[{label:'HM (Riegel est)',pace:fmtP(pHM),hr:'—',speed:`${(60/pHM).toFixed(1)}`,conf:'LOW',col:'var(--mu)',src:'from 10K result',zone:'Z3–4'}]:[]),
+    ...(pMar?[{label:'MARATHON (proj)',pace:fmtP(pMar),hr:'—',speed:`${(60/pMar).toFixed(1)}`,conf:'LOW',col:'var(--mu)',src:'Riegel from 10K',zone:'~Z3'}]:[]),
+    {section:'GOALS'},
+    {label:'MARATHON SUB-4',pace:fmtP(a.goalPaceSub4),hr:'≤LT2',speed:`${(60/a.goalPaceSub4).toFixed(1)}`,conf:'TARGET',col:'#a855f7',src:'requires LT2 ≥12.0 km/h',zone:'Z3–4'},
+    {label:'MARATHON 3:30',pace:fmtP(a.goalPace330),hr:'≤LT2+',speed:`${(60/a.goalPace330).toFixed(1)}`,conf:'STRETCH',col:'#7c3aed',src:'+18–29% LT2 gain needed',zone:'Z4'},
+  ];
+
+  // Calibration curve (pace-HR) from R59 data
+  const curve=a.calibrationCurve||[];
+  const curveHTML=curve.length?`
+    <div style="padding:12px 20px 10px;border-bottom:1px solid var(--bd)">
+      <div style="font-family:var(--mono);font-size:.46rem;letter-spacing:2px;text-transform:uppercase;color:var(--mu);margin-bottom:8px">PACE-HR CURVE — R59 CALIBRATION · ${curve[0].hr}–${curve[curve.length-1].hr} bpm</div>
+      <div style="display:flex;align-items:flex-end;gap:4px;height:52px;padding:0 4px">
+        ${curve.map((pt,i)=>{
+          const paceMin=60/pt.kmh;
+          const hPct=Math.round(80-(pt.hr-130)/50*70);
+          const isLT1=pt.label==='LT1',isLT2=pt.label==='LT2+';
+          const barCol=isLT1?'var(--gn)':isLT2?'var(--am)':'var(--cy)';
+          return`<div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:2px">
+            <div style="font-family:var(--mono);font-size:.42rem;color:var(--mu)">${pt.hr}</div>
+            <div style="width:100%;background:${barCol};border-radius:2px 2px 0 0;opacity:.8;height:${hPct}%;min-height:4px;position:relative">
+              ${pt.label?`<div style="position:absolute;top:-14px;left:50%;transform:translateX(-50%);font-family:var(--mono);font-size:.38rem;color:${barCol};white-space:nowrap">${pt.label}</div>`:''}
+            </div>
+            <div style="font-family:var(--mono);font-size:.42rem;color:var(--m2)">${Math.floor(paceMin)}:${String(Math.round((paceMin%1)*60)).padStart(2,'0')}</div>
+          </div>`;
+        }).join('')}
+      </div>
+      <div style="display:flex;justify-content:space-between;font-family:var(--mono);font-size:.42rem;color:var(--mu);margin-top:2px"><span>slower</span><span style="color:var(--gn)">LT1 →</span><span style="color:var(--am)">← LT2</span><span>faster</span></div>
+    </div>`:'';
+
+  // Render rows
+  const rowsHTML=rows.map(r=>{
+    if(r.section)return`<div style="font-family:var(--mono);font-size:.44rem;letter-spacing:3px;text-transform:uppercase;color:var(--mu);padding:8px 20px 4px;background:rgba(0,212,255,.02);border-top:1px solid rgba(0,212,255,.06)">${r.section}</div>`;
+    const confColor=r.conf==='HIGH'?'var(--gn)':r.conf==='★ MEASURED'?'var(--vb)':r.conf==='MED'||r.conf==='PRESC'?'var(--cy)':r.conf==='TARGET'?'#a855f7':r.conf==='STRETCH'?'#7c3aed':'var(--mu)';
+    return`<div style="display:grid;grid-template-columns:90px 80px 70px 56px 56px 1fr;gap:4px;padding:5px 20px;border-bottom:1px solid rgba(0,212,255,.04);align-items:center">
+      <div style="font-family:var(--mono);font-size:.56rem;font-weight:700;color:${r.col}">${r.label}</div>
+      <div style="font-family:var(--mono);font-size:.65rem;color:var(--m2)">${r.pace}/km</div>
+      <div style="font-family:var(--mono);font-size:.52rem;color:var(--mu)">${r.hr} bpm</div>
+      <div style="font-family:var(--mono);font-size:.5rem;color:var(--mu)">${r.speed}</div>
+      <div style="font-family:var(--mono);font-size:.42rem;color:${confColor};text-align:right">${r.conf}</div>
+      <div style="font-family:var(--mono);font-size:.42rem;color:rgba(148,163,184,.45);text-align:right">${r.src}</div>
+    </div>`;
+  }).join('');
+
+  // LCRS progress bar
+  const lcrs=a.lcrs||0,lcrsTarget=a.lcrsTarget||20;
+  const lcrsPct=Math.min(100,Math.round(lcrs/lcrsTarget*100));
+  const lcrsHTML=`
+    <div style="padding:10px 20px 12px;border-top:1px solid var(--bd)">
+      <div style="font-family:var(--mono);font-size:.44rem;letter-spacing:2px;text-transform:uppercase;color:var(--mu);margin-bottom:6px">LCRS — LONGEST CONTINUOUS RUN SEGMENT · key constraint</div>
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:4px">
+        <div style="font-family:var(--hud,monospace);font-size:1.1rem;font-weight:700;color:var(--vb)">${lcrs} min</div>
+        <div style="font-family:var(--mono);font-size:.52rem;color:var(--mu)">baseline · R61 Aug 14 → target ${lcrsTarget} min by W${a.lcrsTargetWk||20}</div>
+      </div>
+      <div style="background:rgba(255,255,255,.06);height:3px;border-radius:2px;overflow:hidden;margin-bottom:4px"><div style="height:100%;background:var(--vb);border-radius:2px;width:${lcrsPct}%"></div></div>
+      <div style="display:flex;justify-content:space-between;font-family:var(--mono);font-size:.44rem;color:var(--mu)">
+        <span>${lcrs} min now</span><span style="color:var(--am)">${lcrsPct}% to target</span><span>${lcrsTarget} min W${a.lcrsTargetWk||20}</span>
+      </div>
+    </div>`;
+
+  // Column header
+  const headerHTML=`<div style="display:grid;grid-template-columns:90px 80px 70px 56px 56px 1fr;gap:4px;padding:5px 20px 4px;border-bottom:1px solid rgba(0,212,255,.08)">
+    ${['ZONE/TARGET','PACE','HR','SPEED','CONF','SOURCE'].map(h=>`<div style="font-family:var(--mono);font-size:.42rem;letter-spacing:1px;color:var(--mu)">${h}</div>`).join('')}
+  </div>`;
+
+  el.innerHTML=lcrsHTML+curveHTML+headerHTML+rowsHTML+`<div style="padding:6px 20px;font-family:var(--mono);font-size:.42rem;color:var(--mu)">TM=treadmill · OD=outdoor · est=estimate · LT2 confirmed at Regenetics HCMC Sep 2026</div>`;
 }
 
 // ── CHART REGISTRY ──────────────────────────────────────────────────────

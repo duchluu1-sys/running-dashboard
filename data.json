@@ -1865,6 +1865,51 @@
         "priming",
         "bv108-done"
       ]
+    },
+    {
+      "r": 61,
+      "date": "Aug 14",
+      "type": "race",
+      "wk": 14,
+      "dist": 10.01,
+      "duration": 61.28,
+      "moving": 61.22,
+      "pace": 6.12,
+      "paceEasy": null,
+      "hrAvg": 151,
+      "hrMax": 164,
+      "te": 4.9,
+      "te_an": 2.2,
+      "gct": 284,
+      "vr": 8.3,
+      "cadence": 142,
+      "pctCeiling": null,
+      "drift": null,
+      "walkRatio": 17.6,
+      "hrZones": [
+        0,
+        7,
+        17,
+        35,
+        38
+      ],
+      "temp": 32,
+      "surface": "outdoor",
+      "conditions": "14:47 · post-thunderstorm · 30-33°C",
+      "flag": "✅✅",
+      "note": "10K Time Trial · W14 · 1:01:17 · avg HR 151 · max HR 164 · GCT 284ms 🏆 PB · VR 8.3% · cadence 142 spm avg (rising 151→159 under fatigue) · 19 run/walk cycles · LCRS 7.6 min @ 5:16/km · run-only pace 5:20/km · zero tissue complaint · Statin Day 77",
+      "verdict": "10K time trial complete: 61:17. Running-segment pace 5:20/km (47.2 min of running across 8.84 km) confirmed correct. Walk ratio 17.6% — walk breaks were forced physiology at LT2+ intensity in first sustained outdoor threshold effort, not execution failure. First walk at 7.7 min (1.46 km) — pacing error km 1 (5:16/km vs 5:30 plan). GCT 284ms new program best. VR 8.3% new outdoor best. Max HR 164 new observed floor. LCRS baseline: 7.6 min. Reserve confirmed: final 5 min avg 148/max 155 against 164 observed max. Sub-4 marathon requires LCRS → 20 min continuous at LT2 by W20. Tissue: zero complaint across 10 km with 19 acceleration cycles.",
+      "runPace": 5.33,
+      "lcrs": 7.6,
+      "tags": [
+        "time-trial",
+        "first-10k",
+        "gct-pb",
+        "vr-pb",
+        "lcrs-baseline",
+        "pacing-error-km1",
+        "reserve-confirmed"
+      ]
     }
   ],
   "GATES": [
@@ -1905,7 +1950,7 @@
       "short": "8 consecutive rising-load weeks",
       "progress": 75,
       "status": "active",
-      "detail": "Week 14 = week 6 of 8. Started Week 9 (Jul 6). Clears Week 16 (Aug 31). No injury signals through R59. R59: zero tissue complaint at 11.5 km/h — strongest tissue clearance data in program.",
+      "detail": "Week 14 = week 6 of 8. Started Week 9 (Jul 6). Clears Week 16 (Aug 31). R61: zero tissue complaint across 10 km with 19 acceleration cycles at 5:20/km — strongest tissue clearance data in program.",
       "eta": "Aug 31, 2026"
     },
     {
@@ -1993,11 +2038,11 @@
     "age": 30,
     "phase": "Phase 2",
     "phaseName": "Quality Development",
-    "week": 14,
+    "week": 15,
     "totalWeeks": 24,
     "deloadWeek": 21,
-    "weekVolOnBoard": 16.05,
-    "lastWeekVol": 40.26,
+    "weekVolOnBoard": 0.0,
+    "lastWeekVol": 26.06,
     "weekTarget": [
       35,
       38
@@ -2017,12 +2062,12 @@
     "ltRun": "R59",
     "ltDate": "Aug 11",
     "maxHREstimate": 185,
-    "gctBest": 302,
-    "vrBest": 8.5,
+    "gctBest": 284,
+    "vrBest": 8.3,
     "statinStart": "2026-05-30",
     "stressLevel": "MODERATE",
     "formCue": "Eyes on the horizon -- head up every session",
-    "date": "August 13, 2026",
+    "date": "August 14, 2026",
     "hrvBaseline": [
       53,
       68
@@ -2054,9 +2099,9 @@
       "paceTargetMax": 6.17,
       "targetTimeMin": 58.0,
       "targetTimeMax": 61.7,
-      "result": null,
-      "resultPace": null,
-      "resultDate": null,
+      "result": 61.28,
+      "resultPace": 6.12,
+      "resultDate": "Aug 14",
       "venue": "West Lake outdoor loop",
       "shoe": "Evo SL",
       "strategy": "km1-2 at 5:30/km controlled · km3-5 at 5:20-5:25/km build · km6-8 pick up if HR clean · km9-10 RPE 9 everything left · no HR ceiling · outdoor transfer untested — start conservative",
@@ -2067,7 +2112,68 @@
       },
       "departureLogged": true,
       "trialWindow": "Aug 16 (Sun) or Aug 17 (Mon)",
-      "trialNote": "Weather dependent — dawn after rain · heatwave week · confirm night before"
+      "trialNote": "Completed Aug 14 — post-thunderstorm, 30-33°C, 14:47",
+      "runPace": 5.33,
+      "lcrs": 7.6,
+      "walkRatio": 17.6,
+      "avgHR": 151,
+      "maxHR": 164,
+      "walkTime": 10.76,
+      "gct": 284,
+      "vr": 8.3,
+      "laps": [
+        {
+          "km": 1,
+          "pace": 5.33,
+          "hr": 145
+        },
+        {
+          "km": 2,
+          "pace": 5.82,
+          "hr": 157
+        },
+        {
+          "km": 3,
+          "pace": 6.02,
+          "hr": 156
+        },
+        {
+          "km": 4,
+          "pace": 5.87,
+          "hr": 157
+        },
+        {
+          "km": 5,
+          "pace": 6.47,
+          "hr": 149
+        },
+        {
+          "km": 6,
+          "pace": 6.63,
+          "hr": 151
+        },
+        {
+          "km": 7,
+          "pace": 5.68,
+          "hr": 153
+        },
+        {
+          "km": 8,
+          "pace": 6.35,
+          "hr": 151
+        },
+        {
+          "km": 9,
+          "pace": 7.08,
+          "hr": 143
+        },
+        {
+          "km": 10,
+          "pace": 5.97,
+          "hr": 148
+        }
+      ],
+      "verdict": "COMPLETE · 61:17 · pacing error km1 (5:16 vs 5:30 plan) confirmed primary cause · LCRS 7.6 min baseline set · zero tissue · reserve confirmed at finish"
     },
     "phaseAssessment": [
       {
@@ -2077,8 +2183,50 @@
         "headline": "Aerobic engine objective largely complete. Threshold phase begins now.",
         "body": "13 weeks of structured training produced the core adaptation: cardiac drift moved from +8.4 bpm baseline to multiple negative readings by W8. LT1 confirmed at 9.5 km/h — above initial estimate of 8.5 km/h. GCT improved from 361ms to 302ms program best. 17.15km outdoor long run in 30°C heat with controlled HR and correct fueling. Zero significant injuries throughout. The quality work in W11–W14 was dosed below threshold — the 150 bpm ceiling, set from an unvalidated max HR estimate, suppressed Quality A and B paces below LT1. Corrected Aug 11. Max HR revised from 168 to 178–188 bpm estimate.",
         "nextObjective": "Build LT2 from estimated 10.2–10.8 km/h toward ≥12.0 km/h — the explicit gate for sub-4 viability. September lactate test is the first hard measurement. Quality A at 9.8–10.3 km/h and Quality B at 9.0–9.2 km/h from W15."
+      },
+      {
+        "date": "Aug 14, 2026",
+        "week": 14,
+        "phase": "Phase 2 · W14 Close",
+        "headline": "10K time trial complete. 61:17. LCRS baseline: 7.6 min. Threshold phase begins W15.",
+        "body": "First outdoor 10K time trial delivered the single most important new metric: LCRS (longest continuous run segment) = 7.6 minutes at 5:16/km. This is the constraint that W15–23 quality progression is designed to extend. Running-segment pace 5:20/km confirms capable mechanics at threshold. Walk ratio 17.6% was forced physiology, not failure of will — pace above estimated LT2 for first outdoor sustained effort. GCT 284ms is a new program best. Max HR 164 new observed floor, reserve confirmed at finish (avg 148, max 155 in final 5 min against 164 ceiling). Zero tissue complaint across 10 km with 19 acceleration cycles is the highest confidence tissue data in the program. W14 closed: 26.06 km.",
+        "nextObjective": "LCRS 7.6 min → 20 min continuous at LT2 by W20. W15: 4×6 min @ 9.8–10.0 km/h (Quality A). Every quality session extends the longest unbroken block. Regenetics Sep 2026 is the next hard measurement."
       }
-    ]
+    ],
+    "lcrs": 7.6,
+    "lcrsDate": "Aug 14",
+    "lcrsRun": "R61",
+    "lcrsTarget": 20.0,
+    "lcrsTargetWk": 20,
+    "calibrationCurve": [
+      {
+        "hr": 140,
+        "kmh": 9.5,
+        "label": "LT1"
+      },
+      {
+        "hr": 145,
+        "kmh": 10.0,
+        "label": ""
+      },
+      {
+        "hr": 147,
+        "kmh": 10.5,
+        "label": ""
+      },
+      {
+        "hr": 151,
+        "kmh": 11.0,
+        "label": ""
+      },
+      {
+        "hr": 158,
+        "kmh": 11.5,
+        "label": "LT2+"
+      }
+    ],
+    "easyPaceMin": 7.0,
+    "easyPaceMax": 8.5
   },
   "READINESS_LOG": [
     {
@@ -2215,6 +2363,15 @@
       "status": "GREEN",
       "note": "All signals nominal",
       "briefing": "Quality B — 3x5 min race-sharp @ 10.5 km/h continuous, ceiling 155 bpm. Evo SL, Elite Fitness. Volume: 18.9km left over 2 sessions (~9.4km each) to clear 35km. W14/24 · 67d to Race 0 · 16.05km of 35–38km on board · ACWR 1.04. Last: R60 quality_b 4.36km (Aug 13)."
+    },
+    {
+      "date": "2026-08-14",
+      "hrv": null,
+      "rhr": null,
+      "sleepScore": 80,
+      "status": "GREEN",
+      "note": "Sleep 7:20 / score 80 · race day · 10K time trial 61:17 · statin Day 77",
+      "briefing": "W14 race day. Sleep 80. 10K time trial — post-thunderstorm afternoon. LCRS baseline set: 7.6 min. W15 starts Monday Aug 17."
     }
   ],
   "PHASES": [
@@ -2326,23 +2483,24 @@
       "phase": 2,
       "dateStart": "2026-08-10",
       "dateEnd": "2026-08-16",
-      "qualityA": "R59 calibration (5x4 min ladder 9.5-11.5 km/h)",
-      "qualityB": "3x5 min race-sharp @ 10.5 km/h",
+      "qualityA": "R59 calibration ladder · R61 10K trial Aug 14 (pulled forward from W15)",
+      "qualityB": "R60 3×5 min race-sharp @ 10.4 km/h",
       "lrMin": 0,
       "lrMax": 0,
       "volMin": 35,
       "volMax": 38,
-      "kind": "normal"
+      "kind": "normal",
+      "note": "Race-week modification. Trial completed Aug 14 in W14. W14 closed 26.06 km."
     },
     {
       "wk": 15,
       "phase": 2,
       "dateStart": "2026-08-17",
       "dateEnd": "2026-08-23",
-      "qualityA": "10K Time Trial Aug 17 (replaces QA) · W16: 4x6 min @ 9.8-10.0 km/h",
+      "qualityA": "4×6 min @ 9.8–10.0 km/h",
       "qualityB": "25 min @ 9.0 km/h",
-      "lrMin": 16,
-      "lrMax": 18,
+      "lrMin": 12,
+      "lrMax": 14,
       "volMin": 36,
       "volMax": 40,
       "kind": "normal"
@@ -2468,17 +2626,17 @@
   "MILESTONES": [
     {
       "date": "2026-08-13",
-      "label": "BV 108 medical appointment",
+      "label": "BV 108 — Aug 13 ✅ DONE",
       "type": "medical",
       "nonNegotiable": true,
-      "note": "✅ DONE Aug 13. Blood retest done at home — results pending Dr. Thắng review. Quality HR ceiling raise to 160 pending blood results. Lactate + VO₂max: ALL confirmed Regenetics HCMC. Left plantar mentioned (resolved)."
+      "note": "DONE Aug 13. Blood retest at home · results pending Dr. Thắng review · HR ceiling raise to 160 pending blood results · endocrinologist referral (TI-RADS 4) pending · creatine clearance pending."
     },
     {
       "date": "2026-08-17",
-      "label": "10K Time Trial — W15 · Sun Aug 16 or Mon Aug 17",
+      "label": "10K Time Trial — W14 COMPLETE · Aug 14",
       "type": "test",
       "nonNegotiable": false,
-      "note": "Weather dependent — dawn after rain. Start 5:30/km km1-2 · build 5:20-5:25/km km3-5 · pick up if HR clean km6+ · RPE 9 km9-10. No HR ceiling. Saturday race preview: 3×5 min @ 5:20-5:25/km outdoor dawn Evo SL. Realistic: 58-65 min."
+      "note": "DONE Aug 14. 61:17 · LCRS 7.6 min · GCT 284ms PB · run pace 5:20/km · zero tissue. W15 begins Aug 17 with 4×6 min @ 9.8–10.0 km/h."
     },
     {
       "date": "2026-08-30",
