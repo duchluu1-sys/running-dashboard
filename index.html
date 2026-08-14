@@ -3330,40 +3330,22 @@ function renderPaceZones(){
   // Render rows
   const rowsHTML=rows.map(r=>{
     if(r.section)return`<div style="font-family:var(--mono);font-size:.44rem;letter-spacing:3px;text-transform:uppercase;color:var(--mu);padding:8px 20px 4px;background:rgba(0,212,255,.02);border-top:1px solid rgba(0,212,255,.06)">${r.section}</div>`;
-    const confColor=r.conf==='HIGH'?'var(--gn)':r.conf==='★ MEASURED'?'var(--vb)':r.conf==='MED'||r.conf==='PRESC'?'var(--cy)':r.conf==='TARGET'?'#a855f7':r.conf==='STRETCH'?'#7c3aed':'var(--mu)';
-    return`<div style="display:grid;grid-template-columns:90px 80px 70px 56px 56px 1fr;gap:4px;padding:5px 20px;border-bottom:1px solid rgba(0,212,255,.04);align-items:center">
-      <div style="font-family:var(--mono);font-size:.56rem;font-weight:700;color:${r.col}">${r.label}</div>
-      <div style="font-family:var(--mono);font-size:.65rem;color:var(--m2)">${r.pace}/km</div>
-      <div style="font-family:var(--mono);font-size:.52rem;color:var(--mu)">${r.hr} bpm</div>
-      <div style="font-family:var(--mono);font-size:.5rem;color:var(--mu)">${r.speed}</div>
-      <div style="font-family:var(--mono);font-size:.42rem;color:${confColor};text-align:right">${r.conf}</div>
-      <div style="font-family:var(--mono);font-size:.42rem;color:rgba(148,163,184,.45);text-align:right">${r.src}</div>
+    const cc=c=>c==='HIGH'?'var(--gn)':c==='★ MEASURED'?'var(--vb)':c==='MED'||c==='PRESC'?'var(--cy)':c==='TARGET'?'#a855f7':c==='STRETCH'?'#7c3aed':'var(--mu)';
+    return`<div style="padding:5px 20px 4px;border-bottom:1px solid rgba(0,212,255,.04)">
+      <div style="display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;min-width:0">
+        <span style="font-family:var(--mono);font-size:.58rem;font-weight:700;color:${r.col};flex-shrink:0;min-width:88px">${r.label}</span>
+        <span style="font-family:var(--mono);font-size:.65rem;color:var(--m2);flex-shrink:0">${r.pace}/km</span>
+        <span style="font-family:var(--mono);font-size:.5rem;color:var(--mu);flex-shrink:0">${r.hr}</span>
+        <span style="font-family:var(--mono);font-size:.4rem;color:${cc(r.conf)};border:1px solid ${cc(r.conf)};border-radius:2px;padding:1px 5px;flex-shrink:0;opacity:.85;margin-left:auto">${r.conf}</span>
+      </div>
+      <div style="font-family:var(--mono);font-size:.42rem;color:rgba(148,163,184,.38);margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${r.speed} km/h · ${r.src}</div>
     </div>`;
   }).join('');
 
-  // LCRS progress bar
-  const lcrs=a.lcrs||0,lcrsTarget=a.lcrsTarget||20;
-  const lcrsPct=Math.min(100,Math.round(lcrs/lcrsTarget*100));
-  const lcrsHTML=`
-    <div style="padding:10px 20px 12px;border-top:1px solid var(--bd)">
-      <div style="font-family:var(--mono);font-size:.44rem;letter-spacing:2px;text-transform:uppercase;color:var(--mu);margin-bottom:6px">LCRS — LONGEST CONTINUOUS RUN SEGMENT · key constraint</div>
-      <div style="display:flex;align-items:center;gap:12px;margin-bottom:4px">
-        <div style="font-family:var(--hud,monospace);font-size:1.1rem;font-weight:700;color:var(--vb)">${lcrs} min</div>
-        <div style="font-family:var(--mono);font-size:.52rem;color:var(--mu)">baseline · R61 Aug 14 → target ${lcrsTarget} min by W${a.lcrsTargetWk||20}</div>
-      </div>
-      <div style="background:rgba(255,255,255,.06);height:3px;border-radius:2px;overflow:hidden;margin-bottom:4px"><div style="height:100%;background:var(--vb);border-radius:2px;width:${lcrsPct}%"></div></div>
-      <div style="display:flex;justify-content:space-between;font-family:var(--mono);font-size:.44rem;color:var(--mu)">
-        <span>${lcrs} min now</span><span style="color:var(--am)">${lcrsPct}% to target</span><span>${lcrsTarget} min W${a.lcrsTargetWk||20}</span>
-      </div>
-    </div>`;
-
-  // Column header
-  const headerHTML=`<div style="display:grid;grid-template-columns:90px 80px 70px 56px 56px 1fr;gap:4px;padding:5px 20px 4px;border-bottom:1px solid rgba(0,212,255,.08)">
-    ${['ZONE/TARGET','PACE','HR','SPEED','CONF','SOURCE'].map(h=>`<div style="font-family:var(--mono);font-size:.42rem;letter-spacing:1px;color:var(--mu)">${h}</div>`).join('')}
-  </div>`;
-
-  el.innerHTML=lcrsHTML+curveHTML+headerHTML+rowsHTML+`<div style="padding:6px 20px;font-family:var(--mono);font-size:.42rem;color:var(--mu)">TM=treadmill · OD=outdoor · est=estimate · LT2 confirmed at Regenetics HCMC Sep 2026</div>`;
+  const colHdr=`<div style="padding:4px 20px 3px;border-bottom:1px solid rgba(0,212,255,.08);display:flex;gap:8px"><span style="font-family:var(--mono);font-size:.42rem;color:var(--mu);flex-shrink:0;min-width:88px">ZONE</span><span style="font-family:var(--mono);font-size:.42rem;color:var(--mu)">PACE · HR · CONF</span></div>`;
+  el.innerHTML=lcrsHTML+curveHTML+colHdr+rowsHTML+`<div style="padding:5px 20px;font-family:var(--mono);font-size:.42rem;color:var(--mu)">TM=treadmill · OD=outdoor · est=estimate · Regenetics HCMC Sep 2026</div>`;
 }
+
 
 // ── CHART REGISTRY ──────────────────────────────────────────────────────
 const CHARTS={};
