@@ -710,18 +710,18 @@ body{background:var(--bg);background-image:var(--grid);color:var(--tx);font-fami
   display:grid;
   gap:16px;
   grid-template-columns:1fr;
-  grid-template-areas:"races" "timeline" "decisions" "perf" "voltraj" "gates" "qual" "milestones" "trivia";
+  grid-template-areas:"races" "timeline" "decisions" "perf" "voltraj" "gates" "milestones" "trivia";
 }
 /* Desktop: restore 2-col */
 @media(min-width:768px){
   .future-grid{
     grid-template-columns:1fr 1fr;
-    grid-template-areas:"races races" "timeline timeline" "decisions decisions" "perf perf" "voltraj gates" "qual milestones" "trivia trivia";
+    grid-template-areas:"races races" "timeline timeline" "decisions decisions" "perf perf" "voltraj gates" "milestones trivia";
   }
 }
 .future-grid>.card{margin-bottom:0}
 /* Inner components carry their own padding — kill the .cb default */
-#vol-traj-body,#gate-forecast-body,#qual-prog-body,#milestone-body{padding:0}
+#vol-traj-body,#gate-forecast-body,#milestone-body{padding:0}
 /* Overflow guard: a card must never paint outside its own grid area */
 .future-grid>.card{overflow:hidden;min-width:0}
 .future-grid>.hud-card::before{top:0;left:0}
@@ -1082,6 +1082,25 @@ body{background:var(--bg);background-image:var(--grid);color:var(--tx);font-fami
 <div id="tab-adaptation" class="tc">
   <div id="adapt-headline" class="card hud-card tab-headline"></div>
   <div id="coach-note-card" class="card hud-card"></div>
+  <div class="card hud-card" id="run-econ-card">
+    <div class="ch"><div class="cl">RUNNING ECONOMY</div><div class="cs">ground contact time · vertical ratio · cohort-segmented — cross-surface values are not comparable</div></div>
+    <div class="re-grid">
+      <div class="re-panel">
+        <div class="re-hd"><div class="re-hd-t">Ground Contact Time</div><div class="re-hd-s">outdoor-easy trend only · hollow = treadmill</div></div>
+        <div class="cleg" id="gct-leg"></div>
+        <div class="cw"><canvas id="gctChart"></canvas></div>
+        <div id="gct-cohort-table" style="padding:8px 0 0"></div>
+      </div>
+      <div class="re-panel re-panel-div">
+        <div class="re-hd"><div class="re-hd-t">Vertical Ratio</div><div class="re-hd-s">lower = less vertical oscillation = better economy</div></div>
+        <div id="vr-body"></div>
+      </div>
+    </div>
+  </div>
+  <div class="card hud-card">
+    <div class="ch"><div class="cl">PACE GAP ANALYSIS</div><div class="cs">current threshold → marathon goal · evidence-based</div></div>
+    <div id="pace-gap-body"></div>
+  </div>
   <div class="g2" id="pb-row">
     <div class="card hud-card" id="odo-card">
       <div class="ch"><div class="cl">ODOMETER</div><div class="cs">program totals since May 9, 2026</div></div>
@@ -1095,22 +1114,6 @@ body{background:var(--bg);background-image:var(--grid);color:var(--tx);font-fami
   <div class="card hud-card" id="hb-card">
     <div class="ch"><div class="cl">HUMAN BENCHMARK</div><div class="cs">your metrics vs trained runner population · ref: Garmin HRM literature (GCT/VR) · AHA data (RHR) · VO₂max + threshold after lactate test Oct 2026</div></div>
     <div id="hb-body"></div>
-  </div>
-  <div class="g2">
-    <div class="card hud-card">
-      <div class="ch"><div class="cl">PACE · HR PERFORMANCE ENVELOPE</div><div class="cs">easy + long runs · upper-left = faster at same HR = adaptation · dim = older · bright = recent</div></div>
-      <div id="pace-hr-sparse" class="sparse-state" style="display:none"></div>
-      <div class="cw"><canvas id="paceHRChart"></canvas></div>
-    </div>
-    <div class="card hud-card">
-      <div class="ch"><div class="cl">THRESHOLD PACE DEVELOPMENT</div><div class="cs">Q-A: top interval pace · Q-B: tempo block pace · ● interval · ○ tempo</div></div>
-      <div id="threshold-sparse" class="sparse-state" style="display:none"></div>
-      <div class="cw"><canvas id="thresholdChart"></canvas></div>
-    </div>
-  </div>
-  <div class="card hud-card">
-    <div class="ch"><div class="cl">PACE GAP ANALYSIS</div><div class="cs">current threshold → marathon goal · evidence-based</div></div>
-    <div id="pace-gap-body"></div>
   </div>
   <div class="g2">
     <div class="card hud-card">
@@ -1146,19 +1149,16 @@ body{background:var(--bg);background-image:var(--grid);color:var(--tx);font-fami
       <div id="drift-stats" style="padding:0 20px 12px"></div>
     </div>
   </div>
-  <div class="card hud-card" id="run-econ-card">
-    <div class="ch"><div class="cl">RUNNING ECONOMY</div><div class="cs">ground contact time · vertical ratio · cohort-segmented — cross-surface values are not comparable</div></div>
-    <div class="re-grid">
-      <div class="re-panel">
-        <div class="re-hd"><div class="re-hd-t">Ground Contact Time</div><div class="re-hd-s">outdoor-easy trend only · hollow = treadmill</div></div>
-        <div class="cleg" id="gct-leg"></div>
-        <div class="cw"><canvas id="gctChart"></canvas></div>
-        <div id="gct-cohort-table" style="padding:8px 0 0"></div>
-      </div>
-      <div class="re-panel re-panel-div">
-        <div class="re-hd"><div class="re-hd-t">Vertical Ratio</div><div class="re-hd-s">lower = less vertical oscillation = better economy</div></div>
-        <div id="vr-body"></div>
-      </div>
+  <div class="g2">
+    <div class="card hud-card">
+      <div class="ch"><div class="cl">PACE · HR PERFORMANCE ENVELOPE</div><div class="cs">easy + long runs · upper-left = faster at same HR = adaptation · dim = older · bright = recent</div></div>
+      <div id="pace-hr-sparse" class="sparse-state" style="display:none"></div>
+      <div class="cw"><canvas id="paceHRChart"></canvas></div>
+    </div>
+    <div class="card hud-card">
+      <div class="ch"><div class="cl">THRESHOLD PACE DEVELOPMENT</div><div class="cs">Q-A: top interval pace · Q-B: tempo block pace · ● interval · ○ tempo</div></div>
+      <div id="threshold-sparse" class="sparse-state" style="display:none"></div>
+      <div class="cw"><canvas id="thresholdChart"></canvas></div>
     </div>
   </div>
   <div class="card hud-card" id="cadence-card">
@@ -1172,10 +1172,17 @@ body{background:var(--bg);background-image:var(--grid);color:var(--tx);font-fami
 <div id="tab-training" class="tc">
   <div id="train-headline" class="card hud-card tab-headline"></div>
   <div id="next-session-card" class="card hud-card"></div>
-  <div class="card hud-card" id="tt-plan-card"></div>
+  <div class="card hud-card" id="pace-zones-card">
+    <div class="ch"><div class="cl">PACE SPECTRUM</div><div class="cs">current capability map · updates from data.json</div></div>
+    <div id="pace-zones-body"></div>
+  </div>
   <div class="card hud-card" id="variance-card">
     <div class="ch"><div class="cl">VARIANCE</div><div class="cs">actual vs planned · gaps only · interpretation belongs to the coaching layer, not this card</div></div>
     <div id="variance-body"></div>
+  </div>
+  <div class="card hud-card" id="qual-prog-card-train">
+    <div class="ch"><div class="cl">QUALITY PROGRESSION</div><div class="cs">W9–24 · session targets · pace recalibrated Aug 11</div></div>
+    <div id="qual-prog-body-train" class="cb"></div>
   </div>
   <div class="g2">
     <div class="card hud-card">
@@ -1194,7 +1201,7 @@ body{background:var(--bg);background-image:var(--grid);color:var(--tx);font-fami
       <div id="gate-dc" class="gate-dc"></div>
     </div>
     <div class="card hud-card" id="signals-card">
-      <div class="ch"><div class="cl">ADAPTATION SIGNALS</div><div class="cs">GCT · VR · drift summary</div></div>
+      <div class="ch"><div class="cl">ADAPTATION SIGNALS</div><div class="cs">GCT · VR · drift · LCRS</div></div>
       <div id="sig-body" class="cb"></div>
     </div>
     <div class="card hud-card" id="log-card">
@@ -1206,13 +1213,7 @@ body{background:var(--bg);background-image:var(--grid);color:var(--tx);font-fami
     <div class="ch"><div class="cl">PHASE 2 → 3 GATES</div><div class="cs" id="glist-sub">6 hard gates · 0 of 6 cleared</div></div>
     <div id="glist-body"></div>
   </div>
-  <div class="card hud-card" id="qual-prog-card-train">
-    <div class="ch"><div class="cl">QUALITY PROGRESSION</div><div class="cs">W9–24 · session targets · pace recalibrated Aug 11</div></div>
-    <div id="qual-prog-body-train" class="cb"></div>
-  </div>
-  <div class="card hud-card" id="pace-zones-card">
-    <div class="ch"><div class="cl">PACE SPECTRUM</div><div class="cs">current capability map · updates from data.json</div></div>
-    <div id="pace-zones-body"></div>
+  <div class="card hud-card" id="tt-plan-card"></div>
   </div>
 </div>
 <!-- ── HEALTH ── -->
@@ -1696,7 +1697,7 @@ function classifyAlerts(flags){
 
 function validateRuns(runs){
   const ENUM=['easy','quality_a','quality_b','long','flush','strides','race'];
-  const KNOWN=new Set(['r','date','type','wk','dist','duration','moving','pace','paceEasy','hrAvg','hrMax','te','te_an','gct','vr','vo','sl','cadence','pctCeiling','drift','walkRatio','hrZones','temp','surface','conditions','flag','note','verdict','tags','qualityPace']);
+  const KNOWN=new Set(['r','date','type','wk','dist','duration','moving','pace','paceEasy','hrAvg','hrMax','te','te_an','gct','vr','vo','sl','cadence','pctCeiling','drift','walkRatio','hrZones','temp','surface','conditions','flag','note','verdict','tags','qualityPace','runPace','lcrs','laps']);
   const REQ=['r','date','type','wk','dist','flag','note'];
   const f=[];
   runs.forEach((r,i)=>{
@@ -2513,8 +2514,14 @@ function renderVariance(a){
   const OK='var(--gn)',AM='var(--am)',MU='var(--mu)',CY='var(--cy)';
   const push=(name,act,tgt,pct,col,gap)=>rows.push({name,act,tgt,pct:Math.max(0,Math.min(100,pct)),col,gap});
 
+  // 0. Week not yet started — show transition state instead of false deficit
+  const _wsd=ATHLETE.weekStartDate;
+  const _weekPending=_wsd&&new Date(_wsd+'T00:00:00')>new Date(new Date().toDateString());
+  if(_weekPending){
+    push('Week volume','0 km',`starts ${new Date(_wsd).toLocaleDateString('en-GB',{weekday:'short',day:'numeric',month:'short'})}`,100,MU,'week not started yet');
+  }
   // 1. Week volume vs floor
-  if(prog){
+  if(prog&&!_weekPending){
     const on=ATHLETE.weekVolOnBoard||0, vMin=prog.volMin, vMax=prog.volMax;
     if(vMin==null||prog.kind==='chill'){
       push('Week volume',`${on.toFixed(1)}km`,'CHILL WEEK',100,MU,'no strict target');
