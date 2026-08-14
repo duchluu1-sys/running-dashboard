@@ -3342,6 +3342,19 @@ function renderPaceZones(){
     </div>`;
   }).join('');
 
+  const lcrs=a.lcrs||0,lcrsTarget=a.lcrsTarget||20;
+  const lcrsPct=Math.min(100,Math.round(lcrs/lcrsTarget*100));
+  const lcrsHTML=`<div style="padding:10px 20px 12px;border-bottom:1px solid var(--bd)">
+    <div style="font-family:var(--mono);font-size:.44rem;letter-spacing:2px;text-transform:uppercase;color:var(--mu);margin-bottom:6px">LCRS — LONGEST CONTINUOUS RUN SEGMENT · key constraint</div>
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:4px">
+      <div style="font-family:var(--mono);font-size:1.1rem;font-weight:700;color:var(--vb)">${lcrs} min</div>
+      <div style="font-family:var(--mono);font-size:.52rem;color:var(--mu)">baseline · R${a.lcrsRun||'61'} ${a.lcrsDate||'Aug 14'} → target ${lcrsTarget} min by W${a.lcrsTargetWk||20}</div>
+    </div>
+    <div style="background:rgba(255,255,255,.06);height:3px;border-radius:2px;overflow:hidden;margin-bottom:4px"><div style="height:100%;background:var(--vb);border-radius:2px;width:${lcrsPct}%"></div></div>
+    <div style="display:flex;justify-content:space-between;font-family:var(--mono);font-size:.44rem;color:var(--mu)">
+      <span>${lcrs} min now</span><span style="color:var(--am)">${lcrsPct}% to target</span><span>${lcrsTarget} min W${a.lcrsTargetWk||20}</span>
+    </div>
+  </div>`;
   const colHdr=`<div style="padding:4px 20px 3px;border-bottom:1px solid rgba(0,212,255,.08);display:flex;gap:8px"><span style="font-family:var(--mono);font-size:.42rem;color:var(--mu);flex-shrink:0;min-width:88px">ZONE</span><span style="font-family:var(--mono);font-size:.42rem;color:var(--mu)">PACE · HR · CONF</span></div>`;
   el.innerHTML=lcrsHTML+curveHTML+colHdr+rowsHTML+`<div style="padding:5px 20px;font-family:var(--mono);font-size:.42rem;color:var(--mu)">TM=treadmill · OD=outdoor · est=estimate · Regenetics HCMC Sep 2026</div>`;
 }
