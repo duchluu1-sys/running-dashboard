@@ -2382,6 +2382,15 @@
       "status": "GREEN",
       "note": "All signals nominal",
       "briefing": "Easy run — HR 122–139 bpm. Novablast 5. Volume: 36km over 1 sessions = 36.0km each. Above sustainable — expect to land under 36km. W15/24 · 65d to Race 0 · 0.0km of 36–40km on board · ACWR 1.32. Last: R61 race 10.01km (Aug 14)."
+    },
+    {
+      "date": "2026-08-16",
+      "hrv": 73,
+      "rhr": 48,
+      "sleepScore": 79,
+      "status": "GREEN",
+      "note": "All signals nominal",
+      "briefing": "Rest day. W15/24 · 64d to Race 0 · 0.0km of 36–40km on board · ACWR 0.8. Last: R61 race 10.01km (Aug 14)."
     }
   ],
   "PHASES": [
