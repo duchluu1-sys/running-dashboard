@@ -1006,6 +1006,60 @@ body{background:var(--bg);background-image:var(--grid);color:var(--tx);font-fami
 .thl-sub{font-size:.6rem;color:var(--m2);line-height:1.4}
 @media(max-width:600px){.thl-signals{flex-direction:column}.thl-sig{border-right:none;border-bottom:1px solid var(--bd)}.thl-sig:last-child{border-bottom:none}}
 
+
+/* ── GYM TAB ─────────────────────────────────────────────────────────── */
+#tab-gym .ch{border-left-color:var(--cy-bd)}
+#tab-gym .cl{color:var(--cy)}
+.gym-week-tally{display:flex;align-items:center;flex-wrap:wrap;gap:6px;padding:11px 18px;background:var(--sf);border:1px solid var(--bd);border-top:2px solid rgba(0,212,255,.25);border-radius:4px;margin-bottom:12px}
+.gym-wk-lbl{font-family:var(--mono);font-size:.5rem;letter-spacing:2.5px;text-transform:uppercase;color:var(--mu);margin-right:6px}
+.gym-chip{display:inline-flex;align-items:center;gap:4px;padding:3px 9px;border-radius:2px;font-family:var(--mono);font-size:.54rem;letter-spacing:1.5px;font-weight:700;text-transform:uppercase}
+.gym-chip.done{background:rgba(16,185,129,.10);color:var(--ok);border:1px solid rgba(16,185,129,.22)}
+.gym-chip.pend{background:rgba(0,212,255,.04);color:var(--mu);border:1px solid rgba(0,212,255,.10)}
+.gym-milestones{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px}
+@media(max-width:600px){.gym-milestones{grid-template-columns:1fr}}
+.gym-ms{background:var(--sf);border:1px solid var(--cy-bd);border-radius:4px;padding:12px 16px}
+.gym-ms-eyebrow{font-family:var(--mono);font-size:.46rem;letter-spacing:2.5px;text-transform:uppercase;color:var(--mu);margin-bottom:4px}
+.gym-ms-val{font-family:var(--mono);font-size:.82rem;font-weight:700;color:var(--tx);margin-bottom:8px;line-height:1.3}
+.gym-ms-bar{height:3px;background:rgba(0,212,255,.10);border-radius:2px;overflow:hidden}
+.gym-ms-fill{height:100%;border-radius:2px;transition:width .5s}
+.gym-ms-fill.cyan{background:linear-gradient(90deg,var(--cy),rgba(0,212,255,.5))}
+.gym-ms-fill.green{background:linear-gradient(90deg,var(--ok),rgba(16,185,129,.5))}
+.gym-ms-sub{font-family:var(--mono);font-size:.48rem;color:var(--mu);margin-top:5px;letter-spacing:.5px}
+.gym-stabs{display:flex;border-bottom:1px solid var(--bd);margin-bottom:14px}
+.gym-stab{padding:8px 16px;font-family:var(--mono);font-size:.53rem;letter-spacing:2.5px;text-transform:uppercase;color:var(--mu);background:transparent;border:none;border-bottom:2px solid transparent;cursor:pointer;transition:color .15s,border-color .15s;min-height:36px}
+.gym-stab:hover{color:var(--m2)}.gym-stab.active{color:var(--cy);border-bottom-color:var(--cy)}
+.gym-panel{display:none}.gym-panel.active{display:block}
+.gym-toggle{display:flex;border:1px solid var(--bd);border-radius:3px;width:fit-content;overflow:hidden;margin-bottom:14px}
+.gym-tog{padding:5px 18px;font-family:var(--mono);font-size:.52rem;letter-spacing:2px;text-transform:uppercase;color:var(--mu);background:transparent;border:none;cursor:pointer;transition:background .15s,color .15s}
+.gym-tog.active{background:rgba(0,212,255,.09);color:var(--cy)}
+.gym-tbl{width:100%;border-collapse:collapse}
+.gym-tbl th{font-family:var(--mono);font-size:.46rem;letter-spacing:2px;text-transform:uppercase;color:var(--mu);padding:6px 10px;text-align:left;border-bottom:1px solid var(--bd);font-weight:600;white-space:nowrap}
+.gym-tbl td{font-family:var(--mono);font-size:.66rem;padding:9px 10px;border-bottom:1px solid rgba(0,212,255,.04);color:var(--tx);vertical-align:middle}
+.gym-tbl tr:last-child td{border-bottom:none}
+.gym-tbl tr:hover td{background:rgba(0,212,255,.025)}
+.gym-tbl .ex-name{color:var(--tx);font-size:.66rem}
+.gym-tbl .ex-note{font-size:.52rem;color:var(--mu);margin-top:2px;display:block;letter-spacing:.3px}
+.gs-hold{color:rgba(100,116,139,.7);font-size:.52rem;letter-spacing:1px}
+.gs-load{background:rgba(16,185,129,.10);color:var(--ok);padding:2px 8px;border-radius:2px;font-size:.52rem;letter-spacing:1.5px;border:1px solid rgba(16,185,129,.22);white-space:nowrap}
+.gs-log{background:rgba(245,158,11,.07);color:var(--am);padding:2px 8px;border-radius:2px;font-size:.52rem;letter-spacing:1px;border:1px solid rgba(245,158,11,.18);white-space:nowrap}
+.gs-add{color:rgba(245,158,11,.5);font-size:.52rem;letter-spacing:1px;padding:2px 8px;border:1px dashed rgba(245,158,11,.18);border-radius:2px;white-space:nowrap}
+.gym-star{color:rgba(0,212,255,.7);font-size:.62rem}
+.gym-nostar{color:rgba(0,212,255,.12);font-size:.62rem}
+.gym-pair-tbl{width:100%;border-collapse:collapse;margin-bottom:20px}
+.gym-pair-tbl th{font-family:var(--mono);font-size:.46rem;letter-spacing:2px;text-transform:uppercase;color:var(--mu);padding:6px 10px;text-align:left;border-bottom:1px solid var(--bd)}
+.gym-pair-tbl td{font-family:var(--mono);font-size:.64rem;padding:8px 10px;border-bottom:1px solid rgba(0,212,255,.04);color:var(--tx)}
+.gym-pair-tbl td.dim{color:rgba(0,212,255,.45)}
+.gym-pair-tbl td.arrow{color:var(--mu);font-size:.6rem;width:28px;text-align:center}
+.gym-mob-lbl{font-family:var(--mono);font-size:.5rem;letter-spacing:2px;text-transform:uppercase;color:var(--mu);margin-top:16px;margin-bottom:8px;padding-left:10px;border-left:2px solid var(--cy);display:block}
+.gym-checklist{display:flex;flex-direction:column;gap:4px}
+.gym-check-item{display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:3px;cursor:pointer;transition:background .1s}
+.gym-check-item:hover{background:rgba(0,212,255,.04)}
+.gym-check-item input[type=checkbox]{accent-color:var(--cy);width:14px;height:14px;cursor:pointer;flex-shrink:0}
+.gym-check-label{font-family:var(--mono);font-size:.64rem;color:var(--tx)}
+.gym-check-label.locked{color:var(--mu)}
+.gym-prog-note{padding:40px 20px;text-align:center;color:var(--mu);font-family:var(--mono);font-size:.6rem;letter-spacing:1px;line-height:2.2}
+.gym-section-hdr{font-family:var(--mono);font-size:.5rem;letter-spacing:2.5px;text-transform:uppercase;color:var(--cy);padding:10px 10px 6px;border-bottom:1px solid var(--bd);margin-bottom:0;opacity:.7}
+
 </style>
 </head>
 <body>
@@ -1030,6 +1084,7 @@ body{background:var(--bg);background-image:var(--grid);color:var(--tx);font-fami
   <button class="tab-btn" id="tb-training" onclick="switchTab('training')">◇ TRAINING</button>
   <button class="tab-btn" id="tb-health" onclick="switchTab('health')">♥ HEALTH</button>
   <button class="tab-btn" id="tb-future" onclick="switchTab('future')">▷ FUTURE</button>
+  <button class="tab-btn" id="tb-gym" onclick="switchTab('gym')">⊞ GYM</button>
 </nav>
 <main class="main">
 <!-- ── TODAY ── -->
@@ -1265,6 +1320,9 @@ body{background:var(--bg);background-image:var(--grid);color:var(--tx);font-fami
     </div>
   </div>
 </div>
+<div id="tab-gym" class="tc">
+  <div id="gym-root"></div>
+</div>
 </main>
 <nav class="pnav"><div class="pnav-inner">
   <button class="pnb active" id="pnb-today" onclick="switchTab('today')"><span class="pnb-icon">◈</span>TODAY</button>
@@ -1272,12 +1330,13 @@ body{background:var(--bg);background-image:var(--grid);color:var(--tx);font-fami
   <button class="pnb" id="pnb-training" onclick="switchTab('training')"><span class="pnb-icon">◇</span>TRAIN</button>
   <button class="pnb" id="pnb-health" onclick="switchTab('health')"><span class="pnb-icon">♥</span>HEALTH</button>
   <button class="pnb" id="pnb-future" onclick="switchTab('future')"><span class="pnb-icon">▷</span>FUTURE</button>
+  <button class="pnb" id="pnb-gym" onclick="switchTab('gym')"><span class="pnb-icon">⊞</span>GYM</button>
 </div></nav>
 <script>
 // ════════════════════════════════════════════════════
 // DATA — populated at runtime by fetch('data.json')
 // ════════════════════════════════════════════════════
-let RUNS, GATES, RACES, ATHLETE, READINESS_LOG;
+let RUNS, GATES, RACES, ATHLETE, READINESS_LOG, STRENGTH;
 let PHASES=[], PROGRESSION=[], MILESTONES=[];
 let _BYTES=0;   // S16 — byte length of the data.json payload currently loaded
 
@@ -1583,12 +1642,12 @@ function computeAllAnalytics(){
 }
 
 // ── TAB SWITCHING ───────────────────────────────────────────────────────
-const TABS=['today','adaptation','training','health','future'];
+const TABS=['today','adaptation','training','health','future','gym'];
 // ── LAZY CHART INIT ─────────────────────────────────────────────────────
 // Charts are created only when their tab is first visited.
 // This prevents the init-in-hidden-tab blur + resize-shake problem.
 let _A; // analytics cache set on DOMContentLoaded
-const TAB_INITED={today:true,adaptation:false,training:false,health:true,future:false}; // future:false since S28 — vol trajectory chart needs lazy init
+const TAB_INITED={today:true,adaptation:false,training:false,health:true,future:false,gym:true}; // future:false since S28 — vol trajectory chart needs lazy init
 
 function initAdaptationCharts(){
   initPaceHRChart(_A);
@@ -3834,6 +3893,7 @@ document.addEventListener('DOMContentLoaded',()=>{
       PHASES=data.PHASES||[];
       PROGRESSION=data.PROGRESSION||[];
       MILESTONES=data.MILESTONES||[];
+      STRENGTH=data.STRENGTH||{};
       loadingEl.style.display='none';
       renderValidation();
       _A=computeAllAnalytics();
@@ -3845,6 +3905,7 @@ document.addEventListener('DOMContentLoaded',()=>{
       renderTraining(_A);
       renderHealth(_A.statinDay);
       renderFuture();
+      renderGym();
     })
     .catch(err=>{
       loadingEl.style.display='none';
@@ -3852,6 +3913,216 @@ document.addEventListener('DOMContentLoaded',()=>{
       errorEl.style.display='flex';
     });
 });
+
+// ── GYM TAB ────────────────────────────────────────────────────────────────
+function switchGymPanel(panel, btn) {
+  document.querySelectorAll('.gym-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.gym-stab').forEach(b => b.classList.remove('active'));
+  document.getElementById('gym-panel-' + panel).classList.add('active');
+  btn.classList.add('active');
+}
+function switchGymSplit(split, btn) {
+  ['push','pull'].forEach(s => {
+    const el = document.getElementById('gym-split-' + s);
+    if(el) el.style.display = s === split ? 'block' : 'none';
+  });
+  document.querySelectorAll('.gym-tog').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+}
+
+function gymStatus(ex, toAdd) {
+  if(toAdd && toAdd.some(n => n === ex.exercise))
+    return '<span class="gs-add">⚠ ADD</span>';
+  if(ex.weight_kg === null || ex.weight_kg === undefined)
+    return '<span class="gs-log">⚠ LOG</span>';
+  if(ex.status === 'increase')
+    return '<span class="gs-load">↑ LOAD</span>';
+  return '<span class="gs-hold">— HOLD</span>';
+}
+
+function gymWeight(ex) {
+  if(ex.weight_kg === null || ex.weight_kg === undefined) return '<span style="color:var(--mu)">—</span>';
+  if(ex.weight_kg === 0) return '<span style="color:var(--m2)">BW</span>';
+  // format note-style weight
+  const note = ex.note || '';
+  if(note.includes('/hand') || note.includes('each hand')) return ex.weight_kg + ' kg×2';
+  if(note.includes('/side') || note.includes('each side')) return ex.weight_kg + ' kg×2';
+  if(note.includes('machine')) return ex.weight_kg + ' kg (M)';
+  return ex.weight_kg + ' kg';
+}
+
+function gymReps(ex) {
+  if(!ex.reps && !ex.sets) return '<span style="color:var(--mu)">—</span>';
+  if(typeof ex.reps === 'string') return ex.reps;
+  return (ex.sets||'?') + '×' + (ex.reps||'?');
+}
+
+const GYM_STARS_UPPER = {
+  'Pull-ups': true, 'Lat Pulldown': true, 'Row (variant TBC)': true,
+  'Shoulder Press': true, 'Face Pull': true,
+  'Incline Barbell Press': false, 'Incline Dumbbell Press': false,
+  'Cable Fly': false, 'Cable Lateral Raise': false,
+  'Dips': false, 'Tricep Overhead Extension': false,
+  'X Cable Rear Delt Pull': false, 'Preacher Hammer Curl': false
+};
+
+function buildGymTable(exercises, toAdd, showStar) {
+  const addRows = (toAdd||[]).map(name => ({
+    exercise: name, sets: null, reps: null, weight_kg: null, note: 'Not yet in rotation'
+  }));
+  const allEx = [...exercises, ...addRows];
+  const rows = allEx.map(ex => {
+    const isAdd = (toAdd||[]).includes(ex.exercise);
+    const starCol = showStar
+      ? `<td>${GYM_STARS_UPPER[ex.exercise] !== undefined
+          ? (GYM_STARS_UPPER[ex.exercise] ? '<span class="gym-star">★</span>' : '<span class="gym-nostar">★</span>')
+          : '<span class="gym-star">★</span>'
+        }</td>`
+      : '';
+    const noteStr = ex.note ? `<span class="ex-note">${ex.note}</span>` : '';
+    const wt = isAdd ? '<span style="color:var(--mu)">—</span>' : gymWeight(ex);
+    const rp = isAdd ? '<span style="color:var(--mu)">—</span>' : gymReps(ex);
+    return `<tr>
+      <td><span class="ex-name">${ex.exercise}</span>${noteStr}</td>
+      <td style="white-space:nowrap">${wt}</td>
+      <td>${rp}</td>
+      ${starCol}
+      <td>${gymStatus(ex, toAdd)}</td>
+    </tr>`;
+  }).join('');
+
+  const starTh = showStar ? '<th title="Running transfer">★</th>' : '';
+  return `<table class="gym-tbl"><thead><tr>
+    <th>EXERCISE</th><th>LAST</th><th>SETS×REPS</th>${starTh}<th>STATUS</th>
+  </tr></thead><tbody>${rows}</tbody></table>`;
+}
+
+function renderGym() {
+  const S = STRENGTH || {};
+  const ws = S.week_status || {};
+  const toAdd = S.to_add || {};
+
+  // Week tally
+  const sessions = [
+    {key:'push',label:'PUSH'},{key:'pull',label:'PULL'},
+    {key:'legs',label:'LEGS'},{key:'full_body',label:'FULL BODY'}
+  ];
+  const tallyChips = sessions.map(s =>
+    `<span class="gym-chip ${ws[s.key]?'done':'pend'}">${ws[s.key]?'✓ ':''} ${s.label}</span>`
+  ).join('');
+
+  // Milestones
+  // Pull-up: treat reps as 8-6-6, target 10-8-8. Use top set (8) vs target (10) = 80%
+  const puCur = 8, puTgt = 10;
+  const puPct = Math.min(100, Math.round((puCur/puTgt)*100));
+  // Single leg RDL: 14 vs 22
+  const rdlCur = 14, rdlTgt = 22;
+  const rdlPct = Math.min(100, Math.round((rdlCur/rdlTgt)*100));
+
+  const milestones = `<div class="gym-milestones">
+    <div class="gym-ms">
+      <div class="gym-ms-eyebrow">MILESTONE · UPPER</div>
+      <div class="gym-ms-val">Pull-ups · 8-6-6 → 10-8-8<br><span style="font-size:.58rem;color:var(--mu)">Next unlock: weighted pull-ups</span></div>
+      <div class="gym-ms-bar"><div class="gym-ms-fill cyan" style="width:${puPct}%"></div></div>
+      <div class="gym-ms-sub">${puCur} reps top set / ${puTgt} target · ${puPct}%</div>
+    </div>
+    <div class="gym-ms">
+      <div class="gym-ms-eyebrow">MILESTONE · LEGS · ★ RUNNING</div>
+      <div class="gym-ms-val">Single Leg RDL · 14 → 22 kg/hand<br><span style="font-size:.58rem;color:var(--mu)">Running transfer priority</span></div>
+      <div class="gym-ms-bar"><div class="gym-ms-fill green" style="width:${rdlPct}%"></div></div>
+      <div class="gym-ms-sub">${rdlCur} kg/hand / ${rdlTgt} target · ${rdlPct}%</div>
+    </div>
+  </div>`;
+
+  // Sub-tabs + panels
+  const upperPanel = `
+    <div class="card hud-card" style="overflow:hidden">
+      <div class="ch"><div class="cl">UPPER BODY</div><div class="cs">★ = serves running + physique · ☆ = physique only · status resets each session</div></div>
+      <div class="cb" style="padding-top:12px">
+        <div class="gym-toggle">
+          <button class="gym-tog active" onclick="switchGymSplit('push',this)">PUSH</button>
+          <button class="gym-tog" onclick="switchGymSplit('pull',this)">PULL</button>
+        </div>
+        <div id="gym-split-push">${buildGymTable(S.push||[], toAdd.push||[], true)}</div>
+        <div id="gym-split-pull" style="display:none">${buildGymTable(S.pull||[], toAdd.pull||[], true)}</div>
+      </div>
+    </div>`;
+
+  const legsPanel = `
+    <div class="card hud-card" style="overflow:hidden">
+      <div class="ch"><div class="cl">LEGS · STRENGTH PROTOCOL</div><div class="cs">★ = running investment · strength progression: load-primary, not rep-primary</div></div>
+      <div class="cb" style="padding-top:12px">
+        ${buildGymTable(S.legs||[], toAdd.legs||[], true)}
+      </div>
+    </div>`;
+
+  const fullBodyPairs = [
+    {ppl:'Incline Barbell Press', fb:'Incline Dumbbell Press (different angle)'},
+    {ppl:'Pull-ups', fb:'Lat Pullover / Cable Pullover'},
+    {ppl:'Trap Bar Deadlift', fb:'Hip Thrust or Single Leg Press'},
+    {ppl:'[Knee extension gap]', fb:'Bulgarian Split Squat ← priority slot'},
+    {ppl:'Forearm', fb:'Farmer Carry or Reverse Curl'},
+  ];
+  const pairRows = fullBodyPairs.map(p =>
+    `<tr><td class="dim">${p.ppl}</td><td class="arrow">→</td><td>${p.fb}</td></tr>`
+  ).join('');
+
+  const mobilityItems = [
+    {label:'Couch stretch · 2 min/side', locked:false},
+    {label:'Soleus stretch · 30s/side (bent-knee)', locked:false},
+    {label:'Ankle circles · 10 each direction', locked:false},
+    {label:'Dead bug · 3×8 each side', locked:false},
+    {label:'Box jumps · Phase 3 — unlocks Oct 2026', locked:true},
+    {label:'Bounds · Phase 3 — unlocks Oct 2026', locked:true},
+  ];
+  const checkItems = mobilityItems.map((it,i) =>
+    `<label class="gym-check-item">
+      <input type="checkbox" id="mob-${i}" ${it.locked?'disabled':''}>
+      <span class="gym-check-label${it.locked?' locked':''}">${it.label}</span>
+    </label>`
+  ).join('');
+
+  const fullBodyPanel = `
+    <div class="card hud-card" style="overflow:hidden">
+      <div class="ch"><div class="cl">FULL BODY — COMPLEMENT LOGIC</div><div class="cs">PPL primary → full body uses the other implement / angle for same pattern</div></div>
+      <div class="cb" style="padding-top:12px">
+        <table class="gym-pair-tbl"><thead><tr>
+          <th>PPL PRIMARY</th><th></th><th>FULL BODY TODAY</th>
+        </tr></thead><tbody>${pairRows}</tbody></table>
+        <span class="gym-mob-lbl">MOBILITY + PLYOS · weekly checklist</span>
+        <div class="gym-checklist">${checkItems}</div>
+      </div>
+    </div>`;
+
+  const progressPanel = `
+    <div class="card hud-card">
+      <div class="ch"><div class="cl">PROGRESSION HISTORY</div><div class="cs">per-exercise load over time</div></div>
+      <div class="gym-prog-note">
+        Baseline logged ${S.baseline_date||'Aug 16, 2026'}<br>
+        Progress charts activate after 2+ sessions per exercise<br>
+        <span style="color:rgba(0,212,255,.35)">Log next session → send to Claude → commit data.json</span>
+      </div>
+    </div>`;
+
+  document.getElementById('gym-root').innerHTML = `
+    <div class="gym-week-tally">
+      <span class="gym-wk-lbl">W${ws.week||15} GYM</span>
+      ${tallyChips}
+    </div>
+    ${milestones}
+    <div class="gym-stabs">
+      <button class="gym-stab active" onclick="switchGymPanel('upper',this)">UPPER</button>
+      <button class="gym-stab" onclick="switchGymPanel('legs',this)">LEGS</button>
+      <button class="gym-stab" onclick="switchGymPanel('fullbody',this)">FULL BODY</button>
+      <button class="gym-stab" onclick="switchGymPanel('progress',this)">PROGRESS</button>
+    </div>
+    <div id="gym-panel-upper" class="gym-panel active">${upperPanel}</div>
+    <div id="gym-panel-legs" class="gym-panel">${legsPanel}</div>
+    <div id="gym-panel-fullbody" class="gym-panel">${fullBodyPanel}</div>
+    <div id="gym-panel-progress" class="gym-panel">${progressPanel}</div>
+  `;
+}
+
 </script>
   <script>
 // S16 — gated auto-refetch. Unconditional reload on every app-switch reset scroll

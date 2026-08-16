@@ -2901,6 +2901,22 @@
         "weight_kg": 11,
         "note": "11 kg plates"
       }
-    ]
+    ],
+    "week_status": {
+      "week": 15,
+      "push": false,
+      "pull": false,
+      "legs": false,
+      "full_body": false
+    },
+    "to_add": {
+      "legs": [
+        "Bulgarian Split Squat",
+        "Nordic Hamstring Curl",
+        "Hip Thrust"
+      ],
+      "pull": [],
+      "push": []
+    }
   }
 }
