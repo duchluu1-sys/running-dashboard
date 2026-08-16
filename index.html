@@ -4016,8 +4016,8 @@ function renderGym() {
   const puCur = 8, puTgt = 10;
   const puPct = Math.min(100, Math.round((puCur/puTgt)*100));
   // Single leg RDL: 14 vs 22
-  const rdlCur = 14, rdlTgt = 22;
-  const rdlPct = Math.min(100, Math.round((rdlCur/rdlTgt)*100));
+  const nordicWk = S.nordic_week || 1, nordicTgt = 12;
+  const nordicPct = Math.max(5, Math.min(100, Math.round((nordicWk/nordicTgt)*100)));
 
   const milestones = `<div class="gym-milestones">
     <div class="gym-ms">
@@ -4028,9 +4028,9 @@ function renderGym() {
     </div>
     <div class="gym-ms">
       <div class="gym-ms-eyebrow">MILESTONE · LEGS · ★ RUNNING</div>
-      <div class="gym-ms-val">Single Leg RDL · 14 → 22 kg/hand<br><span style="font-size:.58rem;color:var(--mu)">Running transfer priority</span></div>
-      <div class="gym-ms-bar"><div class="gym-ms-fill green" style="width:${rdlPct}%"></div></div>
-      <div class="gym-ms-sub">${rdlCur} kg/hand / ${rdlTgt} target · ${rdlPct}%</div>
+      <div class="gym-ms-val">Nordic Curl · W${nordicWk} of ${nordicTgt}<br><span style="font-size:.58rem;color:var(--mu)">Target: 3×8 eccentrics · highest marathon transfer</span></div>
+      <div class="gym-ms-bar"><div class="gym-ms-fill green" style="width:${nordicPct}%"></div></div>
+      <div class="gym-ms-sub">W1-2: 2×4 · W3-4: 2×5 · W5-8: 3×4 · W9-12: 3×8</div>
     </div>
   </div>`;
 
@@ -4050,17 +4050,17 @@ function renderGym() {
 
   const legsPanel = `
     <div class="card hud-card" style="overflow:hidden">
-      <div class="ch"><div class="cl">LEGS · STRENGTH PROTOCOL</div><div class="cs">★ = running investment · strength progression: load-primary, not rep-primary</div></div>
+      <div class="ch"><div class="cl">LEGS · STRENGTH PROTOCOL</div><div class="cs">★ = running investment · strength-primary on compounds · Nordic: eccentric protocol, track separately</div></div>
       <div class="cb" style="padding-top:12px">
         ${buildGymTable(S.legs||[], toAdd.legs||[], true)}
       </div>
     </div>`;
 
   const fullBodyPairs = [
-    {ppl:'Incline Barbell Press', fb:'Incline Dumbbell Press (different angle)'},
-    {ppl:'Pull-ups', fb:'Lat Pullover / Cable Pullover'},
-    {ppl:'Trap Bar Deadlift', fb:'Hip Thrust or Single Leg Press'},
-    {ppl:'[Knee extension gap]', fb:'Bulgarian Split Squat ← priority slot'},
+    {ppl:'Incline Barbell Press (Push)', fb:'Incline Dumbbell Press — different angle'},
+    {ppl:'Pull-ups (Pull)', fb:'Lat Pullover / Cable Pullover'},
+    {ppl:'Bulgarian Split Squat (Legs)', fb:'Single Leg Press or Step-up — different implement'},
+    {ppl:'Trap Bar DL (Legs)', fb:'Hip Thrust — glute isolation angle'},
     {ppl:'Forearm', fb:'Farmer Carry or Reverse Curl'},
   ];
   const pairRows = fullBodyPairs.map(p =>

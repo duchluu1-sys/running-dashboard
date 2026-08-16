@@ -2772,10 +2772,11 @@
   "STRENGTH": {
     "baseline_date": "Aug 16, 2026",
     "baseline_week": "W15",
-    "note": "Baseline logged Aug 16. Progressive overload: +2.5 kg on barbell compounds when all sets hit top of rep range. +1 rep on bodyweight/cable before adding weight. Pull-up threshold for weighted: 10-8-8. Priority development: Single Leg RDL (target 20-22 kg/hand).",
+    "note": "Baseline logged Aug 16, corrected Aug 16 (BSS confirmed, Nordic added, machine ham curl removed). Progressive overload: +2.5 kg on barbell compounds when all sets hit top of rep range. +1 rep on bodyweight/cable before adding weight. Pull-up threshold for weighted: 10-8-8. Nordic Curl: 12-week eccentric protocol starting W15. Q4 additions: Single Leg RDL (unilateral hip hinge) + Hip Thrust (glute isolation).",
     "missing_weights": [
       "Tricep Overhead Extension",
-      "X Cable Rear Delt Pull"
+      "X Cable Rear Delt Pull",
+      "Tibialis Raise"
     ],
     "push": [
       {
@@ -2871,14 +2872,21 @@
         "sets": 3,
         "reps": 8,
         "weight_kg": 130,
-        "note": "Working sets. Est 1RM ~165 kg"
+        "note": "Working sets · Est. 1RM ~165 kg · bilateral hip hinge"
       },
       {
-        "exercise": "Single Leg RDL",
-        "sets": 2,
+        "exercise": "Bulgarian Split Squat",
+        "sets": 3,
         "reps": 10,
         "weight_kg": 14,
-        "note": "14 kg each hand. PRIORITY: build to 20-22 kg"
+        "note": "14 kg each hand · unilateral knee dominant · full depth · controlled descent"
+      },
+      {
+        "exercise": "Nordic Hamstring Curl",
+        "sets": 2,
+        "reps": 4,
+        "weight_kg": 0,
+        "note": "Eccentric-only · lower 4-5s · assist up · W1-2: 2x4 · replaces machine ham curl · DOMS expected wks 1-4"
       },
       {
         "exercise": "Calf Raise (machine single leg)",
@@ -2888,11 +2896,11 @@
         "note": "Machine load 60 kg"
       },
       {
-        "exercise": "Hamstring Curl (single leg)",
+        "exercise": "Tibialis Raise",
         "sets": 2,
         "reps": 15,
-        "weight_kg": 20,
-        "note": ""
+        "weight_kg": null,
+        "note": "Wall or tib bar · weight TBC"
       },
       {
         "exercise": "Rounded Back Extension (glutes)",
@@ -2911,12 +2919,12 @@
     },
     "to_add": {
       "legs": [
-        "Bulgarian Split Squat",
-        "Nordic Hamstring Curl",
-        "Hip Thrust"
+        "Single Leg RDL (Q4 — unilateral hip hinge gap)",
+        "Hip Thrust (Q4 — glute isolation)"
       ],
       "pull": [],
       "push": []
-    }
+    },
+    "nordic_week": 1
   }
 }
