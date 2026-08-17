@@ -1951,6 +1951,42 @@
         "ankle-flag-3rd",
         "w15-day0"
       ]
+    },
+    {
+      "r": 63,
+      "date": "Aug 17",
+      "type": "easy",
+      "wk": 15,
+      "dist": 4.29,
+      "duration": 37.43,
+      "moving": null,
+      "pace": 8.73,
+      "paceEasy": 8.73,
+      "hrAvg": 128,
+      "hrMax": 147,
+      "te": 2.7,
+      "te_an": 0.0,
+      "gct": 326,
+      "vr": 9.2,
+      "cadence": 124,
+      "pctCeiling": null,
+      "drift": null,
+      "walkRatio": null,
+      "hrZones": null,
+      "temp": 29,
+      "surface": "treadmill",
+      "conditions": "15:05+16:35 · two-run combined · Elite Fitness · 1% grade · 28–31°C gym · Pull Day between runs",
+      "flag": "✅",
+      "note": "Two-run combined · Run1 (2.35km TG, 22:22): ankle tight at 15min → stopped · Run2 (1.94km Garmin, 15:04): post-pull day, clean ✅ · warm-up root cause confirmed · ankle not structural · Statin Day 80",
+      "verdict": "Compliant intent. Run1 correctly stopped at ankle signal. Run2 post-pull confirmed ankle resolves with warm tissue — root cause is cold-start, not structural damage. Z3 in Run2 (50%) is post-lifting HR elevation, not effort-driven. Protocol confirmed: 15+ min warm-up mandatory before all running from W15.",
+      "tags": [
+        "easy",
+        "combined",
+        "ankle-resolved",
+        "post-pull",
+        "warm-up-confirmed",
+        "w15"
+      ]
     }
   ],
   "GATES": [
@@ -2082,7 +2118,7 @@
     "week": 15,
     "totalWeeks": 24,
     "deloadWeek": 21,
-    "weekVolOnBoard": 4.63,
+    "weekVolOnBoard": 8.92,
     "lastWeekVol": 26.06,
     "weekTarget": [
       35,
@@ -2108,7 +2144,7 @@
     "statinStart": "2026-05-30",
     "stressLevel": "LOW",
     "formCue": "Eyes on the horizon -- head up every session",
-    "date": "August 16, 2026",
+    "date": "August 17, 2026",
     "hrvBaseline": [
       53,
       68
@@ -2781,10 +2817,9 @@
   "STRENGTH": {
     "baseline_date": "Aug 16, 2026",
     "baseline_week": "W15",
-    "note": "Baseline logged Aug 16, corrected Aug 16 (BSS confirmed, Nordic added, machine ham curl removed). Progressive overload: +2.5 kg on barbell compounds when all sets hit top of rep range. +1 rep on bodyweight/cable before adding weight. Pull-up threshold for weighted: 10-8-8. Nordic Curl: 12-week eccentric protocol starting W15. Q4 additions: Single Leg RDL (unilateral hip hinge) + Hip Thrust (glute isolation).",
+    "note": "Baseline confirmed Aug 17 pull session. Pull-up top set 10 reps — milestone threshold hit. Chest Supported Machine Row confirmed as preferred row variant. X Cable Rear Delt Pull confirmed at 6 kg/side. Progressive overload: +2.5 kg on barbell compounds when all sets hit top of rep range. Pull-up threshold for weighted: 10-8-8 (top set achieved, need 2nd and 3rd sets to follow). Nordic Curl: 12-week eccentric protocol W15. Q4 additions: Single Leg RDL + Hip Thrust.",
     "missing_weights": [
       "Tricep Overhead Extension",
-      "X Cable Rear Delt Pull",
       "Tibialis Raise"
     ],
     "push": [
@@ -2842,37 +2877,37 @@
       {
         "exercise": "Pull-ups",
         "sets": 3,
-        "reps": "8-6-6",
+        "reps": "10-7-6",
         "weight_kg": 0,
-        "note": "Bodyweight. Threshold for weighted: 10-8-8"
+        "note": "Bodyweight · TOP SET 10 REPS — MILESTONE HIT · next target: 10-8-8 → weighted pull-ups unlock"
       },
       {
         "exercise": "Lat Pulldown",
         "sets": 3,
-        "reps": 8,
-        "weight_kg": 55,
-        "note": ""
+        "reps": "10-8-7",
+        "weight_kg": 60,
+        "note": "Ascending pyramid 50→55→60 kg · lengthened partials to finish last 2 sets"
       },
       {
-        "exercise": "Row (variant TBC)",
-        "sets": 3,
+        "exercise": "Chest Supported Machine Row",
+        "sets": 2,
         "reps": 8,
-        "weight_kg": 50,
-        "note": "Exercise name to confirm"
+        "weight_kg": 55,
+        "note": "Working sets 50→55 kg · chest pad isolates back from lower back demand · confirmed preferred row variant"
       },
       {
         "exercise": "X Cable Rear Delt Pull",
         "sets": 3,
-        "reps": 10,
-        "weight_kg": null,
-        "note": "TBC this week"
+        "reps": 8,
+        "weight_kg": 6,
+        "note": "4.5→6→6 kg per side · lengthened partials to finish · replaces face pull as primary posterior shoulder movement"
       },
       {
         "exercise": "Preacher Hammer Curl",
         "sets": 3,
         "reps": 10,
-        "weight_kg": 10,
-        "note": "10 kg each hand"
+        "weight_kg": 12,
+        "note": "12 kg baseline · pyramid tested to 14 kg but 12 is quality rep range (8–12) · progress to 10-10-10 before loading to 14"
       }
     ],
     "legs": [
@@ -2922,7 +2957,7 @@
     "week_status": {
       "week": 15,
       "push": false,
-      "pull": false,
+      "pull": true,
       "legs": false,
       "full_body": false
     },
@@ -2934,6 +2969,7 @@
       "pull": [],
       "push": []
     },
-    "nordic_week": 1
+    "nordic_week": 1,
+    "pull_up_top_set": 10
   }
 }
