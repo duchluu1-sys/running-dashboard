@@ -2432,6 +2432,15 @@
       "status": "GREEN",
       "note": "All signals nominal",
       "briefing": "Rest day. W15/24 · 64d to Race 0 · 0.0km of 36–40km on board · ACWR 0.8. Last: R61 race 10.01km (Aug 14)."
+    },
+    {
+      "date": "2026-08-17",
+      "hrv": 57,
+      "rhr": 49,
+      "sleepScore": 56,
+      "status": "CAUTION",
+      "note": "Sleep score 56",
+      "briefing": "Easy run — HR 122–139 bpm. Novablast 5. Volume: 31.4km left over 5 sessions (~6.3km each) to clear 36km. W15/24 · 63d to Race 0 · 4.63km of 36–40km on board · ACWR 0.9. Last: R62 easy 4.63km (Aug 16)."
     }
   ],
   "PHASES": [
