@@ -1987,6 +1987,50 @@
         "warm-up-confirmed",
         "w15"
       ]
+    },
+    {
+      "r": 64,
+      "date": "Aug 18",
+      "type": "quality_a",
+      "wk": 15,
+      "dist": 5.22,
+      "duration": 41.55,
+      "moving": 34.6,
+      "pace": 7.97,
+      "paceEasy": null,
+      "hrAvg": 130,
+      "hrMax": 154,
+      "te": 3.2,
+      "te_an": 0.9,
+      "gct": 304,
+      "vr": 8.6,
+      "cadence": 119,
+      "pctCeiling": 0,
+      "drift": null,
+      "walkRatio": 30.9,
+      "hrZones": [
+        14,
+        25,
+        29,
+        12,
+        0
+      ],
+      "temp": 29,
+      "surface": "treadmill",
+      "conditions": "15:50 · treadmill · Elite Fitness Xuân Diệu · 1% grade · 28–30°C gym · Evo SL",
+      "flag": "✅✅",
+      "note": "Quality A W15 · 4×6 min · 9.8/9.8/10.0/10.0 km/h · max HR 154 ⚠️ ceiling touch · Z4 12% · TE_an 0.9 · GCT 304ms · VR 8.6% · walk recovery <110 all reps ✅ · ankle clean ✅ · warm-up 15 min ✅ · Evo SL · Statin Day 81",
+      "verdict": "4/4 reps complete. Ceiling respected — max 154, Z5 0:00. TE_an 0.9 confirms genuine LT work at 10.0 km/h. GCT 304ms consistent with quality history. Walk recovery to <110 confirmed ✅. Ankle clean throughout — warm-up protocol confirmed effective (3rd consecutive data point). W17 flag: blood results required before stepping to 10.3 km/h (10.0 km/h already touching 155 ceiling).",
+      "qualityPace": 6.06,
+      "tags": [
+        "quality-a",
+        "w15",
+        "ceiling-touch",
+        "lt-work",
+        "ankle-clean",
+        "warm-up-confirmed",
+        "pace-ceiling-graduation-1of3"
+      ]
     }
   ],
   "GATES": [
@@ -2118,7 +2162,7 @@
     "week": 15,
     "totalWeeks": 24,
     "deloadWeek": 21,
-    "weekVolOnBoard": 8.92,
+    "weekVolOnBoard": 14.14,
     "lastWeekVol": 26.06,
     "weekTarget": [
       35,
@@ -2144,7 +2188,7 @@
     "statinStart": "2026-05-30",
     "stressLevel": "LOW",
     "formCue": "Eyes on the horizon -- head up every session",
-    "date": "August 17, 2026",
+    "date": "August 18, 2026",
     "hrvBaseline": [
       53,
       68
@@ -2826,25 +2870,24 @@
   "STRENGTH": {
     "baseline_date": "Aug 16, 2026",
     "baseline_week": "W15",
-    "note": "Baseline confirmed Aug 17 pull session. Pull-up top set 10 reps — milestone threshold hit. Chest Supported Machine Row confirmed as preferred row variant. X Cable Rear Delt Pull confirmed at 6 kg/side. Progressive overload: +2.5 kg on barbell compounds when all sets hit top of rep range. Pull-up threshold for weighted: 10-8-8 (top set achieved, need 2nd and 3rd sets to follow). Nordic Curl: 12-week eccentric protocol W15. Q4 additions: Single Leg RDL + Hip Thrust.",
+    "note": "Updated Aug 18 (W15 Push Day). Tricep Overhead Extension baseline established: 12 kg × 12. Shoulder Press double progression: 20.4 kg×10 → 24 kg×12. Cable Lateral Raise: 10→12 reps. Incline Barbell: adjusted 65 kg×6 → 60.8 kg×8 (form reset — narrower grip elbows-in yielded only 4 reps at 65 kg). Full Body clarified W15: Incline DB + Hip Thrust on Full Body day (not Push). Dips normally Push — deferred to Full Body this week. Progressive overload: +2.5 kg when all sets hit top of rep range. Pull-up threshold for weighted: 10-8-8 (top set 10 ✅, need 2nd/3rd sets to follow). Nordic Curl: W1/12 eccentric protocol active. Q4 additions: Single Leg RDL + Hip Thrust.",
     "missing_weights": [
-      "Tricep Overhead Extension",
       "Tibialis Raise"
     ],
     "push": [
       {
         "exercise": "Incline Barbell Press",
         "sets": 3,
-        "reps": 6,
-        "weight_kg": 65,
-        "note": "Working sets"
+        "reps": 8,
+        "weight_kg": 60.8,
+        "note": "60.8 kg (20.4/side) · 3×8 · narrower grip elbows-in · adjusted from 65 kg (4-rep form breakdown at 65 kg W15) · progression: 3×8→3×10 before weight increase"
       },
       {
         "exercise": "Incline Dumbbell Press",
         "sets": 3,
         "reps": 6,
         "weight_kg": 24,
-        "note": "24 kg each hand"
+        "note": "24 kg each hand · Full Body day only — PPL complement with different implement/angle (clarified W15)"
       },
       {
         "exercise": "Cable Fly",
@@ -2856,30 +2899,30 @@
       {
         "exercise": "Shoulder Press",
         "sets": 3,
-        "reps": 10,
-        "weight_kg": 20.4,
-        "note": "20.4 kg each side"
+        "reps": 12,
+        "weight_kg": 24,
+        "note": "24 kg each side · W15 double progression: 20.4 kg×10 → 24 kg×12"
       },
       {
         "exercise": "Cable Lateral Raise",
         "sets": 3,
-        "reps": 10,
+        "reps": 12,
         "weight_kg": 7.5,
-        "note": "7.5 kg each side"
+        "note": "7.5 kg each side · W15 rep progression: 10→12 reps"
       },
       {
         "exercise": "Dips",
         "sets": 3,
         "reps": 10,
         "weight_kg": 0,
-        "note": "Bodyweight"
+        "note": "Bodyweight · normally Push · W15: moved to Full Body day (skipped Push Day)"
       },
       {
         "exercise": "Tricep Overhead Extension",
         "sets": 3,
-        "reps": null,
-        "weight_kg": null,
-        "note": "TBC this week"
+        "reps": 12,
+        "weight_kg": 12,
+        "note": "BASELINE ESTABLISHED W15 · 12 kg × 12 reps · 3 sets with lengthened partials to finish"
       }
     ],
     "pull": [
@@ -2965,7 +3008,7 @@
     ],
     "week_status": {
       "week": 15,
-      "push": false,
+      "push": true,
       "pull": true,
       "legs": false,
       "full_body": false
@@ -2979,6 +3022,22 @@
       "push": []
     },
     "nordic_week": 1,
-    "pull_up_top_set": 10
+    "pull_up_top_set": 10,
+    "full_body": [
+      {
+        "exercise": "Incline Dumbbell Press",
+        "sets": 3,
+        "reps": 6,
+        "weight_kg": 24,
+        "note": "24 kg each hand · complement to Incline Barbell (Push Day) — different implement same pattern"
+      },
+      {
+        "exercise": "Hip Thrust",
+        "sets": 3,
+        "reps": 10,
+        "weight_kg": null,
+        "note": "TBC weight first session W15 Fri · Q4 addition · glute isolation"
+      }
+    ]
   }
 }
