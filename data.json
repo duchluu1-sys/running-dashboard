@@ -2031,6 +2031,48 @@
         "warm-up-confirmed",
         "pace-ceiling-graduation-1of3"
       ]
+    },
+    {
+      "r": 65,
+      "date": "Aug 19",
+      "type": "easy_outdoor",
+      "wk": 15,
+      "dist": 6.21,
+      "duration": 52.12,
+      "moving": 51.42,
+      "pace": 8.4,
+      "paceEasy": 8.4,
+      "hrAvg": 127,
+      "hrMax": 145,
+      "te": 2.6,
+      "te_an": 0.0,
+      "gct": 323,
+      "vr": 9.7,
+      "cadence": 133,
+      "pctCeiling": 0,
+      "drift": null,
+      "walkRatio": 18.9,
+      "hrZones": [
+        17,
+        64,
+        10,
+        0,
+        0
+      ],
+      "temp": 32,
+      "surface": "outdoor",
+      "conditions": "14:49 · outdoor Tây Hồ · 30–33°C post-rain · Novablast 5",
+      "flag": "✅",
+      "note": "Easy outdoor W15 Wed · 6.21 km · avg HR 127 ✅ · max HR 145 (one spike, traffic) · GCT 323ms · VR 9.7% · TE 2.6/0.0 ✅ · 30–33°C post-rain · ankle clean ✅ · Statin Day 82",
+      "verdict": "Controlled outdoor easy on Tây Hồ roads. Avg HR 127 well inside easy band. 145 max = isolated spike from traffic hustle, not sustained. Walk breaks = heat and traffic management, not protocol failures. GCT 323ms beats outdoor easy cohort mean (341ms) by 18ms — post-rain conditions likely helped mechanics. TE 2.6/0.0 textbook easy. Ankle clean throughout.",
+      "qualityPace": null,
+      "tags": [
+        "easy-outdoor",
+        "w15",
+        "tay-ho",
+        "post-rain",
+        "ankle-clean"
+      ]
     }
   ],
   "GATES": [
@@ -2162,7 +2204,7 @@
     "week": 15,
     "totalWeeks": 24,
     "deloadWeek": 21,
-    "weekVolOnBoard": 14.14,
+    "weekVolOnBoard": 20.35,
     "lastWeekVol": 26.06,
     "weekTarget": [
       35,
@@ -2188,7 +2230,7 @@
     "statinStart": "2026-05-30",
     "stressLevel": "LOW",
     "formCue": "Eyes on the horizon -- head up every session",
-    "date": "August 18, 2026",
+    "date": "August 19, 2026",
     "hrvBaseline": [
       53,
       68
@@ -2879,7 +2921,7 @@
   "STRENGTH": {
     "baseline_date": "Aug 16, 2026",
     "baseline_week": "W15",
-    "note": "Updated Aug 18 (W15 Push Day). Tricep Overhead Extension baseline established: 12 kg × 12. Shoulder Press double progression: 20.4 kg×10 → 24 kg×12. Cable Lateral Raise: 10→12 reps. Incline Barbell: adjusted 65 kg×6 → 60.8 kg×8 (form reset — narrower grip elbows-in yielded only 4 reps at 65 kg). Full Body clarified W15: Incline DB + Hip Thrust on Full Body day (not Push). Dips normally Push — deferred to Full Body this week. Progressive overload: +2.5 kg when all sets hit top of rep range. Pull-up threshold for weighted: 10-8-8 (top set 10 ✅, need 2nd/3rd sets to follow). Nordic Curl: W1/12 eccentric protocol active. Q4 additions: Single Leg RDL + Hip Thrust.",
+    "note": "Updated Aug 19 (W15 Lower Day). New baselines established: V Squat 72 kg×10, Hip Thrust 15 kg×10, Single Leg RDL 12 kg×10 (replaces Back Extension). Nordic eccentric protocol gap W15: machine curl used instead of Swiss Ball sub — Swiss Ball hamstring curl (2×4 eccentric) required next legs session. Sitting calf raise and Tibialis Raise skipped W15 lower day — Tibialis still TBC. Tricep Overhead Extension baseline confirmed Aug 18: 12 kg × 12. Shoulder Press double progression Aug 18: 20.4 kg×10 → 24 kg×12. Pull-up top set 10 ✅ — weighted pull-up threshold target: 10-8-8. Nordic Curl: W1/12 eccentric protocol active (2×4). Q4 additions now active: Single Leg RDL + Hip Thrust.",
     "missing_weights": [
       "Tibialis Raise"
     ],
@@ -2973,6 +3015,13 @@
     ],
     "legs": [
       {
+        "exercise": "V Squat Machine",
+        "sets": 3,
+        "reps": 10,
+        "weight_kg": 72,
+        "note": "BASELINE ESTABLISHED W15 · 72 kg · 3×10 · primary bilateral quad compound"
+      },
+      {
         "exercise": "Trap Bar Deadlift",
         "sets": 3,
         "reps": 8,
@@ -2984,14 +3033,21 @@
         "sets": 3,
         "reps": 10,
         "weight_kg": 14,
-        "note": "14 kg each hand · unilateral knee dominant · full depth · controlled descent"
+        "note": "14 kg each hand · 3×10 · confirmed W15 lower day"
+      },
+      {
+        "exercise": "Single Leg RDL",
+        "sets": 2,
+        "reps": 10,
+        "weight_kg": 12,
+        "note": "BASELINE ESTABLISHED W15 · 12 kg each hand · 2×10 · replaces Rounded Back Extension · Q4 addition now active"
       },
       {
         "exercise": "Nordic Hamstring Curl",
         "sets": 2,
         "reps": 4,
         "weight_kg": 0,
-        "note": "Eccentric-only · lower 4-5s · assist up · W1-2: 2x4 · replaces machine ham curl · DOMS expected wks 1-4"
+        "note": "W1/12 eccentric protocol (2×4) · W15 lower day: substituted Single Leg Standing Machine Curl 20 kg×8 (machine — eccentric gap, Swiss Ball sub still required next session)"
       },
       {
         "exercise": "Calf Raise (machine single leg)",
@@ -3008,18 +3064,25 @@
         "note": "Wall or tib bar · weight TBC"
       },
       {
-        "exercise": "Rounded Back Extension (glutes)",
-        "sets": 2,
+        "exercise": "Hip Thrust",
+        "sets": 3,
+        "reps": 10,
+        "weight_kg": 15,
+        "note": "BASELINE ESTABLISHED W15 · 15 kg machine · 3×10 · Q4 addition now active"
+      },
+      {
+        "exercise": "Single Leg Standing Hamstring Curl",
+        "sets": 3,
         "reps": 8,
-        "weight_kg": 11,
-        "note": "11 kg plates"
+        "weight_kg": 20,
+        "note": "20 kg · 3×8 with partials · machine (concentric) · W15 lower: used as Nordic/Swiss Ball sub — eccentric demand not met · Swiss Ball curl still required for eccentric protocol"
       }
     ],
     "week_status": {
       "week": 15,
       "push": true,
       "pull": true,
-      "legs": false,
+      "legs": true,
       "full_body": false
     },
     "to_add": {
@@ -3044,8 +3107,8 @@
         "exercise": "Hip Thrust",
         "sets": 3,
         "reps": 10,
-        "weight_kg": null,
-        "note": "TBC weight first session W15 Fri · Q4 addition · glute isolation"
+        "weight_kg": 15,
+        "note": "BASELINE ESTABLISHED W15 lower day · 15 kg machine · 3×10 · glute isolation"
       }
     ]
   }
