@@ -2530,6 +2530,15 @@
       "status": "GREEN",
       "note": "All signals nominal",
       "briefing": "Quality A — 4×6 min @ 9.8–10.0 km/h, ceiling 155 bpm. Evo SL, Elite Fitness. [5d since last quality] Undercooked, not overcooked (5d without quality, ACWR 0.88) — don't be conservative on the ladder. Volume: 27.1km left over 4 sessions (~6.8km each) to clear 36km. W15/24 · 62d to Race 0 · 8.92km of 36–40km on board · ACWR 0.88. Last: R63 easy 4.29km (Aug 17)."
+    },
+    {
+      "date": "2026-08-19",
+      "hrv": 67,
+      "rhr": 48,
+      "sleepScore": 80,
+      "status": "GREEN",
+      "note": "All signals nominal",
+      "briefing": "Easy run — HR 122–139 bpm. Novablast 5. Volume: 21.9km left over 3 sessions (~7.3km each) to clear 36km. W15/24 · 61d to Race 0 · 14.14km of 36–40km on board · ACWR 0.85. Last: R64 quality_a 5.22km (Aug 18)."
     }
   ],
   "PHASES": [
