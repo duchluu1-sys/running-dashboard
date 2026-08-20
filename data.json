@@ -2072,19 +2072,7 @@
         "tay-ho",
         "post-rain",
         "ankle-clean"
-      ],
-      "gpx": {
-        "parsed": true,
-        "true_walk_breaks": 1,
-        "true_walk_time_s": 23,
-        "time_above_trigger_s": 23,
-        "cadence_running_clean": 141,
-        "drift_half_vs_half": 6.1,
-        "drift_note": "elevation-driven — km 2-5 stable at 128.5 bpm, km 6 spike +7.8 bpm at elevation peak 15.6m",
-        "max_hr_km": 5.96,
-        "max_hr_note": "145 bpm at elevation peak 15.6m — not effort creep",
-        "garmin_walk_vs_gpx": "Garmin 9:46 walk = traffic dodging / road crossings. GPX: 1 genuine 23s walk at km 0.37"
-      }
+      ]
     }
   ],
   "GATES": [
