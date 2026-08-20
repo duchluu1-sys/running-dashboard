@@ -2258,7 +2258,7 @@
     ],
     "walkTrigger": 143,
     "walkResume": 128,
-    "qualityCeiling": 155,
+    "qualityCeiling": 160,
     "hrCeilingHardStop": 165,
     "ltPace": 6.32,
     "lt2PaceMin": 5.56,
@@ -2398,9 +2398,9 @@
         "nextObjective": "LCRS 7.6 min → 20 min continuous at LT2 by W20. W15: 4×6 min @ 9.8–10.0 km/h (Quality A). Every quality session extends the longest unbroken block. Regenetics Sep 2026 is the next hard measurement."
       }
     ],
-    "lcrs": 7.6,
-    "lcrsDate": "Aug 14",
-    "lcrsRun": "R61",
+    "lcrs": 14,
+    "lcrsDate": "Aug 20",
+    "lcrsRun": "R66",
     "lcrsTarget": 20.0,
     "lcrsTargetWk": 20,
     "calibrationCurve": [
@@ -2432,7 +2432,10 @@
     ],
     "easyPaceMin": 7.0,
     "easyPaceMax": 8.5,
-    "weekStartDate": "2026-08-17"
+    "weekStartDate": "2026-08-17",
+    "lcrsNote": "R66 QB at 9.0 km/h (sub-LT1) · LT2-specific LCRS still 7.6 min (R61) · progression metric for continuous running capacity",
+    "creatineApproved": true,
+    "creatineApprovedDate": "Aug 20, 2026"
   },
   "READINESS_LOG": [
     {
