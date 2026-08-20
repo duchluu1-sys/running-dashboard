@@ -2073,6 +2073,48 @@
         "post-rain",
         "ankle-clean"
       ]
+    },
+    {
+      "r": 66,
+      "date": "Aug 20",
+      "type": "quality_b",
+      "wk": 15,
+      "dist": 4.21,
+      "duration": 31,
+      "moving": 27,
+      "pace": 6.67,
+      "hrAvg": 137,
+      "hrMax": 154,
+      "te": 3.4,
+      "te_an": 0.2,
+      "gct": 310,
+      "vr": 8.9,
+      "cadence": 121,
+      "pctCeiling": 0,
+      "drift": null,
+      "walkRatio": 6.9,
+      "hrZones": [
+        17,
+        20,
+        39,
+        24,
+        0
+      ],
+      "temp": 30,
+      "surface": "treadmill",
+      "conditions": "13:17 · treadmill · Elite Fitness Xuân Diệu · 1% grade · 29–32°C gym · Evo SL",
+      "flag": "✅",
+      "note": "Quality B W15 · ~21 min @ 9.0 km/h + 1 water break at ~13 min · max HR 154 ⚠️ ceiling touch · Z4 24% heat-driven · TE 3.4/0.2 ✅ · GCT 310ms · VR 8.9% · LCRS ~13-14 min QB baseline · RPE 4/10 · ankle clean ✅ · Statin Day 83",
+      "verdict": null,
+      "qualityPace": 6.67,
+      "tags": [
+        "quality-b",
+        "w15",
+        "ceiling-touch",
+        "first-90-kmh",
+        "water-break",
+        "heat"
+      ]
     }
   ],
   "GATES": [
@@ -2204,7 +2246,7 @@
     "week": 15,
     "totalWeeks": 24,
     "deloadWeek": 21,
-    "weekVolOnBoard": 20.35,
+    "weekVolOnBoard": 24.56,
     "lastWeekVol": 26.06,
     "weekTarget": [
       35,
@@ -2230,7 +2272,7 @@
     "statinStart": "2026-05-30",
     "stressLevel": "LOW",
     "formCue": "Eyes on the horizon -- head up every session",
-    "date": "August 19, 2026",
+    "date": "August 20, 2026",
     "hrvBaseline": [
       53,
       68
@@ -2581,6 +2623,15 @@
       "status": "GREEN",
       "note": "All signals nominal",
       "briefing": "Easy run — HR 122–139 bpm. Novablast 5. Volume: 21.9km left over 3 sessions (~7.3km each) to clear 36km. W15/24 · 61d to Race 0 · 14.14km of 36–40km on board · ACWR 0.85. Last: R64 quality_a 5.22km (Aug 18)."
+    },
+    {
+      "date": "2026-08-20",
+      "hrv": 57,
+      "rhr": 52,
+      "sleepScore": 65,
+      "status": "GREEN",
+      "note": "HRV balanced · sleep 65 short REM · QB day · SpO2 nadir 84% (probable artifact)",
+      "briefing": "HRV 57ms within baseline, RHR 52 Δ+3 vs 7d avg — GREEN (monitor during session). Quality B — 21 min @ 9.0 km/h + 1 water break, ceiling 155 bpm. Evo SL · Elite Fitness Xuân Diệu · Eyes on horizon. W15/24 · 59d to Race 0 · 20.35km of 36–40km on board. Last: R65 easy 6.21km (Aug 19). Sleep 6h5m, REM 7% deficit — Garmin flagging chronic sleep accumulation. SpO2 nadir 84% — probable wrist artifact, monitor."
     }
   ],
   "PHASES": [
@@ -2921,7 +2972,7 @@
   "STRENGTH": {
     "baseline_date": "Aug 16, 2026",
     "baseline_week": "W15",
-    "note": "Updated Aug 19 (W15 Lower Day). New baselines established: V Squat 72 kg×10, Hip Thrust 15 kg×10, Single Leg RDL 12 kg×10 (replaces Back Extension). Nordic eccentric protocol gap W15: machine curl used instead of Swiss Ball sub — Swiss Ball hamstring curl (2×4 eccentric) required next legs session. Sitting calf raise and Tibialis Raise skipped W15 lower day — Tibialis still TBC. Tricep Overhead Extension baseline confirmed Aug 18: 12 kg × 12. Shoulder Press double progression Aug 18: 20.4 kg×10 → 24 kg×12. Pull-up top set 10 ✅ — weighted pull-up threshold target: 10-8-8. Nordic Curl: W1/12 eccentric protocol active (2×4). Q4 additions now active: Single Leg RDL + Hip Thrust.",
+    "note": "Updated Aug 19 (W15 Lower Day). New baselines established: V Squat 72 kg×10, Hip Thrust 15 kg×10, Single Leg RDL 12 kg×10 (replaces Back Extension). Nordic eccentric protocol gap W15: machine curl used instead of Swiss Ball sub — Swiss Ball hamstring curl (2×4 eccentric) required next legs session. Sitting calf raise and Tibialis Raise skipped W15 lower day — Tibialis still TBC. Tricep Overhead Extension baseline confirmed Aug 18: 12 kg × 12. Shoulder Press double progression Aug 18: 20.4 kg×10 → 24 kg×12. Pull-up top set 10 ✅ — weighted pull-up threshold target: 10-8-8. Nordic Curl: W1/12 eccentric protocol active (2×4). Q4 additions now active: Single Leg RDL + Hip Thrust. Hip protocol added W15 (post-QB Aug 20) — hip flexor loading + lateral stability. First execution pending tonight/Fri.",
     "missing_weights": [
       "Tibialis Raise"
     ],
@@ -3110,6 +3161,86 @@
         "weight_kg": 15,
         "note": "BASELINE ESTABLISHED W15 lower day · 15 kg machine · 3×10 · glute isolation"
       }
-    ]
+    ],
+    "hip_protocol": {
+      "started": "W15 · Aug 20, 2026",
+      "rationale": "Chronic hip flexor tightness post-run — neurological tone, not structural. Lateral stability (glute medius) gap identified. Stretching only manages symptoms; loaded range work treats cause.",
+      "sequence": "pre-run activation: clam + band walk | post-run loaded work: L-sit → 90/90 ankle/knee press → KB knee raises | daily mobility: couch stretch + figure-4 + elephant walks",
+      "exercises": [
+        {
+          "exercise": "Side-Lying Clam",
+          "sets": 2,
+          "reps": 15,
+          "weight_kg": 0,
+          "note": "Activation — pre-run · pelvis stacked, no hip roll-back · glute medius / lateral stability gap"
+        },
+        {
+          "exercise": "Lateral Band Walk",
+          "sets": 2,
+          "reps": 12,
+          "weight_kg": 0,
+          "note": "Activation — pre-run · mini band above knees · stay low · 12 steps each direction"
+        },
+        {
+          "exercise": "L-Sit Hold",
+          "sets": 3,
+          "reps": null,
+          "hold_target_s": 10,
+          "weight_kg": 0,
+          "note": "BASELINE PENDING — first execution tonight/tomorrow W15. Start with tuck hold if full L-sit unavailable. 3 sets × max hold, accumulate 20–30s total. Progression: 3×10s → 3×15s → 3×20s → full L-sit. Legs parallel = counts; piked hips = regression."
+        },
+        {
+          "exercise": "90/90 Ankle Press",
+          "sets": 3,
+          "reps": 5,
+          "weight_kg": 0,
+          "note": "3–5s press per rep · brief release between · biases internal rotation + deep hip flexion"
+        },
+        {
+          "exercise": "90/90 Knee Press",
+          "sets": 3,
+          "reps": 5,
+          "weight_kg": 0,
+          "note": "3–5s press per rep · shifts demand to external rotation control"
+        },
+        {
+          "exercise": "KB Knee Raises",
+          "sets": 2,
+          "reps": 10,
+          "weight_kg": 14,
+          "note": "~20% BW (~14-15 kg) · controlled, no momentum · BASELINE PENDING first execution. Post-QB: 2 sets only — treat as loaded mobility, not max effort. Progression: 2→3 sets before weight increase."
+        },
+        {
+          "exercise": "Couch Stretch",
+          "sets": 2,
+          "reps": null,
+          "hold_target_s": 75,
+          "weight_kg": 0,
+          "note": "60–90s per side · 2 passes · daily · hits harder post-quality when tissue warm"
+        },
+        {
+          "exercise": "Figure-4 Stretch",
+          "sets": 1,
+          "reps": null,
+          "hold_target_s": 75,
+          "weight_kg": 0,
+          "note": "60–90s per side · daily"
+        },
+        {
+          "exercise": "Elephant Walks",
+          "sets": 3,
+          "reps": null,
+          "weight_kg": 0,
+          "note": "10–15 meters × 3 passes · slow · knees soft · hamstring lengthening"
+        }
+      ],
+      "progression_trigger": {
+        "L_sit": "3×10s clean → 3×15s → 3×20s → full straight-leg L-sit",
+        "KB_raises": "2×10 easy 2 consecutive sessions → 3×10 → add weight",
+        "clam_band_walk": "Copenhagen plank when clam/band walk feel easy (months away)"
+      },
+      "timeline": "4–8 weeks before chronic tightness stops recurring. Couch/figure-4/elephant walks shift from symptom management to maintenance coat.",
+      "w15_execution": "Post-QB Aug 20: deferred (time crunch). Target: tonight Aug 20 or Fri Aug 21."
+    }
   }
 }
