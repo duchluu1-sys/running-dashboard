@@ -1643,6 +1643,7 @@ function computeTodaySession(athlete){
 
 
 function computeVOTrend(runs){
+  const fam=t=>t.startsWith('quality')?'quality':t;
   const pts=runs.filter(r=>r.vo!=null&&r.vo>0)
     .map(r=>({r:r.r,date:r.date,vo:r.vo,type:fam(r.type),surface:r.surface||'outdoor'}));
   const ma=movAvg(pts.map(p=>p.vo),5);
@@ -1650,6 +1651,7 @@ function computeVOTrend(runs){
 }
 
 function computeWalkRatioTrend(runs){
+  const fam=t=>t.startsWith('quality')?'quality':t;
   const pts=runs.filter(r=>r.walkRatio!=null&&r.walkRatio>0&&(r.type==='easy'||r.type==='long'))
     .map(r=>({r:r.r,date:r.date,walkRatio:r.walkRatio,type:r.type,dist:r.dist}));
   const ma=movAvg(pts.map(p=>p.walkRatio),4);
@@ -1657,6 +1659,7 @@ function computeWalkRatioTrend(runs){
 }
 
 function computeLCRSPerRun(runs){
+  const fam=t=>t.startsWith('quality')?'quality':t;
   const pts=runs.filter(r=>r.lcrs!=null&&r.lcrs>0)
     .map(r=>({r:r.r,date:r.date,lcrs:r.lcrs,type:fam(r.type)}));
   return{pts};
