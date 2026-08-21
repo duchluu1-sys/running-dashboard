@@ -1182,7 +1182,7 @@ body{background:var(--bg);background-image:var(--grid);color:var(--tx);font-fami
     </div>
   </div>
   <div class="card hud-card">
-    <div class="ch"><div class="cl">INTENSITY DISTRIBUTION</div><div class="cs">80/20 Norwegian Method compliance · by week · bars below 80% easy = amber</div></div>
+    <div class="ch"><div class="cl">INTENSITY DISTRIBUTION</div><div class="cs">80/20 Norwegian Method compliance · by week · easy + long = low intensity · bars below 80% low = amber</div></div>
     <div class="cw"><canvas id="intensityChart"></canvas></div>
   </div>
   <div class="g2">
@@ -1424,8 +1424,9 @@ function computeWeeklyVol(runs){
   return Object.values(map).sort((a,b)=>a.wk-b.wk).map(w=>{
     const t=+(w.easy+w.quality+w.long).toFixed(2);
     const ep=t>0?(w.easy/t*100):0;
+    const lowPct=t>0?((w.easy+w.long)/t*100):0; // easy + long = low intensity
     const partial=w.wk===ATHLETE.week;
-    return{...w,total:t,easyPct:+ep.toFixed(1),compliant:ep>=80,partial};
+    return{...w,total:t,easyPct:+ep.toFixed(1),lowPct:+lowPct.toFixed(1),compliant:lowPct>=80,partial};
   });
 }
 
@@ -3765,12 +3766,12 @@ function initIntensityChart(a){
   CHARTS.intensity=new Chart(document.getElementById('intensityChart').getContext('2d'),{
     type:'bar',
     data:{labels:w.map(x=>x.label),datasets:[
-      {label:'Easy',data:w.map(x=>x.easyPct),backgroundColor:D3,
-       borderColor:w.map(x=>x.compliant?'rgba(0,212,255,.35)':WARN),
+      {label:'Easy',data:w.map(x=>x.easyPct),backgroundColor:'rgba(16,185,129,.35)',
+       borderColor:w.map(x=>x.compliant?'rgba(16,185,129,.4)':WARN),
        borderWidth:w.map(x=>x.compliant?1:2),stack:'s',categoryPercentage:.68,barPercentage:.8},
       {label:'Quality',data:w.map(x=>+(x.quality/x.total*100).toFixed(1)),backgroundColor:D1,borderColor:D1,borderWidth:1,stack:'s',categoryPercentage:.68,barPercentage:.8},
-      {label:'Long',data:w.map(x=>+(x.long/x.total*100).toFixed(1)),backgroundColor:D2,borderColor:'rgba(0,212,255,.6)',borderWidth:1,stack:'s',categoryPercentage:.68,barPercentage:.8},
-      {type:'line',label:'80% easy floor',data:w.map(()=>80),borderColor:WARN,borderDash:[6,4],borderWidth:1.5,pointRadius:0,fill:false,backgroundColor:'transparent'},
+      {label:'Long',data:w.map(x=>+(x.long/x.total*100).toFixed(1)),backgroundColor:'rgba(16,185,129,.18)',borderColor:'rgba(16,185,129,.35)',borderWidth:1,stack:'s',categoryPercentage:.68,barPercentage:.8},
+      {type:'line',label:'80% low-intensity floor',data:w.map(()=>80),borderColor:WARN,borderDash:[6,4],borderWidth:1.5,pointRadius:0,fill:false,backgroundColor:'transparent'},
     ]},
     options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:'#64748b',font:{family:'Share Tech Mono',size:10}}},tooltip:{...CHART_DEFAULTS,callbacks:{label:c=>`${c.dataset.label}: ${c.parsed.y.toFixed(1)}%`}}},scales:{x:{ticks:xTick(),grid:gridLine(),border:borderLine()},y:{max:100,ticks:{...yTick(),callback:v=>`${v}%`},title:{display:true,text:'% of weekly km',color:'#64748b',font:{family:'Share Tech Mono',size:10}},grid:gridLine(),border:borderLine()}}}
   });
