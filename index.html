@@ -1138,7 +1138,7 @@ body{background:var(--bg);background-image:var(--grid);color:var(--tx);font-fami
   <div id="adapt-headline" class="card hud-card tab-headline"></div>
   <div id="coach-note-card" class="card hud-card"></div>
   <div class="card hud-card" id="run-econ-card">
-    <div class="ch"><div class="cl">RUNNING ECONOMY</div><div class="cs">ground contact time · vertical ratio · cohort-segmented — cross-surface values are not comparable</div></div>
+    <div class="ch"><div class="cl">RUNNING ECONOMY</div><div class="cs">ground contact time · vertical ratio · vertical oscillation · cohort-segmented</div></div>
     <div class="re-grid">
       <div class="re-panel">
         <div class="re-hd"><div class="re-hd-t">Ground Contact Time</div><div class="re-hd-s">outdoor-easy trend only · hollow = treadmill</div></div>
@@ -1216,11 +1216,32 @@ body{background:var(--bg);background-image:var(--grid);color:var(--tx);font-fami
       <div class="cw"><canvas id="thresholdChart"></canvas></div>
     </div>
   </div>
+
+  <div class="card hud-card" id="vo-card">
+    <div class="ch"><div class="cl">VERTICAL OSCILLATION</div><div class="cs">bounce height per stride · lower = more efficient · target &lt;9.5 cm · all sessions</div></div>
+    <div id="vo-sparse" class="sparse-state" style="display:none"></div>
+    <div class="cw"><canvas id="voChart"></canvas></div>
+    <div style="padding:4px 20px 12px;font-family:var(--mono);font-size:.56rem;color:var(--mu);line-height:1.6">Garmin VO = vertical bounce per stride. Easy pace: 8–10 cm expected. Quality sessions: 9–11 cm at tempo. Lower is more efficient — complements VR. Cross-surface values are not directly comparable.</div>
+  </div>
+  <div class="g2">
+    <div class="card hud-card" id="walk-ratio-card">
+      <div class="ch"><div class="cl">WALK RATIO</div><div class="cs">easy + long runs only · % of session time walking · target ↓ as fitness builds</div></div>
+      <div id="walk-ratio-sparse" class="sparse-state" style="display:none"></div>
+      <div class="cw"><canvas id="walkRatioChart"></canvas></div>
+    </div>
+    <div class="card hud-card" id="lcrs-per-run-card">
+      <div class="ch"><div class="cl">LCRS PER SESSION</div><div class="cs">longest continuous run segment · quality + race sessions · LT2 target 20 min by W20</div></div>
+      <div id="lcrs-per-run-sparse" class="sparse-state" style="display:none"></div>
+      <div class="cw"><canvas id="lcrsPerRunChart"></canvas></div>
+      <div style="padding:4px 20px 12px;font-family:var(--mono);font-size:.56rem;color:var(--mu);line-height:1.6">Threshold LCRS (R61 · 7.6 min at LT2+) is the race-constraint metric. Easy LCRS (R67 · 51 min at easy pace) tracks aerobic continuity foundation separately.</div>
+    </div>
+  </div>
+
   <div class="card hud-card" id="cadence-card">
     <div class="ch"><div class="cl">RUNNING CADENCE</div><div class="cs">avg run cadence per session · Garmin-reported (run segments only) · target 170 spm</div></div>
     <div id="cadence-sparse" class="sparse-state" style="display:none"></div>
     <div class="cw"><canvas id="cadenceChart"></canvas></div>
-    <div style="padding:4px 20px 12px;font-family:var(--mono);font-size:.56rem;color:var(--mu);line-height:1.6">Garmin avg run cadence excludes walk segments. Target 170 spm = standard threshold for reducing overstriding. Current range 128–133 spm — 37+ spm gap to close over Phase 2–3. Log cadence each session from Stats tab → Avg Run Cadence.</div>
+    <div style="padding:4px 20px 12px;font-family:var(--mono);font-size:.56rem;color:var(--mu);line-height:1.6">Garmin avg run cadence excludes walk segments (Stats tab → Avg Run Cadence). Target 170 spm = standard threshold for reducing overstriding. Recent range: 121 spm treadmill QB (R66), 130 spm easy outdoor (R67). Gap to target closes as pace and fitness develop through Phase 2–3.</div>
   </div>
 </div>
 <!-- ── TRAINING ── -->
@@ -1256,7 +1277,7 @@ body{background:var(--bg);background-image:var(--grid);color:var(--tx);font-fami
       <div id="gate-dc" class="gate-dc"></div>
     </div>
     <div class="card hud-card" id="signals-card">
-      <div class="ch"><div class="cl">ADAPTATION SIGNALS</div><div class="cs">GCT · VR · drift · LCRS</div></div>
+      <div class="ch"><div class="cl">ADAPTATION SIGNALS</div><div class="cs">GCT · VR · VO · drift · LCRS · walk ratio</div></div>
       <div id="sig-body" class="cb"></div>
     </div>
     <div class="card hud-card" id="log-card">
@@ -1620,6 +1641,27 @@ function computeTodaySession(athlete){
   return{day:today,label:map[today]||'Rest',type,hrBand:type.includes('quality')?[null,athlete.qualityCeiling]:athlete.easyHRBand,walkAt:athlete.walkTrigger,resumeAt:athlete.walkResume,prog};
 }
 
+
+function computeVOTrend(runs){
+  const pts=runs.filter(r=>r.vo!=null&&r.vo>0)
+    .map(r=>({r:r.r,date:r.date,vo:r.vo,type:fam(r.type),surface:r.surface||'outdoor'}));
+  const ma=movAvg(pts.map(p=>p.vo),5);
+  return{pts,ma};
+}
+
+function computeWalkRatioTrend(runs){
+  const pts=runs.filter(r=>r.walkRatio!=null&&r.walkRatio>0&&(r.type==='easy'||r.type==='long'))
+    .map(r=>({r:r.r,date:r.date,walkRatio:r.walkRatio,type:r.type,dist:r.dist}));
+  const ma=movAvg(pts.map(p=>p.walkRatio),4);
+  return{pts,ma};
+}
+
+function computeLCRSPerRun(runs){
+  const pts=runs.filter(r=>r.lcrs!=null&&r.lcrs>0)
+    .map(r=>({r:r.r,date:r.date,lcrs:r.lcrs,type:fam(r.type)}));
+  return{pts};
+}
+
 function computeAllAnalytics(){
   const rdns=getReadiness(READINESS_LOG,ATHLETE);
   const wvol=computeWeeklyVol(RUNS);
@@ -1638,7 +1680,10 @@ function computeAllAnalytics(){
   const statinDay=daysSince(ATHLETE.statinStart);
   const acwr=computeACWR(RUNS); // S34 — date-based, not week-bucket
   const cadence=computeCadenceTrend(RUNS);
-  return{rdns,wvol,intensity,gct,vr,drift,compliance,aei,threshold,scatter,zones,paceGap,longRun,todaySession,statinDay,acwr,cadence};
+  const vo=computeVOTrend(RUNS);
+  const walkRatio=computeWalkRatioTrend(RUNS);
+  const lcrsPerRun=computeLCRSPerRun(RUNS);
+  return{rdns,wvol,intensity,gct,vr,drift,compliance,aei,threshold,scatter,zones,paceGap,longRun,todaySession,statinDay,acwr,cadence,vo,walkRatio,lcrsPerRun};
 }
 
 // ── TAB SWITCHING ───────────────────────────────────────────────────────
@@ -2236,6 +2281,10 @@ function renderAdaptation(a){
   if(!hasSufficientData(a.threshold.pts,MIN_SCATTER)){
     renderSparseCard('threshold-sparse','THRESHOLD PACE DEVELOPMENT',a.threshold.pts.length,MIN_SCATTER,'Confirmed LT1: '+fmtPace(ATHLETE.ltPace)+'/km (R34). Timeline builds as quality sessions log pace data.');
   }
+  // New metric charts
+  buildVOChart(a);
+  buildWalkRatioChart(a);
+  buildLCRSPerRunChart(a);
 }
 
 function renderPaceGap(pg){
@@ -2700,8 +2749,9 @@ function renderSignals(a){
     </div>
     <div style="border-top:1px solid var(--bd);padding-top:10px;margin-top:4px">
       <div style="font-family:var(--mono);font-size:.5rem;letter-spacing:2px;text-transform:uppercase;color:var(--mu);margin-bottom:6px">LCRS — LONGEST CONTINUOUS RUN SEGMENT</div>
-      <div style="font-family:var(--mono);font-size:1.1rem;font-weight:700;color:var(--vb)">${ATHLETE.lcrs||'—'} min</div>
-      <div style="font-size:.65rem;color:var(--m2)">R${ATHLETE.lcrsRun||'61'} · ${ATHLETE.lcrsDate||'Aug 14'} · target ${ATHLETE.lcrsTarget||20} min W${ATHLETE.lcrsTargetWk||20}</div>
+      <div style="display:flex;align-items:baseline;gap:8px"><div style="font-family:var(--mono);font-size:1.1rem;font-weight:700;color:var(--vb)">${ATHLETE.lcrsThreshold||'—'} min</div><div style="font-family:var(--mono);font-size:.56rem;color:var(--mu)">LT2</div></div>
+      <div style="font-size:.65rem;color:var(--m2)">R${ATHLETE.lcrsThresholdRun||'61'} · ${ATHLETE.lcrsThresholdDate||'Aug 14'} · target ${ATHLETE.lcrsTarget||20} min W${ATHLETE.lcrsTargetWk||20}</div>
+      ${ATHLETE.lcrsEasy?`<div style="font-size:.58rem;color:var(--mu);margin-top:3px">Easy LCRS: ${ATHLETE.lcrsEasy} min · R${ATHLETE.lcrsRun||'—'} · ${ATHLETE.lcrsDate||'—'}</div>`:''}
     </div>`;
 }
 
@@ -3401,17 +3451,20 @@ function renderPaceZones(){
     </div>`;
   }).join('');
 
-  const lcrs=a.lcrs||0,lcrsTarget=a.lcrsTarget||20;
-  const lcrsPct=Math.min(100,Math.round(lcrs/lcrsTarget*100));
+  const lcrsThresholdVal=a.lcrsThreshold||0;
+  const lcrsEasyVal=a.lcrsEasy||a.lcrs||0;
+  const lcrsTarget=a.lcrsTarget||20;
+  const lcrsPct=Math.min(100,Math.round(lcrsThresholdVal/lcrsTarget*100));
   const lcrsHTML=`<div style="padding:10px 20px 12px;border-bottom:1px solid var(--bd)">
     <div style="font-family:var(--mono);font-size:.44rem;letter-spacing:2px;text-transform:uppercase;color:var(--mu);margin-bottom:6px">LCRS — LONGEST CONTINUOUS RUN SEGMENT · key constraint</div>
     <div style="display:flex;align-items:center;gap:12px;margin-bottom:4px">
-      <div style="font-family:var(--mono);font-size:1.1rem;font-weight:700;color:var(--vb)">${lcrs} min</div>
-      <div style="font-family:var(--mono);font-size:.52rem;color:var(--mu)">baseline · R${a.lcrsRun||'61'} ${a.lcrsDate||'Aug 14'} → target ${lcrsTarget} min by W${a.lcrsTargetWk||20}</div>
+      <div style="display:flex;align-items:baseline;gap:8px"><div style="font-family:var(--mono);font-size:1.1rem;font-weight:700;color:var(--vb)">${lcrsThresholdVal} min</div><div style="font-family:var(--mono);font-size:.6rem;color:var(--mu)">LT2</div></div>
+      <div style="font-family:var(--mono);font-size:.52rem;color:var(--mu)">threshold baseline (R${a.lcrsThresholdRun||'61'}) → target ${lcrsTarget} min W${a.lcrsTargetWk||20}</div>
+      ${lcrsEasyVal?`<div style="font-family:var(--mono);font-size:.5rem;color:var(--d2);margin-top:2px">Easy LCRS: ${lcrsEasyVal} min · R${a.lcrsRun||'—'}</div>`:''}
     </div>
     <div style="background:rgba(255,255,255,.06);height:3px;border-radius:2px;overflow:hidden;margin-bottom:4px"><div style="height:100%;background:var(--vb);border-radius:2px;width:${lcrsPct}%"></div></div>
     <div style="display:flex;justify-content:space-between;font-family:var(--mono);font-size:.44rem;color:var(--mu)">
-      <span>${lcrs} min now</span><span style="color:var(--am)">${lcrsPct}% to target</span><span>${lcrsTarget} min W${a.lcrsTargetWk||20}</span>
+      <span>${lcrsThresholdVal} min LT2 now</span><span style="color:var(--am)">${lcrsPct}% to target</span><span>${lcrsTarget} min W${a.lcrsTargetWk||20}</span>
     </div>
   </div>`;
   const colHdr=`<div style="padding:4px 20px 3px;border-bottom:1px solid rgba(0,212,255,.08);display:flex;gap:8px"><span style="font-family:var(--mono);font-size:.42rem;color:var(--mu);flex-shrink:0;min-width:88px">ZONE</span><span style="font-family:var(--mono);font-size:.42rem;color:var(--mu)">PACE · HR · CONF</span></div>`;
@@ -3492,6 +3545,69 @@ function initGCTChart(a){
     <div class="li" style="color:var(--mu);font-size:.5rem">● outdoor &nbsp;·&nbsp; ○ treadmill</div>
     <div class="li"><span class="ld-line" style="background:#00d4ff"></span>Easy trend (outdoor, n≥5)</div>`;
   renderGCTCohortTable(a.gct.cohorts);
+}
+
+
+// ── VERTICAL OSCILLATION CHART ──────────────────────────────────────────
+function buildVOChart(a){
+  const d=a.vo;
+  const el=document.getElementById('voChart');
+  const sparse=document.getElementById('vo-sparse');
+  if(!el)return;
+  if(!d||d.pts.length<2){if(sparse)sparse.style.display='';el.style.display='none';return;}
+  if(sparse)sparse.style.display='none';
+  const typeColor=t=>t==='quality'?'rgba(0,212,255,.85)':t==='long'?'rgba(0,212,255,.5)':'rgba(16,185,129,.7)';
+  new Chart(el,{type:'scatter',data:{datasets:[
+    {label:'VO',data:d.pts.map(p=>({x:p.r,y:p.vo,lbl:`R${p.r} · ${p.date}`,t:p.type})),
+     pointBackgroundColor:d.pts.map(p=>typeColor(p.type)),pointRadius:5,showLine:false},
+    {label:'5-run avg',data:d.ma.map((v,i)=>v!=null?{x:d.pts[i].r,y:v}:null).filter(Boolean),
+     borderColor:'rgba(0,212,255,.35)',borderWidth:1.5,pointRadius:0,showLine:true,tension:.4,fill:false}
+  ]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},
+    tooltip:{callbacks:{label:c=>c.raw.lbl?`${c.raw.lbl} · ${c.raw.y} cm`:`${c.raw.y} cm`}}},
+    scales:{x:{display:false},y:{min:6,max:14,grid:{color:'rgba(0,212,255,.04)'},
+      ticks:{font:{family:'JetBrains Mono',size:9},color:'#64748b',callback:v=>v+' cm'},
+      title:{display:true,text:'cm',color:'#64748b',font:{size:8}}}}}});
+}
+
+// ── WALK RATIO CHART ─────────────────────────────────────────────────────
+function buildWalkRatioChart(a){
+  const d=a.walkRatio;
+  const el=document.getElementById('walkRatioChart');
+  const sparse=document.getElementById('walk-ratio-sparse');
+  if(!el)return;
+  if(!d||d.pts.length<2){if(sparse)sparse.style.display='';el.style.display='none';return;}
+  if(sparse)sparse.style.display='none';
+  const col=v=>v<=10?'rgba(16,185,129,.7)':v<=20?'rgba(0,212,255,.65)':v<=30?'rgba(245,158,11,.7)':'rgba(239,68,68,.65)';
+  new Chart(el,{type:'bar',data:{datasets:[
+    {label:'Walk %',data:d.pts.map(p=>({x:p.r,y:p.walkRatio,lbl:`R${p.r} · ${p.date} · ${p.type}`,dist:p.dist})),
+     backgroundColor:d.pts.map(p=>col(p.walkRatio)),borderRadius:2,barPercentage:.6},
+    {label:'4-run avg',data:d.ma.map((v,i)=>v!=null?{x:d.pts[i].r,y:v}:null).filter(Boolean),
+     type:'line',borderColor:'rgba(0,212,255,.4)',borderWidth:1.5,pointRadius:0,tension:.4,fill:false}
+  ]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},
+    tooltip:{callbacks:{label:c=>c.raw.lbl?`${c.raw.lbl} · ${c.raw.y}%`:`${c.raw.y}%`}}},
+    scales:{x:{display:false},y:{min:0,grid:{color:'rgba(0,212,255,.04)'},
+      ticks:{font:{family:'JetBrains Mono',size:9},color:'#64748b',callback:v=>v+'%'}}}}});
+}
+
+// ── LCRS PER SESSION CHART ───────────────────────────────────────────────
+function buildLCRSPerRunChart(a){
+  const d=a.lcrsPerRun;
+  const el=document.getElementById('lcrsPerRunChart');
+  const sparse=document.getElementById('lcrs-per-run-sparse');
+  if(!el)return;
+  if(!d||d.pts.length<1){if(sparse)sparse.style.display='';el.style.display='none';return;}
+  if(sparse)sparse.style.display='none';
+  const typeColor=t=>t==='quality'?'rgba(0,212,255,.85)':t==='long'?'rgba(0,212,255,.5)':'rgba(245,158,11,.6)';
+  new Chart(el,{type:'scatter',data:{datasets:[
+    {label:'LCRS',data:d.pts.map(p=>({x:p.r,y:p.lcrs,lbl:`R${p.r} · ${p.date} · ${p.type}`,t:p.type})),
+     pointBackgroundColor:d.pts.map(p=>typeColor(p.type)),pointRadius:6,showLine:true,
+     borderColor:'rgba(0,212,255,.25)',borderWidth:1,tension:.3,fill:false},
+    {label:'Target',data:[{x:d.pts[0].r,y:20},{x:d.pts[d.pts.length-1].r,y:20}],
+     borderColor:'rgba(245,158,11,.4)',borderWidth:1,borderDash:[4,4],pointRadius:0,showLine:true,fill:false,type:'line'}
+  ]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},
+    tooltip:{callbacks:{label:c=>c.raw.lbl?`${c.raw.lbl} · ${c.raw.y} min`:`${c.raw.y} min`}}},
+    scales:{x:{display:false},y:{min:0,grid:{color:'rgba(0,212,255,.04)'},
+      ticks:{font:{family:'JetBrains Mono',size:9},color:'#64748b',callback:v=>v+' min'}}}}});
 }
 
 // ── S39b RUNNING ECONOMY ───────────────────────────────────────────────

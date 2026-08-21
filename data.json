@@ -2114,12 +2114,13 @@
         "first-90-kmh",
         "water-break",
         "heat"
-      ]
+      ],
+      "lcrs": 14
     },
     {
       "r": 67,
       "date": "Aug 21",
-      "type": "long_run",
+      "type": "long",
       "wk": 15,
       "dist": 11.32,
       "duration": 96,
@@ -2210,15 +2211,6 @@
           "note": "0.32 km — rain end"
         }
       ],
-      "gpxFile": "activity_24060640685.gpx",
-      "cardiacDrift": {
-        "q1_km": "0-2.9",
-        "q1_hr": 127.7,
-        "q4_km": "8.7-11.6",
-        "q4_hr": 122.9,
-        "drift": -4.8
-      },
-      "lcrsSession": 51.3,
       "tags": [
         "long-run",
         "w15",
@@ -2228,7 +2220,8 @@
         "lcrs-easy-record",
         "depletion-spike",
         "ankle-hip-hypothesis"
-      ]
+      ],
+      "lcrs": 51.3
     }
   ],
   "GATES": [
