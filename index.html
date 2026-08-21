@@ -1370,17 +1370,17 @@ const HEALTH_FLAGS=[
   //        standing = Health tab only (chronic, doesn't change today's plan)
   // dueDate (ISO): required for class:"dated"; auto-promotes standing→dated at T-7, blocking at T-0
   {class:"standing",status:"urgent",title:"HBV Vaccination",short:"Shot 1 of 3. OVERDUE.",detail:"HBsAg negative, HBsAb 7.77 (need ≥10 — not immune). 3-shot course over 6 months. High priority: Vietnam prevalence + both parents Hep B positive. Any clinic.",action:"Book Shot 1 this week. No further deferral."},
-  {class:"standing",status:"clear",title:"BV 108 — Aug 13 ✅ DONE",short:"Blood retest done. Results pending Dr. Thắng.",detail:"Done Aug 13. Blood retest at home. Results pending Dr. Thắng review. HR ceiling raise to 160 pending blood results. Endocrinologist referral (TI-RADS 4) pending. Left plantar mentioned — resolved. Creatine clearance pending CK/creatinine results.",action:"Await Dr. Thắng blood result review. HR ceiling 160 clearance pending."},
+  {class:"standing",status:"clear",title:"BV 108 — Aug 13 ✅ RESULTS CLEAR",short:"All results clean. HR ceiling 160 ✅ · Creatine approved ✅",detail:"Done Aug 13. Dr. Thắng confirmed via phone Aug 20 — all results clean. HR ceiling raised 155→160 bpm (Aug 20). Creatine (NutraBio monohydrate) approved pending timing confirmation. TI-RADS 4 endocrinologist referral still outstanding. CK baseline clean — statin safe at current training load.",action:"Book endocrinologist referral for TI-RADS 4 thyroid nodule. Confirm creatine dose/timing with Dr. Thắng at next visit."},
   {class:"standing",status:"watch",title:"TI-RADS 4 Thyroid Nodule",short:"5×4mm left lobe. Endocrinologist referral pending.",detail:"TI-RADS 4 = intermediate suspicion — majority benign but specialist required. TSH and thyroid function completely normal. Referral via Jul 30 appointment.",action:"Jul 30: get endocrinologist referral confirmed."},
-  {class:"standing",status:"watch",title:"Triglyceride Disorder",short:"TG 8.52 mmol/L (5× upper limit). On Atoyze 20/10.",detail:"Genetic/metabolic driver confirmed. No fatty liver. Atoyze 20/10 from May 30. Zero statin muscle side effects across all runs to date. Alcohol zero — non-negotiable. Retest ~Aug 13 (BV 108 rescheduled).",action:"Monitor for unusual leg heaviness every run. Retest ~Aug 13 (BV 108)."},
+  {class:"standing",status:"watch",title:"Triglyceride Disorder",short:"TG 8.52 mmol/L baseline. On Atoyze 20/10. Retest results Aug 13.",detail:"Genetic/metabolic driver confirmed. No fatty liver. Atoyze 20/10 from May 30. Zero statin muscle side effects across all runs to date. Alcohol zero — non-negotiable. Aug 13 BV 108 results reviewed by Dr. Thắng (Aug 20) — all clear. TG retest result not yet explicitly confirmed by Dr. Thắng.",action:"Confirm TG retest result number at next Dr. Thắng visit. Continue monitoring unusual muscle heaviness every run."},
   {class:"standing",status:"watch",title:"Right Ankle + Right Plantar",short:"Ankle cleared R45. Plantar mild fatigue — monitor.",detail:"Right lateral ankle (peroneal) irritated R43, present first 2km R44 only, clean through 20 min continuous tempo R45. New mild right plantar fatigue at R45 end — not pain, fatigue. Monitor Week 12.",action:"Flag any ankle or plantar pain during Week 12 Quality A."},
   {class:"standing",status:"clear",title:"Vitamin D Deficiency",short:"15.40 ng/mL baseline. D3 2,000 IU ongoing.",detail:"Deficient at baseline (May 29). D3 supplementation running. ~Aug 13 retest will show response (BV 108 rescheduled). Dose increase likely needed.",action:"Retest ~Aug 13 (BV 108)."},
   {class:"standing",status:"clear",title:"Gallbladder Polyps",short:"Largest 3mm. No action needed now.",detail:"Multiple small polyps found May 30 imaging. Largest 3mm — below surgical threshold. Routine monitoring only.",action:"Book gallbladder ultrasound November 2026."}
 ];
 
 const MEDICATIONS=[
-  {name:"Atoyze 20/10",dose:"Atorvastatin 20mg + Ezetimibe 10mg · 1 tablet · evening with dinner",statinStart:"2026-05-30",status:"clean",purpose:"Triglyceride + cholesterol control",note:"Monitor for unusual muscle heaviness every run. Next review: ~Aug 13 blood retest (BV 108)."},
-  {name:"Vitamin D3 2,000 IU",dose:"1 capsule · with fattiest meal (fat-soluble)",statinStart:"2026-05-30",status:"clean",purpose:"Correct vitamin D deficiency (15.40 ng/mL baseline)",note:"Retest ~Aug 13 (BV 108). Dose increase likely."},
+  {name:"Atoyze 20/10",dose:"Atorvastatin 20mg + Ezetimibe 10mg · 1 tablet · evening with dinner",statinStart:"2026-05-30",status:"clean",purpose:"Triglyceride + cholesterol control",note:"Monitor for unusual muscle heaviness every run. Aug 13 BV 108 results clear (Dr. Thắng Aug 20). CK baseline clean. Next review: next BV 108 visit."},
+  {name:"Vitamin D3 2,000 IU",dose:"1 capsule · with fattiest meal (fat-soluble)",statinStart:"2026-05-30",status:"clean",purpose:"Correct vitamin D deficiency (15.40 ng/mL baseline)",note:"Baseline 15.40 ng/mL (deficient). Aug 13 BV 108 retest done. Result to confirm at next Dr. Thắng visit. Dose increase may follow."},
   {name:"CoQ10 (Sithion Q10)",dose:"Per label · with meal + fat",statinStart:"2026-05-30",status:"clean",purpose:"Counter statin-induced CoQ10 depletion",note:"Standard companion to statin therapy. No side effects."}
 ];
 
@@ -2259,7 +2259,7 @@ function renderAdaptation(a){
   renderCoachNote();           // coaching narrative card
   // Update ceiling-dependent labels
   const cSub=document.getElementById('compliance-sub');
-  if(cSub)cSub.textContent=`% time above ${ATHLETE.qualityCeiling} bpm per quality session · target 0%`;
+  if(cSub)cSub.textContent=`% time above ${ATHLETE.qualityCeiling} bpm per quality session · target 0% · raised 150→155 Aug 11 · 155→160 Aug 20`;
   renderPBWall();              // S43
   renderHumanBenchmark();      // S44
   // Pace gap
@@ -2387,7 +2387,7 @@ function renderTimeTrial(){
         </div>
       </div>
       <div style="padding:8px 20px;border-top:1px solid var(--bd);font-family:var(--mono);font-size:.5rem;color:var(--mu)">
-        <span style="color:var(--am)">⚑ Key finding:</span> Pacing error km 1 (5:16 vs 5:30 plan). LCRS 7.6 min = primary constraint. W15–23 quality progression addresses this directly.
+        <span style="color:var(--am)">⚑ Key finding:</span> Pacing error km 1 (5:16 vs 5:30 plan). LCRS 7.6 min LT2-specific = threshold constraint (target 20 min W20). Easy LCRS 51.3 min (R67). W15–24 quality progression addresses this directly.
       </div>
       ${tt.verdict?`<div style="padding:6px 20px 10px;font-family:var(--mono);font-size:.5rem;color:var(--mu);border-top:1px solid rgba(0,212,255,.05)">${tt.verdict}</div>`:''}`;
   } else {
