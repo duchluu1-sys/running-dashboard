@@ -2115,6 +2115,120 @@
         "water-break",
         "heat"
       ]
+    },
+    {
+      "r": 67,
+      "date": "Aug 21",
+      "type": "long_run",
+      "wk": 15,
+      "dist": 11.32,
+      "duration": 96,
+      "moving": 95,
+      "pace": 8.5,
+      "hrAvg": 122,
+      "hrMax": 157,
+      "te": 3.0,
+      "te_an": 0.0,
+      "gct": 327,
+      "vr": 9.4,
+      "cadence": 130,
+      "pctCeiling": 0,
+      "drift": -4.8,
+      "walkRatio": 22.6,
+      "hrZones": [
+        44,
+        55,
+        1,
+        0,
+        0
+      ],
+      "temp": 30,
+      "surface": "outdoor",
+      "conditions": "17:41 local · outdoor · Tây Hồ · post-rain · 28–33°C · Novablast 5",
+      "flag": "✅",
+      "note": "LR W15 · 11.32 km · avg HR 122 ✅ · drift −4.8 bpm ✅✅ exceptional negative drift · LCRS 51.3 min easy pace program record · walk ratio 22.6% · HR spike 157 bpm km 6.45 (glycogen depletion catecholamine surge — coke+gel resolved) · TE 3.0/0.0 ✅ · GCT 327ms · VR 9.4% · Statin Day 84 · ankle clean ✅ · rain cut at 11.32 km (target 12-14 km) · ankle-hip chain hypothesis logged",
+      "verdict": null,
+      "laps": [
+        {
+          "km": 1,
+          "pace": 7.5,
+          "note": "7:30"
+        },
+        {
+          "km": 2,
+          "pace": 8.55,
+          "note": "8:33"
+        },
+        {
+          "km": 3,
+          "pace": 8.32,
+          "note": "8:19"
+        },
+        {
+          "km": 4,
+          "pace": 8.23,
+          "note": "8:14"
+        },
+        {
+          "km": 5,
+          "pace": 8.36,
+          "note": "8:22"
+        },
+        {
+          "km": 6,
+          "pace": 8.63,
+          "note": "8:38"
+        },
+        {
+          "km": 7,
+          "pace": 10.09,
+          "note": "10:05 — stop/depletion spike"
+        },
+        {
+          "km": 8,
+          "pace": 7.93,
+          "note": "7:56"
+        },
+        {
+          "km": 9,
+          "pace": 7.52,
+          "note": "7:31"
+        },
+        {
+          "km": 10,
+          "pace": 9.68,
+          "note": "9:41 — stop"
+        },
+        {
+          "km": 11,
+          "pace": 8.01,
+          "note": "8:01"
+        },
+        {
+          "km": 12,
+          "pace": 10.42,
+          "note": "0.32 km — rain end"
+        }
+      ],
+      "gpxFile": "activity_24060640685.gpx",
+      "cardiacDrift": {
+        "q1_km": "0-2.9",
+        "q1_hr": 127.7,
+        "q4_km": "8.7-11.6",
+        "q4_hr": 122.9,
+        "drift": -4.8
+      },
+      "lcrsSession": 51.3,
+      "tags": [
+        "long-run",
+        "w15",
+        "tay-ho",
+        "outdoor",
+        "negative-drift",
+        "lcrs-easy-record",
+        "depletion-spike",
+        "ankle-hip-hypothesis"
+      ]
     }
   ],
   "GATES": [
@@ -2246,7 +2360,7 @@
     "week": 15,
     "totalWeeks": 24,
     "deloadWeek": 21,
-    "weekVolOnBoard": 24.56,
+    "weekVolOnBoard": 35.88,
     "lastWeekVol": 26.06,
     "weekTarget": [
       35,
@@ -2272,7 +2386,7 @@
     "statinStart": "2026-05-30",
     "stressLevel": "LOW",
     "formCue": "Eyes on the horizon -- head up every session",
-    "date": "August 20, 2026",
+    "date": "August 21, 2026",
     "hrvBaseline": [
       53,
       68
@@ -2398,9 +2512,9 @@
         "nextObjective": "LCRS 7.6 min → 20 min continuous at LT2 by W20. W15: 4×6 min @ 9.8–10.0 km/h (Quality A). Every quality session extends the longest unbroken block. Regenetics Sep 2026 is the next hard measurement."
       }
     ],
-    "lcrs": 14,
-    "lcrsDate": "Aug 20",
-    "lcrsRun": "R66",
+    "lcrs": 51,
+    "lcrsDate": "Aug 21",
+    "lcrsRun": "R67",
     "lcrsTarget": 20.0,
     "lcrsTargetWk": 20,
     "calibrationCurve": [
@@ -2433,9 +2547,31 @@
     "easyPaceMin": 7.0,
     "easyPaceMax": 8.5,
     "weekStartDate": "2026-08-17",
-    "lcrsNote": "R66 QB at 9.0 km/h (sub-LT1) · LT2-specific LCRS still 7.6 min (R61) · progression metric for continuous running capacity",
+    "lcrsNote": "Easy pace LCRS 51.3 min (R67 Aug 21, 7:30-8:30/km) · QB sub-LT1 14 min (R66 Aug 20) · LT2-specific 7.6 min (R61 Aug 14) — threshold target 20 min by W20 is tracked separately via lcrsThreshold",
     "creatineApproved": true,
-    "creatineApprovedDate": "Aug 20, 2026"
+    "creatineApprovedDate": "Aug 20, 2026",
+    "lcrsThreshold": 7.6,
+    "lcrsThresholdRun": "R61",
+    "lcrsThresholdDate": "Aug 14",
+    "lcrsEasy": 51.3,
+    "ankleHipHypothesis": {
+      "date": "Aug 21, 2026",
+      "hypothesis": "Right hip flexor weakness/damage → insufficient eccentric control of right leg swing → variable foot strike position on cold start → dorsiflexion stress on anterior-lateral right ankle (extensor retinaculum zone). Warm-up resolves because hip flexor fires correctly once tissue is warm.",
+      "evidence_for": [
+        "chronic right-sided hip flexor tightness",
+        "ankle presentations only on cold start",
+        "3 consecutive warm-up resolutions",
+        "same right leg affected both locations",
+        "late-swing mechanics sensitive to hip flexor fatigue"
+      ],
+      "evidence_against": [
+        "no imaging or gait analysis",
+        "no confirmed prior hip injury event",
+        "tibialis anterior weakness / peroneal weakness not ruled out"
+      ],
+      "falsification_condition": "Ankle issues persist after 8 weeks of consistent hip protocol → mechanism incomplete → refer physio for gait analysis",
+      "status": "working hypothesis · hip protocol is the natural experiment"
+    }
   },
   "READINESS_LOG": [
     {
