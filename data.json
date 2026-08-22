@@ -2764,6 +2764,15 @@
       "status": "GREEN",
       "note": "HRV balanced · sleep 65 short REM · QB day · SpO2 nadir 84% (probable artifact)",
       "briefing": "HRV 57ms within baseline, RHR 52 Δ+3 vs 7d avg — GREEN (monitor during session). Quality B — 21 min @ 9.0 km/h + 1 water break, ceiling 155 bpm. Evo SL · Elite Fitness Xuân Diệu · Eyes on horizon. W15/24 · 59d to Race 0 · 20.35km of 36–40km on board. Last: R65 easy 6.21km (Aug 19). Sleep 6h5m, REM 7% deficit — Garmin flagging chronic sleep accumulation. SpO2 nadir 84% — probable wrist artifact, monitor."
+    },
+    {
+      "date": "2026-08-22",
+      "hrv": 72,
+      "rhr": 48,
+      "sleepScore": 42,
+      "status": "REST",
+      "note": "Sleep score 42",
+      "briefing": "REST. Sleep score 42. Easy run suppressed. W15/24 · 58d to Race 0 · 35.88km of 36–40km on board · ACWR 0.99. Last: R67 long 11.32km (Aug 21)."
     }
   ],
   "PHASES": [
