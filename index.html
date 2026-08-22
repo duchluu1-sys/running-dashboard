@@ -1417,7 +1417,7 @@ function computeWeeklyVol(runs){
   return Object.values(map).sort((a,b)=>a.wk-b.wk).map(w=>{
     const t=+(w.easy+w.quality+w.long).toFixed(2);
     const ep=t>0?(w.easy/t*100):0;
-    const lowPct=t>0?((w.easy+w.long)/t*100):0; // easy + long = low intensity
+    const lowPct=t>0?+((w.easy+w.long)/t*100).toFixed(1):0; // easy + long = low intensity
     const partial=w.wk===ATHLETE.week;
     return{...w,total:t,easyPct:+ep.toFixed(1),lowPct:+lowPct.toFixed(1),compliant:lowPct>=80,partial};
   });
@@ -3604,7 +3604,6 @@ function buildWalkRatioChart(a){
 
   panel.innerHTML=wrHtml+voHtml;
 }
-}
 
 // ── LCRS PER SESSION CHART ───────────────────────────────────────────────
 function buildLCRSPerRunChart(a){
@@ -3781,7 +3780,7 @@ function initIntensityChart(a){
     data:{labels:w.map(x=>x.label),datasets:[
       {label:'Low Intensity',data:w.map(x=>x.lowPct),backgroundColor:'rgba(16,185,129,.4)',
        borderColor:w.map(x=>x.compliant?'transparent':WARN),borderWidth:w.map(x=>x.compliant?0:2),stack:'s',categoryPercentage:.68,barPercentage:.8},
-      {label:'Quality',data:w.map(x=>x.qualityPct),backgroundColor:D1,borderColor:D1,borderWidth:1,stack:'s',categoryPercentage:.68,barPercentage:.8},
+      {label:'Quality',data:w.map(x=>x.total>0?+(x.quality/x.total*100).toFixed(1):0),backgroundColor:D1,borderColor:D1,borderWidth:1,stack:'s',categoryPercentage:.68,barPercentage:.8},
       {type:'line',label:'80% floor',data:w.map(()=>80),borderColor:WARN,borderDash:[6,4],borderWidth:1.5,pointRadius:0,fill:false,backgroundColor:'transparent'},
     ]},
     options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:'#64748b',font:{family:'Share Tech Mono',size:10}}},tooltip:{...CHART_DEFAULTS,callbacks:{label:c=>c.dataset.label==='Low Intensity'?`Low intensity (easy+long): ${c.parsed.y.toFixed(1)}%`:c.dataset.label==='Quality'?`Quality: ${c.parsed.y.toFixed(1)}%`:''}}},scales:{x:{ticks:xTick(),grid:gridLine(),border:borderLine()},y:{max:100,ticks:{...yTick(),callback:v=>`${v}%`},title:{display:true,text:'% of weekly km',color:'#64748b',font:{family:'Share Tech Mono',size:10}},grid:gridLine(),border:borderLine()}}}
