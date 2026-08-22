@@ -1217,23 +1217,18 @@ body{background:var(--bg);background-image:var(--grid);color:var(--tx);font-fami
     </div>
   </div>
 
-  <div class="card hud-card" id="vo-card">
-    <div class="ch"><div class="cl">VERTICAL OSCILLATION</div><div class="cs">bounce height per stride · lower = more efficient · target &lt;9.5 cm · all sessions</div></div>
-    <div id="vo-sparse" class="sparse-state" style="display:none"></div>
-    <div class="cw"><canvas id="voChart"></canvas></div>
-    <div style="padding:4px 20px 12px;font-family:var(--mono);font-size:.56rem;color:var(--mu);line-height:1.6">Garmin VO = vertical bounce per stride. Easy pace: 8–10 cm expected. Quality sessions: 9–11 cm at tempo. Lower is more efficient — complements VR. Cross-surface values are not directly comparable.</div>
-  </div>
   <div class="g2">
-    <div class="card hud-card" id="walk-ratio-card">
-      <div class="ch"><div class="cl">WALK RATIO</div><div class="cs">easy + long runs only · % of session time walking · target ↓ as fitness builds</div></div>
-      <div id="walk-ratio-sparse" class="sparse-state" style="display:none"></div>
-      <div class="cw"><canvas id="walkRatioChart"></canvas></div>
-    </div>
     <div class="card hud-card" id="lcrs-per-run-card">
-      <div class="ch"><div class="cl">LCRS PER SESSION</div><div class="cs">longest continuous run segment · quality + race sessions · LT2 target 20 min by W20</div></div>
+      <div class="ch"><div class="cl">LCRS PER SESSION</div><div class="cs">longest continuous run segment · threshold target 20 min W20 (dashed line) · R67 easy 51.3 min recorded separately</div></div>
       <div id="lcrs-per-run-sparse" class="sparse-state" style="display:none"></div>
       <div class="cw"><canvas id="lcrsPerRunChart"></canvas></div>
-      <div style="padding:4px 20px 12px;font-family:var(--mono);font-size:.56rem;color:var(--mu);line-height:1.6">Threshold LCRS (R61 · 7.6 min at LT2+) is the race-constraint metric. Easy LCRS (R67 · 51 min at easy pace) tracks aerobic continuity foundation separately.</div>
+      <div style="padding:4px 20px 12px;font-family:var(--mono);font-size:.56rem;color:var(--mu);line-height:1.6">R61: 7.6 min at LT2+ (race-constraint baseline). R66: 14 min sub-LT1 QB. R67: 51.3 min easy LR. The 20 min threshold target (dashed) tracks LT2-specific continuity — the race-constraint metric. Quality session LCRS is the relevant progression signal each week.</div>
+    </div>
+    <div class="card hud-card" id="walk-ratio-card">
+      <div class="ch"><div class="cl">WALK RATIO + VERTICAL OSCILLATION</div><div class="cs">easy + long runs · walk % declining = fitness building · VO declining = more efficient stride</div></div>
+      <div id="walk-ratio-sparse" class="sparse-state" style="display:none"></div>
+      <div class="cw" style="height:160px"><canvas id="walkRatioChart"></canvas></div>
+      <div id="vo-inline" style="padding:8px 20px 12px"></div>
     </div>
   </div>
 
@@ -2286,7 +2281,6 @@ function renderAdaptation(a){
     renderSparseCard('threshold-sparse','THRESHOLD PACE DEVELOPMENT',a.threshold.pts.length,MIN_SCATTER,'Confirmed LT1: '+fmtPace(ATHLETE.ltPace)+'/km (R34). Timeline builds as quality sessions log pace data.');
   }
   // New metric charts
-  buildVOChart(a);
   buildWalkRatioChart(a);
   buildLCRSPerRunChart(a);
 }
@@ -3553,44 +3547,40 @@ function initGCTChart(a){
 
 
 // ── VERTICAL OSCILLATION CHART ──────────────────────────────────────────
-function buildVOChart(a){
-  const d=a.vo;
-  const el=document.getElementById('voChart');
-  const sparse=document.getElementById('vo-sparse');
-  if(!el)return;
-  if(!d||d.pts.length<2){if(sparse)sparse.style.display='';el.style.display='none';return;}
-  if(sparse)sparse.style.display='none';
-  const typeColor=t=>t==='quality'?'rgba(0,212,255,.85)':t==='long'?'rgba(0,212,255,.5)':'rgba(16,185,129,.7)';
-  new Chart(el,{type:'scatter',data:{datasets:[
-    {label:'VO',data:d.pts.map(p=>({x:p.r,y:p.vo,lbl:`R${p.r} · ${p.date}`,t:p.type})),
-     pointBackgroundColor:d.pts.map(p=>typeColor(p.type)),pointRadius:5,showLine:false},
-    {label:'5-run avg',data:d.ma.map((v,i)=>v!=null?{x:d.pts[i].r,y:v}:null).filter(Boolean),
-     borderColor:'rgba(0,212,255,.35)',borderWidth:1.5,pointRadius:0,showLine:true,tension:.4,fill:false}
-  ]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},
-    tooltip:{callbacks:{label:c=>c.raw.lbl?`${c.raw.lbl} · ${c.raw.y} cm`:`${c.raw.y} cm`}}},
-    scales:{x:{display:false},y:{min:6,max:14,grid:{color:'rgba(0,212,255,.04)'},
-      ticks:{font:{family:'JetBrains Mono',size:9},color:'#64748b',callback:v=>v+' cm'},
-      title:{display:true,text:'cm',color:'#64748b',font:{size:8}}}}}});
-}
+// buildVOChart replaced — VO now shown inline in walk ratio card via vo-inline element
 
 // ── WALK RATIO CHART ─────────────────────────────────────────────────────
 function buildWalkRatioChart(a){
+  const fam=t=>t.startsWith('quality')?'quality':t;
   const d=a.walkRatio;
   const el=document.getElementById('walkRatioChart');
   const sparse=document.getElementById('walk-ratio-sparse');
+  const voEl=document.getElementById('vo-inline');
   if(!el)return;
+  // VO inline stat (no chart — too few points, just show latest values)
+  if(voEl){
+    const voPts=a.vo&&a.vo.pts?a.vo.pts:[];
+    if(voPts.length>0){
+      const latest=voPts[voPts.length-1];
+      const trend=voPts.length>1?+(voPts[voPts.length-1].vo-voPts[0].vo).toFixed(1):null;
+      const col=latest.vo<9?'var(--gn)':latest.vo<10?'var(--cy)':'var(--am)';
+      voEl.innerHTML=`<div style="font-family:var(--mono);font-size:.55rem;color:var(--mu);border-top:1px solid var(--bd);padding-top:6px">VERTICAL OSCILLATION (VO) — last ${voPts.length} sessions with data<br><span style="color:${col};font-size:.75rem;font-weight:700">${latest.vo} cm</span> <span style="color:var(--mu)">R${latest.r} · ${latest.date}</span>${trend!==null?` · trend ${trend>=0?'+':''}${trend} cm vs first logged`:''}. Target &lt;9.5 cm. Easy: 8–10 expected · Quality: 9–11 cm.</div>`;
+    }
+  }
   if(!d||d.pts.length<2){if(sparse)sparse.style.display='';el.style.display='none';return;}
   if(sparse)sparse.style.display='none';
-  const col=v=>v<=10?'rgba(16,185,129,.7)':v<=20?'rgba(0,212,255,.65)':v<=30?'rgba(245,158,11,.7)':'rgba(239,68,68,.65)';
-  new Chart(el,{type:'bar',data:{datasets:[
-    {label:'Walk %',data:d.pts.map(p=>({x:p.r,y:p.walkRatio,lbl:`R${p.r} · ${p.date} · ${p.type}`,dist:p.dist})),
-     backgroundColor:d.pts.map(p=>col(p.walkRatio)),borderRadius:2,barPercentage:.6},
-    {label:'4-run avg',data:d.ma.map((v,i)=>v!=null?{x:d.pts[i].r,y:v}:null).filter(Boolean),
-     type:'line',borderColor:'rgba(0,212,255,.4)',borderWidth:1.5,pointRadius:0,tension:.4,fill:false}
+  const col=v=>v<=10?'rgba(16,185,129,.8)':v<=20?'rgba(0,212,255,.7)':v<=30?'rgba(245,158,11,.7)':'rgba(239,68,68,.65)';
+  new Chart(el,{type:'line',data:{datasets:[
+    {label:'Walk %',data:d.pts.map(p=>({x:p.r,y:p.walkRatio,lbl:`R${p.r} · ${p.date} · ${p.type} · ${p.dist}km`})),
+     borderColor:'rgba(0,212,255,.5)',backgroundColor:d.pts.map(p=>col(p.walkRatio)),
+     pointBackgroundColor:d.pts.map(p=>col(p.walkRatio)),pointRadius:6,fill:false,tension:.3,showLine:true},
+    {label:'4-run trend',data:d.ma.map((v,i)=>v!=null?{x:d.pts[i].r,y:v}:null).filter(Boolean),
+     borderColor:'rgba(16,185,129,.45)',borderWidth:1.5,pointRadius:0,tension:.4,fill:false}
   ]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},
-    tooltip:{callbacks:{label:c=>c.raw.lbl?`${c.raw.lbl} · ${c.raw.y}%`:`${c.raw.y}%`}}},
-    scales:{x:{display:false},y:{min:0,grid:{color:'rgba(0,212,255,.04)'},
-      ticks:{font:{family:'JetBrains Mono',size:9},color:'#64748b',callback:v=>v+'%'}}}}});
+    tooltip:{callbacks:{label:c=>c.raw.lbl?`${c.raw.lbl} · walk: ${c.raw.y}%`:`trend: ${c.raw.y}%`}}},
+    scales:{x:{display:false},y:{min:0,max:50,grid:{color:'rgba(0,212,255,.04)'},
+      ticks:{font:{family:'JetBrains Mono',size:9},color:'#64748b',callback:v=>v+'%'},
+      title:{display:true,text:'walk %',color:'#64748b',font:{size:8}}}}}});
 }
 
 // ── LCRS PER SESSION CHART ───────────────────────────────────────────────
@@ -3766,11 +3756,11 @@ function initIntensityChart(a){
   CHARTS.intensity=new Chart(document.getElementById('intensityChart').getContext('2d'),{
     type:'bar',
     data:{labels:w.map(x=>x.label),datasets:[
-      {label:'Easy',data:w.map(x=>x.easyPct),backgroundColor:'rgba(16,185,129,.35)',
-       borderColor:w.map(x=>x.compliant?'rgba(16,185,129,.4)':WARN),
-       borderWidth:w.map(x=>x.compliant?1:2),stack:'s',categoryPercentage:.68,barPercentage:.8},
+      {label:'Easy',data:w.map(x=>x.easyPct),backgroundColor:'rgba(16,185,129,.45)',
+       borderColor:'transparent',borderWidth:0,stack:'s',categoryPercentage:.68,barPercentage:.8},
+      {label:'Long',data:w.map(x=>x.total>0?+(x.long/x.total*100).toFixed(1):0),backgroundColor:'rgba(16,185,129,.22)',
+       borderColor:w.map(x=>x.compliant?'transparent':WARN),borderWidth:w.map(x=>x.compliant?0:2.5),stack:'s',categoryPercentage:.68,barPercentage:.8},
       {label:'Quality',data:w.map(x=>+(x.quality/x.total*100).toFixed(1)),backgroundColor:D1,borderColor:D1,borderWidth:1,stack:'s',categoryPercentage:.68,barPercentage:.8},
-      {label:'Long',data:w.map(x=>+(x.long/x.total*100).toFixed(1)),backgroundColor:'rgba(16,185,129,.18)',borderColor:'rgba(16,185,129,.35)',borderWidth:1,stack:'s',categoryPercentage:.68,barPercentage:.8},
       {type:'line',label:'80% low-intensity floor',data:w.map(()=>80),borderColor:WARN,borderDash:[6,4],borderWidth:1.5,pointRadius:0,fill:false,backgroundColor:'transparent'},
     ]},
     options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:'#64748b',font:{family:'Share Tech Mono',size:10}}},tooltip:{...CHART_DEFAULTS,callbacks:{label:c=>`${c.dataset.label}: ${c.parsed.y.toFixed(1)}%`}}},scales:{x:{ticks:xTick(),grid:gridLine(),border:borderLine()},y:{max:100,ticks:{...yTick(),callback:v=>`${v}%`},title:{display:true,text:'% of weekly km',color:'#64748b',font:{family:'Share Tech Mono',size:10}},grid:gridLine(),border:borderLine()}}}
@@ -4202,9 +4192,23 @@ function renderGym() {
     </label>`
   ).join('');
 
+  const fbData = S.full_body || {};
+  const fbExercises = Array.isArray(fbData.exercises) ? fbData.exercises : [];
+  const fbRows = fbExercises.map(e=>{
+    const wt = Array.isArray(e.weight_kg)?e.weight_kg.join('/'):e.weight_kg||'BW';
+    const hasFlag = (e.note||'').includes('⚠️');
+    const shortNote = (e.note||'').substring(0,70)+((e.note||'').length>70?'…':'');
+    return `<tr><td>${e.exercise}</td><td>${wt} kg</td><td>${e.sets||'—'}×${e.reps||'—'}</td><td style="color:${hasFlag?'var(--am)':'var(--mu)'};font-size:.52rem">${shortNote}</td></tr>`;
+  }).join('');
+  const fbActual = fbExercises.length ? `
+    <div style="padding:10px 20px 2px;font-family:var(--mono);font-size:.56rem;color:var(--cy);letter-spacing:1px">W15 SESSION · ${fbData.baseline_date||'Aug 23'}</div>
+    <div style="padding:2px 20px 6px;font-family:var(--mono);font-size:.5rem;color:var(--am);line-height:1.5">${fbData.session_note||''}</div>
+    <div style="padding:0 12px 12px;overflow-x:auto"><table class="gym-pair-tbl" style="width:100%"><thead><tr><th>EXERCISE</th><th>WT</th><th>SETS×REPS</th><th>NOTE</th></tr></thead><tbody>${fbRows}</tbody></table></div>` : '';
+
   const fullBodyPanel = `
     <div class="card hud-card" style="overflow:hidden">
       <div class="ch"><div class="cl">FULL BODY — COMPLEMENT LOGIC</div><div class="cs">PPL primary → full body uses the other implement / angle for same pattern</div></div>
+      ${fbActual}
       <div class="cb" style="padding-top:12px">
         <table class="gym-pair-tbl"><thead><tr>
           <th>PPL PRIMARY</th><th></th><th>FULL BODY TODAY</th>
