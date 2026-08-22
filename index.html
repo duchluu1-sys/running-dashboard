@@ -1225,10 +1225,8 @@ body{background:var(--bg);background-image:var(--grid);color:var(--tx);font-fami
       <div style="padding:4px 20px 12px;font-family:var(--mono);font-size:.56rem;color:var(--mu);line-height:1.6">R61: 7.6 min at LT2+ (race-constraint baseline). R66: 14 min sub-LT1 QB. R67: 51.3 min easy LR. The 20 min threshold target (dashed) tracks LT2-specific continuity — the race-constraint metric. Quality session LCRS is the relevant progression signal each week.</div>
     </div>
     <div class="card hud-card" id="walk-ratio-card">
-      <div class="ch"><div class="cl">WALK RATIO + VERTICAL OSCILLATION</div><div class="cs">easy + long runs · walk % declining = fitness building · VO declining = more efficient stride</div></div>
-      <div id="walk-ratio-sparse" class="sparse-state" style="display:none"></div>
-      <div class="cw" style="height:160px"><canvas id="walkRatioChart"></canvas></div>
-      <div id="vo-inline" style="padding:8px 20px 12px"></div>
+      <div class="ch"><div class="cl">WALK RATIO + VERTICAL OSCILLATION</div><div class="cs">easy + long runs only · both should decrease as aerobic base builds</div></div>
+      <div id="walk-ratio-panel" style="padding:12px 20px 16px"></div>
     </div>
   </div>
 
@@ -3547,40 +3545,65 @@ function initGCTChart(a){
 
 
 // ── VERTICAL OSCILLATION CHART ──────────────────────────────────────────
-// buildVOChart replaced — VO now shown inline in walk ratio card via vo-inline element
+// buildVOChart removed — VO integrated into Walk Ratio panel (buildWalkRatioChart)
 
 // ── WALK RATIO CHART ─────────────────────────────────────────────────────
 function buildWalkRatioChart(a){
   const fam=t=>t.startsWith('quality')?'quality':t;
-  const d=a.walkRatio;
-  const el=document.getElementById('walkRatioChart');
-  const sparse=document.getElementById('walk-ratio-sparse');
-  const voEl=document.getElementById('vo-inline');
-  if(!el)return;
-  // VO inline stat (no chart — too few points, just show latest values)
-  if(voEl){
-    const voPts=a.vo&&a.vo.pts?a.vo.pts:[];
-    if(voPts.length>0){
-      const latest=voPts[voPts.length-1];
-      const trend=voPts.length>1?+(voPts[voPts.length-1].vo-voPts[0].vo).toFixed(1):null;
-      const col=latest.vo<9?'var(--gn)':latest.vo<10?'var(--cy)':'var(--am)';
-      voEl.innerHTML=`<div style="font-family:var(--mono);font-size:.55rem;color:var(--mu);border-top:1px solid var(--bd);padding-top:6px">VERTICAL OSCILLATION (VO) — last ${voPts.length} sessions with data<br><span style="color:${col};font-size:.75rem;font-weight:700">${latest.vo} cm</span> <span style="color:var(--mu)">R${latest.r} · ${latest.date}</span>${trend!==null?` · trend ${trend>=0?'+':''}${trend} cm vs first logged`:''}. Target &lt;9.5 cm. Easy: 8–10 expected · Quality: 9–11 cm.</div>`;
-    }
-  }
-  if(!d||d.pts.length<2){if(sparse)sparse.style.display='';el.style.display='none';return;}
-  if(sparse)sparse.style.display='none';
-  const col=v=>v<=10?'rgba(16,185,129,.8)':v<=20?'rgba(0,212,255,.7)':v<=30?'rgba(245,158,11,.7)':'rgba(239,68,68,.65)';
-  new Chart(el,{type:'line',data:{datasets:[
-    {label:'Walk %',data:d.pts.map(p=>({x:p.r,y:p.walkRatio,lbl:`R${p.r} · ${p.date} · ${p.type} · ${p.dist}km`})),
-     borderColor:'rgba(0,212,255,.5)',backgroundColor:d.pts.map(p=>col(p.walkRatio)),
-     pointBackgroundColor:d.pts.map(p=>col(p.walkRatio)),pointRadius:6,fill:false,tension:.3,showLine:true},
-    {label:'4-run trend',data:d.ma.map((v,i)=>v!=null?{x:d.pts[i].r,y:v}:null).filter(Boolean),
-     borderColor:'rgba(16,185,129,.45)',borderWidth:1.5,pointRadius:0,tension:.4,fill:false}
-  ]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},
-    tooltip:{callbacks:{label:c=>c.raw.lbl?`${c.raw.lbl} · walk: ${c.raw.y}%`:`trend: ${c.raw.y}%`}}},
-    scales:{x:{display:false},y:{min:0,max:50,grid:{color:'rgba(0,212,255,.04)'},
-      ticks:{font:{family:'JetBrains Mono',size:9},color:'#64748b',callback:v=>v+'%'},
-      title:{display:true,text:'walk %',color:'#64748b',font:{size:8}}}}}});
+  const panel=document.getElementById('walk-ratio-panel');
+  if(!panel)return;
+
+  // Walk ratio data
+  const wrPts=a.walkRatio&&a.walkRatio.pts?a.walkRatio.pts:[];
+  const wrLatest=wrPts.length?wrPts[wrPts.length-1]:null;
+  const wrPrev=wrPts.length>1?wrPts[wrPts.length-2]:null;
+  const wrTrend=wrLatest&&wrPrev?(wrLatest.walkRatio-wrPrev.walkRatio).toFixed(1):null;
+  const wrCol=v=>v<=10?'var(--gn)':v<=20?'var(--cy)':v<=30?'var(--am)':'var(--rd)';
+  const wrRead=v=>v<=10?'Excellent — minimal walking':v<=20?'Good — walk breaks well managed':v<=25?'Moderate — heat/fatigue driven':v<=35?'High — reduce with fitness':'Very high';
+
+  // VO data
+  const voPts=a.vo&&a.vo.pts?a.vo.pts:[];
+  const voLatest=voPts.length?voPts[voPts.length-1]:null;
+  const voPrev=voPts.length>1?voPts[voPts.length-2]:null;
+  const voTrend=voLatest&&voPrev?(voLatest.vo-voPrev.vo).toFixed(1):null;
+  const voCol=v=>v<8?'var(--gn)':v<9.5?'var(--cy)':v<11?'var(--am)':'var(--rd)';
+  const voRead=v=>v<8?'Excellent — very low bounce':v<9.5?'Good — within target':v<11?'Moderate — room to improve':'High — significant vertical waste';
+
+  const statRow=(label,value,col,read,detail,trend)=>`
+    <div style="padding:10px 0;border-bottom:1px solid var(--bd)">
+      <div style="display:flex;align-items:baseline;gap:10px;margin-bottom:4px">
+        <div style="font-family:var(--mono);font-size:.6rem;color:var(--mu);letter-spacing:1px;text-transform:uppercase;width:160px">${label}</div>
+        <div style="font-family:var(--mono);font-size:1.1rem;font-weight:700;color:${col}">${value}</div>
+        ${trend!==null?`<div style="font-family:var(--mono);font-size:.6rem;color:${parseFloat(trend)<=0?'var(--gn)':'var(--am)'}">${parseFloat(trend)>=0?'+':''}${trend} vs prev</div>`:''}
+      </div>
+      <div style="font-family:var(--mono);font-size:.58rem;color:var(--m2);margin-bottom:3px">${read}</div>
+      <div style="font-family:var(--mono);font-size:.52rem;color:var(--mu);line-height:1.55">${detail}</div>
+    </div>`;
+
+  const wrHtml=wrLatest
+    ?statRow(
+        `Walk ratio · R${wrLatest.r} · ${wrLatest.date} · ${wrLatest.type}`,
+        wrLatest.walkRatio+'%',
+        wrCol(wrLatest.walkRatio),
+        wrRead(wrLatest.walkRatio),
+        `${wrLatest.walkRatio}% of session time was walking. Target: <15% on long runs in cooler conditions, <25% in Hanoi summer heat. Decreasing walk ratio over weeks = aerobic system handling the load better. Walk breaks are not failure — they are protocol.`,
+        wrTrend
+      )
+    :'<div style="font-family:var(--mono);font-size:.56rem;color:var(--mu);padding:10px 0">No walk ratio data yet — populates from easy and long outdoor runs.</div>';
+
+  const voHtml=voLatest
+    ?statRow(
+        `Vertical oscillation · R${voLatest.r} · ${voLatest.date}`,
+        voLatest.vo+' cm',
+        voCol(voLatest.vo),
+        voRead(voLatest.vo),
+        `Bounce height per stride. Target <9.5 cm. Lower = less energy wasted going up, more going forward. R67 easy LR: 8.3 cm (excellent). R66 QB treadmill: 10.1 cm (higher at tempo pace — normal). Cross-surface and cross-pace values are not directly comparable.`,
+        voTrend
+      )
+    :'<div style="font-family:var(--mono);font-size:.56rem;color:var(--mu);padding:10px 0">No VO data yet — populates from Garmin sessions with Running Dynamics.</div>';
+
+  panel.innerHTML=wrHtml+voHtml;
+}
 }
 
 // ── LCRS PER SESSION CHART ───────────────────────────────────────────────
@@ -3756,14 +3779,12 @@ function initIntensityChart(a){
   CHARTS.intensity=new Chart(document.getElementById('intensityChart').getContext('2d'),{
     type:'bar',
     data:{labels:w.map(x=>x.label),datasets:[
-      {label:'Easy',data:w.map(x=>x.easyPct),backgroundColor:'rgba(16,185,129,.45)',
-       borderColor:'transparent',borderWidth:0,stack:'s',categoryPercentage:.68,barPercentage:.8},
-      {label:'Long',data:w.map(x=>x.total>0?+(x.long/x.total*100).toFixed(1):0),backgroundColor:'rgba(16,185,129,.22)',
-       borderColor:w.map(x=>x.compliant?'transparent':WARN),borderWidth:w.map(x=>x.compliant?0:2.5),stack:'s',categoryPercentage:.68,barPercentage:.8},
-      {label:'Quality',data:w.map(x=>+(x.quality/x.total*100).toFixed(1)),backgroundColor:D1,borderColor:D1,borderWidth:1,stack:'s',categoryPercentage:.68,barPercentage:.8},
-      {type:'line',label:'80% low-intensity floor',data:w.map(()=>80),borderColor:WARN,borderDash:[6,4],borderWidth:1.5,pointRadius:0,fill:false,backgroundColor:'transparent'},
+      {label:'Low Intensity',data:w.map(x=>x.lowPct),backgroundColor:'rgba(16,185,129,.4)',
+       borderColor:w.map(x=>x.compliant?'transparent':WARN),borderWidth:w.map(x=>x.compliant?0:2),stack:'s',categoryPercentage:.68,barPercentage:.8},
+      {label:'Quality',data:w.map(x=>x.qualityPct),backgroundColor:D1,borderColor:D1,borderWidth:1,stack:'s',categoryPercentage:.68,barPercentage:.8},
+      {type:'line',label:'80% floor',data:w.map(()=>80),borderColor:WARN,borderDash:[6,4],borderWidth:1.5,pointRadius:0,fill:false,backgroundColor:'transparent'},
     ]},
-    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:'#64748b',font:{family:'Share Tech Mono',size:10}}},tooltip:{...CHART_DEFAULTS,callbacks:{label:c=>`${c.dataset.label}: ${c.parsed.y.toFixed(1)}%`}}},scales:{x:{ticks:xTick(),grid:gridLine(),border:borderLine()},y:{max:100,ticks:{...yTick(),callback:v=>`${v}%`},title:{display:true,text:'% of weekly km',color:'#64748b',font:{family:'Share Tech Mono',size:10}},grid:gridLine(),border:borderLine()}}}
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:'#64748b',font:{family:'Share Tech Mono',size:10}}},tooltip:{...CHART_DEFAULTS,callbacks:{label:c=>c.dataset.label==='Low Intensity'?`Low intensity (easy+long): ${c.parsed.y.toFixed(1)}%`:c.dataset.label==='Quality'?`Quality: ${c.parsed.y.toFixed(1)}%`:''}}},scales:{x:{ticks:xTick(),grid:gridLine(),border:borderLine()},y:{max:100,ticks:{...yTick(),callback:v=>`${v}%`},title:{display:true,text:'% of weekly km',color:'#64748b',font:{family:'Share Tech Mono',size:10}},grid:gridLine(),border:borderLine()}}}
   });
 }
 
