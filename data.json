@@ -3111,10 +3111,8 @@
   "STRENGTH": {
     "baseline_date": "Aug 16, 2026",
     "baseline_week": "W15",
-    "note": "Updated Aug 19 (W15 Lower Day). New baselines established: V Squat 72 kg×10, Hip Thrust 15 kg×10, Single Leg RDL 12 kg×10 (replaces Back Extension). Nordic eccentric protocol gap W15: machine curl used instead of Swiss Ball sub — Swiss Ball hamstring curl (2×4 eccentric) required next legs session. Sitting calf raise and Tibialis Raise skipped W15 lower day — Tibialis still TBC. Tricep Overhead Extension baseline confirmed Aug 18: 12 kg × 12. Shoulder Press double progression Aug 18: 20.4 kg×10 → 24 kg×12. Pull-up top set 10 ✅ — weighted pull-up threshold target: 10-8-8. Nordic Curl: W1/12 eccentric protocol active (2×4). Q4 additions now active: Single Leg RDL + Hip Thrust. Hip protocol added W15 (post-QB Aug 20) — hip flexor loading + lateral stability. First execution pending tonight/Fri.",
-    "missing_weights": [
-      "Tibialis Raise"
-    ],
+    "note": "Updated Aug 23, 2026 (W15 bonus Legs Day). Key changes: Trap Bar reset 130→100 kg (RPE 9-10 + lower back soreness). BSS +2 kg to 16 kg. SL Standing Machine Curl permanently replaces Nordic (setup friction) — 23 kg×10 baseline. Hip Thrust +5.4 kg to 20.4 kg. Seated Calf Raise baseline established 32 kg/side (was skipped Aug 19). Tibialis KB Raise weight baseline 7.5 kg, prescription 2×20. V Squat + SL RDL moved to Full Body day. One-axis progression rule active on SL Machine Curl. Tricep Overhead Extension baseline confirmed Aug 18: 12 kg × 12. Shoulder Press double progression Aug 18: 20.4 kg×10 → 24 kg×12. Pull-up top set 10 ✅ — weighted pull-up threshold target: 10-8-8. Q4 additions active: Hip Thrust + SL Machine Curl. Hip protocol added W15 (Aug 20) — hip flexor loading + lateral stability.",
+    "missing_weights": [],
     "push": [
       {
         "exercise": "Incline Barbell Press",
@@ -3205,85 +3203,71 @@
     ],
     "legs": [
       {
-        "exercise": "V Squat Machine",
-        "sets": 3,
-        "reps": 10,
-        "weight_kg": 72,
-        "note": "BASELINE ESTABLISHED W15 · 72 kg · 3×10 · primary bilateral quad compound"
-      },
-      {
         "exercise": "Trap Bar Deadlift",
         "sets": 3,
-        "reps": 8,
-        "weight_kg": 130,
-        "note": "Working sets · Est. 1RM ~165 kg · bilateral hip hinge"
+        "reps": 10,
+        "weight_kg": 100,
+        "note": "Reset from 130 kg — RPE 9-10 + post-session lower back soreness confirmed. Build: 3 consecutive sessions RPE ≤7 zero lower back response → advance to 110 kg"
       },
       {
         "exercise": "Bulgarian Split Squat",
         "sets": 3,
         "reps": 10,
-        "weight_kg": 14,
-        "note": "14 kg each hand · 3×10 · confirmed W15 lower day"
+        "weight_kg": 16,
+        "note": "✅ +2 kg from 14 kg (Aug 19) · 3×10 confirmed Aug 23"
       },
       {
-        "exercise": "Single Leg RDL",
-        "sets": 2,
-        "reps": 10,
-        "weight_kg": 12,
-        "note": "BASELINE ESTABLISHED W15 · 12 kg each hand · 2×10 · replaces Rounded Back Extension · Q4 addition now active"
-      },
-      {
-        "exercise": "Nordic Hamstring Curl",
-        "sets": 2,
-        "reps": 4,
-        "weight_kg": 0,
-        "note": "W1/12 eccentric protocol (2×4) · W15 lower day: substituted Single Leg Standing Machine Curl 20 kg×8 (machine — eccentric gap, Swiss Ball sub still required next session)"
-      },
-      {
-        "exercise": "Calf Raise (machine single leg)",
+        "exercise": "Single Leg Standing Hamstring Curl",
         "sets": 3,
-        "reps": 15,
-        "weight_kg": 60,
-        "note": "Machine load 60 kg"
-      },
-      {
-        "exercise": "Tibialis Raise",
-        "sets": 2,
-        "reps": 15,
-        "weight_kg": null,
-        "note": "Wall or tib bar · weight TBC"
+        "reps": 10,
+        "weight_kg": 23,
+        "note": "✅ +3 kg +2 reps from 20 kg×8 (Aug 19) · PERMANENT NORDIC REPLACEMENT (setup friction) · one-axis rule: next → 23 kg×12, then 25 kg×8"
       },
       {
         "exercise": "Hip Thrust",
         "sets": 3,
         "reps": 10,
-        "weight_kg": 15,
-        "note": "BASELINE ESTABLISHED W15 · 15 kg machine · 3×10 · Q4 addition now active"
+        "weight_kg": 20.4,
+        "note": "✅ +5.4 kg from 15 kg machine · Aug 23 updated baseline · Q4 active"
       },
       {
-        "exercise": "Single Leg Standing Hamstring Curl",
+        "exercise": "Seated Calf Raise",
         "sets": 3,
-        "reps": 8,
-        "weight_kg": 20,
-        "note": "20 kg · 3×8 with partials · machine (concentric) · W15 lower: used as Nordic/Swiss Ball sub — eccentric demand not met · Swiss Ball curl still required for eccentric protocol"
+        "reps": 15,
+        "weight_kg": 64,
+        "note": "BASELINE ESTABLISHED Aug 23 · 32 kg per side (64 kg total) · was skipped Aug 19"
+      },
+      {
+        "exercise": "Tibialis KB Raise",
+        "sets": 2,
+        "reps": 20,
+        "weight_kg": 7.5,
+        "note": "WEIGHT BASELINE ESTABLISHED Aug 23 · 7.5 kg · prescription normalised: 2×20 · progress to 3×20 after 3 clean sessions"
+      },
+      {
+        "exercise": "Calf Raise (machine, single leg)",
+        "sets": 3,
+        "reps": 15,
+        "weight_kg": 60,
+        "note": "Standing calf raise · unchanged"
       }
     ],
     "week_status": {
-      "week": 15,
-      "push": true,
-      "pull": true,
-      "legs": true,
-      "full_body": true
+      "week": 16,
+      "push": false,
+      "pull": false,
+      "legs": false,
+      "full_body": false
     },
     "to_add": {
-      "legs": [
-        "Single Leg RDL (Q4 — unilateral hip hinge gap)",
-        "Hip Thrust (Q4 — glute isolation)"
+      "legs": [],
+      "full_body": [
+        "V Squat Machine (moved from Legs Day — first session W16 Full Body)",
+        "Single Leg RDL (moved from Legs Day — first session W16 Full Body)"
       ],
       "pull": [],
       "push": []
     },
-    "nordic_week": 1,
     "pull_up_top_set": 10,
     "full_body": {
       "baseline_date": "Aug 23, 2026",
