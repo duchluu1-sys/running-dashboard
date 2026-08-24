@@ -1909,7 +1909,8 @@
         "lcrs-baseline",
         "pacing-error-km1",
         "reserve-confirmed"
-      ]
+      ],
+      "lcrsType": "lt2"
     },
     {
       "r": 62,
@@ -2115,7 +2116,8 @@
         "water-break",
         "heat"
       ],
-      "lcrs": 14
+      "lcrs": 14,
+      "lcrsType": "sublt1"
     },
     {
       "r": 67,
@@ -2221,7 +2223,8 @@
         "depletion-spike",
         "ankle-hip-hypothesis"
       ],
-      "lcrs": 51.3
+      "lcrs": 51.3,
+      "lcrsType": "easy"
     }
   ],
   "GATES": [
@@ -2242,7 +2245,7 @@
       "short": "2x20 intervals + 2x20 tempo ceiling-clean",
       "progress": 0,
       "status": "pending",
-      "detail": "Both 2x20 min Quality A AND 2x20 min Quality B completed with 0% time above 155 bpm (ceiling updated Aug 11), in 2 separate weeks.",
+      "detail": "Both 2x20 min Quality A AND 2x20 min Quality B completed with 0% time above the current quality ceiling (160 bpm, raised Aug 20), in 2 separate weeks.",
       "eta": "~Sep 2026"
     },
     {
@@ -2350,15 +2353,12 @@
     "age": 30,
     "phase": "Phase 2",
     "phaseName": "Quality Development",
-    "week": 15,
+    "week": 16,
     "totalWeeks": 24,
     "deloadWeek": 21,
-    "weekVolOnBoard": 35.88,
-    "lastWeekVol": 26.06,
-    "weekTarget": [
-      35,
-      38
-    ],
+    "weekVolOnBoard": 0,
+    "lastWeekVol": 35.88,
+    "weekTarget": "36–40",
     "easyHRBand": [
       122,
       139
@@ -2390,7 +2390,7 @@
       "Wed": "easy",
       "Thu": "quality_b",
       "Fri": "rest",
-      "Sat": "easy",
+      "Sat": "long",
       "Sun": "rest"
     },
     "goalPaceSub4": 5.683,
@@ -2546,7 +2546,7 @@
     ],
     "easyPaceMin": 7.0,
     "easyPaceMax": 8.5,
-    "weekStartDate": "2026-08-17",
+    "weekStartDate": "2026-08-24",
     "lcrsNote": "Easy pace LCRS 51.3 min (R67 Aug 21, 7:30-8:30/km) · QB sub-LT1 14 min (R66 Aug 20) · LT2-specific 7.6 min (R61 Aug 14) — threshold target 20 min by W20 is tracked separately via lcrsThreshold",
     "creatineApproved": true,
     "creatineApprovedDate": "Aug 20, 2026",
@@ -2571,6 +2571,13 @@
       ],
       "falsification_condition": "Ankle issues persist after 8 weeks of consistent hip protocol → mechanism incomplete → refer physio for gait analysis",
       "status": "working hypothesis · hip protocol is the natural experiment"
+    },
+    "readinessRules": {
+      "sleepRest": 45,
+      "sleepCaution": 60,
+      "sleepMonitor": 75,
+      "rhrRest": 8,
+      "rhrCaution": 5
     }
   },
   "READINESS_LOG": [
@@ -3111,8 +3118,10 @@
   "STRENGTH": {
     "baseline_date": "Aug 16, 2026",
     "baseline_week": "W15",
-    "note": "Updated Aug 23, 2026 (W15 bonus Legs Day). Key changes: Trap Bar reset 130→100 kg (RPE 9-10 + lower back soreness). BSS +2 kg to 16 kg. SL Standing Machine Curl permanently replaces Nordic (setup friction) — 23 kg×10 baseline. Hip Thrust +5.4 kg to 20.4 kg. Seated Calf Raise baseline established 32 kg/side (was skipped Aug 19). Tibialis KB Raise weight baseline 7.5 kg, prescription 2×20. V Squat + SL RDL moved to Full Body day. One-axis progression rule active on SL Machine Curl. Tricep Overhead Extension baseline confirmed Aug 18: 12 kg × 12. Shoulder Press double progression Aug 18: 20.4 kg×10 → 24 kg×12. Pull-up top set 10 ✅ — weighted pull-up threshold target: 10-8-8. Q4 additions active: Hip Thrust + SL Machine Curl. Hip protocol added W15 (Aug 20) — hip flexor loading + lateral stability.",
-    "missing_weights": [],
+    "note": "Updated Aug 19 (W15 Lower Day). New baselines established: V Squat 72 kg×10, Hip Thrust 15 kg×10, Single Leg RDL 12 kg×10 (replaces Back Extension). Nordic eccentric protocol gap W15: machine curl used instead of Swiss Ball sub — Swiss Ball hamstring curl (2×4 eccentric) required next legs session. Sitting calf raise and Tibialis Raise skipped W15 lower day — Tibialis still TBC. Tricep Overhead Extension baseline confirmed Aug 18: 12 kg × 12. Shoulder Press double progression Aug 18: 20.4 kg×10 → 24 kg×12. Pull-up top set 10 ✅ — weighted pull-up threshold target: 10-8-8. Nordic Curl: W1/12 eccentric protocol active (2×4). Q4 additions now active: Single Leg RDL + Hip Thrust. Hip protocol added W15 (post-QB Aug 20) — hip flexor loading + lateral stability. First execution pending tonight/Fri.",
+    "missing_weights": [
+      "Tibialis Raise"
+    ],
     "push": [
       {
         "exercise": "Incline Barbell Press",
@@ -3203,53 +3212,67 @@
     ],
     "legs": [
       {
-        "exercise": "Trap Bar Deadlift",
+        "exercise": "V Squat Machine",
         "sets": 3,
         "reps": 10,
-        "weight_kg": 100,
-        "note": "Reset from 130 kg — RPE 9-10 + post-session lower back soreness confirmed. Build: 3 consecutive sessions RPE ≤7 zero lower back response → advance to 110 kg"
+        "weight_kg": 72,
+        "note": "BASELINE ESTABLISHED W15 · 72 kg · 3×10 · primary bilateral quad compound"
+      },
+      {
+        "exercise": "Trap Bar Deadlift",
+        "sets": 3,
+        "reps": 8,
+        "weight_kg": 130,
+        "note": "Working sets · Est. 1RM ~165 kg · bilateral hip hinge"
       },
       {
         "exercise": "Bulgarian Split Squat",
         "sets": 3,
         "reps": 10,
-        "weight_kg": 16,
-        "note": "✅ +2 kg from 14 kg (Aug 19) · 3×10 confirmed Aug 23"
+        "weight_kg": 14,
+        "note": "14 kg each hand · 3×10 · confirmed W15 lower day"
       },
       {
-        "exercise": "Single Leg Standing Hamstring Curl",
-        "sets": 3,
+        "exercise": "Single Leg RDL",
+        "sets": 2,
         "reps": 10,
-        "weight_kg": 23,
-        "note": "✅ +3 kg +2 reps from 20 kg×8 (Aug 19) · PERMANENT NORDIC REPLACEMENT (setup friction) · one-axis rule: next → 23 kg×12, then 25 kg×8"
+        "weight_kg": 12,
+        "note": "BASELINE ESTABLISHED W15 · 12 kg each hand · 2×10 · replaces Rounded Back Extension · Q4 addition now active"
+      },
+      {
+        "exercise": "Nordic Hamstring Curl",
+        "sets": 2,
+        "reps": 4,
+        "weight_kg": 0,
+        "note": "W1/12 eccentric protocol (2×4) · W15 lower day: substituted Single Leg Standing Machine Curl 20 kg×8 (machine — eccentric gap, Swiss Ball sub still required next session)"
+      },
+      {
+        "exercise": "Calf Raise (machine single leg)",
+        "sets": 3,
+        "reps": 15,
+        "weight_kg": 60,
+        "note": "Machine load 60 kg"
+      },
+      {
+        "exercise": "Tibialis Raise",
+        "sets": 2,
+        "reps": 15,
+        "weight_kg": null,
+        "note": "Wall or tib bar · weight TBC"
       },
       {
         "exercise": "Hip Thrust",
         "sets": 3,
         "reps": 10,
-        "weight_kg": 20.4,
-        "note": "✅ +5.4 kg from 15 kg machine · Aug 23 updated baseline · Q4 active"
+        "weight_kg": 15,
+        "note": "BASELINE ESTABLISHED W15 · 15 kg machine · 3×10 · Q4 addition now active"
       },
       {
-        "exercise": "Seated Calf Raise",
+        "exercise": "Single Leg Standing Hamstring Curl",
         "sets": 3,
-        "reps": 15,
-        "weight_kg": 64,
-        "note": "BASELINE ESTABLISHED Aug 23 · 32 kg per side (64 kg total) · was skipped Aug 19"
-      },
-      {
-        "exercise": "Tibialis KB Raise",
-        "sets": 2,
-        "reps": 20,
-        "weight_kg": 7.5,
-        "note": "WEIGHT BASELINE ESTABLISHED Aug 23 · 7.5 kg · prescription normalised: 2×20 · progress to 3×20 after 3 clean sessions"
-      },
-      {
-        "exercise": "Calf Raise (machine, single leg)",
-        "sets": 3,
-        "reps": 15,
-        "weight_kg": 60,
-        "note": "Standing calf raise · unchanged"
+        "reps": 8,
+        "weight_kg": 20,
+        "note": "20 kg · 3×8 with partials · machine (concentric) · W15 lower: used as Nordic/Swiss Ball sub — eccentric demand not met · Swiss Ball curl still required for eccentric protocol"
       }
     ],
     "week_status": {
@@ -3260,14 +3283,14 @@
       "full_body": false
     },
     "to_add": {
-      "legs": [],
-      "full_body": [
-        "V Squat Machine (moved from Legs Day — first session W16 Full Body)",
-        "Single Leg RDL (moved from Legs Day — first session W16 Full Body)"
+      "legs": [
+        "Single Leg RDL (Q4 — unilateral hip hinge gap)",
+        "Hip Thrust (Q4 — glute isolation)"
       ],
       "pull": [],
       "push": []
     },
+    "nordic_week": 1,
     "pull_up_top_set": 10,
     "full_body": {
       "baseline_date": "Aug 23, 2026",
@@ -3420,5 +3443,282 @@
       "timeline": "4–8 weeks before chronic tightness stops recurring. Couch/figure-4/elephant walks shift from symptom management to maintenance coat.",
       "w15_execution": "W15 Aug 23: KB raises 3×15 @ 12.5 kg EXECUTED ✅ (baseline established). L-sit, 90/90 presses, mobility: NOT done today — establish next session."
     }
-  }
+  },
+  "HEALTH_FLAGS": [
+    {
+      "class": "standing",
+      "status": "urgent",
+      "title": "HBV Vaccination",
+      "short": "Shot 1 of 3. OVERDUE.",
+      "detail": "HBsAg negative, HBsAb 7.77 (need ≥10 — not immune). 3-shot course over 6 months. High priority: Vietnam prevalence + both parents Hep B positive. Any clinic.",
+      "action": "Book Shot 1 this week. No further deferral."
+    },
+    {
+      "class": "standing",
+      "status": "clear",
+      "title": "BV 108 — Aug 13 ✅ RESULTS CLEAR",
+      "short": "All results clean. HR ceiling 160 ✅ · Creatine approved ✅",
+      "detail": "Done Aug 13. Dr. Thắng confirmed via phone Aug 20 — all results clean. HR ceiling raised 155→160 bpm (Aug 20). Creatine (NutraBio monohydrate) approved pending timing confirmation. TI-RADS 4 endocrinologist referral still outstanding. CK baseline clean — statin safe at current training load.",
+      "action": "Book endocrinologist referral for TI-RADS 4 thyroid nodule. Confirm creatine dose/timing with Dr. Thắng at next visit."
+    },
+    {
+      "class": "standing",
+      "status": "watch",
+      "title": "TI-RADS 4 Thyroid Nodule",
+      "short": "5×4mm left lobe. Endocrinologist referral outstanding.",
+      "detail": "TI-RADS 4 = intermediate suspicion — majority benign but specialist required. TSH and thyroid function normal at last panel. Referral still outstanding as of Aug 20.",
+      "action": "Book endocrinologist referral for TI-RADS 4 nodule — still open."
+    },
+    {
+      "class": "standing",
+      "status": "watch",
+      "title": "Triglyceride Disorder",
+      "short": "TG 8.52 mmol/L baseline. On Atoyze 20/10. Aug 13 panel clear.",
+      "detail": "Genetic/metabolic driver confirmed. No fatty liver. Atoyze 20/10 from May 30. Zero statin muscle side effects across all runs to date. Alcohol zero — non-negotiable. Aug 13 BV 108 results reviewed by Dr. Thắng (Aug 20) — all clear. TG retest exact number not yet explicitly confirmed by Dr. Thắng.",
+      "action": "Confirm TG retest result number at next Dr. Thắng visit. Continue monitoring unusual muscle heaviness every run."
+    },
+    {
+      "class": "standing",
+      "status": "watch",
+      "title": "Right Ankle (cold-start)",
+      "short": "Warm-up resolved ✅ — 15+ min warm-up non-negotiable.",
+      "detail": "Anterior-lateral right ankle, extensor retinaculum zone. Cold-start only on sensitised post-trial tissue. Resolved across 3+ consecutive data points (R63-R67) with 15+ min warm-up. Not structural. Ankle-hip chain hypothesis active (8-week natural experiment via hip flexor loading).",
+      "action": "Maintain 15+ min warm-up before every run. Flag if ankle recurs on a warm start — that would falsify the warm-up-resolution model."
+    },
+    {
+      "class": "standing",
+      "status": "clear",
+      "title": "Vitamin D Deficiency",
+      "short": "15.40 ng/mL baseline. D3 2,000 IU ongoing.",
+      "detail": "Deficient at baseline (May 29). D3 supplementation running. Aug 13 BV 108 retest done — exact D response value to confirm with Dr. Thắng. Dose increase may be indicated.",
+      "action": "Confirm D retest value at next Dr. Thắng visit."
+    },
+    {
+      "class": "standing",
+      "status": "clear",
+      "title": "Gallbladder Polyps",
+      "short": "Largest 3mm. No action needed now.",
+      "detail": "Multiple small polyps found May 30 imaging. Largest 3mm — below surgical threshold. Routine monitoring only.",
+      "action": "Book gallbladder ultrasound November 2026."
+    }
+  ],
+  "MEDICATIONS": [
+    {
+      "name": "Atoyze 20/10",
+      "dose": "Atorvastatin 20mg + Ezetimibe 10mg · 1 tablet · evening with dinner",
+      "statinStart": "2026-05-30",
+      "status": "clean",
+      "purpose": "Triglyceride + cholesterol control",
+      "note": "Monitor for unusual muscle heaviness every run. Aug 13 BV 108 results clear (Dr. Thắng Aug 20). CK baseline clean. Next review: next BV 108 visit."
+    },
+    {
+      "name": "Vitamin D3 2,000 IU",
+      "dose": "1 capsule · with fattiest meal",
+      "status": "clean",
+      "purpose": "Correct deficiency (15.40 ng/mL baseline)",
+      "note": "Aug 13 retest done — confirm response value with Dr. Thắng. Dose increase may be indicated."
+    },
+    {
+      "name": "Sithion Q10 (CoQ10)",
+      "dose": "Per label · with meal + fat",
+      "status": "clean",
+      "purpose": "Counter statin CoQ10 depletion",
+      "note": "Prophylactic during statin therapy."
+    },
+    {
+      "name": "Creatine (NutraBio monohydrate)",
+      "dose": "Approved — dose/timing pending Dr. Thắng",
+      "status": "pending",
+      "purpose": "Phosphocreatine resynthesis between intervals + long-run glycogen sparing + statin-era muscle support",
+      "note": "Approved Aug 20 (CK clean). Not yet started — confirm dose and timing with Dr. Thắng in person. Monitor CK at next draw for statin-creatine interaction."
+    }
+  ],
+  "STRENGTH_HISTORY": [
+    {
+      "date": "2026-08-17",
+      "week": 15,
+      "session": "pull",
+      "entries": [
+        {
+          "exercise": "Pull-ups",
+          "topSet": 10,
+          "reps": "10-7-6",
+          "weight_kg": 0
+        },
+        {
+          "exercise": "Lat Pulldown",
+          "weight_kg": 60,
+          "reps": "10-8-7"
+        },
+        {
+          "exercise": "Chest Supported Row",
+          "weight_kg": 55,
+          "reps": 8
+        },
+        {
+          "exercise": "X Rear Delt",
+          "weight_kg": 6,
+          "reps": 8
+        },
+        {
+          "exercise": "Preacher Hammer Curl",
+          "weight_kg": 12,
+          "reps": 10
+        }
+      ]
+    },
+    {
+      "date": "2026-08-18",
+      "week": 15,
+      "session": "push",
+      "entries": [
+        {
+          "exercise": "Incline Barbell Press",
+          "weight_kg": 60.8,
+          "reps": 8
+        },
+        {
+          "exercise": "Cable Fly",
+          "weight_kg": 12,
+          "reps": 10
+        },
+        {
+          "exercise": "Shoulder Press",
+          "weight_kg": 24,
+          "reps": 12
+        },
+        {
+          "exercise": "Cable Lateral Raise",
+          "weight_kg": 7.5,
+          "reps": 12
+        },
+        {
+          "exercise": "Tricep Overhead Extension",
+          "weight_kg": 12,
+          "reps": 12
+        }
+      ]
+    },
+    {
+      "date": "2026-08-19",
+      "week": 15,
+      "session": "legs",
+      "entries": [
+        {
+          "exercise": "V Squat Machine",
+          "weight_kg": 72,
+          "reps": 10
+        },
+        {
+          "exercise": "Trap Bar Deadlift",
+          "weight_kg": 130,
+          "reps": 8
+        },
+        {
+          "exercise": "Bulgarian Split Squat",
+          "weight_kg": 14,
+          "reps": 10
+        },
+        {
+          "exercise": "Single Leg RDL",
+          "weight_kg": 12,
+          "reps": 10
+        },
+        {
+          "exercise": "Single Leg Standing Hamstring Curl",
+          "weight_kg": 20,
+          "reps": 8
+        },
+        {
+          "exercise": "Hip Thrust",
+          "weight_kg": 15,
+          "reps": 10
+        }
+      ]
+    },
+    {
+      "date": "2026-08-23",
+      "week": 15,
+      "session": "full_body",
+      "entries": [
+        {
+          "exercise": "Incline Dumbbell Press",
+          "weight_kg": 26,
+          "reps": "8/7/5"
+        },
+        {
+          "exercise": "DB Shoulder Press",
+          "weight_kg": 20,
+          "reps": 8
+        },
+        {
+          "exercise": "DB Lateral Raise",
+          "weight_kg": 10,
+          "reps": 10
+        },
+        {
+          "exercise": "Seated Incline DB Curl",
+          "weight_kg": 10,
+          "reps": 10
+        },
+        {
+          "exercise": "Chest Supported Row",
+          "weight_kg": 80,
+          "reps": 10
+        },
+        {
+          "exercise": "Lat Pulldown",
+          "weight_kg": 60,
+          "reps": 8
+        },
+        {
+          "exercise": "KB Knee Raises",
+          "weight_kg": 12.5,
+          "reps": 15
+        }
+      ]
+    },
+    {
+      "date": "2026-08-23",
+      "week": 15,
+      "session": "legs_bonus",
+      "entries": [
+        {
+          "exercise": "Trap Bar Deadlift",
+          "weight_kg": 100,
+          "reps": 10
+        },
+        {
+          "exercise": "Bulgarian Split Squat",
+          "weight_kg": 16,
+          "reps": 10
+        },
+        {
+          "exercise": "Single Leg Standing Hamstring Curl",
+          "weight_kg": 23,
+          "reps": 10
+        },
+        {
+          "exercise": "Hip Thrust",
+          "weight_kg": 20.4,
+          "reps": 10
+        },
+        {
+          "exercise": "Seated Calf Raise",
+          "weight_kg": 64,
+          "reps": 15
+        },
+        {
+          "exercise": "Tibialis KB Raise",
+          "weight_kg": 7.5,
+          "reps": 50
+        },
+        {
+          "exercise": "KB Knee Raises",
+          "weight_kg": 12.5,
+          "reps": 10
+        }
+      ]
+    }
+  ]
 }

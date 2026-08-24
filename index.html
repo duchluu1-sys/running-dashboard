@@ -14,7 +14,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Racing</title>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Inter:wght@300;400;500;600;700&family=Rajdhani:wght@600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js" onerror="window._CHARTS_OFFLINE=true;console.warn('Chart.js failed to load — chart panels will be suppressed, data-only mode active')"></script>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
@@ -1025,6 +1025,11 @@ body{background:var(--bg);background-image:var(--grid);color:var(--tx);font-fami
 .gym-ms-fill.cyan{background:linear-gradient(90deg,var(--cy),rgba(0,212,255,.5))}
 .gym-ms-fill.green{background:linear-gradient(90deg,var(--ok),rgba(16,185,129,.5))}
 .gym-ms-sub{font-family:var(--mono);font-size:.48rem;color:var(--mu);margin-top:5px;letter-spacing:.5px}
+.gym-progress-history{padding:4px 0;margin-top:8px}
+.gym-ph-row{display:grid;grid-template-columns:160px 60px 1fr;gap:6px;padding:6px 0;border-bottom:1px solid rgba(0,212,255,.07);align-items:baseline}
+.gym-ph-ex{font-family:var(--mono);font-size:.62rem;color:var(--cy);letter-spacing:.3px}
+.gym-ph-delta{font-family:var(--mono);font-size:.68rem;font-weight:700;text-align:right}
+.gym-ph-hist{font-family:var(--mono);font-size:.56rem;color:var(--mu);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .gym-stabs{display:flex;border-bottom:1px solid var(--bd);margin-bottom:14px}
 .gym-stab{padding:8px 16px;font-family:var(--mono);font-size:.53rem;letter-spacing:2.5px;text-transform:uppercase;color:var(--mu);background:transparent;border:none;border-bottom:2px solid transparent;cursor:pointer;transition:color .15s,border-color .15s;min-height:36px}
 .gym-stab:hover{color:var(--m2)}.gym-stab.active{color:var(--cy);border-bottom-color:var(--cy)}
@@ -1172,9 +1177,9 @@ body{background:var(--bg);background-image:var(--grid);color:var(--tx);font-fami
   </div>
   <div class="g2">
     <div class="card hud-card">
-      <div class="ch"><div class="cl">AEROBIC EFFICIENCY INDEX</div><div class="cs">easy runs only · lower = more efficient · AEI = avg HR ÷ speed (km/h)</div></div>
+<!-- AEI card removed: HR÷speed contradicted the canonical pace-at-HR-band definition. Use PACE·HR ENVELOPE instead. -->
       <div id="aei-sparse" class="sparse-state"></div>
-      <div class="cw" id="aei-chart-wrap" style="display:none"><canvas id="aeiChart"></canvas></div>
+      <div id="aei-sparse" style="display:none"></div>
     </div>
     <div class="card hud-card">
       <div class="ch"><div class="cl">QUALITY SESSION ZONE BREAKDOWN</div><div class="cs">last 8 quality sessions · Z3 dominance = ideal · est. = estimated</div></div>
@@ -1187,7 +1192,7 @@ body{background:var(--bg);background-image:var(--grid);color:var(--tx);font-fami
   </div>
   <div class="g2">
     <div class="card hud-card">
-      <div class="ch"><div class="cl">QUALITY CEILING COMPLIANCE</div><div class="cs" id="compliance-sub">% time above 155 bpm per quality session · target 0% · ceiling raised from 150 → 155 Aug 11</div></div>
+      <div class="ch"><div class="cl">QUALITY CEILING COMPLIANCE</div><div class="cs" id="compliance-sub">% time above quality ceiling per quality session · target 0%</div></div>
       <div id="compliance-header" style="padding:10px 20px 0;font-family:var(--mono);font-size:.72rem;color:var(--gn)"></div>
       <div class="cw"><canvas id="complianceChart"></canvas></div>
       <div class="cleg" id="compliance-leg" style="padding:6px 20px 14px;justify-content:flex-start">
@@ -1219,7 +1224,7 @@ body{background:var(--bg);background-image:var(--grid);color:var(--tx);font-fami
 
   <div class="g2">
     <div class="card hud-card" id="lcrs-per-run-card">
-      <div class="ch"><div class="cl">LCRS PER SESSION</div><div class="cs">longest continuous run segment · threshold target 20 min W20 (dashed line) · R67 easy 51.3 min recorded separately</div></div>
+      <div class="ch"><div class="cl">LCRS PER SESSION</div><div class="cs">longest continuous segment · split by physiological definition · 20-min target = LT2 only</div></div>
       <div id="lcrs-per-run-sparse" class="sparse-state" style="display:none"></div>
       <div class="cw"><canvas id="lcrsPerRunChart"></canvas></div>
       <div style="padding:4px 20px 12px;font-family:var(--mono);font-size:.56rem;color:var(--mu);line-height:1.6">R61: 7.6 min at LT2+ (race-constraint baseline). R66: 14 min sub-LT1 QB. R67: 51.3 min easy LR. The 20 min threshold target (dashed) tracks LT2-specific continuity — the race-constraint metric. Quality session LCRS is the relevant progression signal each week.</div>
@@ -1350,32 +1355,14 @@ body{background:var(--bg);background-image:var(--grid);color:var(--tx);font-fami
 // ════════════════════════════════════════════════════
 // DATA — populated at runtime by fetch('data.json')
 // ════════════════════════════════════════════════════
-let RUNS, GATES, RACES, ATHLETE, READINESS_LOG, STRENGTH;
+let RUNS, GATES, RACES, ATHLETE, READINESS_LOG, STRENGTH, STRENGTH_HISTORY;
 let PHASES=[], PROGRESSION=[], MILESTONES=[];
 let _BYTES=0;   // S16 — byte length of the data.json payload currently loaded
 
 // ════════════════════════════════════════════════════
-// STATIC — HEALTH_FLAGS & MEDICATIONS (kept in HTML, not in data.json)
+// HEALTH_FLAGS & MEDICATIONS — sourced from data.json (canonical, no HTML copy)
 // ════════════════════════════════════════════════════
-const HEALTH_FLAGS=[
-  // class: blocking = red card above MISSION (injury pain, statin red flag)
-  //        dated    = amber countdown below LAST RUN (auto-promotes at T-0)
-  //        standing = Health tab only (chronic, doesn't change today's plan)
-  // dueDate (ISO): required for class:"dated"; auto-promotes standing→dated at T-7, blocking at T-0
-  {class:"standing",status:"urgent",title:"HBV Vaccination",short:"Shot 1 of 3. OVERDUE.",detail:"HBsAg negative, HBsAb 7.77 (need ≥10 — not immune). 3-shot course over 6 months. High priority: Vietnam prevalence + both parents Hep B positive. Any clinic.",action:"Book Shot 1 this week. No further deferral."},
-  {class:"standing",status:"clear",title:"BV 108 — Aug 13 ✅ RESULTS CLEAR",short:"All results clean. HR ceiling 160 ✅ · Creatine approved ✅",detail:"Done Aug 13. Dr. Thắng confirmed via phone Aug 20 — all results clean. HR ceiling raised 155→160 bpm (Aug 20). Creatine (NutraBio monohydrate) approved pending timing confirmation. TI-RADS 4 endocrinologist referral still outstanding. CK baseline clean — statin safe at current training load.",action:"Book endocrinologist referral for TI-RADS 4 thyroid nodule. Confirm creatine dose/timing with Dr. Thắng at next visit."},
-  {class:"standing",status:"watch",title:"TI-RADS 4 Thyroid Nodule",short:"5×4mm left lobe. Endocrinologist referral pending.",detail:"TI-RADS 4 = intermediate suspicion — majority benign but specialist required. TSH and thyroid function completely normal. Referral via Jul 30 appointment.",action:"Jul 30: get endocrinologist referral confirmed."},
-  {class:"standing",status:"watch",title:"Triglyceride Disorder",short:"TG 8.52 mmol/L baseline. On Atoyze 20/10. Retest results Aug 13.",detail:"Genetic/metabolic driver confirmed. No fatty liver. Atoyze 20/10 from May 30. Zero statin muscle side effects across all runs to date. Alcohol zero — non-negotiable. Aug 13 BV 108 results reviewed by Dr. Thắng (Aug 20) — all clear. TG retest result not yet explicitly confirmed by Dr. Thắng.",action:"Confirm TG retest result number at next Dr. Thắng visit. Continue monitoring unusual muscle heaviness every run."},
-  {class:"standing",status:"watch",title:"Right Ankle + Right Plantar",short:"Ankle cleared R45. Plantar mild fatigue — monitor.",detail:"Right lateral ankle (peroneal) irritated R43, present first 2km R44 only, clean through 20 min continuous tempo R45. New mild right plantar fatigue at R45 end — not pain, fatigue. Monitor Week 12.",action:"Flag any ankle or plantar pain during Week 12 Quality A."},
-  {class:"standing",status:"clear",title:"Vitamin D Deficiency",short:"15.40 ng/mL baseline. D3 2,000 IU ongoing.",detail:"Deficient at baseline (May 29). D3 supplementation running. ~Aug 13 retest will show response (BV 108 rescheduled). Dose increase likely needed.",action:"Retest ~Aug 13 (BV 108)."},
-  {class:"standing",status:"clear",title:"Gallbladder Polyps",short:"Largest 3mm. No action needed now.",detail:"Multiple small polyps found May 30 imaging. Largest 3mm — below surgical threshold. Routine monitoring only.",action:"Book gallbladder ultrasound November 2026."}
-];
-
-const MEDICATIONS=[
-  {name:"Atoyze 20/10",dose:"Atorvastatin 20mg + Ezetimibe 10mg · 1 tablet · evening with dinner",statinStart:"2026-05-30",status:"clean",purpose:"Triglyceride + cholesterol control",note:"Monitor for unusual muscle heaviness every run. Aug 13 BV 108 results clear (Dr. Thắng Aug 20). CK baseline clean. Next review: next BV 108 visit."},
-  {name:"Vitamin D3 2,000 IU",dose:"1 capsule · with fattiest meal (fat-soluble)",statinStart:"2026-05-30",status:"clean",purpose:"Correct vitamin D deficiency (15.40 ng/mL baseline)",note:"Baseline 15.40 ng/mL (deficient). Aug 13 BV 108 retest done. Result to confirm at next Dr. Thắng visit. Dose increase may follow."},
-  {name:"CoQ10 (Sithion Q10)",dose:"Per label · with meal + fat",statinStart:"2026-05-30",status:"clean",purpose:"Counter statin-induced CoQ10 depletion",note:"Standard companion to statin therapy. No side effects."}
-];
+let HEALTH_FLAGS=[], MEDICATIONS=[];  // sourced from data.json at load — single source of truth
 
 
 // END STATIC BLOCK
@@ -1452,8 +1439,9 @@ function computeGCTTrend(runs){
     const movingAvg=n>=5?(()=>{const v=c.pts.map(p=>p.gct),ma=movAvg(v,5);return c.pts.map((p,i)=>({r:p.r,ma:ma[i]}));})():null;
     return{...c,n,mean,best,delta,movingAvg};
   });
-  const vals=pts.map(p=>p.gct),ma=movAvg(vals,5);
-  return{pts,movingAvg:pts.map((p,i)=>({r:p.r,ma:ma[i]})),cohorts};
+  // global moving average intentionally removed — session composition changes over
+  // time make a blended all-surface GCT trend misleading. Cohorts only.
+  return{pts,cohorts};
 }
 
 function computeVRTrend(runs){
@@ -1654,8 +1642,11 @@ function computeWalkRatioTrend(runs){
 
 function computeLCRSPerRun(runs){
   const fam=t=>t.startsWith('quality')?'quality':t;
+  // lcrsType is the PHYSIOLOGICAL definition (lt2 | sublt1 | easy). These are
+  // NOT the same construct and must never share one trend line or one target.
+  // The 20-min W20 target applies ONLY to the LT2-specific race-constraint metric.
   const pts=runs.filter(r=>r.lcrs!=null&&r.lcrs>0)
-    .map(r=>({r:r.r,date:r.date,lcrs:r.lcrs,type:fam(r.type)}));
+    .map(r=>({r:r.r,date:r.date,lcrs:r.lcrs,type:fam(r.type),lcrsType:r.lcrsType||'other'}));
   return{pts};
 }
 
@@ -1667,7 +1658,7 @@ function computeAllAnalytics(){
   const vr=computeVRTrend(RUNS);
   const drift=computeCardiacDrift(RUNS);
   const compliance=computeQualityCompliance(RUNS);
-  const aei=computeAEI(RUNS);
+  const aei={pts:[],movingAvg:[]}; // AEI retired — use PACE·HR ENVELOPE
   const threshold=computeThresholdProg(RUNS);
   const scatter=computePaceHRScatter(RUNS);
   const zones=computeHRZoneDist(RUNS);
@@ -1694,7 +1685,7 @@ const TAB_INITED={today:true,adaptation:false,training:false,health:true,future:
 function initAdaptationCharts(){
   initPaceHRChart(_A);
   if(hasSufficientData(_A.threshold.pts,MIN_SCATTER))initThresholdChart(_A);
-  if(hasSufficientData(_A.aei.pts,MIN_TREND))initAEIChart(_A);
+  /* AEI retired */
   initZoneChart(_A);
   initIntensityChart(_A);
   initComplianceChart(_A);
@@ -1732,15 +1723,16 @@ function evaluateReadiness(){
   const rhrVals=READINESS_LOG.slice(-7).filter(e=>e.rhr!=null).map(e=>e.rhr);
   const rhrAvg7=rhrVals.length?Math.round(rhrVals.reduce((s,v)=>s+v,0)/rhrVals.length):rhr;
   const rhrDelta=rhr!=null&&rhrAvg7!=null?rhr-rhrAvg7:0;
+  const R=(ATHLETE.readinessRules)||{sleepRest:45,sleepCaution:60,sleepMonitor:75,rhrRest:8,rhrCaution:5};
   const hrvOk=hrv!=null&&hrv>=ATHLETE.hrvBaseline[0];
   const consecutive2=READINESS_LOG.length>=2&&READINESS_LOG.slice(-2).every(e=>e.hrv!=null&&e.hrv<ATHLETE.hrvBaseline[0]);
   let status='GREEN',note='All signals nominal — train as planned.';
-  if((sleep!=null&&sleep<45)||rhrDelta>=8){
-    status='REST';note=rhrDelta>=8?'RHR elevated ≥8 bpm above rolling average — rest.':'Sleep score below 45 — mandatory rest.';
-  } else if((sleep!=null&&sleep<60)||consecutive2||!hrvOk||rhrDelta>=5){
+  if((sleep!=null&&sleep<R.sleepRest)||rhrDelta>=R.rhrRest){
+    status='REST';note=rhrDelta>=R.rhrRest?`RHR elevated ≥${R.rhrRest} bpm above rolling average — rest.`:`Sleep score below ${R.sleepRest} — mandatory rest.`;
+  } else if((sleep!=null&&sleep<R.sleepCaution)||consecutive2||!hrvOk||rhrDelta>=R.rhrCaution){
     status='CAUTION';
-    note=consecutive2?'HRV below baseline 2 consecutive days — no quality sessions.':!hrvOk?'HRV below baseline — reduce intensity 20%, no quality sessions.':rhrDelta>=5?'RHR elevated +5–7 bpm — easy only, monitor closely.':'Sleep 45–59 — easy only, no quality sessions.';
-  } else if(sleep!=null&&sleep<75){note='Sleep 60–74 but HRV balanced — proceed, monitor during session.';}
+    note=consecutive2?'HRV below baseline 2 consecutive days — no quality sessions.':!hrvOk?'HRV below baseline — reduce intensity 20%, no quality sessions.':rhrDelta>=R.rhrCaution?`RHR elevated +${R.rhrCaution}–${R.rhrRest-1} bpm — easy only, monitor closely.`:`Sleep ${R.sleepRest}–${R.sleepCaution-1} — easy only, no quality sessions.`;
+  } else if(sleep!=null&&sleep<R.sleepMonitor){note=`Sleep ${R.sleepCaution}–${R.sleepMonitor-1} but HRV balanced — proceed, monitor during session.`;}
   const cc=status==='GREEN'?'green':status==='CAUTION'?'amber':'red';
   const cv=status==='GREEN'?'gn':status==='CAUTION'?'am':'rd';
   document.getElementById('eval-res').innerHTML=`<span class="sdot ${cc}"></span><span class="vit-val ${cv}" style="font-size:1rem;margin-left:6px">${status}</span><div class="eval-reason">${note}</div>`;
@@ -1812,6 +1804,29 @@ function validateRuns(runs){
       if(r.type&&r.type.indexOf('quality')===0)f.push('R'+r.r+': drift set on quality session (outdoor easy/long only)');
     }
     Object.keys(r).forEach(k=>{if(!KNOWN.has(k))f.push('R'+r.r+": unknown field '"+k+"'")});
+    // numeric plausibility bounds — silent-wrong guards
+    const B=(v,lo,hi,name)=>{if(v!=null&&(typeof v!=='number'||v<lo||v>hi))f.push('R'+r.r+": "+name+" out of range ("+v+")");};
+    B(r.dist,0.1,60,'dist'); B(r.hrAvg,60,220,'hrAvg'); B(r.hrMax,60,230,'hrMax');
+    B(r.gct,100,600,'gct'); B(r.vr,0,20,'vr'); B(r.cadence,60,240,'cadence');
+    B(r.walkRatio,0,100,'walkRatio'); B(r.pctCeiling,0,100,'pctCeiling');
+    if(r.hrAvg!=null&&r.hrMax!=null&&r.hrMax<r.hrAvg)f.push('R'+r.r+': hrMax < hrAvg');
+    if(r.moving!=null&&r.duration!=null&&r.moving>r.duration)f.push('R'+r.r+': moving > duration');
+  });
+  return f;
+}
+function validateState(){
+  // Cross-object invariants that a single full-file replacement can silently break.
+  const f=[];
+  const aw=ATHLETE&&ATHLETE.week, sw=STRENGTH&&STRENGTH.week_status&&STRENGTH.week_status.week;
+  if(aw!=null&&sw!=null&&aw!==sw)f.push('week mismatch: ATHLETE.week='+aw+' vs STRENGTH.week_status.week='+sw);
+  // prescription must exist for the current week
+  if(aw!=null&&Array.isArray(PROGRESSION)&&!PROGRESSION.find(p=>p.wk===aw))f.push('no PROGRESSION row for current week W'+aw);
+  // last run number must be sequential
+  if(Array.isArray(RUNS)&&RUNS.length){const last=RUNS[RUNS.length-1];if(typeof last.r!=='number')f.push('last run has no numeric id');}
+  // gate: progress 100 but status pending, or cleared with progress<100
+  if(Array.isArray(GATES))GATES.forEach(g=>{
+    if(g.progress===100&&g.status==='pending')f.push('G'+g.id+': progress 100 but status pending');
+    if(g.status==='cleared'&&g.progress!=null&&g.progress<100)f.push('G'+g.id+': cleared but progress '+g.progress+'%');
   });
   return f;
 }
@@ -2253,7 +2268,7 @@ function renderAdaptation(a){
   renderCoachNote();           // coaching narrative card
   // Update ceiling-dependent labels
   const cSub=document.getElementById('compliance-sub');
-  if(cSub)cSub.textContent=`% time above ${ATHLETE.qualityCeiling} bpm per quality session · target 0% · raised 150→155 Aug 11 · 155→160 Aug 20`;
+  if(cSub)cSub.textContent=`% time above ${ATHLETE.qualityCeiling} bpm · last 10 quality sessions · target 0%`;
   renderPBWall();              // S43
   renderHumanBenchmark();      // S44
   // Pace gap
@@ -2264,7 +2279,7 @@ function renderAdaptation(a){
   document.getElementById('compliance-header').textContent=`${a.compliance.cleanCount} of last ${a.compliance.total} quality sessions ceiling-clean (${a.compliance.rate}%)`;
   // AEI sparse state
   if(!hasSufficientData(a.aei.pts,MIN_TREND)){
-    renderSparseCard('aei-sparse','AEROBIC EFFICIENCY INDEX',a.aei.pts.length,MIN_TREND,'Needs outdoor easy runs with pace data. Chart appears at '+MIN_TREND+' qualifying sessions.');
+    /* AEI retired — no sparse card */
     document.getElementById('aei-chart-wrap').style.display='none';
   } else {
     document.getElementById('aei-sparse').style.display='none';
@@ -2808,7 +2823,9 @@ let openGate=null;
 function showGateDetail(id){
   const g=GATES.find(x=>x.id===id),c=document.getElementById('gate-dc');if(!g)return;
   if(openGate===id){c.classList.remove('open');openGate=null;return;}
-  c.innerHTML=`<div class="gdc-name">GATE ${id}: ${g.name.toUpperCase()}</div><div class="gdc-text">${g.detail}</div><div class="gdc-eta">ETA: ${g.eta}</div><div class="gdc-bar"><div class="gdc-fill" style="width:${g.progress}%"></div></div>`;
+  const confBadge=g.derivedConfidence?`<span style="font-family:var(--mono);font-size:.5rem;padding:2px 6px;border-radius:2px;background:${g.derivedConfidence==='HIGH'?'rgba(16,185,129,.15)':'rgba(245,158,11,.15)'};color:${g.derivedConfidence==='HIGH'?'var(--gn)':'var(--am)'}">DERIVED · ${g.derivedConfidence}</span>`:'<span style="font-family:var(--mono);font-size:.5rem;padding:2px 6px;border-radius:2px;background:rgba(245,158,11,.12);color:var(--am)">HAND-SET · UNVERIFIED</span>';
+  const evidence=g.derivedEvidence?`<div style="font-family:var(--mono);font-size:.58rem;color:var(--cy);margin-top:6px;line-height:1.5;border-left:2px solid rgba(0,212,255,.3);padding-left:8px">${g.derivedEvidence}</div>`:'';
+  c.innerHTML=`<div class="gdc-name">GATE ${id}: ${g.name.toUpperCase()} ${confBadge}</div>${evidence}<div class="gdc-text" style="margin-top:8px">${g.detail}</div><div class="gdc-eta">ETA: ${g.eta}</div><div class="gdc-bar"><div class="gdc-fill" style="width:${g.progress}%"></div></div>`;
   c.classList.add('open');openGate=id;
 }
 
@@ -2920,7 +2937,115 @@ const GF_SHORT={
   5:'VPBank Hanoi 10K',
   6:'Lactate + VO₂max cleared'
 };
+// ── GATE DERIVATION ENGINE ────────────────────────────────────────────────
+// Derives gate status directly from RUNS data wherever criteria are computable.
+// Human-set status is preserved only for subjective gates (G7, G9) where data
+// cannot prove clearance. Every derived gate overrides the hand-set GATES value.
+// Confidence: HIGH for data-derivable gates; LOW for human-assessed gates.
+function evaluateGates(gates, runs, athlete){
+  if(!gates||!runs) return gates;
+  // Build weekly volume map from runs
+  const wkVol={};
+  runs.forEach(r=>{const w=r.wk; wkVol[w]=(wkVol[w]||0)+r.dist;});
+  const wks=Object.keys(wkVol).map(Number).sort((a,b)=>a-b);
+
+  return gates.map(g=>{
+    let derived=null; // {status, progress, evidence, confidence}
+
+    // ── G1: Sustained Volume — 3 consecutive weeks ≥38km ──────────────────
+    if(g.id===1){
+      const qual=wks.filter(w=>wkVol[w]>=38);
+      let bestStreak=0, curStreak=0, lastW=null;
+      for(let i=0;i<wks.length;i++){
+        const w=wks[i];
+        if(wkVol[w]>=38&&(lastW===null||w===lastW+1)){curStreak++;bestStreak=Math.max(bestStreak,curStreak);}
+        else if(wkVol[w]>=38){curStreak=1;}
+        else{curStreak=0;}
+        lastW=w;
+      }
+      const progress=Math.min(100,Math.round((bestStreak/3)*100));
+      derived={status:bestStreak>=3?'cleared':'pending',progress,
+        evidence:`Best consecutive ≥38km streak: ${bestStreak} week(s). Qualifying weeks: ${qual.map(w=>`W${w}(${Math.round(wkVol[w])}km)`).join(', ')||'none'}.`,
+        confidence:'HIGH'};
+    }
+
+    // ── G4: Injury-Free Continuity — 8 consecutive rising-load weeks ──────
+    if(g.id===4){
+      // "Rising-load" = each week's total > the week before, injury-free (no run with type=injury flag)
+      // We approximate as: 8+ consecutive weeks where there are qualifying runs logged.
+      // Stricter: count unbroken weeks with runs (no week-gap) from most recent continuous block.
+      let streak=0;
+      for(let i=wks.length-1;i>=0;i--){
+        const w=wks[i], prevW=i>0?wks[i-1]:null;
+        if(prevW!==null&&w-prevW>1) break; // gap in weeks
+        if(wkVol[w]>0) streak++; else break;
+        if(streak>=8) break;
+      }
+      const progress=Math.min(100,Math.round((streak/8)*100));
+      const cleared=streak>=8;
+      derived={status:cleared?'cleared':'active',progress,
+        evidence:`Unbroken logged-run streak: ${streak} consecutive weeks. Gate clears at 8.`,
+        confidence:'HIGH'};
+    }
+
+    // ── G3: Long Run In-Load — 20km LR in a full-quality week ────────────
+    if(g.id===3){
+      const qWks=new Set(), lrWks={};
+      runs.forEach(r=>{
+        if(r.type.startsWith('quality'))qWks.add(r.wk);
+        if(r.type==='long')lrWks[r.wk]=Math.max(lrWks[r.wk]||0,r.dist);
+      });
+      const bestLR=Math.max(0,...Object.values(lrWks));
+      const fullLoad=[...qWks].filter(w=>lrWks[w]&&lrWks[w]>=20);
+      const progress=Math.min(99,Math.round((bestLR/20)*100));
+      derived={status:fullLoad.length>0?'cleared':'pending',
+        progress:fullLoad.length>0?100:progress,
+        evidence:`Best LR: ${bestLR.toFixed(1)}km. Full-load weeks with ≥20km LR: ${fullLoad.length}. Current max LR: ${bestLR.toFixed(1)}km.`,
+        confidence:'HIGH'};
+    }
+
+    // ── G5: Race 0 — event happens Oct 19, 2026 ───────────────────────────
+    if(g.id===5){
+      const raceRun=runs.find(r=>r.type==='race'&&r.r===61); // R61 = 10K trial
+      // G5 clears when the actual Race 0 (VPBank Oct 19) is logged — not the trial.
+      // Status stays pending until Oct 19 run is logged.
+      derived={status:g.status,progress:g.progress,
+        evidence:`R61 10K trial completed (${raceRun?raceRun.date:'Aug 14'}). Official Race 0 = VPBank Oct 19, 2026 — not yet run.`,
+        confidence:'HIGH'};
+    }
+
+    // ── G8: GCT Outdoor Easy ≤320ms on 2 consecutive outdoor easy runs ────
+    if(g.id===8){
+      const oeRuns=runs.filter(r=>r.type==='easy'&&(r.surface||'outdoor')==='outdoor'&&r.gct);
+      let streak=0;
+      for(let i=oeRuns.length-1;i>=0&&streak<2;i--){
+        if(oeRuns[i].gct<=320) streak++; else break;
+      }
+      const best=Math.min(...oeRuns.map(r=>r.gct));
+      derived={status:streak>=2?'cleared':'pending',progress:streak>=2?100:Math.round((streak/2)*100),
+        evidence:`Outdoor easy GCT readings ≤320ms in tail streak: ${streak}. Best outdoor easy GCT: ${best}ms. Gate clears at 2 consecutive ≤320ms.`,
+        confidence:'HIGH'};
+    }
+
+    // Human-assessed gates: G2 (quality repeatability requires detailed HR analysis per session),
+    // G6 (VO2max data — external lab), G7 (form — visual), G9 (feel — subjective).
+    // Preserve hand-set status; mark confidence LOW.
+    const humanGates=[2,6,7,9];
+    if(humanGates.includes(g.id)){
+      derived={status:g.status,progress:g.progress,
+        evidence:`Human-assessed: ${g.short}. Status hand-set — no automated derivation.`,
+        confidence:'LOW'};
+    }
+
+    if(!derived) return g; // gate not handled — preserve as-is
+    return{...g, status:derived.status, progress:derived.progress,
+      derivedEvidence:derived.evidence, derivedConfidence:derived.confidence};
+  });
+}
+
 function renderGates(mode){
+  // Derive gate status from data before rendering — truth over assertion.
+  if(RUNS&&RUNS.length) GATES=evaluateGates(GATES,RUNS,ATHLETE);
   const TARGETS={checklist:'gate-checklist',list:'glist-body',forecast:'gate-forecast-body'};
   const el=document.getElementById(TARGETS[mode]);
   if(!el||!GATES)return;
@@ -3613,16 +3738,33 @@ function buildLCRSPerRunChart(a){
   if(!el)return;
   if(!d||d.pts.length<1){if(sparse)sparse.style.display='';el.style.display='none';return;}
   if(sparse)sparse.style.display='none';
-  const typeColor=t=>t==='quality'?'rgba(0,212,255,.85)':t==='long'?'rgba(0,212,255,.5)':'rgba(245,158,11,.6)';
-  new Chart(el,{type:'scatter',data:{datasets:[
-    {label:'LCRS',data:d.pts.map(p=>({x:p.r,y:p.lcrs,lbl:`R${p.r} · ${p.date} · ${p.type}`,t:p.type})),
-     pointBackgroundColor:d.pts.map(p=>typeColor(p.type)),pointRadius:6,showLine:true,
-     borderColor:'rgba(0,212,255,.25)',borderWidth:1,tension:.3,fill:false},
-    {label:'Target',data:[{x:d.pts[0].r,y:20},{x:d.pts[d.pts.length-1].r,y:20}],
-     borderColor:'rgba(245,158,11,.4)',borderWidth:1,borderDash:[4,4],pointRadius:0,showLine:true,fill:false,type:'line'}
-  ]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},
-    tooltip:{callbacks:{label:c=>c.raw.lbl?`${c.raw.lbl} · ${c.raw.y} min`:`${c.raw.y} min`}}},
-    scales:{x:{display:false},y:{min:0,grid:{color:'rgba(0,212,255,.04)'},
+  // Split by physiological definition. Each is a separate scatter series; NO line
+  // connects across definitions (connecting 7.6 LT2 → 51.3 easy is meaningless).
+  const DEF={
+    lt2:   {label:'LT2 (race constraint)', color:'#00d4ff'},
+    sublt1:{label:'Sub-LT1 (QB continuity)',color:'rgba(0,212,255,.5)'},
+    easy:  {label:'Easy (aerobic base)',    color:'rgba(245,158,11,.65)'},
+    other: {label:'Other',                  color:'rgba(148,163,184,.5)'}
+  };
+  const byDef={};
+  d.pts.forEach(p=>{const k=DEF[p.lcrsType]?p.lcrsType:'other';(byDef[k]=byDef[k]||[]).push(p);});
+  const datasets=[];
+  Object.keys(byDef).forEach(k=>{
+    datasets.push({label:DEF[k].label,
+      data:byDef[k].map(p=>({x:p.r,y:p.lcrs,lbl:`R${p.r} · ${p.date} · ${DEF[k].label}`})),
+      pointBackgroundColor:DEF[k].color,pointBorderColor:DEF[k].color,pointRadius:7,
+      showLine:false,type:'scatter'});
+  });
+  // 20-min target line spans the chart but is labelled as LT2-only.
+  const xs=d.pts.map(p=>p.r);
+  datasets.push({label:'20-min target (LT2 only)',
+    data:[{x:Math.min(...xs),y:20},{x:Math.max(...xs),y:20}],
+    borderColor:'rgba(0,212,255,.4)',borderWidth:1.5,borderDash:[5,4],pointRadius:0,showLine:true,fill:false,type:'line'});
+  new Chart(el,{data:{datasets},options:{responsive:true,maintainAspectRatio:false,
+    plugins:{legend:{display:true,labels:{font:{family:'JetBrains Mono',size:8},color:'#94a3b8',boxWidth:8,padding:6}},
+    tooltip:{callbacks:{label:c=>c.raw.lbl?`${c.raw.lbl} · ${c.raw.y} min`:`${c.dataset.label}: ${c.raw.y} min`}}},
+    scales:{x:{type:'linear',ticks:{callback:v=>`R${v}`,font:{family:'JetBrains Mono',size:9},color:'#64748b'},grid:{color:'rgba(0,212,255,.04)'}},
+      y:{min:0,grid:{color:'rgba(0,212,255,.04)'},
       ticks:{font:{family:'JetBrains Mono',size:9},color:'#64748b',callback:v=>v+' min'}}}}});
 }
 
@@ -3997,7 +4139,7 @@ function initAllCharts(a){
   initLongRunChart(a);
   initPaceHRChart(a);
   if(hasSufficientData(a.threshold.pts,MIN_SCATTER))initThresholdChart(a);
-  if(hasSufficientData(a.aei.pts,MIN_TREND))initAEIChart(a);
+  /* AEI retired */
   initZoneChart(a);
   initCadenceChart(a);
 }
@@ -4024,8 +4166,23 @@ document.addEventListener('DOMContentLoaded',()=>{
       PROGRESSION=data.PROGRESSION||[];
       MILESTONES=data.MILESTONES||[];
       STRENGTH=data.STRENGTH||{};
+      HEALTH_FLAGS=data.HEALTH_FLAGS||[];
+      MEDICATIONS=data.MEDICATIONS||[];
+      STRENGTH_HISTORY=data.STRENGTH_HISTORY||[];
       loadingEl.style.display='none';
+      if(window._CHARTS_OFFLINE){
+        const vb=document.getElementById('validation-banner');
+        if(vb)vb.innerHTML='<div class="card" style="border:1px solid rgba(245,158,11,.4);background:rgba(245,158,11,.05)"><div class="cl" style="color:var(--am)">📡 CHARTS OFFLINE — data-only mode</div><div class="mono" style="font-size:.68rem;color:var(--mu);margin-top:4px">Chart.js CDN unreachable. All numbers and text are live — only visual charts are suppressed.</div></div>';
+      }
       renderValidation();
+      const _stateErrs=validateState();
+      const _runErrs=validateRuns(RUNS);
+      window._DATA_VALID=(_runErrs.length===0&&_stateErrs.length===0);
+      if(!window._DATA_VALID){
+        const vb=document.getElementById('validation-banner');
+        if(vb){vb.innerHTML='<div class="card" style="border:1px solid rgba(239,68,68,.6);background:rgba(239,68,68,.06)"><div class="cl" style="color:var(--rd)">\u26a0 DATA INTEGRITY \u2014 decision layer degraded</div><div class="mono" style="font-size:.7rem;color:var(--m2);margin-top:6px">TODAY prescriptions may be unreliable until fixed. Issues:</div>'
+          +[..._stateErrs,..._runErrs].map(e=>'<div class="mono" style="font-size:.68rem;color:var(--rd);margin-top:3px">\u2022 '+e+'</div>').join('')+'</div>';}
+      }
       _A=computeAllAnalytics();
       renderVitals(_A);
       renderToday(_A);
@@ -4127,6 +4284,30 @@ function buildGymTable(exercises, toAdd, showStar) {
   </tr></thead><tbody>${rows}</tbody></table>`;
 }
 
+// ── GYM PROGRESS — derives history from STRENGTH_HISTORY append-only log ──────
+function buildStrengthHistory(){
+  const hist = STRENGTH_HISTORY||[];
+  if(!hist.length) return '<div style="font-size:.7rem;color:var(--mu);padding:8px 4px">No session history yet.</div>';
+  // Group by exercise across all sessions
+  const byEx={};
+  hist.forEach(sess=>{
+    (sess.entries||[]).forEach(e=>{
+      const k=e.exercise;
+      if(!byEx[k])byEx[k]=[];
+      byEx[k].push({date:sess.date,week:sess.week,session:sess.session,weight_kg:e.weight_kg,reps:e.reps,topSet:e.topSet});
+    });
+  });
+  // Render as grouped table — show load trajectory per exercise
+  const rows=Object.keys(byEx).sort().map(ex=>{
+    const pts=byEx[ex];
+    const first=pts[0], last=pts[pts.length-1];
+    const delta=last.weight_kg!=null&&first.weight_kg!=null?(last.weight_kg-first.weight_kg):null;
+    const arrow=delta==null?'':delta>0?`<span style="color:var(--gn)">+${delta}kg</span>`:delta<0?`<span style="color:var(--rd)">${delta}kg</span>`:'—';
+    const history=pts.map(p=>`${p.date}: ${p.weight_kg!=null?p.weight_kg+'kg':'BW'}×${p.reps||p.topSet||'?'}`).join(' → ');
+    return `<div class="gym-ph-row"><div class="gym-ph-ex">${ex}</div><div class="gym-ph-delta">${arrow}</div><div class="gym-ph-hist">${history}</div></div>`;
+  }).join('');
+  return `<div class="gym-progress-history">${rows}</div>`;
+}
 function renderGym() {
   const S = STRENGTH || {};
   const ws = S.week_status || {};
@@ -4142,12 +4323,13 @@ function renderGym() {
   ).join('');
 
   // Milestones
-  // Pull-up: treat reps as 8-6-6, target 10-8-8. Use top set (8) vs target (10) = 80%
-  const puCur = 8, puTgt = 10;
+  // Pull-up: read top set from STRENGTH.pull_up_top_set, target 10
+  const puCur = S.pull_up_top_set||0, puTgt = 10;
   const puPct = Math.min(100, Math.round((puCur/puTgt)*100));
-  // Single leg RDL: 14 vs 22
-  const nordicWk = S.nordic_week || 1, nordicTgt = 12;
-  const nordicPct = Math.max(5, Math.min(100, Math.round((nordicWk/nordicTgt)*100)));
+  // SL Hamstring Curl milestone
+  const slCurEntry = (S.legs||[]).find(e=>e.exercise.includes('Hamstring Curl'));
+  const slCurWt = slCurEntry?slCurEntry.weight_kg:23, slCurReps = slCurEntry?slCurEntry.reps:10;
+  const slCurPct = Math.min(100, Math.round(((slCurWt-18)/(30-18))*100));
 
   const milestones = `<div class="gym-milestones">
     <div class="gym-ms">
@@ -4158,9 +4340,9 @@ function renderGym() {
     </div>
     <div class="gym-ms">
       <div class="gym-ms-eyebrow">MILESTONE · LEGS · ★ RUNNING</div>
-      <div class="gym-ms-val">Nordic Curl · W${nordicWk} of ${nordicTgt}<br><span style="font-size:.58rem;color:var(--mu)">Target: 3×8 eccentrics · highest marathon transfer</span></div>
-      <div class="gym-ms-bar"><div class="gym-ms-fill green" style="width:${nordicPct}%"></div></div>
-      <div class="gym-ms-sub">W1-2: 2×4 · W3-4: 2×5 · W5-8: 3×4 · W9-12: 3×8</div>
+      <div class="gym-ms-val">SL Hamstring Curl · ${slCurWt} kg×${slCurReps} → 30 kg×12<br><span style="font-size:.58rem;color:var(--mu)">Nordic replaced (setup friction). One-axis progression.</span></div>
+      <div class="gym-ms-bar"><div class="gym-ms-fill green" style="width:${slCurPct}%"></div></div>
+      <div class="gym-ms-sub">Current: ${slCurWt} kg × ${slCurReps} reps · Target: 30 kg × 12</div>
     </div>
   </div>`;
 
@@ -4243,14 +4425,14 @@ function renderGym() {
       <div class="ch"><div class="cl">PROGRESSION HISTORY</div><div class="cs">per-exercise load over time</div></div>
       <div class="gym-prog-note">
         Baseline logged ${S.baseline_date||'Aug 16, 2026'}<br>
-        Progress charts activate after 2+ sessions per exercise<br>
-        <span style="color:rgba(0,212,255,.35)">Log next session → send to Claude → commit data.json</span>
+        Session history below. Add sessions via Claude → commit data.json.
       </div>
+      ${buildStrengthHistory()}
     </div>`;
 
   document.getElementById('gym-root').innerHTML = `
     <div class="gym-week-tally">
-      <span class="gym-wk-lbl">W${ws.week||15} GYM</span>
+      <span class="gym-wk-lbl">W${ATHLETE.week||ws.week||'?'} GYM</span>
       ${tallyChips}
     </div>
     ${milestones}
