@@ -1175,16 +1175,10 @@ body{background:var(--bg);background-image:var(--grid);color:var(--tx);font-fami
     <div class="ch"><div class="cl">HUMAN BENCHMARK</div><div class="cs">your metrics vs trained runner population · ref: Garmin HRM literature (GCT/VR) · AHA data (RHR) · VO₂max + threshold after lactate test Oct 2026</div></div>
     <div id="hb-body"></div>
   </div>
-  <div class="g2">
-    <div class="card hud-card">
-<!-- AEI card removed: HR÷speed contradicted the canonical pace-at-HR-band definition. Use PACE·HR ENVELOPE instead. -->
-      <!-- AEI card retired — HR÷speed formula contradicted canonical pace-at-HR definition. Use PACE·HR ENVELOPE. -->
-    </div>
-    <div class="card hud-card">
+  <div class="card hud-card">
       <div class="ch"><div class="cl">QUALITY SESSION ZONE BREAKDOWN</div><div class="cs">last 8 quality sessions · Z3 dominance = ideal · est. = estimated</div></div>
       <div class="cw"><canvas id="zoneChart"></canvas></div>
     </div>
-  </div>
   <div class="card hud-card">
     <div class="ch"><div class="cl">INTENSITY DISTRIBUTION</div><div class="cs">80/20 Norwegian Method compliance · by week · easy + long = low intensity · bars below 80% low = amber</div></div>
     <div class="cw"><canvas id="intensityChart"></canvas></div>
@@ -1789,7 +1783,7 @@ function classifyAlerts(flags){
 
 function validateRuns(runs){
   const ENUM=['easy','quality_a','quality_b','long','flush','strides','race'];
-  const KNOWN=new Set(['r','date','type','wk','dist','duration','moving','pace','paceEasy','hrAvg','hrMax','te','te_an','gct','vr','vo','sl','cadence','pctCeiling','drift','walkRatio','hrZones','temp','surface','conditions','flag','note','verdict','tags','qualityPace','runPace','lcrs','laps']);
+  const KNOWN=new Set(['r','date','type','wk','dist','duration','moving','pace','paceEasy','hrAvg','hrMax','te','te_an','gct','vr','vo','sl','cadence','pctCeiling','drift','walkRatio','hrZones','temp','surface','conditions','flag','note','verdict','tags','qualityPace','runPace','lcrs','lcrsType','laps']);
   const REQ=['r','date','type','wk','dist','flag','note'];
   const f=[];
   runs.forEach((r,i)=>{
