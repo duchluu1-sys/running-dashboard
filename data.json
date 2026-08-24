@@ -2225,6 +2225,88 @@
       ],
       "lcrs": 51.3,
       "lcrsType": "easy"
+    },
+    {
+      "r": 68,
+      "date": "Aug 24",
+      "type": "easy",
+      "wk": 16,
+      "dist": 6.42,
+      "duration": 3347,
+      "moving": 3306,
+      "pace": 8.58,
+      "hrAvg": 132,
+      "hrMax": 148,
+      "te": 2.9,
+      "te_an": 0.0,
+      "gct": 327,
+      "vr": 9.5,
+      "vo": 8.1,
+      "sl": 0.88,
+      "cadence": 131,
+      "pctCeiling": null,
+      "drift": 1.4,
+      "walkRatio": 24.2,
+      "hrZones": [
+        12,
+        51,
+        33,
+        0,
+        0
+      ],
+      "temp": 33,
+      "surface": "outdoor",
+      "conditions": "32–34°C · humidity 80%+ · Tây Hồ · 16:32 local",
+      "flag": "✅",
+      "note": "W16 easy opener. 32-34°C + 80%+ humidity suppressed sweat efficiency — HR tipped 138-139 without pace change. Proactive walk breaks at 138-139 (below 143 trigger) kept ceiling clean throughout. 14 walk segments (GPX); longest run block 6.0 min. Drift +1.4 bpm exceptional given conditions — cardiovascular base holding well. Z3 33% is entirely heat-driven, not pacing failure. GCT 327 ms consistent with W15 easy range (319-327 ms). Lap 1 7:03/km warmup effect (HR still building). Ankle clean throughout ✅. Hip protocol early signal: form felt stronger, leg muscles more grounded (1 data point, 8-week experiment ongoing). Novablast 5. Statin Day 87 clean.",
+      "verdict": null,
+      "tags": [
+        "heat",
+        "humidity-managed",
+        "W16-opener",
+        "proactive-walk"
+      ],
+      "qualityPace": null,
+      "runPace": null,
+      "lcrs": 6.0,
+      "lcrsType": "easy",
+      "laps": [
+        {
+          "km": 1,
+          "pace": 7.05,
+          "hr": null
+        },
+        {
+          "km": 2,
+          "pace": 8.78,
+          "hr": null
+        },
+        {
+          "km": 3,
+          "pace": 8.93,
+          "hr": null
+        },
+        {
+          "km": 4,
+          "pace": 8.58,
+          "hr": null
+        },
+        {
+          "km": 5,
+          "pace": 9.12,
+          "hr": null
+        },
+        {
+          "km": 6,
+          "pace": 8.48,
+          "hr": null
+        },
+        {
+          "km": 6.42,
+          "pace": 11.48,
+          "hr": null
+        }
+      ]
     }
   ],
   "GATES": [
@@ -2356,7 +2438,7 @@
     "week": 16,
     "totalWeeks": 24,
     "deloadWeek": 21,
-    "weekVolOnBoard": 0,
+    "weekVolOnBoard": 6.42,
     "lastWeekVol": 35.88,
     "weekTarget": "36–40",
     "easyHRBand": [
@@ -2379,7 +2461,7 @@
     "statinStart": "2026-05-30",
     "stressLevel": "LOW",
     "formCue": "Eyes on the horizon -- head up every session",
-    "date": "August 23, 2026",
+    "date": "August 24, 2026",
     "hrvBaseline": [
       53,
       68
@@ -3186,37 +3268,51 @@
       {
         "exercise": "Pull-ups",
         "sets": 3,
-        "reps": "10-7-6",
+        "reps": "10-6-6",
         "weight_kg": 0,
-        "note": "Bodyweight · TOP SET 10 REPS — MILESTONE HIT · next target: 10-8-8 → weighted pull-ups unlock"
+        "note": "Top set 10 held ✅ · W16 sets 2-3 weaker (post-easy-run double session) · 10-8-8 milestone target pending fresh legs"
       },
       {
         "exercise": "Lat Pulldown",
-        "sets": 3,
-        "reps": "10-8-7",
+        "sets": 2,
+        "reps": 10,
         "weight_kg": 60,
-        "note": "Ascending pyramid 50→55→60 kg · lengthened partials to finish last 2 sets"
+        "note": "✅ 60 kg both sets confirmed W16 Aug 24 · 2 sets (3rd deferred)"
       },
       {
         "exercise": "Chest Supported Machine Row",
-        "sets": 2,
-        "reps": 8,
+        "sets": 0,
+        "reps": null,
         "weight_kg": 55,
-        "note": "Working sets 50→55 kg · chest pad isolates back from lower back demand · confirmed preferred row variant"
+        "note": "Deferred W16 Aug 24 → Full Body (crowded) · last logged 50→55 kg Aug 17"
       },
       {
         "exercise": "X Cable Rear Delt Pull",
         "sets": 3,
-        "reps": 8,
-        "weight_kg": 6,
-        "note": "4.5→6→6 kg per side · lengthened partials to finish · replaces face pull as primary posterior shoulder movement"
+        "reps": 10,
+        "weight_kg": 4.5,
+        "note": "4.5 kg/side cable W16 Aug 24 · ⚠️ different machine to W15 6 kg stack — not directly comparable"
       },
       {
-        "exercise": "Preacher Hammer Curl",
+        "exercise": "Cable Lat Pull",
         "sets": 3,
         "reps": 10,
-        "weight_kg": 12,
-        "note": "12 kg baseline · pyramid tested to 14 kg but 12 is quality rep range (8–12) · progress to 10-10-10 before loading to 14"
+        "weight_kg": 19,
+        "note": "BASELINE ESTABLISHED Aug 24 W16 · straight-bar cable"
+      },
+      {
+        "exercise": "Bayesian Cable Bicep Curl",
+        "sets": 3,
+        "reps": 9,
+        "weight_kg": 10.5,
+        "note": "BASELINE ESTABLISHED Aug 24 W16 · 10.5 kg per hand"
+      },
+      {
+        "exercise": "Preacher Curl",
+        "sets": 1,
+        "reps": "failure",
+        "weight_kg": 20,
+        "note": "BASELINE ESTABLISHED Aug 24 W16 · machine · different implement to Preacher Hammer Curl DB W15"
       }
     ],
     "legs": [
@@ -3287,7 +3383,7 @@
     "week_status": {
       "week": 16,
       "push": false,
-      "pull": false,
+      "pull": true,
       "legs": false,
       "full_body": false
     },
@@ -3726,6 +3822,44 @@
           "exercise": "KB Knee Raises",
           "weight_kg": 12.5,
           "reps": 10
+        }
+      ]
+    },
+    {
+      "date": "2026-08-24",
+      "week": 16,
+      "session": "pull",
+      "entries": [
+        {
+          "exercise": "Pull-ups",
+          "weight_kg": 0,
+          "reps": "10-6-6",
+          "topSet": 10
+        },
+        {
+          "exercise": "Lat Pulldown",
+          "weight_kg": 60,
+          "reps": "10-10"
+        },
+        {
+          "exercise": "X Cable Rear Delt Pull",
+          "weight_kg": 4.5,
+          "reps": "3×10"
+        },
+        {
+          "exercise": "Cable Lat Pull",
+          "weight_kg": 19,
+          "reps": "3×10"
+        },
+        {
+          "exercise": "Bayesian Cable Bicep Curl",
+          "weight_kg": 10.5,
+          "reps": "3×9"
+        },
+        {
+          "exercise": "Preacher Curl",
+          "weight_kg": 20,
+          "reps": "1×failure"
         }
       ]
     }
