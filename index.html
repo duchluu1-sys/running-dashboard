@@ -1025,11 +1025,17 @@ body{background:var(--bg);background-image:var(--grid);color:var(--tx);font-fami
 .gym-ms-fill.cyan{background:linear-gradient(90deg,var(--cy),rgba(0,212,255,.5))}
 .gym-ms-fill.green{background:linear-gradient(90deg,var(--ok),rgba(16,185,129,.5))}
 .gym-ms-sub{font-family:var(--mono);font-size:.48rem;color:var(--mu);margin-top:5px;letter-spacing:.5px}
-.gym-progress-history{padding:4px 0;margin-top:8px}
-.gym-ph-row{display:grid;grid-template-columns:160px 60px 1fr;gap:6px;padding:6px 0;border-bottom:1px solid rgba(0,212,255,.07);align-items:baseline}
-.gym-ph-ex{font-family:var(--mono);font-size:.62rem;color:var(--cy);letter-spacing:.3px}
-.gym-ph-delta{font-family:var(--mono);font-size:.68rem;font-weight:700;text-align:right}
-.gym-ph-hist{font-family:var(--mono);font-size:.56rem;color:var(--mu);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.gym-progress-history{padding:2px 0;margin-top:4px}
+.gym-ph-hdr{font-family:var(--mono);font-size:.44rem;letter-spacing:2.5px;text-transform:uppercase;color:var(--mu);display:grid;grid-template-columns:1fr 68px 200px;gap:0 12px;padding:0 0 7px;border-bottom:1px solid rgba(0,212,255,.15);margin-bottom:2px}
+.gym-ph-row{display:grid;grid-template-columns:1fr 68px 200px;gap:0 12px;padding:7px 0;border-bottom:1px solid rgba(0,212,255,.06);align-items:center}
+.gym-ph-row.flat{opacity:.35}
+.gym-ph-ex{font-family:var(--mono);font-size:.63rem;color:var(--cy);letter-spacing:.3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.gym-ph-row.flat .gym-ph-ex{color:var(--mu)}
+.gym-ph-badge{font-family:var(--mono);font-size:.65rem;font-weight:700;padding:2px 8px;border-radius:2px;text-align:center;letter-spacing:.3px;white-space:nowrap}
+.gym-ph-badge.up{color:var(--gn);background:rgba(16,185,129,.12)}
+.gym-ph-badge.dn{color:var(--rd);background:rgba(239,68,68,.1)}
+.gym-ph-badge.nc{color:var(--mu);font-weight:400}
+.gym-ph-hist{font-family:var(--mono);font-size:.56rem;color:var(--m2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;letter-spacing:.2px}
 .gym-stabs{display:flex;border-bottom:1px solid var(--bd);margin-bottom:14px}
 .gym-stab{padding:8px 16px;font-family:var(--mono);font-size:.53rem;letter-spacing:2.5px;text-transform:uppercase;color:var(--mu);background:transparent;border:none;border-bottom:2px solid transparent;cursor:pointer;transition:color .15s,border-color .15s;min-height:36px}
 .gym-stab:hover{color:var(--m2)}.gym-stab.active{color:var(--cy);border-bottom-color:var(--cy)}
@@ -4275,28 +4281,56 @@ function buildGymTable(exercises, toAdd, showStar) {
 
 // ── GYM PROGRESS — derives history from STRENGTH_HISTORY append-only log ──────
 function buildStrengthHistory(){
-  const hist = STRENGTH_HISTORY||[];
-  if(!hist.length) return '<div style="font-size:.7rem;color:var(--mu);padding:8px 4px">No session history yet.</div>';
+  const hist=STRENGTH_HISTORY||[];
+  if(!hist.length) return '<div style="font-size:.62rem;color:var(--mu);padding:10px 4px;font-family:var(--mono)">No history logged yet.</div>';
   // Group by exercise across all sessions
   const byEx={};
   hist.forEach(sess=>{
     (sess.entries||[]).forEach(e=>{
       const k=e.exercise;
       if(!byEx[k])byEx[k]=[];
-      byEx[k].push({date:sess.date,week:sess.week,session:sess.session,weight_kg:e.weight_kg,reps:e.reps,topSet:e.topSet});
+      byEx[k].push({date:sess.date,weight_kg:e.weight_kg,reps:e.reps,topSet:e.topSet});
     });
   });
-  // Render as grouped table — show load trajectory per exercise
-  const rows=Object.keys(byEx).sort().map(ex=>{
+  // fmt: "16kg\u00d710" or "BW\u00d710-7-6"
+  const fmt=p=>{
+    const w=p.weight_kg!=null?p.weight_kg+'kg':'BW';
+    const r=p.topSet||p.reps||'?';
+    return w+'\u00d7'+r;
+  };
+  // Sort: changed exercises first, then alpha
+  const sorted=Object.keys(byEx).sort((a,b)=>{
+    const da=byEx[a],db=byEx[b];
+    const changed=arr=>{
+      const f=arr[0],l=arr[arr.length-1];
+      return arr.length>1&&f.weight_kg!=null&&l.weight_kg!=null&&+(l.weight_kg-f.weight_kg).toFixed(1)!==0;
+    };
+    if(changed(da)&&!changed(db))return -1;
+    if(!changed(da)&&changed(db))return 1;
+    return a.localeCompare(b);
+  });
+  const header='<div class="gym-ph-hdr"><span>EXERCISE</span><span>CHANGE</span><span>TRAJECTORY</span></div>';
+  const rows=sorted.map(ex=>{
     const pts=byEx[ex];
-    const first=pts[0], last=pts[pts.length-1];
-    const delta=last.weight_kg!=null&&first.weight_kg!=null?(last.weight_kg-first.weight_kg):null;
-    const arrow=delta==null?'':delta>0?`<span style="color:var(--gn)">+${delta}kg</span>`:delta<0?`<span style="color:var(--rd)">${delta}kg</span>`:'—';
-    const history=pts.map(p=>`${p.date}: ${p.weight_kg!=null?p.weight_kg+'kg':'BW'}×${p.reps||p.topSet||'?'}`).join(' → ');
-    return `<div class="gym-ph-row"><div class="gym-ph-ex">${ex}</div><div class="gym-ph-delta">${arrow}</div><div class="gym-ph-hist">${history}</div></div>`;
+    const first=pts[0],last=pts[pts.length-1];
+    const hasMulti=pts.length>1;
+    const delta=hasMulti&&last.weight_kg!=null&&first.weight_kg!=null
+      ?+(last.weight_kg-first.weight_kg).toFixed(1):null;
+    const changed=delta!==null&&delta!==0;
+    let badge,badgeClass;
+    if(!hasMulti||delta===null){badge='\u2014';badgeClass='nc';}
+    else if(delta>0){badge='+'+delta+' kg';badgeClass='up';}
+    else if(delta<0){badge=delta+' kg';badgeClass='dn';}
+    else{badge='=';badgeClass='nc';}
+    const traj=hasMulti
+      ?fmt(first)+' \u2192 '+fmt(last)
+      :fmt(first);
+    const rowClass=changed?'':'flat';
+    return '<div class="gym-ph-row '+rowClass+'"><div class="gym-ph-ex">'+ex+'</div><div class="gym-ph-badge '+badgeClass+'">'+badge+'</div><div class="gym-ph-hist">'+traj+'</div></div>';
   }).join('');
-  return `<div class="gym-progress-history">${rows}</div>`;
+  return '<div class="gym-progress-history">'+header+rows+'</div>';
 }
+
 function renderGym() {
   const S = STRENGTH || {};
   const ws = S.week_status || {};
