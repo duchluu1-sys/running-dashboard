@@ -1178,8 +1178,7 @@ body{background:var(--bg);background-image:var(--grid);color:var(--tx);font-fami
   <div class="g2">
     <div class="card hud-card">
 <!-- AEI card removed: HR÷speed contradicted the canonical pace-at-HR-band definition. Use PACE·HR ENVELOPE instead. -->
-      <div id="aei-sparse" class="sparse-state"></div>
-      <div id="aei-sparse" style="display:none"></div>
+      <!-- AEI card retired — HR÷speed formula contradicted canonical pace-at-HR definition. Use PACE·HR ENVELOPE. -->
     </div>
     <div class="card hud-card">
       <div class="ch"><div class="cl">QUALITY SESSION ZONE BREAKDOWN</div><div class="cs">last 8 quality sessions · Z3 dominance = ideal · est. = estimated</div></div>
@@ -2277,14 +2276,7 @@ function renderAdaptation(a){
   renderRunningEconomy(a);
   // Compliance header
   document.getElementById('compliance-header').textContent=`${a.compliance.cleanCount} of last ${a.compliance.total} quality sessions ceiling-clean (${a.compliance.rate}%)`;
-  // AEI sparse state
-  if(!hasSufficientData(a.aei.pts,MIN_TREND)){
-    /* AEI retired — no sparse card */
-    document.getElementById('aei-chart-wrap').style.display='none';
-  } else {
-    document.getElementById('aei-sparse').style.display='none';
-    document.getElementById('aei-chart-wrap').style.display='block';
-  }
+  // AEI retired — card removed. No DOM operations needed.
   // Pace-HR sparse
   if(!hasSufficientData(a.scatter,MIN_SCATTER)){
     renderSparseCard('pace-hr-sparse','PACE · HR ENVELOPE',a.scatter.length,MIN_SCATTER,'Chart fills as pace is logged for each run. Adaptation appears as points moving upper-left over time.');
@@ -4092,8 +4084,11 @@ function initThresholdChart(a){
   });
 }
 
-// ── AEI CHART ───────────────────────────────────────────────────────────
-function initAEIChart(a){
+// ── AEI CHART — RETIRED ─────────────────────────────────────────────────
+// AEI (HR÷speed) removed: formula contradicts canonical pace-at-HR definition.
+// Function stubbed to prevent crashes from any remaining call paths.
+function initAEIChart(a){return;}
+function initAEIChart_RETIRED(a){
   const d=a.aei;if(d.pts.length<2){return}
   CHARTS.aei=new Chart(document.getElementById('aeiChart').getContext('2d'),{
     type:'scatter',
