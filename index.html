@@ -1069,6 +1069,40 @@ body{background:var(--bg);background-image:var(--grid);color:var(--tx);font-fami
 .gym-check-label{font-family:var(--mono);font-size:.64rem;color:var(--tx)}
 .gym-check-label.locked{color:var(--mu)}
 .gym-prog-note{padding:40px 20px;text-align:center;color:var(--mu);font-family:var(--mono);font-size:.6rem;letter-spacing:1px;line-height:2.2}
+
+/* ── PERFORMANCE BENCHMARKS ───────────────────────────────── */
+.perf-section{font-family:var(--mono);font-size:.42rem;letter-spacing:3px;text-transform:uppercase;color:var(--mu);padding:2px 0 8px;display:flex;align-items:center;gap:8px}
+.perf-section span{color:rgba(16,185,129,.65);letter-spacing:.5px;font-size:.4rem}
+.perf-grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:4px}
+.perf-grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+@media(max-width:900px){.perf-grid-3{grid-template-columns:repeat(2,1fr)}.perf-grid-4{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:480px){.perf-grid-3{grid-template-columns:1fr 1fr}.perf-grid-4{grid-template-columns:1fr 1fr}}
+.perf-card{background:var(--sf2);border:1px solid rgba(0,212,255,.18);border-radius:4px;padding:11px 13px;display:flex;flex-direction:column;gap:5px;transition:border-color .18s}
+.perf-card:hover{border-color:rgba(0,212,255,.4)}
+.perf-eyebrow{font-family:var(--mono);font-size:.4rem;letter-spacing:2px;text-transform:uppercase;color:var(--mu);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.perf-body{display:flex;align-items:center;gap:10px}
+.perf-info{flex:1;min-width:0}
+.perf-cur{font-family:var(--mono);font-size:.88rem;font-weight:700;line-height:1.1}
+.perf-tgt{font-family:var(--mono);font-size:.46rem;color:var(--m2);margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.perf-purpose{font-family:var(--mono);font-size:.42rem;color:var(--mu);margin-top:3px;line-height:1.4}
+.perf-spark{padding-top:5px;border-top:1px solid rgba(0,212,255,.06)}
+.perf-div{height:1px;background:rgba(0,212,255,.07);margin:12px 0 10px}
+
+/* ── LOAD PROGRESSION SPARKLINES ─────────────────────────── */
+.ph-sp-hdr{display:grid;grid-template-columns:1fr 64px 56px 76px;gap:0 6px;padding:4px 0 6px;border-bottom:1px solid rgba(0,212,255,.10);font-family:var(--mono);font-size:.39rem;letter-spacing:2px;text-transform:uppercase;color:var(--mu);margin-top:6px}
+.ph-sp-row{display:grid;grid-template-columns:1fr 64px 56px 76px;gap:0 6px;padding:5px 0;border-bottom:1px solid rgba(0,212,255,.04);align-items:center;min-width:0}
+.ph-sp-ex{font-family:var(--mono);font-size:.56rem;color:var(--cy);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ph-sp-cur{font-family:var(--mono);font-size:.58rem;color:var(--m2);text-align:right}
+.ph-sp-badge{font-family:var(--mono);font-size:.56rem;font-weight:700;text-align:center;padding:1px 4px;border-radius:2px}
+.ph-sp-badge.up{color:var(--gn);background:rgba(16,185,129,.12)}
+.ph-sp-badge.dn{color:var(--rd);background:rgba(239,68,68,.09)}
+.ph-sp-badge.nc{color:var(--mu)}
+.ph-sp-chart{display:flex;align-items:center}
+@media(max-width:600px){
+  .ph-sp-hdr,.ph-sp-row{grid-template-columns:1fr 56px 48px 70px;gap:0 4px}
+  .ph-sp-ex{font-size:.5rem}
+  .perf-cur{font-size:.78rem}
+}
 .gym-section-hdr{font-family:var(--mono);font-size:.5rem;letter-spacing:2.5px;text-transform:uppercase;color:var(--cy);padding:10px 10px 6px;border-bottom:1px solid var(--bd);margin-bottom:0;opacity:.7}
 
 </style>
@@ -3038,6 +3072,15 @@ function evaluateGates(gates, runs, athlete){
 function renderGates(mode){
   // Derive gate status from data before rendering — truth over assertion.
   if(RUNS&&RUNS.length) GATES=evaluateGates(GATES,RUNS,ATHLETE);
+  // Derive LCRS fields live from RUNS — never stale from data.json
+  if(RUNS&&RUNS.length){
+    const _lt2=RUNS.filter(r=>r.lcrs&&r.lcrsType==='LT2');
+    const _maxlt2=_lt2.reduce((m,r)=>r.lcrs>(m?.lcrs||0)?r:m,null);
+    if(_maxlt2){ATHLETE.lcrsThreshold=_maxlt2.lcrs;ATHLETE.lcrsThresholdRun=_maxlt2.r;ATHLETE.lcrsThresholdDate=_maxlt2.date;}
+    const _easy=RUNS.filter(r=>r.lcrs&&r.lcrsType==='easy');
+    const _maxeasy=_easy.reduce((m,r)=>r.lcrs>(m?.lcrs||0)?r:m,null);
+    if(_maxeasy){ATHLETE.lcrsEasy=_maxeasy.lcrs;ATHLETE.lcrsRun=_maxeasy.r;ATHLETE.lcrsDate=_maxeasy.date;}
+  }
   const TARGETS={checklist:'gate-checklist',list:'glist-body',forecast:'gate-forecast-body'};
   const el=document.getElementById(TARGETS[mode]);
   if(!el||!GATES)return;
@@ -3697,8 +3740,24 @@ function buildWalkRatioChart(a){
       <div style="font-family:var(--mono);font-size:.52rem;color:var(--mu);line-height:1.55">${detail}</div>
     </div>`;
 
+  // Mini sparkline showing walk ratio trend over last 8 easy/long runs
+  const wrSparkHtml=wrPts.length>=2?(()=>{
+    const sv=wrPts.slice(-8);
+    const mn=Math.min(...sv.map(p=>p.walkRatio)),mx=Math.max(...sv.map(p=>p.walkRatio)),rng=mx-mn||1;
+    const W=120,H=26,pd=4;
+    const xs=sv.map((_,i)=>pd+i/(sv.length-1)*(W-pd*2));
+    const ys=sv.map(p=>H-pd-(p.walkRatio-mn)/rng*(H-pd*2));
+    const pth=xs.map((x,i)=>`${i===0?'M':'L'}${x.toFixed(1)},${ys[i].toFixed(1)}`).join(' ');
+    const lx=xs[xs.length-1].toFixed(1),ly=ys[ys.length-1].toFixed(1);
+    const tgtY=H-pd-(25-mn)/rng*(H-pd*2);
+    const tLine=tgtY>pd&&tgtY<H-pd?`<line x1="${pd}" y1="${tgtY.toFixed(1)}" x2="${W-pd}" y2="${tgtY.toFixed(1)}" stroke="rgba(16,185,129,.4)" stroke-width="1" stroke-dasharray="4,3"/>`:'' ;
+    const dir=sv[sv.length-1].walkRatio<sv[0].walkRatio?'↓ improving':'↑';
+    const dirCol=sv[sv.length-1].walkRatio<sv[0].walkRatio?'var(--gn)':'var(--am)';
+    return`<div style="padding:8px 0 4px;border-bottom:1px solid var(--bd)"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px"><span style="font-family:var(--mono);font-size:.42rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--mu)">Walk Ratio Trend · last ${sv.length} easy+long runs</span><span style="font-family:var(--mono);font-size:.52rem;color:${dirCol}">${dir}</span></div><svg viewBox="0 0 ${W} ${H}" style="width:100%;height:${H}px" preserveAspectRatio="none">${tLine}<path d="${pth}" fill="none" stroke="#00d4ff" stroke-width="1.5" opacity=".8" stroke-linejoin="round" stroke-linecap="round"/><circle cx="${lx}" cy="${ly}" r="2.5" fill="#00d4ff"/></svg><div style="display:flex;justify-content:space-between;font-family:var(--mono);font-size:.4rem;color:var(--mu);margin-top:2px"><span>R${sv[0].r} · ${sv[0].walkRatio}%</span><span style="color:var(--cy)">R${sv[sv.length-1].r} · ${sv[sv.length-1].walkRatio}%</span></div></div>`;
+  })():'';
+
   const wrHtml=wrLatest
-    ?statRow(
+    ?wrSparkHtml+statRow(
         `Walk ratio · R${wrLatest.r} · ${wrLatest.date} · ${wrLatest.type}`,
         wrLatest.walkRatio+'%',
         wrCol(wrLatest.walkRatio),
@@ -3740,12 +3799,15 @@ function buildLCRSPerRunChart(a){
   };
   const byDef={};
   d.pts.forEach(p=>{const k=DEF[p.lcrsType]?p.lcrsType:'other';(byDef[k]=byDef[k]||[]).push(p);});
+  const lineCol={lt2:'rgba(0,212,255,.45)',sublt1:'rgba(0,212,255,.28)',easy:'rgba(245,158,11,.4)',other:'rgba(148,163,184,.28)'};
   const datasets=[];
   Object.keys(byDef).forEach(k=>{
+    const sdp=byDef[k].sort((a,b)=>a.r-b.r);
     datasets.push({label:DEF[k].label,
-      data:byDef[k].map(p=>({x:p.r,y:p.lcrs,lbl:`R${p.r} · ${p.date} · ${DEF[k].label}`})),
+      data:sdp.map(p=>({x:p.r,y:p.lcrs,lbl:`R${p.r} · ${p.date} · ${DEF[k].label}`})),
       pointBackgroundColor:DEF[k].color,pointBorderColor:DEF[k].color,pointRadius:7,
-      showLine:false,type:'scatter'});
+      borderColor:lineCol[k]||'rgba(100,100,100,.3)',borderWidth:1.5,
+      showLine:true,tension:0,type:'scatter'});
   });
   // 20-min target line spans the chart but is labelled as LT2-only.
   const xs=d.pts.map(p=>p.r);
@@ -3909,11 +3971,31 @@ function initVolumeChart(a){
 // ── INTENSITY DISTRIBUTION CHART ────────────────────────────────────────
 function initIntensityChart(a){
   const w=a.intensity;
+  // Custom plugin: draws amber border around entire stacked column for non-compliant weeks.
+  // Per-bar borderWidth arrays are unreliable on stacked charts in Chart.js v3.
+  const amberBorderPlugin={id:'amberBorder',afterDraw(chart){
+    const ctx=chart.ctx;
+    const m0=chart.getDatasetMeta(0),m1=chart.getDatasetMeta(1);
+    w.forEach((wk,i)=>{
+      if(!wk.compliant&&wk.total>0){
+        const b0=m0&&m0.data[i],b1=m1&&m1.data[i];
+        if(!b0)return;
+        const bx=b0.x-b0.width/2;
+        const top=b1?Math.min(b0.y,b1.y):b0.y;
+        const bot=b0.base;
+        if(bot<=top+1)return;
+        ctx.save();ctx.strokeStyle='#f59e0b';ctx.lineWidth=1.5;
+        ctx.strokeRect(bx+.75,top+.75,b0.width-1.5,bot-top-1.5);
+        ctx.restore();
+      }
+    });
+  }};
   CHARTS.intensity=new Chart(document.getElementById('intensityChart').getContext('2d'),{
     type:'bar',
+    plugins:[amberBorderPlugin],
     data:{labels:w.map(x=>x.label),datasets:[
       {label:'Low Intensity',data:w.map(x=>x.lowPct),backgroundColor:'rgba(16,185,129,.4)',
-       borderColor:w.map(x=>x.compliant?'transparent':WARN),borderWidth:w.map(x=>x.compliant?0:2),stack:'s',categoryPercentage:.68,barPercentage:.8},
+       borderColor:'transparent',borderWidth:0,stack:'s',categoryPercentage:.68,barPercentage:.8},
       {label:'Quality',data:w.map(x=>x.total>0?+(x.quality/x.total*100).toFixed(1):0),backgroundColor:D1,borderColor:D1,borderWidth:1,stack:'s',categoryPercentage:.68,barPercentage:.8},
       {type:'line',label:'80% floor',data:w.map(()=>80),borderColor:WARN,borderDash:[6,4],borderWidth:1.5,pointRadius:0,fill:false,backgroundColor:'transparent'},
     ]},
@@ -4047,6 +4129,9 @@ function initThresholdChart(a){
   const rs=d.map(p=>p.r);
   const rMin=Math.min(...rs),rMax=Math.max(...rs);
   const tL=[{x:rMin,y:+(ic).toFixed(3)},{x:rMax,y:+(sl*(n-1)+ic).toFixed(3)}];
+  // 3-point moving average per series (smooths noise, shows real trend direction)
+  const ma3=(arr)=>arr.length<3?null:arr.map((p,i)=>{const w=arr.slice(Math.max(0,i-2),i+1);return{x:p.r,y:+(w.reduce((s,q)=>s+q.pace,0)/w.length).toFixed(3)};});
+  const qaMA=ma3(qa),qbMA=ma3(qb);
   CHARTS.threshold=new Chart(document.getElementById('thresholdChart').getContext('2d'),{
     type:'scatter',
     data:{datasets:[
@@ -4058,6 +4143,8 @@ function initThresholdChart(a){
        data:qb.map(p=>({x:p.r,y:p.pace,date:p.date,sub:'B'})),
        backgroundColor:'transparent',borderColor:D1,borderWidth:2,
        pointRadius:qb.map((_,i)=>i===qb.length-1?8:5),pointHoverRadius:10},
+      ...(qaMA?[{type:'line',label:'',data:qaMA,borderColor:'rgba(0,212,255,.5)',borderWidth:2,borderDash:[3,3],pointRadius:0,fill:false,backgroundColor:'transparent',showLine:true}]:[]),
+      ...(qbMA?[{type:'line',label:'',data:qbMA,borderColor:'rgba(0,212,255,.3)',borderWidth:2,borderDash:[3,3],pointRadius:0,fill:false,backgroundColor:'transparent',showLine:true}]:[]),
       {type:'line',label:'Trend',data:tL,
        borderColor:REF,borderWidth:1.5,borderDash:[4,4],pointRadius:0,fill:false,backgroundColor:'transparent'},
       {type:'line',label:'Sub-4 goal',
@@ -4070,7 +4157,8 @@ function initThresholdChart(a){
     options:{responsive:true,maintainAspectRatio:false,
       plugins:{
         legend:{display:true,position:'bottom',
-          labels:{color:'#64748b',font:{family:'Share Tech Mono',size:9},boxWidth:10}},
+          labels:{color:'#64748b',font:{family:'Share Tech Mono',size:9},boxWidth:10,
+            filter:item=>item.text!==''}},
         tooltip:{...CHART_DEFAULTS,callbacks:{
           label:c=>c.raw.date
             ?`R${c.raw.x} · ${c.raw.date}: ${fmtPace(c.raw.y)}/km (Q-${c.raw.sub||'?'})`
@@ -4279,56 +4367,121 @@ function buildGymTable(exercises, toAdd, showStar) {
   </tr></thead><tbody>${rows}</tbody></table>`;
 }
 
-// ── GYM PROGRESS — derives history from STRENGTH_HISTORY append-only log ──────
+// ── GYM PROGRESS — performance benchmarks + sparklines ─────────────────────
 function buildStrengthHistory(){
   const hist=STRENGTH_HISTORY||[];
-  if(!hist.length) return '<div style="font-size:.62rem;color:var(--mu);padding:10px 4px;font-family:var(--mono)">No history logged yet.</div>';
-  // Group by exercise across all sessions
+  if(!hist.length) return '<div style="font-size:.62rem;color:var(--mu);padding:20px 4px;font-family:var(--mono)">No history logged yet.</div>';
+
+  // Group by exercise
   const byEx={};
   hist.forEach(sess=>{
     (sess.entries||[]).forEach(e=>{
       const k=e.exercise;
       if(!byEx[k])byEx[k]=[];
-      byEx[k].push({date:sess.date,weight_kg:e.weight_kg,reps:e.reps,topSet:e.topSet});
+      byEx[k].push({date:sess.date,weight:e.weight_kg,reps:e.reps,topSet:e.topSet});
     });
   });
-  // fmt: "16kg\u00d710" or "BW\u00d710-7-6"
-  const fmt=p=>{
-    const w=p.weight_kg!=null?p.weight_kg+'kg':'BW';
-    const r=p.topSet||p.reps||'?';
-    return w+'\u00d7'+r;
+  const latW=name=>{const pts=byEx[name];return pts&&pts.length?pts[pts.length-1].weight:null;};
+  const latReps=name=>{const pts=byEx[name];if(!pts||!pts.length)return null;const l=pts[pts.length-1];return l.topSet||parseInt(l.reps)||null;};
+  const BW=(ATHLETE&&ATHLETE.bodyComp&&ATHLETE.bodyComp.weight)||76.2;
+
+  // SVG circular arc progress indicator
+  const arc=(pct,col,sz=52)=>{
+    const r=20,cx=sz/2,cy=sz/2,circ=2*Math.PI*r;
+    const dash=Math.max(0,Math.min(pct,100))/100*circ;
+    const done=pct>=100;
+    const tCol=done?'var(--gn)':col;
+    const txt=done?'✓':pct+'%';
+    return`<svg viewBox="0 0 ${sz} ${sz}" style="width:${sz}px;height:${sz}px;flex-shrink:0"><circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="rgba(0,212,255,.07)" stroke-width="3.5"/><circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="${col}" stroke-width="3.5" stroke-dasharray="${dash.toFixed(1)} ${circ.toFixed(1)}" stroke-linecap="round" transform="rotate(-90 ${cx} ${cy})"/><text x="${cx}" y="${cy}" text-anchor="middle" dominant-baseline="central" style="font-family:JetBrains Mono,monospace;font-size:${done?10:8}px;fill:${tCol};font-weight:700">${txt}</text></svg>`;
   };
-  // Sort: changed exercises first, then alpha
+
+  // Mini sparkline SVG
+  const spark=(pts,key,col)=>{
+    const vals=pts.map(p=>typeof p[key]==='number'?p[key]:null).filter(v=>v!==null&&v>0);
+    if(!vals.length)return'<div style="width:72px"></div>';
+    if(vals.length===1)return`<span style="font-family:JetBrains Mono,monospace;font-size:.4rem;color:var(--mu)">1 session</span>`;
+    const mn=Math.min(...vals),mx=Math.max(...vals),rng=mx-mn||1;
+    const W=72,H=18,pd=3;
+    const xs=vals.map((_,i)=>pd+i/(vals.length-1)*(W-pd*2));
+    const ys=vals.map(v=>H-pd-(v-mn)/rng*(H-pd*2));
+    const pth=xs.map((x,i)=>`${i===0?'M':'L'}${x.toFixed(1)},${ys[i].toFixed(1)}`).join(' ');
+    const lx=xs[xs.length-1].toFixed(1),ly=ys[ys.length-1].toFixed(1);
+    return`<svg viewBox="0 0 ${W} ${H}" style="width:${W}px;height:${H}px;overflow:visible"><path d="${pth}" fill="none" stroke="${col}" stroke-width="1.5" opacity=".75" stroke-linejoin="round" stroke-linecap="round"/><circle cx="${lx}" cy="${ly}" r="2.5" fill="${col}"/></svg>`;
+  };
+
+  // Benchmark card builder
+  const card=(eyebrow,cur,tgt,unit,col,purpose,pts,key='weight')=>{
+    const pct=tgt>0?Math.min(100,Math.round(cur/tgt*100)):0;
+    const curStr=unit==='reps'?cur+' reps':unit==='kg/s'?cur+' kg/side':cur+' kg';
+    const tgtStr=unit==='reps'?tgt+' reps':unit==='kg/s'?tgt+' kg/side':tgt+' kg';
+    const spk=pts&&pts.length>1?spark(pts,key,col):'';
+    return`<div class="perf-card">
+      <div class="perf-eyebrow">${eyebrow}</div>
+      <div class="perf-body">
+        <div>${arc(pct,col)}</div>
+        <div class="perf-info">
+          <div class="perf-cur" style="color:${pct>=100?'var(--gn)':col}">${curStr}</div>
+          <div class="perf-tgt">→ ${tgtStr}</div>
+          <div class="perf-purpose">${purpose}</div>
+        </div>
+      </div>
+      ${spk?`<div class="perf-spark">${spk}</div>`:''}
+    </div>`;
+  };
+
+  // Exercise data
+  const benchW=latW('Incline Barbell Press')||60.8;
+  const puReps=latReps('Pull-ups')||10;
+  const spW=latW('Machine Shoulder Press')||40.8;
+  const dlW=latW('Trap Bar Deadlift')||100;
+  const vsqW=latW('V Squat Machine')||72;
+  const slcW=latW('Single Leg Standing Hamstring Curl')||23;
+  const calfRaw=latW('Seated Calf Raise')||64;  // stored as total; show per-side
+  const calfW=+(calfRaw/2).toFixed(1);
+
+  const upperCards=[
+    card('INCLINE BARBELL PRESS',benchW,Math.round(BW),'kg','var(--cy)','Posture · arm drive late race',byEx['Incline Barbell Press']),
+    card('PULL-UPS',puReps,10,'reps',puReps>=10?'var(--gn)':'var(--cy)','Upright posture km30+',byEx['Pull-ups'],'topSet'),
+    card('MACHINE SHOULDER PRESS',spW,60,'kg','var(--cy)','Arm swing efficiency',byEx['Machine Shoulder Press']),
+  ].join('');
+
+  const lowerCards=[
+    card('TRAP BAR DEADLIFT',dlW,Math.round(BW*1.5),'kg','var(--am)','Posterior chain · force production',byEx['Trap Bar Deadlift']),
+    card('V SQUAT MACHINE',vsqW,Math.round(BW*1.5),'kg','var(--am)','Bilateral quad endurance',byEx['V Squat Machine']),
+    card('SL HAMSTRING CURL',slcW,35,'kg','var(--gn)','Late-swing eccentric control',byEx['Single Leg Standing Hamstring Curl']),
+    card('SEATED CALF RAISE',calfW,50,'kg/s','var(--gn)','Soleus endurance km35+',byEx['Seated Calf Raise']),
+  ].join('');
+
+  // Compact sparkline table — all logged exercises
   const sorted=Object.keys(byEx).sort((a,b)=>{
-    const da=byEx[a],db=byEx[b];
-    const changed=arr=>{
-      const f=arr[0],l=arr[arr.length-1];
-      return arr.length>1&&f.weight_kg!=null&&l.weight_kg!=null&&+(l.weight_kg-f.weight_kg).toFixed(1)!==0;
-    };
-    if(changed(da)&&!changed(db))return -1;
-    if(!changed(da)&&changed(db))return 1;
+    const cha=arr=>{const f=arr[0],l=arr[arr.length-1];return arr.length>1&&f.weight!=null&&l.weight!=null&&+(l.weight-f.weight).toFixed(1)!==0;};
+    if(cha(byEx[a])&&!cha(byEx[b]))return -1;
+    if(!cha(byEx[a])&&cha(byEx[b]))return 1;
     return a.localeCompare(b);
   });
-  const header='<div class="gym-ph-hdr"><span>EXERCISE</span><span>CHANGE</span><span>TRAJECTORY</span></div>';
-  const rows=sorted.map(ex=>{
-    const pts=byEx[ex];
-    const first=pts[0],last=pts[pts.length-1];
-    const hasMulti=pts.length>1;
-    const delta=hasMulti&&last.weight_kg!=null&&first.weight_kg!=null
-      ?+(last.weight_kg-first.weight_kg).toFixed(1):null;
-    const changed=delta!==null&&delta!==0;
-    let badge,badgeClass;
-    if(!hasMulti||delta===null){badge='\u2014';badgeClass='nc';}
-    else if(delta>0){badge='+'+delta+' kg';badgeClass='up';}
-    else if(delta<0){badge=delta+' kg';badgeClass='dn';}
-    else{badge='=';badgeClass='nc';}
-    const traj=hasMulti
-      ?fmt(first)+' \u2192 '+fmt(last)
-      :fmt(first);
-    const rowClass=changed?'':'flat';
-    return '<div class="gym-ph-row '+rowClass+'"><div class="gym-ph-ex">'+ex+'</div><div class="gym-ph-badge '+badgeClass+'">'+badge+'</div><div class="gym-ph-hist">'+traj+'</div></div>';
+  const isPu=ex=>ex.includes('Pull-up');
+  const sparkRows=sorted.map(ex=>{
+    const pts=byEx[ex],l=pts[pts.length-1],f=pts[0];
+    const curVal=isPu(ex)?(l.topSet||'BW')+(l.topSet?' reps':''):(l.weight!=null?l.weight+'kg':'BW');
+    const delta=pts.length>1&&l.weight!=null&&f.weight!=null?+(l.weight-f.weight).toFixed(1):null;
+    const badgeTxt=delta===null?'—':delta>0?'+'+delta+'kg':delta<0?delta+'kg':'=';
+    const badgeCl=delta===null||delta===0?'nc':delta>0?'up':'dn';
+    const spkSvg=isPu(ex)?spark(pts,'topSet','var(--gn)'):spark(pts,'weight','var(--cy)');
+    return`<div class="ph-sp-row"><div class="ph-sp-ex">${ex}</div><div class="ph-sp-cur">${curVal}</div><div class="ph-sp-badge ${badgeCl}">${badgeTxt}</div><div class="ph-sp-chart">${spkSvg}</div></div>`;
   }).join('');
-  return '<div class="gym-progress-history">'+header+rows+'</div>';
+
+  const pullUpNote=puReps>=10?`<div style="font-family:var(--mono);font-size:.46rem;color:var(--gn);padding:3px 0 0;letter-spacing:.5px">✓ 10-rep milestone met → next: 10-8-8 weighted pull-ups</div>`:'';
+
+  return`<div class="perf-section">UPPER BODY <span>★ running-relevant</span></div>
+    <div class="perf-grid-3">${upperCards}</div>
+    ${pullUpNote}
+    <div class="perf-div"></div>
+    <div class="perf-section">LOWER BODY <span>★ marathon investment</span></div>
+    <div class="perf-grid-4">${lowerCards}</div>
+    <div class="perf-div"></div>
+    <div class="perf-section">LOAD PROGRESSION</div>
+    <div class="ph-sp-hdr"><span>EXERCISE</span><span style="text-align:right">CURRENT</span><span style="text-align:center">CHANGE</span><span>TRAJECTORY</span></div>
+    ${sparkRows}`;
 }
 
 function renderGym() {
@@ -4445,12 +4598,8 @@ function renderGym() {
 
   const progressPanel = `
     <div class="card hud-card">
-      <div class="ch"><div class="cl">PROGRESSION HISTORY</div><div class="cs">per-exercise load over time</div></div>
-      <div class="gym-prog-note">
-        Baseline logged ${S.baseline_date||'Aug 16, 2026'}<br>
-        Session history below. Add sessions via Claude → commit data.json.
-      </div>
-      ${buildStrengthHistory()}
+      <div class="ch"><div class="cl">PERFORMANCE BENCHMARKS</div><div class="cs">targets relative to bodyweight · load progression</div></div>
+      <div style="padding:14px 18px 16px">${buildStrengthHistory()}</div>
     </div>`;
 
   document.getElementById('gym-root').innerHTML = `
