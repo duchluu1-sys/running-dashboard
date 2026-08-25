@@ -2307,6 +2307,89 @@
           "hr": null
         }
       ]
+    },
+    {
+      "r": 69,
+      "date": "Aug 25",
+      "type": "quality_a",
+      "wk": 16,
+      "dist": 6.72,
+      "duration": 3063,
+      "moving": 2597,
+      "pace": 7.45,
+      "hrAvg": 137,
+      "hrMax": 156,
+      "te": 3.6,
+      "te_an": 1.8,
+      "gct": 305,
+      "vr": 8.5,
+      "vo": 9.6,
+      "sl": 1.15,
+      "cadence": 123,
+      "pctCeiling": 0,
+      "drift": null,
+      "walkRatio": 23.3,
+      "hrZones": [
+        19,
+        15,
+        16,
+        33,
+        7
+      ],
+      "temp": 28,
+      "surface": "treadmill",
+      "conditions": "27–30°C · Elite Fitness gym · 16:15 local",
+      "flag": "✅✅",
+      "note": "R69 QA W16. 4×8 min: Int 1–2 @ 9.8 km/h, Int 3–4 @ 10.0 km/h. Max HR 156 bpm (−4 bpm under 160 ceiling). Walk recovery to ≤110 bpm between intervals. GCT 305 ms consistent quality cohort. VR 8.5% ties TM best (R39). Connective tissue graduation 2/3 ✅ (zero ankle at 10.0 km/h). QA graduation 2/3 ✅. Technogym max 9.9 km/h = display rounding for 10.0 (user confirmed). RPE 5/10 feel Strong. Post-run: Push Day W16 (bench 60.8 kg 6-6-5 pre-QA fatigue; cable fly 15 kg +25%; machine SP 40.8 kg new baseline; tricep ext 20 kg corrected baseline). Statin Day 88 clean.",
+      "verdict": "clean pass · QA graduation 2/3 · ceiling −4 bpm buffer",
+      "tags": [
+        "QA",
+        "W16",
+        "threshold",
+        "graduation",
+        "connective-tissue-2/3"
+      ],
+      "qualityPace": 6.0,
+      "runPace": 6.0,
+      "lcrs": 8,
+      "lcrsType": "LT2",
+      "laps": [
+        {
+          "km": 1,
+          "pace": 5.74,
+          "hr": null
+        },
+        {
+          "km": 2,
+          "pace": 8.26,
+          "hr": null
+        },
+        {
+          "km": 3,
+          "pace": 5.94,
+          "hr": null
+        },
+        {
+          "km": 4,
+          "pace": 8.45,
+          "hr": null
+        },
+        {
+          "km": 5,
+          "pace": 6.5,
+          "hr": null
+        },
+        {
+          "km": 6,
+          "pace": 8.49,
+          "hr": null
+        },
+        {
+          "km": 6.86,
+          "pace": 8.95,
+          "hr": null
+        }
+      ]
     }
   ],
   "GATES": [
@@ -2438,7 +2521,7 @@
     "week": 16,
     "totalWeeks": 24,
     "deloadWeek": 21,
-    "weekVolOnBoard": 6.42,
+    "weekVolOnBoard": 13.14,
     "lastWeekVol": 35.88,
     "weekTarget": "36–40",
     "easyHRBand": [
@@ -2461,7 +2544,7 @@
     "statinStart": "2026-05-30",
     "stressLevel": "LOW",
     "formCue": "Eyes on the horizon -- head up every session",
-    "date": "August 24, 2026",
+    "date": "August 25, 2026",
     "hrvBaseline": [
       53,
       68
@@ -3232,15 +3315,15 @@
         "exercise": "Cable Fly",
         "sets": 3,
         "reps": 10,
-        "weight_kg": 12,
-        "note": "12 kg each side"
+        "weight_kg": 15,
+        "note": "↑ from 12 kg W15 · W16 Aug 25: 15 kg/side × 2×10 + 3 drop sets to failure"
       },
       {
-        "exercise": "Shoulder Press",
-        "sets": 3,
-        "reps": 12,
-        "weight_kg": 24,
-        "note": "24 kg each side · W15 double progression: 20.4 kg×10 → 24 kg×12"
+        "exercise": "Machine Shoulder Press",
+        "sets": 2,
+        "reps": 10,
+        "weight_kg": 40.8,
+        "note": "✅ BASELINE W16 Aug 25 · machine implement · 40.8 kg × 2×10 · W15 DB shoulder press (24 kg/hand) replaced on Push Day — implement change not a weight regression"
       },
       {
         "exercise": "Cable Lateral Raise",
@@ -3259,9 +3342,16 @@
       {
         "exercise": "Tricep Overhead Extension",
         "sets": 3,
-        "reps": 12,
-        "weight_kg": 12,
-        "note": "BASELINE ESTABLISHED W15 · 12 kg × 12 reps · 3 sets with lengthened partials to finish"
+        "reps": 10,
+        "weight_kg": 20,
+        "note": "✅ CORRECTED BASELINE W16 Aug 25 · 12 kg W15 was undershoot · 20 kg is real working weight · EZ bar overhead 3×10 + cable SA pulldown 7.5 kg finisher"
+      },
+      {
+        "exercise": "Cable Tricep Pulldown SA",
+        "sets": 1,
+        "reps": "failure",
+        "weight_kg": 7.5,
+        "note": "✅ BASELINE ESTABLISHED W16 Aug 25 · single arm · finisher after EZ bar overhead extension"
       }
     ],
     "pull": [
@@ -3382,7 +3472,7 @@
     ],
     "week_status": {
       "week": 16,
-      "push": false,
+      "push": true,
       "pull": true,
       "legs": false,
       "full_body": false
@@ -3860,6 +3950,55 @@
           "exercise": "Preacher Curl",
           "weight_kg": 20,
           "reps": "1×failure"
+        }
+      ]
+    },
+    {
+      "date": "2026-08-25",
+      "week": 16,
+      "session": "push",
+      "entries": [
+        {
+          "exercise": "Incline Barbell Press",
+          "weight_kg": 60.8,
+          "reps": "6-6-5",
+          "note": "Pre-QA fatigue — regressed from W15 3×8 · weight held · no advancement until 3×8 clean"
+        },
+        {
+          "exercise": "Cable Fly",
+          "weight_kg": 15,
+          "reps": "2×10 + 3 drop sets failure",
+          "note": "↑ from 12 kg W15 (+25%) · 2 working sets + drop-set finisher"
+        },
+        {
+          "exercise": "Machine Shoulder Press",
+          "weight_kg": 40.8,
+          "reps": "2×10",
+          "note": "✅ NEW BASELINE W16 · machine implement · W15 was DB shoulder press 24 kg/hand — different exercise"
+        },
+        {
+          "exercise": "Cable Lateral Raise",
+          "weight_kg": 7.5,
+          "reps": "1×10",
+          "note": "Top set 7.5 kg × 10 (↓ from W15 3×12 — fatigue) · drop to 5 kg × 2×12 close to failure"
+        },
+        {
+          "exercise": "Cable Lateral Raise (drop)",
+          "weight_kg": 5.0,
+          "reps": "2×12",
+          "note": "Drop sets close to failure after 7.5 kg top set"
+        },
+        {
+          "exercise": "EZ Bar Tricep Extension",
+          "weight_kg": 20,
+          "reps": "3×10",
+          "note": "✅ CORRECTED BASELINE W16 · 12 kg W15 was undershoot · 20 kg is real working weight"
+        },
+        {
+          "exercise": "Cable Tricep Pulldown SA",
+          "weight_kg": 7.5,
+          "reps": "1×12 failure",
+          "note": "✅ NEW BASELINE W16 Aug 25 · single arm cable finisher"
         }
       ]
     }
