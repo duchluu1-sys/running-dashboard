@@ -2390,6 +2390,79 @@
           "hr": null
         }
       ]
+    },
+    {
+      "r": 70,
+      "date": "Aug 27",
+      "type": "quality_b",
+      "wk": 16,
+      "dist": 4.96,
+      "duration": 2160,
+      "moving": 1867,
+      "pace": 7.27,
+      "hrAvg": 140,
+      "hrMax": 156,
+      "te": 3.8,
+      "te_an": 0.0,
+      "gct": 311,
+      "vr": 9.1,
+      "vo": 10.1,
+      "sl": 1.13,
+      "cadence": 130,
+      "pctCeiling": 0,
+      "drift": null,
+      "walkRatio": 5.0,
+      "hrZones": [
+        9,
+        17,
+        35,
+        32,
+        1
+      ],
+      "temp": 30,
+      "surface": "treadmill",
+      "conditions": "11:55 local · treadmill · Elite Fitness Xuân Diệu · 1% grade · 28–32°C gym · Evo SL · HRM-200",
+      "flag": "✅✅",
+      "note": "QB W16 · 30 min continuous @ 9.0 km/h ✅✅ LCRS QB record · max HR 156 bpm (−4 bpm under ceiling) · Z3+Z4+Z5 = 68% threshold distribution ✅ · GCT 311 ms quality cohort ✅ · VR 9.1% expected at sub-LT1 pace · TE 3.8/0.0 ✅ · walk 5.0% warmup/cooldown transitions only — zero mid-run ✅ · R66 open loop CLOSED · RPE 4/10 feel Strong · shoe initially rough first 10 min (Evo SL), resolved · ankle clean ✅ · Statin Day 90 clean",
+      "verdict": "30 min continuous ✅ · LCRS 30 min 🏆 QB record · ceiling −4 bpm buffer · R66 loop closed",
+      "qualityPace": 6.67,
+      "runPace": 6.67,
+      "tags": [
+        "QB",
+        "W16",
+        "lcrs-record",
+        "R66-closed",
+        "30-min-continuous"
+      ],
+      "lcrs": 30,
+      "lcrsType": "sublt1",
+      "laps": [
+        {
+          "km": 1,
+          "pace": 7.25,
+          "hr": null
+        },
+        {
+          "km": 2,
+          "pace": 6.72,
+          "hr": null
+        },
+        {
+          "km": 3,
+          "pace": 6.72,
+          "hr": null
+        },
+        {
+          "km": 4,
+          "pace": 6.72,
+          "hr": null
+        },
+        {
+          "km": 4.96,
+          "pace": 8.97,
+          "hr": null
+        }
+      ]
     }
   ],
   "GATES": [
@@ -2521,7 +2594,7 @@
     "week": 16,
     "totalWeeks": 24,
     "deloadWeek": 21,
-    "weekVolOnBoard": 13.14,
+    "weekVolOnBoard": 18.10,
     "lastWeekVol": 35.88,
     "weekTarget": "36–40",
     "easyHRBand": [
@@ -2544,7 +2617,7 @@
     "statinStart": "2026-05-30",
     "stressLevel": "LOW",
     "formCue": "Eyes on the horizon -- head up every session",
-    "date": "August 25, 2026",
+    "date": "August 27, 2026",
     "hrvBaseline": [
       53,
       68
@@ -2712,12 +2785,15 @@
     "easyPaceMin": 7.0,
     "easyPaceMax": 8.5,
     "weekStartDate": "2026-08-24",
-    "lcrsNote": "Easy pace LCRS 51.3 min (R67 Aug 21, 7:30-8:30/km) · QB sub-LT1 14 min (R66 Aug 20) · LT2-specific 7.6 min (R61 Aug 14) — threshold target 20 min by W20 is tracked separately via lcrsThreshold",
+    "lcrsNote": "Easy pace LCRS 51.3 min (R67 Aug 21, 7:30-8:30/km) · QB sub-LT1 30 min 🏆 (R70 Aug 27 — doubled from 14 min R66) · LT2-specific 8 min (R69 Aug 25) — threshold target 20 min by W20 tracked via lcrsThreshold",
     "creatineApproved": true,
     "creatineApprovedDate": "Aug 20, 2026",
-    "lcrsThreshold": 7.6,
-    "lcrsThresholdRun": "R61",
-    "lcrsThresholdDate": "Aug 14",
+    "lcrsThreshold": 8,
+    "lcrsThresholdRun": "R69",
+    "lcrsThresholdDate": "Aug 25",
+    "lcrsQB": 30,
+    "lcrsQBRun": "R70",
+    "lcrsQBDate": "Aug 27",
     "lcrsEasy": 51.3,
     "ankleHipHypothesis": {
       "date": "Aug 21, 2026",
