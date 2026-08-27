@@ -2594,7 +2594,7 @@
     "week": 16,
     "totalWeeks": 24,
     "deloadWeek": 21,
-    "weekVolOnBoard": 18.10,
+    "weekVolOnBoard": 18.1,
     "lastWeekVol": 35.88,
     "weekTarget": "36–40",
     "easyHRBand": [
@@ -3028,6 +3028,15 @@
       "status": "GREEN",
       "note": "All signals nominal",
       "briefing": "Easy run — HR 122–139 bpm. Novablast 5. Volume: 36km left over 5 sessions (~7.2km each) to clear 36km. W16/24 · 56d to Race 0 · 0km of 36–40km on board · ACWR 0.96. Last: R67 long 11.32km (Aug 21)."
+    },
+    {
+      "date": "2026-08-27",
+      "hrv": 54,
+      "rhr": 51,
+      "sleepScore": 70,
+      "status": "GREEN",
+      "note": "All signals nominal",
+      "briefing": "Quality B — 30 min @ 9.0 km/h continuous, ceiling 160 bpm. Evo SL, Elite Fitness. Volume: 17.9km left over 2 sessions (~8.9km each) to clear 36km. W16/24 · 53d to Race 0 · 18.1km of 36–40km on board · ACWR 0.99. Last: R70 quality_b 4.96km (Aug 27)."
     }
   ],
   "PHASES": [
