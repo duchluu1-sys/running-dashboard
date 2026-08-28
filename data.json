@@ -3560,7 +3560,7 @@
       "push": true,
       "pull": true,
       "legs": false,
-      "full_body": false
+      "full_body": true
     },
     "to_add": {
       "legs": [
@@ -4084,6 +4084,73 @@
           "weight_kg": 7.5,
           "reps": "1×12 failure",
           "note": "✅ NEW BASELINE W16 Aug 25 · single arm cable finisher"
+        }
+      ]
+    },
+    {
+      "date": "2026-08-28",
+      "week": 16,
+      "session": "full_body",
+      "entries": [
+        {
+          "exercise": "V Squat Machine",
+          "weight_kg": 90,
+          "reps": "10-10-9",
+          "note": "✅ W16 plates only · +18 kg from W15 72 kg baseline · sled weight TBC (total load higher) · moved from Legs Day to Full Body"
+        },
+        {
+          "exercise": "Single Leg Standing Hamstring Curl",
+          "weight_kg": 25,
+          "reps": "3×10",
+          "note": "⚠️ one-axis rule departure · W15 baseline 23 kg×10 · should have gone 23 kg×12 first · next: 25 kg×12 (rep progression only)"
+        },
+        {
+          "exercise": "Seated Calf Raise",
+          "weight_kg": 32,
+          "reps": "2×15",
+          "note": "32 kg/side (64 kg total) · 2 sets in Full Body context (vs 3 on Legs Day)"
+        },
+        {
+          "exercise": "Incline Dumbbell Press",
+          "weight_kg": 26,
+          "reps": "24-26-26 × 8",
+          "note": "✅ First clean sets at 26 kg (×8×2) · W15 was 26 kg 8/7/5 · advancement: 3×8 at 26 kg achieved → try 28 kg next"
+        },
+        {
+          "exercise": "Cable Fly",
+          "weight_kg": 15,
+          "reps": "2×10",
+          "note": "15 kg/side · complement to Push Day · no drop sets in Full Body"
+        },
+        {
+          "exercise": "Plate Row (horizontal)",
+          "weight_kg": 80,
+          "reps": "2×10",
+          "note": "40 kg/side (80 kg total) · horizontal pull · consistent with W15 Full Body chest supported row 80 kg"
+        },
+        {
+          "exercise": "Stack Row (vertical)",
+          "weight_kg": 65,
+          "reps": "2×10",
+          "note": "✅ NEW BASELINE W16 Aug 28 · different grip/machine to plate row · vertical pull"
+        },
+        {
+          "exercise": "Seated Incline DB Lateral Raise",
+          "weight_kg": 8,
+          "reps": "2×10",
+          "note": "✅ NEW BASELINE W16 Aug 28 · seated incline variation (harder than standing) · replaces standing DB lateral raise in Full Body"
+        },
+        {
+          "exercise": "Hip Thrust Machine",
+          "weight_kg": 25,
+          "reps": "3×10",
+          "note": "+4.6 kg from W15 20.4 kg · fast progression for glutes — monitor"
+        },
+        {
+          "exercise": "L-sit Hold",
+          "weight_kg": 0,
+          "reps": "3×(5×5s)",
+          "note": "✅ BASELINE ESTABLISHED W16 Aug 28 · 75s total · progression: 3×(5×8s) → 3×(5×10s)"
         }
       ]
     }
