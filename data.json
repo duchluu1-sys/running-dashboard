@@ -2467,7 +2467,7 @@
     {
       "r": 71,
       "date": "Aug 29",
-      "type": "long_run",
+      "type": "long",
       "wk": 16,
       "dist": 20.07,
       "duration": 11184,
@@ -2494,9 +2494,9 @@
       ],
       "temp": 29,
       "surface": "treadmill",
-      "conditions": "14:21 local · treadmill · Elite Fitness Xuân Diệu · 1% grade · 27–31°C · Novablast 5 · Forerunner 165 · outdoor plan moved indoors (30°C at 06:30)",
+      "conditions": "14:21 local · treadmill · Elite Fitness Xuân Diệu · 1% grade · 27–31°C · Novablast 5 · outdoor plan moved indoors (30°C at 06:30)",
       "flag": "✅✅",
-      "note": "LR W16 · **20.07 km DISTANCE PR 🏆** · **GATE 3 CLEARED ✅ · GATE 4 CLEARED ✅** · avg HR 123 bpm ✅ · max HR 142 bpm (7 bpm above 135 self-imposed ceiling — brief) · 59% Z2 ✅ · Z4+Z5 = 0% ✅ · walk ratio 9.3% (17:28 walk — proactive breaks) · fueling: 3 gels + banana + Snickers + 3 electrolyte capsules + water · GCT 320 ms · VR 9.4% · TE 3.8/0.0 Base (Low Aerobic) ✅ · RPE 6/10 Hard · Feel Strong · ankle clean ✅ · Statin Day 92 · sweat loss 3,038 ml",
+      "note": "LR W16 · 20.07 km DISTANCE PR 🏆 · GATE 3 CLEARED ✅ · GATE 4 CLEARED ✅ · avg HR 123 bpm ✅ · max HR 142 bpm (brief above 135 ceiling) · 59% Z2 ✅ · Z4+Z5=0% ✅ · walk 9.3% · fueling: 3 gels + banana + Snickers + 3 electrolytes · GCT 320 ms · VR 9.4% · TE 3.8/0.0 · RPE 6/10 Hard · Feel Strong · ankle clean ✅ · Statin Day 92",
       "verdict": "20.07 km ✅ · Distance PR 🏆 · Gate 3 ✅ · Gate 4 ✅ · 59% Z2 · avg 123 bpm",
       "tags": [
         "LR",
@@ -2509,21 +2509,81 @@
       "lcrs": null,
       "lcrsType": "easy",
       "laps": [
-        {"km": 7, "pace": 9.43, "hr": null},
-        {"km": 8, "pace": 8.88, "hr": null},
-        {"km": 9, "pace": 8.60, "hr": null},
-        {"km": 10, "pace": 9.03, "hr": null},
-        {"km": 11, "pace": 10.35, "hr": null},
-        {"km": 12, "pace": 10.00, "hr": null},
-        {"km": 13, "pace": 9.02, "hr": null},
-        {"km": 14, "pace": 9.37, "hr": null},
-        {"km": 15, "pace": 9.78, "hr": null},
-        {"km": 16, "pace": 9.10, "hr": null},
-        {"km": 17, "pace": 8.67, "hr": null},
-        {"km": 18, "pace": 8.85, "hr": null},
-        {"km": 19, "pace": 8.97, "hr": null},
-        {"km": 20, "pace": 8.97, "hr": null},
-        {"km": 20.07, "pace": 10.27, "hr": null}
+        {
+          "km": 7,
+          "pace": 9.43,
+          "hr": null
+        },
+        {
+          "km": 8,
+          "pace": 8.88,
+          "hr": null
+        },
+        {
+          "km": 9,
+          "pace": 8.6,
+          "hr": null
+        },
+        {
+          "km": 10,
+          "pace": 9.03,
+          "hr": null
+        },
+        {
+          "km": 11,
+          "pace": 10.35,
+          "hr": null
+        },
+        {
+          "km": 12,
+          "pace": 10.0,
+          "hr": null
+        },
+        {
+          "km": 13,
+          "pace": 9.02,
+          "hr": null
+        },
+        {
+          "km": 14,
+          "pace": 9.37,
+          "hr": null
+        },
+        {
+          "km": 15,
+          "pace": 9.78,
+          "hr": null
+        },
+        {
+          "km": 16,
+          "pace": 9.1,
+          "hr": null
+        },
+        {
+          "km": 17,
+          "pace": 8.67,
+          "hr": null
+        },
+        {
+          "km": 18,
+          "pace": 8.85,
+          "hr": null
+        },
+        {
+          "km": 19,
+          "pace": 8.97,
+          "hr": null
+        },
+        {
+          "km": 20,
+          "pace": 8.97,
+          "hr": null
+        },
+        {
+          "km": 20.07,
+          "pace": 10.27,
+          "hr": null
+        }
       ]
     }
   ],
@@ -2555,10 +2615,10 @@
       "short": "20km during a full-load week",
       "progress": 100,
       "status": "cleared",
+      "detail": "CLEARED Aug 29, 2026 (R71) — 20.07km long run in W16 which also contained QA (R69) and QB (R70). Avg HR 123 bpm · 59% Z2 · Distance PR. Full-load week: 38.17 km.",
+      "eta": "CLEARED",
       "clearedDate": "Aug 29, 2026",
-      "clearedRun": "R71",
-      "detail": "CLEARED Aug 29, 2026 (R71) — 20.07km long run in W16 which also contained QA (R69 4×8min@9.8–10.0km/h) and QB (R70 30min@9.0km/h). Avg HR 123 bpm · 59% Z2 · max HR 142 bpm. Distance PR. Full-load week total: 38.17 km.",
-      "eta": "CLEARED"
+      "clearedRun": "R71"
     },
     {
       "id": 4,
@@ -2567,10 +2627,10 @@
       "short": "8 consecutive rising-load weeks",
       "progress": 100,
       "status": "cleared",
+      "detail": "CLEARED Aug 29, 2026 — 8 consecutive rising-load weeks injury-free (W9–W16). Zero tissue complaints. W16 closed 38.17 km with full QA+QB+LR load.",
+      "eta": "CLEARED",
       "clearedDate": "Aug 29, 2026",
-      "clearedRun": "R71",
-      "detail": "CLEARED Aug 29, 2026 — 8 consecutive rising-load weeks injury-free (W9–W16, Jul 6–Aug 29). Zero tissue complaints across all runs. Right ankle resolved with 15+ min warm-up protocol. W16 closed 38.17 km with full QA+QB+LR load. R61: strongest tissue clearance data (10km, 19 acceleration cycles at 5:20/km).",
-      "eta": "CLEARED"
+      "clearedRun": "R71"
     },
     {
       "id": 5,
@@ -2851,7 +2911,7 @@
     "easyPaceMin": 7.0,
     "easyPaceMax": 8.5,
     "weekStartDate": "2026-08-24",
-    "lcrsNote": "Easy pace LCRS 51.3 min (R67 Aug 21, 7:30-8:30/km) · QB sub-LT1 30 min 🏆 (R70 Aug 27 — doubled from 14 min R66) · LT2-specific 8 min (R69 Aug 25) — threshold target 20 min by W20 tracked via lcrsThreshold",
+    "lcrsNote": "Easy pace LCRS 51.3 min (R67 Aug 21) · QB sub-LT1 30 min 🏆 (R70 Aug 27) · LT2-specific 8 min (R69 Aug 25) — threshold target 20 min by W20 tracked via lcrsThreshold",
     "creatineApproved": true,
     "creatineApprovedDate": "Aug 20, 2026",
     "lcrsThreshold": 8,
