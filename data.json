@@ -2463,6 +2463,68 @@
           "hr": null
         }
       ]
+    },
+    {
+      "r": 71,
+      "date": "Aug 29",
+      "type": "long_run",
+      "wk": 16,
+      "dist": 20.07,
+      "duration": 11184,
+      "moving": 8957,
+      "pace": 9.28,
+      "hrAvg": 123,
+      "hrMax": 142,
+      "te": 3.8,
+      "te_an": 0.0,
+      "gct": 320,
+      "vr": 9.4,
+      "vo": 9.5,
+      "sl": 1.03,
+      "cadence": 121,
+      "pctCeiling": 0,
+      "drift": null,
+      "walkRatio": 9.3,
+      "hrZones": [
+        23,
+        59,
+        2,
+        0,
+        0
+      ],
+      "temp": 29,
+      "surface": "treadmill",
+      "conditions": "14:21 local · treadmill · Elite Fitness Xuân Diệu · 1% grade · 27–31°C · Novablast 5 · Forerunner 165 · outdoor plan moved indoors (30°C at 06:30)",
+      "flag": "✅✅",
+      "note": "LR W16 · **20.07 km DISTANCE PR 🏆** · **GATE 3 CLEARED ✅ · GATE 4 CLEARED ✅** · avg HR 123 bpm ✅ · max HR 142 bpm (7 bpm above 135 self-imposed ceiling — brief) · 59% Z2 ✅ · Z4+Z5 = 0% ✅ · walk ratio 9.3% (17:28 walk — proactive breaks) · fueling: 3 gels + banana + Snickers + 3 electrolyte capsules + water · GCT 320 ms · VR 9.4% · TE 3.8/0.0 Base (Low Aerobic) ✅ · RPE 6/10 Hard · Feel Strong · ankle clean ✅ · Statin Day 92 · sweat loss 3,038 ml",
+      "verdict": "20.07 km ✅ · Distance PR 🏆 · Gate 3 ✅ · Gate 4 ✅ · 59% Z2 · avg 123 bpm",
+      "tags": [
+        "LR",
+        "W16",
+        "distance-PR",
+        "gate3-cleared",
+        "gate4-cleared",
+        "59pct-Z2"
+      ],
+      "lcrs": null,
+      "lcrsType": "easy",
+      "laps": [
+        {"km": 7, "pace": 9.43, "hr": null},
+        {"km": 8, "pace": 8.88, "hr": null},
+        {"km": 9, "pace": 8.60, "hr": null},
+        {"km": 10, "pace": 9.03, "hr": null},
+        {"km": 11, "pace": 10.35, "hr": null},
+        {"km": 12, "pace": 10.00, "hr": null},
+        {"km": 13, "pace": 9.02, "hr": null},
+        {"km": 14, "pace": 9.37, "hr": null},
+        {"km": 15, "pace": 9.78, "hr": null},
+        {"km": 16, "pace": 9.10, "hr": null},
+        {"km": 17, "pace": 8.67, "hr": null},
+        {"km": 18, "pace": 8.85, "hr": null},
+        {"km": 19, "pace": 8.97, "hr": null},
+        {"km": 20, "pace": 8.97, "hr": null},
+        {"km": 20.07, "pace": 10.27, "hr": null}
+      ]
     }
   ],
   "GATES": [
@@ -2491,20 +2553,24 @@
       "type": "hard",
       "name": "Long Run In-Load",
       "short": "20km during a full-load week",
-      "progress": 0,
-      "status": "pending",
-      "detail": "20km long run in a week that also contained both Quality A and Quality B. Current max long run: 17.15km (R57).",
-      "eta": "~Sep 2026"
+      "progress": 100,
+      "status": "cleared",
+      "clearedDate": "Aug 29, 2026",
+      "clearedRun": "R71",
+      "detail": "CLEARED Aug 29, 2026 (R71) — 20.07km long run in W16 which also contained QA (R69 4×8min@9.8–10.0km/h) and QB (R70 30min@9.0km/h). Avg HR 123 bpm · 59% Z2 · max HR 142 bpm. Distance PR. Full-load week total: 38.17 km.",
+      "eta": "CLEARED"
     },
     {
       "id": 4,
       "type": "hard",
       "name": "Injury-Free Continuity",
       "short": "8 consecutive rising-load weeks",
-      "progress": 75,
-      "status": "active",
-      "detail": "Week 14 = week 6 of 8. Started Week 9 (Jul 6). Clears Week 16 (Aug 31). R61: zero tissue complaint across 10 km with 19 acceleration cycles at 5:20/km — strongest tissue clearance data in program.",
-      "eta": "Aug 31, 2026"
+      "progress": 100,
+      "status": "cleared",
+      "clearedDate": "Aug 29, 2026",
+      "clearedRun": "R71",
+      "detail": "CLEARED Aug 29, 2026 — 8 consecutive rising-load weeks injury-free (W9–W16, Jul 6–Aug 29). Zero tissue complaints across all runs. Right ankle resolved with 15+ min warm-up protocol. W16 closed 38.17 km with full QA+QB+LR load. R61: strongest tissue clearance data (10km, 19 acceleration cycles at 5:20/km).",
+      "eta": "CLEARED"
     },
     {
       "id": 5,
@@ -2594,8 +2660,8 @@
     "week": 16,
     "totalWeeks": 24,
     "deloadWeek": 21,
-    "weekVolOnBoard": 18.1,
-    "lastWeekVol": 35.88,
+    "weekVolOnBoard": 38.17,
+    "lastWeekVol": 38.17,
     "weekTarget": "36–40",
     "easyHRBand": [
       122,
@@ -2617,7 +2683,7 @@
     "statinStart": "2026-05-30",
     "stressLevel": "LOW",
     "formCue": "Eyes on the horizon -- head up every session",
-    "date": "August 27, 2026",
+    "date": "August 29, 2026",
     "hrvBaseline": [
       53,
       68
