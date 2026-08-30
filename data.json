@@ -3163,6 +3163,15 @@
       "status": "GREEN",
       "note": "All signals nominal",
       "briefing": "Quality B — 30 min @ 9.0 km/h continuous, ceiling 160 bpm. Evo SL, Elite Fitness. Volume: 17.9km left over 2 sessions (~8.9km each) to clear 36km. W16/24 · 53d to Race 0 · 18.1km of 36–40km on board · ACWR 0.99. Last: R70 quality_b 4.96km (Aug 27)."
+    },
+    {
+      "date": "2026-08-31",
+      "hrv": 69,
+      "rhr": 48,
+      "sleepScore": 42,
+      "status": "REST",
+      "note": "Sleep score 42",
+      "briefing": "REST. Sleep score 42. Easy run suppressed. W16/24 · 49d to Race 0 · 38.17km of 36–40km on board · ACWR 1.09. Last: R71 long 20.07km (Aug 29)."
     }
   ],
   "PHASES": [
