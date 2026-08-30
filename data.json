@@ -3163,15 +3163,6 @@
       "status": "GREEN",
       "note": "All signals nominal",
       "briefing": "Quality B — 30 min @ 9.0 km/h continuous, ceiling 160 bpm. Evo SL, Elite Fitness. Volume: 17.9km left over 2 sessions (~8.9km each) to clear 36km. W16/24 · 53d to Race 0 · 18.1km of 36–40km on board · ACWR 0.99. Last: R70 quality_b 4.96km (Aug 27)."
-    },
-    {
-      "date": "2026-08-30",
-      "hrv": 61,
-      "rhr": 49,
-      "sleepScore": 79,
-      "status": "GREEN",
-      "note": "All signals nominal",
-      "briefing": "Rest day. W16/24 · 50d to Race 0 · 38.17km of 36–40km on board · ACWR 1.09. Last: R71 long 20.07km (Aug 29)."
     }
   ],
   "PHASES": [
@@ -3694,7 +3685,7 @@
       "week": 16,
       "push": true,
       "pull": true,
-      "legs": false,
+      "legs": true,
       "full_body": true
     },
     "to_add": {
@@ -4286,6 +4277,55 @@
           "weight_kg": 0,
           "reps": "3×(5×5s)",
           "note": "✅ BASELINE ESTABLISHED W16 Aug 28 · 75s total · progression: 3×(5×8s) → 3×(5×10s)"
+        }
+      ]
+    },
+    {
+      "date": "2026-08-29",
+      "week": 16,
+      "session": "legs",
+      "entries": [
+        {
+          "exercise": "Trap Bar Deadlift",
+          "weight_kg": 120,
+          "reps": "110-120-120 × 8",
+          "note": "✅ RESET PROTOCOL CLOSED · 120 kg new working weight · clean, RPE ~7, no pain · jumped past 110 kg gate (100→120 in build) · was tracking 1/3 reset at 100 kg — top-set build to 120 clean supersedes"
+        },
+        {
+          "exercise": "Bulgarian Split Squat",
+          "weight_kg": 16,
+          "reps": "3×10",
+          "note": "16 kg each hand · held from prior (18 kg attempt deferred)"
+        },
+        {
+          "exercise": "Single Leg Hamstring Curl",
+          "weight_kg": 25,
+          "reps": "3×10",
+          "note": "25 kg · consistent with Full Body Aug 28 · one-axis: next 25 kg×12"
+        },
+        {
+          "exercise": "Seated Calf Raise",
+          "weight_kg": 32,
+          "reps": "2×15",
+          "note": "32 kg/side"
+        },
+        {
+          "exercise": "Dumbbell Lateral Raise",
+          "weight_kg": 10,
+          "reps": "2×8",
+          "note": "10 kg each hand · standing"
+        },
+        {
+          "exercise": "Preacher Curl",
+          "weight_kg": 10,
+          "reps": "2×10",
+          "note": "10 kg"
+        },
+        {
+          "exercise": "KB Knee Raise",
+          "weight_kg": 17,
+          "reps": "2×8 + drop 12.5kg",
+          "note": "17 kg × 8 × 2 then drop set 12.5 kg · hip/core"
         }
       ]
     }
