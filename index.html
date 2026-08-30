@@ -1403,6 +1403,7 @@ let HEALTH_FLAGS=[], MEDICATIONS=[];  // sourced from data.json at load — sing
 
 
 function fmtPace(v){if(!v)return'—';const m=Math.floor(v),s=Math.round((v-m)*60);return`${m}:${String(s).padStart(2,'0')}`}
+function fmtDur(sec){if(!sec&&sec!==0)return'—';const h=Math.floor(sec/3600),m=Math.floor((sec%3600)/60),s=Math.round(sec%60);return h>0?`${h}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`:`${m}:${String(s).padStart(2,'0')}`}
 function daysUntil(d){const n=new Date();n.setHours(0,0,0,0);const t=new Date(d);t.setHours(0,0,0,0);return Math.ceil((t-n)/86400000)}
 function fmtDate(d){return new Date(d).toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'})}
 function daysSince(s){return Math.floor((new Date()-new Date(s))/86400000)}
@@ -2806,10 +2807,10 @@ function renderSessionLog(){
     const zoneBar=r.hrZones?`<div class="ld-zonewrap"><div class="ld-zonelbl">HR ZONES</div><div class="ld-zonebar">${r.hrZones.map((p,i)=>p>0?`<div class="ld-zone z${i+1}" style="flex:${p}"></div>`:'').join('')}</div><div class="ld-zonepcts">${r.hrZones.map((p,i)=>p>0?`<span style="flex:${p}">Z${i+1} ${p}%</span>`:'').join('')}</div></div>`:'';
     // S37d — tags
     const tagsHTML=r.tags&&r.tags.length?`<div class="ld-tags">${r.tags.map(t=>`<span class="ld-tag">${t}</span>`).join('')}</div>`:'';
-    // S37d — verdict block (full text) or note fallback
-    const bodyHTML=r.verdict
-      ?`<div class="ld-verdict-block">${r.verdict}</div>`
-      :`<div class="ld-note">${r.note}</div>`;
+    // S41 — verdict headline + full note detail. verdict = one-line summary (collapsed 💬),
+    // note = full forensic detail shown when expanded. Previously note was hidden whenever
+    // verdict existed, which stripped all substance from the expanded card.
+    const bodyHTML=`${r.verdict?`<div class="ld-verdict-block">${r.verdict}</div>`:''}${r.note?`<div class="ld-note">${r.note}</div>`:''}`;
     return `
     <div class="log-row ${r.type}" onclick="toggleRow(${r.r})">
       <span class="lc-r c-mu">${r.r}</span>
@@ -2827,7 +2828,7 @@ function renderSessionLog(){
       ${zoneBar}
       <div class="ld-metrics">
         <div><div class="ld-lbl">DIST</div><div class="ld-val">${r.dist}km</div></div>
-        <div><div class="ld-lbl">MOVING</div><div class="ld-val">${r.moving?r.moving+'min':'—'}</div></div>
+        <div><div class="ld-lbl">MOVING</div><div class="ld-val">${fmtDur(r.moving)}</div></div>
         <div><div class="ld-lbl">AVG HR</div><div class="ld-val">${r.hrAvg?r.hrAvg+' bpm':'—'}</div></div>
         <div><div class="ld-lbl">MAX HR</div><div class="ld-val">${r.hrMax?r.hrMax+' bpm':'—'}</div></div>
         <div><div class="ld-lbl">GCT</div><div class="ld-val c-vb">${r.gct?r.gct+' ms':'—'}</div></div>
