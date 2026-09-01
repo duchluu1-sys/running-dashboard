@@ -2585,6 +2585,78 @@
           "hr": null
         }
       ]
+    },
+    {
+      "r": 72,
+      "date": "Sep 1",
+      "type": "easy",
+      "wk": 17,
+      "dist": 5.01,
+      "duration": 2844,
+      "moving": 2706,
+      "pace": 9.45,
+      "paceEasy": 9.0,
+      "hrAvg": 120,
+      "hrMax": 145,
+      "te": 2.6,
+      "te_an": 0.0,
+      "gct": 328,
+      "vr": 9.0,
+      "vo": 7.8,
+      "sl": 0.91,
+      "cadence": 145,
+      "pctCeiling": null,
+      "drift": null,
+      "walkRatio": 39.5,
+      "hrZones": null,
+      "temp": 28,
+      "surface": "outdoor",
+      "conditions": "05:56 local · Avana Retreat access road ĐT439 · Mai Châu vacation · 27–30°C · 156m elevation range (343m→187m→~310m)",
+      "flag": "✅",
+      "note": "R72 vacation easy · Mai Châu · 5.01 km · out-and-back ĐT439 access road · avg HR 120 ✅ · max HR 145 (brief, uphill climb) · grade-adj 8:44/km · walk 39.5% (terrain + dog chase) · LCRS 4.6 min (19 segments – terrain/dogs, not representative) · GCT 328 ms · VR 9.0% · cadence 145 spm running-only · TE 2.6/0.0 Base ✅ · W17 on board 5.01 km · Statin Day 95",
+      "verdict": "Vacation easy. HR 120 avg = aerobic floor maintained. Grade-adj 8:44/km = correct easy equivalent. Walk 39.5% terrain-driven (156m elevation). LCRS 4.6 min not representative. No benchmarks updated.",
+      "tags": [
+        "easy",
+        "vacation",
+        "outdoor",
+        "mai-chau",
+        "hilly",
+        "dog-chase"
+      ],
+      "laps": [
+        {
+          "km": 1,
+          "pace": 8.42,
+          "hr": null
+        },
+        {
+          "km": 2,
+          "pace": 7.8,
+          "hr": null
+        },
+        {
+          "km": 3,
+          "pace": 9.1,
+          "hr": null
+        },
+        {
+          "km": 4,
+          "pace": 10.9,
+          "hr": null
+        },
+        {
+          "km": 5,
+          "pace": 10.98,
+          "hr": null
+        },
+        {
+          "km": 5.01,
+          "pace": 16.3,
+          "hr": null
+        }
+      ],
+      "lcrs": null,
+      "lcrsType": "easy"
     }
   ],
   "GATES": [
@@ -2717,10 +2789,10 @@
     "age": 30,
     "phase": "Phase 2",
     "phaseName": "Quality Development",
-    "week": 16,
+    "week": 17,
     "totalWeeks": 24,
     "deloadWeek": 21,
-    "weekVolOnBoard": 38.17,
+    "weekVolOnBoard": 5.01,
     "lastWeekVol": 38.17,
     "weekTarget": "36–40",
     "easyHRBand": [
@@ -2743,7 +2815,7 @@
     "statinStart": "2026-05-30",
     "stressLevel": "LOW",
     "formCue": "Eyes on the horizon -- head up every session",
-    "date": "August 29, 2026",
+    "date": "September 1, 2026",
     "hrvBaseline": [
       53,
       68
@@ -2910,7 +2982,7 @@
     ],
     "easyPaceMin": 7.0,
     "easyPaceMax": 8.5,
-    "weekStartDate": "2026-08-24",
+    "weekStartDate": "2026-08-31",
     "lcrsNote": "Easy pace LCRS 51.3 min (R67 Aug 21) · QB sub-LT1 30 min 🏆 (R70 Aug 27) · LT2-specific 8 min (R69 Aug 25) — threshold target 20 min by W20 tracked via lcrsThreshold",
     "creatineApproved": true,
     "creatineApprovedDate": "Aug 20, 2026",
