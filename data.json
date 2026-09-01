@@ -2794,10 +2794,10 @@
     "deloadWeek": 21,
     "weekVolOnBoard": 5.01,
     "lastWeekVol": 38.17,
-    "weekTarget": "36–40",
+    "weekTarget": "37-42",
     "easyHRBand": [
       122,
-      139
+      140
     ],
     "walkTrigger": 143,
     "walkResume": 128,
@@ -2946,6 +2946,13 @@
         "headline": "W15 closed. 35.88 km. Negative cardiac drift. LCRS 51.3 min easy record. Ceiling raised to 160.",
         "body": "W15 delivered across every dimension. Long run R67 — the headline metric — produced cardiac drift of −4.8 bpm: HR went down over 96 minutes in 30°C heat at week-end. That is the aerobic base working. LCRS 51.3 min at easy pace is the longest continuous run in the program. Quality B established at 9.0 km/h (first session, LCRS 14 min sub-LT1). Quality A continued at 9.8–10.0 km/h, ceiling clean (154 max, Z5 0:00).\n\nMedical: blood results Aug 13 reviewed by Dr. Thắng (Aug 20 phone). All clean. HR ceiling raised 155→160 bpm. Creatine approved pending timing.\n\nHip protocol initiated. Right ankle-hip chain hypothesis logged: right hip flexor eccentric weakness → variable late-swing → dorsiflexion stress at anterior-lateral right ankle on cold start. Hip protocol is the 8-week natural experiment. Warm-up protocol continues — three consecutive clean runs confirm it resolves the acute presentation.\n\nGel timing gap identified (R67 depletion spike at km 6.45 from delayed first gel). Rule hardened: first gel at 45 min regardless of perceived energy level.\n\nGym: all 4 days complete. Full Body Aug 23 — KB raises baseline 3×15 @ 12.5 kg. Pull-ups and L-sit baseline not established this session — carry to W16 Full Body.",
         "nextObjective": "W16: QB 30 min continuous @ 9.0 km/h (ceiling 160 bpm, no water break). QA 4×8 min @ 9.8–10.0 km/h. LR 16–18 km (gel at 45 min, timer on). Pull-ups 10-8-8 threshold — Priority A W16 Full Body. L-sit baseline to establish. Regenetics VO₂max test Sep/Oct 2026 — book now."
+      },
+      {
+        "date": "Aug 29, 2026",
+        "phase": "Phase 2 · W16 Close",
+        "headline": "W16 closed. 38.17 km. Gate 3 ✅ Gate 4 ✅. Distance PR 20.07 km. QB LCRS 30 min doubled. Fueling rule hardened to 40 min.",
+        "body": "W16 was the program's structural proof-of-concept week. Two gates cleared simultaneously on Aug 29 (R71): Gate 3 — 20.07 km long run inside a full-load week containing both QA and QB — and Gate 4 — 8 consecutive rising-load weeks injury-free (W9–W16).\n\nR71 is the best aerobic long run in the program: 20.07 km, avg HR 123 bpm, 59% Z2, Z4+Z5 = 0%, max HR 142 bpm over 3h06. An aerobic floor that stable at week-peak load is the base strategy working.\n\nQuality B produced the program's most decisive single-session LCRS jump: 14 min (R66, W15) → 30 min continuous (R70, W16). Doubled in one session at 9.0 km/h. RPE 4/10. Max HR 156 bpm against a 160 ceiling. Headroom confirmed.\n\nQuality A continued 4×8 min format (R69) at 9.8–10.0 km/h, ceiling clean at 154 bpm. QA graduation moves to 2/3.\n\nFueling rule hardened Aug 29: first gel at 40 min for runs ≥90 min (revised from 45 min). 4 gels minimum for ≥18 km. 60g+/hr carb target. This replaces all prior gel timing rules.\n\nStrength: Trap Bar DL reset protocol closed at 120 kg (1.58× bodyweight) — clean RPE ~7, zero lower-back soreness, working weight re-established. L-sit baseline established — 3×(5×5s). V Squat reached 90 kg plates (+18 kg from 72 kg). Gym 5/5 including a bonus Legs Day Aug 29 pre-vacation.\n\nConnective tissue: zero complaints across 8 consecutive weeks.",
+        "nextObjective": "W17: QA graduation (3/3) — 4×8 min @ 10.0/10.0/10.3/10.3 km/h, ceiling 160 bpm, full walk recovery. QB ceiling test — 9.5 km/h × 25 min then keep running until 160 bpm forces stop (live LCRS extension). LR 18–20 km, 4 gels minimum, 60g+/hr. Regenetics VO₂max test Sep/Oct 2026 — book now. TI-RADS 4 endocrinologist referral still outstanding."
       }
     ],
     "lcrs": 51,
@@ -3405,7 +3412,7 @@
       "dateStart": "2026-08-31",
       "dateEnd": "2026-09-06",
       "qualityA": "4x8 min @ 10.0-10.3 km/h",
-      "qualityB": "30 min @ 9.2 km/h",
+      "qualityB": "25 min @ 9.5 km/h + ceiling extension to 160 bpm",
       "lrMin": 18,
       "lrMax": 20,
       "volMin": 37,
@@ -3591,9 +3598,9 @@
     }
   ],
   "STRENGTH": {
-    "baseline_date": "Aug 16, 2026",
-    "baseline_week": "W15",
-    "note": "Updated Aug 19 (W15 Lower Day). New baselines established: V Squat 72 kg×10, Hip Thrust 15 kg×10, Single Leg RDL 12 kg×10 (replaces Back Extension). Nordic eccentric protocol gap W15: machine curl used instead of Swiss Ball sub — Swiss Ball hamstring curl (2×4 eccentric) required next legs session. Sitting calf raise and Tibialis Raise skipped W15 lower day — Tibialis still TBC. Tricep Overhead Extension baseline confirmed Aug 18: 12 kg × 12. Shoulder Press double progression Aug 18: 20.4 kg×10 → 24 kg×12. Pull-up top set 10 ✅ — weighted pull-up threshold target: 10-8-8. Nordic Curl: W1/12 eccentric protocol active (2×4). Q4 additions now active: Single Leg RDL + Hip Thrust. Hip protocol added W15 (post-QB Aug 20) — hip flexor loading + lateral stability. First execution pending tonight/Fri.",
+    "baseline_date": "Aug 28, 2026",
+    "baseline_week": "W16",
+    "note": "Updated Aug 28–29 (W16 Full Body + Legs Day). Key W16 baselines: V Squat 90 kg plates × 3×10 (+18 kg from W15 72 kg). Incline DB Press 26 kg × 8 (first clean sets at 26 kg×8×2). Machine Shoulder Press 40.8 kg × 2×10 (replaces DB on Push Day). EZ Bar Tricep Extension 20 kg (corrected from W15 undershoot of 12 kg). Stack Row 65 kg × 2×10 (new baseline). Seated Incline DB Lateral Raise 8 kg × 2×10 (new baseline). Hip Thrust Machine 25 kg × 3×10 (+4.6 kg from W15). L-sit baseline: 3×(5×5s) ✅ (was outstanding since W14). Trap Bar DL reset closed: 120 kg clean RPE ~7 (reset from 130 kg overreach). SL Hamstring Curl: 25 kg×10 done — next target 25 kg×12 (one-axis rule). Bulgarian Split Squat: 16 kg/hand (+2 kg from W15 14 kg). Chest Supported Row: deferred again — belongs on Full Body, action item W17. Pull-ups: once per week only (Pull Day). SL RDL: once per week only (Legs Day).",
     "missing_weights": [
       "Tibialis Raise"
     ],
@@ -3710,23 +3717,23 @@
       {
         "exercise": "V Squat Machine",
         "sets": 3,
-        "reps": 10,
-        "weight_kg": 72,
-        "note": "BASELINE ESTABLISHED W15 · 72 kg · 3×10 · primary bilateral quad compound"
+        "reps": "10-10-9",
+        "weight_kg": 90,
+        "note": "✅ UPDATED W16 Aug 28 · 90 kg plates × 3×10-10-9 (+18 kg from W15 72 kg) · sled weight unlogged"
       },
       {
         "exercise": "Trap Bar Deadlift",
         "sets": 3,
-        "reps": 8,
-        "weight_kg": 130,
-        "note": "Working sets · Est. 1RM ~165 kg · bilateral hip hinge"
+        "reps": "8",
+        "weight_kg": 120,
+        "note": "✅ RESET CLOSED W16 Aug 29 · 120 kg new working weight · RPE ~7 · zero lower-back soreness · was reset from 130 kg (RPE 9-10 + multi-day soreness Aug 23) · next: 3×8 clean → 125 kg"
       },
       {
         "exercise": "Bulgarian Split Squat",
         "sets": 3,
         "reps": 10,
-        "weight_kg": 14,
-        "note": "14 kg each hand · 3×10 · confirmed W15 lower day"
+        "weight_kg": 16,
+        "note": "16 kg each hand · +2 kg from W15 14 kg · 3×10"
       },
       {
         "exercise": "Single Leg RDL",
@@ -3760,15 +3767,15 @@
         "exercise": "Hip Thrust",
         "sets": 3,
         "reps": 10,
-        "weight_kg": 15,
-        "note": "BASELINE ESTABLISHED W15 · 15 kg machine · 3×10 · Q4 addition now active"
+        "weight_kg": 25,
+        "note": "✅ UPDATED W16 · 25 kg × 3×10 (+4.6 kg from W15 15 kg) · now executed on Full Body day primarily"
       },
       {
         "exercise": "Single Leg Standing Hamstring Curl",
         "sets": 3,
-        "reps": 8,
-        "weight_kg": 20,
-        "note": "20 kg · 3×8 with partials · machine (concentric) · W15 lower: used as Nordic/Swiss Ball sub — eccentric demand not met · Swiss Ball curl still required for eccentric protocol"
+        "reps": "10",
+        "weight_kg": 25,
+        "note": "✅ UPDATED W16 · 25 kg × 3×10 · next: 25 kg×12 (one-axis rule before weight increase)"
       }
     ],
     "week_status": {
@@ -3789,74 +3796,87 @@
     "nordic_week": 1,
     "pull_up_top_set": 10,
     "full_body": {
-      "baseline_date": "Aug 23, 2026",
-      "baseline_week": 15,
-      "session_note": "W15 Full Body executed Aug 23. Hybrid session — included pull elements. Pull-ups NOT done (Priority A missed — establish next session). L-sit baseline NOT established (hip protocol incomplete today).",
+      "baseline_date": "Aug 28, 2026",
+      "baseline_week": "W16",
+      "session_note": "W16 Full Body executed Aug 28. All main lifts completed. L-sit baseline established 3×(5×5s) ✅. Chest Supported Row deferred again — action item W17 Full Body.",
       "exercises": [
+        {
+          "exercise": "V Squat Machine",
+          "sets": 3,
+          "reps": "10-10-9",
+          "weight_kg": 90,
+          "note": "✅ +18 kg from W15 72 kg · sled weight unlogged · 3×10-10-9"
+        },
+        {
+          "exercise": "Single Leg Hamstring Curl",
+          "sets": 3,
+          "reps": 10,
+          "weight_kg": 25,
+          "note": "⚠️ one-axis rule departure (weight jumped before hitting 25×12) · next: 25 kg×12"
+        },
+        {
+          "exercise": "Seated Calf Raise",
+          "sets": 2,
+          "reps": 15,
+          "weight_kg": 32,
+          "note": "32 kg/side · 2×15"
+        },
         {
           "exercise": "Incline Dumbbell Press",
           "sets": 3,
-          "reps": "8/7/5",
-          "weight_kg": 26,
-          "note": "↑ from 24 kg · new weight first session · reps dropped 8→5 expected · progression: maintain 26 kg until 3×8 clean · Full Body day only"
-        },
-        {
-          "exercise": "DB Shoulder Press",
-          "sets": 3,
           "reps": 8,
-          "weight_kg": 20,
-          "note": "⚠️ REGRESSION FLAG — Push Day was 24 kg × 12, prescribed 26 kg today. 20 kg is below baseline. Confirm if this was fatigue, form reset, or different implement. Clarify next session."
+          "weight_kg": [
+            24,
+            26,
+            26
+          ],
+          "note": "✅ first clean sets at 26 kg×8×2 · ascending 24→26→26 kg"
         },
         {
-          "exercise": "DB Lateral Raise",
-          "sets": 3,
-          "reps": 10,
-          "weight_kg": 10,
-          "note": "↑ from 7.5 kg × 12 (Push Day) · new weight baseline · rep count reduced 12→10 expected at new weight"
-        },
-        {
-          "exercise": "Seated Incline DB Curl",
-          "sets": 3,
-          "reps": 10,
-          "weight_kg": 10,
-          "note": "New exercise W15 · Full Body complement · baseline established"
-        },
-        {
-          "exercise": "Chest Supported Row",
-          "sets": 3,
-          "reps": 10,
-          "weight_kg": 80,
-          "note": "⚠️ CONFIRM: Pull Day was 50→55 kg ascending. 80 kg = 45% jump. Verify if same machine/weight system or different equipment. Likely different machine or pin setting."
-        },
-        {
-          "exercise": "Lat Pulldown",
-          "sets": 3,
-          "reps": 8,
-          "weight_kg": "55/60/60",
-          "note": "Ascending sets · consistent with Pull Day baseline"
-        },
-        {
-          "exercise": "X Cable Rear Delt",
+          "exercise": "Cable Fly",
           "sets": 2,
-          "reps": "to fail",
-          "weight_kg": 13,
-          "note": "Same as Pull Day · 2 sets to failure"
+          "reps": 10,
+          "weight_kg": 15,
+          "note": "15 kg/side · 2×10"
         },
         {
-          "exercise": "KB Knee Raises",
+          "exercise": "Plate Row (horizontal)",
+          "sets": 2,
+          "reps": 10,
+          "weight_kg": 40,
+          "note": "40 kg/side · 2×10"
+        },
+        {
+          "exercise": "Stack Row (vertical)",
+          "sets": 2,
+          "reps": 10,
+          "weight_kg": 65,
+          "note": "✅ NEW BASELINE W16 · 65 kg × 2×10"
+        },
+        {
+          "exercise": "Seated Incline DB Lateral Raise",
+          "sets": 2,
+          "reps": 10,
+          "weight_kg": 8,
+          "note": "✅ NEW BASELINE W16 · 8 kg × 2×10"
+        },
+        {
+          "exercise": "Hip Thrust Machine",
           "sets": 3,
-          "reps": 15,
-          "weight_kg": 12.5,
-          "note": "HIP PROTOCOL BASELINE ✅ · 3×15 @ 12.5 kg · first execution · more volume than prescription (2×10 @ 14 kg) at slightly lighter weight · progression: 3×15 easy × 2 sessions → 14 kg"
+          "reps": 10,
+          "weight_kg": 25,
+          "note": "+4.6 kg from W15 · 25 kg × 3×10"
+        },
+        {
+          "exercise": "L-sit (parallel bars)",
+          "sets": 3,
+          "reps": "5×5s",
+          "weight_kg": 0,
+          "note": "✅ BASELINE ESTABLISHED W16 Aug 28 · 3×(5×5s) = 75s total · was outstanding since W14"
         }
       ],
       "not_done": [
-        "Pull-ups (Priority A — missed)",
-        "Dips",
-        "Seated Calf Raise",
-        "L-sit (hip protocol baseline not established)",
-        "90/90 presses",
-        "Couch/Figure-4/Elephant walks"
+        "Chest Supported Row (deferred again — Priority A action item for W17 Full Body)"
       ]
     },
     "hip_protocol": {

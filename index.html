@@ -4580,7 +4580,7 @@ function renderGym() {
     return `<tr><td>${e.exercise}</td><td>${wt} kg</td><td>${e.sets||'—'}×${e.reps||'—'}</td><td style="color:${hasFlag?'var(--am)':'var(--mu)'};font-size:.52rem">${shortNote}</td></tr>`;
   }).join('');
   const fbActual = fbExercises.length ? `
-    <div style="padding:10px 20px 2px;font-family:var(--mono);font-size:.56rem;color:var(--cy);letter-spacing:1px">W15 SESSION · ${fbData.baseline_date||'Aug 23'}</div>
+    <div style="padding:10px 20px 2px;font-family:var(--mono);font-size:.56rem;color:var(--cy);letter-spacing:1px">${fbData.baseline_week||'W?'} SESSION · ${fbData.baseline_date||'—'}</div>
     <div style="padding:2px 20px 6px;font-family:var(--mono);font-size:.5rem;color:var(--am);line-height:1.5">${fbData.session_note||''}</div>
     <div style="padding:0 12px 12px;overflow-x:auto"><table class="gym-pair-tbl" style="width:100%"><thead><tr><th>EXERCISE</th><th>WT</th><th>SETS×REPS</th><th>NOTE</th></tr></thead><tbody>${fbRows}</tbody></table></div>` : '';
 
