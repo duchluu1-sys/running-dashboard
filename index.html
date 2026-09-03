@@ -3972,28 +3972,8 @@ function initVolumeChart(a){
 // ── INTENSITY DISTRIBUTION CHART ────────────────────────────────────────
 function initIntensityChart(a){
   const w=a.intensity;
-  // Custom plugin: draws amber border around entire stacked column for non-compliant weeks.
-  // Per-bar borderWidth arrays are unreliable on stacked charts in Chart.js v3.
-  const amberBorderPlugin={id:'amberBorder',afterDraw(chart){
-    const ctx=chart.ctx;
-    const m0=chart.getDatasetMeta(0),m1=chart.getDatasetMeta(1);
-    w.forEach((wk,i)=>{
-      if(!wk.compliant&&wk.total>0){
-        const b0=m0&&m0.data[i],b1=m1&&m1.data[i];
-        if(!b0)return;
-        const bx=b0.x-b0.width/2;
-        const top=b1?Math.min(b0.y,b1.y):b0.y;
-        const bot=b0.base;
-        if(bot<=top+1)return;
-        ctx.save();ctx.strokeStyle='#f59e0b';ctx.lineWidth=1.5;
-        ctx.strokeRect(bx+.75,top+.75,b0.width-1.5,bot-top-1.5);
-        ctx.restore();
-      }
-    });
-  }};
   CHARTS.intensity=new Chart(document.getElementById('intensityChart').getContext('2d'),{
     type:'bar',
-    plugins:[amberBorderPlugin],
     data:{labels:w.map(x=>x.label),datasets:[
       {label:'Low Intensity',data:w.map(x=>x.lowPct),backgroundColor:'rgba(16,185,129,.4)',
        borderColor:'transparent',borderWidth:0,stack:'s',categoryPercentage:.68,barPercentage:.8},
