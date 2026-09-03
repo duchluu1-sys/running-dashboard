@@ -2657,6 +2657,85 @@
       ],
       "lcrs": null,
       "lcrsType": "easy"
+    },
+    {
+      "r": 73,
+      "date": "Sep 3",
+      "type": "quality_b",
+      "wk": 17,
+      "dist": 5.41,
+      "duration": 2543,
+      "moving": 2077,
+      "pace": 7.37,
+      "paceEasy": null,
+      "qualityPace": 6.5,
+      "runPace": 6.5,
+      "hrAvg": 140,
+      "hrMax": 155,
+      "te": 4.0,
+      "te_an": 0.0,
+      "gct": 304,
+      "vr": 9.0,
+      "vo": 10.1,
+      "sl": 1.13,
+      "cadence": 145,
+      "pctCeiling": 0,
+      "drift": null,
+      "walkRatio": 5.0,
+      "hrZones": [
+        11,
+        5,
+        17,
+        55,
+        0
+      ],
+      "temp": 28,
+      "surface": "treadmill",
+      "conditions": "20:05 local · Elite Fitness Xuân Diệu · Evo SL · 1% incline (standard) · QB stepped from 9.0 km/h maintenance → 9.23 km/h × 32 min · intentional departure · Statin Day 97",
+      "flag": "✅",
+      "note": "R73 QB stepped maintenance · 5.41 km (Technogym) · 2 min treadmill warm-up + 32 min main set @ 9.23 km/h (6:30/km, laps 2–5) + 4 min cooldown walk · avg HR 140 ✅ · max HR 155 ✅ (5 bpm below 160 ceiling) · GCT 304 ms (−7 ms vs R70) · Z4 55% / Z3 17% · TE 4.0 Threshold · walk ratio 5.0% (cooldown only, zero mid-run breaks) · Evo SL · 1% incline standard · intentional step from 9.0 km/h maintenance prescription to 9.23 km/h · Statin Day 97",
+      "verdict": "QB at identical cardiac cost to R70 (140 avg) but faster (+0.23 km/h) and longer (+2 min). Ceiling held at 155 — 5 bpm headroom. GCT −7 ms improvement. Zero mid-run walk breaks. Departure from 9.0 km/h maintenance prescription intentional and vindicated by data.",
+      "tags": [
+        "quality_b",
+        "treadmill",
+        "stepped",
+        "ceiling_clean",
+        "lcrs_extension"
+      ],
+      "laps": [
+        {
+          "km": 1,
+          "pace": 7.08,
+          "hr": null
+        },
+        {
+          "km": 2,
+          "pace": 6.5,
+          "hr": null
+        },
+        {
+          "km": 3,
+          "pace": 6.5,
+          "hr": null
+        },
+        {
+          "km": 4,
+          "pace": 6.5,
+          "hr": null
+        },
+        {
+          "km": 5,
+          "pace": 6.5,
+          "hr": null
+        },
+        {
+          "km": 5.41,
+          "pace": 11.93,
+          "hr": null
+        }
+      ],
+      "lcrs": 32,
+      "lcrsType": "quality_b"
     }
   ],
   "GATES": [
@@ -2792,7 +2871,7 @@
     "week": 17,
     "totalWeeks": 24,
     "deloadWeek": 21,
-    "weekVolOnBoard": 5.01,
+    "weekVolOnBoard": 10.42,
     "lastWeekVol": 38.17,
     "weekTarget": "37-42",
     "easyHRBand": [
@@ -2815,7 +2894,7 @@
     "statinStart": "2026-05-30",
     "stressLevel": "LOW",
     "formCue": "Eyes on the horizon -- head up every session",
-    "date": "September 1, 2026",
+    "date": "September 3, 2026",
     "hrvBaseline": [
       53,
       68
@@ -2990,15 +3069,15 @@
     "easyPaceMin": 7.0,
     "easyPaceMax": 8.5,
     "weekStartDate": "2026-08-31",
-    "lcrsNote": "Easy pace LCRS 51.3 min (R67 Aug 21) · QB sub-LT1 30 min 🏆 (R70 Aug 27) · LT2-specific 8 min (R69 Aug 25) — threshold target 20 min by W20 tracked via lcrsThreshold",
+    "lcrsNote": "Easy pace LCRS 51.3 min (R67 Aug 21) · QB sub-LT1 32 min 🏆 (R73 Sep 3 · stepped from 30 min R70) · LT2-specific 8 min (R69 Aug 25) — threshold target 20 min by W20 tracked via lcrsThreshold",
     "creatineApproved": true,
     "creatineApprovedDate": "Aug 20, 2026",
     "lcrsThreshold": 8,
     "lcrsThresholdRun": "R69",
     "lcrsThresholdDate": "Aug 25",
-    "lcrsQB": 30,
-    "lcrsQBRun": "R70",
-    "lcrsQBDate": "Aug 27",
+    "lcrsQB": 32,
+    "lcrsQBRun": "R73",
+    "lcrsQBDate": "Sep 3",
     "lcrsEasy": 51.3,
     "ankleHipHypothesis": {
       "date": "Aug 21, 2026",
