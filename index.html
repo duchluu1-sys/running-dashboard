@@ -4408,12 +4408,31 @@ function renderInBody() {
   const pbfFirst = pbfVals[0], pbfLast = pbfVals[pbfVals.length - 1];
   const smmFirst = smmVals[0], smmLast = smmVals[smmVals.length - 1];
 
-  // Composition range bars
-  const compRow = (name, val, unit, normalMin, normalMax, scaleMin, scaleMax, statusTxt, statusCls) => {
+  // Composition range bars — fully data-driven, no hardcoded scan values
+  // Normal ranges are medical constants (don't change scan-to-scan)
+  const compStatusMap = {
+    bfm:     { below: ['Below normal — lean',           'ib-badge-gn'],
+               in:    ['In normal range',                'ib-badge-gn'],
+               above: ['Above normal — high body fat',   'ib-badge-am'] },
+    tbw:     { below: ['Below normal — check hydration','ib-badge-am'],
+               in:    ['In normal range',                'ib-badge-gn'],
+               above: ['Above normal — creatine / hydration','ib-badge-am'] },
+    protein: { below: ['Below normal',                  'ib-badge-am'],
+               in:    ['In normal range',                'ib-badge-gn'],
+               above: ['Above normal — high muscle',     'ib-badge-gn'] },
+    minerals:{ below: ['Below normal',                  'ib-badge-am'],
+               in:    ['In normal range',                'ib-badge-gn'],
+               above: ['Above normal — good density',    'ib-badge-gn'] },
+  };
+  const compRow = (name, val, unit, normalMin, normalMax, scaleMin, scaleMax, metricKey) => {
+    if (val === null || val === undefined) return '';
     const scaleRng = scaleMax - scaleMin;
-    const dotPct = Math.round((val - scaleMin) / scaleRng * 100);
+    const dotPct = Math.max(2, Math.min(97, Math.round((val - scaleMin) / scaleRng * 100)));
     const nStart = Math.round((normalMin - scaleMin) / scaleRng * 100);
     const nWidth = Math.round((normalMax - normalMin) / scaleRng * 100);
+    const zone = val < normalMin ? 'below' : val > normalMax ? 'above' : 'in';
+    const m = (compStatusMap[metricKey] || {})[zone] || ['—', 'ib-badge-gn'];
+    const statusTxt = m[0], statusCls = m[1];
     const dotColor = statusCls === 'ib-badge-am' ? 'var(--am)' : 'var(--ok)';
     const valCls   = statusCls === 'ib-badge-am' ? 'am' : 'gn';
     return `<div class="ib-comp-cell">
@@ -4459,32 +4478,32 @@ function renderInBody() {
     </div>
     <div class="ib-kpi">
       <div class="ib-kpi-cell">
-        <div class="ib-kv gn">${cur.pbf}<span class="ib-ku">%</span></div>
+        <div class="ib-kv ${cur.pbf < 6 ? 'am' : cur.pbf <= 18 ? 'gn' : 'rd'}">${cur.pbf}<span class="ib-ku">%</span></div>
         <div class="ib-kl">Body Fat</div>
         <div class="ib-kx gn">${prev ? (cur.pbf < prev.pbf ? '↓ ' + (prev.pbf - cur.pbf).toFixed(1) + '% · improving' : '↑ +' + (cur.pbf - prev.pbf).toFixed(1) + '% · watch') : 'baseline'}</div>
       </div>
       <div class="ib-kpi-cell">
-        <div class="ib-kv gn">${cur.smm}<span class="ib-ku"> kg</span></div>
+        <div class="ib-kv ${prev ? (cur.smm >= prev.smm ? 'gn' : 'am') : 'gn'}">${cur.smm}<span class="ib-ku"> kg</span></div>
         <div class="ib-kl">Muscle Mass</div>
         <div class="ib-kx gn">${prev ? (cur.smm > prev.smm ? '↑ +' + (cur.smm - prev.smm).toFixed(1) + ' kg · improving' : '↓ ' + (prev.smm - cur.smm).toFixed(1) + ' kg · watch') : 'baseline'}</div>
       </div>
       <div class="ib-kpi-cell">
         <div class="ib-kv gn">${cur.vfa || '—'}<span class="ib-ku"> cm²</span></div>
         <div class="ib-kl">Visceral Fat</div>
-        <div class="ib-kx gn">Athlete level · &lt;100 normal</div>
+        <div class="ib-kx ${cur.vfa !== null && cur.vfa < 50 ? 'gn' : cur.vfa < 100 ? 'gn' : 'am'}">${cur.vfa !== null ? (cur.vfa < 50 ? 'Athlete level' : cur.vfa < 100 ? 'Good range' : 'Watch · >100') : '—'} · &lt;100 normal</div>
       </div>
       <div class="ib-kpi-cell">
-        <div class="ib-kv gn">${cur.phase_angle || '—'}<span class="ib-ku">°</span></div>
+        <div class="ib-kv ${cur.phase_angle >= 7 ? 'gn' : cur.phase_angle >= 5.5 ? 'am' : 'rd'}">${cur.phase_angle || '—'}<span class="ib-ku">°</span></div>
         <div class="ib-kl">Phase Angle</div>
-        <div class="ib-kx gn">Good · threshold &gt;7°</div>
+        <div class="ib-kx ${cur.phase_angle >= 7 ? 'gn' : 'am'}">${cur.phase_angle >= 7 ? 'Good · threshold >7°' : cur.phase_angle >= 5.5 ? 'Normal range · 5.5–7°' : 'Below threshold'}</div>
       </div>
     </div>
     <div class="ib-sec-hdr"><span class="ib-sec-lbl">Body composition — range context</span></div>
     <div class="ib-comp-grid">
-      ${compRow('Body Fat', cur.bfm||7.2, 'kg', 8.2, 16.4, 4, 20, '↓ Below normal — lean', 'ib-badge-gn')}
-      ${compRow('Body Water', cur.tbw||51.0, 'L', 38.3, 46.9, 30, 60, '↑ Above normal — creatine / hydration', 'ib-badge-am')}
-      ${compRow('Protein', cur.protein||14.1, 'kg', 10.3, 12.5, 8, 18, '↑ Above normal — high muscle', 'ib-badge-gn')}
-      ${compRow('Minerals', cur.minerals||4.74, 'kg', 3.55, 4.33, 3, 6, '↑ Above normal — good density', 'ib-badge-gn')}
+      ${compRow('Body Fat',   cur.bfm,     'kg', 8.2,  16.4, 4,  20, 'bfm')}
+      ${compRow('Body Water', cur.tbw,     'L',  38.3, 46.9, 30, 60, 'tbw')}
+      ${compRow('Protein',    cur.protein, 'kg', 10.3, 12.5, 8,  18, 'protein')}
+      ${compRow('Minerals',   cur.minerals,'kg', 3.55, 4.33, 3,  6,  'minerals')}
     </div>
     ${cur.segmental ? `<div class="ib-sec-hdr"><span class="ib-sec-lbl">Segmental lean — % of ideal weight per segment</span></div>
     <div class="ib-seg-hdr">
@@ -4494,7 +4513,7 @@ function renderInBody() {
       <span class="ib-seg-hdr-cell" style="text-align:right">%</span>
     </div>
     ${segRows}
-    <div class="ib-seg-note">All segments above 100% of ideal · ECW ratios 0.354–0.377 · all within normal (&lt;0.390) · Balance: upper / lower / upper-lower all Balanced</div>` : ''}
+    <div class="ib-seg-note">${Object.values(cur.segmental||{}).every(s=>s.pct>=100)?'All segments above 100% of ideal · ':'Some segments below ideal · '}ECW ratios all within normal (&lt;0.390) · Balance: upper / lower / upper-lower all Balanced</div>` : ''}
     <div class="ib-sec-hdr"><span class="ib-sec-lbl">Scan history — 5 most recent</span></div>
     <div class="ib-hist-hdr">
       <div>Scan</div><div>Weight</div><div>SMM</div><div>BF%</div><div>vs prior</div>
