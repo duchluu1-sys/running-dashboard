@@ -4338,7 +4338,7 @@ document.addEventListener('DOMContentLoaded',()=>{
 
 // ── INBODY CARD ─────────────────────────────────────────────────────────────
 function renderInBody() {
-  const IB = (window.INBODY_HISTORY || []).filter(s => s.weight !== null && s.smm !== null);
+  const IB = (INBODY_HISTORY || []).filter(s => s.weight !== null && s.smm !== null);
   if (!IB.length) return '';
   const cur = IB[IB.length - 1];
   const prev = IB.length > 1 ? IB[IB.length - 2] : null;
@@ -4450,7 +4450,7 @@ function renderInBody() {
     <div class="ib-head">
       <div>
         <div class="ib-eyebrow">Body Composition</div>
-        <div class="ib-sub">InBody 770 · ${cur.date} · Scan ${IB.length} of ${(window.INBODY_HISTORY||[]).length}</div>
+        <div class="ib-sub">InBody 770 · ${cur.date} · Scan ${IB.length} of ${(INBODY_HISTORY||[]).length}</div>
       </div>
       <div class="ib-score-block">
         <div class="ib-score-num">${cur.score || '—'} <span class="ib-score-denom">/ 100</span></div>

@@ -2851,9 +2851,7 @@
         }
       ],
       "lcrs": 7.9,
-      "lcrsType": "easy",
-      "lcrsRepresentative": false,
-      "fueling": "3 gels (GU Roctane) · 2 electrolyte capsules · water · 2 coffee stops · ~31g/hr (below 60g/hr target)"
+      "lcrsType": "easy"
     }
   ],
   "GATES": [
