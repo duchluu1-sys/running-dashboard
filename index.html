@@ -1037,6 +1037,75 @@ body{background:var(--bg);background-image:var(--grid);color:var(--tx);font-fami
 .gym-ph-badge.nc{color:var(--mu);font-weight:400}
 .gym-ph-hist{font-family:var(--mono);font-size:.56rem;color:var(--m2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;letter-spacing:.2px}
 .gym-stabs{display:flex;border-bottom:1px solid var(--bd);margin-bottom:14px}
+/* ── INBODY CARD ──────────────────────────────────────────────────────── */
+.ib-head{padding:13px 20px;border-bottom:1px solid var(--bd);border-left:2px solid var(--cy-bd);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}
+.ib-eyebrow{font-family:var(--mono);font-size:.54rem;letter-spacing:3px;text-transform:uppercase;color:var(--cy);font-weight:700}
+.ib-sub{font-size:.57rem;color:var(--mu);margin-top:3px}
+.ib-score-block{text-align:right}
+.ib-score-num{font-family:var(--mono);font-size:1.4rem;font-weight:700;color:var(--ok);line-height:1}
+.ib-score-denom{font-family:var(--mono);font-size:.52rem;color:var(--mu)}
+.ib-score-lbl{font-family:var(--mono);font-size:.42rem;letter-spacing:2px;text-transform:uppercase;color:var(--mu);margin-top:3px}
+.ib-kpi{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--bd)}
+@media(max-width:600px){.ib-kpi{grid-template-columns:repeat(2,1fr)}}
+.ib-kpi-cell{background:var(--sf2);padding:12px 16px}
+.ib-kv{font-family:var(--mono);font-size:1.25rem;font-weight:700;line-height:1}
+.ib-ku{font-size:.72rem;font-weight:400}
+.ib-kl{font-family:var(--mono);font-size:.42rem;letter-spacing:2px;text-transform:uppercase;color:var(--mu);margin-top:5px}
+.ib-kx{font-family:var(--mono);font-size:.48rem;margin-top:4px;line-height:1.4}
+.ib-sec-hdr{padding:8px 20px;border-bottom:1px solid var(--bd);border-top:1px solid var(--bd);background:var(--sf3)}
+.ib-sec-lbl{font-family:var(--mono);font-size:.44rem;letter-spacing:2.5px;text-transform:uppercase;color:var(--mu);font-weight:700}
+.ib-comp-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--bd)}
+@media(max-width:480px){.ib-comp-grid{grid-template-columns:1fr}}
+.ib-comp-cell{background:var(--sf2);padding:11px 16px}
+.ib-comp-name{font-family:var(--mono);font-size:.43rem;letter-spacing:2px;text-transform:uppercase;color:var(--mu);margin-bottom:5px}
+.ib-comp-val{font-family:var(--mono);font-size:.95rem;font-weight:700;line-height:1}
+.ib-range-track{margin-top:7px;position:relative;height:6px;border-radius:2px;background:rgba(255,255,255,.05);overflow:visible}
+.ib-normal-zone{position:absolute;height:100%;border-radius:1px;background:rgba(255,255,255,.13)}
+.ib-dot{position:absolute;top:50%;width:9px;height:9px;border-radius:50%;transform:translate(-50%,-50%);border:1.5px solid var(--bg);z-index:2}
+.ib-range-lbls{display:flex;justify-content:space-between;margin-top:4px}
+.ib-range-lbl{font-family:var(--mono);font-size:.41rem;color:var(--mu)}
+.ib-status-badge{display:inline-block;font-family:var(--mono);font-size:.43rem;letter-spacing:1px;text-transform:uppercase;padding:1px 6px;border-radius:2px;margin-top:5px;font-weight:700}
+.ib-badge-gn{background:rgba(16,185,129,.12);color:var(--ok);border:1px solid rgba(16,185,129,.2)}
+.ib-badge-am{background:rgba(245,158,11,.10);color:var(--am);border:1px solid rgba(245,158,11,.2)}
+.ib-seg-hdr{display:grid;grid-template-columns:88px 1fr 56px 54px;gap:0 10px;padding:6px 20px;border-bottom:1px solid var(--bdb)}
+.ib-seg-hdr-cell{font-family:var(--mono);font-size:.41rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--mu)}
+.ib-seg-row{display:grid;grid-template-columns:88px 1fr 56px 54px;gap:0 10px;padding:7px 20px;border-bottom:1px solid rgba(0,212,255,.05);align-items:center}
+.ib-seg-row:last-child{border-bottom:none}
+.ib-seg-name{font-family:var(--mono);font-size:.55rem;color:var(--m2)}
+.ib-seg-bar{height:5px;background:rgba(0,212,255,.06);border-radius:2px;overflow:hidden}
+.ib-seg-fill{height:100%;border-radius:2px;background:linear-gradient(90deg,var(--ok),rgba(16,185,129,.4))}
+.ib-seg-pct{font-family:var(--mono);font-size:.6rem;font-weight:700;text-align:right;color:var(--ok)}
+.ib-seg-kg{font-family:var(--mono);font-size:.57rem;color:var(--m2);text-align:right}
+.ib-seg-note{padding:7px 20px 9px;font-family:var(--mono);font-size:.45rem;color:var(--mu);line-height:1.55}
+.ib-hist-hdr{display:grid;grid-template-columns:76px 58px 62px 50px 1fr;gap:0 8px;padding:6px 20px;border-bottom:1px solid var(--bdb)}
+.ib-hist-hdr div{font-family:var(--mono);font-size:.41rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--mu)}
+.ib-hist-row{display:grid;grid-template-columns:76px 58px 62px 50px 1fr;gap:0 8px;padding:8px 20px;border-bottom:1px solid rgba(0,212,255,.05);align-items:center}
+.ib-hist-row:last-child{border-bottom:none}
+.ib-hist-row.ib-cur{background:rgba(0,212,255,.04);border-left:2px solid var(--cy)}
+.ib-hist-date{font-family:var(--mono);font-size:.55rem}
+.ib-hist-num{font-family:var(--mono);font-size:.6rem;font-weight:700}
+.ib-hist-tag{font-family:var(--mono);font-size:.52rem;font-weight:700}
+.ib-spark-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--bd)}
+@media(max-width:480px){.ib-spark-grid{grid-template-columns:1fr}}
+.ib-spark-cell{background:var(--sf2);padding:11px 16px 9px}
+.ib-spark-title{font-family:var(--mono);font-size:.43rem;letter-spacing:2px;text-transform:uppercase;color:var(--mu);margin-bottom:7px}
+.ib-spark-meta{display:flex;justify-content:space-between;align-items:baseline;margin-top:5px}
+.ib-spark-from{font-family:var(--mono);font-size:.45rem;color:var(--mu)}
+.ib-spark-now{font-family:var(--mono);font-size:.55rem;font-weight:700}
+.ib-spark-chg{font-family:var(--mono);font-size:.47rem;font-weight:700}
+.ib-sec-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--bd)}
+@media(max-width:520px){.ib-sec-grid{grid-template-columns:repeat(2,1fr)}}
+.ib-sec-cell{background:var(--sf2);padding:9px 14px}
+.ib-sec-val{font-family:var(--mono);font-size:.86rem;font-weight:700;color:var(--m2);line-height:1}
+.ib-sec-lbl{font-family:var(--mono);font-size:.41rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--mu);margin-top:4px}
+.ib-sec-ctx{font-family:var(--mono);font-size:.45rem;color:var(--mu);margin-top:2px}
+.ib-foot{padding:8px 20px;font-family:var(--mono);font-size:.45rem;color:var(--mu);line-height:1.65;border-top:1px solid var(--bd)}
+@media(max-width:520px){
+  .ib-seg-hdr{grid-template-columns:1fr 50px}.ib-seg-hdr .ib-hide-mob{display:none}
+  .ib-seg-row{grid-template-columns:1fr 50px}.ib-seg-row .ib-hide-mob{display:none}
+  .ib-hist-hdr{grid-template-columns:60px 56px 52px 1fr}.ib-hist-hdr .ib-hide-mob{display:none}
+  .ib-hist-row{grid-template-columns:60px 56px 52px 1fr}.ib-hist-row .ib-hide-mob{display:none}
+}
 .gym-stab{padding:8px 16px;font-family:var(--mono);font-size:.53rem;letter-spacing:2.5px;text-transform:uppercase;color:var(--mu);background:transparent;border:none;border-bottom:2px solid transparent;cursor:pointer;transition:color .15s,border-color .15s;min-height:36px}
 .gym-stab:hover{color:var(--m2)}.gym-stab.active{color:var(--cy);border-bottom-color:var(--cy)}
 .gym-panel{display:none}.gym-panel.active{display:block}
@@ -1388,7 +1457,7 @@ body{background:var(--bg);background-image:var(--grid);color:var(--tx);font-fami
 // ════════════════════════════════════════════════════
 // DATA — populated at runtime by fetch('data.json')
 // ════════════════════════════════════════════════════
-let RUNS, GATES, RACES, ATHLETE, READINESS_LOG, STRENGTH, STRENGTH_HISTORY;
+let RUNS, GATES, RACES, ATHLETE, READINESS_LOG, STRENGTH, STRENGTH_HISTORY, INBODY_HISTORY;
 let PHASES=[], PROGRESSION=[], MILESTONES=[];
 let _BYTES=0;   // S16 — byte length of the data.json payload currently loaded
 
@@ -4233,6 +4302,7 @@ document.addEventListener('DOMContentLoaded',()=>{
       HEALTH_FLAGS=data.HEALTH_FLAGS||[];
       MEDICATIONS=data.MEDICATIONS||[];
       STRENGTH_HISTORY=data.STRENGTH_HISTORY||[];
+      INBODY_HISTORY=data.INBODY_HISTORY||[];
       loadingEl.style.display='none';
       if(window._CHARTS_OFFLINE){
         const vb=document.getElementById('validation-banner');
@@ -4264,6 +4334,203 @@ document.addEventListener('DOMContentLoaded',()=>{
       errorEl.style.display='flex';
     });
 });
+
+
+// ── INBODY CARD ─────────────────────────────────────────────────────────────
+function renderInBody() {
+  const IB = (window.INBODY_HISTORY || []).filter(s => s.weight !== null && s.smm !== null);
+  if (!IB.length) return '';
+  const cur = IB[IB.length - 1];
+  const prev = IB.length > 1 ? IB[IB.length - 2] : null;
+
+  // Format date
+  const fmtDate = d => { const p = d.split('-'); return p[0].slice(2) + '/' + p[1]; };
+  // Five most recent complete scans for history
+  const hist5 = IB.slice(-5).reverse();
+
+  // Delta helper: returns {val, cls, sym} for a metric delta
+  const delta = (cur, prev, higherBetter) => {
+    if (!prev) return {sym:'', cls:'mu'};
+    const d = cur - prev;
+    if (Math.abs(d) < 0.05) return {sym:'→', cls:'mu'};
+    const good = higherBetter ? d > 0 : d < 0;
+    return {sym: d > 0 ? '↑SMM' : '↓SMM', cls: good ? 'gn' : 'rd'};
+  };
+
+  // History rows
+  const histRows = hist5.map((s, i) => {
+    const isCur = i === 0;
+    const p = hist5[i + 1];
+    let smmCls = 'm2', bfCls = 'm2', tag = '';
+    if (p) {
+      const smmUp = s.smm > p.smm;
+      const bfDn  = s.pbf < p.pbf;
+      smmCls = smmUp ? 'gn' : (s.smm < p.smm ? 'rd' : 'm2');
+      bfCls  = bfDn  ? 'gn' : (s.pbf > p.pbf ? (s.pbf >= 12 ? 'am' : 'rd') : 'm2');
+      const sa = smmUp ? '<span class="gn">↑SMM</span>' : (s.smm < p.smm ? '<span class="rd">↓SMM</span>' : '');
+      const ba = bfDn  ? '<span class="gn">↓BF</span>'  : (s.pbf > p.pbf ? '<span class="rd">↑BF</span>'  : '');
+      tag = [sa, ba].filter(Boolean).join(' ');
+    } else { tag = '<span class="mu">baseline</span>'; }
+    return `<div class="ib-hist-row${isCur?' ib-cur':''}">
+      <span class="ib-hist-date ${isCur?'cy':'m2'}">${fmtDate(s.date)}</span>
+      <span class="ib-hist-num ${isCur?'':'m2'}">${s.weight} kg</span>
+      <span class="ib-hist-num ${smmCls}">${s.smm}</span>
+      <span class="ib-hist-num ${bfCls}">${s.pbf}%</span>
+      <span class="ib-hist-tag">${isCur ? '<span class="cy">current</span>' : tag}</span>
+    </div>`;
+  }).join('');
+
+  // Sparkline helper — returns SVG path + fill path
+  const sparkline = (vals, invert, color) => {
+    const mn = Math.min(...vals), mx = Math.max(...vals), rng = mx - mn || 1;
+    const w = 280, h = 44, pad = 4;
+    const pts = vals.map((v, i) => {
+      const x = i / (vals.length - 1) * w;
+      const norm = (v - mn) / rng;
+      const y = invert ? pad + norm * (h - pad * 2) : h - pad - norm * (h - pad * 2);
+      return {x, y};
+    });
+    const line = pts.map((p, i) => `${i ? 'L' : 'M'}${p.x.toFixed(1)},${p.y.toFixed(1)}`).join(' ');
+    const fill = line + ` L${w},${h} L0,${h} Z`;
+    const last = pts[pts.length - 1];
+    const uid = color.replace('#', '');
+    return `<defs><linearGradient id="sg${uid}" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="${color}" stop-opacity=".2"/>
+      <stop offset="100%" stop-color="${color}" stop-opacity="0"/>
+    </linearGradient></defs>
+    <path d="${line}" fill="none" stroke="${color}" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"/>
+    <path d="${fill}" fill="url(#sg${uid})"/>
+    <circle cx="${last.x.toFixed(1)}" cy="${last.y.toFixed(1)}" r="3.5" fill="${color}"/>`;
+  };
+
+  const pbfVals = IB.map(s => s.pbf);
+  const smmVals = IB.map(s => s.smm);
+  const pbfFirst = pbfVals[0], pbfLast = pbfVals[pbfVals.length - 1];
+  const smmFirst = smmVals[0], smmLast = smmVals[smmVals.length - 1];
+
+  // Composition range bars
+  const compRow = (name, val, unit, normalMin, normalMax, scaleMin, scaleMax, statusTxt, statusCls) => {
+    const scaleRng = scaleMax - scaleMin;
+    const dotPct = Math.round((val - scaleMin) / scaleRng * 100);
+    const nStart = Math.round((normalMin - scaleMin) / scaleRng * 100);
+    const nWidth = Math.round((normalMax - normalMin) / scaleRng * 100);
+    const dotColor = statusCls === 'ib-badge-am' ? 'var(--am)' : 'var(--ok)';
+    const valCls   = statusCls === 'ib-badge-am' ? 'am' : 'gn';
+    return `<div class="ib-comp-cell">
+      <div class="ib-comp-name">${name}</div>
+      <div class="ib-comp-val ${valCls}">${val} <span style="font-size:.62rem;font-weight:400;color:var(--m2)">${unit}</span></div>
+      <div class="ib-range-track">
+        <div class="ib-normal-zone" style="left:${nStart}%;width:${nWidth}%"></div>
+        <div class="ib-dot" style="left:${dotPct}%;background:${dotColor}"></div>
+      </div>
+      <div class="ib-range-lbls">
+        <span class="ib-range-lbl">${scaleMin}${unit}</span>
+        <span class="ib-range-lbl">Normal: ${normalMin}–${normalMax}</span>
+        <span class="ib-range-lbl">${scaleMax}${unit}</span>
+      </div>
+      <span class="ib-status-badge ${statusCls}">${statusTxt}</span>
+    </div>`;
+  };
+
+  // Segmental rows
+  const segRows = cur.segmental ? Object.entries({
+    'Right Arm': cur.segmental.right_arm,
+    'Left Arm':  cur.segmental.left_arm,
+    'Trunk':     cur.segmental.trunk,
+    'Right Leg': cur.segmental.right_leg,
+    'Left Leg':  cur.segmental.left_leg
+  }).map(([name, seg]) => `<div class="ib-seg-row">
+    <span class="ib-seg-name">${name}</span>
+    <div class="ib-seg-bar ib-hide-mob"><div class="ib-seg-fill" style="width:${Math.min(100,seg.pct-5)}%"></div></div>
+    <span class="ib-seg-kg">${seg.kg} kg</span>
+    <span class="ib-seg-pct">${seg.pct}%</span>
+  </div>`).join('') : '';
+
+  return `<div class="card" style="margin-bottom:16px">
+    <div class="ib-head">
+      <div>
+        <div class="ib-eyebrow">Body Composition</div>
+        <div class="ib-sub">InBody 770 · ${cur.date} · Scan ${IB.length} of ${(window.INBODY_HISTORY||[]).length}</div>
+      </div>
+      <div class="ib-score-block">
+        <div class="ib-score-num">${cur.score || '—'} <span class="ib-score-denom">/ 100</span></div>
+        <div class="ib-score-lbl">InBody Score</div>
+      </div>
+    </div>
+    <div class="ib-kpi">
+      <div class="ib-kpi-cell">
+        <div class="ib-kv gn">${cur.pbf}<span class="ib-ku">%</span></div>
+        <div class="ib-kl">Body Fat</div>
+        <div class="ib-kx gn">${prev ? (cur.pbf < prev.pbf ? '↓ ' + (prev.pbf - cur.pbf).toFixed(1) + '% · improving' : '↑ +' + (cur.pbf - prev.pbf).toFixed(1) + '% · watch') : 'baseline'}</div>
+      </div>
+      <div class="ib-kpi-cell">
+        <div class="ib-kv gn">${cur.smm}<span class="ib-ku"> kg</span></div>
+        <div class="ib-kl">Muscle Mass</div>
+        <div class="ib-kx gn">${prev ? (cur.smm > prev.smm ? '↑ +' + (cur.smm - prev.smm).toFixed(1) + ' kg · improving' : '↓ ' + (prev.smm - cur.smm).toFixed(1) + ' kg · watch') : 'baseline'}</div>
+      </div>
+      <div class="ib-kpi-cell">
+        <div class="ib-kv gn">${cur.vfa || '—'}<span class="ib-ku"> cm²</span></div>
+        <div class="ib-kl">Visceral Fat</div>
+        <div class="ib-kx gn">Athlete level · &lt;100 normal</div>
+      </div>
+      <div class="ib-kpi-cell">
+        <div class="ib-kv gn">${cur.phase_angle || '—'}<span class="ib-ku">°</span></div>
+        <div class="ib-kl">Phase Angle</div>
+        <div class="ib-kx gn">Good · threshold &gt;7°</div>
+      </div>
+    </div>
+    <div class="ib-sec-hdr"><span class="ib-sec-lbl">Body composition — range context</span></div>
+    <div class="ib-comp-grid">
+      ${compRow('Body Fat', cur.bfm||7.2, 'kg', 8.2, 16.4, 4, 20, '↓ Below normal — lean', 'ib-badge-gn')}
+      ${compRow('Body Water', cur.tbw||51.0, 'L', 38.3, 46.9, 30, 60, '↑ Above normal — creatine / hydration', 'ib-badge-am')}
+      ${compRow('Protein', cur.protein||14.1, 'kg', 10.3, 12.5, 8, 18, '↑ Above normal — high muscle', 'ib-badge-gn')}
+      ${compRow('Minerals', cur.minerals||4.74, 'kg', 3.55, 4.33, 3, 6, '↑ Above normal — good density', 'ib-badge-gn')}
+    </div>
+    ${cur.segmental ? `<div class="ib-sec-hdr"><span class="ib-sec-lbl">Segmental lean — % of ideal weight per segment</span></div>
+    <div class="ib-seg-hdr">
+      <span class="ib-seg-hdr-cell">Segment</span>
+      <span class="ib-seg-hdr-cell ib-hide-mob">% of Ideal</span>
+      <span class="ib-seg-hdr-cell" style="text-align:right">Mass</span>
+      <span class="ib-seg-hdr-cell" style="text-align:right">%</span>
+    </div>
+    ${segRows}
+    <div class="ib-seg-note">All segments above 100% of ideal · ECW ratios 0.354–0.377 · all within normal (&lt;0.390) · Balance: upper / lower / upper-lower all Balanced</div>` : ''}
+    <div class="ib-sec-hdr"><span class="ib-sec-lbl">Scan history — 5 most recent</span></div>
+    <div class="ib-hist-hdr">
+      <div>Scan</div><div>Weight</div><div>SMM</div><div>BF%</div><div>vs prior</div>
+    </div>
+    ${histRows}
+    <div class="ib-spark-grid">
+      <div class="ib-spark-cell">
+        <div class="ib-spark-title">Body Fat % — trend (down = good)</div>
+        <svg width="100%" height="44" viewBox="0 0 280 44" preserveAspectRatio="none">
+          ${sparkline(pbfVals, true, '#10b981')}
+        </svg>
+        <div class="ib-spark-meta">
+          <span class="ib-spark-from">First: ${pbfFirst}%</span>
+          <div><span class="ib-spark-chg ${pbfLast < pbfFirst ? 'gn' : 'rd'}">${pbfLast < pbfFirst ? '−' : '+'}${Math.abs(pbfLast - pbfFirst).toFixed(1)}%  </span><span class="ib-spark-now gn">${pbfLast}%</span></div>
+        </div>
+      </div>
+      <div class="ib-spark-cell">
+        <div class="ib-spark-title">Muscle Mass kg — trend (up = good)</div>
+        <svg width="100%" height="44" viewBox="0 0 280 44" preserveAspectRatio="none">
+          ${sparkline(smmVals, false, '#00d4ff')}
+        </svg>
+        <div class="ib-spark-meta">
+          <span class="ib-spark-from">First: ${smmFirst} kg</span>
+          <div><span class="ib-spark-chg ${smmLast > smmFirst ? 'gn' : 'rd'}">${smmLast > smmFirst ? '+' : '−'}${Math.abs(smmLast - smmFirst).toFixed(1)} kg  </span><span class="ib-spark-now cy">${smmLast} kg</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="ib-sec-grid">
+      <div class="ib-sec-cell"><div class="ib-sec-val">${cur.bmi||'—'}</div><div class="ib-sec-lbl">BMI</div><div class="ib-sec-ctx">Normal 18.5–24.9</div></div>
+      <div class="ib-sec-cell"><div class="ib-sec-val">${cur.smi||'—'} <span style="font-size:.6rem">kg/m²</span></div><div class="ib-sec-lbl">Muscle Index</div><div class="ib-sec-ctx">Good &gt;8.0 for males</div></div>
+      <div class="ib-sec-cell"><div class="ib-sec-val">${cur.ecw_ratio||'—'}</div><div class="ib-sec-lbl">ECW Ratio</div><div class="ib-sec-ctx">Normal &lt;0.390</div></div>
+      <div class="ib-sec-cell"><div class="ib-sec-val">${cur.whr||'—'}</div><div class="ib-sec-lbl">Waist-Hip</div><div class="ib-sec-ctx">Normal 0.80–0.90</div></div>
+    </div>
+    <div class="ib-foot">⚠ InBody 770 carries ±1.5–2.5 kg error on muscle mass · Evening scan + creatine may inflate body water and SMM by 1–2 kg · Treat direction as signal; treat exact SMM as approximate · Next scan recommended in 4–6 weeks</div>
+  </div>`;
+}
 
 // ── GYM TAB ────────────────────────────────────────────────────────────────
 function switchGymPanel(panel, btn) {
@@ -4584,6 +4851,7 @@ function renderGym() {
     </div>`;
 
   document.getElementById('gym-root').innerHTML = `
+    ${renderInBody()}
     <div class="gym-week-tally">
       <span class="gym-wk-lbl">W${ATHLETE.week||ws.week||'?'} GYM</span>
       ${tallyChips}

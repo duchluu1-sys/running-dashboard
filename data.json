@@ -2736,6 +2736,124 @@
       ],
       "lcrs": 32,
       "lcrsType": "quality_b"
+    },
+    {
+      "r": 74,
+      "date": "Sep 5",
+      "type": "long",
+      "wk": 17,
+      "dist": 16.36,
+      "duration": 8604,
+      "moving": 8352,
+      "pace": 8.77,
+      "paceEasy": null,
+      "hrAvg": 126,
+      "hrMax": 154,
+      "te": 3.5,
+      "te_an": 0.0,
+      "gct": 324,
+      "vr": 9.1,
+      "vo": 8.1,
+      "sl": 0.94,
+      "cadence": 145,
+      "pctCeiling": null,
+      "drift": 7.1,
+      "walkRatio": 34.5,
+      "hrZones": [
+        18,
+        44,
+        20,
+        0,
+        0
+      ],
+      "temp": 30,
+      "surface": "outdoor",
+      "conditions": "05:18 local · Hồ Tây outdoor loop · Novablast 5 · 29–33°C avg 30°C · 2 coffee stops (watch paused ~54 min) · fatigued early start · Statin Day 99",
+      "flag": "✅",
+      "note": "R74 long run maintenance · Sep 5 · 16.36 km (GPS) · Hồ Tây loop outdoor · avg HR 126 ✅ · max HR 154 ✅ (6 bpm headroom) · cardiac drift +7.1 bpm (run segs: 126→133 bpm) · walk 34.5% (heat + 2 coffee stops + early fatigue) · GCT 324 ms · VR 9.1% · LCRS 7.9 min (43 segs – not representative) · fueling 3 gels + 2 caps + water + coffee (~31g/hr – below 60g/hr target) · sweat 2,231 ml (936 ml/hr) · 29–33°C · Novablast 5 · W17 FINAL · Statin Day 99",
+      "verdict": "Maintenance LR in heat stress (30°C avg, 33°C max). HR governed correctly (126 avg, 154 max). Walk ratio driven by heat + coffee stops, not fitness failure. Fueling ~31g/hr vs 60g/hr target is the W18 LR action item.",
+      "tags": [
+        "long",
+        "outdoor",
+        "maintenance",
+        "hot",
+        "coffee-stops",
+        "w17-final"
+      ],
+      "laps": [
+        {
+          "km": 1,
+          "pace": 8.55
+        },
+        {
+          "km": 2,
+          "pace": 8.88
+        },
+        {
+          "km": 3,
+          "pace": 8.22
+        },
+        {
+          "km": 4,
+          "pace": 9.52
+        },
+        {
+          "km": 5,
+          "pace": 8.65
+        },
+        {
+          "km": 6,
+          "pace": 9.3
+        },
+        {
+          "km": 7,
+          "pace": 9.67
+        },
+        {
+          "km": 8,
+          "pace": 10.98
+        },
+        {
+          "km": 9,
+          "pace": 7.27
+        },
+        {
+          "km": 10,
+          "pace": 9.03
+        },
+        {
+          "km": 11,
+          "pace": 8.55
+        },
+        {
+          "km": 12,
+          "pace": 9.77
+        },
+        {
+          "km": 13,
+          "pace": 8.75
+        },
+        {
+          "km": 14,
+          "pace": 7.38
+        },
+        {
+          "km": 15,
+          "pace": 8.07
+        },
+        {
+          "km": 16,
+          "pace": 8.23
+        },
+        {
+          "km": 16.36,
+          "pace": 7.22
+        }
+      ],
+      "lcrs": 7.9,
+      "lcrsType": "easy",
+      "lcrsRepresentative": false,
+      "fueling": "3 gels (GU Roctane) · 2 electrolyte capsules · water · 2 coffee stops · ~31g/hr (below 60g/hr target)"
     }
   ],
   "GATES": [
@@ -2871,7 +2989,7 @@
     "week": 17,
     "totalWeeks": 24,
     "deloadWeek": 21,
-    "weekVolOnBoard": 10.42,
+    "weekVolOnBoard": 26.78,
     "lastWeekVol": 38.17,
     "weekTarget": "37-42",
     "easyHRBand": [
@@ -2894,7 +3012,7 @@
     "statinStart": "2026-05-30",
     "stressLevel": "LOW",
     "formCue": "Eyes on the horizon -- head up every session",
-    "date": "September 3, 2026",
+    "date": "September 5, 2026",
     "hrvBaseline": [
       53,
       68
@@ -4544,6 +4662,124 @@
           "note": "17 kg × 8 × 2 then drop set 12.5 kg · hip/core"
         }
       ]
+    }
+  ],
+  "INBODY_HISTORY": [
+    {
+      "date": "2024-06-25",
+      "weight": 76.6,
+      "smm": 38.3,
+      "pbf": 13.2,
+      "ecw_ratio": 0.365,
+      "score": null
+    },
+    {
+      "date": "2024-08-22",
+      "weight": 75.6,
+      "smm": 38.3,
+      "pbf": 12.5,
+      "ecw_ratio": 0.361,
+      "score": null
+    },
+    {
+      "date": "2024-09-23",
+      "weight": 75.7,
+      "smm": 38.6,
+      "pbf": 11.8,
+      "ecw_ratio": 0.362,
+      "score": null
+    },
+    {
+      "date": "2024-10-08",
+      "weight": 74.6,
+      "smm": 39.0,
+      "pbf": 10.1,
+      "ecw_ratio": 0.358,
+      "score": null
+    },
+    {
+      "date": "2025-01-15",
+      "weight": 75.5,
+      "smm": 38.7,
+      "pbf": 10.8,
+      "ecw_ratio": 0.365,
+      "score": null
+    },
+    {
+      "date": "2026-05-26",
+      "weight": 76.2,
+      "smm": 39.1,
+      "pbf": 10.8,
+      "ecw_ratio": 0.365,
+      "score": null
+    },
+    {
+      "date": "2026-07-05",
+      "weight": 75.8,
+      "smm": 38.4,
+      "pbf": 11.7,
+      "ecw_ratio": 0.365,
+      "score": null
+    },
+    {
+      "date": "2026-08-10",
+      "weight": null,
+      "smm": null,
+      "pbf": null,
+      "ecw_ratio": 0.365,
+      "score": null,
+      "note": "Partial — chart value unclear from printout"
+    },
+    {
+      "date": "2026-09-04",
+      "weight": 77.0,
+      "smm": 40.5,
+      "pbf": 9.3,
+      "bfm": 7.2,
+      "ffm": 69.8,
+      "slm": 65.9,
+      "tbw": 51.0,
+      "icw": 32.6,
+      "ecw": 18.4,
+      "ecw_ratio": 0.361,
+      "score": 92,
+      "protein": 14.1,
+      "minerals": 4.74,
+      "bmi": 24.9,
+      "vfa": 21.0,
+      "phase_angle": 7.3,
+      "smi": 9.2,
+      "bmr": 1879,
+      "whr": 0.8,
+      "bcm": 46.7,
+      "segmental": {
+        "right_arm": {
+          "kg": 4.1,
+          "pct": 122,
+          "ecw": 0.372
+        },
+        "left_arm": {
+          "kg": 4.05,
+          "pct": 120,
+          "ecw": 0.377
+        },
+        "trunk": {
+          "kg": 30.6,
+          "pct": 114,
+          "ecw": 0.359
+        },
+        "right_leg": {
+          "kg": 10.16,
+          "pct": 108,
+          "ecw": 0.354
+        },
+        "left_leg": {
+          "kg": 10.07,
+          "pct": 108,
+          "ecw": 0.362
+        }
+      },
+      "note": "Best scan in 2yr history. SMM/TBW elevated by creatine + evening scan — real SMM gain ~+1.0–1.5 kg vs Jul. Direction is signal; exact number is not."
     }
   ]
 }
