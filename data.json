@@ -3482,6 +3482,15 @@
       "status": "REST",
       "note": "HRV 52 below baseline 2+ consecutive days",
       "briefing": "REST. HRV 52 below baseline 2+ consecutive days. Rest day. suppressed. W17/24 · 45d to Race 0 · 10.42km of 37–42km on board · ACWR 0.96. Last: R73 quality_b 5.41km (Sep 3)."
+    },
+    {
+      "date": "2026-09-06",
+      "hrv": 64,
+      "rhr": 50,
+      "sleepScore": 89,
+      "status": "GREEN",
+      "note": "All signals nominal",
+      "briefing": "Rest day. W17/24 · 43d to Race 0 · 26.78km of 37–42km on board · ACWR 0.85. Last: R74 long 16.36km (Sep 5)."
     }
   ],
   "PHASES": [
