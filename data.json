@@ -2984,11 +2984,11 @@
     "age": 30,
     "phase": "Phase 2",
     "phaseName": "Quality Development",
-    "week": 17,
+    "week": 18,
     "totalWeeks": 24,
     "deloadWeek": 21,
-    "weekVolOnBoard": 26.78,
-    "lastWeekVol": 38.17,
+    "weekVolOnBoard": 0,
+    "lastWeekVol": 26.78,
     "weekTarget": "37-42",
     "easyHRBand": [
       122,
@@ -3008,9 +3008,9 @@
     "gctBest": 284,
     "vrBest": 8.3,
     "statinStart": "2026-05-30",
-    "stressLevel": "LOW",
+    "stressLevel": "MODERATE",
     "formCue": "Eyes on the horizon -- head up every session",
-    "date": "September 5, 2026",
+    "date": "September 6, 2026",
     "hrvBaseline": [
       53,
       68
@@ -3028,13 +3028,14 @@
     "goalPace330": 4.967,
     "paceCeilingStatus": "active_monitor",
     "bodyComp": {
-      "date": "2026-07-05",
-      "weight": 76.2,
-      "smm": 39.1,
-      "fatPct": 10.8,
-      "vfa": 28.5,
-      "phaseAngle": 7.1,
-      "score": 90
+      "date": "2026-09-04",
+      "weight": 77.0,
+      "smm": 40.5,
+      "fatPct": 9.3,
+      "vfa": 21.0,
+      "phaseAngle": 7.3,
+      "score": 92,
+      "note": "All-time high SMM + all-time low PBF in 2yr history. SMM/TBW elevated by creatine + evening scan — real gain vs Jul est. +1.0-1.5 kg. Direction is signal; exact number is not."
     },
     "timeTrial": {
       "planned": "2026-08-17",
@@ -3148,6 +3149,14 @@
         "headline": "W16 closed. 38.17 km. Gate 3 ✅ Gate 4 ✅. Distance PR 20.07 km. QB LCRS 30 min doubled. Fueling rule hardened to 40 min.",
         "body": "W16 was the program's structural proof-of-concept week. Two gates cleared simultaneously on Aug 29 (R71): Gate 3 — 20.07 km long run inside a full-load week containing both QA and QB — and Gate 4 — 8 consecutive rising-load weeks injury-free (W9–W16).\n\nR71 is the best aerobic long run in the program: 20.07 km, avg HR 123 bpm, 59% Z2, Z4+Z5 = 0%, max HR 142 bpm over 3h06. An aerobic floor that stable at week-peak load is the base strategy working.\n\nQuality B produced the program's most decisive single-session LCRS jump: 14 min (R66, W15) → 30 min continuous (R70, W16). Doubled in one session at 9.0 km/h. RPE 4/10. Max HR 156 bpm against a 160 ceiling. Headroom confirmed.\n\nQuality A continued 4×8 min format (R69) at 9.8–10.0 km/h, ceiling clean at 154 bpm. QA graduation moves to 2/3.\n\nFueling rule hardened Aug 29: first gel at 40 min for runs ≥90 min (revised from 45 min). 4 gels minimum for ≥18 km. 60g+/hr carb target. This replaces all prior gel timing rules.\n\nStrength: Trap Bar DL reset protocol closed at 120 kg (1.58× bodyweight) — clean RPE ~7, zero lower-back soreness, working weight re-established. L-sit baseline established — 3×(5×5s). V Squat reached 90 kg plates (+18 kg from 72 kg). Gym 5/5 including a bonus Legs Day Aug 29 pre-vacation.\n\nConnective tissue: zero complaints across 8 consecutive weeks.",
         "nextObjective": "W17: QA graduation (3/3) — 4×8 min @ 10.0/10.0/10.3/10.3 km/h, ceiling 160 bpm, full walk recovery. QB ceiling test — 9.5 km/h × 25 min then keep running until 160 bpm forces stop (live LCRS extension). LR 18–20 km, 4 gels minimum, 60g+/hr. Regenetics VO₂max test Sep/Oct 2026 — book now. TI-RADS 4 endocrinologist referral still outstanding."
+      },
+      {
+        "date": "Sep 6, 2026",
+        "week": 17,
+        "phase": "Phase 2 · W17 Close",
+        "headline": "W17 closed. 26.78 km. Vacation maintenance. InBody all-time best. Pull-up milestone. Mass freeze decision.",
+        "body": "W17 was deliberate maintenance around the Mai Chau vacation (Avana Retreat, Sep 1-2). Three runs: R72 easy outdoor on mountain road (avg HR 120), R73 QB stepped to 9.23 km/h x 32 min at identical cardiac cost to 9.0 km/h in R70 — pace-at-ceiling moving up, adaptation confirmed, R74 LR 16.36 km in 29-33C with fueling deficit ~31g/hr vs 60g/hr target — confirmed W18 action item. Gym 3/3 PPL: Push Day at retreat gym (Incline Barbell 60 kg x 2x10, accessories lighter — vacation maintenance only). Pull Day: pull-ups 10-8-8 BW milestone hit; Chest Supported Row 30 kg/side x 3x10 first logged execution (deferred 3 weeks); Lat Pulldown 3x10 at 60 kg; Bayesian Curl 10.5 kg x 3x10 rep target complete. Legs Day (Sep 6): BSS stepped to 18 kg; Seated Calf stepped to 34 kg/side; standing SL calf raise baseline corrected — previous 60 kg entry was bilateral, true single-leg baseline 40 kg x 2x12. Hip routine x2, stretch x3. InBody Sep 4: SMM 40.5 kg all-time high, PBF 9.3% all-time low, VFA 21.0 cm2, Phase angle 7.3, Score 92/100. Mass freeze decision: stop chasing compound PRs, shift to maintenance + aerobic quality. At 77 kg / 9.3% BF, body composition objective is complete.",
+        "nextObjective": "W18 QA graduation (3/3): 4x8 min @ 10.0/10.0/10.3/10.3 km/h, 160 bpm ceiling. QB ceiling test: 9.5 km/h x 25 min then run to 160 bpm. LR 18-20 km, 4 gels min, 60g+/hr. Pull Day: pull-ups + 5 kg dip belt. Bayesian Curl -> 12 kg. BSS -> 18 kg x 3x10. Regenetics VO2max booking still outstanding."
       }
     ],
     "lcrs": 51,
@@ -3184,7 +3193,7 @@
     ],
     "easyPaceMin": 7.0,
     "easyPaceMax": 8.5,
-    "weekStartDate": "2026-08-31",
+    "weekStartDate": "2026-09-07",
     "lcrsNote": "Easy pace LCRS 51.3 min (R67 Aug 21) · QB sub-LT1 32 min 🏆 (R73 Sep 3 · stepped from 30 min R70) · LT2-specific 8 min (R69 Aug 25) — threshold target 20 min by W20 tracked via lcrsThreshold",
     "creatineApproved": true,
     "creatineApprovedDate": "Aug 20, 2026",
@@ -3829,9 +3838,9 @@
     }
   ],
   "STRENGTH": {
-    "baseline_date": "Aug 28, 2026",
-    "baseline_week": "W16",
-    "note": "Updated Aug 28–29 (W16 Full Body + Legs Day). Key W16 baselines: V Squat 90 kg plates × 3×10 (+18 kg from W15 72 kg). Incline DB Press 26 kg × 8 (first clean sets at 26 kg×8×2). Machine Shoulder Press 40.8 kg × 2×10 (replaces DB on Push Day). EZ Bar Tricep Extension 20 kg (corrected from W15 undershoot of 12 kg). Stack Row 65 kg × 2×10 (new baseline). Seated Incline DB Lateral Raise 8 kg × 2×10 (new baseline). Hip Thrust Machine 25 kg × 3×10 (+4.6 kg from W15). L-sit baseline: 3×(5×5s) ✅ (was outstanding since W14). Trap Bar DL reset closed: 120 kg clean RPE ~7 (reset from 130 kg overreach). SL Hamstring Curl: 25 kg×10 done — next target 25 kg×12 (one-axis rule). Bulgarian Split Squat: 16 kg/hand (+2 kg from W15 14 kg). Chest Supported Row: deferred again — belongs on Full Body, action item W17. Pull-ups: once per week only (Pull Day). SL RDL: once per week only (Legs Day).",
+    "baseline_date": "Sep 6, 2026",
+    "baseline_week": "W17",
+    "note": "Updated Sep 6 W17 (PPL complete). Pull: pull-ups 10-8-8 BW milestone; Chest Supported Row 30 kg/side x 3x10 first logged; Lat Pulldown 3x10 at 60 kg (was 2x10); Seated Cable Row 60 kg x 3x10 baseline; Bayesian Curl 10.5 kg x 3x10 complete. Legs: BSS stepped 16->18 kg; Seated Calf 34 kg/side (up from 32); Standing SL Calf CORRECTED 40 kg single-leg (prev 60 kg was bilateral — logging error). Push Day = retreat maintenance only (Incline Barbell 60 kg x 2x10 + lighter accessories) — Elite Fitness Push baselines unchanged as W18 reference. Mass freeze decision: no compound PRs targeted post-Race 0. Maintenance + aerobic development priority.",
     "missing_weights": [
       "Tibialis Raise"
     ],
@@ -3897,23 +3906,23 @@
       {
         "exercise": "Pull-ups",
         "sets": 3,
-        "reps": "10-6-6",
+        "reps": "10-8-8",
         "weight_kg": 0,
-        "note": "Top set 10 held ✅ · W16 sets 2-3 weaker (post-easy-run double session) · 10-8-8 milestone target pending fresh legs"
+        "note": "W17 MILESTONE: 10-8-8 BW on fresh legs. W18: 10-8-8 + 5 kg dip belt."
       },
       {
         "exercise": "Lat Pulldown",
-        "sets": 2,
+        "sets": 3,
         "reps": 10,
         "weight_kg": 60,
-        "note": "✅ 60 kg both sets confirmed W16 Aug 24 · 2 sets (3rd deferred)"
+        "note": "W17: 60 kg x 3x10 complete (was 2x10 W16). W18: 65 kg x 3x8."
       },
       {
         "exercise": "Chest Supported Machine Row",
-        "sets": 0,
-        "reps": null,
-        "weight_kg": 55,
-        "note": "Deferred W16 Aug 24 → Full Body (crowded) · last logged 50→55 kg Aug 17"
+        "sets": 3,
+        "reps": 10,
+        "weight_kg": 30,
+        "note": "W17 FIRST LOGGED: 30 kg/side x 3x10 after 3 deferrals. W18: 32.5 kg/side x 3x10."
       },
       {
         "exercise": "X Cable Rear Delt Pull",
@@ -3932,9 +3941,9 @@
       {
         "exercise": "Bayesian Cable Bicep Curl",
         "sets": 3,
-        "reps": 9,
+        "reps": 10,
         "weight_kg": 10.5,
-        "note": "BASELINE ESTABLISHED Aug 24 W16 · 10.5 kg per hand"
+        "note": "W17: 10.5 kg x 3x10 (was 3x9 W16). Rep target complete. W18: 12 kg x 3x8."
       },
       {
         "exercise": "Preacher Curl",
@@ -3942,75 +3951,61 @@
         "reps": "failure",
         "weight_kg": 20,
         "note": "BASELINE ESTABLISHED Aug 24 W16 · machine · different implement to Preacher Hammer Curl DB W15"
+      },
+      {
+        "exercise": "Seated Cable Row",
+        "sets": 3,
+        "reps": 10,
+        "weight_kg": 60,
+        "note": "BASELINE W17: 60 kg x 3x10. W18: 65 kg x 3x10."
       }
     ],
     "legs": [
       {
-        "exercise": "V Squat Machine",
-        "sets": 3,
-        "reps": "10-10-9",
-        "weight_kg": 90,
-        "note": "✅ UPDATED W16 Aug 28 · 90 kg plates × 3×10-10-9 (+18 kg from W15 72 kg) · sled weight unlogged"
-      },
-      {
         "exercise": "Trap Bar Deadlift",
-        "sets": 3,
-        "reps": "8",
+        "sets": 2,
+        "reps": "10",
         "weight_kg": 120,
-        "note": "✅ RESET CLOSED W16 Aug 29 · 120 kg new working weight · RPE ~7 · zero lower-back soreness · was reset from 130 kg (RPE 9-10 + multi-day soreness Aug 23) · next: 3×8 clean → 125 kg"
+        "note": "W17: 120 kg x 2x10 (vacation maintenance format). W18: return to 3x8 at 120 kg (strength protocol). Next weight: 125 kg when 3x8 clean RPE <=7."
       },
       {
         "exercise": "Bulgarian Split Squat",
         "sets": 3,
         "reps": 10,
-        "weight_kg": 16,
-        "note": "16 kg each hand · +2 kg from W15 14 kg · 3×10"
-      },
-      {
-        "exercise": "Single Leg RDL",
-        "sets": 2,
-        "reps": 10,
-        "weight_kg": 12,
-        "note": "BASELINE ESTABLISHED W15 · 12 kg each hand · 2×10 · replaces Rounded Back Extension · Q4 addition now active"
-      },
-      {
-        "exercise": "Nordic Hamstring Curl",
-        "sets": 2,
-        "reps": 4,
-        "weight_kg": 0,
-        "note": "W1/12 eccentric protocol (2×4) · W15 lower day: substituted Single Leg Standing Machine Curl 20 kg×8 (machine — eccentric gap, Swiss Ball sub still required next session)"
-      },
-      {
-        "exercise": "Calf Raise (machine single leg)",
-        "sets": 3,
-        "reps": 15,
-        "weight_kg": 60,
-        "note": "Machine load 60 kg"
-      },
-      {
-        "exercise": "Tibialis Raise",
-        "sets": 2,
-        "reps": 15,
-        "weight_kg": null,
-        "note": "Wall or tib bar · weight TBC"
-      },
-      {
-        "exercise": "Hip Thrust",
-        "sets": 3,
-        "reps": 10,
-        "weight_kg": 25,
-        "note": "✅ UPDATED W16 · 25 kg × 3×10 (+4.6 kg from W15 15 kg) · now executed on Full Body day primarily"
+        "weight_kg": 18,
+        "note": "W17 STEPPED UP: 16-18-18 kg/hand. W18: 18 kg x 3x10 (consolidate at new weight)."
       },
       {
         "exercise": "Single Leg Standing Hamstring Curl",
-        "sets": 3,
+        "sets": 2,
         "reps": "10",
         "weight_kg": 25,
-        "note": "✅ UPDATED W16 · 25 kg × 3×10 · next: 25 kg×12 (one-axis rule before weight increase)"
+        "note": "W17: 25 kg x 2x10. W18: 25 kg x 2x12 (one-axis rule: reps before weight)."
+      },
+      {
+        "exercise": "Hip Thrust Machine",
+        "sets": 2,
+        "reps": 10,
+        "weight_kg": 20,
+        "note": "W17: 20 kg x 2x10 (maintenance). W18: 20 kg x 3x10. Full Body remains primary hip thrust venue."
+      },
+      {
+        "exercise": "Seated Calf Raise",
+        "sets": 2,
+        "reps": 15,
+        "weight_kg": 34,
+        "note": "W17: 34 kg/side x 2x15 (stepped from 32 kg/side W16). W18: 34 kg x 3x15."
+      },
+      {
+        "exercise": "Standing Calf Raise (single leg)",
+        "sets": 2,
+        "reps": 12,
+        "weight_kg": 40,
+        "note": "CORRECTED BASELINE W17: 40 kg x 2x12 single leg. Previous 60 kg entry was bilateral (logging error corrected). W18: 40 kg x 3x12."
       }
     ],
     "week_status": {
-      "week": 17,
+      "week": 18,
       "push": false,
       "pull": false,
       "legs": false,
