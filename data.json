@@ -2852,6 +2852,89 @@
       ],
       "lcrs": 7.9,
       "lcrsType": "easy"
+    },
+    {
+      "r": 75,
+      "date": "Sep 7",
+      "type": "easy",
+      "wk": 18,
+      "dist": 6.53,
+      "duration": 3093,
+      "moving": 3075,
+      "pace": 7.9,
+      "paceEasy": 7.9,
+      "hrAvg": 130,
+      "hrMax": 146,
+      "te": 2.9,
+      "te_an": 0.0,
+      "gct": 325,
+      "vr": 9.5,
+      "vo": 8.7,
+      "sl": 0.94,
+      "cadence": 135,
+      "pctCeiling": null,
+      "drift": 5.5,
+      "walkRatio": 16.0,
+      "hrZones": [
+        10,
+        72,
+        13,
+        0,
+        0
+      ],
+      "temp": 32,
+      "surface": "outdoor",
+      "conditions": "19:36 local · Hồ Tây outdoor loop · Novablast 5 · 31–33°C avg 32°C · clear sky · Statin Day 101",
+      "flag": "✅",
+      "note": "R75 W18 Monday easy · Sep 7 · 6.53 km (GPS) · Hồ Tây outdoor · avg HR 130 ✅ · max HR 146 (3 bpm above walk trigger — brief heat spike) · drift +5.5 bpm (Q4−Q1 run segs, GPX) · walk 16.0% (8:16) · GCT 325 ms · VR 9.5% · Z2 72% · Z3 13% (heat-driven) · 31–33°C · Novablast 5 · Statin Day 101 · Day after Legs Day — no tissue complaint",
+      "verdict": "Clean easy session. Avg HR 130 ✅ in Z2. Max 146 = brief spike, walk trigger largely respected (16% walk ratio). Z3 13% = heat-driven, acceptable at 31-33°C evening. GCT 325 ms consistent with outdoor easy cohort (mean ~340 ms). Drift +5.5 bpm = appropriate for conditions. Walk ratio 16.0% — improvement vs R74 (34.5%) and R68 (24.2%) in comparable heat. Day after Legs Day: zero tissue complaint. System activated for QA graduation Sep 8.",
+      "tags": [
+        "easy",
+        "outdoor",
+        "w18-open",
+        "hot",
+        "evening",
+        "novablast"
+      ],
+      "laps": [
+        {
+          "km": 1,
+          "pace": 7.38,
+          "hr": null
+        },
+        {
+          "km": 2,
+          "pace": 7.98,
+          "hr": null
+        },
+        {
+          "km": 3,
+          "pace": 8.22,
+          "hr": null
+        },
+        {
+          "km": 4,
+          "pace": 7.88,
+          "hr": null
+        },
+        {
+          "km": 5,
+          "pace": 8.1,
+          "hr": null
+        },
+        {
+          "km": 6,
+          "pace": 8.25,
+          "hr": null
+        },
+        {
+          "km": 6.53,
+          "pace": 7.07,
+          "hr": null
+        }
+      ],
+      "lcrs": 9.0,
+      "lcrsType": "easy_est"
     }
   ],
   "GATES": [
@@ -2987,7 +3070,7 @@
     "week": 18,
     "totalWeeks": 24,
     "deloadWeek": 21,
-    "weekVolOnBoard": 0,
+    "weekVolOnBoard": 6.53,
     "lastWeekVol": 26.78,
     "weekTarget": "37-42",
     "easyHRBand": [
@@ -3010,7 +3093,7 @@
     "statinStart": "2026-05-30",
     "stressLevel": "MODERATE",
     "formCue": "Eyes on the horizon -- head up every session",
-    "date": "September 6, 2026",
+    "date": "September 7, 2026",
     "hrvBaseline": [
       53,
       68
@@ -3500,15 +3583,6 @@
       "status": "GREEN",
       "note": "All signals nominal",
       "briefing": "Rest day. W17/24 · 43d to Race 0 · 26.78km of 37–42km on board · ACWR 0.85. Last: R74 long 16.36km (Sep 5)."
-    },
-    {
-      "date": "2026-09-07",
-      "hrv": 58,
-      "rhr": 51,
-      "sleepScore": 72,
-      "status": "GREEN",
-      "note": "All signals nominal",
-      "briefing": "Easy run — HR 122–140 bpm. Novablast 5. Volume: 37km left over 5 sessions (~7.4km each) to clear 37km. W18/24 · 42d to Race 0 · 0km of 37–42km on board · ACWR 0.85. Last: R74 long 16.36km (Sep 5)."
     }
   ],
   "PHASES": [
