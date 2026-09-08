@@ -1863,7 +1863,7 @@ function renderVitals(a){
     <div class="vit"><div class="vit-val cn" style="font-size:1.8rem">${days}</div><div class="vit-lbl">DAYS TO RACE 0</div><div class="vit-sub">VPBank 10K</div></div>
     <div class="vit"><div class="vit-val vb">${ATHLETE.gctBest}<span style="font-size:.72rem">ms</span></div><div class="vit-lbl">GCT PROGRAM BEST</div><div class="vit-sub">VR ${ATHLETE.vrBest}%</div></div>`;
   document.getElementById('hdr-name').textContent=ATHLETE.name;
-  document.getElementById('hdr-date').textContent=ATHLETE.date;
+  document.getElementById('hdr-date').textContent=new Date().toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'});
   document.getElementById('hdr-meta').textContent=`${ATHLETE.phase} · Week ${ATHLETE.week} · ${ATHLETE.phaseName}`;
   document.getElementById('hdr-pill').textContent=`P2 · W${ATHLETE.week}`;
 }
