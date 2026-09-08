@@ -3093,7 +3093,7 @@
     "statinStart": "2026-05-30",
     "stressLevel": "MODERATE",
     "formCue": "Eyes on the horizon -- head up every session",
-    "date": "September 7, 2026",
+    "date": "September 8, 2026",
     "hrvBaseline": [
       53,
       68
@@ -3930,9 +3930,9 @@
     }
   ],
   "STRENGTH": {
-    "baseline_date": "Sep 6, 2026",
-    "baseline_week": "W17",
-    "note": "Updated Sep 6 W17 (PPL complete). Pull: pull-ups 10-8-8 BW milestone; Chest Supported Row 30 kg/side x 3x10 first logged; Lat Pulldown 3x10 at 60 kg (was 2x10); Seated Cable Row 60 kg x 3x10 baseline; Bayesian Curl 10.5 kg x 3x10 complete. Legs: BSS stepped 16->18 kg; Seated Calf 34 kg/side (up from 32); Standing SL Calf CORRECTED 40 kg single-leg (prev 60 kg was bilateral — logging error). Push Day = retreat maintenance only (Incline Barbell 60 kg x 2x10 + lighter accessories) — Elite Fitness Push baselines unchanged as W18 reference. Mass freeze decision: no compound PRs targeted post-Race 0. Maintenance + aerobic development priority.",
+    "baseline_date": "Sep 8, 2026",
+    "baseline_week": "W18",
+    "note": "Updated Sep 8 W18 Upper A (mixed push+pull day). Key: Incline Barbell 60.8 kg x 10-10-8 — weight bump unlocked → 63.5 kg next. Pull-ups 10-10-9 BW on mixed day — NEW MILESTONE, significantly exceeds 10-8-8. Bayesian Curl jumped to 13.5 kg x 10-10-8 (skipped 12 kg step — consolidate at 13.5 kg). Machine Row (stack, new machine) baseline: 65 kg x 3x10 (70 kg was overreach on set 1). Cable Fly stepped to 13.5 kg (from 12 kg retreat). Tricep EZ Bar Overhead 19.5 kg x 3x10 (≈20 kg baseline). Lateral Raise still at 6 kg + partials. Shoulder Press 40 kg x 2x10. Training split evolving: Upper A (compound push+pull) + Upper B (accessory pull emphasis) — sound concurrent training adaptation. Mass freeze in effect.",
     "missing_weights": [
       "Tibialis Raise"
     ],
@@ -3940,9 +3940,9 @@
       {
         "exercise": "Incline Barbell Press",
         "sets": 3,
-        "reps": 8,
+        "reps": "10-10-8",
         "weight_kg": 60.8,
-        "note": "60.8 kg (20.4/side) · 3×8 · narrower grip elbows-in · adjusted from 65 kg (4-rep form breakdown at 65 kg W15) · progression: 3×8→3×10 before weight increase"
+        "note": "✅ W18 Sep 8: 60.8 kg x 10-10-8 — exceeded 3x8 prescription. Weight bump unlocked → W18 next: 63.5 kg x 3x8."
       },
       {
         "exercise": "Incline Dumbbell Press",
@@ -3955,22 +3955,22 @@
         "exercise": "Cable Fly",
         "sets": 3,
         "reps": 10,
-        "weight_kg": 15,
-        "note": "↑ from 12 kg W15 · W16 Aug 25: 15 kg/side × 2×10 + 3 drop sets to failure"
+        "weight_kg": 13.5,
+        "note": "W18 Sep 8: 13.5 kg x 3x10 (stepped from 12 kg retreat). W18 next: 15 kg x 3x10 (back to W16 baseline)."
       },
       {
         "exercise": "Machine Shoulder Press",
         "sets": 2,
         "reps": 10,
-        "weight_kg": 40.8,
-        "note": "✅ BASELINE W16 Aug 25 · machine implement · 40.8 kg × 2×10 · W15 DB shoulder press (24 kg/hand) replaced on Push Day — implement change not a weight regression"
+        "weight_kg": 40,
+        "note": "W18 Sep 8: 40 kg x 2x10 (≈40.8 kg baseline — stack increment). Maintain."
       },
       {
         "exercise": "Cable Lateral Raise",
         "sets": 3,
-        "reps": 12,
-        "weight_kg": 7.5,
-        "note": "7.5 kg each side · W15 rep progression: 10→12 reps"
+        "reps": "10+partials",
+        "weight_kg": 6,
+        "note": "W18 Sep 8: 6 kg x 3x10 + partials. W18 next: 7.5 kg x 3x10 (return to W16 baseline)."
       },
       {
         "exercise": "Dips",
@@ -3983,8 +3983,8 @@
         "exercise": "Tricep Overhead Extension",
         "sets": 3,
         "reps": 10,
-        "weight_kg": 20,
-        "note": "✅ CORRECTED BASELINE W16 Aug 25 · 12 kg W15 was undershoot · 20 kg is real working weight · EZ bar overhead 3×10 + cable SA pulldown 7.5 kg finisher"
+        "weight_kg": 19.5,
+        "note": "W18 Sep 8: 19.5 kg x 3x10 (≈20 kg, stack increment). Clean at 3x10 → W18 next: 21-22 kg x 3x8."
       },
       {
         "exercise": "Cable Tricep Pulldown SA",
@@ -3998,9 +3998,9 @@
       {
         "exercise": "Pull-ups",
         "sets": 3,
-        "reps": "10-8-8",
+        "reps": "10-10-9",
         "weight_kg": 0,
-        "note": "W17 MILESTONE: 10-8-8 BW on fresh legs. W18: 10-8-8 + 5 kg dip belt."
+        "note": "✅ W18 NEW MILESTONE: 10-10-9 BW on mixed upper day (significantly exceeds W17 10-8-8 on dedicated Pull Day). W18 next: 10-8-8 + 5-7.5 kg dip belt."
       },
       {
         "exercise": "Lat Pulldown",
@@ -4033,9 +4033,9 @@
       {
         "exercise": "Bayesian Cable Bicep Curl",
         "sets": 3,
-        "reps": 10,
-        "weight_kg": 10.5,
-        "note": "W17: 10.5 kg x 3x10 (was 3x9 W16). Rep target complete. W18: 12 kg x 3x8."
+        "reps": "10-10-8",
+        "weight_kg": 13.5,
+        "note": "✅ W18 Sep 8: JUMPED to 13.5 kg x 10-10-8 (skipped 12 kg step). Sets 1-2 strong. Consolidate: 13.5 kg x 3x10 before progressing. Next weight: 15 kg x 3x8 when 3x10 clean."
       },
       {
         "exercise": "Preacher Curl",
@@ -4098,8 +4098,8 @@
     ],
     "week_status": {
       "week": 18,
-      "push": false,
-      "pull": false,
+      "push": true,
+      "pull": true,
       "legs": false,
       "full_body": false
     },
