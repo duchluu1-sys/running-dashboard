@@ -2947,9 +2947,6 @@
       "pace": 7.33,
       "hrAvg": 135,
       "hrMax": 154,
-      "hrCeiling": 160,
-      "pctCeiling": 96.25,
-      "ceilingHeadroom": 6,
       "te": 3.5,
       "te_an": 1.4,
       "gct": 301,
@@ -2957,10 +2954,9 @@
       "vo": 10.0,
       "sl": 1.17,
       "cadence": 118,
-      "temp": 27,
-      "surface": "treadmill",
-      "shoe": "Evo SL",
-      "incline": 1.0,
+      "pctCeiling": 96.25,
+      "drift": null,
+      "walkRatio": 16.6,
       "hrZones": [
         14,
         15,
@@ -2968,47 +2964,13 @@
         37,
         0
       ],
-      "runTime": 2034,
-      "walkTime": 488,
-      "idleTime": 407,
-      "intervals": [
-        {
-          "n": 1,
-          "speed": 10.0,
-          "duration_min": 8,
-          "rest_min": 4
-        },
-        {
-          "n": 2,
-          "speed": 10.0,
-          "duration_min": 8,
-          "rest_min": 4
-        },
-        {
-          "n": 3,
-          "speed": 10.3,
-          "duration_min": 8,
-          "rest_min": 4
-        },
-        {
-          "n": 4,
-          "speed": 10.3,
-          "duration_min": 8,
-          "rest_min": 0
-        }
-      ],
-      "lcrs": 8,
-      "lcrsType": "lt2",
-      "lcrsNote": "8 min per interval · LT2 LCRS unchanged from R69 baseline · target 20 min by W20",
-      "conditions": "12:04 local · Evo SL · 1% incline · 26-29°C treadmill gym · HRV green · Statin Day 104",
+      "temp": 27,
+      "surface": "treadmill",
+      "qualityPace": 5.82,
+      "conditions": "12:04 local · Sep 10 · Evo SL · 1% incline · 26–29°C · HRV green · RPE 6/10 · Statin Day 104 · 4×8 min @ 10.0/10.0/10.3/10.3 km/h · max HR 154 (6 bpm headroom) · QA gate 3/3 CLOSED · CT gate 3/3 CLOSED",
       "flag": "✅",
-      "graduation": {
-        "qa_gate": "3/3 CLOSED",
-        "connective_tissue": "3/3 CLOSED",
-        "note": "4×8 min @ 10.0/10.0/10.3/10.3 km/h · max HR 154 (6 bpm headroom) · zero tissue complaint · ankle clean"
-      },
-      "note": "R76 QA graduation 3/3 ✅ · Sep 10 · 6.66 km (Technogym) · 4×8 min @ 10.0/10.0/10.3/10.3 km/h · 1% incline · max HR 154 (6 bpm headroom below 160 ceiling) · GCT 301 ms 🏆 new program low · VR 8.8% best quality session · Z4 37% (18:26) · Z5 0% · TE 3.5/1.4 · connective tissue gate 3/3 CLOSED · HRV green · RPE 6/10 · Statin Day 104",
-      "verdict": "QA graduation complete. 4×8 min protocol executed cleanly. Max HR 154 = 6 bpm headroom at end of interval 4 — ceiling never threatened. GCT 301 ms is program low, with clear within-session improvement trend (early ~320 ms → late ~285 ms) showing mechanics settling at pace. VR 8.8% best in any quality session. Z4 37% = correct threshold distribution. Hamstring/glute activation at interval 4 = expected muscular fatigue, not connective tissue. Connective tissue gate closed. W19 prescription: 4×10 min at same speeds.",
+      "note": "R76 QA graduation 3/3 ✅ · Sep 10 · 6.66 km (Technogym) · 4×8 min @ 10.0/10.0/10.3/10.3 km/h · 1% incline · Evo SL · max HR 154 (6 bpm headroom below 160 ceiling) · GCT 301 ms (within-session trend: early ~320ms → late ~285ms) · VR 8.8% best quality session · Z4 37% (18:26) · Z5 0% · TE 3.5/1.4 · walk 16.6% (8:08/48:49) · run 33:54 · idle 6:47 · Technogym laps: 6:30/6:54/7:22/7:15/8:12/6:52/7:46 (0.6km) · Statin Day 104",
+      "verdict": "QA graduation complete. 4×8 min protocol executed cleanly. Max HR 154 = 6 bpm headroom at end of interval 4 — ceiling never threatened. GCT 301 ms with clear within-session improvement trend (mechanics settling at pace). VR 8.8% best in any quality session. Z4 37% = correct threshold distribution. Hamstring/glute activation at interval 4 = expected muscular fatigue, not connective tissue. W19 prescription: 4×10 min at same speeds. Next session: Fédian 6 Elite — treat as new shoe baseline.",
       "tags": [
         "qa",
         "quality",
@@ -3017,7 +2979,9 @@
         "treadmill",
         "evo_sl",
         "w18"
-      ]
+      ],
+      "lcrs": 8,
+      "lcrsType": "lt2"
     }
   ],
   "GATES": [
@@ -3323,6 +3287,14 @@
         "headline": "W17 closed. 26.78 km. Vacation maintenance. InBody all-time best. Pull-up milestone. Mass freeze decision.",
         "body": "W17 was deliberate maintenance around the Mai Chau vacation (Avana Retreat, Sep 1-2). Three runs: R72 easy outdoor on mountain road (avg HR 120), R73 QB stepped to 9.23 km/h x 32 min at identical cardiac cost to 9.0 km/h in R70 — pace-at-ceiling moving up, adaptation confirmed, R74 LR 16.36 km in 29-33C with fueling deficit ~31g/hr vs 60g/hr target — confirmed W18 action item. Gym 3/3 PPL: Push Day at retreat gym (Incline Barbell 60 kg x 2x10, accessories lighter — vacation maintenance only). Pull Day: pull-ups 10-8-8 BW milestone hit; Chest Supported Row 30 kg/side x 3x10 first logged execution (deferred 3 weeks); Lat Pulldown 3x10 at 60 kg; Bayesian Curl 10.5 kg x 3x10 rep target complete. Legs Day (Sep 6): BSS stepped to 18 kg; Seated Calf stepped to 34 kg/side; standing SL calf raise baseline corrected — previous 60 kg entry was bilateral, true single-leg baseline 40 kg x 2x12. Hip routine x2, stretch x3. InBody Sep 4: SMM 40.5 kg all-time high, PBF 9.3% all-time low, VFA 21.0 cm2, Phase angle 7.3, Score 92/100. Mass freeze decision: stop chasing compound PRs, shift to maintenance + aerobic quality. At 77 kg / 9.3% BF, body composition objective is complete.",
         "nextObjective": "W18 QA graduation (3/3): 4x8 min @ 10.0/10.0/10.3/10.3 km/h, 160 bpm ceiling. QB ceiling test: 9.5 km/h x 25 min then run to 160 bpm. LR 18-20 km, 4 gels min, 60g+/hr. Pull Day: pull-ups + 5 kg dip belt. Bayesian Curl -> 12 kg. BSS -> 18 kg x 3x10. Regenetics VO2max booking still outstanding."
+      },
+      {
+        "date": "Sep 10, 2026",
+        "week": 18,
+        "phase": "Phase 2 · W18 · QA Graduation",
+        "headline": "QA 3/3 graduation closed. CT gate retired. GCT 301ms quality session. W18 vol 13.19 km.",
+        "body": "R76 Sep 10: 4×8 min @ 10.0/10.0/10.3/10.3 km/h, max HR 154 (6 bpm headroom), GCT 301ms (within-session improving trend), VR 8.8%, Z4 37%, Z5 0%, TE 3.5/1.4. QA gate 3/3 CLOSED. Connective tissue gate 3/3 FULLY RETIRED. W18 running: R75 easy 6.53km + R76 QA 6.66km = 13.19km on board. QB ceiling test and LR 18-20km still pending for W18. Upper A gym Sep 8: pull-ups 10-10-9 BW milestone, incline BB 10-10-8 at 60.8kg, Bayesian 13.5kg.",
+        "nextObjective": "W18 remaining: QB ceiling test (9.5 km/h + run to 160 bpm) + LR 18-20km (4 gels, 60g+/hr). W19: QA 4x10 min @ 10.0/10.0/10.3/10.3 km/h (LCRS 8→10 min). Next gym: Upper B (pull-ups +5kg weighted, Bayesian 13.5kg x3x10, lat pulldown 65kg). First run in Fedian 6 Elite — treat as new shoe baseline, no direct GCT comparison to Evo SL."
       }
     ],
     "lcrs": 51,
