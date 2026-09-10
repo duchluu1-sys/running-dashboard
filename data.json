@@ -2935,6 +2935,89 @@
       ],
       "lcrs": 9.0,
       "lcrsType": "easy_est"
+    },
+    {
+      "r": 76,
+      "date": "Sep 10",
+      "type": "quality_a",
+      "wk": 18,
+      "dist": 6.66,
+      "duration": 2929,
+      "moving": 2265,
+      "pace": 7.33,
+      "hrAvg": 135,
+      "hrMax": 154,
+      "hrCeiling": 160,
+      "pctCeiling": 96.25,
+      "ceilingHeadroom": 6,
+      "te": 3.5,
+      "te_an": 1.4,
+      "gct": 301,
+      "vr": 8.8,
+      "vo": 10.0,
+      "sl": 1.17,
+      "cadence": 118,
+      "temp": 27,
+      "surface": "treadmill",
+      "shoe": "Evo SL",
+      "incline": 1.0,
+      "hrZones": [
+        14,
+        15,
+        19,
+        37,
+        0
+      ],
+      "runTime": 2034,
+      "walkTime": 488,
+      "idleTime": 407,
+      "intervals": [
+        {
+          "n": 1,
+          "speed": 10.0,
+          "duration_min": 8,
+          "rest_min": 4
+        },
+        {
+          "n": 2,
+          "speed": 10.0,
+          "duration_min": 8,
+          "rest_min": 4
+        },
+        {
+          "n": 3,
+          "speed": 10.3,
+          "duration_min": 8,
+          "rest_min": 4
+        },
+        {
+          "n": 4,
+          "speed": 10.3,
+          "duration_min": 8,
+          "rest_min": 0
+        }
+      ],
+      "lcrs": 8,
+      "lcrsType": "lt2",
+      "lcrsNote": "8 min per interval · LT2 LCRS unchanged from R69 baseline · target 20 min by W20",
+      "conditions": "12:04 local · Evo SL · 1% incline · 26-29°C treadmill gym · HRV green · Statin Day 104",
+      "flag": "✅",
+      "graduation": {
+        "qa_gate": "3/3 CLOSED",
+        "connective_tissue": "3/3 CLOSED",
+        "note": "4×8 min @ 10.0/10.0/10.3/10.3 km/h · max HR 154 (6 bpm headroom) · zero tissue complaint · ankle clean"
+      },
+      "note": "R76 QA graduation 3/3 ✅ · Sep 10 · 6.66 km (Technogym) · 4×8 min @ 10.0/10.0/10.3/10.3 km/h · 1% incline · max HR 154 (6 bpm headroom below 160 ceiling) · GCT 301 ms 🏆 new program low · VR 8.8% best quality session · Z4 37% (18:26) · Z5 0% · TE 3.5/1.4 · connective tissue gate 3/3 CLOSED · HRV green · RPE 6/10 · Statin Day 104",
+      "verdict": "QA graduation complete. 4×8 min protocol executed cleanly. Max HR 154 = 6 bpm headroom at end of interval 4 — ceiling never threatened. GCT 301 ms is program low, with clear within-session improvement trend (early ~320 ms → late ~285 ms) showing mechanics settling at pace. VR 8.8% best in any quality session. Z4 37% = correct threshold distribution. Hamstring/glute activation at interval 4 = expected muscular fatigue, not connective tissue. Connective tissue gate closed. W19 prescription: 4×10 min at same speeds.",
+      "tags": [
+        "qa",
+        "quality",
+        "graduation",
+        "threshold",
+        "treadmill",
+        "evo_sl",
+        "w18"
+      ]
     }
   ],
   "GATES": [
@@ -3070,7 +3153,7 @@
     "week": 18,
     "totalWeeks": 24,
     "deloadWeek": 21,
-    "weekVolOnBoard": 6.53,
+    "weekVolOnBoard": 13.19,
     "lastWeekVol": 26.78,
     "weekTarget": "37-42",
     "easyHRBand": [
@@ -3093,7 +3176,7 @@
     "statinStart": "2026-05-30",
     "stressLevel": "MODERATE",
     "formCue": "Eyes on the horizon -- head up every session",
-    "date": "September 8, 2026",
+    "date": "September 10, 2026",
     "hrvBaseline": [
       53,
       68
@@ -3311,7 +3394,9 @@
       "sleepMonitor": 75,
       "rhrRest": 8,
       "rhrCaution": 5
-    }
+    },
+    "lastQADate": "Sep 10, 2026",
+    "lastQAResult": "4×8 min @ 10.0/10.0/10.3/10.3 km/h · max HR 154 · GCT 301 ms 🏆 · QA gate 3/3 CLOSED"
   },
   "READINESS_LOG": [
     {
