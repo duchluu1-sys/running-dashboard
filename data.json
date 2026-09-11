@@ -2982,6 +2982,94 @@
       ],
       "lcrs": 8,
       "lcrsType": "lt2"
+    },
+    {
+      "r": 77,
+      "date": "Sep 11",
+      "type": "quality_b",
+      "wk": 18,
+      "dist": 7.44,
+      "duration": 3121,
+      "moving": 2794,
+      "pace": 6.6,
+      "hrAvg": 139,
+      "hrMax": 151,
+      "te": 4.1,
+      "te_an": 0.1,
+      "gct": 308,
+      "vr": 9.0,
+      "vo": 10.3,
+      "sl": 1.14,
+      "cadence": 147,
+      "pctCeiling": 0,
+      "drift": null,
+      "walkRatio": 1.1,
+      "hrZones": [
+        9,
+        10,
+        72,
+        4,
+        0
+      ],
+      "temp": 30,
+      "surface": "treadmill",
+      "qualityPace": 6.37,
+      "conditions": "15:56 local · Sep 11 · Evo SL · 1% incline · 28–31°C · HRV green · RPE 5/10 Strong · Statin Day 105 · 9.5 km/h × 45 min continuous · one 0:35 phone call walk at ~min 20 · max HR 151 (9 bpm headroom) · LCRS QB 45 min 🏆 NEW RECORD",
+      "flag": "✅",
+      "note": "R77 QB ceiling test · Sep 11 · 7.44 km (Technogym) · 9.5 km/h × 45 min continuous · 1% incline · Evo SL · avg HR 139 · max HR 151 (9 bpm headroom, ceiling never approached) · HR settled ~145 bpm back half · GCT 308 ms (first half ~312–320 ms → second half ~296–308 ms, improving) · VR 9.0% · Z3 72% (37:43) · Z4 4% (2:36) · Z5 0% · walk 0:35 (phone call at min 20) · walk ratio 1.1% · TE 4.1/0.1 · Threshold (High Aerobic) · cadence 147 spm (corrected from 133 blended) · stride 1.14 m · 28–31°C · sweat 816 ml · Statin Day 105",
+      "verdict": "QB ceiling test complete — ceiling definitively not reached. At 9.5 km/h for 45 continuous minutes, HR settled at ~145 bpm with max 151 bpm (9 bpm headroom). Z3 72%, Z5 0%. 9.5 km/h is well below continuous tempo ceiling. Estimated ceiling pace: 10.0–10.3 km/h for 25–30 min sustained effort. GCT 308 ms with within-session improvement (same pattern as R76 — mechanics activate after 20 min). LCRS QB: 32 min (R73) → 45 min 🏆 new record. Next QB: 10.3 km/h. W19 QA prescription unchanged.",
+      "tags": [
+        "qb",
+        "quality",
+        "treadmill",
+        "evo_sl",
+        "w18",
+        "lcrs_record"
+      ],
+      "lcrs": 45,
+      "lcrsType": "qb",
+      "laps": [
+        {
+          "km": 1,
+          "pace": 6.98,
+          "note": "ramp-up"
+        },
+        {
+          "km": 2,
+          "pace": 6.37,
+          "note": "9.5 km/h tempo"
+        },
+        {
+          "km": 3,
+          "pace": 6.37,
+          "note": "9.5 km/h tempo"
+        },
+        {
+          "km": 4,
+          "pace": 6.37,
+          "note": "9.5 km/h tempo"
+        },
+        {
+          "km": 5,
+          "pace": 6.37,
+          "note": "9.5 km/h tempo · phone call mid-lap"
+        },
+        {
+          "km": 6,
+          "pace": 6.37,
+          "note": "9.5 km/h tempo"
+        },
+        {
+          "km": 7,
+          "pace": 6.37,
+          "note": "9.5 km/h tempo"
+        },
+        {
+          "km": 7.44,
+          "pace": 9.32,
+          "note": "cooldown"
+        }
+      ]
     }
   ],
   "GATES": [
@@ -3117,7 +3205,7 @@
     "week": 18,
     "totalWeeks": 24,
     "deloadWeek": 21,
-    "weekVolOnBoard": 13.19,
+    "weekVolOnBoard": 20.63,
     "lastWeekVol": 26.78,
     "weekTarget": "37-42",
     "easyHRBand": [
@@ -3140,7 +3228,7 @@
     "statinStart": "2026-05-30",
     "stressLevel": "MODERATE",
     "formCue": "Eyes on the horizon -- head up every session",
-    "date": "September 10, 2026",
+    "date": "September 11, 2026",
     "hrvBaseline": [
       53,
       68
@@ -3295,6 +3383,14 @@
         "headline": "QA 3/3 graduation closed. CT gate retired. GCT 301ms quality session. W18 vol 13.19 km.",
         "body": "R76 Sep 10: 4×8 min @ 10.0/10.0/10.3/10.3 km/h, max HR 154 (6 bpm headroom), GCT 301ms (within-session improving trend), VR 8.8%, Z4 37%, Z5 0%, TE 3.5/1.4. QA gate 3/3 CLOSED. Connective tissue gate 3/3 FULLY RETIRED. W18 running: R75 easy 6.53km + R76 QA 6.66km = 13.19km on board. QB ceiling test and LR 18-20km still pending for W18. Upper A gym Sep 8: pull-ups 10-10-9 BW milestone, incline BB 10-10-8 at 60.8kg, Bayesian 13.5kg.",
         "nextObjective": "W18 remaining: QB ceiling test (9.5 km/h + run to 160 bpm) + LR 18-20km (4 gels, 60g+/hr). W19: QA 4x10 min @ 10.0/10.0/10.3/10.3 km/h (LCRS 8→10 min). Next gym: Upper B (pull-ups +5kg weighted, Bayesian 13.5kg x3x10, lat pulldown 65kg). First run in Fedian 6 Elite — treat as new shoe baseline, no direct GCT comparison to Evo SL."
+      },
+      {
+        "date": "Sep 11, 2026",
+        "week": 18,
+        "phase": "Phase 2 · W18 · QB Ceiling Test",
+        "headline": "QB 45 min at 9.5 km/h: ceiling not reached. LCRS QB 45 min 🏆. Tempo ceiling: 10.0–10.3 km/h est.",
+        "body": "R77 Sep 11: 9.5 km/h × 45 min continuous (one 0:35 phone call walk). Max HR 151 bpm — 9 bpm headroom to 160 ceiling. HR settled ~145 bpm back half. Z3 72%, Z4 4%, Z5 0%. TE 4.1. RPE 5/10, feel Strong. GCT 308 ms (within-session improvement in second half — same pattern as R76). LCRS QB: 32 min (R73 Sep 3) → 45 min (R77 Sep 11) 🏆. At 9.5 km/h athlete is comfortably below continuous tempo ceiling. Estimated ceiling pace: 10.0–10.3 km/h based on QA interval data (10.0–10.3 km/h for 8 min reaches 154 bpm; continuous at same speed would drift higher). 9.5 km/h confirmed as sub-ceiling aerobic stimulus. Hamstrings/glutes not activated at 9.5 km/h continuous — posterior chain engagement requires quality pace (10.0+ km/h). Cadence 147 spm corrected (133 blended by 4:36 idle from warmup/cooldown). Temperature 28–31°C adds ~2–4 bpm HR load vs cooler Race 0 morning.",
+        "nextObjective": "W18 final: LR 18–20 km (4 gels minimum, 60g+/hr, Novablast 5, first gel at 40 min). W19: QA 4×10 min @ 10.0/10.0/10.3/10.3 km/h (LCRS 8→10 min). Next QB: 10.3 km/h continuous until 160 bpm. Reactive/explosive block starts post-QA on Legs Days."
       }
     ],
     "lcrs": 51,
@@ -3332,15 +3428,15 @@
     "easyPaceMin": 7.0,
     "easyPaceMax": 8.5,
     "weekStartDate": "2026-09-07",
-    "lcrsNote": "Easy pace LCRS 51.3 min (R67 Aug 21) · QB sub-LT1 32 min 🏆 (R73 Sep 3 · stepped from 30 min R70) · LT2-specific 8 min (R69 Aug 25) — threshold target 20 min by W20 tracked via lcrsThreshold",
+    "lcrsNote": "Easy pace LCRS 51.3 min (R67 Aug 21) · QB sub-LT1 45 min 🏆 NEW RECORD (R77 Sep 11 · 9.5 km/h × 45 min · prev 32 min R73) · LT2-specific 8 min (R69 Aug 25) — threshold target 20 min by W20 tracked via lcrsThreshold",
     "creatineApproved": true,
     "creatineApprovedDate": "Aug 20, 2026",
     "lcrsThreshold": 8,
     "lcrsThresholdRun": "R69",
     "lcrsThresholdDate": "Aug 25",
-    "lcrsQB": 32,
-    "lcrsQBRun": "R73",
-    "lcrsQBDate": "Sep 3",
+    "lcrsQB": 45,
+    "lcrsQBRun": "R77",
+    "lcrsQBDate": "Sep 11",
     "lcrsEasy": 51.3,
     "ankleHipHypothesis": {
       "date": "Aug 21, 2026",
