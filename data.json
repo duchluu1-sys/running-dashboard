@@ -2953,8 +2953,8 @@
       "vr": 8.8,
       "vo": 10.0,
       "sl": 1.17,
-      "cadence": 118,
-      "pctCeiling": 96.25,
+      "cadence": 148,
+      "pctCeiling": 0,
       "drift": null,
       "walkRatio": 16.6,
       "hrZones": [
