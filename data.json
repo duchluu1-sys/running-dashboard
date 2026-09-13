@@ -3886,6 +3886,15 @@
       "status": "GREEN",
       "note": "All signals nominal",
       "briefing": "Quality A — 4x8 min @ 10.0-10.3 km/h, ceiling 160 bpm. Evo SL, Elite Fitness. [5d since last quality] Undercooked, not overcooked (5d without quality) — don't be conservative on the ladder. Volume: 30.5km left over 4 sessions (~7.6km each) to clear 37km. W18/24 · 41d to Race 0 · 6.53km of 37–42km on board · ACWR 1.04. Last: R75 easy 6.53km (Sep 7)."
+    },
+    {
+      "date": "2026-09-13",
+      "hrv": 65,
+      "rhr": 46,
+      "sleepScore": 84,
+      "status": "GREEN",
+      "note": "All signals nominal",
+      "briefing": "Rest day. W18/24 · 36d to Race 0 · 36.64km of 37–42km on board · ACWR 1.06. Last: R78 long 16.01km (Sep 13)."
     }
   ],
   "PHASES": [
