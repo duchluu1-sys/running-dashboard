@@ -3070,6 +3070,139 @@
           "note": "cooldown"
         }
       ]
+    },
+    {
+      "r": 78,
+      "date": "Sep 13",
+      "type": "long",
+      "wk": 18,
+      "dist": 16.01,
+      "duration": 8773,
+      "moving": 8289,
+      "pace": 9.1,
+      "hrAvg": 120,
+      "hrMax": 161,
+      "te": 3.5,
+      "te_an": 0.1,
+      "gct": 324,
+      "vr": 9.2,
+      "vo": 8.0,
+      "sl": 0.94,
+      "cadence": 137,
+      "pctCeiling": 0,
+      "drift": 0.8,
+      "walkRatio": 33.1,
+      "hrZones": [
+        24,
+        51,
+        0,
+        0,
+        0
+      ],
+      "temp": 30,
+      "surface": "outdoor",
+      "runPace": 8.63,
+      "conditions": "13:23 local · Sep 13 · Novablast 5 · Hồ Tây outdoor loop · 27–32°C avg 30°C · cloudy/light rain · Statin Day 107 · drift +0.8 bpm · walk 33.1% · VO 8.0 cm outdoor best · max HR 161 (1 GPX pt above 160 at 65.7 min — spike/artifact · pctCeiling 0) · 3 gels (~27g/hr — below 60g/hr target) · W18 FINAL",
+      "flag": "✅",
+      "note": "R78 W18 LR · Sep 13 · 16.01 km (GPS) · Hồ Tây outdoor loop · avg HR 120 bpm ✅ · max HR 161 (1-pt spike at 65.7 min, Z5 0:36, pctCeiling 0) · drift +0.8 bpm (Q1 130.3 → Q4 131.2) · half/half −1.4 bpm (HR dropped in 2nd half) · walk 33.1% (48:21) · GCT 324 ms · VR 9.2% · VO 8.0 cm outdoor best · cadence 137 spm (corrected from 119 blended — 33% walk depresses avg) · Z2 51% (1:14:46) · Z1 24% (36:05) · Z3/Z4/Z5 0% · TE 3.5/0.1 · Base (Low Aerobic) · 27–32°C avg 30°C · sweat 2,166 ml · 3 gels (~27g/hr, below 60g/hr target) · Novablast 5 · Statin Day 107 · stopped at 16 km (planned 18-20, work duties)",
+      "verdict": "Best aerobic long run in the program. Drift +0.8 bpm on 16 km at 30°C avg — dramatically better than R74 (+7.1 bpm, same course, 8 days prior). Half/half drift −1.4 bpm: HR dropped in second half. Avg HR 120 bpm — program low for any outdoor LR. Z2 51% + Z1 24% = 75% in easy aerobic base. VO 8.0 cm best outdoor figure. GCT 324 ms consistent with outdoor LR cohort. Max HR 161: 1 GPX point above 160 (pctCeiling = 0) — isolated spike, not sustained. Fueling deficit: 3 gels (~27g/hr vs 60g+/hr target). W18 closed at 36.64 km.",
+      "tags": [
+        "long",
+        "outdoor",
+        "novablast",
+        "w18",
+        "hot",
+        "afternoon",
+        "rain",
+        "w18-final"
+      ],
+      "laps": [
+        {
+          "km": 1,
+          "pace": 7.3,
+          "hr": null
+        },
+        {
+          "km": 2,
+          "pace": 9.93,
+          "hr": null
+        },
+        {
+          "km": 3,
+          "pace": 8.7,
+          "hr": null
+        },
+        {
+          "km": 4,
+          "pace": 8.12,
+          "hr": null
+        },
+        {
+          "km": 5,
+          "pace": 10.33,
+          "hr": null
+        },
+        {
+          "km": 6,
+          "pace": 11.52,
+          "hr": null
+        },
+        {
+          "km": 7,
+          "pace": 8.68,
+          "hr": null
+        },
+        {
+          "km": 8,
+          "pace": 10.18,
+          "hr": null
+        },
+        {
+          "km": 9,
+          "pace": 9.57,
+          "hr": null
+        },
+        {
+          "km": 10,
+          "pace": 9.13,
+          "hr": null
+        },
+        {
+          "km": 11,
+          "pace": 8.48,
+          "hr": null
+        },
+        {
+          "km": 12,
+          "pace": 8.15,
+          "hr": null
+        },
+        {
+          "km": 13,
+          "pace": 10.33,
+          "hr": null
+        },
+        {
+          "km": 14,
+          "pace": 8.42,
+          "hr": null
+        },
+        {
+          "km": 15,
+          "pace": 8.82,
+          "hr": null
+        },
+        {
+          "km": 16,
+          "pace": 8.47,
+          "hr": null
+        },
+        {
+          "km": 16.01,
+          "pace": 7.52,
+          "hr": null
+        }
+      ]
     }
   ],
   "GATES": [
@@ -3205,7 +3338,7 @@
     "week": 18,
     "totalWeeks": 24,
     "deloadWeek": 21,
-    "weekVolOnBoard": 20.63,
+    "weekVolOnBoard": 36.64,
     "lastWeekVol": 26.78,
     "weekTarget": "37-42",
     "easyHRBand": [
@@ -3228,7 +3361,7 @@
     "statinStart": "2026-05-30",
     "stressLevel": "MODERATE",
     "formCue": "Eyes on the horizon -- head up every session",
-    "date": "September 11, 2026",
+    "date": "September 13, 2026",
     "hrvBaseline": [
       53,
       68
@@ -3391,6 +3524,14 @@
         "headline": "QB 45 min at 9.5 km/h: ceiling not reached. LCRS QB 45 min 🏆. Tempo ceiling: 10.0–10.3 km/h est.",
         "body": "R77 Sep 11: 9.5 km/h × 45 min continuous (one 0:35 phone call walk). Max HR 151 bpm — 9 bpm headroom to 160 ceiling. HR settled ~145 bpm back half. Z3 72%, Z4 4%, Z5 0%. TE 4.1. RPE 5/10, feel Strong. GCT 308 ms (within-session improvement in second half — same pattern as R76). LCRS QB: 32 min (R73 Sep 3) → 45 min (R77 Sep 11) 🏆. At 9.5 km/h athlete is comfortably below continuous tempo ceiling. Estimated ceiling pace: 10.0–10.3 km/h based on QA interval data (10.0–10.3 km/h for 8 min reaches 154 bpm; continuous at same speed would drift higher). 9.5 km/h confirmed as sub-ceiling aerobic stimulus. Hamstrings/glutes not activated at 9.5 km/h continuous — posterior chain engagement requires quality pace (10.0+ km/h). Cadence 147 spm corrected (133 blended by 4:36 idle from warmup/cooldown). Temperature 28–31°C adds ~2–4 bpm HR load vs cooler Race 0 morning.",
         "nextObjective": "W18 final: LR 18–20 km (4 gels minimum, 60g+/hr, Novablast 5, first gel at 40 min). W19: QA 4×10 min @ 10.0/10.0/10.3/10.3 km/h (LCRS 8→10 min). Next QB: 10.3 km/h continuous until 160 bpm. Reactive/explosive block starts post-QA on Legs Days."
+      },
+      {
+        "date": "Sep 13, 2026",
+        "week": 18,
+        "phase": "Phase 2 · W18 CLOSE",
+        "headline": "W18 CLOSED. 36.64 km. QA 3/3 ✅ QB LCRS 45 min 🏆 LR drift +0.8 bpm — best aerobic outdoor performance.",
+        "body": "W18 delivered cleanly across all three session types. R75 easy Monday (6.53 km, avg HR 130, outdoor clean). R76 QA graduation 3/3 — 4×8 min @ 10.0/10.3 km/h, max HR 154, GCT 301 ms program low. R77 QB ceiling test — 9.5 km/h × 45 min, ceiling not reached (max 151 bpm), LCRS QB 45 min new record. R78 LR Sep 13 — 16.01 km outdoor Hồ Tây, avg HR 120 bpm (program low for outdoor LR), drift +0.8 bpm (Q1 130.3 → Q4 131.2), half/half −1.4 bpm (HR dropped in 2nd half in rain/cloud). Compare to R74 8 days prior: same course, +7.1 bpm drift, avg HR 126. Gap: −6.3 bpm drift, −6 bpm avg HR. Partly cooler/cloudy conditions, partly genuine aerobic adaptation. VO 8.0 cm outdoor best. GCT 324 ms consistent outdoor LR cohort. Max HR 161: 1 GPX point above 160 ceiling (pctCeiling 0) — isolated spike. Fueling: 3 gels (~27g/hr) vs 60g+/hr target — deficit flagged, carry to W19. Run stopped at 16 km (planned 18-20 km) due to work duties. Gym: Upper A Sep 8 ✅. Upper B and Legs Day carried to W19. W18 volume: 36.64 km (at 37-42 km floor, given shortened LR and vacation design). InBody Sep 4 remains: SMM 40.5 kg / PBF 9.3% all-time bests. Body comp objective complete.",
+        "nextObjective": "W19: QA 4×10 min @ 10.0/10.0/10.3/10.3 km/h (LCRS 8→10 min target). QB 10.3 km/h continuous until ceiling (find ceiling pace). LR 18-20 km retry (4 gels minimum, first gel at 40 min, 60g+/hr — correct the deficit). Upper B (pull-ups + 5-7.5 kg dip belt, Bayesian 13.5 kg × 3×10). Legs Day + reactive/explosive block (pogo hops, A-skips, broad jumps, explosive push-ups)."
       }
     ],
     "lcrs": 51,
@@ -3745,15 +3886,6 @@
       "status": "GREEN",
       "note": "All signals nominal",
       "briefing": "Quality A — 4x8 min @ 10.0-10.3 km/h, ceiling 160 bpm. Evo SL, Elite Fitness. [5d since last quality] Undercooked, not overcooked (5d without quality) — don't be conservative on the ladder. Volume: 30.5km left over 4 sessions (~7.6km each) to clear 37km. W18/24 · 41d to Race 0 · 6.53km of 37–42km on board · ACWR 1.04. Last: R75 easy 6.53km (Sep 7)."
-    },
-    {
-      "date": "2026-09-12",
-      "hrv": 58,
-      "rhr": 49,
-      "sleepScore": 67,
-      "status": "GREEN",
-      "note": "All signals nominal",
-      "briefing": "Long run — 18–20km, HR 122–140 bpm. Novablast 5. Gel 40 min + electrolytes. Volume: 16.4km over 1 sessions = 16.4km each. Above sustainable — expect to land under 37km. W18/24 · 37d to Race 0 · 20.63km of 37–42km on board · ACWR 1.22. Last: R77 quality_b 7.44km (Sep 11)."
     }
   ],
   "PHASES": [
