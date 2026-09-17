@@ -3292,6 +3292,86 @@
           "note": "interval 4 / cooldown"
         }
       ]
+    },
+    {
+      "r": 80,
+      "date": "Sep 17",
+      "type": "quality_b",
+      "wk": 19,
+      "dist": 5.29,
+      "duration": 1994,
+      "moving": 1769,
+      "pace": 6.6,
+      "hrAvg": 141,
+      "hrMax": 157,
+      "te": 3.8,
+      "te_an": 0.0,
+      "gct": 297,
+      "vr": 8.9,
+      "vo": 10.1,
+      "sl": 1.14,
+      "cadence": 150,
+      "pctCeiling": 0,
+      "drift": null,
+      "walkRatio": 2.5,
+      "hrZones": [
+        10,
+        12,
+        34,
+        38,
+        1
+      ],
+      "temp": 29,
+      "surface": "treadmill",
+      "qualityPace": 5.83,
+      "lcrs": 29,
+      "lcrsType": "lt2",
+      "conditions": "16:43 local · Sep 17 · Evo SL · 1% incline · 26–31°C · HRV ~49 · Statin Day 111 · 10.3 km/h × ~14 min (HR settled 144–145, sub-threshold) → athlete-initiated bump to 10.7 km/h × ~15 min (HR stable 152–154, Z4 dominant) · total continuous ~29 min · max HR 157 (3 bpm headroom) · ceiling not reached · RPE 5/10 Hard · feel Strong",
+      "flag": "✅",
+      "note": "R80 W19 QB · Sep 17 · 5.29 km (Technogym) · 10.3→10.7 km/h continuous (athlete-initiated mid-run speed bump) · Evo SL · 1% incline · avg HR 141 · max HR 157 (3 bpm headroom below 160) · Z4 38% (12:43) · Z5 1% (0:25 at 154–157 bpm — below 160 ceiling, pctCeiling 0) · GCT 297 ms 🏆 new program low (prev 300 ms R79) · VR 8.9% · VO 10.1 cm · cadence 150 spm (corrected from 136 blended) · walk 2.5% (0:50 at end) · TE 3.8/0.0 · 26–31°C · Statin Day 111 · LCRS 29 min 🏆 new LT2-continuous record (prev 10 min R79 intervals)",
+      "verdict": "Decisive QB. At 10.3 km/h HR settled 144–145 (sub-threshold, same as R77 at 9.5 km/h for 45 min). Athlete bumped to 10.7 km/h — HR stabilised at 152–154 after ~3–4 min and held there for ~15 min. 10.7 km/h is confirmed sustainable threshold pace. Ceiling (160 bpm) was never threatened. Z4 38% total session — proper threshold stimulus finally achieved in continuous format. GCT 297 ms: new all-session program low — mechanics improving at higher speed. 5:36/km (10.7 km/h) is 5 sec/km faster than sub-4 marathon goal pace (5:41/km) — significant data point. LT2 lower bound revised: 10.5→10.7 km/h (confirmed sustainable). LT2 upper bound: 11.0 km/h (still unconfirmed). W20 QA prescription revised: 10.5/10.7 obsolete → 10.7/10.9 km/h × 4×10 min. LCRS LT2 continuous: 10 min (R79 intervals) → 29 min (R80 continuous). Phase 2 LCRS target (20 min by W20) exceeded in W19.",
+      "tags": [
+        "quality_b",
+        "treadmill",
+        "evo_sl",
+        "w19",
+        "speed_bump",
+        "lcrs_record",
+        "gct_record",
+        "lt2_confirmed"
+      ],
+      "laps": [
+        {
+          "km": 1,
+          "pace": 6.17,
+          "note": "10.3 km/h phase"
+        },
+        {
+          "km": 2,
+          "pace": 6.17,
+          "note": "10.3 km/h phase"
+        },
+        {
+          "km": 3,
+          "pace": 5.93,
+          "note": "transition → 10.7 km/h"
+        },
+        {
+          "km": 4,
+          "pace": 5.65,
+          "note": "10.7 km/h phase"
+        },
+        {
+          "km": 5,
+          "pace": 5.65,
+          "note": "10.7 km/h phase"
+        },
+        {
+          "km": 5.29,
+          "pace": 11.82,
+          "note": "cooldown"
+        }
+      ]
     }
   ],
   "GATES": [
@@ -3302,18 +3382,18 @@
       "short": "3 weeks >=38km injury-free",
       "progress": 0,
       "status": "pending",
-      "detail": "3 consecutive weeks at or above 38km without injury or unplanned rest. Current max: 40.26km (W13). Best 3-week stretch: W11–W13 = 36.60 + 28.30 + 40.26 — but W12 fell short (28.30km truncated LR). Gate clears when 3 consecutive full weeks each ≥38km.",
-      "eta": "~Aug 2026"
+      "detail": "3 consecutive weeks at or above 38km without injury or unplanned rest. Best 3-week stretch: W11–W13 = 36.60 + 28.30 + 40.26 — W12 fell short. W16: 38.17km ✅ · W17: ~27km (vacation) ❌ · W18: 36.64km ❌ (LR shortened). W19 target 38-44 km: 13.30 km on board (Legs + LR pending). Gate requires 3 full consecutive weeks each ≥38 km. ETA W20-22 if W19 closes clean.",
+      "eta": "~W20-22 if W19 closes ≥38 km"
     },
     {
       "id": 2,
       "type": "hard",
       "name": "Quality Repeatability",
       "short": "2x20 intervals + 2x20 tempo ceiling-clean",
-      "progress": 0,
+      "progress": 20,
       "status": "pending",
-      "detail": "Both 2x20 min Quality A AND 2x20 min Quality B completed with 0% time above the current quality ceiling (160 bpm, raised Aug 20), in 2 separate weeks.",
-      "eta": "~Sep 2026"
+      "detail": "Both 2×20 min Quality A AND 2×20 min Quality B (tempo) completed ceiling-clean. Current LCRS position: QA interval = 10 min (R79, Sep 15) · QB continuous = 29 min (R80, Sep 17 · 10.7 km/h threshold). W20 QA target: 4×10 min @ 10.7/10.9 km/h → step to 2×20 min when LCRS reaches 20 min per interval. Gate clears when 2×20 min QA + 2×20 min QB both ceiling-clean in 2 separate weeks.",
+      "eta": "~W23 Nov 2026"
     },
     {
       "id": 3,
@@ -3356,8 +3436,8 @@
       "short": "VO2max + VT1/VT2 in hand",
       "progress": 0,
       "status": "pending",
-      "detail": "VO2max + VT1/VT2 CONFIRMED Regenetics HCMC (1.5M VND, Sep 2026). Lactate: BV 108 Aug 13 booking agenda. R59 calibration: estimated LT2 10.2–10.8 km/h treadmill — test will validate.",
-      "eta": "Sep 2026"
+      "detail": "VO2max + VT1/VT2 CONFIRMED Regenetics HCMC (1.5M VND). Sep 2026 window missed — unable to leave Hanoi. Current empirical LT2 estimate: 10.7–11.0 km/h (5.61–5.45 min/km), M confidence. Test will replace all estimates. Book ASAP when Hanoi travel permits.",
+      "eta": "ASAP — travel to HCMC required · Sep 2026 window missed · Oct 2026 target"
     },
     {
       "id": 7,
@@ -3401,13 +3481,13 @@
       "color": "#06b6d4"
     },
     {
-      "name": "BIM Tay Ho Half Marathon",
+      "name": "Competitive Half Marathon (TBC)",
       "label": "Race 1",
-      "date": "2027-04-05",
-      "goal": "Sub-1:55 = sub-4 confirmed",
-      "note": "Gate 2. UNCONFIRMED -- retained as live option.",
+      "date": "2027-03-01",
+      "goal": "Sub-1:55 · primary sub-4 gate check",
+      "note": "BIM Tay Ho Half Marathon removed Jul 8, 2026 (see Departure Log). Replaced by competitive half Feb/Mar 2027 (TBC) + Race Simulation Jun/Jul 2027. Date placeholder: Mar 1 2027. Confirm when race is selected.",
       "confirmed": false,
-      "color": "#7c3aed"
+      "color": "#f59e0b"
     },
     {
       "name": "VPBank Hanoi Marathon",
@@ -3427,8 +3507,8 @@
     "week": 19,
     "totalWeeks": 24,
     "deloadWeek": 21,
-    "weekVolOnBoard": 8.01,
-    "lastWeekVol": 26.78,
+    "weekVolOnBoard": 13.3,
+    "lastWeekVol": 36.64,
     "weekTarget": "37-42",
     "easyHRBand": [
       122,
@@ -3440,7 +3520,7 @@
     "hrCeilingHardStop": 165,
     "ltPace": 6.32,
     "lt2PaceMin": 5.45,
-    "lt2PaceMax": 5.71,
+    "lt2PaceMax": 5.61,
     "ltConfirmed": false,
     "ltRun": "R59",
     "ltDate": "Aug 11",
@@ -3450,7 +3530,7 @@
     "statinStart": "2026-05-30",
     "stressLevel": "MODERATE",
     "formCue": "Eyes on the horizon -- head up every session",
-    "date": "September 15, 2026",
+    "date": "September 17, 2026",
     "hrvBaseline": [
       53,
       68
@@ -3629,6 +3709,14 @@
         "headline": "Q3 audit complete. Phase 2 delivered. Uncertainty Map built. Speed ladder active. Regenetics ASAP.",
         "body": "Prediction Log: 4 predictions scored. InBody ✅ H-confidence correct (40.5 kg vs ≥39.1 kg prediction). W9 volume ✅ M-correct. R32 QA pattern ✅ M-correct. Drift R32-35 〰️ partial — H confidence was wrong, heat was a predictable confound. Calibration note: should have been M. New predictions added: QA 10.3/10.5 interval 4 HR 153-158 bpm (M), QB 10.3 km/h ceiling in 20-30 min (M), Race 0 58-65 min (M), speed ladder stable by W22 (L). Departure Log: Race 1 BIM removal still standing — not falsified. Review Jan 2027. Decision Reversals Q3: 3 (all Jul 8, planned red team) vs Q2 5 (reactive drift). Rate down, mechanism improved. Graduation: HR governs/walk trigger/conditions-based timing promoted to internalized. Uncertainty Map built for first time — 7 open unknowns, 3 closed. Phase 2 retrospective: QA 3/3 ✅ CT gate retired ✅ GCT -61 ms (-17%) LCRS LT2 0→10 min LCRS QB 0→45 min drift +8.4→+0.8 bpm SMM 38.8→40.5 kg PBF 10.4→9.3% interval pace 9.0→10.3 km/h. Open execution gaps carried forward: fueling compliance (3/3 LR misses on 60g/hr) and TI-RADS 4 referral overdue.",
         "nextObjective": "W19: Legs Day + explosive block · QB 10.3 km/h until ceiling · LR 18-20 km (4 gels, 60g/hr, no exceptions). W20: QA steps to 10.3/10.5 km/h — trigger condition: interval 4 peak HR < 155. Open critical items: Regenetics lactate test (ASAP when Hanoi permits) · TI-RADS 4 endocrinologist (book Hanoi). Race 0: Oct 19. 34 days."
+      },
+      {
+        "date": "Sep 17, 2026",
+        "week": 19,
+        "phase": "Phase 2 · W19 · QB R80 — LT2 Confirmed",
+        "headline": "10.7 km/h threshold confirmed. GCT 297 ms 🏆. LCRS 29 min 🏆. LT2 lower bound locked. QA W20 revised to 10.7/10.9 km/h.",
+        "body": "R80 Sep 17: QB at 10.3 km/h × 14 min (HR settled 144–145, sub-threshold) → athlete-initiated bump to 10.7 km/h × 15 min (HR stable 152–154, Z4 38%, max 157). Ceiling (160) not reached. 10.7 km/h confirmed sustainable threshold pace. GCT 297 ms — new all-session program low (prev 300 ms R79). LCRS LT2-continuous: 10 min (R79 QA intervals) → 29 min (R80 continuous) 🏆 — Phase 2 target 20 min exceeded in W19. LT2 lower bound revised: 10.5 → 10.7 km/h (5.61 min/km). Upper bound: 11.0 km/h (unconfirmed). Key insight: 5:36/km (10.7 km/h) is 5 sec/km faster than sub-4 marathon goal pace (5:41/km). 10.3 km/h for 14 min produced no meaningful fatigue — effectively a warmup to threshold. W20 QA prescription: original 10.3/10.5 km/h was already revised to 10.5/10.7 after R79; now obsolete again. R80 confirms 10.7/10.9 km/h × 4×10 min for W20 QA. Athlete to adjust speed on-the-fly based on HR — empirical ladder approach confirmed appropriate.",
+        "nextObjective": "W19 remaining: Legs Day + explosive block (Trap Bar 120 kg × 3×8 · reactive block) · LR 18-20 km (4 gels, first at 40 min, 60g+/hr for ≥90 min ≥18 km). W20 QA: 10.7/10.9 km/h × 4×10 min (step up if interval 4 HR < 155 in cool conditions). W20 QB: start directly at 10.7 km/h, target 25-30 min continuous before ceiling. LCRS W20 target: 25-30 min at 10.7 km/h (sub-4 marathon pace range)."
       }
     ],
     "lcrs": 51,
@@ -3666,12 +3754,12 @@
     "easyPaceMin": 7.0,
     "easyPaceMax": 8.5,
     "weekStartDate": "2026-09-07",
-    "lcrsNote": "Easy pace LCRS 51.3 min (R67 Aug 21) · QB sub-LT1 45 min 🏆 (R77 Sep 11 · 9.5 km/h × 45 min · prev 32 min R73) · LT2-specific LCRS 10 min 🏆 NEW RECORD (R79 Sep 15 · 4×10 min @ 10.0/10.3 km/h · prev 8 min R69) · threshold target 20 min by W20",
+    "lcrsNote": "Easy pace LCRS 51.3 min (R67 Aug 21) · QB sub-LT1 45 min 🏆 (R77 Sep 11 · 9.5 km/h) · LT2-continuous LCRS 29 min 🏆 NEW RECORD (R80 Sep 17 · 10.3→10.7 km/h · prev 10 min R79 intervals · Phase 2 target 20 min ✅ EXCEEDED W19) · W20 target: extend to 25–30 min at 10.7 km/h",
     "creatineApproved": true,
     "creatineApprovedDate": "Aug 20, 2026",
-    "lcrsThreshold": 10,
-    "lcrsThresholdRun": "R79",
-    "lcrsThresholdDate": "Sep 15",
+    "lcrsThreshold": 29,
+    "lcrsThresholdRun": "R80",
+    "lcrsThresholdDate": "Sep 17",
     "lcrsQB": 45,
     "lcrsQBRun": "R77",
     "lcrsQBDate": "Sep 11",
@@ -3703,9 +3791,9 @@
     },
     "lastQADate": "Sep 10, 2026",
     "lastQAResult": "4×10 min @ 10.0/10.0/10.3/10.3 km/h · max HR 151 (9 bpm) · GCT 300 ms 🏆 · LCRS 10 min 🏆 · Z4 3% · Z5 0% · adaptation confirmed — speed ladder triggered (next: 10.3/10.5 km/h)",
-    "ltNote": "LT2 range empirically revised Sep 15 (R79 Phase 2 audit). R79: 10.3 km/h × 4×10 min → Z4 3%, max HR 151 — clearly sub-LT2. Revised estimate: 10.5–11.0 km/h (5.71–5.45 min/km). M confidence. Lactate test (Regenetics, HCMC) will replace this estimate. LT1 (ltPace 6.32 = 9.49 km/h) unchanged — R77 QB at 9.5 km/h settled 145 bpm, consistent.",
-    "lt2RevisionDate": "Sep 15, 2026",
-    "lt2RevisionRun": "R79"
+    "ltNote": "LT2 range empirically revised Sep 17 (R80 QB). R80: 10.7 km/h × ~15 min continuous → HR stable 152–154 bpm (Z4 dominant), max 157 (3 bpm headroom). 10.7 km/h is confirmed sustainable threshold pace. LT2 lower bound: 10.5→10.7 km/h (5.71→5.61 min/km). Upper bound: 11.0 km/h (5.45 min/km) — unconfirmed. Key: 5:36/km (10.7 km/h) is 5 sec/km FASTER than sub-4 marathon goal pace (5:41/km). LT1 (ltPace 6.32 = 9.49 km/h) unchanged — consistent with R80 (10.3 km/h settled 144–145 bpm = sub-threshold). Lactate test will replace all estimates.",
+    "lt2RevisionDate": "Sep 17, 2026",
+    "lt2RevisionRun": "R80"
   },
   "READINESS_LOG": [
     {
@@ -4177,8 +4265,8 @@
       "phase": 2,
       "dateStart": "2026-09-07",
       "dateEnd": "2026-09-13",
-      "qualityA": "4x8 min @ 10.0-10.3 km/h",
-      "qualityB": "35 min @ 9.2 km/h",
+      "qualityA": "4×8 min @ 10.0/10.3 km/h (CLOSED — actual)",
+      "qualityB": "9.5 km/h QB × 45 min continuous · LCRS 45 min 🏆 (CLOSED — actual)",
       "lrMin": 18,
       "lrMax": 20,
       "volMin": 37,
@@ -4190,8 +4278,8 @@
       "phase": 2,
       "dateStart": "2026-09-14",
       "dateEnd": "2026-09-20",
-      "qualityA": "3x12 min @ 10.0-10.3 km/h",
-      "qualityB": "2x20 min @ 9.2 km/h",
+      "qualityA": "4×10 min @ 10.0/10.3 km/h (actual)",
+      "qualityB": "10.3→10.7 km/h empirical QB · LCRS 29 min 🏆 (actual · threshold confirmed)",
       "lrMin": 20,
       "lrMax": 22,
       "volMin": 38,
@@ -4203,8 +4291,8 @@
       "phase": 2,
       "dateStart": "2026-09-21",
       "dateEnd": "2026-09-27",
-      "qualityA": "3x12 min @ 10.0-10.3 km/h",
-      "qualityB": "2x20 min @ 9.2 km/h",
+      "qualityA": "4×10 min @ 10.7/10.9 km/h (prescribed — revised from R80 data)",
+      "qualityB": "10.7 km/h continuous · target 25-30 min (prescribed)",
       "lrMin": 20,
       "lrMax": 22,
       "volMin": 38,
@@ -4216,8 +4304,8 @@
       "phase": 2,
       "dateStart": "2026-09-28",
       "dateEnd": "2026-10-04",
-      "qualityA": "4x4 min (16:00)",
-      "qualityB": "10 min",
+      "qualityA": "4×4 min — deload (speed TBD, ~10.5 km/h)",
+      "qualityB": "15 min @ 10.7 km/h — deload",
       "lrMin": 12,
       "lrMax": 12,
       "volMin": 26,
@@ -4229,8 +4317,8 @@
       "phase": 2,
       "dateStart": "2026-10-05",
       "dateEnd": "2026-10-11",
-      "qualityA": "2x20 min (hold) @ 10.0 km/h",
-      "qualityB": "2x20 min (hold) @ 9.2 km/h",
+      "qualityA": "4×10 min @ ~10.7-11.0 km/h (estimated — empirical ladder)",
+      "qualityB": "25-30 min @ 10.7 km/h (estimated · race-pace confirm week)",
       "lrMin": 20,
       "lrMax": 22,
       "volMin": 38,
@@ -4242,8 +4330,8 @@
       "phase": 2,
       "dateStart": "2026-10-12",
       "dateEnd": "2026-10-18",
-      "qualityA": "2x20 min (hold) @ 10.0 km/h",
-      "qualityB": "2x20 min (hold) @ 9.2 km/h",
+      "qualityA": "4×10 min @ ~10.7-11.0 km/h (estimated — empirical ladder)",
+      "qualityB": "25-30 min @ 10.7 km/h (estimated · race-pace confirm week)",
       "lrMin": 20,
       "lrMax": 22,
       "volMin": 38,
@@ -4295,10 +4383,11 @@
     },
     {
       "date": "2026-09-15",
-      "label": "Phase 2 retrospective + quarterly audit",
+      "label": "Phase 2 retrospective + quarterly audit ✅ DONE",
       "type": "review",
       "nonNegotiable": false,
-      "note": "Score resolved predictions, review departures, count reversals. Key: score R59 calibration predictions vs Sep lactate results."
+      "note": "Score resolved predictions, review departures, count reversals. Key: score R59 calibration predictions vs Sep lactate results.",
+      "done": true
     },
     {
       "date": "2026-09-30",
