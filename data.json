@@ -4110,6 +4110,15 @@
       "status": "GREEN",
       "note": "All signals nominal",
       "briefing": "Rest day. Volume: 24.7km over 1 sessions = 24.7km each. Above sustainable — expect to land under 38km. W19/24 · 31d to Race 0 · 13.3km of 38–44km on board · ACWR 1.16. Last: R80 quality_b 5.29km (Sep 17)."
+    },
+    {
+      "date": "2026-09-19",
+      "hrv": 55,
+      "rhr": 49,
+      "sleepScore": 54,
+      "status": "CAUTION",
+      "note": "Sleep score 54",
+      "briefing": "Long run — 20–22km, HR 122–140 bpm. Novablast 5. Gel 40 min + electrolytes. Volume: 24.7km over 1 sessions = 24.7km each. Above sustainable — expect to land under 38km. W19/24 · 30d to Race 0 · 13.3km of 38–44km on board · ACWR 1.02. Last: R80 quality_b 5.29km (Sep 17)."
     }
   ],
   "PHASES": [
