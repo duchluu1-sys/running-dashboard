@@ -4101,6 +4101,15 @@
       "status": "CAUTION",
       "note": "HRV 49 below baseline (53)",
       "briefing": "CAUTION. HRV 49 below baseline (53). EASY ONLY — QUALITY B downgraded. W19/24 · 32d to Race 0 · 8.01km of 38–44km on board · ACWR 1.22. Last: R79 quality_a 8.01km (Sep 15)."
+    },
+    {
+      "date": "2026-09-18",
+      "hrv": 62,
+      "rhr": 50,
+      "sleepScore": 85,
+      "status": "GREEN",
+      "note": "All signals nominal",
+      "briefing": "Rest day. Volume: 24.7km over 1 sessions = 24.7km each. Above sustainable — expect to land under 38km. W19/24 · 31d to Race 0 · 13.3km of 38–44km on board · ACWR 1.16. Last: R80 quality_b 5.29km (Sep 17)."
     }
   ],
   "PHASES": [
