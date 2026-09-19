@@ -3372,6 +3372,139 @@
           "note": "cooldown"
         }
       ]
+    },
+    {
+      "r": 81,
+      "date": "Sep 19",
+      "type": "long",
+      "wk": 19,
+      "dist": 16.71,
+      "duration": 8225,
+      "moving": 8113,
+      "pace": 8.2,
+      "hrAvg": 130,
+      "hrMax": 148,
+      "te": 3.8,
+      "te_an": 0.0,
+      "gct": 322,
+      "vr": 9.4,
+      "vo": 8.5,
+      "sl": 0.93,
+      "cadence": 140,
+      "pctCeiling": 0,
+      "drift": 2.4,
+      "walkRatio": 21.7,
+      "hrZones": [
+        13,
+        60,
+        20,
+        0,
+        0
+      ],
+      "temp": 32,
+      "surface": "outdoor",
+      "runPace": 8.1,
+      "conditions": "07:11 local · Sep 19 · Novablast 5 · Hồ Tây outdoor loop · 30–35°C avg 32°C · Statin Day 113 · first gel ~45 min (≈protocol · 5 min late) · fueling: 4 gels ✅ + 3 electrolyte capsules + 2 coconuts + 2 cokes + 1 Sting + 1 water bottle · ~98g/hr carb (moving time) · first compliant LR fueling in program · elapsed 3:01:08 vs GPS 2:17:05 — 44 min of drink stops (heat management ✅)",
+      "flag": "✅",
+      "note": "R81 W19 LR · Sep 19 · 16.71 km (GPS) · Hồ Tây outdoor · Novablast 5 · avg HR 130 · max HR 148 · drift +2.4 bpm (Q1 134.3 → Q4 136.7) · half/half −0.1 bpm (essentially flat despite heating morning) · walk 21.7% (29:45) · Z2 60% (1:22:41) · Z3 20% · Z4/Z5 0% · GCT 322 ms · VR 9.4% · VO 8.5 cm · cadence 140 spm (corrected from 131 blended) · TE 3.8/0.0 · Tempo (High Aerobic) · 30–35°C avg 32°C · sweat 2,282 ml · FIRST COMPLIANT LR FUELING: 4 gels ✅ + coconuts/cokes/Sting · ~98g/hr (moving time) · elapsed 3:01:08 incl 44 min drink stops · Statin Day 113",
+      "verdict": "Strong aerobic performance in the hottest conditions yet. +2.4 bpm drift at 32°C avg after QB+Legs Thursday — compare to R74 at +7.1 bpm at same distance in less heat. Half/half drift −0.1 bpm: HR flat between first and second half despite temperature climbing to 35°C. First LR with compliant fueling: 4 gels + comprehensive hydration. 44 min of drink stops (elapsed 3:01:08) is heat management not weakness. Z2 60% + Z1 13% = 73% in easy aerobic base — correct zone distribution for LR. 16.71 km in worst conditions = best heat-adjusted LR in program. Fourth consecutive LR under 18 km — all legitimate causes (heat×3, work×1). W19 FINAL LR: complete.",
+      "tags": [
+        "long",
+        "outdoor",
+        "novablast",
+        "w19",
+        "hot",
+        "morning",
+        "fueling_compliant",
+        "w19-lr"
+      ],
+      "laps": [
+        {
+          "km": 1,
+          "pace": 7.67,
+          "hr": null
+        },
+        {
+          "km": 2,
+          "pace": 8.37,
+          "hr": null
+        },
+        {
+          "km": 3,
+          "pace": 8.9,
+          "hr": null
+        },
+        {
+          "km": 4,
+          "pace": 7.82,
+          "hr": null
+        },
+        {
+          "km": 5,
+          "pace": 8.18,
+          "hr": null
+        },
+        {
+          "km": 6,
+          "pace": 8.3,
+          "hr": null
+        },
+        {
+          "km": 7,
+          "pace": 7.9,
+          "hr": null
+        },
+        {
+          "km": 8,
+          "pace": 9.43,
+          "hr": null
+        },
+        {
+          "km": 9,
+          "pace": 8.42,
+          "hr": null
+        },
+        {
+          "km": 10,
+          "pace": 8.3,
+          "hr": null
+        },
+        {
+          "km": 11,
+          "pace": 8.55,
+          "hr": null
+        },
+        {
+          "km": 12,
+          "pace": 7.5,
+          "hr": null
+        },
+        {
+          "km": 13,
+          "pace": 8.53,
+          "hr": null
+        },
+        {
+          "km": 14,
+          "pace": 7.45,
+          "hr": null
+        },
+        {
+          "km": 15,
+          "pace": 7.9,
+          "hr": null
+        },
+        {
+          "km": 16,
+          "pace": 8.52,
+          "hr": null
+        },
+        {
+          "km": 16.71,
+          "pace": 7.53,
+          "hr": null
+        }
+      ]
     }
   ],
   "GATES": [
@@ -3507,7 +3640,7 @@
     "week": 19,
     "totalWeeks": 24,
     "deloadWeek": 21,
-    "weekVolOnBoard": 13.3,
+    "weekVolOnBoard": 30.01,
     "lastWeekVol": 36.64,
     "weekTarget": "37-42",
     "easyHRBand": [
@@ -3530,7 +3663,7 @@
     "statinStart": "2026-05-30",
     "stressLevel": "MODERATE",
     "formCue": "Eyes on the horizon -- head up every session",
-    "date": "September 17, 2026",
+    "date": "September 19, 2026",
     "hrvBaseline": [
       53,
       68
@@ -3717,6 +3850,14 @@
         "headline": "10.7 km/h threshold confirmed. GCT 297 ms 🏆. LCRS 29 min 🏆. LT2 lower bound locked. QA W20 revised to 10.7/10.9 km/h.",
         "body": "R80 Sep 17: QB at 10.3 km/h × 14 min (HR settled 144–145, sub-threshold) → athlete-initiated bump to 10.7 km/h × 15 min (HR stable 152–154, Z4 38%, max 157). Ceiling (160) not reached. 10.7 km/h confirmed sustainable threshold pace. GCT 297 ms — new all-session program low (prev 300 ms R79). LCRS LT2-continuous: 10 min (R79 QA intervals) → 29 min (R80 continuous) 🏆 — Phase 2 target 20 min exceeded in W19. LT2 lower bound revised: 10.5 → 10.7 km/h (5.61 min/km). Upper bound: 11.0 km/h (unconfirmed). Key insight: 5:36/km (10.7 km/h) is 5 sec/km faster than sub-4 marathon goal pace (5:41/km). 10.3 km/h for 14 min produced no meaningful fatigue — effectively a warmup to threshold. W20 QA prescription: original 10.3/10.5 km/h was already revised to 10.5/10.7 after R79; now obsolete again. R80 confirms 10.7/10.9 km/h × 4×10 min for W20 QA. Athlete to adjust speed on-the-fly based on HR — empirical ladder approach confirmed appropriate.",
         "nextObjective": "W19 remaining: Legs Day + explosive block (Trap Bar 120 kg × 3×8 · reactive block) · LR 18-20 km (4 gels, first at 40 min, 60g+/hr for ≥90 min ≥18 km). W20 QA: 10.7/10.9 km/h × 4×10 min (step up if interval 4 HR < 155 in cool conditions). W20 QB: start directly at 10.7 km/h, target 25-30 min continuous before ceiling. LCRS W20 target: 25-30 min at 10.7 km/h (sub-4 marathon pace range)."
+      },
+      {
+        "date": "Sep 19, 2026",
+        "week": 19,
+        "phase": "Phase 2 · W19 · LR R81 — First Compliant Fueling",
+        "headline": "W19 LR complete. 16.71 km at 32°C. +2.4 bpm drift. First compliant LR fueling. W19 vol 30.01 km.",
+        "body": "R81 Sep 19: 16.71 km outdoor Hồ Tây · Novablast 5 · avg HR 130 · max HR 148 · drift +2.4 bpm (Q1 134.3 → Q4 136.7) · half/half −0.1 bpm (flat despite 35°C peak). 30–35°C avg 32°C — hottest LR in program. Compared to R74 (Sep 5, same course, 29-33°C): drift +7.1 → +2.4 bpm. First fully compliant LR fueling: 4 gels + 3 capsules + 2 coconuts + 2 cokes + 1 Sting + 1 water. ~98g/hr carb (moving time), 44 min of drink stops (heat management). Z2 60%, Z3 20%, Z4/Z5 0% — correct easy aerobic distribution. GCT 322 ms (cohort best ever). VO 8.5 cm. Walk ratio 21.7% — less than R78 (33.1%) despite worse conditions. LCRS 9.0 min (outdoor fragmented — not a threshold metric). W19 vol: 30.01 km (R79 8.01 + R80 5.29 + R81 16.71). Easy run Sunday Sep 20 to close W19.",
+        "nextObjective": "W19 close: easy run Sep 20 (~6-8 km) to complete weekly volume (~36-38 km). W20: QA 4×10 min @ 10.7/10.9 km/h (first session at revised speed) · QB start at 10.7 km/h, target 25-30 min continuous · LR 18-20 km in cooler conditions (dawn mandatory, postpone if heat >30°C at 6 AM). Deload W21 begins Sep 28."
       }
     ],
     "lcrs": 51,
