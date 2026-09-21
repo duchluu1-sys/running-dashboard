@@ -4260,6 +4260,15 @@
       "status": "CAUTION",
       "note": "Sleep score 54",
       "briefing": "Long run — 20–22km, HR 122–140 bpm. Novablast 5. Gel 40 min + electrolytes. Volume: 24.7km over 1 sessions = 24.7km each. Above sustainable — expect to land under 38km. W19/24 · 30d to Race 0 · 13.3km of 38–44km on board · ACWR 1.02. Last: R80 quality_b 5.29km (Sep 17)."
+    },
+    {
+      "date": "2026-09-21",
+      "hrv": 57,
+      "rhr": 49,
+      "sleepScore": 63,
+      "status": "GREEN",
+      "note": "All signals nominal",
+      "briefing": "Easy run — HR 122–140 bpm. Novablast 5. Volume: 8.0km left over 5 sessions (~1.6km each) to clear 38km. W19/24 · 28d to Race 0 · 30.01km of 38–44km on board · ACWR 0.91. Last: R81 long 16.71km (Sep 19)."
     }
   ],
   "PHASES": [
