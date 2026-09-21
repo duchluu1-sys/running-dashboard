@@ -4855,9 +4855,9 @@
       }
     ],
     "week_status": {
-      "week": 19,
-      "push": true,
-      "pull": true,
+      "week": 20,
+      "push": false,
+      "pull": false,
       "legs": false,
       "full_body": false
     },
