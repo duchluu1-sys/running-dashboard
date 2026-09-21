@@ -3505,6 +3505,86 @@
           "hr": null
         }
       ]
+    },
+    {
+      "r": 82,
+      "date": "Sep 21",
+      "type": "easy",
+      "wk": 20,
+      "dist": 6.27,
+      "duration": 2967,
+      "moving": 2871,
+      "pace": 7.9,
+      "hrAvg": 129,
+      "hrMax": 145,
+      "te": 3.0,
+      "te_an": 0.0,
+      "gct": 315,
+      "vr": 9.2,
+      "vo": 8.8,
+      "sl": 0.97,
+      "cadence": 142,
+      "pctCeiling": 0,
+      "drift": 3.5,
+      "walkRatio": 18.0,
+      "hrZones": [
+        11,
+        67,
+        15,
+        0,
+        0
+      ],
+      "temp": 31,
+      "surface": "outdoor",
+      "conditions": "06:33 local · Sep 21 (Mon) · Novablast 5 · Hồ Tây north loop · 30–32°C avg 31°C · Statin Day 115 · W20 opener · Z2 67% · drift +3.5 bpm · GCT 315 ms 🏆 new outdoor low",
+      "flag": "✅",
+      "note": "R82 W20 easy · Sep 21 · 6.27 km (GPS) · Novablast 5 · Hồ Tây outdoor · avg HR 129 · max HR 145 · drift +3.5 bpm (Q1 132.2 → Q4 135.7) · half/half +0.5 bpm (flat) · walk 18.0% · Z2 67% (33:17) · Z3 15% (7:35) · Z4/Z5 0% · GCT 315 ms 🏆 new outdoor session low (prev 322 ms R81) · VR 9.2% · VO 8.8 cm · cadence 142 spm (corrected from 131 blended) · TE 3.0/0.0 · 30–32°C · Statin Day 115",
+      "verdict": "Clean W20 opener. Avg HR 129 in 31°C dawn conditions. Z2 67% + Z1 11% = 78% easy aerobic. GCT 315 ms — new outdoor session low (prev 322 ms R81, 324 ms R78). Form improving on easy runs as well as quality sessions. Drift +3.5 bpm controlled for the conditions. Exactly what a Monday recovery run looks like.",
+      "tags": [
+        "easy",
+        "outdoor",
+        "novablast",
+        "w20",
+        "morning",
+        "recovery"
+      ],
+      "laps": [
+        {
+          "km": 1,
+          "pace": 7.15,
+          "hr": null
+        },
+        {
+          "km": 2,
+          "pace": 8.95,
+          "hr": null
+        },
+        {
+          "km": 3,
+          "pace": 7.32,
+          "hr": null
+        },
+        {
+          "km": 4,
+          "pace": 8.2,
+          "hr": null
+        },
+        {
+          "km": 5,
+          "pace": 8.0,
+          "hr": null
+        },
+        {
+          "km": 6,
+          "pace": 7.9,
+          "hr": null
+        },
+        {
+          "km": 6.27,
+          "pace": 7.33,
+          "hr": null
+        }
+      ]
     }
   ],
   "GATES": [
@@ -3637,11 +3717,11 @@
     "age": 30,
     "phase": "Phase 2",
     "phaseName": "Quality Development",
-    "week": 19,
+    "week": 20,
     "totalWeeks": 24,
     "deloadWeek": 21,
-    "weekVolOnBoard": 30.01,
-    "lastWeekVol": 36.64,
+    "weekVolOnBoard": 6.27,
+    "lastWeekVol": 30.01,
     "weekTarget": "37-42",
     "easyHRBand": [
       122,
@@ -3663,7 +3743,7 @@
     "statinStart": "2026-05-30",
     "stressLevel": "MODERATE",
     "formCue": "Eyes on the horizon -- head up every session",
-    "date": "September 19, 2026",
+    "date": "September 21, 2026",
     "hrvBaseline": [
       53,
       68
