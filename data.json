@@ -3585,6 +3585,96 @@
           "hr": null
         }
       ]
+    },
+    {
+      "r": 83,
+      "date": "Sep 22",
+      "type": "quality_a",
+      "wk": 20,
+      "dist": 8.33,
+      "duration": 3406,
+      "moving": 2574,
+      "pace": 6.82,
+      "hrAvg": 135,
+      "hrMax": 151,
+      "te": 3.8,
+      "te_an": 0.3,
+      "gct": 284,
+      "vr": 8.6,
+      "vo": 9.8,
+      "sl": 1.16,
+      "cadence": 155,
+      "pctCeiling": 0,
+      "drift": null,
+      "walkRatio": 10.5,
+      "hrZones": [
+        8,
+        14,
+        35,
+        26,
+        0
+      ],
+      "temp": 28,
+      "surface": "treadmill",
+      "qualityPace": 5.56,
+      "lcrs": 10,
+      "lcrsType": "lt2",
+      "conditions": "15:24 local · Sep 22 · Evo SL · 1% incline · 26–30°C gym · HRV GREEN (54 ms) · RPE 6/10 Hard · feel Normal · 4×10 min @ 10.7/10.7/10.9/10.9 km/h · max HR 151 (9 bpm headroom) · Z4 26% (14:58) · first QA at revised speed tier · Statin Day 116",
+      "flag": "✅✅",
+      "note": "R83 W20 QA · Sep 22 · 8.33 km (Technogym) · 4×10 min @ 10.7/10.7/10.9/10.9 km/h · 1% incline · Evo SL · avg HR 135 · max HR 151 (9 bpm headroom) · Z4 26% (14:58) — 9× threshold accumulation vs R79 at same max HR · Z5 0% · GCT 284 ms 🏆 TIES PROGRAM BEST (R61 Aug 14 outdoor race) · new quality session low (prev 297 ms R80) · VR 8.6% · VO 9.8 cm · SL 1.16 m · cadence 155 spm (corrected from 122 blended — idle depresses avg) · walk ratio 10.5% (5:56 walk + 8:45 idle) · TE 3.8/0.3 · Threshold (High Aerobic) · run time 42:05 · sweat 899 ml · RPE 6/10 Hard · Statin Day 116",
+      "verdict": "First QA at 10.7/10.9 km/h: protocol executed cleanly. Struggle was neuromuscular (speed unfamiliarity), not cardiovascular — athlete confirmed cardiovascular fine. Z4 26% (14:58) is the correct threshold stimulus at LT2-range pace. Max HR 151 = same as R79 at lower speed; zone distribution reveals the real story: Z4 3%→26%. GCT 284 ms: ties program all-time best (R61 outdoor race Aug 14) and new quality session low (prev 297 ms R80). −13 ms vs R80 at higher intensity, same shoe. Strength translating to mechanics. LCRS 10 min unchanged — structure fixed at 4×10 min. Step-up trigger not met in warm gym (26–30°C adds ·3–5 bpm). Stay at 10.7/10.9 through W21 deload; reassess W22 QA.",
+      "tags": [
+        "quality_a",
+        "treadmill",
+        "evo_sl",
+        "w20",
+        "4x10min",
+        "new_speed_tier",
+        "gct_ties_program_best",
+        "first_107_qa"
+      ],
+      "laps": [
+        {
+          "km": 1,
+          "pace": 6.45,
+          "note": "interval 1 / ramp"
+        },
+        {
+          "km": 2,
+          "pace": 9.33,
+          "note": "walk recovery"
+        },
+        {
+          "km": 3,
+          "pace": 5.82,
+          "note": "interval 2"
+        },
+        {
+          "km": 4,
+          "pace": 9.38,
+          "note": "walk recovery"
+        },
+        {
+          "km": 5,
+          "pace": 5.88,
+          "note": "interval 3"
+        },
+        {
+          "km": 6,
+          "pace": 9.4,
+          "note": "walk recovery"
+        },
+        {
+          "km": 7,
+          "pace": 5.46,
+          "note": "interval 4 — fastest lap, 10.9 km/h"
+        },
+        {
+          "km": 7.43,
+          "pace": 11.87,
+          "note": "cooldown / idle capture"
+        }
+      ]
     }
   ],
   "GATES": [
@@ -3720,7 +3810,7 @@
     "week": 20,
     "totalWeeks": 24,
     "deloadWeek": 21,
-    "weekVolOnBoard": 6.27,
+    "weekVolOnBoard": 14.6,
     "lastWeekVol": 30.01,
     "weekTarget": "37-42",
     "easyHRBand": [
@@ -3743,7 +3833,7 @@
     "statinStart": "2026-05-30",
     "stressLevel": "MODERATE",
     "formCue": "Eyes on the horizon -- head up every session",
-    "date": "September 21, 2026",
+    "date": "September 22, 2026",
     "hrvBaseline": [
       53,
       68
@@ -4010,8 +4100,8 @@
       "rhrRest": 8,
       "rhrCaution": 5
     },
-    "lastQADate": "Sep 10, 2026",
-    "lastQAResult": "4×10 min @ 10.0/10.0/10.3/10.3 km/h · max HR 151 (9 bpm) · GCT 300 ms 🏆 · LCRS 10 min 🏆 · Z4 3% · Z5 0% · adaptation confirmed — speed ladder triggered (next: 10.3/10.5 km/h)",
+    "lastQADate": "Sep 22, 2026",
+    "lastQAResult": "4×10 min @ 10.7/10.7/10.9/10.9 km/h · max HR 151 (9 bpm) · GCT 284 ms 🏆 TIES PROGRAM BEST (new quality session low, prev 297 ms R80) · Z4 26% · Z5 0% · first QA at new speed tier · stay at 10.7/10.9",
     "ltNote": "LT2 range empirically revised Sep 17 (R80 QB). R80: 10.7 km/h × ~15 min continuous → HR stable 152–154 bpm (Z4 dominant), max 157 (3 bpm headroom). 10.7 km/h is confirmed sustainable threshold pace. LT2 lower bound: 10.5→10.7 km/h (5.71→5.61 min/km). Upper bound: 11.0 km/h (5.45 min/km) — unconfirmed. Key: 5:36/km (10.7 km/h) is 5 sec/km FASTER than sub-4 marathon goal pace (5:41/km). LT1 (ltPace 6.32 = 9.49 km/h) unchanged — consistent with R80 (10.3 km/h settled 144–145 bpm = sub-threshold). Lactate test will replace all estimates.",
     "lt2RevisionDate": "Sep 17, 2026",
     "lt2RevisionRun": "R80"
