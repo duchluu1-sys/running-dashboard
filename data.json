@@ -3675,6 +3675,51 @@
           "note": "cooldown / idle capture"
         }
       ]
+    },
+    {
+      "r": 84,
+      "date": "Sep 24",
+      "type": "easy",
+      "wk": 20,
+      "dist": 6.09,
+      "duration": 3089,
+      "moving": 2961,
+      "pace": 8.45,
+      "paceEasy": 8.1,
+      "hrAvg": 130,
+      "hrMax": 141,
+      "te": 3.6,
+      "te_an": 0.0,
+      "gct": 302,
+      "vr": 8.5,
+      "vo": 10.7,
+      "sl": 1.27,
+      "cadence": 141,
+      "pctCeiling": 0,
+      "drift": null,
+      "walkRatio": 3.9,
+      "hrZones": [
+        4,
+        85,
+        2,
+        0,
+        0
+      ],
+      "temp": 30,
+      "surface": "treadmill",
+      "conditions": "17:11 local · Sep 24 · Novablast 5 · 1% incline · 28–32°C gym · RPE 2/10 Light · feel Strong · post-illness return day 1 (Sep 23 rest) · Statin Day 118",
+      "flag": "✅✅",
+      "note": "R84 W20 easy · Sep 24 · 6.09 km (Technogym calibrated) · Novablast 5 · avg HR 130 · max HR 141 (2 bpm below walk trigger 143) · Z2 85% (44:00) · Z3 2% (1:07) · Z4/Z5 0% · GCT 302 ms 🏆 new easy-session program low (prev 315 ms R82 outdoor · prev easy TM 319 ms R62) · VR 8.5% new easy-session best (prev 9.0% R53) · VO 10.7 cm · cadence 141 spm · stride 1.27 m · walk ratio 3.9% · TE 3.6/0.0 Base (Low Aerobic) · 28–32°C gym · sweat 856 ml · Statin Day 118",
+      "verdict": "Post-illness return executed correctly. Max HR 141 = 2 bpm below walk trigger, ceiling clean throughout. Z2 85% is textbook easy. GCT 302 ms: new easy-session program low (prev 315 ms R82), matching R49 which was the quality session best in late July. Easy-pace mechanics have now caught up to where quality sessions were 8 weeks ago. VR 8.5% new easy-session best. Body back. QB tomorrow is green.",
+      "tags": [
+        "easy",
+        "treadmill",
+        "novablast",
+        "w20",
+        "post-illness-return",
+        "gct-easy-pb",
+        "vr-easy-pb"
+      ]
     }
   ],
   "GATES": [
@@ -3810,7 +3855,7 @@
     "week": 20,
     "totalWeeks": 24,
     "deloadWeek": 21,
-    "weekVolOnBoard": 14.6,
+    "weekVolOnBoard": 20.69,
     "lastWeekVol": 30.01,
     "weekTarget": "37-42",
     "easyHRBand": [
@@ -3833,7 +3878,7 @@
     "statinStart": "2026-05-30",
     "stressLevel": "MODERATE",
     "formCue": "Eyes on the horizon -- head up every session",
-    "date": "September 22, 2026",
+    "date": "September 24, 2026",
     "hrvBaseline": [
       53,
       68
@@ -4805,9 +4850,9 @@
     }
   ],
   "STRENGTH": {
-    "baseline_date": "Sep 15, 2026",
-    "baseline_week": "W19",
-    "note": "Updated W19 Push (Sep 14) + Pull (Sep 15). Key: Incline 65 kg × 3×6 (jumped up, consolidate × 3×8). Weighted pull-ups FIRST SESSION 5 kg × 10-7-8 ✅. Bayesian Curl not yet at 3×10 at 13.5 kg — dropped to 12 kg set 3. Lateral Raise stepped to 8 kg ✅. Tricep OH at 22 kg (2 sets). Cable Row 65 kg × 3×8 (target 3×10). Mass freeze in effect post-Race 0 (Oct 19).",
+    "baseline_date": "Sep 24, 2026 (W20 — recent sessions)",
+    "baseline_week": "W20",
+    "note": "W20 sessions (multiple days, exact dates not logged). Key progressions: Incline BB 65→70 kg ×3×6 🏆 · Machine Row 65→70 kg ×3×10 🏆 · BSS 18→24 kg ×3×6 🏆 · Hip Thrust 20→30 kg ×2×10 🏆 · Bayesian Curl 13.5→14 kg ×3×8 🏆 · Tricep OH 22→22.5 kg ×3×10 🏆 · Smith Rev Lunge 60 kg ×2×8 (new exercise) · SL RDL 20 kg ×2×8 · WPU 5 kg 8-6-5 (sick week — expect recovery next session) · Mass freeze in effect post-Race 0 (Oct 19).",
     "missing_weights": [
       "Tibialis Raise"
     ],
@@ -4816,8 +4861,8 @@
         "exercise": "Incline Barbell Press",
         "sets": 3,
         "reps": "3×6",
-        "weight_kg": 65,
-        "note": "✅ W19 Sep 14: 65 kg × 3×6. Jumped above 63.5 kg target — only 6 reps. Consolidate 65 kg × 3×8 before stepping to 67.5 kg."
+        "weight_kg": 70,
+        "note": "✅ W20: stepped 65→70 kg ×3×6. Consolidate 70 kg ×3×8 before next step."
       },
       {
         "exercise": "Incline Dumbbell Press",
@@ -4830,22 +4875,22 @@
         "exercise": "Cable Fly",
         "sets": 3,
         "reps": "3×8",
-        "weight_kg": 13.5,
-        "note": "W19 Sep 14: 13.5 kg × 3×8 (below 15 kg × 3×10 W18 target). Consolidate 13.5 kg × 3×10 before stepping."
+        "weight_kg": 15,
+        "note": "W20: 15 kg ×3×8 confirmed."
       },
       {
         "exercise": "Shoulder Press",
         "sets": 2,
-        "reps": "3×10",
-        "weight_kg": 30,
-        "note": "W19 Sep 14: 30 kg/side × 3×10 (different format/machine — possibly seated DB or bilateral machine at 30 kg/side). Previous: 40 kg stack × 2×10."
+        "reps": "3×6",
+        "weight_kg": 22,
+        "note": "W20: DB Shoulder Press 22 kg/side ×3×6. Previous 30 kg/side entry was different machine — now confirmed as DB format 22 kg."
       },
       {
         "exercise": "Cable Lateral Raise",
         "sets": 3,
-        "reps": "3×10",
+        "reps": "3×8",
         "weight_kg": 8,
-        "note": "✅ W19 Sep 14: 8 kg × 3×10. Stepped from 7.5 kg W18 target."
+        "note": "W20: 8 kg ×3×8. Same weight, rep format confirmed."
       },
       {
         "exercise": "Dips",
@@ -4857,9 +4902,9 @@
       {
         "exercise": "Tricep Overhead Extension",
         "sets": 3,
-        "reps": "2×10",
-        "weight_kg": 22,
-        "note": "W19 Sep 14: 22 kg × 2×10 (stepped weight, 1 fewer set). Next: 22 kg × 3×8."
+        "reps": "3×10",
+        "weight_kg": 22.5,
+        "note": "✅ W20: 22.5 kg ×3×10. Stepped from 22 kg ×2×10."
       },
       {
         "exercise": "Cable Tricep Pulldown SA",
@@ -4873,23 +4918,23 @@
       {
         "exercise": "Pull-ups",
         "sets": 3,
-        "reps": "10-7-8",
+        "reps": "8-6-5 (sick week)",
         "weight_kg": 5,
-        "note": "✅ W19 Sep 15: FIRST WEIGHTED SESSION — 5 kg dip belt × 10-7-8. Consolidate 5 kg × 10-8-8 before stepping to 7.5 kg."
+        "note": "⚠️ W20 sick week regression: 5 kg × 8-6-5 (was 10-7-8). Expect recovery next healthy session. Consolidate 5 kg × 10-8-8 target unchanged."
       },
       {
         "exercise": "Lat Pulldown",
         "sets": 3,
-        "reps": "7-7-7 (60 kg set 3) + partials",
+        "reps": "3×8",
         "weight_kg": 65,
-        "note": "W19 Sep 15: 65-65-60 kg × 7 + partials. Near capacity at 65 kg. Consolidate 65 kg × 3×8 before stepping."
+        "note": "W20: 65 kg ×3×8 clean (3 full sets vs previous partials). Consolidate ×3×10 before stepping to 70 kg."
       },
       {
         "exercise": "Chest Supported Machine Row",
         "sets": 3,
-        "reps": 10,
-        "weight_kg": 30,
-        "note": "W17 FIRST LOGGED: 30 kg/side x 3x10 after 3 deferrals. W18: 32.5 kg/side x 3x10."
+        "reps": "3×10",
+        "weight_kg": 70,
+        "note": "✅ W20: stepped 65→70 kg ×3×10. New baseline."
       },
       {
         "exercise": "X Cable Rear Delt Pull",
@@ -4908,53 +4953,53 @@
       {
         "exercise": "Bayesian Cable Bicep Curl",
         "sets": 3,
-        "reps": "2×6 + drop 12 kg × 8",
-        "weight_kg": 13.5,
-        "note": "W19 Sep 15: 13.5 kg × 2×6, dropped to 12 kg × 1×8. Not yet at 3×10 at 13.5 kg. Target: 13.5 kg × 3×8 before 3×10 before stepping to 15 kg."
+        "reps": "3×8",
+        "weight_kg": 14,
+        "note": "✅ W20: 14 kg ×3×8 — stepped from 13.5 kg. Consolidate 14 kg ×3×10 before next step."
       },
       {
         "exercise": "Preacher Curl",
         "sets": 1,
-        "reps": "failure",
-        "weight_kg": 20,
-        "note": "BASELINE ESTABLISHED Aug 24 W16 · machine · different implement to Preacher Hammer Curl DB W15"
+        "reps": "3×8",
+        "weight_kg": 12,
+        "note": "W20: 12 kg/side ×3×8 (DB preacher curl format — may differ from previous machine 20 kg entry)."
       },
       {
         "exercise": "Seated Cable Row",
         "sets": 3,
-        "reps": "3×8",
+        "reps": "3×10",
         "weight_kg": 65,
-        "note": "W19 Sep 15: 65 kg × 3×8 (target 3×10 — 2 reps short). Consolidate 65 kg × 3×10 before stepping."
+        "note": "✅ W20: 65 kg ×3×10 target ACHIEVED. Next: 70 kg ×3×8."
       }
     ],
     "legs": [
       {
         "exercise": "Trap Bar Deadlift",
-        "sets": 2,
-        "reps": "10",
+        "sets": 3,
+        "reps": "3×8",
         "weight_kg": 120,
-        "note": "W17: 120 kg x 2x10 (vacation maintenance format). W18: return to 3x8 at 120 kg (strength protocol). Next weight: 125 kg when 3x8 clean RPE <=7."
+        "note": "W20: 120 kg ×3×8 — same weight, confirmed 3-set protocol. Next weight: 125 kg when RPE ≤7 clean."
       },
       {
         "exercise": "Bulgarian Split Squat",
         "sets": 3,
-        "reps": 10,
-        "weight_kg": 18,
-        "note": "W17 STEPPED UP: 16-18-18 kg/hand. W18: 18 kg x 3x10 (consolidate at new weight)."
+        "reps": "3×6",
+        "weight_kg": 24,
+        "note": "🏆 W20: stepped 18→24 kg/hand (+6 kg) ×3×6. Large jump — consolidate 24 kg ×3×8 before stepping."
       },
       {
         "exercise": "Single Leg Standing Hamstring Curl",
         "sets": 2,
-        "reps": "10",
-        "weight_kg": 25,
-        "note": "W17: 25 kg x 2x10. W18: 25 kg x 2x12 (one-axis rule: reps before weight)."
+        "reps": "3×8",
+        "weight_kg": 20,
+        "note": "W20: 20 kg ×3×8 (down from 25 kg W17 — possible machine change or conservative reset post-illness). One-axis rule: 20 kg ×3×10 next."
       },
       {
         "exercise": "Hip Thrust Machine",
         "sets": 2,
-        "reps": 10,
-        "weight_kg": 20,
-        "note": "W17: 20 kg x 2x10 (maintenance). W18: 20 kg x 3x10. Full Body remains primary hip thrust venue."
+        "reps": "2×10",
+        "weight_kg": 30,
+        "note": "🏆 W20: stepped 20→30 kg (+10 kg) ×2×10. Large jump — consolidate 30 kg ×3×10 before stepping."
       },
       {
         "exercise": "Seated Calf Raise",
@@ -4969,6 +5014,27 @@
         "reps": 12,
         "weight_kg": 40,
         "note": "CORRECTED BASELINE W17: 40 kg x 2x12 single leg. Previous 60 kg entry was bilateral (logging error corrected). W18: 40 kg x 3x12."
+      },
+      {
+        "exercise": "Smith Machine Reverse Lunge",
+        "sets": 2,
+        "reps": "2×8",
+        "weight_kg": 60,
+        "note": "✅ W20 NEW: Smith Machine Reverse Lunge 60 kg ×2×8. First logged session. Baseline established."
+      },
+      {
+        "exercise": "Single Leg RDL",
+        "sets": 2,
+        "reps": "2×8",
+        "weight_kg": 20,
+        "note": "W20: 20 kg ×2×8. Up from 12 kg W15 baseline."
+      },
+      {
+        "exercise": "Bent Leg SL Calf Raise (KB)",
+        "sets": 3,
+        "reps": "3×8",
+        "weight_kg": 20,
+        "note": "W20 NEW: Bent leg single-leg calf raise with 20 kg KB ×3×8. Different from seated/standing variations."
       }
     ],
     "week_status": {
@@ -5703,6 +5769,138 @@
           "weight_kg": 13.5,
           "reps": "2×6 + drop 12 kg × 8",
           "note": "13.5 kg × 2×6, dropped to 12 kg × 1×8 · not yet at 3×10 at 13.5 kg · target 13.5 kg × 3×8 next"
+        }
+      ]
+    },
+    {
+      "date": "2026-09-W20",
+      "week": 20,
+      "session": "push",
+      "entries": [
+        {
+          "exercise": "Incline Barbell Press",
+          "weight_kg": 70,
+          "reps": "3×6",
+          "note": "🏆 stepped from 65 kg"
+        },
+        {
+          "exercise": "Incline Dumbbell Press",
+          "weight_kg": 26,
+          "reps": "3×6"
+        },
+        {
+          "exercise": "Cable Fly",
+          "weight_kg": 15,
+          "reps": "3×8"
+        },
+        {
+          "exercise": "Cable Lateral Raise",
+          "weight_kg": 8,
+          "reps": "3×8"
+        },
+        {
+          "exercise": "DB Shoulder Press",
+          "weight_kg": 22,
+          "reps": "3×6"
+        },
+        {
+          "exercise": "Tricep Overhead Press",
+          "weight_kg": 22.5,
+          "reps": "3×10",
+          "note": "🏆 stepped from 22 kg"
+        }
+      ]
+    },
+    {
+      "date": "2026-09-W20",
+      "week": 20,
+      "session": "pull",
+      "entries": [
+        {
+          "exercise": "Weighted Pull-ups",
+          "weight_kg": 5,
+          "reps": "8-6-5",
+          "note": "⚠️ sick week regression"
+        },
+        {
+          "exercise": "Machine Row",
+          "weight_kg": 70,
+          "reps": "3×10",
+          "note": "🏆 stepped from 65 kg"
+        },
+        {
+          "exercise": "Seated Cable Row",
+          "weight_kg": 65,
+          "reps": "3×10",
+          "note": "✅ target achieved"
+        },
+        {
+          "exercise": "Lat Pulldown",
+          "weight_kg": 65,
+          "reps": "3×8"
+        },
+        {
+          "exercise": "X Cable Rear Delt Pull",
+          "weight_kg": 8,
+          "reps": "3×8"
+        },
+        {
+          "exercise": "Preacher Curl",
+          "weight_kg": 12,
+          "reps": "3×8",
+          "note": "12 kg/side — DB format"
+        },
+        {
+          "exercise": "Bayesian Cable Curl",
+          "weight_kg": 14,
+          "reps": "3×8",
+          "note": "🏆 stepped from 13.5 kg"
+        }
+      ]
+    },
+    {
+      "date": "2026-09-W20",
+      "week": 20,
+      "session": "legs",
+      "entries": [
+        {
+          "exercise": "Trap Bar Deadlift",
+          "weight_kg": 120,
+          "reps": "3×8"
+        },
+        {
+          "exercise": "Smith Machine Reverse Lunge",
+          "weight_kg": 60,
+          "reps": "2×8",
+          "note": "NEW exercise"
+        },
+        {
+          "exercise": "Bulgarian Split Squat",
+          "weight_kg": 24,
+          "reps": "3×6",
+          "note": "🏆 stepped from 18 kg"
+        },
+        {
+          "exercise": "Single Leg RDL",
+          "weight_kg": 20,
+          "reps": "2×8"
+        },
+        {
+          "exercise": "SL Machine Hamstring Curl",
+          "weight_kg": 20,
+          "reps": "3×8"
+        },
+        {
+          "exercise": "Bent Leg SL Calf Raise (KB)",
+          "weight_kg": 20,
+          "reps": "3×8",
+          "note": "NEW variation"
+        },
+        {
+          "exercise": "Hip Thrust Machine",
+          "weight_kg": 30,
+          "reps": "2×10",
+          "note": "🏆 stepped from 20 kg"
         }
       ]
     }
