@@ -4457,6 +4457,15 @@
       "status": "GREEN",
       "note": "All signals nominal",
       "briefing": "Easy run — HR 122–140 bpm. Novablast 5. Volume: 23.4km left over 3 sessions (~7.8km each) to clear 38km. W20/24 · 26d to Race 0 · 14.6km of 38–44km on board · ACWR 1.1. Last: R83 quality_a 8.33km (Sep 22)."
+    },
+    {
+      "date": "2026-09-24",
+      "hrv": 58,
+      "rhr": 51,
+      "sleepScore": 70,
+      "status": "GREEN",
+      "note": "All signals nominal",
+      "briefing": "Quality B — 10.7 km/h continuous · target 25-30 min (prescribed) continuous, ceiling 160 bpm. Evo SL, Elite Fitness. Volume: 23.4km left over 2 sessions (~11.7km each) to clear 38km. W20/24 · 25d to Race 0 · 14.6km of 38–44km on board · ACWR 1.1. Last: R83 quality_a 8.33km (Sep 22)."
     }
   ],
   "PHASES": [
