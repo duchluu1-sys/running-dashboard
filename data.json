@@ -3720,6 +3720,217 @@
         "gct-easy-pb",
         "vr-easy-pb"
       ]
+    },
+    {
+      "r": 85,
+      "date": "Sep 25",
+      "type": "quality_b",
+      "wk": 20,
+      "dist": 5.3,
+      "duration": 1852,
+      "moving": 1556,
+      "pace": 6.0,
+      "hrAvg": 144,
+      "hrMax": 155,
+      "te": 3.8,
+      "te_an": 0.6,
+      "gct": 302,
+      "vr": 9.9,
+      "vo": 8.6,
+      "sl": 0.88,
+      "cadence": 159,
+      "pctCeiling": 0,
+      "drift": null,
+      "walkRatio": 2.8,
+      "hrZones": [
+        3,
+        14,
+        37,
+        44,
+        0
+      ],
+      "temp": 29,
+      "surface": "treadmill",
+      "qualityPace": 5.61,
+      "lcrs": 16,
+      "lcrsType": "lt2",
+      "conditions": "16:19 local · Sep 25 · Adizero Adios Pro 4 (DEBUT) · 1% incline · 27–31°C gym · RPE 6/10 Hard · feel Normal · 10.7 km/h continuous target · one 0:51 break mid-session · two blocks: ~12 min + ~16 min · max HR 155 (5 bpm headroom) · Statin Day 119",
+      "flag": "✅✅",
+      "note": "R85 W20 QB · Sep 25 · 5.30 km (Technogym) · 10.7 km/h continuous · Adios Pro 4 debut · 28 min total at 10.7 with one 0:51 break · LCRS 16 min (second block) · avg HR 144 · max HR 155 (5 bpm headroom) · Z4 44% (13:47) — highest Z4 accumulation in program history · Z5 5 sec (0%) · pctCeiling 0 · TE 3.8/0.6 · Anaerobic 0.6 FIRST REGISTERED ANAEROBIC TE · GCT 302 ms (blended — debut shoe, warmup lag) · VR 9.9% (artifact — blended SL 0.88 m depressed by walk/idle; actual running VR ~7.8%) · VO 8.6 cm · cadence 159 spm (corrected from 136 blended) · walk ratio 2.8% · 1% incline · 27–31°C · sweat 486 ml · Statin Day 119",
+      "verdict": "First QB at 10.7 km/h: protocol executed. 28 min total (0:51 break), LCRS 16 min second block. Max HR 155 = 5 bpm from ceiling, never threatened. Z4 44% (13:47) = highest Z4 accumulation in program history. First anaerobic TE registered (0.6). Session was legitimately hard — neuromuscular demand of first continuous QB at confirmed LT2. Mental struggle was real but decision to stop at 28 min was correct: LR tomorrow, first QB at this speed. Pure 10.7 km/h LCRS baseline: 16 min. Previous QB LCRS (R80 29 min) included sub-threshold warmup at 10.3 — comparable threshold portion was ~15 min. R85 matches that. Stay at 10.7 km/h — 10.5 km/h is sub-threshold, not a QB. W22 target: 20–25 min continuous at 10.7 km/h.",
+      "tags": [
+        "quality_b",
+        "treadmill",
+        "adios_pro_4",
+        "debut_shoe",
+        "w20",
+        "10_7_continuous",
+        "highest_z4_program",
+        "first_anaerobic_te",
+        "lcrs_16min"
+      ]
+    },
+    {
+      "r": 86,
+      "date": "Sep 26",
+      "type": "long",
+      "wk": 20,
+      "dist": 21.2,
+      "duration": 10688,
+      "moving": 10426,
+      "pace": 8.4,
+      "paceEasy": 8.2,
+      "hrAvg": 131,
+      "hrMax": 150,
+      "te": 3.8,
+      "te_an": 0.0,
+      "gct": 320,
+      "vr": 9.7,
+      "vo": 8.4,
+      "sl": 0.89,
+      "cadence": 144,
+      "pctCeiling": 0,
+      "drift": 4.4,
+      "walkRatio": 16.0,
+      "hrZones": [
+        9,
+        65,
+        20,
+        0,
+        0
+      ],
+      "temp": 31,
+      "surface": "outdoor",
+      "lcrs": 46,
+      "lcrsType": "easy",
+      "conditions": "05:19 local · Sep 26 (Sat) · Novablast 5 · outdoor Hồ Tây · 29–34°C (avg 31°C — 29°C first half, rising to 34°C) · fueling: 4 gels (first ~35 min, 5 min early) + 2 coconuts + 2 cokes + 3 electrolyte capsules + frequent water · sweat 2,945 ml · RPE N/A · feel Good · Statin Day 120",
+      "flag": "✅✅",
+      "note": "R86 W20 LR · Sep 26 · 21.20 km 🏆 NEW PROGRAM DISTANCE RECORD (prev 16.71 km R81) · Novablast 5 · Hồ Tây outdoor · avg HR 131 bpm · max HR 150 (10 bpm) · drift +4.4 bpm (Q1 129.2 → Q4 133.6) · Z2 65% (1:57:32) · Z3 20% (37:24) · Z4 0% · GCT 320 ms · VO 8.4 cm 🏆 outdoor best (prev 8.8 R82) · VR 9.7% · LCRS 46 min · cadence 144 spm (corrected from 134 blended) · walk ratio 16.0% (28:32 walk) · TE 3.8/0.0 Tempo (High Aerobic) · temp 29–34°C · 4 gels + 2 coconuts + 2 cokes + 3 electrolytes + water · 2,945 ml sweat · felt good start to finish · Statin Day 120",
+      "verdict": "Program distance record: 21.20 km (+4.49 km over R81). Half marathon distance completed. Avg HR 131 bpm over 3 hours in 31°C heat. Drift +4.4 bpm: Q1 129.2 → Q4 133.6 — fully controlled given heat climb to 34°C and extra distance vs R81. Z2 65% appropriate for hot outdoor LR. LCRS 46 min continuous: longest outdoor easy segment in program. Pace consistency confirmed by lap data: no late-race fade. Fueling compliant (4 gels, first at 35 min — 5 min early, close to protocol) with excellent supplementary hydration. Aerobic base confirmed. VO 8.4 cm: new outdoor best. W20 closes at 47.19 km (above ceiling, one illness day lost; acceptable).",
+      "tags": [
+        "long",
+        "outdoor",
+        "novablast",
+        "w20",
+        "program_distance_record",
+        "half_marathon",
+        "ho_tay",
+        "4_gels_compliant",
+        "vo_outdoor_best",
+        "lcrs_46min"
+      ],
+      "laps": [
+        {
+          "km": 1,
+          "pace": 8.07,
+          "note": ""
+        },
+        {
+          "km": 2,
+          "pace": 7.77,
+          "note": ""
+        },
+        {
+          "km": 3,
+          "pace": 7.92,
+          "note": ""
+        },
+        {
+          "km": 4,
+          "pace": 7.73,
+          "note": ""
+        },
+        {
+          "km": 5,
+          "pace": 8.12,
+          "note": ""
+        },
+        {
+          "km": 6,
+          "pace": 8.58,
+          "note": "walk break"
+        },
+        {
+          "km": 7,
+          "pace": 7.47,
+          "note": ""
+        },
+        {
+          "km": 8,
+          "pace": 9.27,
+          "note": "walk break"
+        },
+        {
+          "km": 9,
+          "pace": 8.07,
+          "note": ""
+        },
+        {
+          "km": 10,
+          "pace": 7.85,
+          "note": ""
+        },
+        {
+          "km": 11,
+          "pace": 7.78,
+          "note": ""
+        },
+        {
+          "km": 12,
+          "pace": 8.15,
+          "note": ""
+        },
+        {
+          "km": 13,
+          "pace": 8.55,
+          "note": "walk break"
+        },
+        {
+          "km": 14,
+          "pace": 8.17,
+          "note": ""
+        },
+        {
+          "km": 15,
+          "pace": 9.12,
+          "note": "walk break"
+        },
+        {
+          "km": 16,
+          "pace": 8.6,
+          "note": ""
+        },
+        {
+          "km": 17,
+          "pace": 8.27,
+          "note": ""
+        },
+        {
+          "km": 18,
+          "pace": 9.42,
+          "note": "walk break / heat"
+        },
+        {
+          "km": 19,
+          "pace": 8.65,
+          "note": ""
+        },
+        {
+          "km": 20,
+          "pace": 8.48,
+          "note": ""
+        },
+        {
+          "km": 21,
+          "pace": 9.4,
+          "note": "walk break"
+        },
+        {
+          "km": 21.2,
+          "pace": 13.32,
+          "note": "cooldown"
+        }
+      ]
     }
   ],
   "GATES": [
@@ -3852,11 +4063,11 @@
     "age": 30,
     "phase": "Phase 2",
     "phaseName": "Quality Development",
-    "week": 20,
+    "week": 21,
     "totalWeeks": 24,
     "deloadWeek": 21,
-    "weekVolOnBoard": 20.69,
-    "lastWeekVol": 30.01,
+    "weekVolOnBoard": 0.0,
+    "lastWeekVol": 47.19,
     "weekTarget": "37-42",
     "easyHRBand": [
       122,
@@ -3878,7 +4089,7 @@
     "statinStart": "2026-05-30",
     "stressLevel": "MODERATE",
     "formCue": "Eyes on the horizon -- head up every session",
-    "date": "September 24, 2026",
+    "date": "September 26, 2026",
     "hrvBaseline": [
       53,
       68
@@ -4149,7 +4360,12 @@
     "lastQAResult": "4×10 min @ 10.7/10.7/10.9/10.9 km/h · max HR 151 (9 bpm) · GCT 284 ms 🏆 TIES PROGRAM BEST (new quality session low, prev 297 ms R80) · Z4 26% · Z5 0% · first QA at new speed tier · stay at 10.7/10.9",
     "ltNote": "LT2 range empirically revised Sep 17 (R80 QB). R80: 10.7 km/h × ~15 min continuous → HR stable 152–154 bpm (Z4 dominant), max 157 (3 bpm headroom). 10.7 km/h is confirmed sustainable threshold pace. LT2 lower bound: 10.5→10.7 km/h (5.71→5.61 min/km). Upper bound: 11.0 km/h (5.45 min/km) — unconfirmed. Key: 5:36/km (10.7 km/h) is 5 sec/km FASTER than sub-4 marathon goal pace (5:41/km). LT1 (ltPace 6.32 = 9.49 km/h) unchanged — consistent with R80 (10.3 km/h settled 144–145 bpm = sub-threshold). Lactate test will replace all estimates.",
     "lt2RevisionDate": "Sep 17, 2026",
-    "lt2RevisionRun": "R80"
+    "lt2RevisionRun": "R80",
+    "lastQBDate": "Sep 25, 2026",
+    "lastQBResult": "10.7 km/h continuous · 28 min (0:51 break) · LCRS 16 min · max HR 155 (5 bpm) · Z4 44% program high · first anaerobic TE 0.6 · Adios Pro 4 debut · W22 target: 20-25 min continuous",
+    "lastLRDate": "Sep 26, 2026",
+    "lastLRDist": 21.2,
+    "lastLRResult": "21.20 km 🏆 NEW PROGRAM RECORD · Hồ Tây · avg HR 131 · max 150 (10 bpm) · drift +4.4 bpm · LCRS 46 min · Z2 65% · 4 gels compliant · 29–34°C · Novablast 5 · W20 CLOSED 47.19 km · W21 deload begins Sep 28"
   },
   "READINESS_LOG": [
     {
