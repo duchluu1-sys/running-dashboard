@@ -3931,6 +3931,48 @@
           "note": "cooldown"
         }
       ]
+    },
+    {
+      "r": 87,
+      "date": "Sep 28",
+      "type": "easy",
+      "wk": 21,
+      "dist": 5.12,
+      "duration": 41.92,
+      "moving": 40.63,
+      "pace": 8.18,
+      "paceEasy": 7.93,
+      "hrAvg": 127,
+      "hrMax": 137,
+      "te": 3.2,
+      "te_an": 0.0,
+      "gct": 288,
+      "vr": 8.3,
+      "vo": 10.4,
+      "sl": 1.27,
+      "cadence": 145,
+      "pctCeiling": null,
+      "drift": null,
+      "walkRatio": 8.5,
+      "hrZones": [
+        3,
+        87,
+        0,
+        0,
+        0
+      ],
+      "temp": 29,
+      "surface": "treadmill",
+      "conditions": "17:16 · Technogym · 1% grade · 28–31°C gym · deload W21 Day 1",
+      "flag": "✅✅",
+      "note": "W21 deload Day 1 · 5.12 km Technogym · avg HR 127 · max HR 137 ✅ · Z2 87% · GCT 288ms 🏆 easy-session low · VR 8.3% 🏆 ties race best (R61) · cadence 145 spm · VO 10.4 cm · stride 1.27m · RPE 2/10 · feel Strong · 28–31°C · Statin Day 122",
+      "verdict": "Textbook deload Day 1. Max HR 137 — 6 bpm under walk trigger, 0% Z3+. GCT 288ms new easy-session program low (prior R84 302ms). VR 8.3% ties R61 race best. Full aerobic control two days post 21.20 km LR program record.",
+      "tags": [
+        "easy",
+        "deload",
+        "gct-easy-low",
+        "vr-ties-race-best"
+      ]
     }
   ],
   "GATES": [
@@ -4066,7 +4108,7 @@
     "week": 21,
     "totalWeeks": 24,
     "deloadWeek": 21,
-    "weekVolOnBoard": 0.0,
+    "weekVolOnBoard": 5.12,
     "lastWeekVol": 47.19,
     "weekTarget": "37-42",
     "easyHRBand": [
@@ -4089,7 +4131,7 @@
     "statinStart": "2026-05-30",
     "stressLevel": "MODERATE",
     "formCue": "Eyes on the horizon -- head up every session",
-    "date": "September 26, 2026",
+    "date": "September 28, 2026",
     "hrvBaseline": [
       53,
       68
