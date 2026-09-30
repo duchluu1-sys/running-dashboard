@@ -4998,6 +4998,15 @@
       "status": "GREEN",
       "note": "All signals nominal",
       "briefing": "Quality A — 4×4 min — deload (speed TBD, ~10.5 km/h), ceiling 160 bpm. Evo SL, Elite Fitness. [4d since last quality] Volume: 26km left over 4 sessions (~6.5km each) to clear 26km. W21/24 · 20d to Race 0 · 0.0km of 26–28km on board · ACWR 1.17. Last: R86 long 21.2km (Sep 26)."
+    },
+    {
+      "date": "2026-10-01",
+      "hrv": 52,
+      "rhr": 50,
+      "sleepScore": 54,
+      "status": "CAUTION",
+      "note": "HRV 52 below baseline (53); Sleep score 54",
+      "briefing": "CAUTION. HRV 52 below baseline (53); Sleep score 54. EASY ONLY — QUALITY B downgraded. W21/24 · 17d to Race 0 · 8.87km of 20–25km on board · ACWR 1.15. Last: R88 quality_a 3.75km (Sep 30)."
     }
   ],
   "PHASES": [
