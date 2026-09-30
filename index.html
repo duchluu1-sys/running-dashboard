@@ -95,7 +95,7 @@ body{background:var(--bg);background-image:var(--grid);color:var(--tx);font-fami
 #radar-card{grid-area:radar}#log-card{grid-area:log}
 /* STATS ROW */
 .stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--bd)}
-.stat-cell{background:var(--sf2);padding:14px 16px}
+.stat-cell{background:var(--sf2);padding:14px 16px;min-width:0}
 .stat-val{font-family:var(--mono);font-size:1.5rem;font-weight:700;color:var(--tx);line-height:1}
 .stat-val.gn{color:var(--gn)}.stat-val.am{color:var(--am)}.stat-val.rd{color:var(--rd)}.stat-val.vb{color:var(--vb)}.stat-val.cn{color:var(--cn)}
 .stat-lbl{font-family:var(--mono);font-size:.48rem;letter-spacing:2px;text-transform:uppercase;color:var(--mu);margin-top:4px}
@@ -206,6 +206,16 @@ body{background:var(--bg);background-image:var(--grid);color:var(--tx);font-fami
 .log-hdr,.log-row{display:grid;grid-template-columns:36px 48px 50px 56px 52px 42px 42px 40px 28px;gap:0;padding:6px 12px;align-items:center}
 .log-hdr{font-family:var(--mono);font-size:.46rem;letter-spacing:2px;text-transform:uppercase;color:var(--mu);border-bottom:1px solid var(--bd);font-weight:700}
 .log-row{border-bottom:1px solid rgba(0,212,255,.05);cursor:pointer;transition:background .15s;font-family:var(--mono);font-size:.65rem;min-height:44px;border-left:2px solid transparent}
+/* S46 fix — desktop log-card gets 38%/62% of a wide viewport but the row grid was still phone-width fixed px, so the table sat squeezed in a corner of a big card. Scale it up past tablet. */
+@media(min-width:1025px){
+  .log-hdr,.log-row{grid-template-columns:44px 70px 62px 76px 66px 54px 54px 54px 34px;gap:4px;padding:9px 18px}
+  .log-hdr{font-size:.5rem}
+  .log-row{font-size:.76rem;min-height:48px}
+}
+@media(min-width:1400px){
+  .log-hdr,.log-row{grid-template-columns:50px 1fr 1fr 1fr 1fr 1fr 1fr 1fr 38px;padding:10px 22px}
+  .log-row{font-size:.8rem}
+}
 .log-row:hover{background:var(--sf2)}.log-row.quality{border-left-color:var(--v)}.log-row.long{border-left-color:var(--cn)}.log-row.easy{border-left-color:var(--gn)}
 .log-scroll{max-height:420px;overflow-y:auto}.log-scroll::-webkit-scrollbar{width:3px}.log-scroll::-webkit-scrollbar-thumb{background:var(--v);border-radius:2px}.log-scroll::-webkit-scrollbar-track{background:transparent}
 .log-detail{display:none;padding:10px 12px 14px;background:var(--sf2);border-bottom:1px solid var(--bd);border-left:2px solid rgba(0,212,255,.25)}
@@ -329,6 +339,11 @@ body{background:var(--bg);background-image:var(--grid);color:var(--tx);font-fami
   .med-row{grid-template-columns:1fr}.fshort{display:none}
   .rd-block{flex-direction:column;gap:12px}
   .lr-grid{grid-template-columns:repeat(2,1fr)}
+  .ld-metrics{grid-template-columns:repeat(2,1fr)}
+  /* S46 fix — 4-col stat rows (LT2 Ladder etc.) overflow their card on phone width; force 2x2 and let values wrap */
+  .stats-row[style*="repeat(4"]{grid-template-columns:repeat(2,1fr)!important}
+  .stat-val{font-size:1.15rem;white-space:normal;overflow-wrap:break-word;word-break:break-word}
+  .stat-sub{overflow-wrap:break-word}
   /* S25/S27 — grids handled by mobile-first defaults above */
   .eval-grid{grid-template-columns:1fr;gap:8px}
   .race-pipe{grid-template-columns:1fr}
@@ -1165,7 +1180,7 @@ body{background:var(--bg);background-image:var(--grid);color:var(--tx);font-fami
 .k-sub{font-family:var(--mono);font-size:.5rem;color:var(--m2);margin-top:3px;line-height:1.45}
 @media(max-width:767px){.k-strip{grid-template-columns:repeat(2,1fr)}}
 .lad-wrap{padding:16px 20px 6px}
-.lad-track{position:relative;height:14px;background:var(--sf2);border:1px solid var(--bd);border-radius:7px;margin:26px 0 30px}
+.lad-track{position:relative;height:14px;background:var(--sf2);border:1px solid var(--bd);border-radius:7px;margin:40px 0 44px}
 .lad-fill{position:absolute;left:0;top:0;bottom:0;border-radius:7px;background:linear-gradient(90deg,rgba(0,212,255,.18),rgba(0,212,255,.55))}
 .lad-pin{position:absolute;top:-4px;bottom:-4px;width:2px;transform:translateX(-1px)}
 .lad-pin-lbl{position:absolute;top:-19px;transform:translateX(-50%);font-family:var(--mono);font-size:.46rem;white-space:nowrap;letter-spacing:.5px}
@@ -2300,7 +2315,14 @@ function renderLT2Ladder(a){
   const lo=9.0,hi=Math.max(12.4,pg.reqKmh+0.4);
   const pos=k=>Math.max(0,Math.min(100,(k-lo)/(hi-lo)*100));
   const mpKmh=pg.goalKmh;
-  const pin=(k,col,lbl,sub)=>`<div class="lad-pin" style="left:${pos(k).toFixed(1)}%;background:${col}"><div class="lad-pin-lbl" style="color:${col}">${lbl}</div><div class="lad-pin-sub">${sub}</div></div>`;
+  // S46 fix — MP and LT2-NOW pins sit close together on the track (10.55 vs 10.7 km/h) and their
+  // labels collided/overlapped, worst on phone width. Stagger to a second tier when pins are close.
+  const collide=Math.abs(pos(mpKmh)-pos(pg.lt2Kmh))<9;
+  const pin=(k,col,lbl,sub,tier)=>{
+    const t=tier||0;
+    const lblTop=-19-(t*15), subBot=-19-(t*15);
+    return `<div class="lad-pin" style="left:${pos(k).toFixed(1)}%;background:${col}"><div class="lad-pin-lbl" style="color:${col};top:${lblTop}px">${lbl}</div><div class="lad-pin-sub" style="bottom:${subBot}px">${sub}</div></div>`;
+  };
   const steps=lad.map(x=>`<div class="lad-step${x.confirmedLT2?' conf':''}">
       <div class="lad-step-r">${x.run} · ${x.date} · ${x.type}</div>
       <div class="lad-step-v">${x.kmh}${x.kmhTop?'/'+x.kmhTop:''} <span style="font-size:.5rem;font-weight:400;color:var(--mu)">km/h</span></div>
@@ -2321,9 +2343,9 @@ function renderLT2Ladder(a){
     <div class="lad-wrap">
       <div class="lad-track">
         <div class="lad-fill" style="width:${pos(pg.lt2Kmh).toFixed(1)}%"></div>
-        ${pin(mpKmh,'rgba(168,85,247,.9)','MP 5:41',mpKmh.toFixed(1)+' km/h')}
-        ${pin(pg.lt2Kmh,'#00d4ff','LT2 NOW',pg.lt2Kmh+' km/h')}
-        ${pin(pg.reqKmh,'#f59e0b','SUB-4 LT2',`≥${pg.reqKmh} km/h`)}
+        ${pin(mpKmh,'rgba(168,85,247,.9)','MP 5:41',mpKmh.toFixed(1)+' km/h',collide?1:0)}
+        ${pin(pg.lt2Kmh,'#00d4ff','LT2 NOW',pg.lt2Kmh+' km/h',0)}
+        ${pin(pg.reqKmh,'#f59e0b','SUB-4 LT2',`≥${pg.reqKmh} km/h`,0)}
       </div>
     </div>
     <div class="lad-steps">${steps}</div>
