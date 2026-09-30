@@ -1910,7 +1910,8 @@
         "pacing-error-km1",
         "reserve-confirmed"
       ],
-      "lcrsType": "lt2"
+      "lcrsType": "LT2",
+      "lcrsNote": "first segment 5:16/km (~11.4 km/h) — above LT2 floor; walk-broken race effort"
     },
     {
       "r": 62,
@@ -2117,7 +2118,7 @@
         "heat"
       ],
       "lcrs": 14,
-      "lcrsType": "sublt1"
+      "lcrsType": "subLT1"
     },
     {
       "r": 67,
@@ -2352,7 +2353,7 @@
       "qualityPace": 6.0,
       "runPace": 6.0,
       "lcrs": 8,
-      "lcrsType": "LT2",
+      "lcrsType": "subLT2",
       "laps": [
         {
           "km": 1,
@@ -2389,6 +2390,11 @@
           "pace": 8.95,
           "hr": null
         }
+      ],
+      "lcrsNote": "QA interval block below the 10.7 km/h LT2 floor — not an LCRS@LT2 datapoint",
+      "workKmh": [
+        9.8,
+        10.0
       ]
     },
     {
@@ -2435,7 +2441,7 @@
         "30-min-continuous"
       ],
       "lcrs": 30,
-      "lcrsType": "sublt1",
+      "lcrsType": "subLT1",
       "laps": [
         {
           "km": 1,
@@ -2735,7 +2741,10 @@
         }
       ],
       "lcrs": 32,
-      "lcrsType": "quality_b"
+      "lcrsType": "subLT1",
+      "workKmh": [
+        9.23
+      ]
     },
     {
       "r": 74,
@@ -2934,7 +2943,8 @@
         }
       ],
       "lcrs": 9.0,
-      "lcrsType": "easy_est"
+      "lcrsType": "easy",
+      "lcrsNote": "estimated (was easy_est)"
     },
     {
       "r": 76,
@@ -2981,7 +2991,12 @@
         "w18"
       ],
       "lcrs": 8,
-      "lcrsType": "lt2"
+      "lcrsType": "subLT2",
+      "lcrsNote": "QA interval block below the 10.7 km/h LT2 floor — not an LCRS@LT2 datapoint",
+      "workKmh": [
+        10.0,
+        10.3
+      ]
     },
     {
       "r": 77,
@@ -3027,7 +3042,7 @@
         "lcrs_record"
       ],
       "lcrs": 45,
-      "lcrsType": "qb",
+      "lcrsType": "subLT1",
       "laps": [
         {
           "km": 1,
@@ -3069,6 +3084,9 @@
           "pace": 9.32,
           "note": "cooldown"
         }
+      ],
+      "workKmh": [
+        9.5
       ]
     },
     {
@@ -3236,7 +3254,7 @@
       "surface": "treadmill",
       "qualityPace": 6.1,
       "lcrs": 10,
-      "lcrsType": "lt2",
+      "lcrsType": "subLT2",
       "conditions": "14:05 local · Sep 15 · Evo SL · 1% incline · 26–30°C · Statin Day 109 · 4×10 min @ 10.0/10.0/10.3/10.3 km/h · max HR 151 (9 bpm headroom) · LCRS LT2 10 min 🏆 new record · RPE 4/10 Somewhat Hard · feel Strong",
       "flag": "✅",
       "note": "R79 W19 QA · Sep 15 · 8.01 km (Technogym) · 4×10 min @ 10.0/10.0/10.3/10.3 km/h · 1% incline · Evo SL · avg HR 131 · max HR 151 (9 bpm headroom) · Z3 41% (22:52) · Z4 3% (1:59) · Z5 0% · GCT 300 ms 🏆 new program QA low (prev 301 ms R76) · VR 8.8% · VO 9.8 cm · cadence 148 spm (corrected from 121 blended) · walk 11.9% · TE 3.5/0.0 · 26–30°C · Statin Day 109 · LCRS LT2 10 min 🏆 (prev 8 min R69/R76) · adaptation: same speed +2 min/interval max HR down 3 bpm vs R76",
@@ -3291,6 +3309,11 @@
           "pace": 7.15,
           "note": "interval 4 / cooldown"
         }
+      ],
+      "lcrsNote": "QA interval block below the 10.7 km/h LT2 floor — not an LCRS@LT2 datapoint",
+      "workKmh": [
+        10.0,
+        10.3
       ]
     },
     {
@@ -3325,10 +3348,10 @@
       "surface": "treadmill",
       "qualityPace": 5.83,
       "lcrs": 29,
-      "lcrsType": "lt2",
+      "lcrsType": "LT2",
       "conditions": "16:43 local · Sep 17 · Evo SL · 1% incline · 26–31°C · HRV ~49 · Statin Day 111 · 10.3 km/h × ~14 min (HR settled 144–145, sub-threshold) → athlete-initiated bump to 10.7 km/h × ~15 min (HR stable 152–154, Z4 dominant) · total continuous ~29 min · max HR 157 (3 bpm headroom) · ceiling not reached · RPE 5/10 Hard · feel Strong",
       "flag": "✅",
-      "note": "R80 W19 QB · Sep 17 · 5.29 km (Technogym) · 10.3→10.7 km/h continuous (athlete-initiated mid-run speed bump) · Evo SL · 1% incline · avg HR 141 · max HR 157 (3 bpm headroom below 160) · Z4 38% (12:43) · Z5 1% (0:25 at 154–157 bpm — below 160 ceiling, pctCeiling 0) · GCT 297 ms 🏆 new program low (prev 300 ms R79) · VR 8.9% · VO 10.1 cm · cadence 150 spm (corrected from 136 blended) · walk 2.5% (0:50 at end) · TE 3.8/0.0 · 26–31°C · Statin Day 111 · LCRS 29 min 🏆 new LT2-continuous record (prev 10 min R79 intervals)",
+      "note": "R80 W19 QB · Sep 17 · 5.29 km (Technogym) · 10.3→10.7 km/h continuous (athlete-initiated mid-run speed bump) · Evo SL · 1% incline · avg HR 141 · max HR 157 (3 bpm headroom below 160) · Z4 38% (12:43) · Z5 1% (0:25 at 154–157 bpm — below 160 ceiling, pctCeiling 0) · GCT 297 ms 🏆 new program low (prev 300 ms R79) · VR 8.9% · VO 10.1 cm · cadence 150 spm (corrected from 136 blended) · walk 2.5% (0:50 at end) · TE 3.8/0.0 · 26–31°C · Statin Day 111 · LCRS 29 min 🏆 new LT2-continuous record (prev 10 min R79 intervals) · [Sep 30 revision: 29-min LCRS disqualified as LT2 record — disrupted by a mid-session break. LCRS@LT2 record = R85 16 min]",
       "verdict": "Decisive QB. At 10.3 km/h HR settled 144–145 (sub-threshold, same as R77 at 9.5 km/h for 45 min). Athlete bumped to 10.7 km/h — HR stabilised at 152–154 after ~3–4 min and held there for ~15 min. 10.7 km/h is confirmed sustainable threshold pace. Ceiling (160 bpm) was never threatened. Z4 38% total session — proper threshold stimulus finally achieved in continuous format. GCT 297 ms: new all-session program low — mechanics improving at higher speed. 5:36/km (10.7 km/h) is 5 sec/km faster than sub-4 marathon goal pace (5:41/km) — significant data point. LT2 lower bound revised: 10.5→10.7 km/h (confirmed sustainable). LT2 upper bound: 11.0 km/h (still unconfirmed). W20 QA prescription revised: 10.5/10.7 obsolete → 10.7/10.9 km/h × 4×10 min. LCRS LT2 continuous: 10 min (R79 intervals) → 29 min (R80 continuous). Phase 2 LCRS target (20 min by W20) exceeded in W19.",
       "tags": [
         "quality_b",
@@ -3338,7 +3361,8 @@
         "speed_bump",
         "lcrs_record",
         "gct_record",
-        "lt2_confirmed"
+        "lt2_confirmed",
+        "lcrs-disqualified"
       ],
       "laps": [
         {
@@ -3371,6 +3395,12 @@
           "pace": 11.82,
           "note": "cooldown"
         }
+      ],
+      "lcrsCounted": false,
+      "lcrsNote": "29 min total (10.3→10.7 km/h) disrupted mid-session by a break — not truly continuous. Not counted as LCRS@LT2 record (Sep 30, 2026 revision). Threshold portion at 10.7 km/h ≈15 min.",
+      "workKmh": [
+        10.3,
+        10.7
       ]
     },
     {
@@ -3618,7 +3648,7 @@
       "surface": "treadmill",
       "qualityPace": 5.56,
       "lcrs": 10,
-      "lcrsType": "lt2",
+      "lcrsType": "LT2",
       "conditions": "15:24 local · Sep 22 · Evo SL · 1% incline · 26–30°C gym · HRV GREEN (54 ms) · RPE 6/10 Hard · feel Normal · 4×10 min @ 10.7/10.7/10.9/10.9 km/h · max HR 151 (9 bpm headroom) · Z4 26% (14:58) · first QA at revised speed tier · Statin Day 116",
       "flag": "✅✅",
       "note": "R83 W20 QA · Sep 22 · 8.33 km (Technogym) · 4×10 min @ 10.7/10.7/10.9/10.9 km/h · 1% incline · Evo SL · avg HR 135 · max HR 151 (9 bpm headroom) · Z4 26% (14:58) — 9× threshold accumulation vs R79 at same max HR · Z5 0% · GCT 284 ms 🏆 TIES PROGRAM BEST (R61 Aug 14 outdoor race) · new quality session low (prev 297 ms R80) · VR 8.6% · VO 9.8 cm · SL 1.16 m · cadence 155 spm (corrected from 122 blended — idle depresses avg) · walk ratio 10.5% (5:56 walk + 8:45 idle) · TE 3.8/0.3 · Threshold (High Aerobic) · run time 42:05 · sweat 899 ml · RPE 6/10 Hard · Statin Day 116",
@@ -3674,6 +3704,10 @@
           "pace": 11.87,
           "note": "cooldown / idle capture"
         }
+      ],
+      "workKmh": [
+        10.7,
+        10.9
       ]
     },
     {
@@ -3753,7 +3787,7 @@
       "surface": "treadmill",
       "qualityPace": 5.61,
       "lcrs": 16,
-      "lcrsType": "lt2",
+      "lcrsType": "LT2",
       "conditions": "16:19 local · Sep 25 · Adizero Adios Pro 4 (DEBUT) · 1% incline · 27–31°C gym · RPE 6/10 Hard · feel Normal · 10.7 km/h continuous target · one 0:51 break mid-session · two blocks: ~12 min + ~16 min · max HR 155 (5 bpm headroom) · Statin Day 119",
       "flag": "✅✅",
       "note": "R85 W20 QB · Sep 25 · 5.30 km (Technogym) · 10.7 km/h continuous · Adios Pro 4 debut · 28 min total at 10.7 with one 0:51 break · LCRS 16 min (second block) · avg HR 144 · max HR 155 (5 bpm headroom) · Z4 44% (13:47) — highest Z4 accumulation in program history · Z5 5 sec (0%) · pctCeiling 0 · TE 3.8/0.6 · Anaerobic 0.6 FIRST REGISTERED ANAEROBIC TE · GCT 302 ms (blended — debut shoe, warmup lag) · VR 9.9% (artifact — blended SL 0.88 m depressed by walk/idle; actual running VR ~7.8%) · VO 8.6 cm · cadence 159 spm (corrected from 136 blended) · walk ratio 2.8% · 1% incline · 27–31°C · sweat 486 ml · Statin Day 119",
@@ -3768,6 +3802,10 @@
         "highest_z4_program",
         "first_anaerobic_te",
         "lcrs_16min"
+      ],
+      "lcrsNote": "second block at pure 10.7 km/h after one 0:51 break — current LCRS@LT2 record",
+      "workKmh": [
+        10.7
       ]
     },
     {
@@ -3996,16 +4034,30 @@
       "pctCeiling": 0,
       "drift": null,
       "walkRatio": 18.6,
-      "hrZones": [13, 40, 20, 0, 0],
+      "hrZones": [
+        13,
+        40,
+        20,
+        0,
+        0
+      ],
       "temp": 28,
       "surface": "treadmill",
       "conditions": "16:16 · Technogym · 1% grade · 27–30°C gym · W21 Deload QA · 4×4 min 10.7×2+10.9×2 · Evo SL",
       "flag": "✅✅",
       "lcrs": 4,
-      "lcrsType": "lt2",
+      "lcrsType": "LT2",
       "note": "W21 Deload QA · 4×4 min 10.7×2+10.9×2 · avg HR 124 · max HR 143 · pctCeiling 0 (17 bpm below ceiling) · Z2 40% Z3 20% Z4 0% · GCT 297ms · VR 9.3% · cadence ~160 spm corrected · VO 8.6cm · stride 0.95m · TE 2.7/0.0 · walk ratio 18.6% · RPE 2/10 · Evo SL · Statin Day 124",
       "verdict": "Textbook deload QA. pctCeiling 0 (max 143, 17 bpm below 160 ceiling). 0% Z4/Z5. TE 2.7/0.0 appropriate deload response. GCT 297ms whole-session avg (steady-state ~278–290ms from chart). Max HR 143 at quality pace = significant aerobic headroom — efficiency at 10.7–10.9 km/h confirmed.",
-      "tags": ["quality_a", "deload", "ceiling-clean"]
+      "tags": [
+        "quality_a",
+        "deload",
+        "ceiling-clean"
+      ],
+      "workKmh": [
+        10.7,
+        10.9
+      ]
     }
   ],
   "GATES": [
@@ -4013,21 +4065,29 @@
       "id": 1,
       "type": "hard",
       "name": "Sustained Volume",
-      "short": "3 weeks >=38km injury-free",
-      "progress": 0,
+      "short": "2 qualifying weeks ≥38 km (W20 closed 47.19km + W22 target ≥38km) — W21/W23/W24 excluded",
+      "progress": 50,
       "status": "pending",
-      "detail": "3 consecutive weeks at or above 38km without injury or unplanned rest. Best 3-week stretch: W11–W13 = 36.60 + 28.30 + 40.26 — W12 fell short. W16: 38.17km ✅ · W17: ~27km (vacation) ❌ · W18: 36.64km ❌ (LR shortened). W19 target 38-44 km: 13.30 km on board (Legs + LR pending). Gate requires 3 full consecutive weeks each ≥38 km. ETA W20-22 if W19 closes clean.",
-      "eta": "~W20-22 if W19 closes ≥38 km"
+      "detail": "RE-SPECIFIED Sep 30, 2026 (athlete-approved): 2 qualifying weeks ≥38 km required — W20 (closed, 47.19 km ✅) + W22 (target ≥38 km). W21 (deload), W23 (now Race 0 week, provisional 20–26 km taper target), and W24 (deload) are excluded as structurally reduced weeks that cannot carry a third qualifying week before Phase 3 starts (~Oct 27, 2026). Progress: W20 = 47.19 km ✅ (1 of 2). W22 pending.",
+      "eta": "W22 close · Oct 2026",
+      "qualifyingWeeks": [
+        20,
+        22
+      ],
+      "volThreshold": 38
     },
     {
       "id": 2,
       "type": "hard",
       "name": "Quality Repeatability",
-      "short": "2x20 intervals + 2x20 tempo ceiling-clean",
-      "progress": 20,
-      "status": "pending",
-      "detail": "Both 2×20 min Quality A AND 2×20 min Quality B (tempo) completed ceiling-clean. Current LCRS position: QA interval = 10 min (R79, Sep 15) · QB continuous = 29 min (R80, Sep 17 · 10.7 km/h threshold). W20 QA target: 4×10 min @ 10.7/10.9 km/h → step to 2×20 min when LCRS reaches 20 min per interval. Gate clears when 2×20 min QA + 2×20 min QB both ceiling-clean in 2 separate weeks.",
-      "eta": "~W23 Nov 2026"
+      "short": "1 QA + 1 QB ≥10.7 km/h · ceiling-clean · 2 separate weeks",
+      "progress": 100,
+      "status": "cleared",
+      "detail": "RE-SPECIFIED Sep 30, 2026 (athlete-approved): 2 quality sessions (1 QA + 1 QB), each at or above the confirmed LT2 floor (10.7 km/h), each ceiling-clean (0% time >160 bpm), completed in 2 separate weeks. Satisfied by R85 (QB, W20, Sep 25 · continuous 10.7 km/h · max 155 · 0%) + R88 (QA, W21, Sep 30 · 4×4 min 10.7/10.9 · max 143 · 0%). Caveat: R88 was a deload-dose QA (4×4 min) — the criterion is met literally; it is a weak repeatability test. R83 (QA W20) + R85 share a week and do not count as a pair.",
+      "eta": "CLEARED Sep 30, 2026",
+      "minKmh": 10.7,
+      "clearedDate": "Sep 30, 2026",
+      "clearedRun": "R85 + R88"
     },
     {
       "id": 3,
@@ -4060,21 +4120,22 @@
       "short": "VPBank Hanoi 10K completed",
       "progress": 0,
       "status": "pending",
-      "detail": "VPBank Hanoi 10K -- October 2026. Running with partner. Low stakes. Sub-55 min is Gate 1 fitness check.",
-      "eta": "Oct 2026"
+      "detail": "VPBank Hanoi 10K — Sunday Oct 18, 2026 (W23 race week). Running with partner. Sub-55:00 is the Gate 1 fitness-check prediction (M).",
+      "eta": "Oct 18, 2026"
     },
     {
       "id": 6,
       "type": "hard",
       "name": "Test Data",
-      "short": "⛔ RETIRED Sep 30, 2026",
+      "short": "⛔ Retired — geographic constraint, see fallback plan",
       "progress": 0,
       "status": "retired",
-      "detail": "Gate 6 retired Sep 30, 2026 — geographic constraint (not in HCMC near-term). Regenetics HCMC dropped. Phase 3 zones estimated from Phase 2 empirical LT2 data (10.7 km/h lower bound confirmed R80) + Race 0 HR calibration data (Oct 19). Confidence: medium-low. Fallback: Viện Y học thể thao Hanoi — book if ≥2 Phase 3 QA ceiling breaches (>160 bpm) attributable to zone miscalibration.",
+      "detail": "Gate 6 retired Sep 30, 2026 — geographic constraint (not in HCMC near-term). Non-blocking: excluded from the hard-gate count. Phase 3 zones estimated from Phase 2 empirical LT2 data (10.7 km/h floor confirmed R80) + Race 0 HR calibration data (Oct 18). Confidence: medium-low. Fallback: Viện Y học thể thao Hanoi — book if ≥2 Phase 3 QA ceiling breaches (>160 bpm) attributable to zone miscalibration.",
       "eta": "⛔ Retired",
       "retiredDate": "Sep 30, 2026",
       "retiredReason": "Geographic constraint — not in HCMC near-term",
-      "fallback": "Viện Y học thể thao Hanoi — trigger: ≥2 Phase 3 QA ceiling breaches attributable to zone miscalibration"
+      "fallback": "Viện Y học thể thao Hanoi — trigger: ≥2 Phase 3 QA ceiling breaches attributable to zone miscalibration",
+      "blocking": false
     },
     {
       "id": 7,
@@ -4111,9 +4172,9 @@
     {
       "name": "VPBank Hanoi 10K",
       "label": "Race 0",
-      "date": "2026-10-19",
-      "goal": "Sub-55 min (Gate 1 fitness check)",
-      "note": "Running with partner. Low pressure. Primary purpose: race-day execution data point.",
+      "date": "2026-10-18",
+      "goal": "Sub-55:00 (Gate 1 fitness check prediction, M confidence)",
+      "note": "Sunday Oct 18, 2026 (moved from Oct 19). Falls inside W23 — race week: Race replaces the long run; QA/QB taper early in the week. Running with partner. Primary purpose: race-day execution + outdoor LT2 HR calibration data point.",
       "confirmed": true,
       "color": "#06b6d4"
     },
@@ -4146,7 +4207,10 @@
     "deloadWeek": 21,
     "weekVolOnBoard": 8.87,
     "lastWeekVol": 47.19,
-    "weekTarget": "37-42",
+    "weekTarget": {
+      "min": 20,
+      "max": 25
+    },
     "easyHRBand": [
       122,
       140
@@ -4311,8 +4375,8 @@
         "date": "Sep 6, 2026",
         "week": 17,
         "phase": "Phase 2 · W17 Close",
-        "headline": "W17 closed. 26.78 km. Vacation maintenance. InBody all-time best. Pull-up milestone. Mass freeze decision.",
-        "body": "W17 was deliberate maintenance around the Mai Chau vacation (Avana Retreat, Sep 1-2). Three runs: R72 easy outdoor on mountain road (avg HR 120), R73 QB stepped to 9.23 km/h x 32 min at identical cardiac cost to 9.0 km/h in R70 — pace-at-ceiling moving up, adaptation confirmed, R74 LR 16.36 km in 29-33C with fueling deficit ~31g/hr vs 60g/hr target — confirmed W18 action item. Gym 3/3 PPL: Push Day at retreat gym (Incline Barbell 60 kg x 2x10, accessories lighter — vacation maintenance only). Pull Day: pull-ups 10-8-8 BW milestone hit; Chest Supported Row 30 kg/side x 3x10 first logged execution (deferred 3 weeks); Lat Pulldown 3x10 at 60 kg; Bayesian Curl 10.5 kg x 3x10 rep target complete. Legs Day (Sep 6): BSS stepped to 18 kg; Seated Calf stepped to 34 kg/side; standing SL calf raise baseline corrected — previous 60 kg entry was bilateral, true single-leg baseline 40 kg x 2x12. Hip routine x2, stretch x3. InBody Sep 4: SMM 40.5 kg all-time high, PBF 9.3% all-time low, VFA 21.0 cm2, Phase angle 7.3, Score 92/100. Mass freeze decision: stop chasing compound PRs, shift to maintenance + aerobic quality. At 77 kg / 9.3% BF, body composition objective is complete.",
+        "headline": "W17 closed. 26.78 km. Vacation maintenance. InBody all-time best. Pull-up milestone. Mass freeze decision (removed Sep 30).",
+        "body": "W17 was deliberate maintenance around the Mai Chau vacation (Avana Retreat, Sep 1-2). Three runs: R72 easy outdoor on mountain road (avg HR 120), R73 QB stepped to 9.23 km/h x 32 min at identical cardiac cost to 9.0 km/h in R70 — pace-at-ceiling moving up, adaptation confirmed, R74 LR 16.36 km in 29-33C with fueling deficit ~31g/hr vs 60g/hr target — confirmed W18 action item. Gym 3/3 PPL: Push Day at retreat gym (Incline Barbell 60 kg x 2x10, accessories lighter — vacation maintenance only). Pull Day: pull-ups 10-8-8 BW milestone hit; Chest Supported Row 30 kg/side x 3x10 first logged execution (deferred 3 weeks); Lat Pulldown 3x10 at 60 kg; Bayesian Curl 10.5 kg x 3x10 rep target complete. Legs Day (Sep 6): BSS stepped to 18 kg; Seated Calf stepped to 34 kg/side; standing SL calf raise baseline corrected — previous 60 kg entry was bilateral, true single-leg baseline 40 kg x 2x12. Hip routine x2, stretch x3. InBody Sep 4: SMM 40.5 kg all-time high, PBF 9.3% all-time low, VFA 21.0 cm2, Phase angle 7.3, Score 92/100. Mass freeze decision: stop chasing compound PRs, shift to maintenance + aerobic quality. [Superseded Sep 30, 2026 — mass freeze removed; athlete self-calibrates lift loading.] At 77 kg / 9.3% BF, body composition objective is complete.",
         "nextObjective": "W18 QA graduation (3/3): 4x8 min @ 10.0/10.0/10.3/10.3 km/h, 160 bpm ceiling. QB ceiling test: 9.5 km/h x 25 min then run to 160 bpm. LR 18-20 km, 4 gels min, 60g+/hr. Pull Day: pull-ups + 5 kg dip belt. Bayesian Curl -> 12 kg. BSS -> 18 kg x 3x10. Regenetics VO2max booking still outstanding."
       },
       {
@@ -4345,7 +4409,7 @@
         "phase": "Q3 Quarterly Audit · Phase 2 Retrospective",
         "headline": "Q3 audit complete. Phase 2 delivered. Uncertainty Map built. Speed ladder active. Regenetics ASAP.",
         "body": "Prediction Log: 4 predictions scored. InBody ✅ H-confidence correct (40.5 kg vs ≥39.1 kg prediction). W9 volume ✅ M-correct. R32 QA pattern ✅ M-correct. Drift R32-35 〰️ partial — H confidence was wrong, heat was a predictable confound. Calibration note: should have been M. New predictions added: QA 10.3/10.5 interval 4 HR 153-158 bpm (M), QB 10.3 km/h ceiling in 20-30 min (M), Race 0 58-65 min (M), speed ladder stable by W22 (L). Departure Log: Race 1 BIM removal still standing — not falsified. Review Jan 2027. Decision Reversals Q3: 3 (all Jul 8, planned red team) vs Q2 5 (reactive drift). Rate down, mechanism improved. Graduation: HR governs/walk trigger/conditions-based timing promoted to internalized. Uncertainty Map built for first time — 7 open unknowns, 3 closed. Phase 2 retrospective: QA 3/3 ✅ CT gate retired ✅ GCT -61 ms (-17%) LCRS LT2 0→10 min LCRS QB 0→45 min drift +8.4→+0.8 bpm SMM 38.8→40.5 kg PBF 10.4→9.3% interval pace 9.0→10.3 km/h. Open execution gaps carried forward: fueling compliance (3/3 LR misses on 60g/hr) and TI-RADS 4 referral overdue.",
-        "nextObjective": "W19: Legs Day + explosive block · QB 10.3 km/h until ceiling · LR 18-20 km (4 gels, 60g/hr, no exceptions). W20: QA steps to 10.3/10.5 km/h — trigger condition: interval 4 peak HR < 155. Open critical items: Regenetics lactate test (ASAP when Hanoi permits) · TI-RADS 4 endocrinologist (book Hanoi). Race 0: Oct 19. 34 days."
+        "nextObjective": "W19: Legs Day + explosive block · QB 10.3 km/h until ceiling · LR 18-20 km (4 gels, 60g/hr, no exceptions). W20: QA steps to 10.3/10.5 km/h — trigger condition: interval 4 peak HR < 155. Open critical items: Regenetics lactate test (ASAP when Hanoi permits) · TI-RADS 4 endocrinologist (book Hanoi). Race 0: Oct 19 [moved to Sun Oct 18]. 34 days."
       },
       {
         "date": "Sep 17, 2026",
@@ -4369,14 +4433,22 @@
         "phase": "Phase 2 · W20 · R86 LR — Program Distance Record · W20 CLOSED",
         "headline": "W20 CLOSED. 47.19 km. LR 21.20 km 🏆 program record. First QB at LT2. Z4 44% program high. Drift +4.4 bpm in 34°C heat.",
         "body": "R86 Sep 26: 21.20 km outdoor Hồ Tây · Novablast 5 · avg HR 131 · max HR 150 (10 bpm) · drift +4.4 bpm (Q1 129.2 → Q4 133.6) · 29–34°C (29°C start, climbed to 34°C). Z2 65%, Z3 20%, Z4/Z5 0%. LCRS 46 min. VO 8.4 cm outdoor best. GCT 320 ms. Walk ratio 16.0%. 4 gels (first ˜35 min) + 2 coconuts + 2 cokes + 3 electrolyte capsules. Sweat 2,945 ml. Felt good start to finish. Pace consistent across 21 laps — no late-race fade. W20 WEEK: R82 easy 6.27 km · R83 QA 8.33 km (GCT 284 ms ties program best, first 10.7/10.9 km/h) · Sep 23 rest (illness) · R84 easy 6.09 km (post-illness return, GCT 302 ms easy-session low) · R85 QB 5.30 km (Z4 44% program record, first anaerobic TE 0.6, LCRS 16 min at pure 10.7 km/h) · R86 LR 21.20 km. W20 total 47.19 km (target 38–44; 1 illness day lost). Quality ceiling: 100% maintained. 10/10 ceiling-clean quality sessions.",
-        "nextObjective": "W21 DELOAD (Sep 28–Oct 4): QA 4×4 min @ 10.7/10.9 km/h · QB 15 min @ 10.7 km/h · LR 12–14 km · target vol ~20–25 km. W22–23: reassess QA step trigger (interval 4 HR <155 in cool conditions) · QB target 20–25 min continuous. Race 0: VPBank Hanoi 10K Oct 19 (23 days). W24 deload around race day."
+        "nextObjective": "W21 DELOAD (Sep 28–Oct 4): QA 4×4 min @ 10.7/10.9 km/h · QB 15 min @ 10.7 km/h · LR 12–14 km · target vol ~20–25 km. W22–23: reassess QA step trigger (interval 4 HR <155 in cool conditions) · QB target 20–25 min continuous. Race 0: VPBank Hanoi 10K Oct 19 [moved to Sun Oct 18]. W24 deload around race day."
+      },
+      {
+        "date": "Sep 30, 2026",
+        "week": 21,
+        "phase": "Phase 2 · W21 Deload · Dashboard + Program Audit",
+        "headline": "Audit closed. LCRS@LT2 record corrected to 16 min (R85). Race 0 moved to Sun Oct 18. Gates 1–2 re-specified — G2 cleared. Mass freeze removed.",
+        "body": "R88 Sep 30: deload QA 4×4 min @ 10.7/10.9 km/h, max HR 143, 0% ceiling. Audit decisions: (1) LCRS@LT2 record = 16 min (R85 Sep 25) — R80's 29 min was disrupted by a mid-session break and is not counted. Phase 2 target (20 min by W20) was NOT met. (2) Race 0 = Sunday Oct 18, 2026 — lands in W23, which becomes a race week (race replaces LR, QA/QB taper early). (3) Gate 1 re-specified: W20 + W22 + W23 each ≥38 km, deloads excluded — W20 47.19 km ✅; note W23 ≥38 km conflicts with the race-week taper. (4) Gate 2 re-specified: 1 QA + 1 QB ≥10.7 km/h, ceiling-clean, separate weeks — satisfied by R85 + R88 (R88 is deload-dose; literal pass). (5) Gate 6 retired — non-blocking; fallback lab test triggers at 2 attributable Phase 3 ceiling breaches. (6) Mass freeze removed — lift loading self-calibrated. (7) Creatine confirmed ACTIVE since ~early/mid Sep (date unconfirmed) — watch CK with statin.",
+        "nextObjective": "W21 remaining: QB 15 min @ 10.7 km/h · LR 12–14 km · vol 20–25 km. W22: QA 4×10 @ 10.7/10.9 (step trigger: interval-4 HR <155 in cool conditions) · QB extend LCRS@LT2 toward 20–25 min at 10.7 km/h · ≥38 km for Gate 1. W23: race week — taper QA/QB early, Race 0 Sun Oct 18 (sub-55 prediction live). Resolve the W23 ≥38 km vs taper conflict."
       }
     ],
     "lcrs": 51,
     "lcrsDate": "Aug 21",
     "lcrsRun": "R67",
-    "lcrsTarget": 20.0,
-    "lcrsTargetWk": 20,
+    "lcrsTarget": 25,
+    "lcrsTargetWk": null,
     "calibrationCurve": [
       {
         "hr": 140,
@@ -4406,13 +4478,13 @@
     ],
     "easyPaceMin": 7.0,
     "easyPaceMax": 8.5,
-    "weekStartDate": "2026-09-07",
-    "lcrsNote": "Easy pace LCRS 51.3 min (R67 Aug 21) · QB sub-LT1 45 min 🏆 (R77 Sep 11 · 9.5 km/h) · LT2-continuous LCRS 29 min 🏆 NEW RECORD (R80 Sep 17 · 10.3→10.7 km/h · prev 10 min R79 intervals · Phase 2 target 20 min ✅ EXCEEDED W19) · W20 target: extend to 25–30 min at 10.7 km/h",
+    "weekStartDate": "2026-09-28",
+    "lcrsNote": "Easy pace LCRS 51.3 min (R67 Aug 21) · QB sub-LT1 45 min 🏆 (R77 Sep 11 · 9.5 km/h) · LCRS@LT2 16 min 🏆 RECORD (R85 Sep 25 · pure 10.7 km/h, second block) · R80 29 min (Sep 17) NOT COUNTED — disrupted by a mid-session break (revised Sep 30, 2026) · Phase 2 target 20 min by W20 NOT MET · next target 25–30 min continuous at 10.7 km/h",
     "creatineApproved": true,
     "creatineApprovedDate": "Aug 20, 2026",
-    "lcrsThreshold": 29,
-    "lcrsThresholdRun": "R80",
-    "lcrsThresholdDate": "Sep 17",
+    "lcrsThreshold": 16,
+    "lcrsThresholdRun": "R85",
+    "lcrsThresholdDate": "Sep 25",
     "lcrsQB": 45,
     "lcrsQBRun": "R77",
     "lcrsQBDate": "Sep 11",
@@ -4442,16 +4514,111 @@
       "rhrRest": 8,
       "rhrCaution": 5
     },
-    "lastQADate": "Sep 22, 2026",
-    "lastQAResult": "4×10 min @ 10.7/10.7/10.9/10.9 km/h · max HR 151 (9 bpm) · GCT 284 ms 🏆 TIES PROGRAM BEST (new quality session low, prev 297 ms R80) · Z4 26% · Z5 0% · first QA at new speed tier · stay at 10.7/10.9",
-    "ltNote": "LT2 range empirically revised Sep 17 (R80 QB). R80: 10.7 km/h × ~15 min continuous → HR stable 152–154 bpm (Z4 dominant), max 157 (3 bpm headroom). 10.7 km/h is confirmed sustainable threshold pace. LT2 lower bound: 10.5→10.7 km/h (5.71→5.61 min/km). Upper bound: 11.0 km/h (5.45 min/km) — unconfirmed. Key: 5:36/km (10.7 km/h) is 5 sec/km FASTER than sub-4 marathon goal pace (5:41/km). LT1 (ltPace 6.32 = 9.49 km/h) unchanged — consistent with R80 (10.3 km/h settled 144–145 bpm = sub-threshold). Regenetics test dropped Sep 30, 2026 (geographic constraint). Estimates remain empirical (medium-low confidence). Phase 3 calibration: Race 0 HR data (Oct 19) + fallback Viện Y học thể thao Hanoi if ≥2 Phase 3 QA ceiling breaches (>160 bpm) attributable to zone miscalibration.",
+    "lastQADate": "Sep 30, 2026",
+    "lastQAResult": "R88 W21 deload QA · 4×4 min @ 10.7/10.9 km/h · max HR 143 (17 bpm headroom) · 0% Z4/Z5 · GCT 297 ms · pctCeiling 0 · Gate 2 pair completed (with R85)",
+    "ltNote": "LT2 range empirically revised Sep 17 (R80 QB). R80: 10.7 km/h × ~15 min continuous → HR stable 152–154 bpm (Z4 dominant), max 157 (3 bpm headroom). 10.7 km/h is confirmed sustainable threshold pace. LT2 lower bound: 10.5→10.7 km/h (5.71→5.61 min/km). Upper bound: 11.0 km/h (5.45 min/km) — unconfirmed. Key: 5:36/km (10.7 km/h) is 5 sec/km FASTER than sub-4 marathon goal pace (5:41/km). LT1 (ltPace 6.32 = 9.49 km/h) unchanged — consistent with R80 (10.3 km/h settled 144–145 bpm = sub-threshold). Lab test (Gate 6) retired Sep 30, 2026 (geographic constraint). Estimates remain empirical (medium-low confidence). Phase 3 calibration: Race 0 HR data (Oct 18) + fallback Viện Y học thể thao Hanoi if ≥2 Phase 3 QA ceiling breaches (>160 bpm) attributable to zone miscalibration.",
     "lt2RevisionDate": "Sep 17, 2026",
     "lt2RevisionRun": "R80",
     "lastQBDate": "Sep 25, 2026",
     "lastQBResult": "10.7 km/h continuous · 28 min (0:51 break) · LCRS 16 min · max HR 155 (5 bpm) · Z4 44% program high · first anaerobic TE 0.6 · Adios Pro 4 debut · W22 target: 20-25 min continuous",
     "lastLRDate": "Sep 26, 2026",
     "lastLRDist": 21.2,
-    "lastLRResult": "21.20 km 🏆 NEW PROGRAM RECORD · Hồ Tây · avg HR 131 · max 150 (10 bpm) · drift +4.4 bpm · LCRS 46 min · Z2 65% · 4 gels compliant · 29–34°C · Novablast 5 · W20 CLOSED 47.19 km · W21 deload begins Sep 28"
+    "lastLRResult": "21.20 km 🏆 NEW PROGRAM RECORD · Hồ Tây · avg HR 131 · max 150 (10 bpm) · drift +4.4 bpm · LCRS 46 min · Z2 65% · 4 gels compliant · 29–34°C · Novablast 5 · W20 CLOSED 47.19 km · W21 deload begins Sep 28",
+    "lcrsThresholdDateISO": "2026-09-25",
+    "lcrsTargetMax": 30,
+    "lcrsTargetNote": "next LCRS@LT2 target 25–30 min continuous at 10.7 km/h",
+    "lt2FloorKmh": 10.7,
+    "lt2FloorPace": 5.607,
+    "lt2FloorRun": "R80",
+    "lt2FloorDate": "Sep 17, 2026",
+    "lt2RequiredKmh": 12.0,
+    "lt2RequiredBy": "2027-08-01",
+    "lt2Ladder": [
+      {
+        "run": "R73",
+        "date": "Sep 3",
+        "kmh": 9.23,
+        "kmhTop": null,
+        "type": "QB",
+        "note": "QB 32 min continuous — sub-LT1 continuity work",
+        "confirmedLT2": false
+      },
+      {
+        "run": "R77",
+        "date": "Sep 11",
+        "kmh": 9.5,
+        "kmhTop": null,
+        "type": "QB",
+        "note": "QB 45 min continuous — ceiling not reached",
+        "confirmedLT2": false
+      },
+      {
+        "run": "R80",
+        "date": "Sep 17",
+        "kmh": 10.7,
+        "kmhTop": null,
+        "type": "QB",
+        "note": "10.3→10.7 km/h · HR stable 152–154 at 10.7 — LT2 floor CONFIRMED",
+        "confirmedLT2": true
+      },
+      {
+        "run": "R83",
+        "date": "Sep 22",
+        "kmh": 10.7,
+        "kmhTop": 10.9,
+        "type": "QA",
+        "note": "4×10 min @ 10.7/10.9 · max HR 151",
+        "confirmedLT2": true
+      },
+      {
+        "run": "R85",
+        "date": "Sep 25",
+        "kmh": 10.7,
+        "kmhTop": null,
+        "type": "QB",
+        "note": "continuous 10.7 · LCRS@LT2 16 min record · max HR 155",
+        "confirmedLT2": true
+      }
+    ],
+    "race0": {
+      "date": "2026-10-18",
+      "weekday": "Sunday",
+      "week": 23,
+      "goalMin": 55.0,
+      "predictions": [
+        {
+          "date": "Jul 5, 2026",
+          "text": "Sub-55:00 — achievable if Phase 2 quality sessions land clean",
+          "conf": "M",
+          "source": "decision_log.md · Prediction Log"
+        },
+        {
+          "date": "Sep 15, 2026",
+          "text": "Finish 58–65 min — wide band (heat, race-day conditions, pacing unknown)",
+          "conf": "M",
+          "source": "decision_log.md · Prediction Log"
+        }
+      ],
+      "baseline": {
+        "run": "R61",
+        "date": "Aug 14",
+        "timeMin": 61.28,
+        "runPace": 5.33,
+        "lcrs": 7.6,
+        "walkRatio": 17.6
+      }
+    },
+    "phase3Calibration": {
+      "trigger": 2,
+      "attributedBreaches": [],
+      "ceiling": 160,
+      "phase3StartWk": 25,
+      "phase3StartDate": "2026-10-26",
+      "fallback": "Viện Y học thể thao Hanoi — lactate / zone test",
+      "note": "Falsification condition of the Gate 6 departure. A breach counts only when a Phase 3 QA exceeds 160 bpm AND the breach is attributed to zone miscalibration (not heat, illness, or pacing error). Attribution is logged manually in attributedBreaches (run ids)."
+    },
+    "creatineActive": true,
+    "creatineStartApprox": "early-to-mid Sep 2026 (unconfirmed)"
   },
   "READINESS_LOG": [
     {
@@ -4856,7 +5023,7 @@
       "dateEnd": "2026-10-25",
       "openEnded": false,
       "focus": "Two quality sessions/week -- Quality A intervals + Quality B tempo · volume to 44 km · quality paces recalibrated Aug 11 (R59)",
-      "note": "16 weeks · deload W21 + W24 · QA 9.8-10.3 km/h · QB 9.0-9.2 km/h from W15"
+      "note": "16 weeks · deload W21 + W24 · W23 = Race 0 week (Oct 18) · QA/QB at 10.7–10.9 km/h from W20 (LT2 floor confirmed R80)"
     },
     {
       "n": 3,
@@ -4867,7 +5034,7 @@
       "dateStart": "2026-10-26",
       "dateEnd": null,
       "openEnded": true,
-      "focus": "Pace targets estimated from Phase 2 empirical LT2 data (10.7 km/h lower bound confirmed R80, medium-low confidence) + Race 0 HR calibration (Oct 19) · LT2 gate: must reach ≥12.0 km/h for sub-4 viability · Fallback calibration: Viện Y học thể thao Hanoi — trigger if ≥2 QA ceiling breaches (>160 bpm) attributable to zone miscalibration",
+      "focus": "Pace targets estimated from Phase 2 empirical LT2 data (10.7 km/h lower bound confirmed R80, medium-low confidence) + Race 0 HR calibration (Oct 18) · LT2 gate: must reach ≥12.0 km/h for sub-4 viability · Fallback calibration: Viện Y học thể thao Hanoi — trigger if ≥2 QA ceiling breaches (>160 bpm) attributable to zone miscalibration",
       "note": "End date undefined."
     }
   ],
@@ -5009,7 +5176,7 @@
       "dateStart": "2026-09-14",
       "dateEnd": "2026-09-20",
       "qualityA": "4×10 min @ 10.0/10.3 km/h (actual)",
-      "qualityB": "10.3→10.7 km/h empirical QB · LCRS 29 min 🏆 (actual · threshold confirmed)",
+      "qualityB": "10.3→10.7 km/h empirical QB · 29 min (disrupted — not counted as LCRS@LT2) · LT2 floor confirmed (actual)",
       "lrMin": 20,
       "lrMax": 22,
       "volMin": 38,
@@ -5034,12 +5201,12 @@
       "phase": 2,
       "dateStart": "2026-09-28",
       "dateEnd": "2026-10-04",
-      "qualityA": "4×4 min — deload (speed TBD, ~10.5 km/h)",
+      "qualityA": "4×4 min @ 10.7/10.9 km/h — deload",
       "qualityB": "15 min @ 10.7 km/h — deload",
       "lrMin": 12,
-      "lrMax": 12,
-      "volMin": 26,
-      "volMax": 28,
+      "lrMax": 14,
+      "volMin": 20,
+      "volMax": 25,
       "kind": "deload"
     },
     {
@@ -5060,13 +5227,15 @@
       "phase": 2,
       "dateStart": "2026-10-12",
       "dateEnd": "2026-10-18",
-      "qualityA": "4×10 min @ ~10.7-11.0 km/h (estimated — empirical ladder)",
-      "qualityB": "25-30 min @ 10.7 km/h (estimated · race-pace confirm week)",
-      "lrMin": 20,
-      "lrMax": 22,
-      "volMin": 38,
-      "volMax": 42,
-      "kind": "consolidation"
+      "qualityA": "Taper QA early in week (reduced dose @ 10.7/10.9 km/h — exact dose TBD)",
+      "qualityB": "Taper QB early/mid-week (short sharpener @ 10.7 km/h — exact dose TBD)",
+      "lrMin": null,
+      "lrMax": null,
+      "volMin": 20,
+      "volMax": 26,
+      "kind": "race",
+      "raceDay": "2026-10-18",
+      "note": "RACE WEEK — Race 0 VPBank Hanoi 10K Sun Oct 18 replaces the long run. Previous plan (20–22 km LR + 38–42 km) void. Volume = race ~10 km + taper; 20–26 km is provisional — confirm in coaching session."
     },
     {
       "wk": 24,
@@ -5079,7 +5248,8 @@
       "lrMax": 12,
       "volMin": 26,
       "volMax": 28,
-      "kind": "deload"
+      "kind": "deload",
+      "note": "Post-Race 0 recovery deload (Oct 19–25). Phase 3 entry Oct 26."
     }
   ],
   "MILESTONES": [
@@ -5116,16 +5286,16 @@
       "label": "Phase 2 retrospective + quarterly audit ✅ DONE",
       "type": "review",
       "nonNegotiable": false,
-      "note": "Score resolved predictions, review departures, count reversals. Key: score R59 calibration predictions vs Sep lactate results.",
+      "note": "Score resolved predictions, review departures, count reversals.",
       "done": true
     },
     {
       "date": "2026-09-30",
-      "label": "⛔ Lactate + VO₂max test (DROPPED)",
+      "label": "⛔ Gate 6 lab test retired",
       "type": "test",
       "nonNegotiable": false,
       "status": "retired",
-      "note": "Regenetics HCMC dropped Sep 30, 2026 — geographic constraint (not in HCMC near-term). Phase 3 zones estimated from Phase 2 empirical LT2 data (10.7 km/h lower bound, R80) + Race 0 HR calibration (Oct 19, 2026). Confidence: medium-low. Fallback: Viện Y học thể thao Hanoi — trigger if ≥2 Phase 3 QA ceiling breaches (>160 bpm) attributable to zone miscalibration."
+      "note": "Lab test dropped Sep 30, 2026 — geographic constraint. Phase 3 zones estimated from Phase 2 empirical LT2 data (10.7 km/h floor, R80) + Race 0 HR calibration (Oct 18, 2026). Confidence: medium-low. Fallback: Viện Y học thể thao Hanoi — trigger if ≥2 Phase 3 QA ceiling breaches (>160 bpm) attributable to zone miscalibration."
     },
     {
       "date": "2026-10-04",
@@ -5135,18 +5305,18 @@
       "note": "30% reduction. Non-negotiable."
     },
     {
-      "date": "2026-10-19",
-      "label": "Race 0 -- VPBank Hanoi 10K",
+      "date": "2026-10-18",
+      "label": "Race 0 -- VPBank Hanoi 10K (Sun)",
       "type": "race",
       "nonNegotiable": true,
-      "note": "Gate 5. Low stakes. Race-day execution data point."
+      "note": "Gate 5. Sunday Oct 18, 2026 (moved from Oct 19). W23 race week — race replaces the long run."
     },
     {
       "date": "2026-10-26",
       "label": "Phase 3 start",
       "type": "phase",
       "nonNegotiable": false,
-      "note": "Gate 6 (Test Data) retired Sep 30, 2026 — geographic constraint. Proceeding on 5 hard gates: Gates 1–4 ✅, Gate 5 = Race 0 (Oct 19). Phase 3 zone calibration: empirical LT2 data + Race 0 HR calibration."
+      "note": "Gate 6 (Test Data) retired Sep 30, 2026 — geographic constraint, non-blocking. 5 blocking hard gates: G2 ✅ G3 ✅ G4 ✅ · G1 (W20+W22+W23 ≥38 km) pending · G5 = Race 0 (Oct 18). Phase 3 zone calibration: empirical LT2 data + Race 0 HR calibration."
     },
     {
       "date": "2027-03-01",
@@ -5173,7 +5343,7 @@
   "STRENGTH": {
     "baseline_date": "Sep 29–30, 2026 (W21 — deload sessions)",
     "baseline_week": "W21",
-    "note": "W21 deload sessions Sep 29 (Pull) + W21 Push day. Key updates: Incline BB 70→72 kg ×3×5 🏆 pre-freeze PR · Tricep OH 22.5→24 kg ×2×8 🏆 pre-freeze PR · Shoulder Press format change: DB 22kg/side → barbell/smith 50 kg (new baseline, not comparable) · WPU recovery: W20 sick-week 8-6-5 → W21 ×3×8 at 5 kg ✅ baseline restored · Lower Back Extension NEW baseline 15 kg ×2×8 · Cable Fly deloaded 15→13.5 kg · Bayesian Curl deloaded 14→12 kg · Mass freeze in effect post-Race 0 (Oct 19).",
+    "note": "W21 deload sessions Sep 29 (Pull) + W21 Push day. Key updates: Incline BB 70→72 kg ×3×5 🏆 PR · Tricep OH 22.5→24 kg ×2×8 🏆 PR · Shoulder Press format change: DB 22kg/side → barbell/smith 50 kg (new baseline, not comparable) · WPU recovery: W20 sick-week 8-6-5 → W21 ×3×8 at 5 kg ✅ baseline restored · Lower Back Extension NEW baseline 15 kg ×2×8 · Cable Fly deloaded 15→13.5 kg · Bayesian Curl deloaded 14→12 kg. Mass freeze REMOVED Sep 30, 2026 — athlete self-calibrates lift loading; normal progression rules resume.",
     "missing_weights": [
       "Tibialis Raise"
     ],
@@ -5183,56 +5353,64 @@
         "sets": 3,
         "reps": "3×5",
         "weight_kg": 72,
-        "note": "🏆 W21 pre-freeze PR · stepped 70→72 kg ×3×5 · deload rep format (lower reps) · mass freeze activates post-Race 0 Oct 19"
+        "note": "🏆 W21 PR · stepped 70→72 kg ×3×5 · deload rep format (lower reps)",
+        "id": "incline_barbell_press"
       },
       {
         "exercise": "Incline Dumbbell Press",
         "sets": 3,
         "reps": 6,
         "weight_kg": 24,
-        "note": "24 kg each hand · Full Body day only — PPL complement with different implement/angle (clarified W15)"
+        "note": "24 kg each hand · Full Body day only — PPL complement with different implement/angle (clarified W15)",
+        "id": "incline_db_press"
       },
       {
         "exercise": "Cable Fly",
         "sets": 3,
         "reps": "3×8",
         "weight_kg": 13.5,
-        "note": "W21 deload: 13.5 kg ×3×8 (↓ from W20 15 kg — deload week reduction)."
+        "note": "W21 deload: 13.5 kg ×3×8 (↓ from W20 15 kg — deload week reduction).",
+        "id": "cable_fly"
       },
       {
         "exercise": "Shoulder Press",
         "sets": 2,
         "reps": "2×8",
         "weight_kg": 50,
-        "note": "W21 FORMAT CHANGE: barbell/smith 50 kg ×2×8. W20 was DB 22 kg/side — different implement, not directly comparable. New barbell baseline established W21."
+        "note": "W21 FORMAT CHANGE: barbell/smith 50 kg ×2×8. W20 was DB 22 kg/side — different implement, not directly comparable. New barbell baseline established W21.",
+        "id": "shoulder_press"
       },
       {
         "exercise": "Cable Lateral Raise",
         "sets": 3,
         "reps": "3×8",
         "weight_kg": 8,
-        "note": "W20: 8 kg ×3×8. Same weight, rep format confirmed."
+        "note": "W20: 8 kg ×3×8. Same weight, rep format confirmed.",
+        "id": "cable_lateral_raise"
       },
       {
         "exercise": "Dips",
         "sets": 3,
         "reps": 10,
         "weight_kg": 0,
-        "note": "Bodyweight · normally Push · W15: moved to Full Body day (skipped Push Day)"
+        "note": "Bodyweight · normally Push · W15: moved to Full Body day (skipped Push Day)",
+        "id": "dips"
       },
       {
         "exercise": "Tricep Overhead Extension",
         "sets": 2,
         "reps": "2×8",
         "weight_kg": 24,
-        "note": "🏆 W21 pre-freeze PR · stepped 22.5→24 kg ×2×8 · deload rep format · mass freeze activates post-Race 0 Oct 19"
+        "note": "🏆 W21 PR · stepped 22.5→24 kg ×2×8 · deload rep format",
+        "id": "tricep_overhead_extension"
       },
       {
         "exercise": "Cable Tricep Pulldown SA",
         "sets": 1,
         "reps": "failure",
         "weight_kg": 7.5,
-        "note": "✅ BASELINE ESTABLISHED W16 Aug 25 · single arm · finisher after EZ bar overhead extension"
+        "note": "✅ BASELINE ESTABLISHED W16 Aug 25 · single arm · finisher after EZ bar overhead extension",
+        "id": "cable_tricep_pulldown_sa"
       }
     ],
     "pull": [
@@ -5241,63 +5419,72 @@
         "sets": 3,
         "reps": "3×8",
         "weight_kg": 5,
-        "note": "✅ W21 recovery from sick-week regression (W20: 8-6-5) — baseline restored at 5 kg ×3×8. Next target: 5 kg ×10-8-8 before stepping to 7.5 kg."
+        "note": "✅ W21 recovery from sick-week regression (W20: 8-6-5) — baseline restored at 5 kg ×3×8. Next target: 5 kg ×10-8-8 before stepping to 7.5 kg.",
+        "id": "pull_ups"
       },
       {
         "exercise": "Lat Pulldown",
         "sets": 2,
         "reps": "2×8",
         "weight_kg": 65,
-        "note": "W21 deload: 2×8 format (↓ from W20 3×8). Weight held at 65 kg."
+        "note": "W21 deload: 2×8 format (↓ from W20 3×8). Weight held at 65 kg.",
+        "id": "lat_pulldown"
       },
       {
         "exercise": "Chest Supported Machine Row",
         "sets": 2,
         "reps": "2×8",
         "weight_kg": 70,
-        "note": "W21 deload: 2×8 format (↓ from W20 3×10). Weight held at 70 kg."
+        "note": "W21 deload: 2×8 format (↓ from W20 3×10). Weight held at 70 kg.",
+        "id": "chest_supported_row"
       },
       {
         "exercise": "X Cable Rear Delt Pull",
         "sets": 3,
         "reps": "2×8",
         "weight_kg": 8,
-        "note": "W19 Sep 15: 8 kg × 2×8. Prev W16 baseline: 4.5 kg × 3×10 (different machine possible). New working weight 8 kg."
+        "note": "W19 Sep 15: 8 kg × 2×8. Prev W16 baseline: 4.5 kg × 3×10 (different machine possible). New working weight 8 kg.",
+        "id": "rear_delt_x_cable"
       },
       {
         "exercise": "Cable Lat Pull",
         "sets": 3,
         "reps": 10,
         "weight_kg": 19,
-        "note": "BASELINE ESTABLISHED Aug 24 W16 · straight-bar cable"
+        "note": "BASELINE ESTABLISHED Aug 24 W16 · straight-bar cable",
+        "id": "cable_lat_pull"
       },
       {
         "exercise": "Bayesian Cable Bicep Curl",
         "sets": 3,
         "reps": "3×8",
         "weight_kg": 12,
-        "note": "W21 deload: 12 kg ×3×8 (↓ from W20 14 kg — deload week reduction). Return to 14 kg in W22."
+        "note": "W21 deload: 12 kg ×3×8 (↓ from W20 14 kg — deload week reduction). Return to 14 kg in W22.",
+        "id": "bayesian_curl"
       },
       {
         "exercise": "Preacher Curl",
         "sets": 1,
         "reps": "3×8",
         "weight_kg": 12,
-        "note": "W20: 12 kg/side ×3×8 (DB preacher curl format — may differ from previous machine 20 kg entry)."
+        "note": "W20: 12 kg/side ×3×8 (DB preacher curl format — may differ from previous machine 20 kg entry).",
+        "id": "preacher_curl"
       },
       {
         "exercise": "Seated Cable Row",
         "sets": 3,
         "reps": "3×10",
         "weight_kg": 65,
-        "note": "✅ W20: 65 kg ×3×10 target ACHIEVED. Next: 70 kg ×3×8."
+        "note": "✅ W20: 65 kg ×3×10 target ACHIEVED. Next: 70 kg ×3×8.",
+        "id": "seated_cable_row"
       },
       {
         "exercise": "Lower Back Extension",
         "sets": 2,
         "reps": "2×8",
         "weight_kg": 15,
-        "note": "✅ NEW EXERCISE W21 · 15 kg plates ×2×8 · baseline established Sep 29, 2026"
+        "note": "✅ NEW EXERCISE W21 · 15 kg plates ×2×8 · baseline established Sep 29, 2026",
+        "id": "lower_back_extension"
       }
     ],
     "legs": [
@@ -5306,63 +5493,72 @@
         "sets": 3,
         "reps": "3×8",
         "weight_kg": 120,
-        "note": "W20: 120 kg ×3×8 — same weight, confirmed 3-set protocol. Next weight: 125 kg when RPE ≤7 clean."
+        "note": "W20: 120 kg ×3×8 — same weight, confirmed 3-set protocol. Next weight: 125 kg when RPE ≤7 clean.",
+        "id": "trap_bar_deadlift"
       },
       {
         "exercise": "Bulgarian Split Squat",
         "sets": 3,
         "reps": "3×6",
         "weight_kg": 24,
-        "note": "🏆 W20: stepped 18→24 kg/hand (+6 kg) ×3×6. Large jump — consolidate 24 kg ×3×8 before stepping."
+        "note": "🏆 W20: stepped 18→24 kg/hand (+6 kg) ×3×6. Large jump — consolidate 24 kg ×3×8 before stepping.",
+        "id": "bulgarian_split_squat"
       },
       {
         "exercise": "Single Leg Standing Hamstring Curl",
         "sets": 2,
         "reps": "3×8",
         "weight_kg": 20,
-        "note": "W20: 20 kg ×3×8 (down from 25 kg W17 — possible machine change or conservative reset post-illness). One-axis rule: 20 kg ×3×10 next."
+        "note": "W20: 20 kg ×3×8 (down from 25 kg W17 — possible machine change or conservative reset post-illness). One-axis rule: 20 kg ×3×10 next.",
+        "id": "sl_hamstring_curl"
       },
       {
         "exercise": "Hip Thrust Machine",
         "sets": 2,
         "reps": "2×10",
         "weight_kg": 30,
-        "note": "🏆 W20: stepped 20→30 kg (+10 kg) ×2×10. Large jump — consolidate 30 kg ×3×10 before stepping."
+        "note": "🏆 W20: stepped 20→30 kg (+10 kg) ×2×10. Large jump — consolidate 30 kg ×3×10 before stepping.",
+        "id": "hip_thrust"
       },
       {
         "exercise": "Seated Calf Raise",
         "sets": 2,
         "reps": 15,
         "weight_kg": 34,
-        "note": "W17: 34 kg/side x 2x15 (stepped from 32 kg/side W16). W18: 34 kg x 3x15."
+        "note": "W17: 34 kg/side x 2x15 (stepped from 32 kg/side W16). W18: 34 kg x 3x15.",
+        "id": "seated_calf_raise"
       },
       {
         "exercise": "Standing Calf Raise (single leg)",
         "sets": 2,
         "reps": 12,
         "weight_kg": 40,
-        "note": "CORRECTED BASELINE W17: 40 kg x 2x12 single leg. Previous 60 kg entry was bilateral (logging error corrected). W18: 40 kg x 3x12."
+        "note": "CORRECTED BASELINE W17: 40 kg x 2x12 single leg. Previous 60 kg entry was bilateral (logging error corrected). W18: 40 kg x 3x12.",
+        "id": "standing_sl_calf_raise"
       },
       {
         "exercise": "Smith Machine Reverse Lunge",
         "sets": 2,
         "reps": "2×8",
         "weight_kg": 60,
-        "note": "✅ W20 NEW: Smith Machine Reverse Lunge 60 kg ×2×8. First logged session. Baseline established."
+        "note": "✅ W20 NEW: Smith Machine Reverse Lunge 60 kg ×2×8. First logged session. Baseline established.",
+        "id": "smith_reverse_lunge"
       },
       {
         "exercise": "Single Leg RDL",
         "sets": 2,
         "reps": "2×8",
         "weight_kg": 20,
-        "note": "W20: 20 kg ×2×8. Up from 12 kg W15 baseline."
+        "note": "W20: 20 kg ×2×8. Up from 12 kg W15 baseline.",
+        "id": "sl_rdl"
       },
       {
         "exercise": "Bent Leg SL Calf Raise (KB)",
         "sets": 3,
         "reps": "3×8",
         "weight_kg": 20,
-        "note": "W20 NEW: Bent leg single-leg calf raise with 20 kg KB ×3×8. Different from seated/standing variations."
+        "note": "W20 NEW: Bent leg single-leg calf raise with 20 kg KB ×3×8. Different from seated/standing variations.",
+        "id": "bent_leg_sl_calf_raise"
       }
     ],
     "week_status": {
@@ -5392,21 +5588,24 @@
           "sets": 3,
           "reps": "10-10-9",
           "weight_kg": 90,
-          "note": "✅ +18 kg from W15 72 kg · sled weight unlogged · 3×10-10-9"
+          "note": "✅ +18 kg from W15 72 kg · sled weight unlogged · 3×10-10-9",
+          "id": "v_squat"
         },
         {
           "exercise": "Single Leg Hamstring Curl",
           "sets": 3,
           "reps": 10,
           "weight_kg": 25,
-          "note": "⚠️ one-axis rule departure (weight jumped before hitting 25×12) · next: 25 kg×12"
+          "note": "⚠️ one-axis rule departure (weight jumped before hitting 25×12) · next: 25 kg×12",
+          "id": "sl_hamstring_curl"
         },
         {
           "exercise": "Seated Calf Raise",
           "sets": 2,
           "reps": 15,
           "weight_kg": 32,
-          "note": "32 kg/side · 2×15"
+          "note": "32 kg/side · 2×15",
+          "id": "seated_calf_raise"
         },
         {
           "exercise": "Incline Dumbbell Press",
@@ -5417,42 +5616,48 @@
             26,
             26
           ],
-          "note": "✅ first clean sets at 26 kg×8×2 · ascending 24→26→26 kg"
+          "note": "✅ first clean sets at 26 kg×8×2 · ascending 24→26→26 kg",
+          "id": "incline_db_press"
         },
         {
           "exercise": "Cable Fly",
           "sets": 2,
           "reps": 10,
           "weight_kg": 15,
-          "note": "15 kg/side · 2×10"
+          "note": "15 kg/side · 2×10",
+          "id": "cable_fly"
         },
         {
           "exercise": "Plate Row (horizontal)",
           "sets": 2,
           "reps": 10,
           "weight_kg": 40,
-          "note": "40 kg/side · 2×10"
+          "note": "40 kg/side · 2×10",
+          "id": "plate_row"
         },
         {
           "exercise": "Stack Row (vertical)",
           "sets": 2,
           "reps": 10,
           "weight_kg": 65,
-          "note": "✅ NEW BASELINE W16 · 65 kg × 2×10"
+          "note": "✅ NEW BASELINE W16 · 65 kg × 2×10",
+          "id": "stack_row"
         },
         {
           "exercise": "Seated Incline DB Lateral Raise",
           "sets": 2,
           "reps": 10,
           "weight_kg": 8,
-          "note": "✅ NEW BASELINE W16 · 8 kg × 2×10"
+          "note": "✅ NEW BASELINE W16 · 8 kg × 2×10",
+          "id": "seated_incline_db_lateral_raise"
         },
         {
           "exercise": "Hip Thrust Machine",
           "sets": 3,
           "reps": 10,
           "weight_kg": 25,
-          "note": "+4.6 kg from W15 · 25 kg × 3×10"
+          "note": "+4.6 kg from W15 · 25 kg × 3×10",
+          "id": "hip_thrust"
         },
         {
           "exercise": "L-sit (parallel bars)",
@@ -5545,7 +5750,40 @@
       },
       "timeline": "4–8 weeks before chronic tightness stops recurring. Couch/figure-4/elephant walks shift from symptom management to maintenance coat.",
       "w15_execution": "W15 Aug 23: KB raises 3×15 @ 12.5 kg EXECUTED ✅ (baseline established). L-sit, 90/90 presses, mobility: NOT done today — establish next session."
-    }
+    },
+    "leg_sessions": [
+      {
+        "date": "2026-08-19",
+        "kind": "legs",
+        "source": "STRENGTH_HISTORY"
+      },
+      {
+        "date": "2026-08-23",
+        "kind": "legs_bonus",
+        "source": "STRENGTH_HISTORY"
+      },
+      {
+        "date": "2026-08-28",
+        "kind": "full_body",
+        "source": "STRENGTH_HISTORY (V squat, SL ham curl, hip thrust)"
+      },
+      {
+        "date": "2026-08-29",
+        "kind": "legs",
+        "source": "STRENGTH_HISTORY"
+      },
+      {
+        "date": "2026-09-06",
+        "kind": "legs",
+        "source": "phaseAssessment Sep 6 (W17 Legs Day) + R75 \"day after Legs Day\""
+      },
+      {
+        "date": "2026-09-17",
+        "kind": "legs",
+        "source": "R81 verdict \"after QB+Legs Thursday\""
+      }
+    ],
+    "leg_sessions_note": "W20 Legs Day date not logged (STRENGTH_HISTORY \"2026-09-W20\"). Add ISO date + optional \"time\" (HH:MM) to enable hours-since."
   },
   "HEALTH_FLAGS": [
     {
@@ -5560,9 +5798,9 @@
       "class": "standing",
       "status": "clear",
       "title": "BV 108 — Aug 13 ✅ RESULTS CLEAR",
-      "short": "All results clean. HR ceiling 160 ✅ · Creatine approved ✅",
-      "detail": "Done Aug 13. Dr. Thắng confirmed via phone Aug 20 — all results clean. HR ceiling raised 155→160 bpm (Aug 20). Creatine (NutraBio monohydrate) approved pending timing confirmation. TI-RADS 4 endocrinologist referral still outstanding. CK baseline clean — statin safe at current training load.",
-      "action": "Book endocrinologist referral for TI-RADS 4 thyroid nodule. Confirm creatine dose/timing with Dr. Thắng at next visit."
+      "short": "All results clean. HR ceiling 160 ✅ · Creatine approved + ACTIVE ✅",
+      "detail": "Done Aug 13. Dr. Thắng confirmed via phone Aug 20 — all results clean. HR ceiling raised 155→160 bpm (Aug 20). Creatine (NutraBio monohydrate) approved and now ACTIVE (started ~early/mid Sep 2026, exact date unconfirmed). TI-RADS 4 endocrinologist referral still outstanding. CK baseline clean — recheck CK at next draw given statin + creatine.",
+      "action": "Book endocrinologist referral for TI-RADS 4 thyroid nodule. Recheck CK at next draw (statin + creatine)."
     },
     {
       "class": "standing",
@@ -5610,30 +5848,41 @@
       "name": "Atoyze 20/10",
       "dose": "Atorvastatin 20mg + Ezetimibe 10mg · 1 tablet · evening with dinner",
       "statinStart": "2026-05-30",
-      "status": "clean",
+      "status": "active",
       "purpose": "Triglyceride + cholesterol control",
-      "note": "Monitor for unusual muscle heaviness every run. Aug 13 BV 108 results clear (Dr. Thắng Aug 20). CK baseline clean. Next review: next BV 108 visit."
+      "note": "Monitor for unusual muscle heaviness every run. Aug 13 BV 108 results clear (Dr. Thắng Aug 20). CK baseline clean. Next review: next BV 108 visit.",
+      "startDate": "2026-05-30",
+      "startConfirmed": true
     },
     {
       "name": "Vitamin D3 2,000 IU",
       "dose": "1 capsule · with fattiest meal",
-      "status": "clean",
+      "status": "active",
       "purpose": "Correct deficiency (15.40 ng/mL baseline)",
-      "note": "Aug 13 retest done — confirm response value with Dr. Thắng. Dose increase may be indicated."
+      "note": "Aug 13 retest done — confirm response value with Dr. Thắng. Dose increase may be indicated.",
+      "startDate": "2026-05-30",
+      "startConfirmed": false,
+      "startNote": "started with the May 29–30 deficiency diagnosis (KB \"Medications … Day 88\" on Aug 25) — exact day unconfirmed"
     },
     {
       "name": "Sithion Q10 (CoQ10)",
       "dose": "Per label · with meal + fat",
-      "status": "clean",
+      "status": "active",
       "purpose": "Counter statin CoQ10 depletion",
-      "note": "Prophylactic during statin therapy."
+      "note": "Prophylactic during statin therapy.",
+      "startDate": "2026-05-30",
+      "startConfirmed": false,
+      "startNote": "started alongside Atoyze per KB medication-day count — exact day unconfirmed"
     },
     {
       "name": "Creatine (NutraBio monohydrate)",
-      "dose": "Approved — dose/timing pending Dr. Thắng",
-      "status": "pending",
+      "dose": "Monohydrate · daily (dose per athlete — confirm with Dr. Thắng)",
+      "status": "active",
       "purpose": "Phosphocreatine resynthesis between intervals + long-run glycogen sparing + statin-era muscle support",
-      "note": "Approved Aug 20 (CK clean). Not yet started — confirm dose and timing with Dr. Thắng in person. Monitor CK at next draw for statin-creatine interaction."
+      "note": "ACTIVE — athlete confirms started several weeks ago. Approved Aug 20 (CK clean). Concurrent statin: watch CK at next blood draw; flag unusual muscle heaviness.",
+      "startDate": "2026-09-07",
+      "startConfirmed": false,
+      "startNote": "approx. early-to-mid September 2026 — exact start date UNCONFIRMED (Sep 4 InBody note already attributes part of the SMM rise to creatine)"
     }
   ],
   "STRENGTH_HISTORY": [
@@ -5643,27 +5892,42 @@
       "session": "pull",
       "entries": [
         {
+          "id": "pull_ups",
+          "label": "Pull-ups",
+          "variant": "Pull-ups",
           "exercise": "Pull-ups",
           "topSet": 10,
           "reps": "10-7-6",
           "weight_kg": 0
         },
         {
+          "id": "lat_pulldown",
+          "label": "Lat Pulldown",
+          "variant": "Lat Pulldown",
           "exercise": "Lat Pulldown",
           "weight_kg": 60,
           "reps": "10-8-7"
         },
         {
+          "id": "chest_supported_row",
+          "label": "Chest Supported Row",
+          "variant": "Chest Supported Row",
           "exercise": "Chest Supported Row",
           "weight_kg": 55,
           "reps": 8
         },
         {
+          "id": "rear_delt_x_cable",
+          "label": "X Cable Rear Delt Pull",
+          "variant": "X Rear Delt",
           "exercise": "X Rear Delt",
           "weight_kg": 6,
           "reps": 8
         },
         {
+          "id": "preacher_curl",
+          "label": "Preacher Curl",
+          "variant": "Preacher Hammer Curl",
           "exercise": "Preacher Hammer Curl",
           "weight_kg": 12,
           "reps": 10
@@ -5676,26 +5940,41 @@
       "session": "push",
       "entries": [
         {
+          "id": "incline_barbell_press",
+          "label": "Incline Barbell Press",
+          "variant": "Incline Barbell Press",
           "exercise": "Incline Barbell Press",
           "weight_kg": 60.8,
           "reps": 8
         },
         {
+          "id": "cable_fly",
+          "label": "Cable Fly",
+          "variant": "Cable Fly",
           "exercise": "Cable Fly",
           "weight_kg": 12,
           "reps": 10
         },
         {
+          "id": "shoulder_press",
+          "label": "Shoulder Press",
+          "variant": "Shoulder Press",
           "exercise": "Shoulder Press",
           "weight_kg": 24,
           "reps": 12
         },
         {
+          "id": "cable_lateral_raise",
+          "label": "Cable Lateral Raise",
+          "variant": "Cable Lateral Raise",
           "exercise": "Cable Lateral Raise",
           "weight_kg": 7.5,
           "reps": 12
         },
         {
+          "id": "tricep_overhead_extension",
+          "label": "Tricep Overhead Extension",
+          "variant": "Tricep Overhead Extension",
           "exercise": "Tricep Overhead Extension",
           "weight_kg": 12,
           "reps": 12
@@ -5708,31 +5987,49 @@
       "session": "legs",
       "entries": [
         {
+          "id": "v_squat",
+          "label": "V Squat Machine",
+          "variant": "V Squat Machine",
           "exercise": "V Squat Machine",
           "weight_kg": 72,
           "reps": 10
         },
         {
+          "id": "trap_bar_deadlift",
+          "label": "Trap Bar Deadlift",
+          "variant": "Trap Bar Deadlift",
           "exercise": "Trap Bar Deadlift",
           "weight_kg": 130,
           "reps": 8
         },
         {
+          "id": "bulgarian_split_squat",
+          "label": "Bulgarian Split Squat",
+          "variant": "Bulgarian Split Squat",
           "exercise": "Bulgarian Split Squat",
           "weight_kg": 14,
           "reps": 10
         },
         {
+          "id": "sl_rdl",
+          "label": "Single Leg RDL",
+          "variant": "Single Leg RDL",
           "exercise": "Single Leg RDL",
           "weight_kg": 12,
           "reps": 10
         },
         {
+          "id": "sl_hamstring_curl",
+          "label": "SL Hamstring Curl",
+          "variant": "Single Leg Standing Hamstring Curl",
           "exercise": "Single Leg Standing Hamstring Curl",
           "weight_kg": 20,
           "reps": 8
         },
         {
+          "id": "hip_thrust",
+          "label": "Hip Thrust",
+          "variant": "Hip Thrust",
           "exercise": "Hip Thrust",
           "weight_kg": 15,
           "reps": 10
@@ -5745,36 +6042,57 @@
       "session": "full_body",
       "entries": [
         {
+          "id": "incline_db_press",
+          "label": "Incline Dumbbell Press",
+          "variant": "Incline Dumbbell Press",
           "exercise": "Incline Dumbbell Press",
           "weight_kg": 26,
           "reps": "8/7/5"
         },
         {
+          "id": "shoulder_press",
+          "label": "Shoulder Press",
+          "variant": "DB Shoulder Press",
           "exercise": "DB Shoulder Press",
           "weight_kg": 20,
           "reps": 8
         },
         {
+          "id": "db_lateral_raise",
+          "label": "DB Lateral Raise",
+          "variant": "DB Lateral Raise",
           "exercise": "DB Lateral Raise",
           "weight_kg": 10,
           "reps": 10
         },
         {
+          "id": "seated_incline_db_curl",
+          "label": "Seated Incline DB Curl",
+          "variant": "Seated Incline DB Curl",
           "exercise": "Seated Incline DB Curl",
           "weight_kg": 10,
           "reps": 10
         },
         {
+          "id": "chest_supported_row",
+          "label": "Chest Supported Row",
+          "variant": "Chest Supported Row",
           "exercise": "Chest Supported Row",
           "weight_kg": 80,
           "reps": 10
         },
         {
+          "id": "lat_pulldown",
+          "label": "Lat Pulldown",
+          "variant": "Lat Pulldown",
           "exercise": "Lat Pulldown",
           "weight_kg": 60,
           "reps": 8
         },
         {
+          "id": "kb_knee_raise",
+          "label": "KB Knee Raise",
+          "variant": "KB Knee Raises",
           "exercise": "KB Knee Raises",
           "weight_kg": 12.5,
           "reps": 15
@@ -5787,36 +6105,58 @@
       "session": "legs_bonus",
       "entries": [
         {
+          "id": "trap_bar_deadlift",
+          "label": "Trap Bar Deadlift",
+          "variant": "Trap Bar Deadlift",
           "exercise": "Trap Bar Deadlift",
           "weight_kg": 100,
           "reps": 10
         },
         {
+          "id": "bulgarian_split_squat",
+          "label": "Bulgarian Split Squat",
+          "variant": "Bulgarian Split Squat",
           "exercise": "Bulgarian Split Squat",
           "weight_kg": 16,
           "reps": 10
         },
         {
+          "id": "sl_hamstring_curl",
+          "label": "SL Hamstring Curl",
+          "variant": "Single Leg Standing Hamstring Curl",
           "exercise": "Single Leg Standing Hamstring Curl",
           "weight_kg": 23,
           "reps": 10
         },
         {
+          "id": "hip_thrust",
+          "label": "Hip Thrust",
+          "variant": "Hip Thrust",
           "exercise": "Hip Thrust",
           "weight_kg": 20.4,
           "reps": 10
         },
         {
+          "id": "seated_calf_raise",
+          "label": "Seated Calf Raise",
+          "variant": "Seated Calf Raise",
           "exercise": "Seated Calf Raise",
-          "weight_kg": 64,
-          "reps": 15
+          "weight_kg": 32,
+          "reps": 15,
+          "note": "Logged as 64 kg total — normalised to 32 kg/side (history stores per-side weight)"
         },
         {
+          "id": "tibialis_raise",
+          "label": "Tibialis Raise",
+          "variant": "Tibialis KB Raise",
           "exercise": "Tibialis KB Raise",
           "weight_kg": 7.5,
           "reps": 50
         },
         {
+          "id": "kb_knee_raise",
+          "label": "KB Knee Raise",
+          "variant": "KB Knee Raises",
           "exercise": "KB Knee Raises",
           "weight_kg": 12.5,
           "reps": 10
@@ -5829,32 +6169,50 @@
       "session": "pull",
       "entries": [
         {
+          "id": "pull_ups",
+          "label": "Pull-ups",
+          "variant": "Pull-ups",
           "exercise": "Pull-ups",
           "weight_kg": 0,
           "reps": "10-6-6",
           "topSet": 10
         },
         {
+          "id": "lat_pulldown",
+          "label": "Lat Pulldown",
+          "variant": "Lat Pulldown",
           "exercise": "Lat Pulldown",
           "weight_kg": 60,
           "reps": "10-10"
         },
         {
+          "id": "rear_delt_x_cable",
+          "label": "X Cable Rear Delt Pull",
+          "variant": "X Cable Rear Delt Pull",
           "exercise": "X Cable Rear Delt Pull",
           "weight_kg": 4.5,
           "reps": "3×10"
         },
         {
+          "id": "cable_lat_pull",
+          "label": "Cable Lat Pull",
+          "variant": "Cable Lat Pull",
           "exercise": "Cable Lat Pull",
           "weight_kg": 19,
           "reps": "3×10"
         },
         {
+          "id": "bayesian_curl",
+          "label": "Bayesian Cable Curl",
+          "variant": "Bayesian Cable Bicep Curl",
           "exercise": "Bayesian Cable Bicep Curl",
           "weight_kg": 10.5,
           "reps": "3×9"
         },
         {
+          "id": "preacher_curl",
+          "label": "Preacher Curl",
+          "variant": "Preacher Curl",
           "exercise": "Preacher Curl",
           "weight_kg": 20,
           "reps": "1×failure"
@@ -5867,42 +6225,64 @@
       "session": "push",
       "entries": [
         {
+          "id": "incline_barbell_press",
+          "label": "Incline Barbell Press",
+          "variant": "Incline Barbell Press",
           "exercise": "Incline Barbell Press",
           "weight_kg": 60.8,
           "reps": "6-6-5",
           "note": "Pre-QA fatigue — regressed from W15 3×8 · weight held · no advancement until 3×8 clean"
         },
         {
+          "id": "cable_fly",
+          "label": "Cable Fly",
+          "variant": "Cable Fly",
           "exercise": "Cable Fly",
           "weight_kg": 15,
           "reps": "2×10 + 3 drop sets failure",
           "note": "↑ from 12 kg W15 (+25%) · 2 working sets + drop-set finisher"
         },
         {
+          "id": "shoulder_press",
+          "label": "Shoulder Press",
+          "variant": "Machine Shoulder Press",
           "exercise": "Machine Shoulder Press",
           "weight_kg": 40.8,
           "reps": "2×10",
           "note": "✅ NEW BASELINE W16 · machine implement · W15 was DB shoulder press 24 kg/hand — different exercise"
         },
         {
+          "id": "cable_lateral_raise",
+          "label": "Cable Lateral Raise",
+          "variant": "Cable Lateral Raise",
           "exercise": "Cable Lateral Raise",
           "weight_kg": 7.5,
           "reps": "1×10",
           "note": "Top set 7.5 kg × 10 (↓ from W15 3×12 — fatigue) · drop to 5 kg × 2×12 close to failure"
         },
         {
+          "id": "cable_lateral_raise",
+          "label": "Cable Lateral Raise",
+          "variant": "Cable Lateral Raise (drop)",
           "exercise": "Cable Lateral Raise (drop)",
           "weight_kg": 5.0,
           "reps": "2×12",
-          "note": "Drop sets close to failure after 7.5 kg top set"
+          "note": "Drop sets close to failure after 7.5 kg top set",
+          "dropSet": true
         },
         {
+          "id": "tricep_overhead_extension",
+          "label": "Tricep Overhead Extension",
+          "variant": "EZ Bar Tricep Extension",
           "exercise": "EZ Bar Tricep Extension",
           "weight_kg": 20,
           "reps": "3×10",
           "note": "✅ CORRECTED BASELINE W16 · 12 kg W15 was undershoot · 20 kg is real working weight"
         },
         {
+          "id": "cable_tricep_pulldown_sa",
+          "label": "Cable Tricep Pulldown SA",
+          "variant": "Cable Tricep Pulldown SA",
           "exercise": "Cable Tricep Pulldown SA",
           "weight_kg": 7.5,
           "reps": "1×12 failure",
@@ -5916,60 +6296,90 @@
       "session": "full_body",
       "entries": [
         {
+          "id": "v_squat",
+          "label": "V Squat Machine",
+          "variant": "V Squat Machine",
           "exercise": "V Squat Machine",
           "weight_kg": 90,
           "reps": "10-10-9",
           "note": "✅ W16 plates only · +18 kg from W15 72 kg baseline · sled weight TBC (total load higher) · moved from Legs Day to Full Body"
         },
         {
+          "id": "sl_hamstring_curl",
+          "label": "SL Hamstring Curl",
+          "variant": "Single Leg Standing Hamstring Curl",
           "exercise": "Single Leg Standing Hamstring Curl",
           "weight_kg": 25,
           "reps": "3×10",
           "note": "⚠️ one-axis rule departure · W15 baseline 23 kg×10 · should have gone 23 kg×12 first · next: 25 kg×12 (rep progression only)"
         },
         {
+          "id": "seated_calf_raise",
+          "label": "Seated Calf Raise",
+          "variant": "Seated Calf Raise",
           "exercise": "Seated Calf Raise",
           "weight_kg": 32,
           "reps": "2×15",
           "note": "32 kg/side (64 kg total) · 2 sets in Full Body context (vs 3 on Legs Day)"
         },
         {
+          "id": "incline_db_press",
+          "label": "Incline Dumbbell Press",
+          "variant": "Incline Dumbbell Press",
           "exercise": "Incline Dumbbell Press",
           "weight_kg": 26,
           "reps": "24-26-26 × 8",
           "note": "✅ First clean sets at 26 kg (×8×2) · W15 was 26 kg 8/7/5 · advancement: 3×8 at 26 kg achieved → try 28 kg next"
         },
         {
+          "id": "cable_fly",
+          "label": "Cable Fly",
+          "variant": "Cable Fly",
           "exercise": "Cable Fly",
           "weight_kg": 15,
           "reps": "2×10",
           "note": "15 kg/side · complement to Push Day · no drop sets in Full Body"
         },
         {
+          "id": "plate_row",
+          "label": "Plate Row (horizontal)",
+          "variant": "Plate Row (horizontal)",
           "exercise": "Plate Row (horizontal)",
           "weight_kg": 80,
           "reps": "2×10",
           "note": "40 kg/side (80 kg total) · horizontal pull · consistent with W15 Full Body chest supported row 80 kg"
         },
         {
+          "id": "stack_row",
+          "label": "Stack Row (vertical)",
+          "variant": "Stack Row (vertical)",
           "exercise": "Stack Row (vertical)",
           "weight_kg": 65,
           "reps": "2×10",
           "note": "✅ NEW BASELINE W16 Aug 28 · different grip/machine to plate row · vertical pull"
         },
         {
+          "id": "seated_incline_db_lateral_raise",
+          "label": "Seated Incline DB Lateral Raise",
+          "variant": "Seated Incline DB Lateral Raise",
           "exercise": "Seated Incline DB Lateral Raise",
           "weight_kg": 8,
           "reps": "2×10",
           "note": "✅ NEW BASELINE W16 Aug 28 · seated incline variation (harder than standing) · replaces standing DB lateral raise in Full Body"
         },
         {
+          "id": "hip_thrust",
+          "label": "Hip Thrust",
+          "variant": "Hip Thrust Machine",
           "exercise": "Hip Thrust Machine",
           "weight_kg": 25,
           "reps": "3×10",
           "note": "+4.6 kg from W15 20.4 kg · fast progression for glutes — monitor"
         },
         {
+          "id": "l_sit",
+          "label": "L-sit Hold",
+          "variant": "L-sit Hold",
           "exercise": "L-sit Hold",
           "weight_kg": 0,
           "reps": "3×(5×5s)",
@@ -5983,42 +6393,63 @@
       "session": "legs",
       "entries": [
         {
+          "id": "trap_bar_deadlift",
+          "label": "Trap Bar Deadlift",
+          "variant": "Trap Bar Deadlift",
           "exercise": "Trap Bar Deadlift",
           "weight_kg": 120,
           "reps": "110-120-120 × 8",
           "note": "✅ RESET PROTOCOL CLOSED · 120 kg new working weight · clean, RPE ~7, no pain · jumped past 110 kg gate (100→120 in build) · was tracking 1/3 reset at 100 kg — top-set build to 120 clean supersedes"
         },
         {
+          "id": "bulgarian_split_squat",
+          "label": "Bulgarian Split Squat",
+          "variant": "Bulgarian Split Squat",
           "exercise": "Bulgarian Split Squat",
           "weight_kg": 16,
           "reps": "3×10",
           "note": "16 kg each hand · held from prior (18 kg attempt deferred)"
         },
         {
+          "id": "sl_hamstring_curl",
+          "label": "SL Hamstring Curl",
+          "variant": "Single Leg Hamstring Curl",
           "exercise": "Single Leg Hamstring Curl",
           "weight_kg": 25,
           "reps": "3×10",
           "note": "25 kg · consistent with Full Body Aug 28 · one-axis: next 25 kg×12"
         },
         {
+          "id": "seated_calf_raise",
+          "label": "Seated Calf Raise",
+          "variant": "Seated Calf Raise",
           "exercise": "Seated Calf Raise",
           "weight_kg": 32,
           "reps": "2×15",
           "note": "32 kg/side"
         },
         {
+          "id": "db_lateral_raise",
+          "label": "DB Lateral Raise",
+          "variant": "Dumbbell Lateral Raise",
           "exercise": "Dumbbell Lateral Raise",
           "weight_kg": 10,
           "reps": "2×8",
           "note": "10 kg each hand · standing"
         },
         {
+          "id": "preacher_curl",
+          "label": "Preacher Curl",
+          "variant": "Preacher Curl",
           "exercise": "Preacher Curl",
           "weight_kg": 10,
           "reps": "2×10",
           "note": "10 kg"
         },
         {
+          "id": "kb_knee_raise",
+          "label": "KB Knee Raise",
+          "variant": "KB Knee Raise",
           "exercise": "KB Knee Raise",
           "weight_kg": 17,
           "reps": "2×8 + drop 12.5kg",
@@ -6032,30 +6463,45 @@
       "session": "push",
       "entries": [
         {
+          "id": "incline_barbell_press",
+          "label": "Incline Barbell Press",
+          "variant": "Incline Barbell Press",
           "exercise": "Incline Barbell Press",
           "weight_kg": 65,
           "reps": "3×6",
           "note": "✅ Jumped to 65 kg (above 63.5 kg target) · only 6 reps · consolidate 65 kg × 3×8 before next step"
         },
         {
+          "id": "cable_fly",
+          "label": "Cable Fly",
+          "variant": "Cable Fly",
           "exercise": "Cable Fly",
           "weight_kg": 13.5,
           "reps": "3×8",
           "note": "Held at 13.5 kg · below 15 kg × 3×10 W18 target · consolidate first"
         },
         {
+          "id": "shoulder_press",
+          "label": "Shoulder Press",
+          "variant": "Shoulder Press",
           "exercise": "Shoulder Press",
           "weight_kg": 30,
           "reps": "3×10",
           "note": "30 kg/side × 3×10 · format note: different from Machine Shoulder Press 40 kg stack — may be different machine/implement"
         },
         {
+          "id": "cable_lateral_raise",
+          "label": "Cable Lateral Raise",
+          "variant": "Lateral Raise",
           "exercise": "Lateral Raise",
           "weight_kg": 8,
           "reps": "3×10",
           "note": "✅ Stepped from 7.5 kg target to 8 kg × 3×10 · clean"
         },
         {
+          "id": "tricep_overhead_extension",
+          "label": "Tricep Overhead Extension",
+          "variant": "Overhead Tricep Press",
           "exercise": "Overhead Tricep Press",
           "weight_kg": 22,
           "reps": "2×10",
@@ -6069,30 +6515,45 @@
       "session": "pull",
       "entries": [
         {
+          "id": "pull_ups",
+          "label": "Pull-ups",
+          "variant": "Weighted Pull-ups",
           "exercise": "Weighted Pull-ups",
           "weight_kg": 5,
           "reps": "10-7-8",
           "note": "✅ FIRST WEIGHTED SESSION · 5 kg dip belt · 10-7-8 · strong opener · consolidate 10-8-8 before stepping to 7.5 kg"
         },
         {
+          "id": "lat_pulldown",
+          "label": "Lat Pulldown",
+          "variant": "Lat Pulldown",
           "exercise": "Lat Pulldown",
           "weight_kg": 65,
           "reps": "65-65-60 × 7 + partials",
           "note": "Near capacity at 65 kg · dropped to 60 kg set 3 · consolidate 65 kg × 3×8"
         },
         {
+          "id": "seated_cable_row",
+          "label": "Seated Cable Row",
+          "variant": "Seated Cable Row",
           "exercise": "Seated Cable Row",
           "weight_kg": 65,
           "reps": "3×8",
           "note": "65 kg × 3×8 · W18 target was 3×10 · 2 reps short · consolidate"
         },
         {
+          "id": "rear_delt_x_cable",
+          "label": "X Cable Rear Delt Pull",
+          "variant": "X Rear Cable Pull",
           "exercise": "X Rear Cable Pull",
           "weight_kg": 8,
           "reps": "2×8",
           "note": "8 kg × 2×8 · prev W16 was 4.5 kg × 3×10 · note possible machine difference"
         },
         {
+          "id": "bayesian_curl",
+          "label": "Bayesian Cable Curl",
+          "variant": "Bayesian Cable Curl",
           "exercise": "Bayesian Cable Curl",
           "weight_kg": 13.5,
           "reps": "2×6 + drop 12 kg × 8",
@@ -6106,32 +6567,50 @@
       "session": "push",
       "entries": [
         {
+          "id": "incline_barbell_press",
+          "label": "Incline Barbell Press",
+          "variant": "Incline Barbell Press",
           "exercise": "Incline Barbell Press",
           "weight_kg": 70,
           "reps": "3×6",
           "note": "🏆 stepped from 65 kg"
         },
         {
+          "id": "incline_db_press",
+          "label": "Incline Dumbbell Press",
+          "variant": "Incline Dumbbell Press",
           "exercise": "Incline Dumbbell Press",
           "weight_kg": 26,
           "reps": "3×6"
         },
         {
+          "id": "cable_fly",
+          "label": "Cable Fly",
+          "variant": "Cable Fly",
           "exercise": "Cable Fly",
           "weight_kg": 15,
           "reps": "3×8"
         },
         {
+          "id": "cable_lateral_raise",
+          "label": "Cable Lateral Raise",
+          "variant": "Cable Lateral Raise",
           "exercise": "Cable Lateral Raise",
           "weight_kg": 8,
           "reps": "3×8"
         },
         {
+          "id": "shoulder_press",
+          "label": "Shoulder Press",
+          "variant": "DB Shoulder Press",
           "exercise": "DB Shoulder Press",
           "weight_kg": 22,
           "reps": "3×6"
         },
         {
+          "id": "tricep_overhead_extension",
+          "label": "Tricep Overhead Extension",
+          "variant": "Tricep Overhead Press",
           "exercise": "Tricep Overhead Press",
           "weight_kg": 22.5,
           "reps": "3×10",
@@ -6145,40 +6624,61 @@
       "session": "pull",
       "entries": [
         {
+          "id": "pull_ups",
+          "label": "Pull-ups",
+          "variant": "Weighted Pull-ups",
           "exercise": "Weighted Pull-ups",
           "weight_kg": 5,
           "reps": "8-6-5",
           "note": "⚠️ sick week regression"
         },
         {
+          "id": "chest_supported_row",
+          "label": "Chest Supported Row",
+          "variant": "Machine Row",
           "exercise": "Machine Row",
           "weight_kg": 70,
           "reps": "3×10",
           "note": "🏆 stepped from 65 kg"
         },
         {
+          "id": "seated_cable_row",
+          "label": "Seated Cable Row",
+          "variant": "Seated Cable Row",
           "exercise": "Seated Cable Row",
           "weight_kg": 65,
           "reps": "3×10",
           "note": "✅ target achieved"
         },
         {
+          "id": "lat_pulldown",
+          "label": "Lat Pulldown",
+          "variant": "Lat Pulldown",
           "exercise": "Lat Pulldown",
           "weight_kg": 65,
           "reps": "3×8"
         },
         {
+          "id": "rear_delt_x_cable",
+          "label": "X Cable Rear Delt Pull",
+          "variant": "X Cable Rear Delt Pull",
           "exercise": "X Cable Rear Delt Pull",
           "weight_kg": 8,
           "reps": "3×8"
         },
         {
+          "id": "preacher_curl",
+          "label": "Preacher Curl",
+          "variant": "Preacher Curl",
           "exercise": "Preacher Curl",
           "weight_kg": 12,
           "reps": "3×8",
           "note": "12 kg/side — DB format"
         },
         {
+          "id": "bayesian_curl",
+          "label": "Bayesian Cable Curl",
+          "variant": "Bayesian Cable Curl",
           "exercise": "Bayesian Cable Curl",
           "weight_kg": 14,
           "reps": "3×8",
@@ -6192,39 +6692,60 @@
       "session": "legs",
       "entries": [
         {
+          "id": "trap_bar_deadlift",
+          "label": "Trap Bar Deadlift",
+          "variant": "Trap Bar Deadlift",
           "exercise": "Trap Bar Deadlift",
           "weight_kg": 120,
           "reps": "3×8"
         },
         {
+          "id": "smith_reverse_lunge",
+          "label": "Smith Machine Reverse Lunge",
+          "variant": "Smith Machine Reverse Lunge",
           "exercise": "Smith Machine Reverse Lunge",
           "weight_kg": 60,
           "reps": "2×8",
           "note": "NEW exercise"
         },
         {
+          "id": "bulgarian_split_squat",
+          "label": "Bulgarian Split Squat",
+          "variant": "Bulgarian Split Squat",
           "exercise": "Bulgarian Split Squat",
           "weight_kg": 24,
           "reps": "3×6",
           "note": "🏆 stepped from 18 kg"
         },
         {
+          "id": "sl_rdl",
+          "label": "Single Leg RDL",
+          "variant": "Single Leg RDL",
           "exercise": "Single Leg RDL",
           "weight_kg": 20,
           "reps": "2×8"
         },
         {
+          "id": "sl_hamstring_curl",
+          "label": "SL Hamstring Curl",
+          "variant": "SL Machine Hamstring Curl",
           "exercise": "SL Machine Hamstring Curl",
           "weight_kg": 20,
           "reps": "3×8"
         },
         {
+          "id": "bent_leg_sl_calf_raise",
+          "label": "Bent Leg SL Calf Raise (KB)",
+          "variant": "Bent Leg SL Calf Raise (KB)",
           "exercise": "Bent Leg SL Calf Raise (KB)",
           "weight_kg": 20,
           "reps": "3×8",
           "note": "NEW variation"
         },
         {
+          "id": "hip_thrust",
+          "label": "Hip Thrust",
+          "variant": "Hip Thrust Machine",
           "exercise": "Hip Thrust Machine",
           "weight_kg": 30,
           "reps": "2×10",
@@ -6238,36 +6759,54 @@
       "session": "pull",
       "entries": [
         {
+          "id": "pull_ups",
+          "label": "Pull-ups",
+          "variant": "Weighted Pull-ups",
           "exercise": "Weighted Pull-ups",
           "weight_kg": 5,
           "reps": "3×8",
           "note": "✅ W21 recovery from sick-week regression (W20: 8-6-5) — baseline restored at 5 kg ×3×8"
         },
         {
+          "id": "lat_pulldown",
+          "label": "Lat Pulldown",
+          "variant": "Lat Pulldown",
           "exercise": "Lat Pulldown",
           "weight_kg": 65,
           "reps": "2×8",
           "note": "Deload format: 2×8 (was 3×8)"
         },
         {
+          "id": "chest_supported_row",
+          "label": "Chest Supported Row",
+          "variant": "Chest Supported Machine Row",
           "exercise": "Chest Supported Machine Row",
           "weight_kg": 70,
           "reps": "2×8",
           "note": "Deload format: 2×8 (was 3×10)"
         },
         {
+          "id": "rear_delt_x_cable",
+          "label": "X Cable Rear Delt Pull",
+          "variant": "X Cable Rear Delt Pull",
           "exercise": "X Cable Rear Delt Pull",
           "weight_kg": 8,
           "reps": "2×8",
           "note": "Deload format: 2×8 (same weight as W20)"
         },
         {
+          "id": "bayesian_curl",
+          "label": "Bayesian Cable Curl",
+          "variant": "Bayesian Cable Bicep Curl",
           "exercise": "Bayesian Cable Bicep Curl",
           "weight_kg": 12,
           "reps": "3×8",
           "note": "Lighter than W20 (was 14 kg) — deload week"
         },
         {
+          "id": "lower_back_extension",
+          "label": "Lower Back Extension",
+          "variant": "Lower Back Extension",
           "exercise": "Lower Back Extension",
           "weight_kg": 15,
           "reps": "2×8",
@@ -6281,34 +6820,49 @@
       "session": "push",
       "entries": [
         {
+          "id": "incline_barbell_press",
+          "label": "Incline Barbell Press",
+          "variant": "Incline Barbell Press",
           "exercise": "Incline Barbell Press",
           "weight_kg": 72,
           "reps": "3×5",
-          "note": "🏆 W21 pre-freeze PR · stepped from 70 kg · 3×5 format (deload reps lower) · mass freeze activates post-Race 0 Oct 19"
+          "note": "🏆 W21 PR · stepped from 70 kg · 3×5 format (deload reps lower)"
         },
         {
+          "id": "cable_fly",
+          "label": "Cable Fly",
+          "variant": "Cable Fly",
           "exercise": "Cable Fly",
           "weight_kg": 13.5,
           "reps": "3×8",
           "note": "Lighter than W20 (was 15 kg) — deload week"
         },
         {
+          "id": "cable_lateral_raise",
+          "label": "Cable Lateral Raise",
+          "variant": "Lateral Raise",
           "exercise": "Lateral Raise",
           "weight_kg": 8,
           "reps": "3×8",
           "note": "Same as W20"
         },
         {
+          "id": "shoulder_press",
+          "label": "Shoulder Press",
+          "variant": "Shoulder Press",
           "exercise": "Shoulder Press",
           "weight_kg": 50,
           "reps": "2×8",
           "note": "FORMAT CHANGE W21: barbell/smith 50 kg (W20 was DB 22 kg/side — different implement, not directly comparable)"
         },
         {
+          "id": "tricep_overhead_extension",
+          "label": "Tricep Overhead Extension",
+          "variant": "Tricep Overhead Press",
           "exercise": "Tricep Overhead Press",
           "weight_kg": 24,
           "reps": "2×8",
-          "note": "🏆 W21 pre-freeze PR · stepped from 22.5 kg · mass freeze activates post-Race 0 Oct 19"
+          "note": "🏆 W21 PR · stepped from 22.5 kg"
         }
       ]
     }
