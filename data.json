@@ -4067,11 +4067,14 @@
       "id": 6,
       "type": "hard",
       "name": "Test Data",
-      "short": "VO2max + VT1/VT2 in hand",
+      "short": "⛔ RETIRED Sep 30, 2026",
       "progress": 0,
-      "status": "pending",
-      "detail": "VO2max + VT1/VT2 CONFIRMED Regenetics HCMC (1.5M VND). Sep 2026 window missed — unable to leave Hanoi. Current empirical LT2 estimate: 10.7–11.0 km/h (5.61–5.45 min/km), M confidence. Test will replace all estimates. Book ASAP when Hanoi travel permits.",
-      "eta": "ASAP — travel to HCMC required · Sep 2026 window missed · Oct 2026 target"
+      "status": "retired",
+      "detail": "Gate 6 retired Sep 30, 2026 — geographic constraint (not in HCMC near-term). Regenetics HCMC dropped. Phase 3 zones estimated from Phase 2 empirical LT2 data (10.7 km/h lower bound confirmed R80) + Race 0 HR calibration data (Oct 19). Confidence: medium-low. Fallback: Viện Y học thể thao Hanoi — book if ≥2 Phase 3 QA ceiling breaches (>160 bpm) attributable to zone miscalibration.",
+      "eta": "⛔ Retired",
+      "retiredDate": "Sep 30, 2026",
+      "retiredReason": "Geographic constraint — not in HCMC near-term",
+      "fallback": "Viện Y học thể thao Hanoi — trigger: ≥2 Phase 3 QA ceiling breaches attributable to zone miscalibration"
     },
     {
       "id": 7,
@@ -4441,7 +4444,7 @@
     },
     "lastQADate": "Sep 22, 2026",
     "lastQAResult": "4×10 min @ 10.7/10.7/10.9/10.9 km/h · max HR 151 (9 bpm) · GCT 284 ms 🏆 TIES PROGRAM BEST (new quality session low, prev 297 ms R80) · Z4 26% · Z5 0% · first QA at new speed tier · stay at 10.7/10.9",
-    "ltNote": "LT2 range empirically revised Sep 17 (R80 QB). R80: 10.7 km/h × ~15 min continuous → HR stable 152–154 bpm (Z4 dominant), max 157 (3 bpm headroom). 10.7 km/h is confirmed sustainable threshold pace. LT2 lower bound: 10.5→10.7 km/h (5.71→5.61 min/km). Upper bound: 11.0 km/h (5.45 min/km) — unconfirmed. Key: 5:36/km (10.7 km/h) is 5 sec/km FASTER than sub-4 marathon goal pace (5:41/km). LT1 (ltPace 6.32 = 9.49 km/h) unchanged — consistent with R80 (10.3 km/h settled 144–145 bpm = sub-threshold). Lactate test will replace all estimates.",
+    "ltNote": "LT2 range empirically revised Sep 17 (R80 QB). R80: 10.7 km/h × ~15 min continuous → HR stable 152–154 bpm (Z4 dominant), max 157 (3 bpm headroom). 10.7 km/h is confirmed sustainable threshold pace. LT2 lower bound: 10.5→10.7 km/h (5.71→5.61 min/km). Upper bound: 11.0 km/h (5.45 min/km) — unconfirmed. Key: 5:36/km (10.7 km/h) is 5 sec/km FASTER than sub-4 marathon goal pace (5:41/km). LT1 (ltPace 6.32 = 9.49 km/h) unchanged — consistent with R80 (10.3 km/h settled 144–145 bpm = sub-threshold). Regenetics test dropped Sep 30, 2026 (geographic constraint). Estimates remain empirical (medium-low confidence). Phase 3 calibration: Race 0 HR data (Oct 19) + fallback Viện Y học thể thao Hanoi if ≥2 Phase 3 QA ceiling breaches (>160 bpm) attributable to zone miscalibration.",
     "lt2RevisionDate": "Sep 17, 2026",
     "lt2RevisionRun": "R80",
     "lastQBDate": "Sep 25, 2026",
@@ -4864,7 +4867,7 @@
       "dateStart": "2026-10-26",
       "dateEnd": null,
       "openEnded": true,
-      "focus": "Pace targets calibrated from real lactate data · LT2 gate: must reach ≥12.0 km/h for sub-4 viability",
+      "focus": "Pace targets estimated from Phase 2 empirical LT2 data (10.7 km/h lower bound confirmed R80, medium-low confidence) + Race 0 HR calibration (Oct 19) · LT2 gate: must reach ≥12.0 km/h for sub-4 viability · Fallback calibration: Viện Y học thể thao Hanoi — trigger if ≥2 QA ceiling breaches (>160 bpm) attributable to zone miscalibration",
       "note": "End date undefined."
     }
   ],
@@ -5118,10 +5121,11 @@
     },
     {
       "date": "2026-09-30",
-      "label": "Lactate + VO2max test",
+      "label": "⛔ Lactate + VO₂max test (DROPPED)",
       "type": "test",
-      "nonNegotiable": true,
-      "note": "VO2max + VT1/VT2: CONFIRMED Regenetics HCMC (1.5M VND). Lactate: BV 108 Aug 13 booking. Will validate R59 LT2 estimate (10.2-10.8 km/h treadmill)."
+      "nonNegotiable": false,
+      "status": "retired",
+      "note": "Regenetics HCMC dropped Sep 30, 2026 — geographic constraint (not in HCMC near-term). Phase 3 zones estimated from Phase 2 empirical LT2 data (10.7 km/h lower bound, R80) + Race 0 HR calibration (Oct 19, 2026). Confidence: medium-low. Fallback: Viện Y học thể thao Hanoi — trigger if ≥2 Phase 3 QA ceiling breaches (>160 bpm) attributable to zone miscalibration."
     },
     {
       "date": "2026-10-04",
@@ -5142,7 +5146,7 @@
       "label": "Phase 3 start",
       "type": "phase",
       "nonNegotiable": false,
-      "note": "Blocked until all 6 hard gates green."
+      "note": "Gate 6 (Test Data) retired Sep 30, 2026 — geographic constraint. Proceeding on 5 hard gates: Gates 1–4 ✅, Gate 5 = Race 0 (Oct 19). Phase 3 zone calibration: empirical LT2 data + Race 0 HR calibration."
     },
     {
       "date": "2027-03-01",

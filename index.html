@@ -1281,7 +1281,7 @@ body{background:var(--bg);background-image:var(--grid);color:var(--tx);font-fami
     </div>
   </div>
   <div class="card hud-card" id="hb-card">
-    <div class="ch"><div class="cl">HUMAN BENCHMARK</div><div class="cs">your metrics vs trained runner population · ref: Garmin HRM literature (GCT/VR) · AHA data (RHR) · VO₂max + threshold after lactate test Oct 2026</div></div>
+    <div class="ch"><div class="cl">HUMAN BENCHMARK</div><div class="cs">your metrics vs trained runner population · ref: Garmin HRM literature (GCT/VR) · AHA data (RHR) · VO₂max + threshold estimated from empirical LT2 data + Race 0 calibration (Oct 19)</div></div>
     <div id="hb-body"></div>
   </div>
   <div class="card hud-card">
@@ -1432,7 +1432,7 @@ body{background:var(--bg);background-image:var(--grid);color:var(--tx);font-fami
     </div>
 
     <div class="card hud-card fg-milestones" id="milestone-card">
-      <div class="ch"><div class="cl">MILESTONES</div><div class="cs">Oct 19 Race 0 · Sep 2026 Regenetics · Oct 2027 VPBank Marathon</div></div>
+      <div class="ch"><div class="cl">MILESTONES</div><div class="cs">Oct 19 Race 0 · Oct 2027 VPBank Marathon · Gate 6 retired Sep 30, 2026</div></div>
       <div id="milestone-body" class="cb"></div>
     </div>
     <div class="card hud-card fg-trivia" id="trivia-card">
@@ -2219,7 +2219,7 @@ function renderCoachNote(){
 // Static tier thresholds are population benchmarks, not computed from RUNS.
 // GCT + VR are treadmill bests (R39) — flagged in ref column.
 // Body comp populates from ATHLETE.bodyComp after InBody Aug 30.
-// VO₂max + threshold pace rows ship after lactate test Oct 2026.
+// VO₂max + threshold pace rows: estimated from empirical LT2 data + Race 0 calibration (Oct 19). Regenetics test dropped Sep 30, 2026.
 function renderHumanBenchmark(){
   const el=document.getElementById('hb-body');
   if(!el)return;
@@ -2290,7 +2290,7 @@ function renderHumanBenchmark(){
       American Heart Association resting HR reference ranges (RHR) ·
       ACSM body composition standards (body comp) ·
       Tiers are population cohort benchmarks, not personalized thresholds —
-      lactate test Oct 2026 will establish your individual training zones.
+      Phase 3 zones estimated from empirical LT2 data (10.7 km/h, R80) + Race 0 HR calibration (Oct 19). Regenetics test dropped Sep 30, 2026.
     </div>`;
 }
 
@@ -2440,9 +2440,9 @@ function renderPaceGap(pg){
             <div style="font-size:.6rem;color:var(--m2);line-height:1.55">LT1 expected to hold roughly flat. This phase builds the aerobic engine — longer intervals, more reps. Ceiling compliance rate is the metric that matters, not pace.</div>
           </div>
           <div style="background:rgba(245,158,11,.04);border:1px solid rgba(245,158,11,.15);border-radius:4px;padding:10px">
-            <div style="font-family:var(--mono);font-size:.44rem;letter-spacing:1.5px;color:var(--mu);margin-bottom:4px">LACTATE TEST — SEP 2026</div>
-            <div style="font-family:var(--hud);font-size:.9rem;color:var(--am);margin-bottom:5px">CALIBRATION</div>
-            <div style="font-size:.6rem;color:var(--m2);line-height:1.55">Regenetics HCMC. Recalibrates all zones from real data. This is when LT1 gets a proper number — not inference. Everything Phase 3+ is built on this.</div>
+            <div style="font-family:var(--mono);font-size:.44rem;letter-spacing:1.5px;color:var(--mu);margin-bottom:4px">PHASE 3 CALIBRATION</div>
+            <div style="font-family:var(--hud);font-size:.9rem;color:var(--am);margin-bottom:5px">EMPIRICAL</div>
+            <div style="font-size:.6rem;color:var(--m2);line-height:1.55">⛔ Regenetics HCMC dropped Sep 30, 2026 (geographic constraint). Phase 3 zones estimated from empirical LT2 data (10.7 km/h lower bound, R80) + Race 0 HR calibration (Oct 19). Fallback: Viện Y học thể thao Hanoi if ≥2 QA ceiling breaches attributable to zone miscalibration.</div>
           </div>
           <div style="background:rgba(99,102,241,.04);border:1px solid rgba(99,102,241,.15);border-radius:4px;padding:10px">
             <div style="font-family:var(--mono);font-size:.44rem;letter-spacing:1.5px;color:var(--mu);margin-bottom:4px">PHASE 3 → RACE — OCT 2026+</div>
@@ -2529,7 +2529,7 @@ function renderPerfProjections(){
   const conf=hasResult?'MEDIUM':'LOW';
   const confCol=hasResult?'var(--am)':'#f87171';
   const confNote=hasResult
-    ?`Based on ${tt.resultDate||'time trial'} result · Riegel formula · LT data: Regenetics Sep 2026`
+    ?`Based on ${tt.resultDate||'time trial'} result · Riegel formula · LT data: empirical (R80) + Race 0 calibration`
     :'No race data · LT1 inference · time trial result will auto-update';
   const fmtP=v=>{const m=Math.floor(v),s=Math.round((v-m)*60);return`${m}:${String(s).padStart(2,'0')}`;};
   const fmtT=m=>{const h=Math.floor(m/60),mn=Math.round(m%60);return`${h}:${String(mn).padStart(2,'0')}`;};
@@ -2592,7 +2592,7 @@ function renderPerfProjections(){
       <div style="font-family:var(--mono);font-size:.46rem;letter-spacing:2px;color:var(--mu);text-transform:uppercase;margin-bottom:6px">What updates this model</div>
       <div style="font-family:var(--stm,monospace);font-size:.6rem;color:var(--mu);line-height:1.85">
         1 · ✓ Aug 14 10K trial → Riegel calibrated to actual result<br>
-        2 · Sep 2026 lactate test → LT1/LT2 precision replaces inference<br>
+        2 · Race 0 (Oct 19) HR calibration + empirical LT2 data (R80) → Phase 3 zone estimates<br>
         3 · Feb/Mar 2027 HM race → replaces all estimates with real data<br>
         <span style="color:var(--m2);font-style:italic">Note: current = today's baseline. Phase 3–5 training closes the gap.</span>
       </div>
@@ -3694,7 +3694,7 @@ function renderPaceZones(){
     </div>
   </div>`;
   const colHdr=`<div style="padding:4px 20px 3px;border-bottom:1px solid rgba(0,212,255,.08);display:flex;gap:8px"><span style="font-family:var(--mono);font-size:.42rem;color:var(--mu);flex-shrink:0;min-width:88px">ZONE</span><span style="font-family:var(--mono);font-size:.42rem;color:var(--mu)">PACE · HR · CONF</span></div>`;
-  el.innerHTML=lcrsHTML+curveHTML+colHdr+rowsHTML+`<div style="padding:5px 20px;font-family:var(--mono);font-size:.42rem;color:var(--mu)">TM=treadmill · OD=outdoor · est=estimate · Regenetics HCMC Sep 2026</div>`;
+  el.innerHTML=lcrsHTML+curveHTML+colHdr+rowsHTML+`<div style="padding:5px 20px;font-family:var(--mono);font-size:.42rem;color:var(--mu)">TM=treadmill · OD=outdoor · est=estimate · empirical LT2 (R80) + Race 0 calibration Oct 19</div>`;
 }
 
 
