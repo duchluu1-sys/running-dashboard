@@ -4058,6 +4058,83 @@
         10.7,
         10.9
       ]
+    },
+    {
+      "r": 89,
+      "date": "Oct 1",
+      "type": "quality_b",
+      "wk": 21,
+      "dist": 3.83,
+      "duration": 1350,
+      "moving": 1247,
+      "pace": 5.87,
+      "qualityPace": 5.61,
+      "hrAvg": 146,
+      "hrMax": 159,
+      "te": 3.5,
+      "te_an": 0.0,
+      "gct": 272,
+      "vr": 8.1,
+      "vo": 10.9,
+      "sl": 1.35,
+      "cadence": 148,
+      "pctCeiling": 0,
+      "drift": null,
+      "walkRatio": 0.6,
+      "hrZones": [
+        4,
+        8,
+        13,
+        55,
+        13
+      ],
+      "temp": 28,
+      "surface": "treadmill",
+      "lcrs": 20,
+      "lcrsType": "LT2",
+      "lcrsNote": "20 min continuous at 10.7 km/h (Set 2 of programmed workout). Garmin's 0:08 walk time almost certainly falls in the abbreviated 4 km/h cooldown (Set 3), not inside the main set — laps 1-3 (Technogym, all 5:51/km) show no irregular lap. CONFIRMED as the new LCRS@LT2 record (16→20 min, prev R85) per athlete call Oct 1, 2026 — this is a decision to close the pending verification, not a new measurement; confidence stays MEDIUM (not lap-by-lap verified to the second like R80's disqualification was).",
+      "conditions": "19:23 local (Garmin) / 19:46 console clock (unreconciled offset, immaterial) · Oct 1 (Wed) · Technogym Evo SL · 1% incline · 27–30°C gym · programmed Set1 2:00 @ 6.8 km/h + Set2 20:00 @ 10.7 km/h + Set3 4:00 @ 4.0 km/h · cooldown cut short (~30s of 4-min Set3, then stopped) · feel 'Weak' · RPE 'Very Hard' 7/10 · QB moved from scheduled Thu (Oct 2) to Wed (Oct 1) — one day after R88 QA (Sep 30), zero rest/easy day between quality sessions · Statin Day 125",
+      "flag": "✅✅",
+      "note": "R89 W21 QB · pre-programmed 20-min main set @ 10.7 km/h (W21 deload prescription: 15 min) · Technogym & Garmin agree on distance 3.83 km · avg HR 146 · max HR 159 (1 bpm below 160 ceiling) · pctCeiling 0 · Z4 55% + Z5 13% = 68% combined — program high, vs R85's 44% at the identical 10.7 km/h pace · GCT 272ms — NEW PROGRAM BEST (prev 284ms, R61/R83), likely conservative given warmup/cooldown dilution · VR 8.1% — NEW PROGRAM BEST (prev 8.3%, R61/R87) · TE 3.5/0.0 · walk ratio 0.6% · LCRS 20 min — NEW LT2 RECORD, confirmed by athlete call Oct 1 (medium confidence, not lab-verified — see lcrsNote) · feel 'Weak' / RPE 'Very Hard' 7/10 · QB run one day early (Wed not Thu), eliminating the scheduled rest/easy day after QA · corrected analysis: initial read of Technogym lap-pace data as 'actual pace ~10.3 km/h' was wrong — user-supplied programmed-workout screenshot confirmed 10.7 km/h executed exactly as planned · Statin Day 125",
+      "verdict": "Pace was exactly as claimed — 10.7 km/h, 20 continuous minutes, confirmed by the programmed Technogym set list, not the ~10.3 km/h I initially (incorrectly) inferred from lap-boundary pace data. Correcting that is the first fact. Given the real pace, this session cost materially more than it should have: Z4+Z5 68% and max HR 159 vs R85's 44% and 155 at the identical 10.7 km/h speed. The leading explanation isn't fitness or pace drift — it's that QB was moved from Thu to Wed, landing one day after Tuesday's QA with zero rest/easy day between two quality sessions, on top of running 5 extra minutes beyond the already-reduced deload prescription. Both are logged departures with falsification conditions in decision_log.md. The positives are real and should be stated with equal rigor: GCT 272ms and VR 8.1% are new program bests, and the 20-minute uninterrupted main set is now logged as the new LCRS@LT2 record (16→20 min, confirmed by athlete call Oct 1 — medium confidence, not lab-verified), a week ahead of the W22 target. This was a genuinely hard, useful session that also broke two deload guardrails (duration, spacing) in the same week the guardrails exist specifically to reduce accumulated load before Race 0 — worth being deliberate about, not reflexive, if it happens again.",
+      "tags": [
+        "quality_b",
+        "treadmill",
+        "deload",
+        "duration_departure",
+        "schedule_departure",
+        "zero_rest_day",
+        "elevated_hr_cost",
+        "gct_pb",
+        "vr_pb",
+        "lcrs_record_confirmed_by_athlete",
+        "corrected_analysis"
+      ],
+      "laps": [
+        {
+          "km": 1.0,
+          "pace": 5.85,
+          "note": "warmup ramp + main set start (blended)"
+        },
+        {
+          "km": 1.0,
+          "pace": 5.85,
+          "note": "main set @ 10.7 km/h"
+        },
+        {
+          "km": 1.0,
+          "pace": 5.85,
+          "note": "main set @ 10.7 km/h"
+        },
+        {
+          "km": 0.8,
+          "pace": 6.67,
+          "note": "cooldown (cut short)"
+        }
+      ],
+      "workKmh": [
+        10.7
+      ]
     }
   ],
   "GATES": [
@@ -4205,7 +4282,7 @@
     "week": 21,
     "totalWeeks": 24,
     "deloadWeek": 21,
-    "weekVolOnBoard": 8.87,
+    "weekVolOnBoard": 12.7,
     "lastWeekVol": 47.19,
     "weekTarget": {
       "min": 20,
@@ -4226,12 +4303,12 @@
     "ltRun": "R59",
     "ltDate": "Aug 11",
     "maxHREstimate": 185,
-    "gctBest": 284,
-    "vrBest": 8.3,
+    "gctBest": 272,
+    "vrBest": 8.1,
     "statinStart": "2026-05-30",
     "stressLevel": "MODERATE",
     "formCue": "Eyes on the horizon -- head up every session",
-    "date": "September 30, 2026",
+    "date": "October 1, 2026",
     "hrvBaseline": [
       53,
       68
@@ -4442,6 +4519,14 @@
         "headline": "Audit closed. LCRS@LT2 record corrected to 16 min (R85). Race 0 moved to Sun Oct 18. Gates 1–2 re-specified — G2 cleared. Mass freeze removed.",
         "body": "R88 Sep 30: deload QA 4×4 min @ 10.7/10.9 km/h, max HR 143, 0% ceiling. Audit decisions: (1) LCRS@LT2 record = 16 min (R85 Sep 25) — R80's 29 min was disrupted by a mid-session break and is not counted. Phase 2 target (20 min by W20) was NOT met. (2) Race 0 = Sunday Oct 18, 2026 — lands in W23, which becomes a race week (race replaces LR, QA/QB taper early). (3) Gate 1 re-specified: W20 + W22 + W23 each ≥38 km, deloads excluded — W20 47.19 km ✅; note W23 ≥38 km conflicts with the race-week taper. (4) Gate 2 re-specified: 1 QA + 1 QB ≥10.7 km/h, ceiling-clean, separate weeks — satisfied by R85 + R88 (R88 is deload-dose; literal pass). (5) Gate 6 retired — non-blocking; fallback lab test triggers at 2 attributable Phase 3 ceiling breaches. (6) Mass freeze removed — lift loading self-calibrated. (7) Creatine confirmed ACTIVE since ~early/mid Sep (date unconfirmed) — watch CK with statin.",
         "nextObjective": "W21 remaining: QB 15 min @ 10.7 km/h · LR 12–14 km · vol 20–25 km. W22: QA 4×10 @ 10.7/10.9 (step trigger: interval-4 HR <155 in cool conditions) · QB extend LCRS@LT2 toward 20–25 min at 10.7 km/h · ≥38 km for Gate 1. W23: race week — taper QA/QB early, Race 0 Sun Oct 18 (sub-55 prediction live). Resolve the W23 ≥38 km vs taper conflict."
+      },
+      {
+        "date": "Oct 1, 2026",
+        "week": 21,
+        "phase": "Phase 2 · W21 Deload · R89 QB — Correction + Departures",
+        "headline": "R89 QB: 10.7 km/h confirmed exactly as programmed (corrected from an initial misread). 20 min continuous, not the 15-min deload prescription. GCT 272ms + VR 8.1% new program bests. Z4+Z5 68% (vs R85 44%) — elevated cost, likely spacing not fitness.",
+        "body": "R89 Oct 1: 3.83 km Technogym (Technogym and Garmin agree on distance). Programmed Set2 was 20:00 @ 10.7 km/h — confirmed by the Technogym 'Exercise details' screenshot the athlete supplied after I initially (incorrectly) read the console's lap-pace display as the executed speed and claimed the real pace was ~10.3 km/h. That claim was wrong and is retracted here. Avg HR 146, max HR 159 (1 bpm below the 160 ceiling). Z4 55% + Z5 13% = 68% combined — the highest Z4+Z5 share in program history at this pace, well above R85's 44% at the identical 10.7 km/h three Phase-2 weeks ago. GCT 272ms and VR 8.1% are both new all-time program bests (prev 284ms and 8.3%, both R61/various). LCRS: the 20-minute main set appears uninterrupted (Garmin's 8-second walk almost certainly falls in the brief 4 km/h cooldown, not the main set) — logged as a candidate new LCRS@LT2 record (16→20 min) at medium confidence, pending a stricter lap-level check next time. Two departures logged in decision_log.md: (1) QB run at 20 min vs the W21 deload prescription of 15 min, and (2) QB moved from its scheduled Thu slot to Wed — one day after Tue's QA — eliminating the scheduled rest/easy day between the two quality sessions. Leading hypothesis for the elevated cardiac cost: the zero-rest-day spacing (not a pace or fitness change, since pace was unchanged from R85/R80). Falsifiable at the next QB with normal spacing restored.",
+        "nextObjective": "W21 close: LR 12–14 km (deload). W22: QA 4×10 min @ 10.7/10.9 km/h · QB — restore normal weekSchedule spacing (Wed easy, Thu QB) and check whether Z4+Z5 returns toward R85's 44% baseline at 10.7 km/h; if it does, the spacing hypothesis is confirmed and this departure should not repeat casually. Confirm LCRS@LT2 20 min candidate with a cleaner single-block session before calling it a hard record."
       }
     ],
     "lcrs": 51,
@@ -4479,12 +4564,12 @@
     "easyPaceMin": 7.0,
     "easyPaceMax": 8.5,
     "weekStartDate": "2026-09-28",
-    "lcrsNote": "Easy pace LCRS 51.3 min (R67 Aug 21) · QB sub-LT1 45 min 🏆 (R77 Sep 11 · 9.5 km/h) · LCRS@LT2 16 min 🏆 RECORD (R85 Sep 25 · pure 10.7 km/h, second block) · R80 29 min (Sep 17) NOT COUNTED — disrupted by a mid-session break (revised Sep 30, 2026) · Phase 2 target 20 min by W20 NOT MET · next target 25–30 min continuous at 10.7 km/h",
+    "lcrsNote": "Easy pace LCRS 51.3 min (R67 Aug 21) · QB sub-LT1 45 min 🏆 (R77 Sep 11 · 9.5 km/h) · LCRS@LT2 20 min 🏆 RECORD (R89 Oct 1 · pure 10.7 km/h, uninterrupted main set — confirmed by athlete call Oct 1, not by new measurement; confidence remains MEDIUM, not lap-verified to the second like R80's disqualification was) · prev record 16 min (R85 Sep 25) · R80 29 min (Sep 17) NOT COUNTED — disrupted by a mid-session break (revised Sep 30, 2026) · Phase 2 target 20 min by W20 met one week late (W21, deload week, via a departure from the 15-min deload prescription) · next target 25–30 min continuous at 10.7 km/h with normal recovery spacing",
     "creatineApproved": true,
     "creatineApprovedDate": "Aug 20, 2026",
-    "lcrsThreshold": 16,
-    "lcrsThresholdRun": "R85",
-    "lcrsThresholdDate": "Sep 25",
+    "lcrsThreshold": 20,
+    "lcrsThresholdRun": "R89",
+    "lcrsThresholdDate": "Oct 1",
     "lcrsQB": 45,
     "lcrsQBRun": "R77",
     "lcrsQBDate": "Sep 11",
@@ -4519,12 +4604,12 @@
     "ltNote": "LT2 range empirically revised Sep 17 (R80 QB). R80: 10.7 km/h × ~15 min continuous → HR stable 152–154 bpm (Z4 dominant), max 157 (3 bpm headroom). 10.7 km/h is confirmed sustainable threshold pace. LT2 lower bound: 10.5→10.7 km/h (5.71→5.61 min/km). Upper bound: 11.0 km/h (5.45 min/km) — unconfirmed. Key: 5:36/km (10.7 km/h) is 5 sec/km FASTER than sub-4 marathon goal pace (5:41/km). LT1 (ltPace 6.32 = 9.49 km/h) unchanged — consistent with R80 (10.3 km/h settled 144–145 bpm = sub-threshold). Lab test (Gate 6) retired Sep 30, 2026 (geographic constraint). Estimates remain empirical (medium-low confidence). Phase 3 calibration: Race 0 HR data (Oct 18) + fallback Viện Y học thể thao Hanoi if ≥2 Phase 3 QA ceiling breaches (>160 bpm) attributable to zone miscalibration.",
     "lt2RevisionDate": "Sep 17, 2026",
     "lt2RevisionRun": "R80",
-    "lastQBDate": "Sep 25, 2026",
-    "lastQBResult": "10.7 km/h continuous · 28 min (0:51 break) · LCRS 16 min · max HR 155 (5 bpm) · Z4 44% program high · first anaerobic TE 0.6 · Adios Pro 4 debut · W22 target: 20-25 min continuous",
+    "lastQBDate": "Oct 1, 2026",
+    "lastQBResult": "R89 W21 QB (moved Thu→Wed, zero rest day after QA) · 20 min continuous @ 10.7 km/h (prescribed 15 min) · max HR 159 (1 bpm headroom) · Z4+Z5 68% — program high, vs R85 44% at same pace · GCT 272ms 🏆 new program best · VR 8.1% 🏆 new program best · LCRS 20 min candidate new record (prev 16 min R85) · duration + schedule departures logged · W22 target: confirm spacing explains elevated cost",
     "lastLRDate": "Sep 26, 2026",
     "lastLRDist": 21.2,
     "lastLRResult": "21.20 km 🏆 NEW PROGRAM RECORD · Hồ Tây · avg HR 131 · max 150 (10 bpm) · drift +4.4 bpm · LCRS 46 min · Z2 65% · 4 gels compliant · 29–34°C · Novablast 5 · W20 CLOSED 47.19 km · W21 deload begins Sep 28",
-    "lcrsThresholdDateISO": "2026-09-25",
+    "lcrsThresholdDateISO": "2026-10-01",
     "lcrsTargetMax": 30,
     "lcrsTargetNote": "next LCRS@LT2 target 25–30 min continuous at 10.7 km/h",
     "lt2FloorKmh": 10.7,
