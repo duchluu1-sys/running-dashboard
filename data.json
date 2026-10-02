@@ -5092,6 +5092,15 @@
       "status": "CAUTION",
       "note": "HRV 52 below baseline (53); Sleep score 54",
       "briefing": "CAUTION. HRV 52 below baseline (53); Sleep score 54. EASY ONLY — QUALITY B downgraded. W21/24 · 17d to Race 0 · 8.87km of 20–25km on board · ACWR 1.15. Last: R88 quality_a 3.75km (Sep 30)."
+    },
+    {
+      "date": "2026-10-02",
+      "hrv": 71,
+      "rhr": 47,
+      "sleepScore": 94,
+      "status": "GREEN",
+      "note": "All signals nominal",
+      "briefing": "Rest day. Volume: 7.3km left over 1 sessions (~7.3km each) to clear 20km. W21/24 · 16d to Race 0 · 12.7km of 20–25km on board · ACWR 1.1. Last: R89 quality_b 3.83km (Oct 1)."
     }
   ],
   "PHASES": [
