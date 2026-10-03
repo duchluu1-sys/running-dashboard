@@ -4135,6 +4135,50 @@
       "workKmh": [
         10.7
       ]
+    },
+    {
+      "r": 90,
+      "date": "Oct 3",
+      "type": "long",
+      "wk": 21,
+      "dist": 7.28,
+      "duration": 3697,
+      "moving": 3101,
+      "pace": 8.47,
+      "paceEasy": 7.1,
+      "hrAvg": 123,
+      "hrMax": 137,
+      "te": 3.2,
+      "te_an": 0.0,
+      "gct": 311,
+      "vr": 9.2,
+      "cadence": 127,
+      "pctCeiling": 0,
+      "drift": null,
+      "walkRatio": 16.1,
+      "hrZones": [
+        16,
+        84,
+        0,
+        0,
+        0
+      ],
+      "temp": 29,
+      "surface": "treadmill",
+      "conditions": "13:03 · Garmin only, no Technogym cross-validation this session · 1% grade assumed · 28–31°C gym · W21 deload LR, shortened · Legs Day gym session Oct 2 (day before) · family duties cut the run short · practicing nasal-only breathing · confidence MEDIUM on distance (single-source) and on the HR-zone split (reconstructed from walk ratio, not a verified per-zone readout)",
+      "flag": "⚠️",
+      "note": "W21 deload LR, shortened · 7.28 km Garmin (no Technogym this session) · avg HR 123 · max HR 137 (6 bpm under walk trigger) · walk ratio 16.1% (9:56/61:37) · GCT 311ms · VR 9.2% · TE 3.2/0.0 · cadence 127 raw (walk/idle-depressed, not SOP-corrected this entry — split data unavailable) · running-only pace ~7:10/km, creeping faster than recent easy/LR sessions at a similarly low avg HR · nasal breathing practiced throughout · legs-day fatigue (weights Oct 2) + family duties cut the long run well short of the 12–14 km W21 deload target · Statin Day ~127",
+      "verdict": "Shortfall against the 12–14 km deload LR target (7.28 km, ~55% of floor), but the shortfall is explained and not concerning: leg day the day before plus a family-duty interruption, not fatigue from the run itself or any tissue complaint. Aerobic control was clean — max HR 137 stayed 6 bpm under the walk trigger the entire session, avg HR 123 is squarely easy-zone, and walk ratio 16.1% is unremarkable for a treadmill session at this stage. The one data point worth tracking rather than acting on: running-only pace ~7:10/km at avg HR 123 is faster than several recent easy/LR sessions at a comparable HR — consistent with aerobic efficiency continuing to improve, but this is n=1 and not yet a trend (Low confidence it's real vs. day-to-day noise; HR still governs, not pace, per the non-negotiable — no change to that rule from one session). No departure log entry warranted: a shortened deload LR for an explained, non-training reason is not a rule override.",
+      "tags": [
+        "long",
+        "treadmill",
+        "deload",
+        "shortened",
+        "legs-day-fatigue",
+        "family-duties",
+        "pace-watch",
+        "nasal-breathing"
+      ]
     }
   ],
   "GATES": [
@@ -4282,7 +4326,7 @@
     "week": 21,
     "totalWeeks": 24,
     "deloadWeek": 21,
-    "weekVolOnBoard": 12.7,
+    "weekVolOnBoard": 19.98,
     "lastWeekVol": 47.19,
     "weekTarget": {
       "min": 20,
@@ -4308,7 +4352,7 @@
     "statinStart": "2026-05-30",
     "stressLevel": "MODERATE",
     "formCue": "Eyes on the horizon -- head up every session",
-    "date": "October 1, 2026",
+    "date": "October 3, 2026",
     "hrvBaseline": [
       53,
       68
@@ -4527,6 +4571,14 @@
         "headline": "R89 QB: 10.7 km/h confirmed exactly as programmed (corrected from an initial misread). 20 min continuous, not the 15-min deload prescription. GCT 272ms + VR 8.1% new program bests. Z4+Z5 68% (vs R85 44%) — elevated cost, likely spacing not fitness.",
         "body": "R89 Oct 1: 3.83 km Technogym (Technogym and Garmin agree on distance). Programmed Set2 was 20:00 @ 10.7 km/h — confirmed by the Technogym 'Exercise details' screenshot the athlete supplied after I initially (incorrectly) read the console's lap-pace display as the executed speed and claimed the real pace was ~10.3 km/h. That claim was wrong and is retracted here. Avg HR 146, max HR 159 (1 bpm below the 160 ceiling). Z4 55% + Z5 13% = 68% combined — the highest Z4+Z5 share in program history at this pace, well above R85's 44% at the identical 10.7 km/h three Phase-2 weeks ago. GCT 272ms and VR 8.1% are both new all-time program bests (prev 284ms and 8.3%, both R61/various). LCRS: the 20-minute main set appears uninterrupted (Garmin's 8-second walk almost certainly falls in the brief 4 km/h cooldown, not the main set) — logged as a candidate new LCRS@LT2 record (16→20 min) at medium confidence, pending a stricter lap-level check next time. Two departures logged in decision_log.md: (1) QB run at 20 min vs the W21 deload prescription of 15 min, and (2) QB moved from its scheduled Thu slot to Wed — one day after Tue's QA — eliminating the scheduled rest/easy day between the two quality sessions. Leading hypothesis for the elevated cardiac cost: the zero-rest-day spacing (not a pace or fitness change, since pace was unchanged from R85/R80). Falsifiable at the next QB with normal spacing restored.",
         "nextObjective": "W21 close: LR 12–14 km (deload). W22: QA 4×10 min @ 10.7/10.9 km/h · QB — restore normal weekSchedule spacing (Wed easy, Thu QB) and check whether Z4+Z5 returns toward R85's 44% baseline at 10.7 km/h; if it does, the spacing hypothesis is confirmed and this departure should not repeat casually. Confirm LCRS@LT2 20 min candidate with a cleaner single-block session before calling it a hard record."
+      },
+      {
+        "date": "Oct 3, 2026",
+        "week": 21,
+        "phase": "Phase 2 · W21 Deload CLOSE",
+        "headline": "W21 CLOSED. 19.98 km — just under the 20–25 km deload target. LCRS@LT2 record upgraded to confirmed. LR shortened, explained by life, not fitness or injury.",
+        "body": "R90 Oct 3: 7.28 km Garmin-only treadmill LR, shortened from the 12–14 km deload target. Avg HR 123, max HR 137 — clean aerobic control, 6 bpm under the walk trigger throughout. Shortfall explained by a leg-day weights session the day before (Oct 2) plus a family-duty interruption, not by injury, illness, or run-induced fatigue — no departure log entry, this is life intruding on a deload week, not a rule override. Running-only pace ~7:10/km at that HR is faster than several recent sessions at comparable HR (n=1, Low confidence it's a real trend rather than noise — HR still governs, pace does not). Session also confirms the athlete's subjective nasal-breathing experiment is underway, unquantified so far. Separately, Oct 1: the LCRS@LT2 20-minute candidate record from R89 was upgraded to CONFIRMED by explicit athlete call ('counting that as my LCRS LT2 PR') — this closes the verification by decision, not by new measurement; confidence stays MEDIUM, same as it was pre-upgrade. W21 final volume: R87 5.12 + R88 3.75 + R89 3.83 + R90 7.28 = 19.98 km, against a 20–25 km deload target — a 0.02 km miss, immaterial, and consistent with a deload week's purpose (reduce load before W22's full-volume push). Two logged departures from R89 (duration, schedule spacing) remain open with falsification conditions due at the next normally-spaced QB.",
+        "nextObjective": "W22 (full load resumes): QA 4×10 min @ 10.7/10.9 km/h, step trigger interval-4 HR <155 in cool conditions. QB — restore normal weekSchedule spacing (Wed easy, Thu QB) and check whether Z4+Z5 returns toward R85's 44% baseline at 10.7 km/h at the full 15–20 min duration; this is the direct test of the R89 spacing/duration hypothesis. LR 18–20 km outdoor if conditions allow (R90 was treadmill-only, no outdoor LR since R86 Sep 26). Gate 1 (Sustained Volume): W22 needs ≥38 km — this is the qualifying week. Watch the pace-at-easy-HR trend from R90 over 2–3 more easy/LR sessions before treating it as a real efficiency gain."
       }
     ],
     "lcrs": 51,
@@ -4605,10 +4657,10 @@
     "lt2RevisionDate": "Sep 17, 2026",
     "lt2RevisionRun": "R80",
     "lastQBDate": "Oct 1, 2026",
-    "lastQBResult": "R89 W21 QB (moved Thu→Wed, zero rest day after QA) · 20 min continuous @ 10.7 km/h (prescribed 15 min) · max HR 159 (1 bpm headroom) · Z4+Z5 68% — program high, vs R85 44% at same pace · GCT 272ms 🏆 new program best · VR 8.1% 🏆 new program best · LCRS 20 min candidate new record (prev 16 min R85) · duration + schedule departures logged · W22 target: confirm spacing explains elevated cost",
-    "lastLRDate": "Sep 26, 2026",
-    "lastLRDist": 21.2,
-    "lastLRResult": "21.20 km 🏆 NEW PROGRAM RECORD · Hồ Tây · avg HR 131 · max 150 (10 bpm) · drift +4.4 bpm · LCRS 46 min · Z2 65% · 4 gels compliant · 29–34°C · Novablast 5 · W20 CLOSED 47.19 km · W21 deload begins Sep 28",
+    "lastQBResult": "R89 W21 QB (moved Thu→Wed, zero rest day after QA) · 20 min continuous @ 10.7 km/h (prescribed 15 min) · max HR 159 (1 bpm headroom) · Z4+Z5 68% — program high, vs R85 44% at same pace · GCT 272ms 🏆 new program best · VR 8.1% 🏆 new program best · LCRS 20 min new record, confirmed by athlete call (prev 16 min R85) · duration + schedule departures logged · W22 target: confirm spacing explains elevated cost",
+    "lastLRDate": "Oct 3, 2026",
+    "lastLRDist": 7.28,
+    "lastLRResult": "R90 W21 deload LR, shortened · 7.28 km Garmin (no Technogym) · avg HR 123 · max HR 137 (6 bpm under walk trigger) · walk ratio 16.1% · GCT 311ms · VR 9.2% · running-only pace ~7:10/km, faster than recent sessions at similar HR (n=1, not yet a trend) · shortfall vs 12–14 km deload target explained by leg day Oct 2 + family duties, not injury or fatigue from the run · W21 CLOSED 19.98 km",
     "lcrsThresholdDateISO": "2026-10-01",
     "lcrsTargetMax": 30,
     "lcrsTargetNote": "next LCRS@LT2 target 25–30 min continuous at 10.7 km/h",
