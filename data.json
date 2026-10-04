@@ -5153,6 +5153,15 @@
       "status": "GREEN",
       "note": "All signals nominal",
       "briefing": "Rest day. Volume: 7.3km left over 1 sessions (~7.3km each) to clear 20km. W21/24 · 16d to Race 0 · 12.7km of 20–25km on board · ACWR 1.1. Last: R89 quality_b 3.83km (Oct 1)."
+    },
+    {
+      "date": "2026-10-04",
+      "hrv": 42,
+      "rhr": 54,
+      "sleepScore": 14,
+      "status": "REST",
+      "note": "Sleep score 14; HRV 42 below baseline (53)",
+      "briefing": "REST. Sleep score 14; HRV 42 below baseline (53). Rest day. suppressed. W21/24 · 14d to Race 0 · 19.98km of 20–25km on board · ACWR 0.6. Last: R90 long 7.28km (Oct 3)."
     }
   ],
   "PHASES": [
