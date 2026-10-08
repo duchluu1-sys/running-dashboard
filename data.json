@@ -4179,6 +4179,51 @@
         "pace-watch",
         "nasal-breathing"
       ]
+    },
+    {
+      "r": 91,
+      "date": "Oct 8",
+      "type": "easy",
+      "wk": 22,
+      "dist": 3.78,
+      "duration": 1736,
+      "moving": 1506,
+      "pace": 7.65,
+      "paceEasy": 6.65,
+      "hrAvg": 123,
+      "hrMax": 134,
+      "te": 2.8,
+      "te_an": 0.0,
+      "gct": 310,
+      "vr": 9.3,
+      "vo": 9.5,
+      "sl": 1.03,
+      "cadence": 130,
+      "pctCeiling": 0,
+      "drift": null,
+      "walkRatio": 6.9,
+      "hrZones": [
+        9,
+        76,
+        0,
+        0,
+        0
+      ],
+      "temp": 27,
+      "surface": "treadmill",
+      "conditions": "17:08 local (Garmin) · Thursday Oct 8 (W22 Day 4, normal QB slot per weekSchedule) · Technogym photo not supplied this session — Garmin is sole distance source, confidence MEDIUM · 1% grade assumed, not re-confirmed · 26–29°C gym · run 24:07 / walk 2:00 / idle 2:49 · avg power 236 W, max 311 W (Garmin Running Power, not schema field) · max cadence 155 spm · sweat loss 438 ml · Statin Day ~132 · first run logged since R90 (Oct 3) — Oct 4–6 were REST per readiness log (HRV 42→43→34 vs 53–68 baseline, sleep score 14→30→24) — no readiness-log entry retrieved for Oct 7 or Oct 8, so today's own HRV/sleep status is NOT CONFIRMED from data.json · weight session reported skipped this week — specific day/session type not confirmed in this entry, flagged for athlete follow-up",
+      "flag": "✅",
+      "note": "W22 Day 4 (Thu, normal QB slot) — run logged as easy, not quality · 3.78 km Garmin only (no Technogym cross-validation — MEDIUM confidence) · avg HR 123 · max HR 134 (9 bpm under 143 walk trigger, 26 bpm under 160 ceiling) · pctCeiling 0 · Z1 9% + Z2 76% = 85% in-zone, 0% Z3+ · walk ratio 6.9% (2:00 of 28:56) · GCT 310 ms · VR 9.3% · VO 9.5 cm · stride 1.03 m · cadence 130 spm avg (155 max) · TE 2.8/0.0 · laps 1–2 (first 2 km) ran at 6:29–6:31/km — quality-adjacent pace — at avg HR only 123–127-ish, a SECOND data point (after R90's ~7:10/km) of faster running-only pace at low easy HR · laps 3–4 slowed to 8:19 and 9:46/km with walk breaks · resumes training after 3 consecutive REST days (Oct 4–6, HRV/sleep crash)",
+      "verdict": "Clean aerobic control — max HR 134 never approached the walk trigger (143), let alone the 160 quality ceiling, and 85% of session time sat in Z1–Z2. The headline is the pace-at-HR pattern, not the HR control itself: the first two kilometers ran at 6:29–6:31/km — within quality-session pace territory historically — while HR stayed in the low 120s-to-low 130s, well inside the easy band. This is the second consecutive session (after R90's ~7:10/km running-only pace at avg HR 123) showing faster pace at a comparable-or-lower easy HR than the Jun–Sep baseline (7:30–8:30/km easy pace at similar HR). Two data points is still not a trend with statistical confidence — Low-Medium, up from R90's Low — but it's now worth deliberately checking at the next 2–3 easy sessions rather than treating as isolated noise. Two confounds not yet ruled out: this session followed three full rest days (Oct 4–6) after an HRV/sleep crash, so fresher legs could explain faster pace at the same HR without any underlying fitness change; and Technogym cross-validation is missing, so the distance/pace numbers themselves carry only MEDIUM confidence. HR continues to govern easy pacing regardless — this observation does not license running faster on purpose. Separately: today was the W22 Thursday slot, which weekSchedule assigns to Quality B — but given three REST days immediately prior for an HRV/sleep crash, running easy instead of jumping straight to quality is the readiness-conscious call, not a rule violation requiring a Departure Log entry. No Oct 7–Oct 8 HRV/sleep readiness data was available to confirm today's GREEN/CAUTION status directly — flagged as missing, not inferred.",
+      "tags": [
+        "easy",
+        "treadmill",
+        "post-rest-return",
+        "pace-watch",
+        "qb-slot-run-easy",
+        "weight-session-skipped",
+        "garmin-only"
+      ]
     }
   ],
   "GATES": [
@@ -4323,11 +4368,11 @@
     "age": 30,
     "phase": "Phase 2",
     "phaseName": "Quality Development",
-    "week": 21,
+    "week": 22,
     "totalWeeks": 24,
     "deloadWeek": 21,
-    "weekVolOnBoard": 19.98,
-    "lastWeekVol": 47.19,
+    "weekVolOnBoard": 3.78,
+    "lastWeekVol": 19.98,
     "weekTarget": {
       "min": 20,
       "max": 25
@@ -4352,7 +4397,7 @@
     "statinStart": "2026-05-30",
     "stressLevel": "MODERATE",
     "formCue": "Eyes on the horizon -- head up every session",
-    "date": "October 3, 2026",
+    "date": "October 8, 2026",
     "hrvBaseline": [
       53,
       68
