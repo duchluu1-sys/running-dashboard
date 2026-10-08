@@ -4231,14 +4231,14 @@
       "id": 1,
       "type": "hard",
       "name": "Sustained Volume",
-      "short": "2 qualifying weeks ≥38 km (W20 closed 47.19km + W22 target ≥38km) — W21/W23/W24 excluded",
+      "short": "2 qualifying weeks ≥38 km (W20 closed 47.19km + W23 target 38–42km) — W21/W22/W24 excluded",
       "progress": 50,
       "status": "pending",
-      "detail": "RE-SPECIFIED Sep 30, 2026 (athlete-approved): 2 qualifying weeks ≥38 km required — W20 (closed, 47.19 km ✅) + W22 (target ≥38 km). W21 (deload), W23 (now Race 0 week, provisional 20–26 km taper target), and W24 (deload) are excluded as structurally reduced weeks that cannot carry a third qualifying week before Phase 3 starts (~Oct 27, 2026). Progress: W20 = 47.19 km ✅ (1 of 2). W22 pending.",
-      "eta": "W22 close · Oct 2026",
+      "detail": "RE-SPECIFIED Sep 30, 2026, then REVISED Oct 8, 2026 (illness forced W22 out as a qualifying week — reclassified illness-test, target 10–18 km). 2 qualifying weeks ≥38 km required — W20 (closed, 47.19 km ✅) + W23 (target 38–42 km, resumes normal full-load training, race moved to Nov 8 — see RACES). W21 (deload), W22 (illness-test), and W24 (flagged needs-replanning) are excluded as structurally reduced or unplanned weeks. Progress: W20 = 47.19 km ✅ (1 of 2). W23 pending.",
+      "eta": "W23 close · Oct 2026",
       "qualifyingWeeks": [
         20,
-        22
+        23
       ],
       "volThreshold": 38
     },
@@ -4283,11 +4283,11 @@
       "id": 5,
       "type": "hard",
       "name": "Race 0",
-      "short": "VPBank Hanoi 10K completed",
+      "short": "Standard Chartered Hanoi 10K completed",
       "progress": 0,
       "status": "pending",
-      "detail": "VPBank Hanoi 10K — Sunday Oct 18, 2026 (W23 race week). Running with partner. Sub-55:00 is the Gate 1 fitness-check prediction (M).",
-      "eta": "Oct 18, 2026"
+      "detail": "CHANGED Oct 8, 2026 — original VPBank Hanoi 10K (Oct 18) dropped after illness cost the W22 consolidation block; no normal full-load week remained before Oct 18. Replaced with Standard Chartered Hanoi Marathon — Heritage Race 10K, Sunday Nov 8, 2026 (2 independent sources, MEDIUM-HIGH confidence). Running with partner carried over, not re-confirmed. Sub-55:00 is the Gate 1 fitness-check prediction (M) — carried over unchanged, not re-confirmed against the extra training time.",
+      "eta": "Nov 8, 2026"
     },
     {
       "id": 6,
@@ -4296,7 +4296,7 @@
       "short": "⛔ Retired — geographic constraint, see fallback plan",
       "progress": 0,
       "status": "retired",
-      "detail": "Gate 6 retired Sep 30, 2026 — geographic constraint (not in HCMC near-term). Non-blocking: excluded from the hard-gate count. Phase 3 zones estimated from Phase 2 empirical LT2 data (10.7 km/h floor confirmed R80) + Race 0 HR calibration data (Oct 18). Confidence: medium-low. Fallback: Viện Y học thể thao Hanoi — book if ≥2 Phase 3 QA ceiling breaches (>160 bpm) attributable to zone miscalibration.",
+      "detail": "Gate 6 retired Sep 30, 2026 — geographic constraint (not in HCMC near-term). Non-blocking: excluded from the hard-gate count. Phase 3 zones estimated from Phase 2 empirical LT2 data (10.7 km/h floor confirmed R80) + Race 0 HR calibration data (Nov 8 (Race 0 moved — see RACES, Oct 8, 2026 change)). Confidence: medium-low. Fallback: Viện Y học thể thao Hanoi — book if ≥2 Phase 3 QA ceiling breaches (>160 bpm) attributable to zone miscalibration.",
       "eta": "⛔ Retired",
       "retiredDate": "Sep 30, 2026",
       "retiredReason": "Geographic constraint — not in HCMC near-term",
@@ -4336,11 +4336,11 @@
   ],
   "RACES": [
     {
-      "name": "VPBank Hanoi 10K",
+      "name": "Standard Chartered Hanoi Marathon — Heritage Race (10K)",
       "label": "Race 0",
-      "date": "2026-10-18",
+      "date": "2026-11-08",
       "goal": "Sub-55:00 (Gate 1 fitness check prediction, M confidence)",
-      "note": "Sunday Oct 18, 2026 (moved from Oct 19). Falls inside W23 — race week: Race replaces the long run; QA/QB taper early in the week. Running with partner. Primary purpose: race-day execution + outdoor LT2 HR calibration data point.",
+      "note": "CHANGED Oct 8, 2026 — original Race 0 (VPBank Hanoi 10K, Oct 18) dropped after a 3-day HRV/sleep-crash illness week (Oct 4–6) cost the W22 consolidation block, with no normal full-load week left before Oct 18. Replaced with the Standard Chartered Hanoi Marathon — Heritage Race 10K, Sunday Nov 8, 2026 — confirmed by two independent sources (finishers.com, nhandan.vn), MEDIUM-HIGH confidence (finishers.com also showed a conflicting \"Oct 25\" mention elsewhere on the same page, discounted since two sources independently agree on Nov 8). This buys ~3 extra weeks in the bank before racing. Goal carried over unchanged from VPBank 10K (sub-55:00) — NOT re-confirmed against the new timeline, flagged for review. Falls in new race week (W26, Oct 12–Nov 8 cycle) — see PROGRESSION; weeks 24–26 not yet re-planned, flagged as open item.",
       "confirmed": true,
       "color": "#06b6d4"
     },
@@ -4374,8 +4374,8 @@
     "weekVolOnBoard": 3.78,
     "lastWeekVol": 19.98,
     "weekTarget": {
-      "min": 20,
-      "max": 25
+      "min": 10,
+      "max": 18
     },
     "easyHRBand": [
       122,
@@ -4800,7 +4800,8 @@
       "note": "Falsification condition of the Gate 6 departure. A breach counts only when a Phase 3 QA exceeds 160 bpm AND the breach is attributed to zone miscalibration (not heat, illness, or pacing error). Attribution is logged manually in attributedBreaches (run ids)."
     },
     "creatineActive": true,
-    "creatineStartApprox": "early-to-mid Sep 2026 (unconfirmed)"
+    "creatineStartApprox": "early-to-mid Sep 2026 (unconfirmed)",
+    "totalWeeksNote": "FLAGGED Oct 8, 2026 — totalWeeks (24) assumed Phase 2 ended around Race 0 (Oct 18). Race 0 moved to Nov 8, 2026 (~3 extra weeks). totalWeeks has NOT been updated to a specific new number — weeks 24–26 need re-planning first. Treat 24 as stale until resolved."
   },
   "READINESS_LOG": [
     {
@@ -5441,28 +5442,28 @@
       "phase": 2,
       "dateStart": "2026-10-05",
       "dateEnd": "2026-10-11",
-      "qualityA": "4×10 min @ ~10.7-11.0 km/h (estimated — empirical ladder)",
-      "qualityB": "25-30 min @ 10.7 km/h (estimated · race-pace confirm week)",
-      "lrMin": 20,
-      "lrMax": 22,
-      "volMin": 38,
-      "volMax": 42,
-      "kind": "consolidation"
+      "qualityA": "NONE — illness/body-test week, easy only",
+      "qualityB": "NONE — illness/body-test week, easy only",
+      "lrMin": null,
+      "lrMax": null,
+      "volMin": 10,
+      "volMax": 18,
+      "kind": "illness-test",
+      "note": "RECLASSIFIED Oct 8, 2026 — 3 consecutive REST days Oct 4–6 (HRV/sleep crash, HRV 42→43→34 vs 53–68 baseline) cost this week’s planned consolidation block (was: 4×10 min QA, 25–30 min QB, 20–22 km LR, 38–42 km). Oct 8 (R91) run easy as a readiness test. Oct 9–11 (Fri–Sun) governed by daily readiness, not a volume quota — light/easy only, no quality, no long run target. Original W22 consolidation prescription is NOT deferred to W23 — it’s simply lost; W23 resumes normal full-load training instead (see wk 23). Race 0 moved to Nov 8, 2026 — see RACES and Decision Reasoning Log, Oct 8, 2026."
     },
     {
       "wk": 23,
       "phase": 2,
       "dateStart": "2026-10-12",
       "dateEnd": "2026-10-18",
-      "qualityA": "Taper QA early in week (reduced dose @ 10.7/10.9 km/h — exact dose TBD)",
-      "qualityB": "Taper QB early/mid-week (short sharpener @ 10.7 km/h — exact dose TBD)",
-      "lrMin": null,
-      "lrMax": null,
-      "volMin": 20,
-      "volMax": 26,
-      "kind": "race",
-      "raceDay": "2026-10-18",
-      "note": "RACE WEEK — Race 0 VPBank Hanoi 10K Sun Oct 18 replaces the long run. Previous plan (20–22 km LR + 38–42 km) void. Volume = race ~10 km + taper; 20–26 km is provisional — confirm in coaching session."
+      "qualityA": "4×10 min @ ~10.7–11.0 km/h (estimated — carried forward from the W22 consolidation plan that illness displaced, not re-derived)",
+      "qualityB": "25–30 min @ 10.7 km/h (estimated — carried forward from the W22 plan)",
+      "lrMin": 20,
+      "lrMax": 22,
+      "volMin": 38,
+      "volMax": 42,
+      "kind": "consolidation",
+      "note": "REVERTED to normal full-load training Oct 8, 2026 — this week is no longer Race 0 taper/race week. Race 0 moved to Nov 8, 2026 (see RACES). Prescription carried forward unchanged from the W22 consolidation block that illness displaced (4×10 min QA, 25–30 min QB, 20–22 km LR, 38–42 km) — NOT freshly derived for this date, and should be sanity-checked against how the body responds during the Oct 9–11 illness-test days before committing to full load. \"Normal training resumes\" per athlete instruction Oct 8, 2026."
     },
     {
       "wk": 24,
@@ -5475,8 +5476,8 @@
       "lrMax": 12,
       "volMin": 26,
       "volMax": 28,
-      "kind": "deload",
-      "note": "Post-Race 0 recovery deload (Oct 19–25). Phase 3 entry Oct 26."
+      "kind": "needs-replanning",
+      "note": "FLAGGED Oct 8, 2026 — this row previously assumed Race 0 (Oct 18) had just happened (\"post-Race 0 recovery deload... Phase 3 entry Oct 26\"). That assumption is now wrong: Race 0 moved to Nov 8, 2026 (new race week ≈ Oct 12 + 4 weeks). Weeks 24–26 and the taper structure into the new race date have NOT been re-planned — this is an open item, not a silent carryover. Original (now stale) prescription: qualityA 4x4 min, qualityB 10 min, lrMin/Max 12/12, volMin/Max 26/28, kind deload."
     }
   ],
   "MILESTONES": [
@@ -5789,9 +5790,9 @@
       }
     ],
     "week_status": {
-      "week": 21,
-      "push": true,
-      "pull": true,
+      "week": 22,
+      "push": false,
+      "pull": false,
       "legs": false,
       "full_body": false
     },
