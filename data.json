@@ -5226,6 +5226,15 @@
       "status": "REST",
       "note": "HRV 34 below baseline 2+ consecutive days; Sleep score 24",
       "briefing": "REST. HRV 34 below baseline 2+ consecutive days; Sleep score 24. Quality A suppressed. [5d since last quality] W21/24 · 12d to Race 0 · 19.98km of 20–25km on board · ACWR 0.47. Last: R90 long 7.28km (Oct 3)."
+    },
+    {
+      "date": "2026-10-08",
+      "hrv": 51,
+      "rhr": 53,
+      "sleepScore": 71,
+      "status": "CAUTION",
+      "note": "HRV 51 below baseline (53)",
+      "briefing": "CAUTION. HRV 51 below baseline (53). EASY ONLY — QUALITY B downgraded. [7d since last quality] W22/24 · 31d to Race 0 · 3.78km of 10–18km on board · ACWR 0.45. Last: R91 easy 3.78km (Oct 8)."
     }
   ],
   "PHASES": [
