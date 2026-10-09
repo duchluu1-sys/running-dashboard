@@ -5235,6 +5235,15 @@
       "status": "CAUTION",
       "note": "HRV 51 below baseline (53)",
       "briefing": "CAUTION. HRV 51 below baseline (53). EASY ONLY — QUALITY B downgraded. [7d since last quality] W22/24 · 31d to Race 0 · 3.78km of 10–18km on board · ACWR 0.45. Last: R91 easy 3.78km (Oct 8)."
+    },
+    {
+      "date": "2026-10-10",
+      "hrv": 51,
+      "rhr": 56,
+      "sleepScore": 24,
+      "status": "REST",
+      "note": "Sleep score 24; HRV 51 below baseline (53)",
+      "briefing": "REST. Sleep score 24; HRV 51 below baseline (53). Long run suppressed. W22/24 · 29d to Race 0 · 3.78km of 10–18km on board · ACWR 0.38. Last: R91 easy 3.78km (Oct 8)."
     }
   ],
   "PHASES": [
