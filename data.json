@@ -4224,6 +4224,145 @@
         "weight-session-skipped",
         "garmin-only"
       ]
+    },
+    {
+      "r": 92,
+      "date": "Oct 9",
+      "type": "easy",
+      "wk": 23,
+      "dist": 4.12,
+      "duration": 2167,
+      "moving": 2014,
+      "pace": 8.77,
+      "paceEasy": 8.15,
+      "hrAvg": 127,
+      "hrMax": 143,
+      "te": null,
+      "te_an": null,
+      "gct": null,
+      "vr": null,
+      "cadence": 144,
+      "pctCeiling": 0,
+      "drift": -2.7,
+      "walkRatio": 7.1,
+      "hrZones": [
+        15,
+        68,
+        7,
+        0,
+        0
+      ],
+      "temp": 31,
+      "surface": "outdoor",
+      "conditions": "17:14-17:50 local (GPX metadata, UTC+7) · GPX-parsed, no Garmin Connect screenshot/Technogym cross-validation — confidence MEDIUM on all derived fields · one 153s pause ~km2.3 (traffic/junction, excluded from moving time) · no GCT/VR/TE fields present in this GPX export (device did not record running dynamics extensions) · cadence is raw GPX value x2 per SOP S3 (Garmin GPX cad field is per-foot) · shoe not stated",
+      "flag": "✅",
+      "note": "W23 Day 1 (Fri, moved from W22 — illness week reclassification) · 4.12 km outdoor · avg HR 127 · max HR 143 (0% time >160, pctCeiling 0) · HR zones Z1 15% Z2 68% Z3 7% (10% below Z1) · cardiac drift -2.7 bpm (Q4 124.6 vs Q1 127.3) · cadence ~144 spm (corrected) · 31C · genuinely Z2-dominant, matches stated intent (\"nothing much, zone 2 easy\")",
+      "verdict": "Clean aerobic-control session - 68% Z2, only 7% Z3 drift, nothing above. Negative drift (-2.7 bpm) is a single data point, not a trend (n=1 for hot-weather outdoor drift this cycle) - plausible explanations include a cooling evening or a short enough duration that drift never built; Medium confidence only. Flagged plainly, not re-litigated: this run started 17:14 local Oct 9, after the same-day check-in where day-6 illness symptoms (no fever, but weakness, cough, runny nose, and a stated \"feels like the fever is still affecting me\") were described and training was advised against. The HR data shows a physiologically trivial stimulus (true Z2, no cardiac strain signature) - it says nothing about whether running while still symptomatic was the right call. No Technogym/console cross-validation exists for this GPX-only session; confidence on cadence and pace numbers is Medium.",
+      "tags": [
+        "easy",
+        "outdoor",
+        "post-illness-return",
+        "pace-watch",
+        "illness-timing-flag",
+        "gpx-parsed",
+        "no-gct-data"
+      ]
+    },
+    {
+      "r": 93,
+      "date": "Oct 11",
+      "type": "easy",
+      "wk": 23,
+      "dist": 7.25,
+      "duration": 3508,
+      "moving": 3160,
+      "pace": 8.07,
+      "paceEasy": 7.27,
+      "hrAvg": 129,
+      "hrMax": 141,
+      "te": 3.6,
+      "te_an": 0.0,
+      "gct": 308,
+      "vr": 9.3,
+      "vo": 9.5,
+      "cadence": 137,
+      "pctCeiling": 0,
+      "drift": null,
+      "walkRatio": 6.9,
+      "hrZones": [
+        11,
+        74,
+        6,
+        0,
+        0
+      ],
+      "temp": 27,
+      "surface": "treadmill",
+      "conditions": "13:20 local · Technogym console photo not supplied this session — Garmin sole distance source, confidence MEDIUM · 1% grade assumed · 26-29C gym · run 51:21 / walk 4:01 / idle 3:06 (broken session, several short stops) · feel \"Strong\" · RPE \"Light\" 2/10 · shoe not stated",
+      "flag": "✅",
+      "note": "W23 Day 3 (Sun, moved from W22 — illness week reclassification) · 7.25 km treadmill (Garmin only, medium confidence) · avg HR 129 · max HR 141 (0% time >160) · TE 3.6/0.0 · GCT 308ms · VR 9.3% · VO 9.5cm · HR zones Z1 11% Z2 74% Z3 6% · RPE/feel match HR data (both read easy)",
+      "verdict": "Genuine Z2 session — 74% Z2, nothing near threshold, subjective RPE (2/10, Light) matches the HR data for once. Multiple walk/idle breaks (7:07 total non-running) suggest a feel-it-out session with stops rather than one continuous effort, consistent with the athlete's own framing (\"slowly getting back into it\"). No tissue complaint. No Technogym cross-validation — distance/pace carry medium confidence.",
+      "tags": [
+        "easy",
+        "treadmill",
+        "garmin-only",
+        "post-illness-return",
+        "multiple-breaks",
+        "moved-to-w23"
+      ]
+    },
+    {
+      "r": 94,
+      "date": "Oct 14",
+      "type": "quality_a",
+      "wk": 23,
+      "dist": 6.28,
+      "duration": 2770,
+      "moving": 1993,
+      "pace": 7.33,
+      "qualityPace": 5.28,
+      "hrAvg": 134,
+      "hrMax": 155,
+      "te": 3.5,
+      "te_an": 0.5,
+      "gct": 300,
+      "vr": 9.6,
+      "vo": 8.6,
+      "sl": 0.91,
+      "cadence": 150,
+      "pctCeiling": 0,
+      "drift": null,
+      "walkRatio": 13.1,
+      "hrZones": [
+        10,
+        21,
+        24,
+        27,
+        0
+      ],
+      "temp": 27,
+      "surface": "treadmill",
+      "lcrs": 10,
+      "lcrsType": "lt2",
+      "conditions": "~17:37-18:23 local · Technogym Evo SL (shoe) · 1% incline · fixed-speed programmed workout (Technogym custom-exercise set list, not pace-governed) · prescribed 10:00@10.7 -> 4:00@4 (rec) -> 10:00@10.7 -> 4:00@4 (rec) -> 10:00@11 -> 4:00@4 (rec) -> 10:00@11 [ABANDONED] -> 5:00@4 cooldown [not reached] · console: 6.28km / 42:27 active (near-exact match to 3 completed reps+recoveries = 42:00 ideal, confirms clean execution) · Garmin: 6.29km / 46:10 total, 33:13 moving, 31:33 run / 6:04 walk / 8:33 idle · feel \"Strong\" · RPE \"Hard\" 5/10 · recovery HR 23 bpm post-session · cadence corrected estimate (Garmin session avg 116 spm depressed by recovery/idle segments between reps per SOP S3 quality-treadmill rule)",
+      "flag": "⚠️",
+      "note": "W23 Day 4 (Tue, QA slot) · first Quality A back from illness · 6.28km (Technogym) · 3 of 4 prescribed reps completed clean (10.7, 10.7, 11 km/h x10min each, full 4min@4km/h recoveries) — 4th rep (11 km/h) abandoned before starting/finishing · avg HR 134 · max HR 155 (5 bpm under 160 ceiling, pctCeiling 0) · HR zones Z4 27% Z3 24% Z2 21% Z1 10% (51% at-or-above aerobic) · recovery HR 23bpm · GCT 300ms · VR 9.6% · **initial lap-based read of this session was wrong and corrected same session** — laps are 1km-distance splits straddling fixed-speed recovery segments, not a pace decay within reps; console active-time math (42:27 vs ideal 42:00 for 3 reps+recoveries) confirms clean fixed-speed execution throughout, with the abandoned 4th rep the entire signal, not a gradual fade",
+      "verdict": "Binary result, not a gradual fade: held all three prescribed reps (10.7, 10.7, 11 km/h) to spec on a fixed-speed belt, then could not start/finish the fourth (11 km/h again). HR zones (Z4 27%, Z3 24% — 51% at-or-above aerobic) and recovery HR (23 bpm) show this was a real, appropriately hard session with no cardiovascular red flag — the stop was muscular/neuromuscular, not an engine problem, consistent with 2 days post leg-day-back and early in the post-illness return. Primary limiting factor: legs, not aerobic ceiling. Confidence Medium-High on \"executed cleanly through rep 3, abandoned rep 4\" (console timing match is strong corroboration); Medium on finer within-rep HR detail (no per-second export, chart-read only — true cadence correction and any within-rep HR progression are estimates). Next QA at this structure: does rep 4 go the distance? That is the return-to-form marker, not pace, since pace is fixed by the belt.",
+      "tags": [
+        "quality_a",
+        "treadmill",
+        "post-illness-return",
+        "rep-abandoned",
+        "fixed-speed-protocol",
+        "w23-open",
+        "corrected-analysis",
+        "evo-sl"
+      ],
+      "workKmh": [
+        10.7,
+        10.7,
+        11
+      ]
     }
   ],
   "GATES": [
@@ -4234,7 +4373,7 @@
       "short": "2 qualifying weeks ≥38 km (W20 closed 47.19km + W23 target 38–42km) — W21/W22/W24 excluded",
       "progress": 50,
       "status": "pending",
-      "detail": "RE-SPECIFIED Sep 30, 2026, then REVISED Oct 8, 2026 (illness forced W22 out as a qualifying week — reclassified illness-test, target 10–18 km). 2 qualifying weeks ≥38 km required — W20 (closed, 47.19 km ✅) + W23 (target 38–42 km, resumes normal full-load training, race moved to Nov 8 — see RACES). W21 (deload), W22 (illness-test), and W24 (flagged needs-replanning) are excluded as structurally reduced or unplanned weeks. Progress: W20 = 47.19 km ✅ (1 of 2). W23 pending.",
+      "detail": "RE-SPECIFIED Sep 30, 2026, then REVISED Oct 8, 2026 (illness forced W22 out as a qualifying week), then RECLASSIFIED Oct 14, 2026 — W22 recorded as a pure illness week (3.78 km, R91 only, no volume target); R92/R93 moved into W23 mileage. 2 qualifying weeks ≥38 km required — W20 (closed, 47.19 km ✅) + W23 (target 38–42 km, resumes normal full-load training, race moved to Nov 8 — see RACES; 17.65 km already on board from R92+R93+R94). W21 (deload), W22 (illness), and W24 (flagged needs-replanning) are excluded as structurally reduced or unplanned weeks. Progress: W20 = 47.19 km ✅ (1 of 2). W23 pending.",
       "eta": "W23 close · Oct 2026",
       "qualifyingWeeks": [
         20,
@@ -4368,14 +4507,14 @@
     "age": 30,
     "phase": "Phase 2",
     "phaseName": "Quality Development",
-    "week": 22,
+    "week": 23,
     "totalWeeks": 24,
     "deloadWeek": 21,
-    "weekVolOnBoard": 3.78,
-    "lastWeekVol": 19.98,
+    "weekVolOnBoard": 17.65,
+    "lastWeekVol": 3.78,
     "weekTarget": {
-      "min": 10,
-      "max": 18
+      "min": 38,
+      "max": 42
     },
     "easyHRBand": [
       122,
@@ -4397,7 +4536,7 @@
     "statinStart": "2026-05-30",
     "stressLevel": "MODERATE",
     "formCue": "Eyes on the horizon -- head up every session",
-    "date": "October 8, 2026",
+    "date": "October 14, 2026",
     "hrvBaseline": [
       53,
       68
@@ -5464,10 +5603,10 @@
       "qualityB": "NONE — illness/body-test week, easy only",
       "lrMin": null,
       "lrMax": null,
-      "volMin": 10,
-      "volMax": 18,
-      "kind": "illness-test",
-      "note": "RECLASSIFIED Oct 8, 2026 — 3 consecutive REST days Oct 4–6 (HRV/sleep crash, HRV 42→43→34 vs 53–68 baseline) cost this week’s planned consolidation block (was: 4×10 min QA, 25–30 min QB, 20–22 km LR, 38–42 km). Oct 8 (R91) run easy as a readiness test. Oct 9–11 (Fri–Sun) governed by daily readiness, not a volume quota — light/easy only, no quality, no long run target. Original W22 consolidation prescription is NOT deferred to W23 — it’s simply lost; W23 resumes normal full-load training instead (see wk 23). Race 0 moved to Nov 8, 2026 — see RACES and Decision Reasoning Log, Oct 8, 2026."
+      "volMin": null,
+      "volMax": null,
+      "kind": "illness",
+      "note": "RECLASSIFIED Oct 8, 2026 — 3 consecutive REST days Oct 4–6 (HRV/sleep crash, HRV 42→43→34 vs 53–68 baseline) cost this week’s planned consolidation block (was: 4×10 min QA, 25–30 min QB, 20–22 km LR, 38–42 km). Oct 8 (R91) run easy as a readiness test. Oct 9–11 (Fri–Sun) governed by daily readiness, not a volume quota — light/easy only, no quality, no long run target. Original W22 consolidation prescription is NOT deferred to W23 — it’s simply lost; W23 resumes normal full-load training instead (see wk 23). Race 0 moved to Nov 8, 2026 — see RACES and Decision Reasoning Log, Oct 8, 2026. CLOSED Oct 14, 2026 at 3.78 km (R91 only — pure illness week, no volume target; R92/R93 reclassified into W23 mileage per Oct 14, 2026 decision — see Decision Reasoning Log)."
     },
     {
       "wk": 23,
@@ -5481,7 +5620,7 @@
       "volMin": 38,
       "volMax": 42,
       "kind": "consolidation",
-      "note": "REVERTED to normal full-load training Oct 8, 2026 — this week is no longer Race 0 taper/race week. Race 0 moved to Nov 8, 2026 (see RACES). Prescription carried forward unchanged from the W22 consolidation block that illness displaced (4×10 min QA, 25–30 min QB, 20–22 km LR, 38–42 km) — NOT freshly derived for this date, and should be sanity-checked against how the body responds during the Oct 9–11 illness-test days before committing to full load. \"Normal training resumes\" per athlete instruction Oct 8, 2026."
+      "note": "REVERTED to normal full-load training Oct 8, 2026 — this week is no longer Race 0 taper/race week. Race 0 moved to Nov 8, 2026 (see RACES). Prescription carried forward unchanged from the W22 consolidation block that illness displaced (4×10 min QA, 25–30 min QB, 20–22 km LR, 38–42 km) — NOT freshly derived for this date, and should be sanity-checked against how the body responds during the Oct 9–11 illness-test days before committing to full load. \"Normal training resumes\" per athlete instruction Oct 8, 2026. OPENED Oct 9, 2026 (R92) — reclassified from W22 on Oct 14, 2026 along with R93; W23 on-board total 17.65 km (R92 4.12 + R93 7.25 + R94 6.28)."
     },
     {
       "wk": 24,
@@ -5808,7 +5947,7 @@
       }
     ],
     "week_status": {
-      "week": 22,
+      "week": 23,
       "push": false,
       "pull": false,
       "legs": false,

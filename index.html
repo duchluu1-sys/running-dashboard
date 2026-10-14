@@ -1435,7 +1435,7 @@ body{background:var(--bg);background-image:var(--grid);color:var(--tx);font-fami
     </div>
     <div class="card hud-card fg-perf" id="perf-proj-card"></div>
     <div class="card hud-card fg-milestones" id="milestone-card">
-      <div class="ch"><div class="cl">MILESTONES</div><div class="cs">Sun Oct 18 Race 0 · Oct 2027 VPBank Marathon · Gate 6 retired Sep 30, 2026</div></div>
+      <div class="ch"><div class="cl">MILESTONES</div><div class="cs">Sun Nov 8 Race 0 · Oct 2027 VPBank Marathon · Gate 6 retired Sep 30, 2026</div></div>
       <div id="milestone-body" class="cb"></div>
     </div>
   </div>
@@ -1472,7 +1472,7 @@ let HEALTH_FLAGS=[], MEDICATIONS=[];  // sourced from data.json at load — sing
 
 function fmtPace(v){if(!v)return'—';const m=Math.floor(v),s=Math.round((v-m)*60);return`${m}:${String(s).padStart(2,'0')}`}
 function fmtDur(sec){if(!sec&&sec!==0)return'—';const h=Math.floor(sec/3600),m=Math.floor((sec%3600)/60),s=Math.round(sec%60);return h>0?`${h}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`:`${m}:${String(s).padStart(2,'0')}`}
-// ISO 'YYYY-MM-DD' strings are parsed as LOCAL midnight (new Date('2026-10-18') would be UTC midnight
+// ISO 'YYYY-MM-DD' strings are parsed as LOCAL midnight (new Date('2026-11-08') would be UTC midnight
 // and can land on the wrong calendar day west of UTC).
 function toLocalDate(d){if(d instanceof Date)return new Date(d.getTime());if(typeof d==='string'&&/^\d{4}-\d{2}-\d{2}$/.test(d))return new Date(d+'T00:00:00');return new Date(d);}
 function daysUntil(d){const n=new Date();n.setHours(0,0,0,0);const t=toLocalDate(d);t.setHours(0,0,0,0);return Math.round((t-n)/86400000)}
@@ -1724,7 +1724,7 @@ function computeTodaySession(athlete){
   };
   let type=athlete.weekSchedule[today]||'rest';
   let label=map[today]||'Rest';
-  // Race day overrides the weekly template (Race 0 = Sun Oct 18, 2026).
+  // Race day overrides the weekly template (Race 0 = Sun Nov 8, 2026).
   const r0=(RACES||[]).find(r=>r.label==='Race 0');
   if(r0&&daysUntil(r0.date)===0){type='race';label=`RACE 0 — ${r0.name}`;}
   if(prog&&prog.kind==='race'&&type==='long'){label='Race week — no long run (Race 0 replaces it)';}
@@ -1855,7 +1855,7 @@ function renderVitals(a){
     <div class="vit"><div class="vit-val gn">${a.rdns.rhr}<span style="font-size:.72rem">bpm</span></div><div class="vit-lbl">RHR</div><div class="vit-sub">avg ${a.rdns.rhrAvg7} · Δ${a.rdns.rhrDelta>=0?'+':''}${a.rdns.rhrDelta}</div></div>
     <div class="vit"><div class="vit-val vb">${ATHLETE.weekVolOnBoard}<span style="font-size:.72rem">km</span></div><div class="vit-lbl">WEEK ${ATHLETE.week} ON BOARD</div><div class="vit-sub">tgt ${_wt.min}–${_wt.max}km</div></div>
     <div class="vit"><div class="vit-val" style="font-size:.95rem;line-height:1.2">${ATHLETE.phase}<br><span style="font-size:.58rem;color:var(--m2)">${ATHLETE.phaseName}</span></div><div class="vit-lbl">PHASE 2 · WEEK ${ATHLETE.week}</div><div class="vit-sub">W${ATHLETE.week}/${ATHLETE.totalWeeks}</div></div>
-    <div class="vit"><div class="vit-val cn" style="font-size:1.8rem">${days>0?days:days===0?'GO':'✓'}</div><div class="vit-lbl">${days>=0?'DAYS TO RACE 0':'RACE 0 DONE'}</div><div class="vit-sub">VPBank 10K · ${toLocalDate(RACES[0].date).toLocaleDateString('en-GB',{weekday:'short',day:'numeric',month:'short'})}</div></div>
+    <div class="vit"><div class="vit-val cn" style="font-size:1.8rem">${days>0?days:days===0?'GO':'✓'}</div><div class="vit-lbl">${days>=0?'DAYS TO RACE 0':'RACE 0 DONE'}</div><div class="vit-sub">${RACES[0].name} · ${toLocalDate(RACES[0].date).toLocaleDateString('en-GB',{weekday:'short',day:'numeric',month:'short'})}</div></div>
     <div class="vit"><div class="vit-val vb">${ATHLETE.gctBest}<span style="font-size:.72rem">ms</span></div><div class="vit-lbl">GCT PROGRAM BEST</div><div class="vit-sub">VR ${ATHLETE.vrBest}%</div></div>`;
   document.getElementById('hdr-name').textContent=ATHLETE.name;
   document.getElementById('hdr-date').textContent=new Date().toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'});
@@ -2035,14 +2035,14 @@ function renderToday(a){
   );
   // Mission card data — matches Next Session template
   const _missionShoe=ts.type==='race'?'Race shoe (your call)':ts.type.startsWith('quality')?'Evo SL':'Novablast 5';
-  const _missionVenue=ts.type==='race'?'VPBank Hanoi 10K course':(ts.type.startsWith('quality')||ts.type==='long')?'Elite Fitness Xuân Diệu':'Outdoor';
+  const _missionVenue=ts.type==='race'?`${(RACES&&RACES[0]&&RACES[0].name)||'Race 0'} course`:(ts.type.startsWith('quality')||ts.type==='long')?'Elite Fitness Xuân Diệu':'Outdoor';
   const _purposeM={
     quality_a:'Build interval capacity and raise speed ceiling. Full walk recovery between reps.',
     quality_b:'Develop continuous tempo endurance. Single unbroken block at controlled effort.',
     long:'Aerobic base and fat adaptation. HR governs — pace is irrelevant.',
     easy:'Aerobic maintenance. Stay in Zone 2 throughout.',
     flush:'Active recovery. Clear residual fatigue — effort should feel trivially easy.',
-    race:'Race 0 — VPBank Hanoi 10K. Execution data point + outdoor LT2 HR calibration for Phase 3 zones.'
+    race:`Race 0 — ${(RACES&&RACES[0]&&RACES[0].name)||'Race 0'}. Execution data point + outdoor LT2 HR calibration for Phase 3 zones.`
   };
   const _successM={
     quality_a:`Complete all reps ceiling-clean (0% above ${ATHLETE.qualityCeiling} bpm). Full recovery between each.`,
@@ -3020,14 +3020,14 @@ function evaluateGates(gates, runs, athlete){
         confidence:'HIGH'};
     }
 
-    // ── G5: Race 0 — VPBank Hanoi 10K, Sunday Oct 18, 2026 ────────────────
+    // ── G5: Race 0 — Standard Chartered Hanoi 10K, Sunday Nov 8, 2026 ────────────────
     if(g.id===5){
       const r0=(RACES||[]).find(r=>r.label==='Race 0');
-      const r0Str=r0?toLocalDate(r0.date).toLocaleDateString('en-GB',{weekday:'short',day:'numeric',month:'short',year:'numeric'}):'Oct 18, 2026';
+      const r0Str=r0?toLocalDate(r0.date).toLocaleDateString('en-GB',{weekday:'short',day:'numeric',month:'short',year:'numeric'}):'Nov 8, 2026';
       // Clears only when a type=race run dated on Race 0 day is logged (R61 was the Aug 14 trial, not Race 0).
       const raceRun=r0?runs.find(r=>r.type==='race'&&(()=>{const d=runDateOf(r);return d&&daysUntil(d)===daysUntil(r0.date);})()):null;
       derived={status:raceRun?'cleared':g.status,progress:raceRun?100:g.progress,
-        evidence:raceRun?`Race 0 logged: R${raceRun.r} · ${raceRun.date}.`:`Official Race 0 = VPBank Hanoi 10K ${r0Str} — not yet run. (R61 Aug 14 was a time trial, not Race 0.)`,
+        evidence:raceRun?`Race 0 logged: R${raceRun.r} · ${raceRun.date}.`:`Official Race 0 = ${r0?r0.name:'Standard Chartered Hanoi 10K'} ${r0Str} — not yet run. (R61 Aug 14 was a time trial, not Race 0.)`,
         confidence:'HIGH'};
     }
 
@@ -3341,7 +3341,7 @@ function renderPaceZones(){
     {label:'QUALITY A',pace:`${fmtP(qaPaceMin)}–${fmtP(qaPaceMax)}`,hr:'≤160 ceiling',speed:`${qaMinKmh}–${qaMaxKmh}`,conf:'PRESC',col:'var(--gn)',src:'W20+ tier · 4×10 min',zone:'Z4'},
     {label:'QUALITY B',pace:fmtP(qbPace),hr:'≤160 ceiling',speed:`${qbKmh}`,conf:'PRESC',col:'var(--gn)',src:'W20+ · continuous at LT2 floor',zone:'Z4'},
     {label:'LT2 (TM)',pace:`${fmtP(a.lt2PaceMin||5.45)}–${fmtP(a.lt2PaceMax||5.61)}`,hr:'152–154 steady',speed:`${a.lt2FloorKmh||10.7}–11.0`,conf:'MED',col:'var(--am)',src:'floor confirmed R80 · upper 11.0 unconfirmed',zone:'Z4'},
-    {label:'LT2 (OD)',pace:'—',hr:'—',speed:'untested',conf:'UNKNOWN',col:'rgba(245,158,11,.6)',src:'outdoor transfer untested at LT2 — Race 0 (Oct 18) is the test',zone:'Z4'},
+    {label:'LT2 (OD)',pace:'—',hr:'—',speed:'untested',conf:'UNKNOWN',col:'rgba(245,158,11,.6)',src:'outdoor transfer untested at LT2 — Race 0 (Nov 8) is the test',zone:'Z4'},
     {section:'RACE BENCHMARKS'},
     ...(has10K?[
       {label:'10K ACTUAL',pace:fmtP(tt.resultPace),hr:tt.avgHR?`${tt.avgHR} avg`:'151 avg',speed:`${(60/tt.resultPace).toFixed(1)}`,conf:'★ MEASURED',col:'var(--vb)',src:`Aug 14 · R61 overall`,zone:'Z4'},
@@ -3408,7 +3408,7 @@ function renderPaceZones(){
     </div>
   </div>`;
   const colHdr=`<div style="padding:4px 20px 3px;border-bottom:1px solid rgba(0,212,255,.08);display:flex;gap:8px"><span style="font-family:var(--mono);font-size:.42rem;color:var(--mu);flex-shrink:0;min-width:88px">ZONE</span><span style="font-family:var(--mono);font-size:.42rem;color:var(--mu)">PACE · HR · CONF</span></div>`;
-  el.innerHTML=lcrsHTML+curveHTML+colHdr+rowsHTML+`<div style="padding:5px 20px;font-family:var(--mono);font-size:.42rem;color:var(--mu)">TM=treadmill · OD=outdoor · est=estimate · empirical LT2 (R80) + Race 0 calibration Oct 18</div>`;
+  el.innerHTML=lcrsHTML+curveHTML+colHdr+rowsHTML+`<div style="padding:5px 20px;font-family:var(--mono);font-size:.42rem;color:var(--mu)">TM=treadmill · OD=outdoor · est=estimate · empirical LT2 (R80) + Race 0 calibration Nov 8</div>`;
 }
 
 
