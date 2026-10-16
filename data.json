@@ -5383,6 +5383,15 @@
       "status": "REST",
       "note": "Sleep score 24; HRV 51 below baseline (53)",
       "briefing": "REST. Sleep score 24; HRV 51 below baseline (53). Long run suppressed. W22/24 · 29d to Race 0 · 3.78km of 10–18km on board · ACWR 0.38. Last: R91 easy 3.78km (Oct 8)."
+    },
+    {
+      "date": "2026-10-16",
+      "hrv": 52,
+      "rhr": 51,
+      "sleepScore": 58,
+      "status": "CAUTION",
+      "note": "HRV 52 below baseline (53); Sleep score 58",
+      "briefing": "Rest day. Volume: 20.4km over 1 sessions = 20.4km each. Above sustainable — expect to land under 38km. Sleep 4-night mean 37 — below 65. Earlier bedtime is the lever. W23/24 · 23d to Race 0 · 17.65km of 38–42km on board · ACWR 0.67. Last: R94 quality_a 6.28km (Oct 14)."
     }
   ],
   "PHASES": [
