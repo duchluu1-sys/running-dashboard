@@ -4363,6 +4363,97 @@
         10.7,
         11
       ]
+    },
+    {
+      "r": 95,
+      "date": "Oct 15",
+      "type": "quality_b",
+      "wk": 23,
+      "dist": 4.17,
+      "duration": 1340,
+      "moving": 1220,
+      "pace": 5.36,
+      "paceEasy": null,
+      "hrAvg": 140,
+      "hrMax": 152,
+      "te": null,
+      "te_an": null,
+      "gct": 279,
+      "vr": 8.4,
+      "cadence": 148,
+      "pctCeiling": 0,
+      "drift": null,
+      "walkRatio": 9.0,
+      "hrZones": [
+        5,
+        10,
+        55,
+        30,
+        0
+      ],
+      "temp": 28,
+      "surface": "treadmill",
+      "lcrs": 17,
+      "lcrsType": "qb",
+      "conditions": "~evening, treadmill, 1% incline assumed · Technogym 4.17 km / Garmin 4.18 km (sources agree, HIGH confidence on distance) · raw Garmin Avg Run Cadence 132 spm depressed by phone-call/work-break idle time -> corrected to ~148 spm via SOP S3 blended formula (deviation from the standard 'QB = use Garmin average directly' rule, justified because this QB had atypical idle time, unlike a normal uninterrupted QB) · laps 2-4 identical at 5:39/km (10.64 km/h, ~confirmed 10.7 km/h LT2 floor pace) forming the ~17 min continuous LCRS block · duration/moving/walkRatio/hrZones reconstructed from the parsed-but-not-re-screenshotted session summary carried over in this chat (not re-read pixel-by-pixel from the Garmin charts this pass) -> MEDIUM confidence on exact seconds-level timing and zone split; HIGH confidence on dist/HR/GCT/VR which were direct chart/console reads · ran one day after R94 (Oct 14 QA) -> zero rest day, same stacking pattern flagged at R89",
+      "qualityPace": 5.65,
+      "flag": "✅",
+      "note": "W23 Thu — QB treadmill · 4.17 km (TG) · avg HR 140 · max HR 152 (8 bpm under 160 ceiling, pctCeiling 0) · GCT 279 ms · VR 8.4% · cadence corrected ~148 spm (raw Garmin 132 spm idle-depressed) · ~17 min continuous LCRS block at 5:39/km (10.64 km/h, LT2 floor) · minor phone-call/work breaks (walkRatio ~9%, estimated) · zero rest day after R94 (Oct 14 QA) — second instance of the R89 stacking pattern",
+      "verdict": "Clean execution at the LT2 floor — HR control (max 152, 8 bpm of headroom) and mechanics (GCT 279 ms, VR 8.4%, both near program-best QB territory) both read as a good session on their own terms. But this is NOT a clean test of the R89 zero-rest-day stacking hypothesis (QA Oct 14 -> QB Oct 15, one day apart, same pattern as R89's QA-Wed/QB-Thu): the phone-call and work interruptions acted as unplanned recovery, breaking up what would otherwise have been a continuous stress test of back-to-back quality days. Z4+Z5 share cannot be meaningfully compared to R89's 68% or R85's 44% baseline for that reason. Confidence on this session's raw metrics: HIGH on dist/HR/GCT/VR (direct Garmin/Technogym reads carried over from the earlier parse this session); MEDIUM on duration/walkRatio/hrZones (reconstructed estimates, not re-verified against the charts pixel-by-pixel this pass). The stacking question remains open — next QB with normal spacing AND without interruptions is the real test.",
+      "tags": [
+        "quality_b",
+        "treadmill",
+        "lt2-floor",
+        "interrupted",
+        "work-breaks",
+        "stacking-confound-inconclusive",
+        "zero-rest-day",
+        "medium-confidence"
+      ]
+    },
+    {
+      "r": 96,
+      "date": "Oct 17",
+      "type": "long",
+      "wk": 23,
+      "dist": 17.24,
+      "duration": 8928,
+      "moving": 7020,
+      "pace": 8.63,
+      "paceEasy": null,
+      "hrAvg": 126,
+      "hrMax": 144,
+      "te": null,
+      "te_an": null,
+      "gct": 289,
+      "vr": null,
+      "cadence": 129,
+      "pctCeiling": 0,
+      "drift": null,
+      "walkRatio": 21.0,
+      "hrZones": [
+        15,
+        65,
+        20,
+        0,
+        0
+      ],
+      "temp": 28,
+      "surface": "treadmill",
+      "runPace": 6.78,
+      "flag": "✅",
+      "note": "W23 Sat — LR treadmill · 17.24 km (TG, authoritative) / 17.27 km Garmin (sources agree) · TG duration 2:28:48 / Garmin 2:27:08 · avg HR 126 · max HR 144 (1 bpm over the 143 walk-trigger — trivial, not a concern, easy/long rule is for easy/long and this is within noise) · GCT 289 ms — BEST treadmill long-run GCT on record (prior treadmill LR precedents 319-329 ms) · cadence corrected ~129 spm (raw Garmin 123 spm depressed by ~21% non-running session time per SOP S3 formula) · fueling: 4 gels + biscuits + coke + 3 electrolyte capsules + water — compliant, better than several past LR fueling misses · session-wide avg pace 8:31-8:38/km vs athlete's stated 'mostly 7:30/km' — reconciled: moving-only pace was ~6:47/km (faster than claimed), diluted down to the slower session average by break-inflated laps (up to ~13:06/km on the longest stop); fast clean laps ran 7:00-8:00/km · VR, drift, LCRS not computed this pass — no VR chart re-read, no GPX (treadmill), and no lap table available to fix a precise continuous-segment length, flagged as a gap rather than estimated · duration/moving/walkRatio/hrZones/cadence reconstructed from the parsed-but-not-re-screenshotted session summary carried over in this chat — MEDIUM confidence on these; HIGH confidence on dist/duration/HR/GCT which were direct TG/Garmin reads",
+      "verdict": "Strong long run on the numbers that are solid: HR control was clean (126 avg, 144 max — 1 bpm over the walk trigger is noise, not a signal), and GCT 289 ms is a new treadmill-LR best by a wide margin (30-40 ms better than the 319-329 ms precedent cohort) — consistent with either genuinely improving mechanics or a shoe/pace effect that should be watched, not yet claimed as a structural gain (n=1 at this GCT level for a treadmill LR). Fueling was compliant for the first time in several long runs. The one thing to state plainly rather than smooth over: the athlete's own 'mostly 7:30 pace' framing doesn't match the data at either denominator — moving-only pace was faster (~6:47/km) and session-wide pace was slower (8:31-8:38/km) than 7:30/km; the two readings diverge because break-inflated laps pull the average down while clean laps ran genuinely quick. Neither number validates the 7:30 claim as stated, and this is noted factually, not to relitigate the run's quality. Gaps worth naming rather than papering over with invented precision: VR, cardiac drift (n/a on treadmill — no GPX), and LCRS were not re-derived this pass for lack of chart/lap data; confidence on this entry is HIGH for distance/duration/HR/GCT, MEDIUM for the walk-ratio/cadence/zone-split estimates.",
+      "tags": [
+        "long",
+        "treadmill",
+        "fueling-compliant",
+        "gct-pb-treadmill-lr",
+        "pace-claim-mismatch",
+        "medium-confidence",
+        "vr-missing",
+        "lcrs-not-computed"
+      ]
     }
   ],
   "GATES": [
@@ -4371,15 +4462,17 @@
       "type": "hard",
       "name": "Sustained Volume",
       "short": "2 qualifying weeks ≥38 km (W20 closed 47.19km + W23 target 38–42km) — W21/W22/W24 excluded",
-      "progress": 50,
-      "status": "pending",
-      "detail": "RE-SPECIFIED Sep 30, 2026, then REVISED Oct 8, 2026 (illness forced W22 out as a qualifying week), then RECLASSIFIED Oct 14, 2026 — W22 recorded as a pure illness week (3.78 km, R91 only, no volume target); R92/R93 moved into W23 mileage. 2 qualifying weeks ≥38 km required — W20 (closed, 47.19 km ✅) + W23 (target 38–42 km, resumes normal full-load training, race moved to Nov 8 — see RACES; 17.65 km already on board from R92+R93+R94). W21 (deload), W22 (illness), and W24 (flagged needs-replanning) are excluded as structurally reduced or unplanned weeks. Progress: W20 = 47.19 km ✅ (1 of 2). W23 pending.",
-      "eta": "W23 close · Oct 2026",
+      "progress": 100,
+      "status": "cleared",
+      "detail": "RE-SPECIFIED Sep 30, 2026, then REVISED Oct 8, 2026 (illness forced W22 out as a qualifying week), then RECLASSIFIED Oct 14, 2026 — W22 recorded as a pure illness week (3.78 km, R91 only, no volume target); R92/R93 moved into W23 mileage. 2 qualifying weeks ≥38 km required — W20 (closed, 47.19 km ✅) + W23 (target 38–42 km, resumes normal full-load training, race moved to Nov 8 — see RACES; 17.65 km already on board from R92+R93+R94). W21 (deload), W22 (illness), and W24 (flagged needs-replanning) are excluded as structurally reduced or unplanned weeks. Progress: W20 = 47.19 km ✅ (1 of 2). W23 pending. UPDATED Oct 17, 2026 — W23 closed at 39.06 km (R92 4.12 + R93 7.25 + R94 6.28 + R95 4.17 + R96 17.24), clearing the ≥38 km threshold. W20 (47.19 km) + W23 (39.06 km) = 2 of 2 qualifying weeks. GATE 1 CLEARED. One day remains in W23's calendar span (Sun Oct 18, rest per weekSchedule) — barring an unplanned Sunday run, this total is final.",
+      "eta": "CLEARED Oct 17, 2026",
       "qualifyingWeeks": [
         20,
         23
       ],
-      "volThreshold": 38
+      "volThreshold": 38,
+      "clearedDate": "Oct 17, 2026",
+      "clearedRun": "W20 + W23"
     },
     {
       "id": 2,
@@ -4510,7 +4603,7 @@
     "week": 23,
     "totalWeeks": 24,
     "deloadWeek": 21,
-    "weekVolOnBoard": 17.65,
+    "weekVolOnBoard": 39.06,
     "lastWeekVol": 3.78,
     "weekTarget": {
       "min": 38,
@@ -4536,7 +4629,7 @@
     "statinStart": "2026-05-30",
     "stressLevel": "MODERATE",
     "formCue": "Eyes on the horizon -- head up every session",
-    "date": "October 14, 2026",
+    "date": "October 17, 2026",
     "hrvBaseline": [
       53,
       68
@@ -4840,11 +4933,11 @@
     "ltNote": "LT2 range empirically revised Sep 17 (R80 QB). R80: 10.7 km/h × ~15 min continuous → HR stable 152–154 bpm (Z4 dominant), max 157 (3 bpm headroom). 10.7 km/h is confirmed sustainable threshold pace. LT2 lower bound: 10.5→10.7 km/h (5.71→5.61 min/km). Upper bound: 11.0 km/h (5.45 min/km) — unconfirmed. Key: 5:36/km (10.7 km/h) is 5 sec/km FASTER than sub-4 marathon goal pace (5:41/km). LT1 (ltPace 6.32 = 9.49 km/h) unchanged — consistent with R80 (10.3 km/h settled 144–145 bpm = sub-threshold). Lab test (Gate 6) retired Sep 30, 2026 (geographic constraint). Estimates remain empirical (medium-low confidence). Phase 3 calibration: Race 0 HR data (Oct 18) + fallback Viện Y học thể thao Hanoi if ≥2 Phase 3 QA ceiling breaches (>160 bpm) attributable to zone miscalibration.",
     "lt2RevisionDate": "Sep 17, 2026",
     "lt2RevisionRun": "R80",
-    "lastQBDate": "Oct 1, 2026",
-    "lastQBResult": "R89 W21 QB (ran on its normal Thu slot; QA slipped Tue→Wed instead, zero rest day between them — corrected Oct 3, 2026) · 20 min continuous @ 10.7 km/h (prescribed 15 min) · max HR 159 (1 bpm headroom) · Z4+Z5 68% — program high, vs R85 44% at same pace · GCT 272ms 🏆 new program best · VR 8.1% 🏆 new program best · LCRS 20 min new record, confirmed by athlete call (prev 16 min R85) · duration + schedule departures logged · W22 target: confirm spacing explains elevated cost",
-    "lastLRDate": "Oct 3, 2026",
-    "lastLRDist": 7.28,
-    "lastLRResult": "R90 W21 deload LR, shortened · 7.28 km Garmin (no Technogym) · avg HR 123 · max HR 137 (6 bpm under walk trigger) · walk ratio 16.1% · GCT 311ms · VR 9.2% · running-only pace ~7:10/km, faster than recent sessions at similar HR (n=1, not yet a trend) · shortfall vs 12–14 km deload target explained by leg day Oct 2 + family duties, not injury or fatigue from the run · W21 CLOSED 19.98 km",
+    "lastQBDate": "Oct 15, 2026",
+    "lastQBResult": "R95 W23 QB treadmill · 4.17 km (TG) · ~17 min continuous @ 5:39/km (10.64 km/h, LT2 floor) · max HR 152 (8 bpm headroom) · GCT 279 ms · VR 8.4% · minor work/phone-call breaks · zero rest day after R94 (Oct 14 QA) — NOT a clean test of the R89 stacking hypothesis (breaks acted as unplanned recovery) · confidence MEDIUM on timing/zone-split, HIGH on dist/HR/GCT/VR",
+    "lastLRDate": "Oct 17, 2026",
+    "lastLRDist": 17.24,
+    "lastLRResult": "R96 W23 LR treadmill · 17.24 km (TG) · avg HR 126 · max HR 144 (1 bpm over walk trigger, trivial) · GCT 289 ms — best treadmill LR on record · fueling compliant (4 gels + biscuits + coke + 3 electrolyte caps + water) · session avg pace 8:31-8:38/km vs moving-only ~6:47/km vs athlete's stated 'mostly 7:30/km' — neither reading matches the claim, reconciled via break-inflated laps · VR/drift/LCRS not computed this pass (no chart/lap re-read, no GPX) · closes W23 at 39.06 km",
     "lcrsThresholdDateISO": "2026-10-01",
     "lcrsTargetMax": 30,
     "lcrsTargetNote": "next LCRS@LT2 target 25–30 min continuous at 10.7 km/h",
@@ -4940,7 +5033,7 @@
     },
     "creatineActive": true,
     "creatineStartApprox": "early-to-mid Sep 2026 (unconfirmed)",
-    "totalWeeksNote": "FLAGGED Oct 8, 2026 — totalWeeks (24) assumed Phase 2 ended around Race 0 (Oct 18). Race 0 moved to Nov 8, 2026 (~3 extra weeks). totalWeeks has NOT been updated to a specific new number — weeks 24–26 need re-planning first. Treat 24 as stale until resolved."
+    "totalWeeksNote": "FLAGGED Oct 8, 2026 — totalWeeks (24) assumed Phase 2 ended around Race 0 (Oct 18). Race 0 moved to Nov 8, 2026 (~3 extra weeks). totalWeeks has NOT been updated to a specific new number — weeks 24–26 need re-planning first. Treat 24 as stale until resolved. UPDATED Oct 17, 2026 — W24 has now been re-derived (see PROGRESSION wk 24 and training_kb.md Decision Reasoning Log); W25-26 and the Nov 8 taper structure remain open."
   },
   "READINESS_LOG": [
     {
@@ -5629,21 +5722,21 @@
       "volMin": 38,
       "volMax": 42,
       "kind": "consolidation",
-      "note": "REVERTED to normal full-load training Oct 8, 2026 — this week is no longer Race 0 taper/race week. Race 0 moved to Nov 8, 2026 (see RACES). Prescription carried forward unchanged from the W22 consolidation block that illness displaced (4×10 min QA, 25–30 min QB, 20–22 km LR, 38–42 km) — NOT freshly derived for this date, and should be sanity-checked against how the body responds during the Oct 9–11 illness-test days before committing to full load. \"Normal training resumes\" per athlete instruction Oct 8, 2026. OPENED Oct 9, 2026 (R92) — reclassified from W22 on Oct 14, 2026 along with R93; W23 on-board total 17.65 km (R92 4.12 + R93 7.25 + R94 6.28)."
+      "note": "REVERTED to normal full-load training Oct 8, 2026 — this week is no longer Race 0 taper/race week. Race 0 moved to Nov 8, 2026 (see RACES). Prescription carried forward unchanged from the W22 consolidation block that illness displaced (4×10 min QA, 25–30 min QB, 20–22 km LR, 38–42 km) — NOT freshly derived for this date, and should be sanity-checked against how the body responds during the Oct 9–11 illness-test days before committing to full load. \"Normal training resumes\" per athlete instruction Oct 8, 2026. OPENED Oct 9, 2026 (R92) — reclassified from W22 on Oct 14, 2026 along with R93; W23 on-board total 17.65 km (R92 4.12 + R93 7.25 + R94 6.28). CLOSED Oct 17, 2026 at 39.06 km (R92+R93+R94+R95+R96) — clears the 38-42 km target band and the ≥38 km Gate 1 threshold. Gate 1 (Sustained Volume) CLEARED."
     },
     {
       "wk": 24,
       "phase": 2,
       "dateStart": "2026-10-19",
       "dateEnd": "2026-10-25",
-      "qualityA": "4x4 min",
-      "qualityB": "10 min",
-      "lrMin": 12,
-      "lrMax": 12,
-      "volMin": 26,
-      "volMax": 28,
-      "kind": "needs-replanning",
-      "note": "FLAGGED Oct 8, 2026 — this row previously assumed Race 0 (Oct 18) had just happened (\"post-Race 0 recovery deload... Phase 3 entry Oct 26\"). That assumption is now wrong: Race 0 moved to Nov 8, 2026 (new race week ≈ Oct 12 + 4 weeks). Weeks 24–26 and the taper structure into the new race date have NOT been re-planned — this is an open item, not a silent carryover. Original (now stale) prescription: qualityA 4x4 min, qualityB 10 min, lrMin/Max 12/12, volMin/Max 26/28, kind deload."
+      "qualityA": "4×10 min @ 10.7–11.0 km/h (continue W23 load, step if interval-4 HR <155 in cool conditions)",
+      "qualityB": "25–30 min continuous @ 10.7 km/h (extend LCRS@LT2 toward the 25–30 min target, normal recovery spacing — no QA the day before)",
+      "lrMin": 20,
+      "lrMax": 22,
+      "volMin": 38,
+      "volMax": 42,
+      "kind": "build",
+      "note": "RE-DERIVED Oct 17, 2026 (replaces the stale needs-replanning row flagged Oct 8, 2026). The old row assumed Race 0 had just happened (post-race recovery deload) because Race 0 was originally Oct 18 (end of W23). That assumption broke when Race 0 moved to Nov 8, 2026 (now lands in W26, not W23/24) — there is no race to recover from in W24. Separately, Phase 3 start was already scheduled for W25 (Oct 26, 2026) in ATHLETE.phase3Calibration, independent of the Race 0 date change — nothing in the Oct 8 decision moved that. So W24 is simply the last full week of Phase 2 before Phase 3 begins: continue the W23 full-load prescription rather than deload. W25-26 (including the taper dose into the Nov 8 race) remain explicitly NOT planned — this pass only derives W24, which is the immediate 'next week' question; see training_kb.md Decision Reasoning Log, Oct 17, 2026 entry."
     }
   ],
   "MILESTONES": [
