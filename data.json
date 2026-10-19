@@ -4454,6 +4454,51 @@
         "vr-missing",
         "lcrs-not-computed"
       ]
+    },
+    {
+      "r": 97,
+      "date": "Oct 19",
+      "type": "easy",
+      "wk": 24,
+      "dist": 7.82,
+      "duration": 3753,
+      "moving": 3393,
+      "pace": 8.0,
+      "paceEasy": 7.3,
+      "hrAvg": 129,
+      "hrMax": 142,
+      "te": 3.7,
+      "te_an": 0.0,
+      "gct": 311,
+      "vr": 9.3,
+      "vo": 9.4,
+      "sl": 1.02,
+      "cadence": 136,
+      "pctCeiling": 0,
+      "drift": null,
+      "walkRatio": 8.2,
+      "hrZones": [
+        5,
+        71,
+        11,
+        0,
+        0
+      ],
+      "temp": 30,
+      "surface": "treadmill",
+      "conditions": "W24 Mon opener · started ~16:17 local, Technogym photo taken ~17:20 (consistent with a 1:02:33 session, no clock discrepancy) · 1% incline · 27-32°C gym (temp field uses midpoint estimate) · Technogym 7.82 km / Garmin 7.75 km (agree, HIGH confidence) · Technogym duration 1:02:33 / Garmin 1:02:28 (agree) · Garmin run/walk/idle: run 54:09, walk 5:06, idle 3:13 · two short breaks, ~37 min mark and near the finish (visible as a brief GCT spike to 358ms and a VR spike to ~11-12% at the ~37:28 mark, and a cadence dip to ~100spm at both break points) · laps (Technogym): 09:37 (warmup) / 07:30 / 07:30 / 07:30 / 07:39 / 07:39 / 07:39 / 09:08 (0.8km, cooldown+break) — laps 2-4 at a clean 7:30/km (8.0 km/h), laps 5-7 a hair slower (7:39/km) after the mid-session break · Garmin TE primary-benefit tag: 'Tempo (High Aerobic)', not 'Base' · feel 'Strong', RPE 'Moderate' 3/10 · athlete explicitly trying to increase easy-run mileage and pace this block",
+      "flag": "✅",
+      "note": "W24 Mon — easy treadmill opener · 7.82 km (TG) / 7.75 km (Garmin) · avg HR 129 · max HR 142 (1 bpm under the 143 walk trigger) · GCT 311 ms · VR 9.3% · VO 9.4 cm · cadence 136 spm (135-145 typical band for easy treadmill, no correction needed) · moving pace 7:18/km (7.3) vs elapsed 8:00/km (TG) · TE 3.7/0.0, Garmin tagged it 'Tempo (High Aerobic)' · two short breaks (~37 min mark, near finish) · deliberate mileage + pace increase on easy runs, first session of this attempt in a normal (unconfounded) week",
+      "verdict": "Clean session, and it executed on the stated intent: distance (7.82 km) is clearly above the recent easy-Monday-opener cohort (R72 5.01, R75 6.53, R82 6.27), and moving pace (7:18/km) sits inside the 7:00-7:45/km band training_kb.md projects for Phase 3 — at a Phase-2 easy HR (129, well inside the 122-140 easy band). HR control itself is not in question (max 142 is 1 bpm under the walk trigger, pctCeiling 0, no departure). The one thing worth tracking rather than ignoring: this is the first UNCONFOUNDED data point on the open 'is easy-pace running economy improving, or is this noise' question (R90, R91, R92, R93 were all post-rest, post-leg-day, or post-illness; this is a normal week, deliberate effort) — one data point still doesn't resolve it, but it's the cleanest read so far and it's consistent with the faster-pace-at-easy-HR pattern already seen. Watch item, not action item: max HR has now landed within 1-2 bpm of the walk trigger on both of the last two sessions (R96: 144, 1 over; R97: 142, 1 under) while pace has been trending up — worth noting if it keeps recurring as pace keeps climbing, since it would mean the easy-pace ceiling is getting close to the walk-trigger boundary rather than comfortably under it.",
+      "tags": [
+        "easy",
+        "treadmill",
+        "w24-opener",
+        "pace-up",
+        "mileage-up",
+        "unconfounded-pace-at-hr-datapoint",
+        "garmin-tempo-tag"
+      ]
     }
   ],
   "GATES": [
@@ -4600,11 +4645,11 @@
     "age": 30,
     "phase": "Phase 2",
     "phaseName": "Quality Development",
-    "week": 23,
+    "week": 24,
     "totalWeeks": 24,
     "deloadWeek": 21,
-    "weekVolOnBoard": 39.06,
-    "lastWeekVol": 3.78,
+    "weekVolOnBoard": 7.82,
+    "lastWeekVol": 39.06,
     "weekTarget": {
       "min": 38,
       "max": 42
@@ -4629,7 +4674,7 @@
     "statinStart": "2026-05-30",
     "stressLevel": "MODERATE",
     "formCue": "Eyes on the horizon -- head up every session",
-    "date": "October 17, 2026",
+    "date": "October 19, 2026",
     "hrvBaseline": [
       53,
       68
