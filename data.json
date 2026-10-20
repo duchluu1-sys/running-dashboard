@@ -4499,6 +4499,60 @@
         "unconfounded-pace-at-hr-datapoint",
         "garmin-tempo-tag"
       ]
+    },
+    {
+      "r": 98,
+      "date": "Oct 20",
+      "type": "quality_a",
+      "wk": 24,
+      "dist": 8.53,
+      "duration": 3504,
+      "moving": 2466,
+      "pace": 6.85,
+      "paceEasy": null,
+      "hrAvg": 132,
+      "hrMax": 152,
+      "te": 3.6,
+      "te_an": 1.1,
+      "gct": 296,
+      "vr": 9.5,
+      "vo": 8.8,
+      "sl": 0.94,
+      "cadence": 150,
+      "pctCeiling": 0,
+      "drift": null,
+      "walkRatio": 9.7,
+      "hrZones": [
+        7,
+        16,
+        28,
+        23,
+        0
+      ],
+      "temp": 27,
+      "surface": "treadmill",
+      "lcrs": null,
+      "lcrsType": null,
+      "qualityPace": 5.45,
+      "conditions": "W24 Tue QA, Technogym 'CUSTOM EXERCISE IN TIME' program, logged Oct 20 @ 17:23 local (overview screen shows activity timestamp Oct 20 @ 16:03 — Garmin's recorded-vs-logged timestamp offset, not a session-timing issue) · 1% incline · 24-29°C (Garmin min/max) · 4x10min fixed-speed ladder 11.0/11.0/11.3/11.3 km/h, full walk recovery between reps, continuing the established QA ladder protocol (prior rung: R94 Oct14 10.7/10.7/11/11, 3 of 4 reps completed, rep 4 abandoned) · Technogym recorded max speed 11.2 km/h (0.1 km/h display rounding-down vs the true 11.3 target, same artifact seen historically) · Run/Walk/Idle: 41:06/5:40/11:38 (41:06 run time vs 40:00 planned main-set time — near-exact match, confirms all 4 reps ran full length) · cadence raw Garmin avg 115 spm (idle-depressed) -> corrected ~150 spm via SOP blended formula: 115 = (2466*X + 340*100 + 698*0)/3504 -> X=149.6, rounded 150 · HR zones (Garmin native bands): Z1 7% Z2 16% Z3 28% Z4 23% Z5 0%, remainder ~26% below Z1 (walk/idle/warm-up) · Garmin Primary Benefit tag 'Threshold (High Aerobic)' matching the QA cohort's historical tag (R76/R79/R94 all tagged the same) · feel 'Strong', RPE 'Hard' 5/10 · direct rematch of R94's abandoned rung at a faster pace: R94 (10.7/10.7/11/11) → max HR 155, rep4 abandoned; R98 (11.0/11.0/11.3/11.3) → max HR 152, all 4 reps completed — lower peak HR at a higher speed, reading as resolution of R94's legs/neuromuscular limiter rather than a persistent ceiling",
+      "flag": "✅",
+      "note": "W24 Tue — QA treadmill · 4x10min @ 11.0/11.0/11.3/11.3 km/h, full recovery · 8.53 km (Garmin) / 8.52 km (Technogym) · avg HR 132 · max HR 152 (8 bpm under 160 ceiling, pctCeiling 0) · GCT 296 ms (blended) · VR 9.5% · cadence corrected ~150 spm (raw 115 spm idle-depressed) · TE 3.6/1.1, Garmin tagged 'Threshold (High Aerobic)' · all 4 reps completed to spec (41:06 run time vs 40:00 planned) · direct rematch of R94's abandoned rung (10.7/10.7/11/11, max HR155, rep4 abandoned) at a full step faster, with 3bpm LOWER peak HR and MORE headroom — clear aerobic adaptation signal, R94's legs/neuromuscular limiter reads as resolved",
+      "verdict": "Clean QA session and a genuinely strong progression signal, not just a feeling. This is a direct rematch of R94 (Oct 14, six days prior), which ran the previous ladder rung (10.7/10.7/11/11 km/h) and abandoned rep 4 at max HR 155 (5 bpm headroom), read at the time as a legs/neuromuscular limiter rather than an aerobic one. Today's session ran the next rung up (11.0/11.0/11.3/11.3) and completed all 4 reps clean, with max HR 3 bpm LOWER (152 vs 155) and more headroom (8 bpm vs 5 bpm). Faster pace, lower peak HR, full completion where the prior attempt bailed — about as clean a confirmation as this kind of test gets. R94's limiter reads as session-specific (post-illness/post-Legs-Day residual fatigue at the time), not a durable ceiling. Per the program's own standing QA ladder protocol (Decision Reasoning Log, Sep 15, 2026): interval-4 peak HR <155 bpm in cool conditions triggers a pace step; today's interval-4 HR (~152, matching session max) clears that trigger decisively, so the next QA should step pace again, continuing the ladder's established pattern (new bottom = old top, +0.3 km/h on top): 11.3/11.3/11.6/11.6 km/h, 4x10min, full recovery — athlete flagged this as the default next step but raised an open question on whether to instead hold pace and extend total threshold volume (toward Daniels' cruise-interval benchmark of ~45-60min; today's session is 40min, already past the 30min 'comfortable' marker) — decision deferred pending Phase 3 structure (W25, Oct 26) and confirmed conditions.",
+      "tags": [
+        "quality_a",
+        "treadmill",
+        "ladder-step",
+        "rep94-rematch",
+        "full-completion",
+        "w24",
+        "pace-up"
+      ],
+      "workKmh": [
+        11.0,
+        11.0,
+        11.3,
+        11.3
+      ]
     }
   ],
   "GATES": [
@@ -4648,8 +4702,8 @@
     "week": 24,
     "totalWeeks": 24,
     "deloadWeek": 21,
-    "weekVolOnBoard": 7.82,
-    "lastWeekVol": 39.06,
+    "weekVolOnBoard": 16.35,
+    "lastWeekVol": 16.35,
     "weekTarget": {
       "min": 38,
       "max": 42
@@ -4674,7 +4728,7 @@
     "statinStart": "2026-05-30",
     "stressLevel": "MODERATE",
     "formCue": "Eyes on the horizon -- head up every session",
-    "date": "October 19, 2026",
+    "date": "October 20, 2026",
     "hrvBaseline": [
       53,
       68
@@ -6094,7 +6148,7 @@
       }
     ],
     "week_status": {
-      "week": 23,
+      "week": 24,
       "push": false,
       "pull": false,
       "legs": false,
