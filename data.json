@@ -4553,6 +4553,56 @@
         11.3,
         11.3
       ]
+    },
+    {
+      "r": 99,
+      "date": "Oct 22",
+      "type": "quality_b",
+      "wk": 24,
+      "dist": 4.8,
+      "duration": 1864,
+      "moving": 1532,
+      "pace": 6.47,
+      "paceEasy": null,
+      "hrAvg": 137,
+      "hrMax": 153,
+      "te": 3.5,
+      "te_an": 0.0,
+      "gct": 271,
+      "vr": 8.0,
+      "vo": 11.0,
+      "sl": 1.38,
+      "cadence": 152,
+      "pctCeiling": 0,
+      "drift": null,
+      "walkRatio": 3.3,
+      "hrZones": [
+        7,
+        27,
+        41,
+        18,
+        0
+      ],
+      "temp": 27,
+      "surface": "treadmill",
+      "lcrs": 10,
+      "lcrsType": "qb",
+      "qualityPace": 5.65,
+      "conditions": "W24 Thu QB, Technogym 'CUSTOM EXERCISE IN TIME' program, logged ~16:13 local (console photo) vs Garmin overview ~15:43 — arithmetic check: 15:43 + 29:20 Technogym active duration ≈ 16:12, matching the console display, same recorded-vs-logged-time pattern seen historically, not a real discrepancy · 1% incline · ~27°C estimated (exact Garmin min/max not captured this pass, estimated from the week's gym range 24-29°C — LOW-MEDIUM confidence) · prescribed 25 min continuous @ 10.7 km/h, extension from last week's shorter QB · Technogym laps: 1.0km 06:26 (warmup) / 1.0km 05:39 / 1.0km 05:39 / 1.0km 05:39 / 0.8km 07:23 (cooldown) — laps 2-4 clean @ 5:39/km (10.64 km/h, same display-rounding artifact vs 10.7 target seen historically) · Garmin Run/Walk/Idle: 25:48/1:02/4:13, total elapsed 31:04 (run time ~matches the prescribed 25min main-set target) · Garmin detected 3 small breaks mid-session (~9.5/15.8/21.8 min marks, visible as GCT spikes to ~300-346ms and brief walk/idle bars) — breaks fall mid-lap so Technogym's lap pace reads clean through them · cadence raw Garmin avg 130 spm (idle-depressed) -> corrected ~152 spm via SOP blended formula: 130 = (1548*X + 62*100 + 253*0)/1863 -> X=152.4 · compared to the 10.7 km/h QB cohort at the same pace: R80 (~15-16min, max157, Z4 38%), R85 (28min interrupted, max155, Z4 44%), R89 (20min zero-rest-day, max159, Z4+Z5 68%) — today ran longer (25:48) with lower max HR (153) and lower Z4 share (18%) than any prior session at this pace — genuine adaptation signal, though break-confounded (MEDIUM confidence on HR-zone comparison; GCT/VR less break-sensitive, HIGH confidence) · does NOT cleanly test the R89/R95 zero-rest-day stacking hypothesis — today followed a full rest day (Wed Oct 21), not zero rest · Wed (Oct 21) taken as full rest instead of prescribed easy — competitive pickleball same evening as R98 (Tue QA), combined load, conservative call · feel 'Normal', RPE 'Hard' 5/10",
+      "flag": "✅",
+      "note": "W24 Thu — QB treadmill · 25:48 run time @ 10.64 km/h (laps 2-4 clean, Technogym) · 4.80 km (Garmin/Technogym agree) · avg HR 137 · max HR 153 (7 bpm under 160 ceiling, pctCeiling 0) · GCT 271 ms (fractional new all-time program best, prev 272ms R89) · VR 8.0% (fractional new best, prev 8.1% R89) · cadence corrected ~152 spm (raw 130 idle-depressed) · 3 small breaks mid-session · lowest Z4 share (18%) and lowest max HR (153) of the entire 10.7 km/h QB cohort (R80 Z4 38%, R85 Z4 44%, R89 Z4+Z5 68%) — genuine adaptation signal at this pace, though break-confounded (MEDIUM confidence) · does NOT cleanly test the R89/R95 zero-rest-day stacking hypothesis (today followed a full rest day)",
+      "verdict": "Clean QB execution at the program's own confirmed LT2-floor pace — 10.7 km/h (10.64 km/h actual) is not an arbitrary tempo speed, it is deliberately calibrated to sit at the edge of sustainable threshold, so feeling hard is the expected signal, not a sign of mis-prescription. Compared at the identical pace across the cohort: R80 (~15-16min, max157, Z4 38%), R85 (28min interrupted, max155, Z4 44%) — today ran longer (25:48 run time) with a lower peak HR (153) and less than half the Z4 share (18%) of either prior session at this pace. GCT (271ms) and VR (8.0%) are fractional new program bests, less sensitive to the session's 3 small breaks than the HR-zone read. This is a genuine adaptation signal at 10.7 km/h over time, distinct from — and NOT a clean test of — the R89/R95 zero-rest-day QA-QB stacking hypothesis, since today followed a full rest day (Wed), a more generously-spaced condition. The Wed rest + Fri easy-recovery-makeup schedule reshuffle stacks zero rest day before Saturday's long run and pushes projected W24 volume to ~47-49 km against the 38-42 km target — flagged as a trade-off, not silently accepted.",
+      "tags": [
+        "quality_b",
+        "treadmill",
+        "lt2-floor-pace",
+        "lowest-cost-at-pace",
+        "break-confounded",
+        "gct-pb",
+        "vr-pb",
+        "w24",
+        "stacking-hypothesis-not-tested"
+      ]
     }
   ],
   "GATES": [
@@ -4702,8 +4752,8 @@
     "week": 24,
     "totalWeeks": 24,
     "deloadWeek": 21,
-    "weekVolOnBoard": 16.35,
-    "lastWeekVol": 16.35,
+    "weekVolOnBoard": 21.15,
+    "lastWeekVol": 21.15,
     "weekTarget": {
       "min": 38,
       "max": 42
@@ -4723,12 +4773,12 @@
     "ltRun": "R59",
     "ltDate": "Aug 11",
     "maxHREstimate": 185,
-    "gctBest": 272,
-    "vrBest": 8.1,
+    "gctBest": 271,
+    "vrBest": 8.0,
     "statinStart": "2026-05-30",
     "stressLevel": "MODERATE",
     "formCue": "Eyes on the horizon -- head up every session",
-    "date": "October 20, 2026",
+    "date": "October 22, 2026",
     "hrvBaseline": [
       53,
       68
