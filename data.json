@@ -4603,6 +4603,52 @@
         "w24",
         "stacking-hypothesis-not-tested"
       ]
+    },
+    {
+      "r": 100,
+      "date": "Oct 23",
+      "type": "long",
+      "wk": 24,
+      "dist": 23.65,
+      "duration": 11770,
+      "moving": 9918,
+      "pace": 8.3,
+      "paceEasy": null,
+      "hrAvg": 127,
+      "hrMax": 141,
+      "te": 4.6,
+      "te_an": 0.0,
+      "gct": 292,
+      "vr": 8.6,
+      "vo": 10.4,
+      "sl": 1.23,
+      "cadence": 149,
+      "pctCeiling": 0,
+      "drift": null,
+      "walkRatio": 7.9,
+      "hrZones": [
+        9,
+        73,
+        3,
+        0,
+        0
+      ],
+      "temp": 29,
+      "surface": "treadmill",
+      "conditions": "W24 Fri — long run moved up one day from its normal Sat slot (family business Sat Oct 24); replaced Fri's planned easy-recovery-makeup run entirely rather than stacking after it — so the actual sequence is R98 QA (Tue) -> full rest Wed -> R99 QB (Thu) -> this LR (Fri), zero rest/easy day between QB and the LR, not the QB->easy->LR sequence anticipated Oct 22 · MAJOR SOURCE CONFLICT: Garmin reported 30.04 km / 5:30/km moving pace / 'New Personal Record', Technogym console reported 23.65 km / 8:18/km avg pace for what both devices agree was one continuous 3hr+ treadmill session (Technogym end-of-session timestamp 20:24 matches Garmin's computed end time of ~20:23, ruling out a progress-photo-taken-early explanation) — a 6.39 km / 27% gap, far outside the ~0.01-0.1 km agreement seen on every other treadmill session this cycle · per SOP S0 (Technogym is the authoritative treadmill distance source because Garmin overestimates on treadmills) and per athlete confirmation Oct 23, 2026, 23.65 km is logged as the official distance — the 30.04 km Garmin figure and its 'Personal Record' badge are treated as a watch-side artifact, not a result · duration/pace sourced from Technogym's own display (3:16:10 @ 8:18/km, internally consistent) · moving/walkRatio/hrZones/cadence-raw sourced from Garmin's time-based splits (clock measurements, not subject to the same distance-tracking bug) · Garmin Run/Walk/Idle: 2:40:28/15:20/18:11 (total 3:13:59) — notably more frequent breaks than this athlete's typical long run, consistent with a 3hr+ treadmill session · cadence raw Garmin avg 131 spm (idle/walk-depressed) -> corrected ~149 spm via SOP blended formula: 131 = (9628*X + 920*100 + 1091*0)/11639 -> X=148.8 · Technogym laps: 1-4 steady @ 7:59/km, drifting to 8:35-9:23/km mid-run (lap 11's 9:23 reads as a longer stop), recovering to 7:53/km in laps 15-17 — pace held/recovered late rather than fading · fueling: 4 gels + biscuits + coke + electrolytes over ~3:16 — estimated ~45-55 g/hr (LOW-MEDIUM confidence, biscuit/coke carb content not precisely quantifiable from data given), below the 60 g/hr target but a step up from the program's historical ~27-31 g/hr misses · drift not computed — treadmill, no GPX (consistent with prior treadmill LR precedent, e.g. R96) · LCRS not computed this pass — no second-level break timestamps available to fix a precise continuous-segment length despite the clearly-recovering late-lap pace pattern",
+      "flag": "✅",
+      "note": "W24 Fri — LR treadmill, moved up from Sat · 23.65 km Technogym (authoritative per SOP + athlete confirmation Oct 23) / 30.04 km Garmin (rejected — 27% overestimate, Garmin treadmill distance-tracking artifact) · avg HR 127 · max HR 141 (2 bpm under 143 walk trigger) · GCT 292 ms (essentially ties the 289 ms treadmill-LR best, R96, despite ~37% more distance and ~45 more minutes) · VR 8.6% · VO 10.4 cm · cadence corrected ~149 spm (raw 131 idle/walk-depressed) · zero rest/easy day between R99 QB (Thu) and this LR (Fri) — Fri's planned easy-recovery-makeup run never happened, replaced entirely by moving the LR up · NEW PROGRAM DISTANCE RECORD at 23.65 km, surpassing R86's 21.20 km (Sep 26, outdoor) by 2.45 km",
+      "verdict": "Two separate questions here, and they shouldn't be blurred. First, the data-quality issue: Garmin's 30.04 km / 'Personal Record' reading is not trustworthy — a 27% gap against Technogym on a single continuous treadmill session is an order of magnitude beyond the sub-0.1 km agreement seen everywhere else this cycle, and the SOP's standing reason for preferring Technogym on treadmill (Garmin overestimates) exists for exactly this failure mode. Logged at 23.65 km on the athlete's own confirmation. Second, the result itself: even at the lower, trustworthy number, this is a genuine all-time program distance record, not a consolation prize — 2.45 km past the previous best (R86, 21.20 km outdoor). HR control was clean throughout (avg 127, max 141, comfortably inside Z2) despite more than three hours on the belt, and GCT held essentially at the treadmill-LR best (292 ms vs the 289 ms record) over nearly 40% more time and distance than the session that set that record — mechanics did not degrade under this fatigue load. The schedule context is worth stating plainly rather than smoothing over: this LR followed R99 (QB) with zero rest or easy day in between, a stacking pattern this KB has flagged as a watch item before (R89/R95 QA->QB), and today showed no sign of cost from it — no elevated HR for the effort, no mechanical breakdown, pace recovering rather than fading in the final third. That is a data point in favor of this athlete's aerobic base tolerating a hard-day-into-long-day sequence when forced by life logistics, not a license to treat it as routine. Fueling (4 gels + biscuits + coke + electrolytes, an estimated 45-55 g/hr) is an improvement on the program's historical fueling misses but still likely short of the 60 g/hr target — flagged with appropriate uncertainty since biscuit/coke carb content isn't precisely quantifiable from what's available.",
+      "tags": [
+        "long",
+        "treadmill",
+        "distance-pr",
+        "technogym-garmin-major-discrepancy",
+        "moved-up-one-day",
+        "zero-rest-before-lr-stack",
+        "fueling-improved",
+        "gct-near-best"
+      ]
     }
   ],
   "GATES": [
@@ -4752,7 +4798,7 @@
     "week": 24,
     "totalWeeks": 24,
     "deloadWeek": 21,
-    "weekVolOnBoard": 21.15,
+    "weekVolOnBoard": 44.8,
     "lastWeekVol": 21.15,
     "weekTarget": {
       "min": 38,
@@ -4778,7 +4824,7 @@
     "statinStart": "2026-05-30",
     "stressLevel": "MODERATE",
     "formCue": "Eyes on the horizon -- head up every session",
-    "date": "October 22, 2026",
+    "date": "October 23, 2026",
     "hrvBaseline": [
       53,
       68
@@ -5084,9 +5130,9 @@
     "lt2RevisionRun": "R80",
     "lastQBDate": "Oct 15, 2026",
     "lastQBResult": "R95 W23 QB treadmill · 4.17 km (TG) · ~17 min continuous @ 5:39/km (10.64 km/h, LT2 floor) · max HR 152 (8 bpm headroom) · GCT 279 ms · VR 8.4% · minor work/phone-call breaks · zero rest day after R94 (Oct 14 QA) — NOT a clean test of the R89 stacking hypothesis (breaks acted as unplanned recovery) · confidence MEDIUM on timing/zone-split, HIGH on dist/HR/GCT/VR",
-    "lastLRDate": "Oct 17, 2026",
-    "lastLRDist": 17.24,
-    "lastLRResult": "R96 W23 LR treadmill · 17.24 km (TG) · avg HR 126 · max HR 144 (1 bpm over walk trigger, trivial) · GCT 289 ms — best treadmill LR on record · fueling compliant (4 gels + biscuits + coke + 3 electrolyte caps + water) · session avg pace 8:31-8:38/km vs moving-only ~6:47/km vs athlete's stated 'mostly 7:30/km' — neither reading matches the claim, reconciled via break-inflated laps · VR/drift/LCRS not computed this pass (no chart/lap re-read, no GPX) · closes W23 at 39.06 km",
+    "lastLRDate": "Oct 23, 2026",
+    "lastLRDist": 23.65,
+    "lastLRResult": "R100 W24 LR treadmill, moved up from Sat to Fri (family business Sat) · 23.65 km Technogym (authoritative; Garmin's 30.04 km / 'PR' badge rejected as a 27% treadmill-distance-tracking artifact, athlete-confirmed Oct 23) · avg HR 127 · max HR 141 (2 bpm under walk trigger) · GCT 292 ms (near-ties 289 ms treadmill-LR record, R96) · VR 8.6% · cadence corrected ~149 spm · zero rest/easy day between R99 QB (Thu) and this LR (Fri) — no sign of cost · NEW PROGRAM DISTANCE RECORD (23.65 km, prev 21.20 km R86) · fueling improved (~45-55 g/hr est.) but still under 60 g/hr target",
     "lcrsThresholdDateISO": "2026-10-01",
     "lcrsTargetMax": 30,
     "lcrsTargetNote": "next LCRS@LT2 target 25–30 min continuous at 10.7 km/h",
@@ -5885,7 +5931,7 @@
       "volMin": 38,
       "volMax": 42,
       "kind": "build",
-      "note": "RE-DERIVED Oct 17, 2026 (replaces the stale needs-replanning row flagged Oct 8, 2026). The old row assumed Race 0 had just happened (post-race recovery deload) because Race 0 was originally Oct 18 (end of W23). That assumption broke when Race 0 moved to Nov 8, 2026 (now lands in W26, not W23/24) — there is no race to recover from in W24. Separately, Phase 3 start was already scheduled for W25 (Oct 26, 2026) in ATHLETE.phase3Calibration, independent of the Race 0 date change — nothing in the Oct 8 decision moved that. So W24 is simply the last full week of Phase 2 before Phase 3 begins: continue the W23 full-load prescription rather than deload. W25-26 (including the taper dose into the Nov 8 race) remain explicitly NOT planned — this pass only derives W24, which is the immediate 'next week' question; see training_kb.md Decision Reasoning Log, Oct 17, 2026 entry."
+      "note": "RE-DERIVED Oct 17, 2026 (replaces the stale needs-replanning row flagged Oct 8, 2026). The old row assumed Race 0 had just happened (post-race recovery deload) because Race 0 was originally Oct 18 (end of W23). That assumption broke when Race 0 moved to Nov 8, 2026 (now lands in W26, not W23/24) — there is no race to recover from in W24. Separately, Phase 3 start was already scheduled for W25 (Oct 26, 2026) in ATHLETE.phase3Calibration, independent of the Race 0 date change — nothing in the Oct 8 decision moved that. So W24 is simply the last full week of Phase 2 before Phase 3 begins: continue the W23 full-load prescription rather than deload. W25-26 (including the taper dose into the Nov 8 race) remain explicitly NOT planned — this pass only derives W24, which is the immediate 'next week' question; see training_kb.md Decision Reasoning Log, Oct 17, 2026 entry. UPDATED Oct 23, 2026: R100 LR actual = 23.65 km (Technogym, authoritative; Garmin's 30.04 km rejected as a treadmill distance-tracking artifact) vs the 20-22 km prescription — a real overshoot, not just the one-day-early timing shift. Ran Fri instead of Sat (family business), replacing the planned Fri easy-recovery-makeup run entirely rather than stacking after it, so R99(QB)->R100(LR) ran with zero rest/easy day between them. NEW PROGRAM DISTANCE RECORD (23.65 km, prev 21.20 km R86) with no observed cost (HR control clean, GCT near-best). W24 on-board after R100: 44.80 km against the 38-42 km target band — confirmed overshoot; Sat/Sun are expected rest (family commitment), so this is likely the final W24 total pending Sunday confirmation."
     }
   ],
   "MILESTONES": [
