@@ -4738,7 +4738,7 @@
       "progress": 0,
       "status": "pending",
       "detail": "Re-assessment Oct 2026. Primary fix: eyes on horizon. Head down confirmed in video.",
-      "eta": "Oct 2026"
+      "eta": "OVERDUE — due Oct 2026, not yet reassessed"
     },
     {
       "id": 8,
@@ -4757,8 +4757,8 @@
       "short": "2x20+20km LR feels controlled, not hard",
       "progress": 0,
       "status": "pending",
-      "detail": "Subjective check only. Peak load week must feel managed.",
-      "eta": "Sep 2026"
+      "detail": "Subjective check only. Peak load week must feel managed. FLAGGED Oct 24, 2026: multiple peak-load weeks have occurred since the Sep 2026 target (W19, W20, W23, W24 all >=38 km) without reported overwhelm, which is informally supportive — but this is a soft gate meant to be confirmed by the athlete's own report, not inferred from volume data alone, so it stays 'pending' rather than being marked cleared on my own judgment.",
+      "eta": "OVERDUE — due Sep 2026, not yet formally assessed"
     }
   ],
   "RACES": [
@@ -5051,6 +5051,30 @@
         "headline": "W21 CLOSED. 19.98 km — just under the 20–25 km deload target. LCRS@LT2 record upgraded to confirmed. LR shortened, explained by life, not fitness or injury.",
         "body": "R90 Oct 3: 7.28 km Garmin-only treadmill LR, shortened from the 12–14 km deload target. Avg HR 123, max HR 137 — clean aerobic control, 6 bpm under the walk trigger throughout. Shortfall explained by a leg-day weights session the day before (Oct 2) plus a family-duty interruption, not by injury, illness, or run-induced fatigue — no departure log entry, this is life intruding on a deload week, not a rule override. Running-only pace ~7:10/km at that HR is faster than several recent sessions at comparable HR (n=1, Low confidence it's a real trend rather than noise — HR still governs, pace does not). Session also confirms the athlete's subjective nasal-breathing experiment is underway, unquantified so far. Separately, Oct 1: the LCRS@LT2 20-minute candidate record from R89 was upgraded to CONFIRMED by explicit athlete call ('counting that as my LCRS LT2 PR') — this closes the verification by decision, not by new measurement; confidence stays MEDIUM, same as it was pre-upgrade. W21 final volume: R87 5.12 + R88 3.75 + R89 3.83 + R90 7.28 = 19.98 km, against a 20–25 km deload target — a 0.02 km miss, immaterial, and consistent with a deload week's purpose (reduce load before W22's full-volume push). Two logged departures from R89 (duration, schedule spacing) remain open with falsification conditions due at the next normally-spaced QB.",
         "nextObjective": "W22 (full load resumes): QA 4×10 min @ 10.7/10.9 km/h, step trigger interval-4 HR <155 in cool conditions. QB — restore normal weekSchedule spacing (Wed easy, Thu QB) and check whether Z4+Z5 returns toward R85's 44% baseline at 10.7 km/h at the full 15–20 min duration; this is the direct test of the R89 spacing/duration hypothesis. LR 18–20 km outdoor if conditions allow (R90 was treadmill-only, no outdoor LR since R86 Sep 26). Gate 1 (Sustained Volume): W22 needs ≥38 km — this is the qualifying week. Watch the pace-at-easy-HR trend from R90 over 2–3 more easy/LR sessions before treating it as a real efficiency gain."
+      },
+      {
+        "date": "Oct 14, 2026",
+        "week": 22,
+        "phase": "Phase 2 · W22 Illness Week CLOSE",
+        "headline": "W22 closed as a pure illness week — 3.78 km (R91 only). R92/R93 reclassified into W23. Race 0 confirmed moved to Nov 8.",
+        "body": "3 consecutive REST days (Oct 4-6, HRV/sleep crash: 42->43->34 ms vs 53-68 baseline) cost the planned W22 consolidation block entirely. R91 (Oct 8) ran the QB slot as easy, readiness-conscious. R92 (Oct 9, outdoor, GPX-parsed) and R93 (Oct 11, treadmill) followed, governed by daily readiness rather than a volume target. On Oct 14, 2026 a reporting decision was made: R92 and R93's mileage moved from W22 into W23 (W22 recorded as a pure illness week, no volume target, 3.78 km final). This is an attribution change, not new physiology. Race 0 had already moved Oct 8 from VPBank Hanoi 10K (Oct 18, dropped — no normal full-load week left before it) to the Standard Chartered Hanoi Marathon Heritage Race 10K, Nov 8, 2026 — buying roughly 3 extra weeks. Open items carried forward: which W22 weight session was skipped (still unconfirmed), Technogym cross-validation gap on R91/R92/R93 (Garmin/GPX-only, medium confidence), and weeks 24-26 plus the Nov 8 taper structure still not re-planned.",
+        "nextObjective": "W23: resume normal full-load training (QA 4x10 min ~10.7-11.0 km/h, QB 25-30 min continuous @ 10.7 km/h, LR 20-22 km, target 38-42 km) - this is the qualifying week for Gate 1 (Sustained Volume). Confirm the skipped W22 weight session. Resume Technogym photos for treadmill sessions going forward."
+      },
+      {
+        "date": "Oct 17, 2026",
+        "week": 23,
+        "phase": "Phase 2 · W23 CLOSE · Gate 1 CLEARED",
+        "headline": "W23 closed at 39.06 km, clearing Gate 1 (Sustained Volume). W24 re-derived as a continued build week, not a deload, since Phase 3 start (W25) was already independent of the Race 0 date change.",
+        "body": "W23 (R92 4.12 + R93 7.25 + R94 6.28 + R95 4.17 + R96 17.24 = 39.06 km) cleared the >=38 km Gate 1 threshold, pairing with W20's 47.19 km for 2 of 2 qualifying weeks - Gate 1 CLEARED. R94 (QA, Oct 14) found a limiter at 11.0 km/h (3 of 4 reps completed, read as legs/neuromuscular). R95 (QB, Oct 15) ran ~17 min continuous at the 10.7 km/h LT2 floor, break-confounded (phone/work interruptions), inconclusive for the R89 zero-rest-day stacking hypothesis. R96 (LR, Oct 17) ran 17.24 km treadmill (vs a 20-22 km outdoor target) with the best treadmill-LR GCT on record (289 ms) and compliant fueling - closed the gate. Separately: the old W24 'needs re-planning' placeholder (which had assumed Race 0 would just have happened, since Race 0 was originally the end of W23) was stale once Race 0 moved to Nov 8 - there is no race to recover from in W24. Phase 3 start (W25, Oct 26) was already scheduled independently in ATHLETE.phase3Calibration, so W24 was re-derived as simply the last full-load week of Phase 2 before Phase 3 begins, continuing the W23 prescription rather than deloading.",
+        "nextObjective": "W24: QA 4x10 min @ 10.7-11.0 km/h (continue W23 load, step if interval-4 HR <155 in cool conditions). QB 25-30 min continuous @ 10.7 km/h, normal recovery spacing - the direct test of whether the R89 zero-rest-day stacking hypothesis holds. LR 20-22 km. Target 38-42 km. Weeks 25-26 and the Nov 8 taper structure remain explicitly unplanned."
+      },
+      {
+        "date": "Oct 23, 2026",
+        "week": 24,
+        "phase": "Phase 2 -> Phase 3 · W24 CLOSE · New Distance PR",
+        "headline": "W24 closed at 44.80 km (confirmed overshoot vs 38-42 km target). R100 long run set a new program distance record at 23.65 km, with no observed cost despite zero rest day before it. Phase 3 begins Oct 26.",
+        "body": "W24: R97 easy 7.82 + R98 QA 8.53 + R99 QB 4.80 + R100 LR 23.65 = 44.80 km. R98 (QA, Oct 20) completed a faster ladder rung (11.0/11.0/11.3/11.3 km/h) than R94's abandoned attempt, with a lower peak HR - new evidence the LT2 upper-bound estimate (previously ~11.0 km/h, unconfirmed) may be conservative, though interval format doesn't confirm a continuous ceiling. R99 (QB, Oct 22) produced the lowest cardiac cost yet in the 10.7 km/h QB cohort (Z4 18% vs 38-44% prior), break-confounded, MEDIUM confidence. Wed (Oct 21) was taken as full rest instead of the prescribed easy (pickleball + QA combined load). R100 (LR, Oct 23) then moved up from its normal Saturday slot to Friday (family commitment Saturday), replacing the planned Friday easy-recovery-makeup run entirely rather than stacking after it - producing a zero-rest-day QB(Thu)->LR(Fri) stack that was not the exact sequence anticipated two days earlier. R100's distance required resolving a major Garmin/Technogym conflict: Garmin read 30.04 km ('Personal Record') against Technogym's 23.65 km, a 27% gap far outside this cycle's usual sub-0.1 km agreement. Logged at 23.65 km per the SOP's Technogym-authoritative rule and athlete confirmation - still a genuine new program distance record (prev 21.20 km, R86), with HR control clean (avg 127, max 141) and GCT (292 ms) essentially tying the treadmill-LR mechanical best despite far greater distance. No sign of cost from the zero-rest stack. Athlete stated this reflects a standing scheduling principle going forward - training bends to life logistics, not the reverse - logged with a falsification condition rather than treated as a one-off.",
+        "nextObjective": "W25 (Oct 26-Nov 1), Phase 3 begins: no official prescription exists yet beyond Phase 3's overall 40-48 km/week, 18-21 km LR band and the QA format alternating threshold/VO2max every 2 weeks - W25/26 specifics remain genuinely unplanned as of this entry. Recommended default pending confirmation: hold QA at threshold format for W25 rather than introducing VO2max immediately, protect the Wed easy buffer before QB (it has slipped twice this cycle), target LR at 18-20 km (below this week's 23.65 km to allow recovery), and aim for the lower half of the 40-48 km band given this week's overshoot and the zero-rest stack it carried."
       }
     ],
     "lcrs": 51,
@@ -5123,13 +5147,13 @@
       "rhrRest": 8,
       "rhrCaution": 5
     },
-    "lastQADate": "Sep 30, 2026",
-    "lastQAResult": "R88 W21 deload QA · 4×4 min @ 10.7/10.9 km/h · max HR 143 (17 bpm headroom) · 0% Z4/Z5 · GCT 297 ms · pctCeiling 0 · Gate 2 pair completed (with R85)",
-    "ltNote": "LT2 range empirically revised Sep 17 (R80 QB). R80: 10.7 km/h × ~15 min continuous → HR stable 152–154 bpm (Z4 dominant), max 157 (3 bpm headroom). 10.7 km/h is confirmed sustainable threshold pace. LT2 lower bound: 10.5→10.7 km/h (5.71→5.61 min/km). Upper bound: 11.0 km/h (5.45 min/km) — unconfirmed. Key: 5:36/km (10.7 km/h) is 5 sec/km FASTER than sub-4 marathon goal pace (5:41/km). LT1 (ltPace 6.32 = 9.49 km/h) unchanged — consistent with R80 (10.3 km/h settled 144–145 bpm = sub-threshold). Lab test (Gate 6) retired Sep 30, 2026 (geographic constraint). Estimates remain empirical (medium-low confidence). Phase 3 calibration: Race 0 HR data (Oct 18) + fallback Viện Y học thể thao Hanoi if ≥2 Phase 3 QA ceiling breaches (>160 bpm) attributable to zone miscalibration.",
+    "lastQADate": "Oct 20, 2026",
+    "lastQAResult": "R98 W24 QA treadmill · 8.53 km Garmin / 8.52 km Technogym (agree) · 4x10 min, ran faster than prescribed: 11.0/11.0/11.3/11.3 km/h · avg HR 132 · max HR 152 (8 bpm under 160 ceiling) · GCT 296 ms · VR 9.5% · cadence corrected ~150 spm · all 4 reps completed, direct rematch of R94's abandoned rung (11.0 km/h) one step faster with a lower peak HR than that abandoned attempt — R94's limiter reads resolved · ladder trigger met, next step 11.3/11.3/11.6/11.6 km/h pending athlete decision",
+    "ltNote": "LT2 range empirically revised Sep 17 (R80 QB). R80: 10.7 km/h × ~15 min continuous → HR stable 152–154 bpm (Z4 dominant), max 157 (3 bpm headroom). 10.7 km/h is confirmed sustainable threshold pace. LT2 lower bound: 10.5→10.7 km/h (5.71→5.61 min/km). Upper bound: 11.0 km/h (5.45 min/km) — unconfirmed. Key: 5:36/km (10.7 km/h) is 5 sec/km FASTER than sub-4 marathon goal pace (5:41/km). LT1 (ltPace 6.32 = 9.49 km/h) unchanged — consistent with R80 (10.3 km/h settled 144–145 bpm = sub-threshold). Lab test (Gate 6) retired Sep 30, 2026 (geographic constraint). Estimates remain empirical (medium-low confidence). Phase 3 calibration: Race 0 HR data (Oct 18) + fallback Viện Y học thể thao Hanoi if ≥2 Phase 3 QA ceiling breaches (>160 bpm) attributable to zone miscalibration. UPDATED Oct 24, 2026: R94 (Oct 14) found a limiter at 11.0 km/h in interval format (3 of 4 reps completed, 4th abandoned — read as legs/neuromuscular, not cardiac, max HR 155/5 bpm headroom). R98 (Oct 20) then completed 4x10 min at 11.0/11.0/11.3/11.3 km/h cleanly — all reps finished, max HR only 152 (8 bpm headroom), LOWER peak HR than R94's abandoned attempt at a slower pace. This is new evidence the 11.0 km/h upper-bound estimate may be conservative — but R98 was interval format with recovery between reps, not a continuous test, so it does not by itself confirm a higher continuous-LT2 ceiling. Upper bound remains logged as unconfirmed pending a continuous QB at 10.9-11.0+ km/h.",
     "lt2RevisionDate": "Sep 17, 2026",
     "lt2RevisionRun": "R80",
-    "lastQBDate": "Oct 15, 2026",
-    "lastQBResult": "R95 W23 QB treadmill · 4.17 km (TG) · ~17 min continuous @ 5:39/km (10.64 km/h, LT2 floor) · max HR 152 (8 bpm headroom) · GCT 279 ms · VR 8.4% · minor work/phone-call breaks · zero rest day after R94 (Oct 14 QA) — NOT a clean test of the R89 stacking hypothesis (breaks acted as unplanned recovery) · confidence MEDIUM on timing/zone-split, HIGH on dist/HR/GCT/VR",
+    "lastQBDate": "Oct 22, 2026",
+    "lastQBResult": "R99 W24 QB treadmill · 4.80 km Garmin/Technogym (agree) · 25:48 run time @ 10.64 km/h (laps 2-4 clean, Technogym) · avg HR 137 · max HR 153 (7 bpm under ceiling, pctCeiling 0) · GCT 271 ms fractional new all-time program best (prev 272 ms R89) · VR 8.0% fractional new best (prev 8.1% R89) · cadence corrected ~152 spm · 3 small breaks mid-session · lowest Z4 share (18%) and lowest max HR (153) of the entire 10.7 km/h QB cohort to date (R80 Z4 38%, R85 Z4 44%, R89 Z4+Z5 68%) — genuine adaptation signal, break-confounded MEDIUM confidence · does NOT cleanly test the R89/R95 zero-rest-day stacking hypothesis (today followed a full rest day)",
     "lastLRDate": "Oct 23, 2026",
     "lastLRDist": 23.65,
     "lastLRResult": "R100 W24 LR treadmill, moved up from Sat to Fri (family business Sat) · 23.65 km Technogym (authoritative; Garmin's 30.04 km / 'PR' badge rejected as a 27% treadmill-distance-tracking artifact, athlete-confirmed Oct 23) · avg HR 127 · max HR 141 (2 bpm under walk trigger) · GCT 292 ms (near-ties 289 ms treadmill-LR record, R96) · VR 8.6% · cadence corrected ~149 spm · zero rest/easy day between R99 QB (Thu) and this LR (Fri) — no sign of cost · NEW PROGRAM DISTANCE RECORD (23.65 km, prev 21.20 km R86) · fueling improved (~45-55 g/hr est.) but still under 60 g/hr target",
@@ -5187,6 +5211,24 @@
         "type": "QB",
         "note": "continuous 10.7 · LCRS@LT2 16 min record · max HR 155",
         "confirmedLT2": true
+      },
+      {
+        "run": "R94",
+        "date": "Oct 14",
+        "kmh": 10.7,
+        "kmhTop": 11.0,
+        "type": "QA",
+        "note": "4x10 min fixed-speed ladder 10.7/10.7/11/11 km/h — only 3 of 4 reps completed, 4th (11.0 km/h) abandoned; limiter read as legs/neuromuscular, not cardiac (max HR 155, 5 bpm headroom)",
+        "confirmedLT2": false
+      },
+      {
+        "run": "R98",
+        "date": "Oct 20",
+        "kmh": 11.0,
+        "kmhTop": 11.3,
+        "type": "QA",
+        "note": "4x10 min @ 11.0/11.0/11.3/11.3 km/h — all 4 reps completed, max HR 152 (8 bpm headroom), a direct rematch of R94's abandoned 11.0 km/h rung one step faster with a LOWER peak HR. Interval format (not continuous), so this does not directly confirm a higher continuous-LT2 ceiling, but it is new evidence the previously-estimated 11.0 km/h upper bound may sit higher than thought — worth testing continuously in a future QB.",
+        "confirmedLT2": false
       }
     ],
     "race0": {
@@ -5680,15 +5722,6 @@
       "status": "CAUTION",
       "note": "HRV 52 below baseline (53); Sleep score 58",
       "briefing": "Rest day. Volume: 20.4km over 1 sessions = 20.4km each. Above sustainable — expect to land under 38km. Sleep 4-night mean 37 — below 65. Earlier bedtime is the lever. W23/24 · 23d to Race 0 · 17.65km of 38–42km on board · ACWR 0.67. Last: R94 quality_a 6.28km (Oct 14)."
-    },
-    {
-      "date": "2026-10-24",
-      "hrv": 64,
-      "rhr": 48,
-      "sleepScore": 87,
-      "status": "GREEN",
-      "note": "All signals nominal",
-      "briefing": "Long run — 20–22km, HR 122–140 bpm. Novablast 5. Gel 40 min + electrolytes. Sleep 4-night mean 44 — below 65. Earlier bedtime is the lever. W24/24 · 15d to Race 0 · 44.8km of 38–42km on board · ACWR 1.93. Last: R100 long 23.65km (Oct 23)."
     }
   ],
   "PHASES": [
