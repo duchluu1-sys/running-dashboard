@@ -5722,6 +5722,15 @@
       "status": "CAUTION",
       "note": "HRV 52 below baseline (53); Sleep score 58",
       "briefing": "Rest day. Volume: 20.4km over 1 sessions = 20.4km each. Above sustainable — expect to land under 38km. Sleep 4-night mean 37 — below 65. Earlier bedtime is the lever. W23/24 · 23d to Race 0 · 17.65km of 38–42km on board · ACWR 0.67. Last: R94 quality_a 6.28km (Oct 14)."
+    },
+    {
+      "date": "2026-10-24",
+      "hrv": 64,
+      "rhr": 48,
+      "sleepScore": 87,
+      "status": "GREEN",
+      "note": "All signals nominal",
+      "briefing": "Long run — 20–22km, HR 122–140 bpm. Novablast 5. Gel 40 min + electrolytes. Sleep 4-night mean 44 — below 65. Earlier bedtime is the lever. W24/24 · 15d to Race 0 · 44.8km of 38–42km on board · ACWR 1.93. Last: R100 long 23.65km (Oct 23)."
     }
   ],
   "PHASES": [
