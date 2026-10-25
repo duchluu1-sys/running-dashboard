@@ -5731,6 +5731,15 @@
       "status": "GREEN",
       "note": "All signals nominal",
       "briefing": "Long run — 20–22km, HR 122–140 bpm. Novablast 5. Gel 40 min + electrolytes. Sleep 4-night mean 44 — below 65. Earlier bedtime is the lever. W24/24 · 15d to Race 0 · 44.8km of 38–42km on board · ACWR 1.93. Last: R100 long 23.65km (Oct 23)."
+    },
+    {
+      "date": "2026-10-25",
+      "hrv": 70,
+      "rhr": 47,
+      "sleepScore": 61,
+      "status": "GREEN",
+      "note": "All signals nominal",
+      "briefing": "Rest day. Sleep 4-night mean 60 — below 65. Earlier bedtime is the lever. W24/24 · 14d to Race 0 · 44.8km of 38–42km on board · ACWR 1.67. Last: R100 long 23.65km (Oct 23)."
     }
   ],
   "PHASES": [
