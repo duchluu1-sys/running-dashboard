@@ -5740,6 +5740,15 @@
       "status": "GREEN",
       "note": "All signals nominal",
       "briefing": "Rest day. Sleep 4-night mean 60 — below 65. Earlier bedtime is the lever. W24/24 · 14d to Race 0 · 44.8km of 38–42km on board · ACWR 1.67. Last: R100 long 23.65km (Oct 23)."
+    },
+    {
+      "date": "2026-10-26",
+      "hrv": 69,
+      "rhr": 47,
+      "sleepScore": 63,
+      "status": "GREEN",
+      "note": "All signals nominal",
+      "briefing": "Easy run — HR 122–140 bpm. Novablast 5. Sleep 4-night mean 58 — below 65. Earlier bedtime is the lever. W24/24 · 13d to Race 0 · 44.8km of 38–42km on board · ACWR 1.67. Last: R100 long 23.65km (Oct 23)."
     }
   ],
   "PHASES": [
