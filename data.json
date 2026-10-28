@@ -4700,6 +4700,51 @@
       "workKmh": [
         11.3
       ]
+    },
+    {
+      "r": 102,
+      "date": "Oct 28",
+      "type": "easy",
+      "wk": 25,
+      "dist": 8.15,
+      "duration": 3867,
+      "moving": 3466,
+      "pace": 7.9,
+      "paceEasy": 7.87,
+      "hrAvg": 122,
+      "hrMax": 131,
+      "te": 3.1,
+      "te_an": 0.0,
+      "gct": 277,
+      "vr": 8.2,
+      "vo": 10.9,
+      "sl": 1.34,
+      "cadence": 141,
+      "pctCeiling": 0,
+      "drift": null,
+      "walkRatio": 2.2,
+      "hrZones": [
+        11,
+        78,
+        0,
+        0,
+        0
+      ],
+      "temp": 29,
+      "surface": "treadmill",
+      "conditions": "W25 Wed easy · Garmin Overview stamped Oct 28 @ 16:34, Technogym console stamped 28 Oct 17:38 (~1hr gap, consistent with the 'photo taken near session end' pattern seen repeatedly this cycle, not a real discrepancy) · 1% incline · 26-31C gym · Garmin run/walk/idle: run 58:11, walk 1:25, idle 4:51, total 1:04:27 · Technogym 8.15 km / Garmin 8.15 km (exact agreement) · Technogym laps: 08:14 / 08:14 / 08:02 / 07:52 x6 (laps 4-9, incl. 0.1km tail) -- clean steady-state cruise pace of 7:52/km (7.6 km/h) after a 3-lap warm-up, console avg pace 7:59/km (blends warm-up) · Garmin's own pace fields disagree with Technogym and with each other: Avg Pace 7:54/km (session, incl. idle), Avg Moving Pace 7:05/km (8.5 km/h) -- the 7:05 moving-pace figure does not match the Technogym lap data (7:52/km sustained) and is treated as unreliable per SOP's standing 'Garmin overestimates on treadmills' rule; Technogym laps are authoritative for pace same as for distance · athlete-stated target was 7:30/km (8.0 km/h) -- actual sustained laps ran 22 sec/km slower (7:52/km) than the stated target, a ~5% gap · one data-glitch cluster at ~17-18 min mark: GCT/VR/VO/cadence all show a single outlier dot at the same timestamp (cadence spike to 180 spm, GCT dip, VR dip) consistent with a brief stumble or sensor blip, not a real effort change; best-pace 4:42/km and max-speed 12.8 km/h readings are artifacts of the same moment · avg HR 122 (floor of the 122-140 easy band), max HR 131, zero time in Z3+ (Z1 11%, Z2 78%, Z3/Z4/Z5 0%) · TE 3.1/0.0, Garmin tagged 'Base (Low Aerobic)' -- lowest-intensity tag of the recent easy cohort · feel 'Strong', RPE 'Moderate' 3/10 · comparison context: R97 (Oct 19, 9 days prior) ran clean 7:30/km laps (laps 2-4) with session avg HR 129 / max 142, logged at the time as the first unconfounded 'is easy-pace economy improving' data point -- athlete's recollection of '7:30/km costing HR in the 135s a couple of weeks ago' most plausibly refers to this session rather than today's, since no logged easy run matches 7:30/km with HR in the 135s in the weeks between R97 and today.",
+      "flag": "✅",
+      "note": "R102 W25 Wed easy treadmill · 8.15 km (TG/Garmin agree) · avg HR 122 (floor of 122-140 easy band) · max HR 131 (well under 143 walk trigger) · zero time Z3+ · TE 3.1/0.0, tagged Base (Low Aerobic) · GCT 277 ms, VR 8.2%, cadence 141 spm (Garmin avg, no correction needed) · actual sustained pace per Technogym laps was 7:52/km, not the 7:30/km the athlete believed was set (~5% / 22 sec/km slower) -- this gap is the most likely primary explanation for today's low HR, not a confirmed fitness jump · athlete asked whether to deliberately target 7:00-7:15/km on future easy days; held off pending a session that actually confirms 7:30/km on the Technogym laps, compared against R97 (Oct 19, clean 7:30/km laps, HR 129 avg/142 max) as the real baseline.",
+      "verdict": "Clean, low-stress easy session by every measure that matters: HR pinned to the floor of the easy band (122 avg/131 max), zero time above Z2, TE tagged Base rather than Tempo. No execution concerns. The pace question needs a correction before it can be answered, though. The athlete's premise was that today held 7:30/km -- the same pace that, per the archive, R97 (Oct 19) held cleanly on 3 laps and which cost HR climbing to a 142 max (session avg 129, diluted by a mid-session slowdown and breaks). The measured data today does not support that premise: Technogym's own lap splits (laps 4-9, six consecutive full-km laps) show a steady 7:52/km, 22 sec/km (~5%) slower than 7:30/km. Garmin's 'moving pace' field (7:05/km) looked faster, but it disagrees with the Technogym laps by an even larger margin in the other direction and is the less reliable of the two per the program's standing treadmill-pace rule -- so it is not used to override the console splits. Given that, the honest read is: today's low HR is adequately explained by running slower than intended, without needing to invoke an efficiency improvement since Oct 19. That doesn't rule out real improvement -- it just means today's session is not evidence of it, because the pace comparison that would prove it (7:30/km vs 7:30/km, R97 vs today) wasn't actually run. Recommendation: don't deliberately dial the target down to 7:00-7:15/km yet. Instead, run an easy session that actually confirms 7:30/km on the Technogym laps (watch the lap splits live, not just the dial setting) and compare HR directly against R97's 129 avg/142 max. If a genuinely-held 7:30/km now produces meaningfully lower HR than R97 did, that's real evidence of an aerobic efficiency gain and a legitimate basis for nudging the easy-pace target down. Until then, let HR keep governing and let pace land wherever it lands -- per the program's own non-negotiable.",
+      "tags": [
+        "easy",
+        "treadmill",
+        "w25",
+        "low-hr-at-pace",
+        "garmin-technogym-pace-conflict",
+        "pace-vs-intent-gap",
+        "r97-comparison"
+      ]
     }
   ],
   "GATES": [
@@ -4849,7 +4894,7 @@
     "week": 25,
     "totalWeeks": 24,
     "deloadWeek": 21,
-    "weekVolOnBoard": 8.59,
+    "weekVolOnBoard": 16.74,
     "lastWeekVol": 44.8,
     "weekTarget": {
       "min": 38,
@@ -4875,7 +4920,7 @@
     "statinStart": "2026-05-30",
     "stressLevel": "MODERATE",
     "formCue": "Eyes on the horizon -- head up every session",
-    "date": "October 27, 2026",
+    "date": "October 28, 2026",
     "hrvBaseline": [
       53,
       68
