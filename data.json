@@ -5898,6 +5898,15 @@
       "status": "REST",
       "note": "Sleep score 43",
       "briefing": "REST. Sleep score 43. Easy run suppressed. W25/24 · -1d to Race 0 · 16.74km of 40–44km on board · ACWR 0.0. Last: R102 easy 8.15km (Oct 28)."
+    },
+    {
+      "date": "2026-11-17",
+      "hrv": 53,
+      "rhr": 50,
+      "sleepScore": 78,
+      "status": "GREEN",
+      "note": "All signals nominal",
+      "briefing": "Quality A — 4×10 min @ 11.3 km/h flat (actual, R101 — held pace, did NOT step to 11.6 km/h per the Oct 20 ladder trigger default; highest cardiac cost of the cycle, hold recommended), ceiling 160 bpm. Evo SL, Elite Fitness. [21d since last quality] Undercooked, not overcooked (21d without quality, ACWR 0.0) — don't be conservative on the ladder. Volume: 23.3km left over 4 sessions (~5.8km each) to clear 40km. Sleep 4-night mean 36 — below 65. Earlier bedtime is the lever. W25/24 · -9d to Race 0 · 16.74km of 40–44km on board · ACWR 0.0. Last: R102 easy 8.15km (Oct 28)."
     }
   ],
   "PHASES": [
